@@ -110,7 +110,7 @@ public class ProductSurfaceTest {
 
     private static String read(Path path) throws Exception {
         assertTrue(path.toString(), Files.isRegularFile(path));
-        return Files.readString(path, StandardCharsets.UTF_8);
+        return new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
     }
 
     private static Path root() {
