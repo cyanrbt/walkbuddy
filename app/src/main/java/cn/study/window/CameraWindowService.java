@@ -88,7 +88,7 @@ public final class CameraWindowService extends Service {
     private Notification notification(String status) {
         PendingIntent open=PendingIntent.getActivity(this,0,new Intent(this,MainActivity.class),PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent stop=PendingIntent.getService(this,1,new Intent(this,CameraWindowService.class).setAction("STOP"),PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_UPDATE_CURRENT);
-        return new Notification.Builder(this,"camera").setSmallIcon(R.drawable.ic_stat_camera).setContentTitle("WalkBuddy · "+status)
+        return new Notification.Builder(this,"camera").setSmallIcon(R.drawable.ic_stat_camera).setContentTitle(getString(R.string.app_name)+" · "+status)
             .setContentText(getString(R.string.notify_text)).setContentIntent(open).setOngoing(true)
             .addAction(new Notification.Action.Builder(null,"停止",stop).build()).build();
     }

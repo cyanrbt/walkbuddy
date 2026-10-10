@@ -63,14 +63,14 @@ jobs:
         run: bash ./gradlew testDebugUnitTest assembleDebug --no-daemon --no-watch-fs
 
       - name: Collect APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk "WalkBuddy-${GITHUB_REF_NAME}-arm64-debug.apk"
+        run: cp app/build/outputs/apk/debug/app-debug.apk "Walk-Buddy-${GITHUB_REF_NAME}-arm64-debug.apk"
 
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           tag="${GITHUB_REF_NAME}"
-          asset="WalkBuddy-${tag}-arm64-debug.apk"
+          asset="Walk-Buddy-${tag}-arm64-debug.apk"
           cat > /tmp/release-notes.md <<EOF
           ARM64 调试包，最低 Android 8。安装后在首页依次允许摄像头、悬浮窗和通知，再自己点开启。识别和提示音默认关闭。
 
@@ -82,5 +82,5 @@ jobs:
             gh release upload "${tag}" "${asset}" --clobber
             gh release edit "${tag}" --notes-file /tmp/release-notes.md
           else
-            gh release create "${tag}" "${asset}" --title "WalkBuddy ${tag}" --notes-file /tmp/release-notes.md
+            gh release create "${tag}" "${asset}" --title "Walk Buddy ${tag}" --notes-file /tmp/release-notes.md
           fi

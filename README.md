@@ -1,8 +1,8 @@
-# WalkBuddy
+# Walk Buddy
 
 走路时把后置摄像头留在一个小窗里。窗口可以拖走、改大小，切到别的应用也还在。画面给你自己看。
 
-这是一个 Android 学习原型，当前版本 **0.2.2**。可选的本地识别只是说「画面里可能有人、车或路边的椅子」，不能替你判断前面能不能走。
+这是一个 Android 学习原型，当前版本 **0.2.3**。可选的本地识别只是说「画面里可能有人、车或路边的椅子」，不能替你判断前面能不能走。
 
 ## 打开之后
 
@@ -24,7 +24,7 @@
 
 ## 下载
 
-推送 `v` 开头的标签后，GitHub Actions 会构建 arm64 调试包并挂到 [Releases](https://github.com/cyanrbt/walkbuddy/releases)。当前版本的文件名是 `WalkBuddy-v0.2.2-arm64-debug.apk`，只含 arm64-v8a，最低 Android 8。
+推送 `v` 开头的标签后，GitHub Actions 会构建 arm64 调试包并挂到 [Releases](https://github.com/cyanrbt/walkbuddy/releases)。当前版本的文件名是 `Walk-Buddy-v0.2.3-arm64-debug.apk`，只含 arm64-v8a，最低 Android 8。
 
 装好后按首页允许摄像头、悬浮窗和通知，再自己点开启。系统若拒绝覆盖安装，先卸载旧包：调试签名变了就不能直接升级。
 
@@ -51,6 +51,6 @@ python3 scripts/check_model.py
 
 行为说明在 [方案](docs/方案.md)。预览方向见 [预览修复](docs/预览修复.md)。验证记录、云端构建阻塞、实机空白表和许可证分别在 [验证结果](docs/验证结果.md)、[云迁移验证](docs/云迁移验证.md)、[实机测试](docs/实机测试.md)、[许可证](docs/许可证.md)。
 
-0.2.2 只重做了介绍、首页和浮窗外观，识别与相机逻辑沿用 0.2.1。模型文件和 26 项纯 Java 单测已在当前环境复核。本机若没有 JDK 和 Android SDK，仍然不能在本地打包；打上 `v*` 标签后由 GitHub Actions 构建。真实摄像头烟测曾因采集时间戳过期未通过。握持视野、延迟、耗电和识别效果还没有实机记录。
+0.2.2 重做了介绍、首页和浮窗外观。0.2.3 把显示名改成 Walk Buddy，并换了启动图标。识别与相机逻辑沿用 0.2.1。模型文件和 26 项纯 Java 单测已在当前环境复核。本机若没有 JDK 和 Android SDK，仍然不能在本地打包；打上 `v*` 标签后由 GitHub Actions 构建。真实摄像头烟测曾因采集时间戳过期未通过。握持视野、延迟、耗电和识别效果还没有实机记录。
 
 源码：https://github.com/cyanrbt/walkbuddy
