@@ -83,6 +83,13 @@ public class ProductSurfaceTest {
         assertTrue(mark.contains("a10,10"));
         assertFalse(Files.exists(root.resolve("app/src/main/res/drawable-nodpi/ic_launcher_art.png")));
         assertFalse(Files.exists(root.resolve("app/src/main/res/drawable/ic_observe.xml")));
+        String service = read(root.resolve("app/src/main/java/cn/study/window/CameraWindowService.java"));
+        String activity = read(root.resolve("app/src/main/java/cn/study/window/MainActivity.java"));
+        assertTrue(activity.contains("status.setText(CameraWindowService.report())"));
+        assertFalse(activity.contains("帧龄") || activity.contains("毫秒") || activity.contains(" ms"));
+        assertFalse(service.contains("帧龄") || service.contains("毫秒") || service.contains(" ms"));
+        assertFalse(service.contains("lastLatency"));
+        assertTrue(service.contains("publicReport=state.reason+\"\\n\"+(state.recognition?\"识别开着\":\"识别关着\");"));
     }
 
     private static String between(String text, String name, String end) {

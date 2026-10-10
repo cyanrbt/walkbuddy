@@ -44,7 +44,7 @@ public final class CameraWindowService extends Service {
         public void onDisplayChanged(int id){if(added && id==wm.getDefaultDisplay().getDisplayId())transform();}
     };
     private boolean realtimeTimestamp, destroyed, added,disableRotateCrop;
-    private long brightnessAt,sampledAt,lastLatency,analysisEpoch;
+    private long brightnessAt,sampledAt,analysisEpoch;
     private static InferenceWorker<BitmapFrame,LocalDetector.Result> sharedWorker;
     private InferenceWorker<BitmapFrame,LocalDetector.Result> worker;
     private InferenceWorker.Ticket analysisTicket;
@@ -244,7 +244,7 @@ public final class CameraWindowService extends Service {
             if(state.expired(now)){fail("采集/显示/分析截止时间已过：不可用");return;}
             if(!state.acceptResult(token,frameAt,now))return;
             if(error!=null){fail("模型初始化或推理失败：不可用");return;}
-            state.analysisAt=now;syncTicket();lastLatency=now-frameAt;
+            state.analysisAt=now;syncTicket();
             info.setText(result.category.isEmpty()?"未识别到支持目标；不代表安全":"潜在目标："+result.category+"；请自行观察");
             if(policy.shouldAlert(result.category,now))alert();
         }));

@@ -69,4 +69,11 @@ assert "<vector" in mark and 'android:viewportWidth="108"' in mark
 assert 'android:fillType="evenOdd"' in mark and "M42,34" in mark and "a10,10" in mark
 assert not (root / "app/src/main/res/drawable-nodpi/ic_launcher_art.png").exists()
 assert not (root / "app/src/main/res/drawable/ic_observe.xml").exists()
+service = read("app/src/main/java/cn/study/window/CameraWindowService.java")
+activity = read("app/src/main/java/cn/study/window/MainActivity.java")
+assert "status.setText(CameraWindowService.report())" in activity
+assert "帧龄" not in activity and "毫秒" not in activity and " ms" not in activity
+assert "帧龄" not in service and "毫秒" not in service and " ms" not in service
+assert "lastLatency" not in service
+assert 'publicReport=state.reason+"\\n"+(state.recognition?"识别开着":"识别关着");' in service
 print("ProductSurfaceTest: ok")
