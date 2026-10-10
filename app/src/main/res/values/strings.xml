@@ -29,13 +29,12 @@
     <string name="toast_notice_skip">这个系统不用单独允许通知</string>
     <string name="toast_granted">已允许。准备好了再点开启。</string>
     <string name="toast_denied">还没有允许，窗口不会打开。</string>
-    <string name="overlay_drag">按住移动</string>
-    <string name="window_live">实时 · %1$s 毫秒</string>
-    <string name="window_idle">不在观察</string>
+    <string name="window_live">实时</string>
+    <string name="window_idle">已停下</string>
     <string name="overlay_starting">正在打开\n还没有实时画面</string>
     <string name="overlay_info_idle">实时画面还不可用</string>
-    <string name="check_recognition">辅助识别</string>
-    <string name="check_sound">提示音</string>
+    <string name="check_recognition">识别</string>
+    <string name="check_sound">声音</string>
     <string name="overlay_stop">停止</string>
     <string name="overlay_resize">缩放</string>
     <string name="notify_channel">观察窗口</string>

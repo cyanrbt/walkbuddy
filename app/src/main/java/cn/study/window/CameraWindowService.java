@@ -266,7 +266,7 @@ public final class CameraWindowService extends Service {
         recognition.setEnabled(live && LocalDetector.AVAILABLE);
         publicReport=state.reason+"\n采集帧龄 "+(state.captureAt==0?"—":now-state.captureAt)+" ms · 显示帧龄 "+(state.displayAt==0?"—":now-state.displayAt)+" ms\n识别："+(state.recognition?"开启":"关闭")+" · 抽帧到结果 "+lastLatency+" ms";
         if(live){cover.setText("");if(!state.recognition)info.setText(R.string.info_recognition_off);}
-        if(titleView!=null) titleView.setText(live?getString(R.string.window_live,state.displayAt==0?"—":Long.toString(now-state.displayAt)):getString(R.string.window_idle));
+        if(titleView!=null) titleView.setText(live?R.string.window_live:R.string.window_idle);
     }
     private void fail(String message) {
         if(destroyed)return;
