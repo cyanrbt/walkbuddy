@@ -21,7 +21,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 public final class CameraWindowService extends Service {
-    private static volatile String publicReport = "已停止 / 不可用；请主动开启";
+    private static volatile String publicReport = "已停止；请主动开启";
     public static String report() { return publicReport; }
     private final Handler main = new Handler(Looper.getMainLooper());
     private final SessionState state = new SessionState();
@@ -264,7 +264,7 @@ public final class CameraWindowService extends Service {
         cover.setVisibility(live?View.GONE:View.VISIBLE);
         if(!live) cover.setText(state.reason);
         recognition.setEnabled(live && LocalDetector.AVAILABLE);
-        publicReport=state.reason+"\n采集帧龄 "+(state.captureAt==0?"—":now-state.captureAt)+" ms · 显示帧龄 "+(state.displayAt==0?"—":now-state.displayAt)+" ms\n识别："+(state.recognition?"开启":"关闭")+" · 抽帧到结果 "+lastLatency+" ms";
+        publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(live){cover.setText("");if(!state.recognition)info.setText(R.string.info_recognition_off);}
         if(titleView!=null) titleView.setText(live?R.string.window_live:R.string.window_idle);
     }
@@ -290,7 +290,7 @@ public final class CameraWindowService extends Service {
     @Override public void onDestroy() {
         destroyed=true;cancelAnalysis();state.stop();policy.clear();silence();main.removeCallbacksAndMessages(null);closeCamera();
         removeWindow();unregisterReceiver(screenOff);getSystemService(DisplayManager.class).unregisterDisplayListener(displayListener);
-        stopForeground(STOP_FOREGROUND_REMOVE);getSystemService(NotificationManager.class).cancel(1);publicReport="已停止 / 不可用；请主动开启";super.onDestroy();
+        stopForeground(STOP_FOREGROUND_REMOVE);getSystemService(NotificationManager.class).cancel(1);publicReport="已停止；请主动开启";super.onDestroy();
     }
     @Override public IBinder onBind(Intent i) {return null;}
 }

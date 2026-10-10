@@ -41,7 +41,7 @@
         android:layout_weight="1"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="#000000">
+        android:background="@color/scrim">
         <TextureView
             android:id="@+id/overlay_preview"
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:background="#000000"
+            android:background="@color/scrim"
             android:padding="22dp"
             android:text="@string/overlay_starting"
             android:textColor="@color/on_ink"
@@ -123,7 +123,7 @@
             android:stateListAnimator="@null"
             android:text="@string/overlay_stop"
             android:textAllCaps="false"
-            android:textColor="#E7A39C"
+            android:textColor="@color/stop_text"
             android:textSize="14sp"
             android:fontFamily="sans-serif-medium"/>
         <TextView

@@ -87,12 +87,16 @@
             android:fontFamily="sans-serif-medium"/>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card">
+        <LinearLayout
             android:id="@+id/row_camera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/bg_card"
             android:padding="14dp"
             android:clickable="true"
             android:focusable="true"
@@ -138,14 +142,17 @@
                 android:fontFamily="sans-serif-medium"/>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="62dp"
+            android:background="@color/line"/>
         <LinearLayout
             android:id="@+id/row_overlay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/bg_card"
             android:padding="14dp"
             android:clickable="true"
             android:focusable="true"
@@ -191,14 +198,17 @@
                 android:fontFamily="sans-serif-medium"/>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="62dp"
+            android:background="@color/line"/>
         <LinearLayout
             android:id="@+id/row_notice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/bg_card"
             android:padding="14dp"
             android:clickable="true"
             android:focusable="true"
@@ -243,30 +253,34 @@
                 android:textSize="13sp"
                 android:fontFamily="sans-serif-medium"/>
         </LinearLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/start"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="52dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/bg_primary"
+            android:backgroundTint="@null"
             android:stateListAnimator="@null"
             android:text="@string/start"
             android:textAllCaps="false"
-            android:textColor="@color/paper"
+            android:textColor="@color/on_ink"
             android:textSize="16sp"
             android:fontFamily="sans-serif-medium"/>
         <Button
             android:id="@+id/stop"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/bg_quiet"
+            android:background="@drawable/bg_stop"
+            android:backgroundTint="@null"
             android:stateListAnimator="@null"
-            android:text="@string/stop"
+            android:text="@string/overlay_stop"
             android:textAllCaps="false"
-            android:textColor="@color/ink"
-            android:textSize="15sp"/>
+            android:textColor="@color/stop_text"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-medium"/>
 
         <TextView
             android:layout_width="match_parent"
