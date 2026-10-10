@@ -1,0 +1,5 @@
+最终锁文件对应POM许可声明：
+com.google.ai.edge.litert:litert-api:1.4.0 → The Apache Software License, Version 2.0
+com.google.ai.edge.litert:litert:1.4.0 → The Apache Software License, Version 2.0
+junit:junit:4.13.2 → Eclipse Public License 1.0
+org.hamcrest:hamcrest-core:1.3 → POM未声明

@@ -1,0 +1,15 @@
+.gradle/
+build/
+app/build/
+local.properties
+
+app/src/androidTest/assets/portrait.jpg
+
+*.apk
+*.aab
+*.jks
+*.keystore
+.gradle-user-home/
+.idea/
+*.iml
+.DS_Store
