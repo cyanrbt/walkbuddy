@@ -31,7 +31,7 @@ public final class CameraWindowService extends Service {
     private WindowManager.LayoutParams layout;
     private LinearLayout root;
     private TextureView texture;
-    private TextView cover, info;
+    private TextView cover, info, titleView;
     private CheckBox recognition, sound;
     private CameraDevice camera;
     private CameraCaptureSession session;
@@ -74,7 +74,7 @@ public final class CameraWindowService extends Service {
         // 无自动恢复或重试。START_NOT_STICKY；仅 Activity 发出启动请求。
         try {
             NotificationManager nm=getSystemService(NotificationManager.class);
-            nm.createNotificationChannel(new NotificationChannel("camera","摄像头运行与停止",NotificationManager.IMPORTANCE_LOW));
+            nm.createNotificationChannel(new NotificationChannel("camera",getString(R.string.notify_channel),NotificationManager.IMPORTANCE_LOW));
             if(Build.VERSION.SDK_INT>=30) startForeground(1,notification("正在启动"),ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA);
             else startForeground(1,notification("正在启动"));
             if(!Settings.canDrawOverlays(this) || checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED) { fail("权限不足：不可用"); stopSelf(); return START_NOT_STICKY; }
@@ -88,31 +88,33 @@ public final class CameraWindowService extends Service {
     private Notification notification(String status) {
         PendingIntent open=PendingIntent.getActivity(this,0,new Intent(this,MainActivity.class),PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_UPDATE_CURRENT);
         PendingIntent stop=PendingIntent.getService(this,1,new Intent(this,CameraWindowService.class).setAction("STOP"),PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_UPDATE_CURRENT);
-        return new Notification.Builder(this,"camera").setSmallIcon(android.R.drawable.ic_menu_camera).setContentTitle("WalkBuddy · "+status)
-            .setContentText("点击停止关闭观察服务").setContentIntent(open).setOngoing(true)
+        return new Notification.Builder(this,"camera").setSmallIcon(R.drawable.ic_stat_camera).setContentTitle("WalkBuddy · "+status)
+            .setContentText(getString(R.string.notify_text)).setContentIntent(open).setOngoing(true)
             .addAction(new Notification.Action.Builder(null,"停止",stop).build()).build();
     }
-    private TextView label(String value,int size) { TextView v=new TextView(this);v.setText(value);v.setTextSize(size);v.setTextColor(Color.WHITE);v.setPadding(8,4,8,4);return v; }
     private void createWindow() {
-        root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(Color.rgb(20,28,36));
-        TextView title=label("拖动移动 · WalkBuddy",16);root.addView(title);drag(title,false);
-        FrameLayout frame=new FrameLayout(this);frame.setBackgroundColor(Color.BLACK);root.addView(frame,new LinearLayout.LayoutParams(-1,0,1));
-        texture=new TextureView(this);texture.setOpaque(false);frame.addView(texture,new FrameLayout.LayoutParams(-1,-1));
-        cover=label("正在启动\n尚无实时画面",18);cover.setGravity(Gravity.CENTER);cover.setBackgroundColor(Color.BLACK);frame.addView(cover,new FrameLayout.LayoutParams(-1,-1));
-        info=label("实时画面不可用",12);root.addView(info);
-        recognition=new CheckBox(this);recognition.setText("辅助识别（默认关闭）");recognition.setTextColor(Color.WHITE);root.addView(recognition);
+        root=(LinearLayout)LayoutInflater.from(this).inflate(R.layout.overlay_window,null);
+        titleView=root.findViewById(R.id.overlay_title);
+        View header=root.findViewById(R.id.overlay_header);
+        drag(header,false);
+        for(int i=0;i<((ViewGroup)header).getChildCount();i++) drag(((ViewGroup)header).getChildAt(i),false);
+        texture=root.findViewById(R.id.overlay_preview);texture.setOpaque(false);
+        cover=root.findViewById(R.id.overlay_cover);
+        info=root.findViewById(R.id.overlay_info);
+        recognition=root.findViewById(R.id.overlay_recognition);
         recognition.setOnCheckedChangeListener((b,checked)-> {
             policy.clear();analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
             if(checked){long now=SystemClock.elapsedRealtime();state.analysisAt=now;analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;}
-            if(!checked) { silence();if(info!=null)info.setText("识别关闭；主要由你观察"); }else if(info!=null)info.setText("正在初始化本地识别");
+            if(!checked) { silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_on);
         });
-        sound=new CheckBox(this);sound.setText("提醒声音（默认关闭，可选）");sound.setTextColor(Color.WHITE);root.addView(sound);
-        LinearLayout bottom=new LinearLayout(this);
-        Button stop=new Button(this);stop.setText("停止");stop.setOnClickListener(v->stopSelf());bottom.addView(stop,new LinearLayout.LayoutParams(0,48,1));
-        TextView resize=label("↘ 缩放",16);bottom.addView(resize);drag(resize,true);root.addView(bottom);
-        layout=new WindowManager.LayoutParams(dp(290),dp(430),WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+        sound=root.findViewById(R.id.overlay_sound);
+        Button stop=(Button)root.findViewById(R.id.overlay_stop);
+        stop.setBackgroundTintList(null);
+        stop.setOnClickListener(v->stopSelf());
+        drag(root.findViewById(R.id.overlay_resize),true);
+        layout=new WindowManager.LayoutParams(dp(300),dp(500),WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,PixelFormat.OPAQUE);
         layout.gravity=Gravity.TOP|Gravity.LEFT;layout.x=16;layout.y=80;clamp();
         wm.addView(root,layout);added=true;
@@ -141,7 +143,7 @@ public final class CameraWindowService extends Service {
                 if(e.getAction()==android.view.MotionEvent.ACTION_DOWN) { x=e.getRawX();y=e.getRawY();startX=layout.x;startY=layout.y;startW=layout.width;startH=layout.height;return true; }
                 if(e.getAction()==android.view.MotionEvent.ACTION_MOVE) {
                     int dx=(int)(e.getRawX()-x),dy=(int)(e.getRawY()-y);
-                    if(resize) { layout.width=Math.max(dp(250),startW+dx);layout.height=Math.max(dp(380),startH+dy); }
+                    if(resize) { layout.width=Math.max(dp(260),startW+dx);layout.height=Math.max(dp(420),startH+dy); }
                     else { layout.x=startX+dx;layout.y=startY+dy; }
                     clamp();if(added) wm.updateViewLayout(root,layout);return true;
                 }
@@ -263,9 +265,8 @@ public final class CameraWindowService extends Service {
         if(!live) cover.setText(state.reason);
         recognition.setEnabled(live && LocalDetector.AVAILABLE);
         publicReport=state.reason+"\n采集帧龄 "+(state.captureAt==0?"—":now-state.captureAt)+" ms · 显示帧龄 "+(state.displayAt==0?"—":now-state.displayAt)+" ms\n识别："+(state.recognition?"开启":"关闭")+" · 抽帧到结果 "+lastLatency+" ms";
-        if(live){cover.setText("");if(!state.recognition)info.setText("识别关闭；主要由你观察");}
-        // 指标显示独立于目标提示；title 保留拖动入口。
-        ((TextView)root.getChildAt(0)).setText(getString(R.string.window_title,live?"实时":"不可用",state.displayAt==0?"—":Long.toString(now-state.displayAt)));
+        if(live){cover.setText("");if(!state.recognition)info.setText(R.string.info_recognition_off);}
+        if(titleView!=null) titleView.setText(live?getString(R.string.window_live,state.displayAt==0?"—":Long.toString(now-state.displayAt)):getString(R.string.window_idle));
     }
     private void fail(String message) {
         if(destroyed)return;
@@ -275,7 +276,7 @@ public final class CameraWindowService extends Service {
         if(cover!=null) {cover.setText(message);cover.setVisibility(View.VISIBLE);}
         closeCamera();
         if(texture!=null) {((FrameLayout)texture.getParent()).removeView(texture);texture=null;}
-        if(info!=null)info.setText("提醒已停止；回到应用主动重新开启");
+        if(info!=null)info.setText(R.string.info_stopped);
         if(root!=null)render(SystemClock.elapsedRealtime());
         publicReport=message+"；提醒已停止";
         getSystemService(NotificationManager.class).notify(1,notification("不可用；摄像头已释放"));

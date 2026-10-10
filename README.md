@@ -1,45 +1,48 @@
-当前版本 **0.2.1 / versionCode 3**，修复重复旋转与预览比例；详见 [预览修复说明](docs/预览修复.md)。
+# WalkBuddy
 
-# WalkBuddy · Android Java 学习原型
+走路时把后置摄像头留在一个小窗里。窗口可以拖走、改大小，切到别的应用也还在。画面给你自己看。
 
-中文界面，用户主动开启后置摄像头浮窗，可移动/调整大小，切换App继续，浮窗与通知均有停止入口。主要由用户观察；仅白天正常步行实验，可能误报漏报，没有提醒不代表安全。
+这是一个 Android 学习原型，当前版本 **0.2.2**。可选的本地识别只是说「画面里可能有人、车或路边的椅子」，不能替你判断前面能不能走。
 
-辅助识别和声音**每次启动默认关闭**。用户主动开启识别后，固定许可核验模型在本地筛选人、自行车、汽车、摩托车、公交车、卡车、椅子、长凳，不判断距离/深度/通行安全。默认不保存、不上传画面；最终APK无网络权限，没有模型运行时下载。
+## 打开之后
 
-- [本次云迁移验证与构建阻塞](docs/云迁移验证.md)
-- [完整中文技术方案](docs/方案.md)
-- [实机测试步骤与空白结果表](docs/实机测试.md)
-- [精确模型和依赖许可证据](docs/许可证.md)
-- [验证结果与剩余限制](docs/验证结果.md)
-- [第三方归属记录](docs/NOTICE.md)
+按顺序允许摄像头、悬浮窗和通知，再点「开启观察窗口」。
 
-## 可复现构建
+- 小窗贴在其他应用上面。按住顶栏拖动，右下角调整大小。
+- 浮窗里或通知里都能停止。锁屏会关掉摄像头。
+- 辅助识别和提示音每次打开都是关着的，要看检测时再在浮窗里勾选。
 
-固定Java源级17，Temurin OpenJDK17.0.13+11，Gradle8.13（wrapper含官方SHA256），AGP8.10.1，compile/target API36，Build Tools36.0.0，minAPI26。安装官方Android SDK，在项目根建立`local.properties`：`sdk.dir=/绝对路径/android-sdk`，SDK安装platforms;android-36 / build-tools;36.0.0 / platform-tools。工具来源：https://developer.android.com/studio ，https://adoptium.net/ ，https://gradle.org/releases/ 。
+识别在手机上完成，只看这八类：人、自行车、汽车、摩托车、公交车、卡车、椅子、长凳。连续两次看到同一类，才会短震一下。它不量距离，也不管台阶、坑洞和玻璃。没有提醒，只说明这次没有出声。
+
+画面不保存，也不上传。安装包没有网络权限。
+
+## 适合的场合
+
+白天、平路、你本来就会看周围的时候，拿来多留一个画面。先站着确认镜头对着你想看的方向。自然拿着手机时，后置镜头经常朝向地面。
+
+不要在马路、楼梯或骑行时靠它决定下一步。
+
+## 构建
+
+需要 JDK 17，以及 Android SDK 36（platforms、build-tools 36.0.0、platform-tools）。在项目根写下 `local.properties`：
+
+```
+sdk.dir=/绝对路径/android-sdk
+```
 
 ```sh
 python3 scripts/check_model.py
 ./gradlew assembleDebug testDebugUnitTest lintDebug
 ```
 
-APK：`app/build/outputs/apk/debug/app-debug.apk`。默认ARM64-only（arm64-v8a），最低Android8/API26，适合本次ARM64手机目标；不适用于32位ARM或x86设备。要恢复四ABI通用APK，执行`./gradlew assembleDebug -PuniversalApk`。固定运行依赖LiteRT1.4.0/litert-api1.4.0，测试JUnit4.13.2/Hamcrest1.3；间接版本锁在app/gradle.lockfile。首次构建下载依赖，不等于运行时联网。公开源码内置经核验权重、标签、许可全文、官方发行JSON和公开许可证明；不含大截图、重复APK、SDK/模拟器/JDK缓存或私人密钥。禁止用旧版本含未确认MediaPipe权重的交付替代当前版本。
+调试包在 `app/build/outputs/apk/debug/app-debug.apk`。默认只有 arm64-v8a，最低 Android 8。四 ABI 包用 `./gradlew assembleDebug -PuniversalApk`。
 
-## 仅模拟器复现真实模型测试
+固定组合是 Java 17、Gradle 8.13、Android Gradle Plugin 8.10.1、LiteRT 1.4.0。第一次构建会下载依赖。应用运行时不联网。
 
-测试人像图片不随源码包或运行APK分发。脚本从官方演示地址下载并校验SHA256，仅进入androidTest资产。
+## 文档
 
-```sh
-./scripts/fetch_test_fixture.sh
-./gradlew assembleDebug assembleDebugAndroidTest
-adb -s emulator-5554 install -r app/build/outputs/apk/debug/app-debug.apk
-adb -s emulator-5554 install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-adb -s emulator-5554 shell am instrument -w cn.study.window.test/cn.study.window.RuntimeProbe
-```
+行为说明在 [方案](docs/方案.md)。预览方向见 [预览修复](docs/预览修复.md)。验证记录、云端构建阻塞、实机空白表和许可证分别在 [验证结果](docs/验证结果.md)、[云迁移验证](docs/云迁移验证.md)、[实机测试](docs/实机测试.md)、[许可证](docs/许可证.md)。
 
-运行命令前，将示例 emulator-5554 替换为自己的模拟器序号。未经授权不在实体手机安装或操作。历史模型验证结果见 docs/验证结果.md。
+0.2.2 只重做了介绍、首页和浮窗外观，识别与相机逻辑沿用 0.2.1。模型文件和 26 项纯 Java 单测已在当前环境复核。完整 Gradle 构建还缺编译器和 Android SDK。真实摄像头烟测曾因采集时间戳过期未通过。握持视野、延迟、耗电和识别效果还没有实机记录。
 
-## 代码入口
-
-MainActivity：权限、中文说明、主动启动。CameraWindowService：相机/浮窗/FGS、过期遮挡、锁屏、停止资源释放。SessionState：纯Java截止锁存状态机。InferenceWorker：进程内唯一worker、最多1个排队帧、创建/推理前取消检查、过期结果丢弃、串行关闭。LocalDetector：LiteRT解释器、张量检查、letterbox、90槽标签映射及8类筛选。AlertPolicy：双观测与3秒冷却。测试包含阻塞fake detector及Android RuntimeProbe。
-
-源码公开于 https://github.com/cyanrbt/walkbuddy ，不承诺安全保障。实机视野、延迟、耗电与识别效果尚未验证。
+源码：https://github.com/cyanrbt/walkbuddy
