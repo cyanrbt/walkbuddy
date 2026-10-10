@@ -98,6 +98,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:background="@drawable/bg_toggle"
+            android:backgroundTint="@null"
             android:gravity="center"
             android:text="@string/check_sound"
             android:textColor="@color/toggle_text"
