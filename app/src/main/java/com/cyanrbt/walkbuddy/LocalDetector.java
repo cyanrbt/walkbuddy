@@ -13,7 +13,6 @@ import org.tensorflow.lite.Interpreter;
 /** 独立worker串行调用；固定许可核验模型，UINT8输入和4个输出逐项校验。 */
 final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalDetector.Result> {
     static final boolean AVAILABLE=true;
-    static final Set<String> SUPPORTED=Collections.unmodifiableSet(new HashSet<>(Arrays.asList("person","bicycle","car","motorcycle","bus","truck","chair","bench")));
     final Interpreter interpreter;
     final List<String> labels;
     static final class Result {
@@ -26,7 +25,7 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     LocalDetector(Context context) throws IOException {
         labels=new ArrayList<>();
         try(BufferedReader reader=new BufferedReader(new InputStreamReader(context.getAssets().open("labelmap.txt"),java.nio.charset.StandardCharsets.UTF_8))) {String line;while((line=reader.readLine())!=null)labels.add(line);}
-        if(labels.size()!=90 || !"person".equals(labels.get(0)) || !labels.containsAll(SUPPORTED))throw new IOException("模型标签映射不匹配");
+        if(labels.size()!=90 || !"person".equals(labels.get(0)))throw new IOException("模型标签映射不匹配");
         try(AssetFileDescriptor fd=context.getAssets().openFd("efficientdet_lite0_v1.tflite");FileInputStream stream=new FileInputStream(fd.getFileDescriptor())) {
             ByteBuffer model=stream.getChannel().map(FileChannel.MapMode.READ_ONLY,fd.getStartOffset(),fd.getDeclaredLength());
             interpreter=new Interpreter(model,new Interpreter.Options().setNumThreads(2));
@@ -61,14 +60,14 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
             int index=Math.round(classes[0][i]);float score=scores[0][i];
             if(index<0 || index>=labels.size() || !Float.isFinite(score) || score<0 || score>1)throw new IllegalStateException("模型结果/标签索引无效");
             indices[i]=index;values[i]=score;String name=labels.get(index);
-            if(score>=0.35f && SUPPORTED.contains(name)) {
+            if(score>=0.35f && !"???".equals(name)) {
                 Detection detection=Detection.fromModel(chinese(name),score,boxes[0][i],width,height,padX,padY);
-                if(detection!=null){detections.add(detection);if(category.isEmpty() && detection.attention())category=detection.label;}
+                if(detection!=null){detections.add(detection);if(category.isEmpty() && score>=0.5f)category=detection.label;}
             }
         }
         return new Result(category,indices,values,detections);
     }
     String tensorReport(){StringBuilder out=new StringBuilder();out.append("input ").append(interpreter.getInputTensor(0).name()).append(" ").append(interpreter.getInputTensor(0).dataType()).append(" ").append(Arrays.toString(interpreter.getInputTensor(0).shape()));for(int i=0;i<4;i++)out.append("\noutput ").append(i).append(" ").append(interpreter.getOutputTensor(i).name()).append(" ").append(interpreter.getOutputTensor(i).dataType()).append(" ").append(Arrays.toString(interpreter.getOutputTensor(i).shape()));return out.toString();}
-    private static String chinese(String name){switch(name){case"person":return"人";case"bicycle":return"自行车";case"car":return"汽车";case"motorcycle":return"摩托车";case"bus":return"公交车";case"truck":return"卡车";case"chair":return"椅子";case"bench":return"长凳";default:return"";}}
+    private static String chinese(String name){switch(name){case"person":return"人";case"bicycle":return"自行车";case"car":return"汽车";case"motorcycle":return"摩托车";case"bus":return"公交车";case"truck":return"卡车";case"chair":return"椅子";case"bench":return"长凳";case"dining table":return"桌子";case"couch":return"沙发";case"potted plant":return"盆栽";case"dog":return"狗";case"cat":return"猫";case"suitcase":return"行李箱";case"backpack":return"背包";case"bottle":return"瓶子";case"bed":return"床";case"stop sign":return"停车标志";case"fire hydrant":return"消防栓";default:return name;}}
     @Override public void close(){interpreter.close();}
 }

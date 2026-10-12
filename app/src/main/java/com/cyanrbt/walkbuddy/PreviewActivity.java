@@ -21,6 +21,7 @@ import android.util.Rational;
 import android.graphics.drawable.Icon;
 import android.view.*;
 import android.widget.*;
+import com.google.ar.core.ArCoreApk;
 import java.util.*;
 import java.lang.ref.WeakReference;
 
@@ -41,6 +42,13 @@ public final class PreviewActivity extends Activity {
     private LinearLayout root;
     private TextureView texture;
     private DetectionOverlay detectionOverlay;
+    private ArDepthCamera depthCamera;
+    private DepthSnapshot depthSnapshot;
+    private long lastDepthProcessed=-1;
+    private boolean useDepth,pendingDepthInstall;
+    private Button depthButton;
+    private TextView depthStatus;
+    private ArCoreApk.Availability depthAvailability;
     private long detectionAt;
     private TextView postureHint;
     private SensorManager sensors;
@@ -89,7 +97,8 @@ public final class PreviewActivity extends Activity {
     private final Runnable watchdog = new Runnable() { public void run() {
         if(destroyed) return;
         long now=SystemClock.elapsedRealtime();
-        if(detectionOverlay!=null && now-detectionAt>1000)detectionOverlay.clear();
+        if(detectionOverlay!=null && now-detectionAt>(useDepth?500:1000))detectionOverlay.clear();
+        if(useDepth && depthSnapshot!=null && now-depthSnapshot.sampledAt>500 && depthStatus!=null)depthStatus.setText("深度暂不可用 · 未测到不代表可通行");
         if(postureHint!=null && now-postureAt>1500){postureHint.setVisibility(View.GONE);posturePolicy.reset();}
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
             if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED) fail("权限已撤回：不可用");
@@ -124,6 +133,7 @@ public final class PreviewActivity extends Activity {
         super.onResume();
         resumed = true;
         if (initialStart) { initialStart = false; startPreview(); }
+        if(pendingDepthInstall){pendingDepthInstall=false;enableDepth(false);}
         render(SystemClock.elapsedRealtime());
     }
 
@@ -152,7 +162,7 @@ public final class PreviewActivity extends Activity {
     }
 
     private void startPreview() {
-        if (!resumed || isInPictureInPictureMode()) return;
+        if (destroyed || !resumed || isInPictureInPictureMode()) return;
         KeyguardManager lock = getSystemService(KeyguardManager.class);
         if (lock.isKeyguardLocked() || !getSystemService(PowerManager.class).isInteractive()) return;
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -161,7 +171,7 @@ public final class PreviewActivity extends Activity {
         if (state.phase == SessionState.Phase.STARTING || state.phase == SessionState.Phase.LIVE) return;
         if (texture != null) texture.setSurfaceTextureListener(null);
         state.start(SystemClock.elapsedRealtime());
-        brightnessAt = sampledAt = 0;
+        brightnessAt = sampledAt = 0;depthSnapshot=null;lastDepthProcessed=-1;
         // Rebuild only after a stopped/failed session, never on a PiP size change.
         createWindow();
         startPosture();
@@ -229,6 +239,8 @@ public final class PreviewActivity extends Activity {
         root.findViewById(R.id.preview_header).setVisibility(visibility);
         root.findViewById(R.id.preview_controls).setVisibility(visibility);
         root.findViewById(R.id.preview_info).setVisibility(visibility);
+        root.findViewById(R.id.depth_status).setVisibility(useDepth?View.VISIBLE:visibility);
+        root.findViewById(R.id.risk_legend).setVisibility(visibility);
         if (compact) root.setPadding(0, 0, 0, 0);
         root.requestApplyInsets();
         if (compact) getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
@@ -250,12 +262,16 @@ public final class PreviewActivity extends Activity {
         detectionOverlay=root.findViewById(R.id.detection_overlay);
         postureHint=root.findViewById(R.id.posture_hint);
         info=root.findViewById(R.id.preview_info);
+        depthStatus=root.findViewById(R.id.depth_status);
+        depthButton=root.findViewById(R.id.enable_depth);
+        depthButton.setOnClickListener(v->chooseDepth());
+        refreshDepthAvailability();
         recognition=root.findViewById(R.id.preview_recognition);
         recognition.setOnCheckedChangeListener((b,checked)-> {
             policy.clear();detectionOverlay.clear();analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
-            if(checked){long now=SystemClock.elapsedRealtime();state.analysisAt=now;analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;}
+            if(checked){long now=SystemClock.elapsedRealtime();state.analysisAt=now;if(!useDepth)analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;lastDepthProcessed=-1;}
             if(!checked) { if(sound!=null)sound.setChecked(false); silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_on);
         });
         sound=root.findViewById(R.id.preview_sound);
@@ -283,7 +299,10 @@ public final class PreviewActivity extends Activity {
                     }
                 }
                 state.display(now);state.promote(now);syncTicket();render(now);
-                if(state.phase==SessionState.Phase.LIVE && state.recognition && now-sampledAt>=500 && !worker.busy())sample(now);
+                if(state.phase==SessionState.Phase.LIVE && state.recognition) {
+                    if(useDepth)processDepth(now);
+                    else if(now-sampledAt>=500 && !worker.busy())sample(now);
+                }
             }
         });
         setContentView(root);
@@ -306,7 +325,7 @@ public final class PreviewActivity extends Activity {
         // 变换后旧结果不再与当前画面对应；等待新显示帧重新采样。
         policy.clear();detectionOverlay.clear();silence();analysisEpoch++;cancelAnalysis();
         if(state.recognition){long now=SystemClock.elapsedRealtime();state.analysisAt=now;
-            analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=now;}
+            if(!useDepth)analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=now;lastDepthProcessed=-1;}
     }
     static Bitmap samplePreview(TextureView view,PreviewGeometry geometry) {
         // getBitmap 复制的是 SurfaceTexture 内容，不包含 view 的 fit-center Matrix。
@@ -321,6 +340,19 @@ public final class PreviewActivity extends Activity {
         if(state.phase!=SessionState.Phase.STARTING) return;
         if(state.expired(SystemClock.elapsedRealtime())){fail("启动截止时间已过：不可用");return;}
         long token=state.generation;
+        if(useDepth){
+            sensorOrientation=90;transform();
+            depthCamera=new ArDepthCamera(this,surfaceTexture,new ArDepthCamera.Callback(){
+                public void frame(long timestamp,long capturedAt,DepthSnapshot depth){
+                    if(destroyed || token!=state.generation)return;
+                    long now=SystemClock.elapsedRealtime();
+                    if(now-capturedAt>500 || state.expired(now)){fail("增强画面已过期，请重新开启");return;}
+                    state.capture(timestamp,capturedAt);syncTicket();depthSnapshot=depth;
+                    if(depth!=null && depthStatus!=null)depthStatus.setText(depth.status);
+                }
+                public void failed(String reason){if(!destroyed && token==state.generation){useDepth=false;fail(reason);refreshDepthAvailability();}}
+            });depthCamera.start();return;
+        }
         try {
             CameraManager manager=getSystemService(CameraManager.class);String selected=null;
             for(String id:manager.getCameraIdList()) {
@@ -383,8 +415,9 @@ public final class PreviewActivity extends Activity {
             if(!state.acceptResult(token,frameAt,now))return;
             if(error!=null){fail("模型初始化或推理失败：不可用");return;}
             state.analysisAt=now;syncTicket();
-            detectionAt=frameAt;detectionOverlay.show(result.detections,previewGeometry);
+            detectionAt=frameAt;
             AlertPolicy.Decision decision=policy.update(result.detections,now);
+            detectionOverlay.show(decision.detections,previewGeometry);
             info.setText(decision.message);
             if(decision.alert)alert();
         }));
@@ -437,7 +470,47 @@ public final class PreviewActivity extends Activity {
         posturePolicy.reset();gravityReady=false;postureAt=0;
         if(postureHint!=null)postureHint.setVisibility(View.GONE);
     }
+    private void refreshDepthAvailability() {
+        if(depthStatus==null)return;
+        if(useDepth){depthButton.setText("返回基础模式");depthStatus.setText("深度增强 · 正在建立环境");return;}
+        depthStatus.setText("基础识别 · 尚未启用测距");depthButton.setText("检测增强能力…");
+        try{ArCoreApk.getInstance().checkAvailabilityAsync(this,availability->main.post(()->{
+            if(destroyed || useDepth)return;depthAvailability=availability;
+            depthButton.setText(availability.isSupported()?"启用空间检测":"查看测距能力");
+            depthStatus.setText(availability.isSupported()?"可尝试增强 · 启用后检查深度支持":"基础识别 · 增强服务暂不可用");
+        }));}catch(RuntimeException|LinkageError error){depthButton.setText("查看测距能力");depthStatus.setText("基础识别 · 增强服务暂不可用");}
+    }
+    private void chooseDepth() {
+        if(!resumed || isInPictureInPictureMode())return;
+        if(useDepth){useDepth=false;fail("正在切换到基础预览");long token=state.generation;ArDepthCamera.afterRelease(()->{if(token==state.generation)startPreview();});return;}
+        if(depthAvailability==ArCoreApk.Availability.UNSUPPORTED_DEVICE_NOT_CAPABLE){
+            new AlertDialog.Builder(this).setTitle("此设备暂不支持增强测距").setMessage("基础模式仍可捕获模型认识的物体，但无法提供深度轮廓或距离分级。").setPositiveButton("知道了",null).show();return;
+        }
+        new AlertDialog.Builder(this).setTitle("启用空间检测（实验）")
+            .setMessage("将自动检查 Google Play 服务 AR 与深度支持。启用后先站稳，缓慢移动手机，让镜头看到前方地面。深度轮廓不依赖物体名称；灰色不代表安全。\n\n此功能由 Google Play 服务 AR 提供，Google 会按其隐私政策处理服务数据；本应用不保存相机画面。")
+            .setNegativeButton("继续基础模式",null)
+            .setNeutralButton("服务隐私说明",(dialog,which)->{try{startActivity(new Intent(Intent.ACTION_VIEW,android.net.Uri.parse("https://policies.google.com/privacy")));}catch(RuntimeException ignored){}})
+            .setPositiveButton("继续启用",(dialog,which)->enableDepth(true)).show();
+    }
+    private void enableDepth(boolean userRequested) {
+        if(!resumed || destroyed)return;
+        try{
+            if(ArCoreApk.getInstance().requestInstall(this,userRequested)==ArCoreApk.InstallStatus.INSTALL_REQUESTED){pendingDepthInstall=true;fail("等待增强服务安装；返回后继续");return;}
+            fail("正在切换到空间检测");useDepth=true;long token=state.generation;main.postDelayed(()->{if(token==state.generation)startPreview();},250);
+        }catch(Exception|LinkageError error){pendingDepthInstall=false;useDepth=false;refreshDepthAvailability();info.setText("增强服务暂不可用，请继续基础模式");}
+    }
+    private void processDepth(long now) {
+        // A running renderer with unavailable depth is explicit unknown, not an analysis timeout.
+        state.analysisAt=now;
+        if(depthSnapshot==null || now-depthSnapshot.sampledAt>500){detectionOverlay.clear();policy.clear();return;}
+        if(lastDepthProcessed==depthSnapshot.sampledAt)return;
+        lastDepthProcessed=depthSnapshot.sampledAt;detectionAt=depthSnapshot.sampledAt;
+        AlertPolicy.Decision decision=policy.update(depthSnapshot.rotated(-wm.getDefaultDisplay().getRotation()*90),now);
+        detectionOverlay.show(decision.detections,previewGeometry);info.setText(decision.message);
+        if(decision.alert)alert();
+    }
     private void closeCamera() {
+        if(depthCamera!=null){depthCamera.stop();depthCamera=null;}depthSnapshot=null;
         if(session!=null) {session.close();session=null;}if(camera!=null){camera.close();camera=null;}if(surface!=null){surface.release();surface=null;}
     }
 

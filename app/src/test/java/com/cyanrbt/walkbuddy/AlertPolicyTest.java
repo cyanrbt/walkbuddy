@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class AlertPolicyTest {
-    private Detection person(float left,float right){return new Detection("人",0.8f,left,0.2f,right,0.8f);}
+    private Detection person(float left,float right){return new Detection("空间障碍",1,left,0.2f,right,0.8f,Detection.Risk.CAUTION,1.5f,null);}
     private AlertPolicy.Decision update(AlertPolicy policy,long time,Detection... detections){return policy.update(Arrays.asList(detections),time);}
     @Test public void requiresSameTargetAndSuppressesRepeats() {
         AlertPolicy p=new AlertPolicy();Detection a=person(0.3f,0.6f);
@@ -29,11 +29,11 @@ public class AlertPolicyTest {
         p.clear();assertFalse(update(p,7000,a).alert);
     }
     @Test public void weakOrPeripheralDetectionsRemainVisibleWithoutAlert() {
-        AlertPolicy p=new AlertPolicy();Detection a=person(0.01f,0.2f);
+        AlertPolicy p=new AlertPolicy();Detection a=new Detection("人",0.8f,0.01f,0.2f,0.2f,0.8f);
         update(p,100,a);assertFalse(update(p,600,a).alert);
         Detection weak=new Detection("人",0.4f,0.3f,0.2f,0.6f,0.8f);
         update(p,1100,weak);assertFalse(update(p,1600,weak).alert);
-        assertTrue(update(p,2100,weak).message.contains("检测到 1 个"));
+        assertTrue(update(p,2100,weak).message.contains("已捕获 1 处"));
     }
     @Test public void matchDoesNotDependOnDetectorOrdering() {
         AlertPolicy p=new AlertPolicy();Detection a=person(0.1f,0.35f),b=person(0.65f,0.9f);

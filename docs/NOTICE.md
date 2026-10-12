@@ -7,3 +7,5 @@
 运行解释器LiteRT1.4.0及litert-api1.4.0按官方POM为Apache2.0，附官方LICENSE与POM/锁文件。应用原生Java代码由本任务生成，未复制外部业务实现。
 
 模拟器正例使用官方演示测试图portrait.jpg，来源 https://storage.googleapis.com/mediapipe-assets/portrait.jpg ，只用于测试；不进入运行APK，也不纳入源码ZIP。测试复现脚本单独下载并校验摘要，无运行时下载。本项目不对该照片另行授予许可。
+
+0.4.0 新增 Google ARCore SDK 1.56.0（ARCore Additional Terms of Service），仅用于用户主动启用的深度功能。服务由 Google 提供，按 Google 隐私政策处理服务数据；不沿用 TensorFlow/LiteRT 的 Apache 许可。来源与条款见许可证.md。

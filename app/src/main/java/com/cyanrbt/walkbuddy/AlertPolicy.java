@@ -1,48 +1,50 @@
 package com.cyanrbt.walkbuddy;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-/** Match individual targets; image position is a cue, never a distance estimate. */
+/** Temporal confirmation belongs to measured occupancy, independent of semantic labels. */
 final class AlertPolicy {
     static final class Decision {
-        final String message;
-        final boolean alert;
-        Decision(String message,boolean alert){this.message=message;this.alert=alert;}
+        final String message;final boolean alert;final List<Detection> detections;
+        Decision(String message,boolean alert,List<Detection> detections){this.message=message;this.alert=alert;this.detections=Collections.unmodifiableList(detections);}
     }
     private static final class Track {
-        final Detection detection;
-        final int hits;
-        long alertedAt;
-        Track(Detection detection,int hits,long alertedAt){this.detection=detection;this.hits=hits;this.alertedAt=alertedAt;}
+        final Detection detection;final int hits,nearHits;
+        long alertedAt;int alertedRisk;
+        Track(Detection d,int hits,int nearHits,long at,int risk){detection=d;this.hits=hits;this.nearHits=nearHits;alertedAt=at;alertedRisk=risk;}
     }
     private List<Track> previous=Collections.emptyList();
     private long previousAt,lastAlert=-3000;
     Decision update(List<Detection> detections,long now) {
         boolean fresh=now>=previousAt && now-previousAt<=1200;
-        boolean[] used=new boolean[previous.size()];
-        List<Track> next=new ArrayList<>();Track target=null;
-        for(Detection detection:detections) {
+        boolean[] used=new boolean[previous.size()];List<Track> next=new ArrayList<>();List<Detection> visible=new ArrayList<>();Track target=null;
+        for(Detection d:detections) {
             int match=-1;float best=0.2f;
             if(fresh)for(int i=0;i<previous.size();i++) {
-                Track track=previous.get(i);float overlap=detection.overlap(track.detection);
-                if(!used[i] && detection.label.equals(track.detection.label) && overlap>best){best=overlap;match=i;}
+                Track old=previous.get(i);float overlap=d.overlap(old.detection);
+                if(!used[i] && d.label.equals(old.detection.label) && overlap>best){best=overlap;match=i;}
             }
             Track old=match<0?null:previous.get(match);if(match>=0)used[match]=true;
-            Track current=new Track(detection,old==null || !old.detection.attention() || !detection.attention()?1:old.hits+1,old==null?-8000:old.alertedAt);
-            next.add(current);
-            if(detection.attention() && current.hits>=2 && (target==null || current.alertedAt<target.alertedAt))target=current;
+            int hits=old==null || !old.detection.attention() || !d.attention()?1:old.hits+1;
+            int nearHits=d.risk==Detection.Risk.NEAR?(old==null?1:old.nearHits+1):0;
+            Track current=new Track(d,hits,nearHits,old==null?-8000:old.alertedAt,old==null?0:old.alertedRisk);next.add(current);
+            Detection.Risk confirmed=hits>=2?d.risk:Detection.Risk.CAPTURED;
+            if(confirmed==Detection.Risk.NEAR && nearHits<2)confirmed=Detection.Risk.CAUTION;
+            visible.add(d.withRisk(confirmed));
+            if(confirmed!=Detection.Risk.CAPTURED && (target==null || confirmed.ordinal()>confirmed(target).ordinal()
+                || (confirmed==confirmed(target) && current.alertedAt<target.alertedAt)))target=current;
         }
         previous=next;previousAt=now;
         if(target!=null) {
-            boolean alert=now-lastAlert>=3000 && now-target.alertedAt>=8000;
-            if(alert){target.alertedAt=now;lastAlert=now;}
-            return new Decision("请留意："+target.detection.position()+target.detection.label+"连续出现，进入画面中央关注区；距离未知",alert);
+            boolean urgent=confirmed(target)==Detection.Risk.NEAR;
+            boolean escalation=urgent && target.alertedRisk<2;
+            boolean alert=now-lastAlert>=(escalation?1000:3000) && (escalation || now-target.alertedAt>=(urgent?4000:8000));
+            if(alert){target.alertedAt=now;target.alertedRisk=confirmed(target).ordinal();lastAlert=now;}
+            String distance=Float.isFinite(target.detection.meters)?String.format(Locale.CHINA,"约 %.1f 米",target.detection.meters):"距离未知";
+            return new Decision((urgent?"请及时注意":"前方可能受阻")+" · "+target.detection.position()+" · "+distance,alert,visible);
         }
-        if(detections.isEmpty())return new Decision("未检测到支持目标；不代表道路安全",false);
-        Detection first=detections.get(0);
-        return new Decision("检测到 "+detections.size()+" 个目标（"+first.position()+first.label+"等）；等待连续确认或进入关注区",false);
+        return new Decision(detections.isEmpty()?"尚未捕获目标 · 不代表前方可通行":"已捕获 "+detections.size()+" 处目标 · 灰色不代表安全",false,visible);
     }
+    private static Detection.Risk confirmed(Track track){return track.detection.risk==Detection.Risk.NEAR && track.nearHits<2?Detection.Risk.CAUTION:track.detection.risk;}
     void clear(){previous=Collections.emptyList();previousAt=0;}
 }

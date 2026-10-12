@@ -3,7 +3,7 @@
     <string name="app_name">Walk Buddy</string>
     <string name="hero_kicker">白天步行</string>
     <string name="hero_title">Walk Buddy</string>
-    <string name="hero_lead">先确认后置镜头方向，再用系统画中画把实时画面留在旁边。无需悬浮窗权限。</string>
+    <string name="hero_lead">看见前方，也留意身边。实时取景与空间障碍提示，可放进系统画中画。</string>
     <string name="status_label">现在</string>
     <string name="status_initial">已停止</string>
     <string name="prepare">开始之前</string>
@@ -15,16 +15,16 @@
     <string name="caution">先站着确认镜头方向。没有提醒，只说明这次没有出声，路还是要你自己看。</string>
     <string name="section_use">小窗怎么用</string>
     <string name="use_body">先在预览页确认取景，再点「以小窗观察」。点击小窗可返回完整界面或停止。识别和声音每次开启默认关闭；关闭小窗、锁屏或预览离开屏幕后会停止摄像头。</string>
-    <string name="section_see">打开识别之后</string>
-    <string name="see_body">只看这几类：人、自行车、汽车、摩托车、公交车、卡车、椅子、长凳。判断在手机上完成，不保存画面，应用也没有网络权限。人类目标包括成人和儿童，不区分年龄，也不能保证识别所有儿童。锥桶、围挡、上下台阶、坑洞和玻璃尚不支持；不测量距离。</string>
+    <string name="section_see">两种观察方式</string>
+    <string name="see_body">基础模式展示模型认识的常见物体，尚不能判断距离。空间检测模式通过深度与地面位置寻找前方障碍，不要求知道物体名称；需设备及 AR 服务支持。深度缺失、透明物体和细小目标仍会漏检。相机画面不保存，应用没有网络权限。</string>
     <string name="toast_granted">已允许。准备好了再点开启。</string>
     <string name="toast_denied">还没有允许，窗口不会打开。</string>
     <string name="window_live">实时</string>
     <string name="window_idle">已停下</string>
     <string name="preview_starting">正在打开\n还没有实时画面</string>
     <string name="preview_info_idle">实时画面还不可用</string>
-    <string name="check_recognition">识别</string>
-    <string name="check_sound">声音</string>
+    <string name="check_recognition">开启检测</string>
+    <string name="check_sound">提示音</string>
     <string name="preview_stop">停止</string>
     <string name="info_recognition_off">识别关着，画面靠你看</string>
     <string name="info_recognition_on">正在准备本地识别</string>
@@ -42,6 +42,11 @@
     <string name="settings_unavailable">无法打开设置，请在系统应用设置中查看。</string>
     <string name="enter_pip">以小窗观察</string>
     <string name="restart_preview">重新开启预览</string>
-    <string name="preview_hint">绿色框表示检测到目标；黄色框表示进入画面中央关注区，连续确认后提醒，不代表实际距离。当前不支持锥桶、围挡、上下台阶和坑洞。声音仅在识别开启后可用。</string>
+    <string name="preview_hint">灰色不代表安全 · 测距有效时才显示黄、红色</string>
     <string name="posture_hint">镜头可能偏向地面或天空，请调整持机姿势，确认画面能看到前方</string>
+    <string name="depth_status_initial">正在检查增强能力</string>
+    <string name="enable_depth">空间检测</string>
+    <string name="risk_captured">● 灰 · 已捕获</string>
+    <string name="risk_caution">● 黄 · 可能受阻</string>
+    <string name="risk_near">● 红 · 近处注意</string>
 </resources>

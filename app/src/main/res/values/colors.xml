@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ink">#102028</color>
-    <color name="ink_raised">#17303A</color>
-    <color name="paper">#F3EFE6</color>
-    <color name="paper_card">#FFFBF5</color>
-    <color name="line">#E4DDD0</color>
-    <color name="mint">#1F8F7A</color>
-    <color name="mint_bright">#7ED9C8</color>
-    <color name="mint_soft">#D7F3EC</color>
-    <color name="foam">#E7F6F2</color>
+    <color name="ink">#0E1522</color>
+    <color name="ink_raised">#1B2638</color>
+    <color name="paper">#F3F6FC</color>
+    <color name="paper_card">#FFFFFF</color>
+    <color name="line">#DEE5F0</color>
+    <color name="mint">#416CEF</color>
+    <color name="mint_bright">#9AB4FF</color>
+    <color name="mint_soft">#E1EBFF</color>
+    <color name="foam">#EAF0FF</color>
     <color name="clay">#C4554A</color>
     <color name="stop_text">#E7A39C</color>
     <color name="scrim">#000000</color>
-    <color name="ink_text">#1C2A32</color>
-    <color name="muted">#5E6E76</color>
+    <color name="ink_text">#17243B</color>
+    <color name="muted">#65738A</color>
     <color name="on_ink">#F6F3EC</color>
-    <color name="on_ink_dim">#C5D2D4</color>
+    <color name="on_ink_dim">#AEBBCD</color>
 </resources>
