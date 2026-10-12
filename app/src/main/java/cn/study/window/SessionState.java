@@ -1,6 +1,6 @@
 package cn.study.window;
 
-/** 所有状态转移在 service 主线程；纯 Java 便于审查和单测。 */
+/** 所有状态转移在 预览 Activity 主线程；纯 Java 便于审查和单测。 */
 public final class SessionState {
     public enum Phase { STOPPED, STARTING, LIVE, UNAVAILABLE }
     public Phase phase = Phase.STOPPED;

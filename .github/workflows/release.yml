@@ -60,7 +60,7 @@ jobs:
           keytool -list -keystore "${HOME}/.android/debug.keystore" -storepass android
 
       - name: Test and build arm64 debug APK
-        run: bash ./gradlew testDebugUnitTest assembleDebug --no-daemon --no-watch-fs
+        run: bash ./gradlew testDebugUnitTest lintDebug assembleDebug --no-daemon --no-watch-fs
 
       - name: Collect APK
         run: cp app/build/outputs/apk/debug/app-debug.apk "Walk-Buddy-${GITHUB_REF_NAME}-arm64-debug.apk"
@@ -72,7 +72,7 @@ jobs:
           tag="${GITHUB_REF_NAME}"
           asset="Walk-Buddy-${tag}-arm64-debug.apk"
           cat > /tmp/release-notes.md <<EOF
-          ARM64 调试包，最低 Android 8。安装后在首页依次允许摄像头、悬浮窗和通知，再自己点开启。识别和提示音默认关闭。
+          ARM64 调试包，最低 Android 8。安装后允许摄像头，打开预览确认取景，再点「以小窗观察」进入系统画中画。不需要悬浮窗或通知授权；不支持画中画时可在应用内观察。关闭小窗或锁屏会释放相机，识别和提示音默认关闭。
 
           这是学习原型。没有提醒不代表安全。不要在道路、楼梯或骑行时靠它决定下一步。画面不保存、不上传，安装包没有网络权限。
 

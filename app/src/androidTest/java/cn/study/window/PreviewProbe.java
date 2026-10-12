@@ -12,8 +12,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /** 模拟器真实 TextureView/Surface 管线：合成生产者模拟系统已补偿 sensor 的纹理。 */
 public class PreviewProbe extends Instrumentation {
- protected boolean preview;
- @Override public void onCreate(Bundle args){super.onCreate(args);preview=args!=null && "true".equals(args.getString("preview"));start();}
+ protected boolean preview, pip;
+ @Override public void onCreate(Bundle args){super.onCreate(args);pip=args!=null && "true".equals(args.getString("pip"));preview=args!=null && "true".equals(args.getString("preview"));start();}
  @Override public void onStart(){Bundle result=new Bundle();Activity activity=null;StringBuilder report=new StringBuilder();try{
   activity=startActivitySync(new Intent(getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
   final Activity host=activity;int cases=0;
@@ -41,7 +41,7 @@ public class PreviewProbe extends Instrumentation {
     AtomicReference<Bitmap> shot=new AtomicReference<>(),sample=new AtomicReference<>();CountDownLatch copied=new CountDownLatch(1);int[] copyResult={-1};
     runOnMainSync(()->{int[] location=new int[2];ref.get().getLocationInWindow(location);report.append("view=").append(ref.get().getWidth()).append("x").append(ref.get().getHeight()).append(" location=").append(java.util.Arrays.toString(location)).append(" matrix=").append(ref.get().getTransform(null)).append("\n");Bitmap capture=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);shot.set(capture);
      PixelCopy.request(host.getWindow(),new Rect(location[0],location[1],location[0]+w,location[1]+h),capture,status->{copyResult[0]=status;copied.countDown();},new android.os.Handler(android.os.Looper.getMainLooper()));
-     sample.set(CameraWindowService.samplePreview(ref.get(),geometry));});
+     sample.set(PreviewActivity.samplePreview(ref.get(),geometry));});
     if(!copied.await(5,TimeUnit.SECONDS) || copyResult[0]!=PixelCopy.SUCCESS)throw new AssertionError("PixelCopy failed "+copyResult[0]);
     Bitmap image=shot.get(),input=sample.get();if(image==null || input==null)throw new AssertionError("bitmap unavailable");
     try(FileOutputStream stream=new FileOutputStream(new File(getTargetContext().getCacheDir(),"preview-last.png"))){image.compress(Bitmap.CompressFormat.PNG,100,stream);}

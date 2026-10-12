@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.graphics.*;
 import android.hardware.camera2.*;
@@ -13,14 +12,21 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.ToneGenerator;
 import android.media.AudioManager;
 import android.os.*;
-import android.provider.Settings;
 import android.util.Size;
+import android.util.Rational;
+import android.graphics.drawable.Icon;
 import android.view.*;
 import android.widget.*;
 import java.util.*;
-import java.util.concurrent.*;
+import java.lang.ref.WeakReference;
 
-public final class CameraWindowService extends Service {
+/** Camera is owned by the visible preview Activity, including system PiP. */
+public final class PreviewActivity extends Activity {
+    private static WeakReference<PreviewActivity> active = new WeakReference<>(null);
+    static void stopActivePreview() {
+        PreviewActivity preview = active.get();
+        if (preview != null && !preview.destroyed) preview.stopPreview();
+    }
     private static volatile String publicReport = "已停止；请主动开启";
     public static String report() { return publicReport; }
     private final Handler main = new Handler(Looper.getMainLooper());
@@ -28,7 +34,6 @@ public final class CameraWindowService extends Service {
     private final AlertPolicy policy = new AlertPolicy();
     private ToneGenerator activeTone;
     private WindowManager wm;
-    private WindowManager.LayoutParams layout;
     private LinearLayout root;
     private TextureView texture;
     private TextView cover, info, titleView;
@@ -41,89 +46,203 @@ public final class CameraWindowService extends Service {
     private PreviewGeometry previewGeometry;
     private final DisplayManager.DisplayListener displayListener=new DisplayManager.DisplayListener(){
         public void onDisplayAdded(int id){} public void onDisplayRemoved(int id){}
-        public void onDisplayChanged(int id){if(added && id==wm.getDefaultDisplay().getDisplayId())transform();}
+        public void onDisplayChanged(int id){if(root!=null && id==wm.getDefaultDisplay().getDisplayId())transform();}
     };
-    private boolean realtimeTimestamp, destroyed, added,disableRotateCrop;
+    private boolean realtimeTimestamp, destroyed, disableRotateCrop, resumed;
+    private boolean initialStart;
+    private Button pipButton, restartButton;
     private long brightnessAt,sampledAt,analysisEpoch;
     private static InferenceWorker<BitmapFrame,LocalDetector.Result> sharedWorker;
     private InferenceWorker<BitmapFrame,LocalDetector.Result> worker;
     private InferenceWorker.Ticket analysisTicket;
-    private final BroadcastReceiver screenOff = new BroadcastReceiver() { public void onReceive(Context c,Intent i) { fail("锁屏：已停止摄像头，请回应用重新开启"); }};
+    private final BroadcastReceiver events = new BroadcastReceiver() {
+        public void onReceive(Context c, Intent intent) {
+            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) fail("锁屏：摄像头已停止，请主动重新开启");
+        }
+    };
     private final Runnable watchdog = new Runnable() { public void run() {
         if(destroyed) return;
         long now=SystemClock.elapsedRealtime();
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
-            if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED || !Settings.canDrawOverlays(CameraWindowService.this)) fail("权限已撤回：不可用");
+            if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED) fail("权限已撤回：不可用");
             else if(state.expired(now)) fail("画面或分析帧过期：不可用，请重新开启");
             else { state.promote(now); render(now); }
         }
         main.postDelayed(this,100);
     }};
-    @Override public void onCreate() {
-        super.onCreate();
-        wm=(WindowManager)getSystemService(WINDOW_SERVICE);
-        getSystemService(DisplayManager.class).registerDisplayListener(displayListener,main);
-        synchronized(CameraWindowService.class){if(sharedWorker==null){Context app=getApplicationContext();sharedWorker=new InferenceWorker<>(SystemClock::elapsedRealtime,()->new LocalDetector(app));}worker=sharedWorker;}
-        if(Build.VERSION.SDK_INT>=33) registerReceiver(screenOff,new IntentFilter(Intent.ACTION_SCREEN_OFF),Context.RECEIVER_NOT_EXPORTED);
-        else registerReceiver(screenOff,new IntentFilter(Intent.ACTION_SCREEN_OFF));
+    @Override public void onCreate(Bundle savedState) {
+        super.onCreate(savedState);
+        active = new WeakReference<>(this);
+        wm = getWindowManager();
+        getSystemService(DisplayManager.class).registerDisplayListener(displayListener, main);
+        synchronized (PreviewActivity.class) {
+            if (sharedWorker == null) {
+                Context app = getApplicationContext();
+                sharedWorker = new InferenceWorker<>(SystemClock::elapsedRealtime, () -> new LocalDetector(app));
+            }
+            worker = sharedWorker;
+        }
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        if (Build.VERSION.SDK_INT >= 33) registerReceiver(events, filter, Context.RECEIVER_NOT_EXPORTED);
+        else registerReceiver(events, filter);
+        // Process recreation must not silently reopen the camera.
+        initialStart = savedState == null;
+        createWindow();
+        main.post(watchdog);
+    }
 
+    @Override protected void onResume() {
+        super.onResume();
+        resumed = true;
+        if (initialStart) { initialStart = false; startPreview(); }
+        render(SystemClock.elapsedRealtime());
     }
-    @Override public int onStartCommand(Intent intent,int flags,int startId) {
-        if(intent!=null && "STOP".equals(intent.getAction())) { stopSelf(); return START_NOT_STICKY; }
-        if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) return START_NOT_STICKY;
-        // 无自动恢复或重试。START_NOT_STICKY；仅 Activity 发出启动请求。
+
+    @Override protected void onPause() {
+        resumed = false;
+        // A PiP Activity is paused but still visible: keep its camera running.
+        super.onPause();
+    }
+
+    @Override protected void onStop() {
+        // Called when the PiP window is dismissed or the preview is no longer visible.
+        // Do not gate this on isInPictureInPictureMode(): it can still be true on dismissal.
+        fail("预览已离开屏幕，摄像头已停止；请主动重新开启");
+        super.onStop();
+    }
+
+    @Override protected void onDestroy() {
+        destroyed = true;
+        if (active.get() == this) active.clear();
+        cancelAnalysis(); state.stop(); policy.clear(); silence();
+        main.removeCallbacksAndMessages(null); closeCamera();
+        unregisterReceiver(events);
+        getSystemService(DisplayManager.class).unregisterDisplayListener(displayListener);
+        publicReport = "已停止；请主动开启";
+        super.onDestroy();
+    }
+
+    private void startPreview() {
+        if (!resumed || isInPictureInPictureMode()) return;
+        KeyguardManager lock = getSystemService(KeyguardManager.class);
+        if (lock.isKeyguardLocked() || !getSystemService(PowerManager.class).isInteractive()) return;
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            fail("请返回首页允许摄像头，再开启预览"); return;
+        }
+        if (state.phase == SessionState.Phase.STARTING || state.phase == SessionState.Phase.LIVE) return;
+        if (texture != null) texture.setSurfaceTextureListener(null);
+        state.start(SystemClock.elapsedRealtime());
+        brightnessAt = sampledAt = 0;
+        // Rebuild only after a stopped/failed session, never on a PiP size change.
+        createWindow();
+        render(SystemClock.elapsedRealtime());
+    }
+
+    private void stopPreview() {
+        fail("已停止；请主动开启");
+        finish();
+    }
+
+    private PictureInPictureParams pipParams() {
+        int rotation = wm.getDefaultDisplay().getRotation() * 90;
+        boolean portrait = Math.floorMod(sensorOrientation - rotation, 180) != 0;
+        PictureInPictureParams.Builder builder = new PictureInPictureParams.Builder()
+            .setAspectRatio(new Rational(portrait ? 3 : 4, portrait ? 4 : 3))
+            .setActions(Collections.singletonList(stopAction()));
+        if (texture != null) {
+            Rect bounds = new Rect();
+            if (texture.getGlobalVisibleRect(bounds)) builder.setSourceRectHint(bounds);
+        }
+        // Entry is explicit after the user has checked the viewfinder.
+        if (Build.VERSION.SDK_INT >= 31) builder.setAutoEnterEnabled(false);
+        return builder.build();
+    }
+
+    private RemoteAction stopAction() {
+        PendingIntent stop = PendingIntent.getBroadcast(this, 0,
+            new Intent(this, StopPreviewReceiver.class),
+            PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        return new RemoteAction(Icon.createWithResource(this, R.drawable.ic_stop),
+            getString(R.string.preview_stop), getString(R.string.preview_stop), stop);
+    }
+
+    private void enterPip() {
+        if (!resumed || state.phase != SessionState.Phase.LIVE || !state.fresh(SystemClock.elapsedRealtime())) return;
+        if (!PipSupport.available(this)) { showPipFallback(); return; }
         try {
-            NotificationManager nm=getSystemService(NotificationManager.class);
-            nm.createNotificationChannel(new NotificationChannel("camera",getString(R.string.notify_channel),NotificationManager.IMPORTANCE_LOW));
-            if(Build.VERSION.SDK_INT>=30) startForeground(1,notification("正在启动"),ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA);
-            else startForeground(1,notification("正在启动"));
-            if(!Settings.canDrawOverlays(this) || checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED) { fail("权限不足：不可用"); stopSelf(); return START_NOT_STICKY; }
-            if(root!=null) removeWindow();
-            state.start(SystemClock.elapsedRealtime());
-            createWindow();
-            main.removeCallbacks(watchdog);main.post(watchdog);
-        } catch(RuntimeException e) { publicReport="启动被系统拒绝：不可用，请检查权限并回到应用"; stopSelf(); }
-        return START_NOT_STICKY;
+            setCompactUi(true);
+            if (!enterPictureInPictureMode(pipParams())) {
+                setCompactUi(false); showPipFallback();
+            }
+        } catch (RuntimeException error) {
+            setCompactUi(false); showPipFallback();
+        }
     }
-    private Notification notification(String status) {
-        PendingIntent open=PendingIntent.getActivity(this,0,new Intent(this,MainActivity.class),PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_UPDATE_CURRENT);
-        PendingIntent stop=PendingIntent.getService(this,1,new Intent(this,CameraWindowService.class).setAction("STOP"),PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_UPDATE_CURRENT);
-        return new Notification.Builder(this,"camera").setSmallIcon(R.drawable.ic_stat_camera).setContentTitle(getString(R.string.app_name)+" · "+status)
-            .setContentText(getString(R.string.notify_text)).setContentIntent(open).setOngoing(true)
-            .addAction(new Notification.Action.Builder(null,"停止",stop).build()).build();
+
+    private void showPipFallback() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+            .setTitle(R.string.pip_unavailable_title).setMessage(R.string.pip_unavailable_body)
+            .setNegativeButton(R.string.keep_preview, null);
+        if (PipSupport.supported(this)) dialog.setPositiveButton(R.string.pip_settings,
+            (d, which) -> PipSupport.openSettings(this));
+        dialog.show();
     }
+
+    @Override public void onPictureInPictureModeChanged(boolean inPip, Configuration config) {
+        super.onPictureInPictureModeChanged(inPip, config);
+        setCompactUi(inPip);
+    }
+
+    private void setCompactUi(boolean compact) {
+        if (root == null) return;
+        int visibility = compact ? View.GONE : View.VISIBLE;
+        root.findViewById(R.id.preview_header).setVisibility(visibility);
+        root.findViewById(R.id.preview_controls).setVisibility(visibility);
+        root.findViewById(R.id.preview_info).setVisibility(visibility);
+        if (compact) root.setPadding(0, 0, 0, 0);
+        root.requestApplyInsets();
+        if (compact) getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        else getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+    }
+
+    @Override public void onConfigurationChanged(Configuration config) {
+        super.onConfigurationChanged(config);
+        if (texture != null) texture.post(this::transform);
+    }
+
     private void createWindow() {
-        root=(LinearLayout)LayoutInflater.from(this).inflate(R.layout.overlay_window,null);
-        titleView=root.findViewById(R.id.overlay_title);
-        View header=root.findViewById(R.id.overlay_header);
-        drag(header,false);
-        for(int i=0;i<((ViewGroup)header).getChildCount();i++) drag(((ViewGroup)header).getChildAt(i),false);
-        texture=root.findViewById(R.id.overlay_preview);texture.setOpaque(false);
-        cover=root.findViewById(R.id.overlay_cover);
-        info=root.findViewById(R.id.overlay_info);
-        recognition=root.findViewById(R.id.overlay_recognition);
+        previewGeometry = null;
+        root=(LinearLayout)getLayoutInflater().inflate(R.layout.activity_preview,
+            (ViewGroup)findViewById(android.R.id.content), false);
+        titleView=root.findViewById(R.id.preview_title);
+        texture=root.findViewById(R.id.camera_preview);texture.setOpaque(false);
+        cover=root.findViewById(R.id.preview_cover);
+        info=root.findViewById(R.id.preview_info);
+        recognition=root.findViewById(R.id.preview_recognition);
         recognition.setOnCheckedChangeListener((b,checked)-> {
             policy.clear();analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
             if(checked){long now=SystemClock.elapsedRealtime();state.analysisAt=now;analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;}
-            if(!checked) { silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_on);
+            if(!checked) { if(sound!=null)sound.setChecked(false); silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_on);
         });
-        sound=root.findViewById(R.id.overlay_sound);
-        Button stop=(Button)root.findViewById(R.id.overlay_stop);
+        sound=root.findViewById(R.id.preview_sound);
+        Button stop=(Button)root.findViewById(R.id.preview_stop);
         stop.setBackgroundTintList(null);
-        stop.setOnClickListener(v->stopSelf());
-        drag(root.findViewById(R.id.overlay_resize),true);
-        layout=new WindowManager.LayoutParams(dp(300),dp(500),WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,PixelFormat.OPAQUE);
-        layout.gravity=Gravity.TOP|Gravity.LEFT;layout.x=16;layout.y=80;clamp();
-        wm.addView(root,layout);added=true;
+        stop.setOnClickListener(v->stopPreview());
+        pipButton=root.findViewById(R.id.enter_pip);
+        pipButton.setBackgroundTintList(null);
+        pipButton.setOnClickListener(v->enterPip());
+        restartButton=root.findViewById(R.id.restart_preview);
+        restartButton.setBackgroundTintList(null);
+        restartButton.setOnClickListener(v->startPreview());
+        sound.setOnCheckedChangeListener((button, checked) -> { if (!checked) silence(); });
         texture.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h) { openCamera(s); }
             public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h) { transform(); }
-            public boolean onSurfaceTextureDestroyed(SurfaceTexture s) { if(!destroyed && state.phase!=SessionState.Phase.UNAVAILABLE) fail("显示 Surface 已销毁：不可用");return true; }
+            public boolean onSurfaceTextureDestroyed(SurfaceTexture s) { if(!destroyed && (state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE)) fail("显示 Surface 已销毁：不可用");return true; }
             public void onSurfaceTextureUpdated(SurfaceTexture s) {
-                if(texture==null || destroyed || state.phase==SessionState.Phase.UNAVAILABLE)return;
+                if(texture==null || destroyed || (state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE))return;
                 long now=SystemClock.elapsedRealtime();
                 if(state.expired(now)){fail("采集或显示截止时间已过：不可用");return;}
                 if(now-brightnessAt>=1000) { brightnessAt=now;Bitmap check=texture.getBitmap(16,12);
@@ -135,29 +254,16 @@ public final class CameraWindowService extends Service {
                 if(state.phase==SessionState.Phase.LIVE && state.recognition && now-sampledAt>=500 && !worker.busy())sample(now);
             }
         });
-    }
-    private void drag(View handle,boolean resize) {
-        handle.setOnTouchListener(new View.OnTouchListener() {
-            float x,y;int startX,startY,startW,startH;
-            public boolean onTouch(View v,android.view.MotionEvent e) {
-                if(e.getAction()==android.view.MotionEvent.ACTION_DOWN) { x=e.getRawX();y=e.getRawY();startX=layout.x;startY=layout.y;startW=layout.width;startH=layout.height;return true; }
-                if(e.getAction()==android.view.MotionEvent.ACTION_MOVE) {
-                    int dx=(int)(e.getRawX()-x),dy=(int)(e.getRawY()-y);
-                    if(resize) { layout.width=Math.max(dp(260),startW+dx);layout.height=Math.max(dp(420),startH+dy); }
-                    else { layout.x=startX+dx;layout.y=startY+dy; }
-                    clamp();if(added) wm.updateViewLayout(root,layout);return true;
-                }
-                if(e.getAction()==android.view.MotionEvent.ACTION_UP) { v.performClick();return true; }return false;
-            }
+        setContentView(root);
+        root.setOnApplyWindowInsetsListener((view, insets) -> {
+            if (!isInPictureInPictureMode()) view.setPadding(insets.getSystemWindowInsetLeft(),
+                insets.getSystemWindowInsetTop(), insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
+            else view.setPadding(0, 0, 0, 0);
+            return insets;
         });
+        root.requestApplyInsets();
+        setCompactUi(isInPictureInPictureMode());
     }
-    private int dp(int value) { return Math.round(value*getResources().getDisplayMetrics().density); }
-    private void clamp() {
-        android.util.DisplayMetrics metrics=new android.util.DisplayMetrics();wm.getDefaultDisplay().getMetrics(metrics);
-        layout.width=Math.min(layout.width,metrics.widthPixels);layout.height=Math.min(layout.height,Math.max(1,metrics.heightPixels-dp(24)));
-        layout.x=Math.max(0,Math.min(layout.x,metrics.widthPixels-layout.width));layout.y=Math.max(0,Math.min(layout.y,metrics.heightPixels-layout.height));
-    }
-    @Override public void onConfigurationChanged(Configuration config) { super.onConfigurationChanged(config);if(added) {clamp();wm.updateViewLayout(root,layout);transform();} }
     private void transform() {
         if(texture==null || texture.getWidth()<=0 || texture.getHeight()<=0) return;
         PreviewGeometry next=new PreviewGeometry(BUFFER_WIDTH,BUFFER_HEIGHT,sensorOrientation,
@@ -264,6 +370,9 @@ public final class CameraWindowService extends Service {
         cover.setVisibility(live?View.GONE:View.VISIBLE);
         if(!live) cover.setText(state.reason);
         recognition.setEnabled(live && LocalDetector.AVAILABLE);
+        sound.setEnabled(live && state.recognition);
+        pipButton.setEnabled(live);
+        restartButton.setVisibility(state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED ? View.VISIBLE : View.GONE);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(live){cover.setText("");if(!state.recognition)info.setText(R.string.info_recognition_off);}
         if(titleView!=null) titleView.setText(live?R.string.window_live:R.string.window_idle);
@@ -279,18 +388,9 @@ public final class CameraWindowService extends Service {
         if(info!=null)info.setText(R.string.info_stopped);
         if(root!=null)render(SystemClock.elapsedRealtime());
         publicReport=message+"；提醒已停止";
-        getSystemService(NotificationManager.class).notify(1,notification("不可用；摄像头已释放"));
-        stopForeground(STOP_FOREGROUND_DETACH);
     }
     private void closeCamera() {
         if(session!=null) {session.close();session=null;}if(camera!=null){camera.close();camera=null;}if(surface!=null){surface.release();surface=null;}
     }
 
-    private void removeWindow() {if(added){wm.removeViewImmediate(root);added=false;}root=null;texture=null;previewGeometry=null;}
-    @Override public void onDestroy() {
-        destroyed=true;cancelAnalysis();state.stop();policy.clear();silence();main.removeCallbacksAndMessages(null);closeCamera();
-        removeWindow();unregisterReceiver(screenOff);getSystemService(DisplayManager.class).unregisterDisplayListener(displayListener);
-        stopForeground(STOP_FOREGROUND_REMOVE);getSystemService(NotificationManager.class).cancel(1);publicReport="已停止；请主动开启";super.onDestroy();
-    }
-    @Override public IBinder onBind(Intent i) {return null;}
 }

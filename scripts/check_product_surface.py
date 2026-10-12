@@ -23,7 +23,7 @@ def chunk(text, id_, until):
     return text[at:stop]
 
 home = read("app/src/main/res/layout/activity_main.xml")
-overlay = read("app/src/main/res/layout/overlay_window.xml")
+overlay = read("app/src/main/res/layout/activity_preview.xml")
 strings = read("app/src/main/res/values/strings.xml")
 colors = read("app/src/main/res/values/colors.xml")
 launcher = read("app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml")
@@ -50,14 +50,14 @@ assert '<string name="window_live">实时</string>' in strings
 assert "毫秒" not in between(strings, "window_live", "</string>")
 for phrase in ("没有提醒", "你自己看", "不保存", "网络权限"):
     assert phrase in strings, phrase
-for id_ in ("overlay_header", "overlay_resize", "overlay_stop", "overlay_recognition", "overlay_sound", "overlay_cover"):
+for id_ in ("preview_header", "preview_stop", "preview_recognition", "preview_sound", "preview_cover"):
     assert f"@+id/{id_}" in overlay
 assert 'android:checked="true"' not in overlay
-recognition = chunk(overlay, "overlay_recognition", "overlay_sound")
-sound = chunk(overlay, "overlay_sound", "overlay_stop")
+recognition = chunk(overlay, "preview_recognition", "preview_sound")
+sound = chunk(overlay, "preview_sound", "preview_stop")
 assert "@drawable/bg_toggle" in recognition and "@drawable/bg_toggle" in sound
 assert 'android:button="@null"' in recognition and 'android:button="@null"' in sound
-cover = chunk(overlay, "overlay_cover", "/>")
+cover = chunk(overlay, "preview_cover", "/>")
 assert 'android:layout_width="match_parent"' in cover
 assert 'android:layout_height="match_parent"' in cover
 assert "@color/scrim" in cover
@@ -69,11 +69,30 @@ assert "<vector" in mark and 'android:viewportWidth="108"' in mark
 assert 'android:fillType="evenOdd"' in mark and "M42,34" in mark and "a10,10" in mark
 assert not (root / "app/src/main/res/drawable-nodpi/ic_launcher_art.png").exists()
 assert not (root / "app/src/main/res/drawable/ic_observe.xml").exists()
-service = read("app/src/main/java/cn/study/window/CameraWindowService.java")
+service = read("app/src/main/java/cn/study/window/PreviewActivity.java")
 activity = read("app/src/main/java/cn/study/window/MainActivity.java")
-assert "status.setText(CameraWindowService.report())" in activity
+assert "status.setText(PreviewActivity.report())" in activity
 assert "帧龄" not in activity and "毫秒" not in activity and " ms" not in activity
 assert "帧龄" not in service and "毫秒" not in service and " ms" not in service
 assert "lastLatency" not in service
 assert 'publicReport=state.reason+"\\n"+(state.recognition?"识别开着":"识别关着");' in service
-print("ProductSurfaceTest: ok")
+# PiP permission and component contract, mirrored by PipContractTest.
+import xml.etree.ElementTree as ET
+android = "{http://schemas.android.com/apk/res/android}"
+tools = "{http://schemas.android.com/tools}"
+manifest = ET.fromstring(read("app/src/main/AndroidManifest.xml"))
+permissions = {node.get(android + "name") for node in manifest.findall("uses-permission")
+               if node.get(tools + "node") != "remove"}
+assert permissions == {"android.permission.CAMERA", "android.permission.VIBRATE"}
+assert not manifest.findall("application/service")
+receivers = manifest.findall("application/receiver")
+assert len(receivers) == 1 and receivers[0].get(android + "exported") == "false"
+assert receivers[0].get(android + "name") == ".StopPreviewReceiver"
+preview = next(node for node in manifest.findall("application/activity")
+               if node.get(android + "name") == ".PreviewActivity")
+assert preview.get(android + "supportsPictureInPicture") == "true"
+assert preview.get(android + "exported") == "false"
+assert preview.get(android + "launchMode") == "singleTask"
+assert {"screenSize", "smallestScreenSize", "screenLayout", "orientation"} <= set(preview.get(android + "configChanges").split("|"))
+assert "row_overlay" not in home and "row_notice" not in home and "row_pip" in home
+print("ProductSurfaceTest + PiP contract: ok")

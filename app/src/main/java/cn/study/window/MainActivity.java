@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Button;
@@ -13,11 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public final class MainActivity extends Activity {
-    private TextView status, cameraState, overlayState, noticeState, cameraBadge, overlayBadge, noticeBadge;
+    private TextView status, cameraState, pipState, cameraBadge, pipBadge;
     private boolean visible;
     private final android.os.Handler handler = new android.os.Handler(android.os.Looper.getMainLooper());
     private final Runnable refresh = new Runnable() { public void run() {
-        status.setText(CameraWindowService.report());
+        status.setText(PreviewActivity.report());
         paintAccess();
         handler.postDelayed(this, 500);
     }};
@@ -27,31 +26,44 @@ public final class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         status = findViewById(R.id.status);
         cameraState = findViewById(R.id.state_camera);
-        overlayState = findViewById(R.id.state_overlay);
-        noticeState = findViewById(R.id.state_notice);
+        pipState = findViewById(R.id.state_pip);
         cameraBadge = findViewById(R.id.badge_camera);
-        overlayBadge = findViewById(R.id.badge_overlay);
-        noticeBadge = findViewById(R.id.badge_notice);
-        findViewById(R.id.row_camera).setOnClickListener(v -> requestPermissions(new String[]{Manifest.permission.CAMERA}, 1));
-        findViewById(R.id.row_overlay).setOnClickListener(v -> startActivity(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()))));
-        findViewById(R.id.row_notice).setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= 33) requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 2);
-            else toast(R.string.toast_notice_skip);
+        pipBadge = findViewById(R.id.badge_pip);
+        findViewById(R.id.row_camera).setOnClickListener(v -> requestCamera());
+        findViewById(R.id.row_pip).setOnClickListener(v -> {
+            if (PipSupport.supported(this)) PipSupport.openSettings(this);
+            else toast(R.string.pip_unsupported);
         });
         Button open = findViewById(R.id.start);
         Button stop = findViewById(R.id.stop);
         open.setBackgroundTintList(null);
         stop.setBackgroundTintList(null);
         open.setOnClickListener(v -> start());
-        stop.setOnClickListener(v -> stopService(new Intent(this, CameraWindowService.class)));
+        stop.setOnClickListener(v -> PreviewActivity.stopActivePreview());
+    }
+
+    private void requestCamera() {
+        if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            toast(R.string.toast_granted); return;
+        }
+        boolean asked = getPreferences(MODE_PRIVATE).getBoolean("asked_camera", false);
+        if (asked && !shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+            try {
+                startActivity(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    Uri.parse("package:" + getPackageName())));
+            } catch (RuntimeException error) { toast(R.string.settings_unavailable); }
+            return;
+        }
+        getPreferences(MODE_PRIVATE).edit().putBoolean("asked_camera", true).apply();
+        requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
     }
 
     private void start() {
         if (!visible) return;
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) { toast(R.string.toast_camera); return; }
-        if (!Settings.canDrawOverlays(this)) { toast(R.string.toast_overlay); return; }
-        try { startForegroundService(new Intent(this, CameraWindowService.class)); }
-        catch (RuntimeException e) { toast(R.string.toast_start_rejected); }
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestCamera(); return;
+        }
+        startActivity(new Intent(this, PreviewActivity.class));
     }
 
     @Override protected void onResume() { super.onResume(); visible = true; handler.post(refresh); }
@@ -63,10 +75,10 @@ public final class MainActivity extends Activity {
     }
 
     private void paintAccess() {
-        mark(cameraBadge, cameraState, checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED, R.string.access_ok, R.string.access_needed);
-        mark(overlayBadge, overlayState, Settings.canDrawOverlays(this), R.string.access_ok, R.string.access_needed);
-        if (Build.VERSION.SDK_INT < 33) mark(noticeBadge, noticeState, true, R.string.access_notice_skip, R.string.access_needed);
-        else mark(noticeBadge, noticeState, checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED, R.string.access_ok, R.string.access_needed);
+        mark(cameraBadge, cameraState, checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED,
+            R.string.access_ok, R.string.access_needed);
+        mark(pipBadge, pipState, PipSupport.available(this), R.string.pip_available,
+            PipSupport.supported(this) ? R.string.pip_disabled : R.string.pip_in_app_only);
     }
 
     private void mark(TextView badge, TextView label, boolean ok, int okText, int needText) {

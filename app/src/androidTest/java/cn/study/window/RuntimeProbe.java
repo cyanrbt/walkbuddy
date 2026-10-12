@@ -6,7 +6,7 @@ import java.util.*;
 
 /** 显式只在模拟器运行：实际Android Interpreter/模型形状/标签与人像推理。 */
 public final class RuntimeProbe extends PreviewProbe {
-    @Override public void onStart(){if(preview){super.onStart();return;}Bundle result=new Bundle();try{
+    @Override public void onStart(){if(pip){PipProbe.run(this);return;}if(preview){super.onStart();return;}Bundle result=new Bundle();try{
         LocalDetector detector=new LocalDetector(getTargetContext());StringBuilder report=new StringBuilder(detector.tensorReport());
         try{
             Bitmap bitmap=BitmapFactory.decodeStream(getContext().getAssets().open("portrait.jpg"));if(bitmap==null)throw new IllegalStateException("测试图无法解码");

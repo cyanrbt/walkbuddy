@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 
 /** Reads the shipped resource XML. It does not reimplement the layouts. */
 public class ProductSurfaceTest {
-    @Test public void homeAndOverlayAreOneProduct() throws Exception {
+    @Test public void homeAndPreviewAreOneProduct() throws Exception {
         Path root = root();
         String home = read(root.resolve("app/src/main/res/layout/activity_main.xml"));
-        String overlay = read(root.resolve("app/src/main/res/layout/overlay_window.xml"));
+        String overlay = read(root.resolve("app/src/main/res/layout/activity_preview.xml"));
         String strings = read(root.resolve("app/src/main/res/values/strings.xml"));
         String colors = read(root.resolve("app/src/main/res/values/colors.xml"));
         String launcher = read(root.resolve("app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"));
@@ -56,17 +56,17 @@ public class ProductSurfaceTest {
         assertTrue(strings.contains("不保存"));
         assertTrue(strings.contains("网络权限"));
 
-        for (String id : new String[]{"overlay_header", "overlay_resize", "overlay_stop", "overlay_recognition", "overlay_sound", "overlay_cover"}) {
+        for (String id : new String[]{"preview_header", "preview_stop", "preview_recognition", "preview_sound", "preview_cover"}) {
             assertTrue(overlay.contains("@+id/" + id));
         }
         assertFalse(overlay.contains("android:checked=\"true\""));
-        String recognition = chunk(overlay, "overlay_recognition", "overlay_sound");
-        String sound = chunk(overlay, "overlay_sound", "overlay_stop");
+        String recognition = chunk(overlay, "preview_recognition", "preview_sound");
+        String sound = chunk(overlay, "preview_sound", "preview_stop");
         assertTrue(recognition.contains("@drawable/bg_toggle"));
         assertTrue(sound.contains("@drawable/bg_toggle"));
         assertTrue(recognition.contains("android:button=\"@null\""));
         assertTrue(sound.contains("android:button=\"@null\""));
-        String cover = chunk(overlay, "overlay_cover", "/>");
+        String cover = chunk(overlay, "preview_cover", "/>");
         assertTrue(cover.contains("android:layout_width=\"match_parent\""));
         assertTrue(cover.contains("android:layout_height=\"match_parent\""));
         assertTrue(cover.contains("@color/scrim"));
@@ -83,9 +83,9 @@ public class ProductSurfaceTest {
         assertTrue(mark.contains("a10,10"));
         assertFalse(Files.exists(root.resolve("app/src/main/res/drawable-nodpi/ic_launcher_art.png")));
         assertFalse(Files.exists(root.resolve("app/src/main/res/drawable/ic_observe.xml")));
-        String service = read(root.resolve("app/src/main/java/cn/study/window/CameraWindowService.java"));
+        String service = read(root.resolve("app/src/main/java/cn/study/window/PreviewActivity.java"));
         String activity = read(root.resolve("app/src/main/java/cn/study/window/MainActivity.java"));
-        assertTrue(activity.contains("status.setText(CameraWindowService.report())"));
+        assertTrue(activity.contains("status.setText(PreviewActivity.report())"));
         assertFalse(activity.contains("帧龄") || activity.contains("毫秒") || activity.contains(" ms"));
         assertFalse(service.contains("帧龄") || service.contains("毫秒") || service.contains(" ms"));
         assertFalse(service.contains("lastLatency"));
@@ -116,7 +116,7 @@ public class ProductSurfaceTest {
     private static Path root() {
         Path dir = Path.of(System.getProperty("user.dir")).toAbsolutePath();
         for (int i = 0; i < 6 && dir != null; i++) {
-            if (Files.exists(dir.resolve("settings.gradle")) && Files.exists(dir.resolve("app/src/main/res/layout/overlay_window.xml"))) return dir;
+            if (Files.exists(dir.resolve("settings.gradle")) && Files.exists(dir.resolve("app/src/main/res/layout/activity_preview.xml"))) return dir;
             dir = dir.getParent();
         }
         throw new AssertionError("project root not found from " + System.getProperty("user.dir"));
