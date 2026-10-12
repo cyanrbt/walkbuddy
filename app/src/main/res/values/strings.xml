@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Walk Buddy</string>
+    <string name="app_name">WalkBuddy</string>
     <string name="hero_kicker">白天步行</string>
-    <string name="hero_title">Walk Buddy</string>
+    <string name="hero_title">WalkBuddy</string>
     <string name="hero_lead">看见前方，也留意身边。实时取景与空间障碍提示，可放进系统画中画。</string>
     <string name="status_label">现在</string>
     <string name="status_initial">已停止</string>

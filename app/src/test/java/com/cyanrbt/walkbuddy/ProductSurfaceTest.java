@@ -23,8 +23,8 @@ public class ProductSurfaceTest {
         String stop = read(root.resolve("app/src/main/res/drawable/bg_stop.xml"));
         String toggle = read(root.resolve("app/src/main/res/drawable/bg_toggle.xml"));
 
-        assertTrue(strings.contains("<string name=\"app_name\">Walk Buddy</string>"));
-        assertTrue(strings.contains("<string name=\"hero_title\">Walk Buddy</string>"));
+        assertTrue(strings.contains("<string name=\"app_name\">WalkBuddy</string>"));
+        assertTrue(strings.contains("<string name=\"hero_title\">WalkBuddy</string>"));
         assertTrue(home.contains("@string/app_name") || home.contains("@string/hero_title"));
         assertTrue(home.contains("@string/caution") && home.contains("@string/hero_lead") && home.contains("@string/see_body"));
         assertFalse(home.contains("毫秒"));
