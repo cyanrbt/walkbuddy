@@ -29,9 +29,13 @@
 
 推送 `v` 开头的标签后，GitHub Actions 会构建 arm64 调试包并挂到 [Releases](https://github.com/cyanrbt/walkbuddy/releases)。当前版本的文件名是 `Walk-Buddy-v0.3.0-arm64-debug.apk`，只含 arm64-v8a，最低 Android 8。
 
-装好后允许摄像头并打开预览，确认取景后点「以小窗观察」。系统若拒绝覆盖安装，先卸载旧包：调试签名变了就不能直接升级。
+装好后允许摄像头并打开预览，确认取景后点「以小窗观察」。覆盖安装要求包名、签名证书一致，且 versionCode 不降低。遇到安装失败先核对签名和版本号，不要直接卸载以免丢失应用数据。
 
-想让以后每次发布都用同一把调试签名，把用密码 `android`、别名 `androiddebugkey` 生成的密钥库做一次 base64，存成仓库密钥 `DEBUG_KEYSTORE_BASE64`。没有这把密钥时，Actions 会把第一次生成的调试密钥库放进构建缓存。
+发布前必须把固定签名密钥库的 base64 内容存入仓库 Actions Secret `DEBUG_KEYSTORE_BASE64`（密码 `android`，别名 `androiddebugkey`），并另行备份原始密钥。工作流不再用缓存保存密钥，也不在缺失时生成新密钥；缺少或无效的 Secret 会阻止发布。每次发布递增 `app/build.gradle` 的 `versionCode`，保持 `applicationId` 不变。仅修改 `versionName` 或标签不会递增内部版本号。
+
+优先恢复已安装版本对应的原始密钥，不能从 APK 中还原私钥。历史流程在标签内生成的缓存不能跨标签复用：可在对应标签的 Actions 缓存仍存在时，通过受控的维护流程恢复到固定 Secret（不要在日志、代码仓库或公开 artifact 中输出密钥）。若原始密钥无法恢复，换用新固定密钥后，旧签名用户需要一次卸载重装，后续才能持续覆盖升级。不要只改回原来的别名或密码：它们相同也不代表签名证书相同。
+
+已核对历史 Release：`v0.2.4`（versionCode 6）证书 SHA-256 为 `bac8ab9c0a50066dc91f51c1715c6b566bcbebaacdbf5c4233bfe1ffa3bbd95a`；`v0.3.0`（versionCode 8）为 `1c4b3a2ce0652541d28b2ae2bb152a684974b881a4028f9ab4e90b06a0edad9a`。两者签名不同，不能直接覆盖。
 
 ## 构建
 
