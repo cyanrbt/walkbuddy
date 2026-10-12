@@ -27,7 +27,7 @@ public final class DetectionOverlay extends View {
                 p.moveTo(l,b-corner);p.lineTo(l,b);p.lineTo(l+corner,b);p.moveTo(r-corner,b);p.lineTo(r,b);p.lineTo(r,b-corner);canvas.drawPath(p,paint);
             }
             paint.setStyle(Paint.Style.FILL);paint.setTextSize(11*dp);paint.setTypeface(Typeface.create("sans-serif-medium",Typeface.NORMAL));
-            String label=d.label+(Float.isFinite(d.meters)?String.format(Locale.CHINA,"  %.1fm",d.meters):"");
+            String label=d.label+(Float.isFinite(d.meters)?String.format(Locale.CHINA,"  %.1fm",d.meters):d.attention()?" · 未测距":"");
             float textWidth=Math.min(paint.measureText(label),geometry.width-12*dp);
             while(label.length()>1 && paint.measureText(label)>textWidth)label=label.substring(0,label.length()-1);
             float x=Math.max(geometry.left+2*dp,Math.min(l,geometry.left+geometry.width-textWidth-12*dp));

@@ -64,8 +64,10 @@ public class ProductSurfaceTest {
         String sound = chunk(overlay, "preview_sound", "preview_stop");
         assertTrue(recognition.contains("@drawable/bg_toggle"));
         assertTrue(sound.contains("@drawable/bg_toggle"));
-        assertTrue(recognition.contains("android:button=\"@null\""));
-        assertTrue(sound.contains("android:button=\"@null\""));
+        assertFalse(recognition.contains("android:button=\"@null\""));
+        assertFalse(sound.contains("android:button=\"@null\""));
+        assertTrue(strings.contains("检测：已关闭"));
+        assertTrue(strings.contains("声音：已关闭"));
         String cover = chunk(overlay, "preview_cover", "/>");
         assertTrue(cover.contains("android:layout_width=\"match_parent\""));
         assertTrue(cover.contains("android:layout_height=\"match_parent\""));

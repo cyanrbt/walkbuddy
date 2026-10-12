@@ -18,8 +18,9 @@ final class Detection {
     static Detection fromModel(String label,float score,float[] box,float width,float height,float padX,float padY) {
         float l=clip((box[1]*320-padX)/width),t=clip((box[0]*320-padY)/height);
         float r=clip((box[3]*320-padX)/width),b=clip((box[2]*320-padY)/height);
-        return r>l && b>t ? new Detection(label,score,l,t,r,b) : null;
+        return r>l && b>t ? new Detection(label,score,l,t,r,b).withImageAttention() : null;
     }
+    Detection withImageAttention(){return withRisk(score>=0.5f && right>=0.25f && left<=0.75f && bottom>=0.45f?Risk.CAUTION:Risk.CAPTURED);}
     private static float clip(float v){return Math.max(0,Math.min(1,v));}
     Detection withRisk(Risk value){return new Detection(label,score,left,top,right,bottom,value,meters,mask);}
     boolean attention(){return risk!=Risk.CAPTURED;}

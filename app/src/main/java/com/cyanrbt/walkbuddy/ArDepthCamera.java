@@ -105,7 +105,9 @@ final class ArDepthCamera {
         try(Image depth=frame.acquireRawDepthImage16Bits();Image confidence=frame.acquireRawDepthConfidenceImage()) {
             if(depth.getWidth()!=confidence.getWidth() || depth.getHeight()!=confidence.getHeight())return empty(now,"深度格式不可用");
             long age=frame.getTimestamp()-depth.getTimestamp();
-            if(age<0 || age>500000000L || depth.getTimestamp()!=confidence.getTimestamp())return empty(now,"深度已过期 · 暂停距离判断");
+            DepthTiming.State timing=DepthTiming.check(frame.getTimestamp(),depth.getTimestamp());
+            if(timing!=DepthTiming.State.FRESH)return empty(now,timing==DepthTiming.State.EXPIRED?"深度更新较慢 · 暂停测距":timing==DepthTiming.State.FUTURE_TIMESTAMP?"深度时间不同步 · 暂停测距":"深度时间缺失 · 暂停测距");
+            // The confidence API returns the matching image for this Frame; its timestamp is not an age contract.
             if(depth.getTimestamp()==lastDepthStamp)return groundKnown && latest!=null && now-latest.sampledAt<=500?latest:empty(now,"等待新的深度观测");
             lastDepthStamp=depth.getTimestamp();
             int w=DepthObstacles.WIDTH,h=DepthObstacles.HEIGHT,n=w*h;

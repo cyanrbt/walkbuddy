@@ -36,7 +36,8 @@ public final class PreviewActivity extends Activity {
     public static String report() { return publicReport; }
     private final Handler main = new Handler(Looper.getMainLooper());
     private final SessionState state = new SessionState();
-    private final AlertPolicy policy = new AlertPolicy();
+    private final DetectionFeedback feedback = new DetectionFeedback();
+    private boolean restoreDetection,restoreSound;
     private ToneGenerator activeTone;
     private WindowManager wm;
     private LinearLayout root;
@@ -44,12 +45,10 @@ public final class PreviewActivity extends Activity {
     private DetectionOverlay detectionOverlay;
     private ArDepthCamera depthCamera;
     private DepthSnapshot depthSnapshot;
-    private long lastDepthProcessed=-1;
-    private boolean useDepth,pendingDepthInstall;
+    private boolean useDepth,pendingDepthInstall,installDetection,installSound;
     private Button depthButton;
     private TextView depthStatus;
     private ArCoreApk.Availability depthAvailability;
-    private long detectionAt;
     private TextView postureHint;
     private SensorManager sensors;
     private final PosturePolicy posturePolicy=new PosturePolicy();
@@ -97,7 +96,7 @@ public final class PreviewActivity extends Activity {
     private final Runnable watchdog = new Runnable() { public void run() {
         if(destroyed) return;
         long now=SystemClock.elapsedRealtime();
-        if(detectionOverlay!=null && now-detectionAt>(useDepth?500:1000))detectionOverlay.clear();
+        if(detectionOverlay!=null && state.recognition)showFeedback(now);
         if(useDepth && depthSnapshot!=null && now-depthSnapshot.sampledAt>500 && depthStatus!=null)depthStatus.setText("深度暂不可用 · 未测到不代表可通行");
         if(postureHint!=null && now-postureAt>1500){postureHint.setVisibility(View.GONE);posturePolicy.reset();}
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
@@ -153,7 +152,7 @@ public final class PreviewActivity extends Activity {
     @Override protected void onDestroy() {
         destroyed = true;
         if (active.get() == this) active.clear();
-        cancelAnalysis(); state.stop(); policy.clear(); silence();
+        cancelAnalysis(); state.stop(); feedback.clear(); silence();
         main.removeCallbacksAndMessages(null); stopPosture(); closeCamera();
         unregisterReceiver(events);
         getSystemService(DisplayManager.class).unregisterDisplayListener(displayListener);
@@ -171,7 +170,7 @@ public final class PreviewActivity extends Activity {
         if (state.phase == SessionState.Phase.STARTING || state.phase == SessionState.Phase.LIVE) return;
         if (texture != null) texture.setSurfaceTextureListener(null);
         state.start(SystemClock.elapsedRealtime());
-        brightnessAt = sampledAt = 0;depthSnapshot=null;lastDepthProcessed=-1;
+        brightnessAt = sampledAt = 0;depthSnapshot=null;
         // Rebuild only after a stopped/failed session, never on a PiP size change.
         createWindow();
         startPosture();
@@ -268,10 +267,11 @@ public final class PreviewActivity extends Activity {
         refreshDepthAvailability();
         recognition=root.findViewById(R.id.preview_recognition);
         recognition.setOnCheckedChangeListener((b,checked)-> {
-            policy.clear();detectionOverlay.clear();analysisEpoch++;cancelAnalysis();
+            feedback.clear();detectionOverlay.clear();analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
-            if(checked){long now=SystemClock.elapsedRealtime();state.analysisAt=now;if(!useDepth)analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;lastDepthProcessed=-1;}
+            b.setText(checked?"检测：已开启":"检测：已关闭");
+            if(checked){long now=SystemClock.elapsedRealtime();state.analysisAt=now;analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;}
             if(!checked) { if(sound!=null)sound.setChecked(false); silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_on);
         });
         sound=root.findViewById(R.id.preview_sound);
@@ -284,7 +284,7 @@ public final class PreviewActivity extends Activity {
         restartButton=root.findViewById(R.id.restart_preview);
         restartButton.setBackgroundTintList(null);
         restartButton.setOnClickListener(v->startPreview());
-        sound.setOnCheckedChangeListener((button, checked) -> { if (!checked) silence(); });
+        sound.setOnCheckedChangeListener((button, checked) -> { button.setText(checked?"声音：已开启":"声音：已关闭"); if (!checked) silence(); });
         texture.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h) { openCamera(s); }
             public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h) { transform(); }
@@ -301,7 +301,7 @@ public final class PreviewActivity extends Activity {
                 state.display(now);state.promote(now);syncTicket();render(now);
                 if(state.phase==SessionState.Phase.LIVE && state.recognition) {
                     if(useDepth)processDepth(now);
-                    else if(now-sampledAt>=500 && !worker.busy())sample(now);
+                    if(now-sampledAt>=500 && !worker.busy())sample(now);
                 }
             }
         });
@@ -323,9 +323,9 @@ public final class PreviewActivity extends Activity {
         previewGeometry=next;
         Matrix matrix=new Matrix();matrix.setValues(next.matrix);texture.setTransform(matrix);
         // 变换后旧结果不再与当前画面对应；等待新显示帧重新采样。
-        policy.clear();detectionOverlay.clear();silence();analysisEpoch++;cancelAnalysis();
+        feedback.clear();detectionOverlay.clear();silence();analysisEpoch++;cancelAnalysis();
         if(state.recognition){long now=SystemClock.elapsedRealtime();state.analysisAt=now;
-            if(!useDepth)analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=now;lastDepthProcessed=-1;}
+            analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=now;}
     }
     static Bitmap samplePreview(TextureView view,PreviewGeometry geometry) {
         // getBitmap 复制的是 SurfaceTexture 内容，不包含 view 的 fit-center Matrix。
@@ -348,7 +348,7 @@ public final class PreviewActivity extends Activity {
                     long now=SystemClock.elapsedRealtime();
                     if(now-capturedAt>500 || state.expired(now)){fail("增强画面已过期，请重新开启");return;}
                     state.capture(timestamp,capturedAt);syncTicket();depthSnapshot=depth;
-                    if(depth!=null && depthStatus!=null)depthStatus.setText(depth.status);
+                    if(depth!=null && depthStatus!=null)depthStatus.setText(depth.status+" · 基础识别"+(state.recognition?"继续":"未开启"));
                 }
                 public void failed(String reason){if(!destroyed && token==state.generation){useDepth=false;fail(reason);refreshDepthAvailability();}}
             });depthCamera.start();return;
@@ -415,11 +415,9 @@ public final class PreviewActivity extends Activity {
             if(!state.acceptResult(token,frameAt,now))return;
             if(error!=null){fail("模型初始化或推理失败：不可用");return;}
             state.analysisAt=now;syncTicket();
-            detectionAt=frameAt;
-            AlertPolicy.Decision decision=policy.update(result.detections,now);
-            detectionOverlay.show(decision.detections,previewGeometry);
-            info.setText(decision.message);
-            if(decision.alert)alert();
+            boolean notify=feedback.basic(result.detections,frameAt,now);
+            showFeedback(now);
+            if(notify)alert();
         }));
     }
     private void alert(){
@@ -438,6 +436,7 @@ public final class PreviewActivity extends Activity {
         if(!live) cover.setText(state.reason);
         recognition.setEnabled(live && LocalDetector.AVAILABLE);
         sound.setEnabled(live && state.recognition);
+        if(live && restoreDetection){boolean enableSound=restoreSound;restoreDetection=restoreSound=false;recognition.setChecked(true);sound.setChecked(enableSound);}
         pipButton.setEnabled(live);
         restartButton.setVisibility(state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED ? View.VISIBLE : View.GONE);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
@@ -446,7 +445,8 @@ public final class PreviewActivity extends Activity {
     }
     private void fail(String message) {
         if(destroyed)return;
-        cancelAnalysis();state.unavailable(message);policy.clear();silence();
+        restoreDetection=restoreSound=false;
+        cancelAnalysis();state.unavailable(message);feedback.clear();silence();
         if(detectionOverlay!=null)detectionOverlay.clear();
         stopPosture();
         if(recognition!=null)recognition.setChecked(false);
@@ -472,17 +472,17 @@ public final class PreviewActivity extends Activity {
     }
     private void refreshDepthAvailability() {
         if(depthStatus==null)return;
-        if(useDepth){depthButton.setText("返回基础模式");depthStatus.setText("深度增强 · 正在建立环境");return;}
+        if(useDepth){depthButton.setText("空间增强：已开启");depthStatus.setText("深度增强 · 正在建立环境");return;}
         depthStatus.setText("基础识别 · 尚未启用测距");depthButton.setText("检测增强能力…");
         try{ArCoreApk.getInstance().checkAvailabilityAsync(this,availability->main.post(()->{
             if(destroyed || useDepth)return;depthAvailability=availability;
-            depthButton.setText(availability.isSupported()?"启用空间检测":"查看测距能力");
+            depthButton.setText(availability.isSupported()?"空间增强：已关闭":"增强不可用 · 查看");
             depthStatus.setText(availability.isSupported()?"可尝试增强 · 启用后检查深度支持":"基础识别 · 增强服务暂不可用");
         }));}catch(RuntimeException|LinkageError error){depthButton.setText("查看测距能力");depthStatus.setText("基础识别 · 增强服务暂不可用");}
     }
     private void chooseDepth() {
         if(!resumed || isInPictureInPictureMode())return;
-        if(useDepth){useDepth=false;fail("正在切换到基础预览");long token=state.generation;ArDepthCamera.afterRelease(()->{if(token==state.generation)startPreview();});return;}
+        if(useDepth){switchDepth(false);return;}
         if(depthAvailability==ArCoreApk.Availability.UNSUPPORTED_DEVICE_NOT_CAPABLE){
             new AlertDialog.Builder(this).setTitle("此设备暂不支持增强测距").setMessage("基础模式仍可捕获模型认识的物体，但无法提供深度轮廓或距离分级。").setPositiveButton("知道了",null).show();return;
         }
@@ -494,20 +494,26 @@ public final class PreviewActivity extends Activity {
     }
     private void enableDepth(boolean userRequested) {
         if(!resumed || destroyed)return;
+        if(userRequested){installDetection=state.recognition;installSound=sound.isChecked();}
         try{
             if(ArCoreApk.getInstance().requestInstall(this,userRequested)==ArCoreApk.InstallStatus.INSTALL_REQUESTED){pendingDepthInstall=true;fail("等待增强服务安装；返回后继续");return;}
-            fail("正在切换到空间检测");useDepth=true;long token=state.generation;main.postDelayed(()->{if(token==state.generation)startPreview();},250);
+            switchDepth(true);restoreDetection=installDetection;restoreSound=installSound;
         }catch(Exception|LinkageError error){pendingDepthInstall=false;useDepth=false;refreshDepthAvailability();info.setText("增强服务暂不可用，请继续基础模式");}
     }
+    private void switchDepth(boolean enabled) {
+        boolean detection=state.recognition,audio=sound.isChecked();
+        fail("正在切换观察模式");useDepth=enabled;restoreDetection=detection;restoreSound=audio;
+        long token=state.generation;
+        ArDepthCamera.afterRelease(()->main.postDelayed(()->{if(token==state.generation)startPreview();},250));
+    }
     private void processDepth(long now) {
-        // A running renderer with unavailable depth is explicit unknown, not an analysis timeout.
-        state.analysisAt=now;
-        if(depthSnapshot==null || now-depthSnapshot.sampledAt>500){detectionOverlay.clear();policy.clear();return;}
-        if(lastDepthProcessed==depthSnapshot.sampledAt)return;
-        lastDepthProcessed=depthSnapshot.sampledAt;detectionAt=depthSnapshot.sampledAt;
-        AlertPolicy.Decision decision=policy.update(depthSnapshot.rotated(-wm.getDefaultDisplay().getRotation()*90),now);
-        detectionOverlay.show(decision.detections,previewGeometry);info.setText(decision.message);
-        if(decision.alert)alert();
+        boolean notify=feedback.depth(depthSnapshot,-wm.getDefaultDisplay().getRotation()*90,now);
+        showFeedback(now);
+        if(notify)alert();
+    }
+    private void showFeedback(long now) {
+        AlertPolicy.Decision visible=feedback.visible(now);
+        detectionOverlay.show(visible.detections,previewGeometry);info.setText(visible.message);
     }
     private void closeCamera() {
         if(depthCamera!=null){depthCamera.stop();depthCamera=null;}depthSnapshot=null;
