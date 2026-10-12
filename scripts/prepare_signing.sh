@@ -24,3 +24,8 @@ keytool -list -keystore "$signing_file" -storepass android -alias androiddebugke
 keytool -exportcert -keystore "$signing_file" -storepass android -alias androiddebugkey |
   sha256sum | awk '{ print "Signing certificate SHA-256: " $1 }'
 mv "$signing_file" "$signing_dir/debug.keystore"
+
+# Pass the exact restored file to Gradle, independent of Android/Java home defaults.
+if [[ -n "${GITHUB_ENV:-}" ]]; then
+  printf 'WALKBUDDY_SIGNING_KEYSTORE=%s/debug.keystore\n' "$(cd "$signing_dir" && pwd)" >> "$GITHUB_ENV"
+fi

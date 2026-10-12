@@ -22,6 +22,7 @@ jobs:
 
       - name: Restore fixed signing key
         env:
+          SIGNING_KEYSTORE_DIR: ${{ runner.temp }}/walkbuddy-signing
           DEBUG_KEYSTORE_BASE64: ${{ secrets.DEBUG_KEYSTORE_BASE64 }}
         run: bash scripts/prepare_signing.sh
 
@@ -39,6 +40,9 @@ jobs:
       - name: Test and build arm64 debug APK
         run: bash ./gradlew testDebugUnitTest lintDebug assembleDebug --no-daemon --no-watch-fs
 
+      - name: Verify APK signature matches restored key
+        run: bash scripts/verify_apk_signing.sh app/build/outputs/apk/debug/app-debug.apk
+
       - name: Collect APK
         run: cp app/build/outputs/apk/debug/app-debug.apk "Walk-Buddy-${GITHUB_REF_NAME}-arm64-debug.apk"
 
@@ -54,6 +58,8 @@ jobs:
           这是学习原型。没有提醒不代表安全。不要在道路、楼梯或骑行时靠它决定下一步。画面不保存、不上传，安装包没有网络权限。
 
           从 v0.3.2 起包名为 com.cyanrbt.walkbuddy，旧包 cn.study.window 与它属于不同应用，可以并存，旧设置不会迁移。后续版本保持新包名。
+
+          v0.3.3 起显式使用固定签名，上传前校验 APK 证书与 Secret 中的密钥一致。v0.3.2 的 APK 实际签名不同，若已经安装，需卸载后安装本版（卸载会清除设置）。
 
           发布使用仓库 Secret 中固定保存的签名密钥。同签名且版本号不降低的包可以覆盖安装；历史版本若签名不同，需先恢复对应旧密钥，或卸载旧包后安装（卸载会清除应用数据）。
           EOF
