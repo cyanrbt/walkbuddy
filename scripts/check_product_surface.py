@@ -71,8 +71,8 @@ assert "M60,24" in mark
 assert "@drawable/ic_launcher_mono" in launcher
 assert not (root / "app/src/main/res/drawable-nodpi/ic_launcher_art.png").exists()
 assert not (root / "app/src/main/res/drawable/ic_observe.xml").exists()
-service = read("app/src/main/java/cn/study/window/PreviewActivity.java")
-activity = read("app/src/main/java/cn/study/window/MainActivity.java")
+service = read("app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java")
+activity = read("app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java")
 assert "status.setText(PreviewActivity.report())" in activity
 assert "帧龄" not in activity and "毫秒" not in activity and " ms" not in activity
 assert "帧龄" not in service and "毫秒" not in service and " ms" not in service
