@@ -18,9 +18,10 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     final List<String> labels;
     static final class Result {
         final String category;
+        final List<Detection> detections;
         final int[] classIndices;
         final float[] scores;
-        Result(String category,int[] indices,float[] scores){this.category=category;this.classIndices=indices;this.scores=scores;}
+        Result(String category,int[] indices,float[] scores,List<Detection> detections){this.category=category;this.classIndices=indices;this.scores=scores;this.detections=Collections.unmodifiableList(new ArrayList<>(detections));}
     }
     LocalDetector(Context context) throws IOException {
         labels=new ArrayList<>();
@@ -53,18 +54,19 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
         Map<Integer,Object> output=new HashMap<>();output.put(0,boxes);output.put(1,classes);output.put(2,scores);output.put(3,count);
         interpreter.runForMultipleInputsOutputs(new Object[]{input},output);
         if(!Float.isFinite(count[0]) || count[0]<0 || count[0]>25)throw new IllegalStateException("模型检测数量无效");
-        int size=Math.round(count[0]);int[] indices=new int[size];float[] values=new float[size];String category="";
+        int size=Math.round(count[0]);int[] indices=new int[size];float[] values=new float[size];String category="";List<Detection> detections=new ArrayList<>();
         for(int i=0;i<size;i++) {
             if(!Float.isFinite(classes[0][i]) || Math.abs(classes[0][i]-Math.round(classes[0][i]))>0.001f)throw new IllegalStateException("模型类别值无效");
             for(float coordinate:boxes[0][i])if(!Float.isFinite(coordinate))throw new IllegalStateException("模型框坐标无效");
             int index=Math.round(classes[0][i]);float score=scores[0][i];
             if(index<0 || index>=labels.size() || !Float.isFinite(score) || score<0 || score>1)throw new IllegalStateException("模型结果/标签索引无效");
             indices[i]=index;values[i]=score;String name=labels.get(index);
-            float x=((boxes[0][i][1]+boxes[0][i][3])*160-padX)/width;
-            float bottom=(boxes[0][i][2]*320-padY)/height;
-            if(category.isEmpty() && score>=0.6f && SUPPORTED.contains(name) && x>=0.2f && x<=0.8f && bottom>=0.35f)category=chinese(name);
+            if(score>=0.35f && SUPPORTED.contains(name)) {
+                Detection detection=Detection.fromModel(chinese(name),score,boxes[0][i],width,height,padX,padY);
+                if(detection!=null){detections.add(detection);if(category.isEmpty() && detection.attention())category=detection.label;}
+            }
         }
-        return new Result(category,indices,values);
+        return new Result(category,indices,values,detections);
     }
     String tensorReport(){StringBuilder out=new StringBuilder();out.append("input ").append(interpreter.getInputTensor(0).name()).append(" ").append(interpreter.getInputTensor(0).dataType()).append(" ").append(Arrays.toString(interpreter.getInputTensor(0).shape()));for(int i=0;i<4;i++)out.append("\noutput ").append(i).append(" ").append(interpreter.getOutputTensor(i).name()).append(" ").append(interpreter.getOutputTensor(i).dataType()).append(" ").append(Arrays.toString(interpreter.getOutputTensor(i).shape()));return out.toString();}
     private static String chinese(String name){switch(name){case"person":return"人";case"bicycle":return"自行车";case"car":return"汽车";case"motorcycle":return"摩托车";case"bus":return"公交车";case"truck":return"卡车";case"chair":return"椅子";case"bench":return"长凳";default:return"";}}

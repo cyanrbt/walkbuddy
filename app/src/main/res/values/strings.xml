@@ -16,7 +16,7 @@
     <string name="section_use">小窗怎么用</string>
     <string name="use_body">先在预览页确认取景，再点「以小窗观察」。点击小窗可返回完整界面或停止。识别和声音每次开启默认关闭；关闭小窗、锁屏或预览离开屏幕后会停止摄像头。</string>
     <string name="section_see">打开识别之后</string>
-    <string name="see_body">只看这几类：人、自行车、汽车、摩托车、公交车、卡车、椅子、长凳。判断在手机上完成，不保存画面，应用也没有网络权限。不量距离，不管台阶、坑洞和玻璃。</string>
+    <string name="see_body">只看这几类：人、自行车、汽车、摩托车、公交车、卡车、椅子、长凳。判断在手机上完成，不保存画面，应用也没有网络权限。人类目标包括成人和儿童，不区分年龄，也不能保证识别所有儿童。锥桶、围挡、上下台阶、坑洞和玻璃尚不支持；不测量距离。</string>
     <string name="toast_granted">已允许。准备好了再点开启。</string>
     <string name="toast_denied">还没有允许，窗口不会打开。</string>
     <string name="window_live">实时</string>
@@ -42,5 +42,6 @@
     <string name="settings_unavailable">无法打开设置，请在系统应用设置中查看。</string>
     <string name="enter_pip">以小窗观察</string>
     <string name="restart_preview">重新开启预览</string>
-    <string name="preview_hint">先站着确认镜头方向，再以小窗观察。声音仅在识别开启后可用。</string>
+    <string name="preview_hint">绿色框表示检测到目标；黄色框表示进入画面中央关注区，连续确认后提醒，不代表实际距离。当前不支持锥桶、围挡、上下台阶和坑洞。声音仅在识别开启后可用。</string>
+    <string name="posture_hint">镜头可能偏向地面或天空，请调整持机姿势，确认画面能看到前方</string>
 </resources>

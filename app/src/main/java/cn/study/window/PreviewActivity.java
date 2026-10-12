@@ -7,6 +7,10 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.*;
 import android.hardware.camera2.*;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.hardware.display.DisplayManager;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.ToneGenerator;
@@ -36,6 +40,28 @@ public final class PreviewActivity extends Activity {
     private WindowManager wm;
     private LinearLayout root;
     private TextureView texture;
+    private DetectionOverlay detectionOverlay;
+    private long detectionAt;
+    private TextView postureHint;
+    private SensorManager sensors;
+    private final PosturePolicy posturePolicy=new PosturePolicy();
+    private final float[] gravity=new float[3];
+    private boolean gravityReady;
+    private long postureAt;
+    private final SensorEventListener postureListener=new SensorEventListener() {
+        public void onAccuracyChanged(Sensor sensor,int accuracy){}
+        public void onSensorChanged(SensorEvent event) {
+            if(state.phase!=SessionState.Phase.LIVE){posturePolicy.reset();return;}
+            long now=SystemClock.elapsedRealtime();
+            if(now-postureAt>1500){posturePolicy.reset();gravityReady=false;}
+            postureAt=now;
+            for(int i=0;i<3;i++)gravity[i]=event.sensor.getType()==Sensor.TYPE_GRAVITY || !gravityReady
+                ? event.values[i] : 0.8f*gravity[i]+0.2f*event.values[i];
+            gravityReady=true;
+            boolean warn=posturePolicy.update(gravity[0],gravity[1],gravity[2],now);
+            postureHint.setVisibility(warn?View.VISIBLE:View.GONE);
+        }
+    };
     private TextView cover, info, titleView;
     private CheckBox recognition, sound;
     private CameraDevice camera;
@@ -63,6 +89,8 @@ public final class PreviewActivity extends Activity {
     private final Runnable watchdog = new Runnable() { public void run() {
         if(destroyed) return;
         long now=SystemClock.elapsedRealtime();
+        if(detectionOverlay!=null && now-detectionAt>1000)detectionOverlay.clear();
+        if(postureHint!=null && now-postureAt>1500){postureHint.setVisibility(View.GONE);posturePolicy.reset();}
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
             if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED) fail("权限已撤回：不可用");
             else if(state.expired(now)) fail("画面或分析帧过期：不可用，请重新开启");
@@ -74,6 +102,7 @@ public final class PreviewActivity extends Activity {
         super.onCreate(savedState);
         active = new WeakReference<>(this);
         wm = getWindowManager();
+        sensors=getSystemService(SensorManager.class);
         getSystemService(DisplayManager.class).registerDisplayListener(displayListener, main);
         synchronized (PreviewActivity.class) {
             if (sharedWorker == null) {
@@ -115,7 +144,7 @@ public final class PreviewActivity extends Activity {
         destroyed = true;
         if (active.get() == this) active.clear();
         cancelAnalysis(); state.stop(); policy.clear(); silence();
-        main.removeCallbacksAndMessages(null); closeCamera();
+        main.removeCallbacksAndMessages(null); stopPosture(); closeCamera();
         unregisterReceiver(events);
         getSystemService(DisplayManager.class).unregisterDisplayListener(displayListener);
         publicReport = "已停止；请主动开启";
@@ -135,6 +164,7 @@ public final class PreviewActivity extends Activity {
         brightnessAt = sampledAt = 0;
         // Rebuild only after a stopped/failed session, never on a PiP size change.
         createWindow();
+        startPosture();
         render(SystemClock.elapsedRealtime());
     }
 
@@ -217,10 +247,12 @@ public final class PreviewActivity extends Activity {
         titleView=root.findViewById(R.id.preview_title);
         texture=root.findViewById(R.id.camera_preview);texture.setOpaque(false);
         cover=root.findViewById(R.id.preview_cover);
+        detectionOverlay=root.findViewById(R.id.detection_overlay);
+        postureHint=root.findViewById(R.id.posture_hint);
         info=root.findViewById(R.id.preview_info);
         recognition=root.findViewById(R.id.preview_recognition);
         recognition.setOnCheckedChangeListener((b,checked)-> {
-            policy.clear();analysisEpoch++;cancelAnalysis();
+            policy.clear();detectionOverlay.clear();analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
             if(checked){long now=SystemClock.elapsedRealtime();state.analysisAt=now;analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;}
@@ -272,7 +304,7 @@ public final class PreviewActivity extends Activity {
         previewGeometry=next;
         Matrix matrix=new Matrix();matrix.setValues(next.matrix);texture.setTransform(matrix);
         // 变换后旧结果不再与当前画面对应；等待新显示帧重新采样。
-        policy.clear();silence();analysisEpoch++;cancelAnalysis();
+        policy.clear();detectionOverlay.clear();silence();analysisEpoch++;cancelAnalysis();
         if(state.recognition){long now=SystemClock.elapsedRealtime();state.analysisAt=now;
             analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=now;}
     }
@@ -351,8 +383,10 @@ public final class PreviewActivity extends Activity {
             if(!state.acceptResult(token,frameAt,now))return;
             if(error!=null){fail("模型初始化或推理失败：不可用");return;}
             state.analysisAt=now;syncTicket();
-            info.setText(result.category.isEmpty()?"未识别到支持目标；不代表安全":"潜在目标："+result.category+"；请自行观察");
-            if(policy.shouldAlert(result.category,now))alert();
+            detectionAt=frameAt;detectionOverlay.show(result.detections,previewGeometry);
+            AlertPolicy.Decision decision=policy.update(result.detections,now);
+            info.setText(decision.message);
+            if(decision.alert)alert();
         }));
     }
     private void alert(){
@@ -380,6 +414,8 @@ public final class PreviewActivity extends Activity {
     private void fail(String message) {
         if(destroyed)return;
         cancelAnalysis();state.unavailable(message);policy.clear();silence();
+        if(detectionOverlay!=null)detectionOverlay.clear();
+        stopPosture();
         if(recognition!=null)recognition.setChecked(false);
         // 先不透明遮挡，再移除纹理，从视图树彻底清除最后一帧。
         if(cover!=null) {cover.setText(message);cover.setVisibility(View.VISIBLE);}
@@ -388,6 +424,18 @@ public final class PreviewActivity extends Activity {
         if(info!=null)info.setText(R.string.info_stopped);
         if(root!=null)render(SystemClock.elapsedRealtime());
         publicReport=message+"；提醒已停止";
+    }
+    private void startPosture() {
+        stopPosture();
+        if(sensors==null)return;
+        Sensor sensor=sensors.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        if(sensor==null)sensor=sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if(sensor!=null)sensors.registerListener(postureListener,sensor,SensorManager.SENSOR_DELAY_UI,main);
+    }
+    private void stopPosture() {
+        if(sensors!=null)sensors.unregisterListener(postureListener);
+        posturePolicy.reset();gravityReady=false;postureAt=0;
+        if(postureHint!=null)postureHint.setVisibility(View.GONE);
     }
     private void closeCamera() {
         if(session!=null) {session.close();session=null;}if(camera!=null){camera.close();camera=null;}if(surface!=null){surface.release();surface=null;}

@@ -44,6 +44,22 @@
             android:id="@+id/camera_preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        <cn.study.window.DetectionOverlay
+            android:id="@+id/detection_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/posture_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:padding="8dp"
+            android:background="#DD16232B"
+            android:textColor="#FFFFC74D"
+            android:textSize="13sp"
+            android:accessibilityLiveRegion="polite"
+            android:visibility="gone"
+            android:text="@string/posture_hint"/>
         <TextView
             android:id="@+id/preview_cover"
             android:layout_width="match_parent"
