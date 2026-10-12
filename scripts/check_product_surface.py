@@ -66,7 +66,9 @@ assert "@color/ink" in launcher and "@drawable/ic_launcher_mark" in launcher
 assert ".png" not in launcher
 assert launcher == round_icon.replace("ic_launcher_round.xml", "ic_launcher.xml") or launcher.replace("ic_launcher.xml", "") == round_icon.replace("ic_launcher_round.xml", "")
 assert "<vector" in mark and 'android:viewportWidth="108"' in mark
-assert 'android:fillType="evenOdd"' in mark and "M42,34" in mark and "a10,10" in mark
+assert "@color/mint_bright" in mark and "@color/on_ink" in mark and "@color/mint" in mark
+assert "M60,24" in mark
+assert "@drawable/ic_launcher_mono" in launcher
 assert not (root / "app/src/main/res/drawable-nodpi/ic_launcher_art.png").exists()
 assert not (root / "app/src/main/res/drawable/ic_observe.xml").exists()
 service = read("app/src/main/java/cn/study/window/PreviewActivity.java")

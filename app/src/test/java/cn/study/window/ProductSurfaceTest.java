@@ -78,9 +78,11 @@ public class ProductSurfaceTest {
         assertEquals(launcher, round);
         assertTrue(mark.contains("<vector"));
         assertTrue(mark.contains("android:viewportWidth=\"108\""));
-        assertTrue(mark.contains("android:fillType=\"evenOdd\""));
-        assertTrue(mark.contains("M42,34"));
-        assertTrue(mark.contains("a10,10"));
+        assertTrue(mark.contains("@color/mint_bright"));
+        assertTrue(mark.contains("@color/on_ink"));
+        assertTrue(mark.contains("@color/mint"));
+        assertTrue(mark.contains("M60,24"));
+        assertTrue(launcher.contains("@drawable/ic_launcher_mono"));
         assertFalse(Files.exists(root.resolve("app/src/main/res/drawable-nodpi/ic_launcher_art.png")));
         assertFalse(Files.exists(root.resolve("app/src/main/res/drawable/ic_observe.xml")));
         String service = read(root.resolve("app/src/main/java/cn/study/window/PreviewActivity.java"));
