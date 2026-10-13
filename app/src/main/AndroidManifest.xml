@@ -7,7 +7,7 @@
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
     <application android:label="@string/app_name" android:theme="@style/Theme.WalkBuddy" android:allowBackup="false" android:fullBackupContent="false" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="false" android:dataExtractionRules="@xml/data_extraction_rules">
         <meta-data android:name="com.google.ar.core" android:value="optional"/>
-        <activity android:name=".MainActivity" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
+        <activity android:name=".MainActivity" android:theme="@style/Theme.WalkBuddy.Home" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
         <activity android:name=".PreviewActivity" android:exported="false"
             android:launchMode="singleTask" android:supportsPictureInPicture="true"
             android:resizeableActivity="true"

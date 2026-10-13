@@ -7,4 +7,9 @@
         <item name="android:colorAccent">@color/mint</item>
         <item name="android:textColor">@color/ink_text</item>
     </style>
+    <style name="Theme.WalkBuddy.HomeBase" parent="Theme.WalkBuddy">
+        <item name="android:statusBarColor">@color/paper</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    <style name="Theme.WalkBuddy.Home" parent="Theme.WalkBuddy.HomeBase"/>
 </resources>

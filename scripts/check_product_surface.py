@@ -28,13 +28,14 @@ strings = read("app/src/main/res/values/strings.xml")
 colors = read("app/src/main/res/values/colors.xml")
 launcher = read("app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml")
 round_icon = read("app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml")
-mark = read("app/src/main/res/drawable/ic_launcher_mark.xml")
+foreground = read("app/src/main/res/drawable/walkbuddy_foreground.xml")
+mono = read("app/src/main/res/drawable/walkbuddy_mono.xml")
 primary = read("app/src/main/res/drawable/bg_primary.xml")
 stop = read("app/src/main/res/drawable/bg_stop.xml")
 toggle = read("app/src/main/res/drawable/bg_toggle.xml")
 
-assert '<string name="app_name">Walk Buddy</string>' in strings
-assert '<string name="hero_title">Walk Buddy</string>' in strings
+assert '<string name="app_name">WalkBuddy</string>' in strings
+assert '<string name="hero_title">WalkBuddy</string>' in strings
 assert "@string/hero_title" in home or "@string/app_name" in home
 assert "@string/caution" in home and "@string/hero_lead" in home and "@string/see_body" in home
 assert "毫秒" not in home
@@ -56,21 +57,19 @@ assert 'android:checked="true"' not in overlay
 recognition = chunk(overlay, "preview_recognition", "preview_sound")
 sound = chunk(overlay, "preview_sound", "preview_stop")
 assert "@drawable/bg_toggle" in recognition and "@drawable/bg_toggle" in sound
-assert 'android:button="@null"' in recognition and 'android:button="@null"' in sound
+assert 'android:button="@null"' not in recognition and 'android:button="@null"' not in sound
 cover = chunk(overlay, "preview_cover", "/>")
 assert 'android:layout_width="match_parent"' in cover
 assert 'android:layout_height="match_parent"' in cover
 assert "@color/scrim" in cover
 assert "<adaptive-icon" in launcher
-assert "@color/ink" in launcher and "@drawable/ic_launcher_mark" in launcher
-assert ".png" not in launcher
-assert launcher == round_icon.replace("ic_launcher_round.xml", "ic_launcher.xml") or launcher.replace("ic_launcher.xml", "") == round_icon.replace("ic_launcher_round.xml", "")
-assert "<vector" in mark and 'android:viewportWidth="108"' in mark
-assert "@color/mint_bright" in mark and "@color/on_ink" in mark and "@color/mint" in mark
-assert "M60,24" in mark
-assert "@drawable/ic_launcher_mono" in launcher
-assert not (root / "app/src/main/res/drawable-nodpi/ic_launcher_art.png").exists()
-assert not (root / "app/src/main/res/drawable/ic_observe.xml").exists()
+assert "@drawable/walkbuddy_background" in launcher
+assert "@drawable/walkbuddy_foreground" in launcher
+assert "@drawable/walkbuddy_mono" in launcher
+assert launcher == round_icon
+assert "@drawable/walkbuddy_mascot" in foreground
+assert "<vector" in mono
+assert (root / "app/src/main/res/drawable-nodpi/walkbuddy_mascot.png").stat().st_size > 0
 service = read("app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java")
 activity = read("app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java")
 assert "status.setText(PreviewActivity.report())" in activity

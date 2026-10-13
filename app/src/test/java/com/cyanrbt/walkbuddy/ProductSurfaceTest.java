@@ -18,7 +18,8 @@ public class ProductSurfaceTest {
         String colors = read(root.resolve("app/src/main/res/values/colors.xml"));
         String launcher = read(root.resolve("app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"));
         String round = read(root.resolve("app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"));
-        String mark = read(root.resolve("app/src/main/res/drawable/ic_launcher_mark.xml"));
+        String foreground = read(root.resolve("app/src/main/res/drawable/walkbuddy_foreground.xml"));
+        String mono = read(root.resolve("app/src/main/res/drawable/walkbuddy_mono.xml"));
         String primary = read(root.resolve("app/src/main/res/drawable/bg_primary.xml"));
         String stop = read(root.resolve("app/src/main/res/drawable/bg_stop.xml"));
         String toggle = read(root.resolve("app/src/main/res/drawable/bg_toggle.xml"));
@@ -74,19 +75,13 @@ public class ProductSurfaceTest {
         assertTrue(cover.contains("@color/scrim"));
 
         assertTrue(launcher.contains("<adaptive-icon"));
-        assertTrue(launcher.contains("@color/ink"));
-        assertTrue(launcher.contains("@drawable/ic_launcher_mark"));
-        assertFalse(launcher.contains(".png"));
+        assertTrue(launcher.contains("@drawable/walkbuddy_background"));
+        assertTrue(launcher.contains("@drawable/walkbuddy_foreground"));
+        assertTrue(launcher.contains("@drawable/walkbuddy_mono"));
         assertEquals(launcher, round);
-        assertTrue(mark.contains("<vector"));
-        assertTrue(mark.contains("android:viewportWidth=\"108\""));
-        assertTrue(mark.contains("@color/mint_bright"));
-        assertTrue(mark.contains("@color/on_ink"));
-        assertTrue(mark.contains("@color/mint"));
-        assertTrue(mark.contains("M60,24"));
-        assertTrue(launcher.contains("@drawable/ic_launcher_mono"));
-        assertFalse(Files.exists(root.resolve("app/src/main/res/drawable-nodpi/ic_launcher_art.png")));
-        assertFalse(Files.exists(root.resolve("app/src/main/res/drawable/ic_observe.xml")));
+        assertTrue(foreground.contains("@drawable/walkbuddy_mascot"));
+        assertTrue(mono.contains("<vector"));
+        assertTrue(Files.size(root.resolve("app/src/main/res/drawable-nodpi/walkbuddy_mascot.png")) > 0);
         String service = read(root.resolve("app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java"));
         String activity = read(root.resolve("app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java"));
         assertTrue(activity.contains("status.setText(PreviewActivity.report())"));

@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.WalkBuddy.Home" parent="Theme.WalkBuddy.HomeBase">
+        <item name="android:navigationBarColor">@color/paper</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>

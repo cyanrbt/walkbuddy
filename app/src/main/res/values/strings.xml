@@ -4,7 +4,7 @@
     <string name="hero_kicker">白天步行</string>
     <string name="hero_title">WalkBuddy</string>
     <string name="hero_lead">看见前方，也留意身边。实时取景与空间障碍提示，可放进系统画中画。</string>
-    <string name="status_label">现在</string>
+    <string name="status_label">观察状态</string>
     <string name="status_initial">已停止</string>
     <string name="prepare">开始之前</string>
     <string name="step_camera">摄像头</string>
@@ -49,4 +49,8 @@
     <string name="risk_captured">● 灰 · 已捕获</string>
     <string name="risk_caution">● 黄 · 请关注</string>
     <string name="risk_near">● 红 · 近处注意</string>
+    <string name="brand_caption">你的步行观察搭子</string>
+    <string name="hero_message">多看一眼\n前方</string>
+    <string name="guide_title">认识你的步行搭子</string>
+    <string name="privacy_caption">本地处理 · 不保存相机画面</string>
 </resources>

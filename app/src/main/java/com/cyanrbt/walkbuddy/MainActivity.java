@@ -24,6 +24,13 @@ public final class MainActivity extends Activity {
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_main);
+        android.view.View home = findViewById(R.id.home_scroll);
+        home.setOnApplyWindowInsetsListener((view, insets) -> {
+            view.setPadding(insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(),
+                insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
+            return insets;
+        });
+        home.requestApplyInsets();
         status = findViewById(R.id.status);
         cameraState = findViewById(R.id.state_camera);
         pipState = findViewById(R.id.state_pip);
@@ -83,9 +90,9 @@ public final class MainActivity extends Activity {
 
     private void mark(TextView badge, TextView label, boolean ok, int okText, int needText) {
         label.setText(ok ? okText : needText);
-        label.setTextColor(ok ? 0xFF5E6E76 : 0xFF1F8F7A);
+        label.setTextColor(getColor(ok ? R.color.muted : R.color.mint));
         badge.setBackgroundResource(ok ? R.drawable.bg_badge_ok : R.drawable.bg_badge);
-        badge.setTextColor(ok ? 0xFF102028 : 0xFFF6F3EC);
+        badge.setTextColor(getColor(ok ? R.color.ink : R.color.on_ink));
     }
 
     private void toast(int value) { Toast.makeText(this, value, Toast.LENGTH_LONG).show(); }

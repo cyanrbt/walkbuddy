@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ink">#0E1522</color>
-    <color name="ink_raised">#1B2638</color>
-    <color name="paper">#F3F6FC</color>
+    <color name="ink">#102C28</color>
+    <color name="ink_raised">#203D38</color>
+    <color name="paper">#F2F7F4</color>
     <color name="paper_card">#FFFFFF</color>
-    <color name="line">#DEE5F0</color>
-    <color name="mint">#416CEF</color>
-    <color name="mint_bright">#9AB4FF</color>
-    <color name="mint_soft">#E1EBFF</color>
-    <color name="foam">#EAF0FF</color>
-    <color name="clay">#C4554A</color>
-    <color name="stop_text">#E7A39C</color>
-    <color name="scrim">#000000</color>
-    <color name="ink_text">#17243B</color>
-    <color name="muted">#65738A</color>
-    <color name="on_ink">#F6F3EC</color>
-    <color name="on_ink_dim">#AEBBCD</color>
+    <color name="line">#DBE8E0</color>
+    <color name="mint">#087B63</color>
+    <color name="mint_bright">#4DE4AC</color>
+    <color name="mint_soft">#CBF5E2</color>
+    <color name="foam">#E4F5EC</color>
+    <color name="clay">#B33D43</color>
+    <color name="stop_text">#FFB7B8</color>
+    <color name="scrim">#071410</color>
+    <color name="ink_text">#183B32</color>
+    <color name="muted">#5D756C</color>
+    <color name="on_ink">#F5FAF7</color>
+    <color name="on_ink_dim">#AEC8BD</color>
+    <color name="buddy_violet">#7C4DFF</color>
+    <color name="buddy_green">#3DDC84</color>
+    <color name="mint_disabled">#29483F</color>
+    <color name="muted_dark">#8BA79C</color>
+    <color name="warning">#FFC857</color>
+    <color name="risk_near">#FF636E</color>
+    <color name="risk_captured">#AEB7C5</color>
 </resources>

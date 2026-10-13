@@ -50,7 +50,10 @@ public class PipContractTest {
         for (String id : new String[]{"enter_pip", "preview_stop", "restart_preview", "preview_recognition", "preview_sound"}) {
             Element control = byId(layout, id);
             assertNotNull(id, control);
-            assertEquals("48dp", control.getAttributeNS(ANDROID, "layout_height"));
+            assertEquals("wrap_content", control.getAttributeNS(ANDROID, "layout_height"));
+            String minHeight = control.getAttributeNS(ANDROID, "minHeight");
+            assertTrue("Touch target must remain at least 48dp", minHeight.endsWith("dp")
+                && Integer.parseInt(minHeight.replace("dp", "")) >= 48);
             assertNotEquals("true", control.getAttributeNS(ANDROID, "checked"));
         }
         assertNotNull(byId(layout, "camera_preview"));
