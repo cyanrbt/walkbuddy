@@ -36,6 +36,6 @@ Use case: logo-brand. Create a finished original Android app mascot icon for Wal
 
 结果：53 项单元测试通过；Lint 无错误；调试 APK 构建成功。`python3 scripts/check_product_surface.py` 和 `git diff --check` 均通过。
 
-APK 位于 `app/build/outputs/apk/debug/app-debug.apk`，包名和版本号维持 0.4.2 / 14，签名 SHA-256 为 `ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d`，与当前发布证书一致。此改版不创建版本标签或 GitHub Release。
+APK 位于 `app/build/outputs/apk/debug/app-debug.apk`，包名不变，发布版本为 0.4.3 / 15，签名 SHA-256 为 `ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d`，与当前发布证书一致。通过 `v0.4.3` 标签触发 GitHub Actions 构建与 Release 发布。
 
 检查覆盖界面资源及画中画权限约束。未连接 Android 设备，未进行真机截图和交互验收；小屏、大字体、横屏、圆形图标裁切和画中画切换仍需设备确认。
