@@ -46,6 +46,14 @@
     <string name="posture_hint">镜头可能偏向地面或天空，请调整持机姿势，确认画面能看到前方</string>
     <string name="depth_status_initial">正在检查增强能力</string>
     <string name="enable_depth">空间检测</string>
+    <string name="guide_step_service">服务</string>
+    <string name="guide_step_ground">地面</string>
+    <string name="guide_step_depth">深度</string>
+    <string name="guide_step_alert">提示</string>
+    <string name="guide_hint_default">启用空间检测后，这里会提示下一步该做什么</string>
+    <string name="depth_intro_title">启用空间检测（实验）</string>
+    <string name="depth_intro_body">将检查 Google Play 服务 AR 与深度支持。启用后按预览页分步提示操作：先看向前方地面建立环境，再等待深度就绪。深度轮廓不依赖物体名称；灰色不代表安全。</string>
+    <string name="depth_intro_privacy">此功能由 Google Play 服务 AR 提供，Google 会按其隐私政策处理服务数据；本应用不保存相机画面。</string>
     <string name="risk_captured">● 灰 · 已捕获</string>
     <string name="risk_caution">● 黄 · 请关注</string>
     <string name="risk_near">● 红 · 近处注意</string>

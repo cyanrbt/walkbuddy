@@ -48,6 +48,8 @@ public final class PreviewActivity extends Activity {
     private boolean useDepth,pendingDepthInstall,installDetection,installSound;
     private Button depthButton;
     private TextView depthStatus;
+    private TextView depthGuideHint;
+    private boolean depthChecking = true;
     private ArCoreApk.Availability depthAvailability;
     private TextView postureHint;
     private SensorManager sensors;
@@ -98,6 +100,7 @@ public final class PreviewActivity extends Activity {
         long now=SystemClock.elapsedRealtime();
         if(detectionOverlay!=null && state.recognition)showFeedback(now);
         if(useDepth && depthSnapshot!=null && now-depthSnapshot.sampledAt>500 && depthStatus!=null)depthStatus.setText("深度暂不可用 · 未测到不代表可通行");
+        if(useDepth)renderDepthGuide();
         if(postureHint!=null && now-postureAt>1500){postureHint.setVisibility(View.GONE);posturePolicy.reset();}
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
             if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED) fail("权限已撤回：不可用");
@@ -239,6 +242,7 @@ public final class PreviewActivity extends Activity {
         root.findViewById(R.id.preview_controls).setVisibility(visibility);
         root.findViewById(R.id.preview_info).setVisibility(visibility);
         root.findViewById(R.id.depth_status).setVisibility(useDepth?View.VISIBLE:visibility);
+        root.findViewById(R.id.depth_guide).setVisibility(compact && !useDepth ? View.GONE : View.VISIBLE);
         root.findViewById(R.id.risk_legend).setVisibility(visibility);
         if (compact) root.setPadding(0, 0, 0, 0);
         root.requestApplyInsets();
@@ -262,9 +266,11 @@ public final class PreviewActivity extends Activity {
         postureHint=root.findViewById(R.id.posture_hint);
         info=root.findViewById(R.id.preview_info);
         depthStatus=root.findViewById(R.id.depth_status);
+        depthGuideHint=root.findViewById(R.id.depth_guide_hint);
         depthButton=root.findViewById(R.id.enable_depth);
         depthButton.setOnClickListener(v->chooseDepth());
         refreshDepthAvailability();
+        renderDepthGuide();
         recognition=root.findViewById(R.id.preview_recognition);
         recognition.setOnCheckedChangeListener((b,checked)-> {
             feedback.clear();detectionOverlay.clear();analysisEpoch++;cancelAnalysis();
@@ -273,6 +279,7 @@ public final class PreviewActivity extends Activity {
             b.setText(checked?"检测：已开启":"检测：已关闭");
             if(checked){long now=SystemClock.elapsedRealtime();state.analysisAt=now;analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;}
             if(!checked) { if(sound!=null)sound.setChecked(false); silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_on);
+            renderDepthGuide();
         });
         sound=root.findViewById(R.id.preview_sound);
         Button stop=(Button)root.findViewById(R.id.preview_stop);
@@ -349,6 +356,7 @@ public final class PreviewActivity extends Activity {
                     if(now-capturedAt>500 || state.expired(now)){fail("增强画面已过期，请重新开启");return;}
                     state.capture(timestamp,capturedAt);syncTicket();depthSnapshot=depth;
                     if(depth!=null && depthStatus!=null)depthStatus.setText(depth.status+" · 基础识别"+(state.recognition?"继续":"未开启"));
+                    renderDepthGuide();
                 }
                 public void failed(String reason){if(!destroyed && token==state.generation){useDepth=false;fail(reason);refreshDepthAvailability();}}
             });depthCamera.start();return;
@@ -442,6 +450,7 @@ public final class PreviewActivity extends Activity {
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(live){cover.setText("");if(!state.recognition)info.setText(R.string.info_recognition_off);}
         if(titleView!=null) titleView.setText(live?R.string.window_live:R.string.window_idle);
+        renderDepthGuide();
     }
     private void fail(String message) {
         if(destroyed)return;
@@ -455,7 +464,7 @@ public final class PreviewActivity extends Activity {
         closeCamera();
         if(texture!=null) {((FrameLayout)texture.getParent()).removeView(texture);texture=null;}
         if(info!=null)info.setText(R.string.info_stopped);
-        if(root!=null)render(SystemClock.elapsedRealtime());
+        if(root!=null){render(SystemClock.elapsedRealtime());renderDepthGuide();}
         publicReport=message+"；提醒已停止";
     }
     private void startPosture() {
@@ -472,13 +481,13 @@ public final class PreviewActivity extends Activity {
     }
     private void refreshDepthAvailability() {
         if(depthStatus==null)return;
-        if(useDepth){depthButton.setText("空间增强：已开启");depthStatus.setText("深度增强 · 正在建立环境");return;}
-        depthStatus.setText("基础识别 · 尚未启用测距");depthButton.setText("检测增强能力…");
+        if(useDepth){depthChecking=false;depthStatus.setText("深度增强 · 正在建立环境");renderDepthGuide();return;}
+        depthChecking=true;depthStatus.setText("基础识别 · 尚未启用测距");renderDepthGuide();
         try{ArCoreApk.getInstance().checkAvailabilityAsync(this,availability->main.post(()->{
-            if(destroyed || useDepth)return;depthAvailability=availability;
-            depthButton.setText(availability.isSupported()?"空间增强：已关闭":"增强不可用 · 查看");
-            depthStatus.setText(availability.isSupported()?"可尝试增强 · 启用后检查深度支持":"基础识别 · 增强服务暂不可用");
-        }));}catch(RuntimeException|LinkageError error){depthButton.setText("查看测距能力");depthStatus.setText("基础识别 · 增强服务暂不可用");}
+            if(destroyed || useDepth)return;depthAvailability=availability;depthChecking=false;
+            depthStatus.setText(availability.isSupported()?"可尝试增强 · 启用后按分步提示操作":"基础识别 · 增强服务暂不可用");
+            renderDepthGuide();
+        }));}catch(RuntimeException|LinkageError error){depthChecking=false;depthAvailability=ArCoreApk.Availability.UNSUPPORTED_DEVICE_NOT_CAPABLE;depthStatus.setText("基础识别 · 增强服务暂不可用");renderDepthGuide();}
     }
     private void chooseDepth() {
         if(!resumed || isInPictureInPictureMode())return;
@@ -486,8 +495,8 @@ public final class PreviewActivity extends Activity {
         if(depthAvailability==ArCoreApk.Availability.UNSUPPORTED_DEVICE_NOT_CAPABLE){
             new AlertDialog.Builder(this).setTitle("此设备暂不支持增强测距").setMessage("基础模式仍可捕获模型认识的物体，但无法提供深度轮廓或距离分级。").setPositiveButton("知道了",null).show();return;
         }
-        new AlertDialog.Builder(this).setTitle("启用空间检测（实验）")
-            .setMessage("将自动检查 Google Play 服务 AR 与深度支持。启用后先站稳，缓慢移动手机，让镜头看到前方地面。深度轮廓不依赖物体名称；灰色不代表安全。\n\n此功能由 Google Play 服务 AR 提供，Google 会按其隐私政策处理服务数据；本应用不保存相机画面。")
+        new AlertDialog.Builder(this).setTitle(R.string.depth_intro_title)
+            .setMessage(getString(R.string.depth_intro_body)+"\n\n"+getString(R.string.depth_intro_privacy))
             .setNegativeButton("继续基础模式",null)
             .setNeutralButton("服务隐私说明",(dialog,which)->{try{startActivity(new Intent(Intent.ACTION_VIEW,android.net.Uri.parse("https://policies.google.com/privacy")));}catch(RuntimeException ignored){}})
             .setPositiveButton("继续启用",(dialog,which)->enableDepth(true)).show();
@@ -514,6 +523,41 @@ public final class PreviewActivity extends Activity {
     private void showFeedback(long now) {
         AlertPolicy.Decision visible=feedback.visible(now);
         detectionOverlay.show(visible.detections,previewGeometry);info.setText(visible.message);
+    }
+    private void renderDepthGuide() {
+        if(root==null || depthGuideHint==null)return;
+        Boolean supported=null;
+        if(!depthChecking && depthAvailability!=null)supported=depthAvailability.isSupported();
+        DepthSnapshot.Stage stage=null;
+        boolean groundReady=false,depthReady=false;
+        if(useDepth && depthSnapshot!=null){
+            stage=depthSnapshot.stage;groundReady=depthSnapshot.groundReady;depthReady=depthSnapshot.depthReady;
+            long now=SystemClock.elapsedRealtime();
+            if(now-depthSnapshot.sampledAt>500){stage=DepthSnapshot.Stage.DEPTH_STALE;depthReady=false;}
+        }
+        DepthGuide.Progress progress=DepthGuide.resolve(useDepth,supported,depthChecking,stage,groundReady,depthReady,state.recognition);
+        paintStep(R.id.guide_dot_service,R.id.guide_label_service,progress.serviceDone,progress.active==DepthGuide.Step.SERVICE);
+        paintStep(R.id.guide_dot_ground,R.id.guide_label_ground,progress.groundDone,progress.active==DepthGuide.Step.GROUND);
+        paintStep(R.id.guide_dot_depth,R.id.guide_label_depth,progress.depthDone,progress.active==DepthGuide.Step.DEPTH);
+        paintStep(R.id.guide_dot_alert,R.id.guide_label_alert,progress.alertDone,progress.active==DepthGuide.Step.ALERT);
+        depthGuideHint.setText(progress.hint);
+        if(depthButton!=null)depthButton.setText(progress.buttonLabel);
+    }
+    private void paintStep(int dotId,int labelId,boolean done,boolean active) {
+        TextView dot=root.findViewById(dotId),label=root.findViewById(labelId);
+        if(done){
+            dot.setBackgroundResource(R.drawable.bg_step_done);
+            dot.setTextColor(getColor(R.color.ink));
+            label.setTextColor(getColor(R.color.mint_soft));
+        }else if(active){
+            dot.setBackgroundResource(R.drawable.bg_step_active);
+            dot.setTextColor(getColor(R.color.ink));
+            label.setTextColor(getColor(R.color.warning));
+        }else{
+            dot.setBackgroundResource(R.drawable.bg_step_todo);
+            dot.setTextColor(getColor(R.color.on_ink_dim));
+            label.setTextColor(getColor(R.color.on_ink_dim));
+        }
     }
     private void closeCamera() {
         if(depthCamera!=null){depthCamera.stop();depthCamera=null;}depthSnapshot=null;

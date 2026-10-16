@@ -57,9 +57,16 @@ public class ProductSurfaceTest {
         assertTrue(strings.contains("不保存"));
         assertTrue(strings.contains("网络权限"));
 
-        for (String id : new String[]{"preview_header", "preview_stop", "preview_recognition", "preview_sound", "preview_cover"}) {
+        for (String id : new String[]{"preview_header", "preview_stop", "preview_recognition", "preview_sound", "preview_cover", "depth_guide", "depth_guide_hint"}) {
             assertTrue(overlay.contains("@+id/" + id));
         }
+        for (String step : new String[]{"guide_step_service", "guide_step_ground", "guide_step_depth", "guide_step_alert"}) {
+            assertTrue(overlay.contains("@+id/" + step));
+        }
+        assertTrue(strings.contains("<string name=\"guide_step_service\">服务</string>"));
+        assertTrue(strings.contains("<string name=\"guide_step_ground\">地面</string>"));
+        assertTrue(strings.contains("<string name=\"guide_step_depth\">深度</string>"));
+        assertTrue(strings.contains("<string name=\"guide_step_alert\">提示</string>"));
         assertFalse(overlay.contains("android:checked=\"true\""));
         String recognition = chunk(overlay, "preview_recognition", "preview_sound");
         String sound = chunk(overlay, "preview_sound", "preview_stop");
@@ -84,6 +91,8 @@ public class ProductSurfaceTest {
         assertTrue(Files.size(root.resolve("app/src/main/res/drawable-nodpi/walkbuddy_mascot.png")) > 0);
         String service = read(root.resolve("app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java"));
         String activity = read(root.resolve("app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java"));
+        assertTrue(service.contains("DepthGuide.resolve"));
+        assertTrue(service.contains("renderDepthGuide"));
         assertTrue(activity.contains("status.setText(PreviewActivity.report())"));
         assertFalse(activity.contains("帧龄") || activity.contains("毫秒") || activity.contains(" ms"));
         assertFalse(service.contains("帧龄") || service.contains("毫秒") || service.contains(" ms"));

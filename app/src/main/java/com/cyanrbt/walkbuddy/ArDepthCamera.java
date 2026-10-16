@@ -87,9 +87,9 @@ final class ArDepthCamera {
         if(!EGL14.eglSwapBuffers(display,window))throw new IllegalStateException("Display lost");
     }
     private DepthSnapshot depth(Frame frame,long now) {
-        if(frame.getCamera().getTrackingState()!=TrackingState.TRACKING){floorY=Float.NaN;floorSince=0;return empty(now,"测距未就绪 · 请缓慢移动并看向前方地面");}
+        if(frame.getCamera().getTrackingState()!=TrackingState.TRACKING){floorY=Float.NaN;floorSince=0;return empty(now,"测距未就绪 · 请缓慢移动并看向前方地面",DepthSnapshot.Stage.TRACKING);}
         Pose pose=frame.getCamera().getPose();float[] forward=pose.getZAxis();float fx=-forward[0],fz=-forward[2];float length=(float)Math.hypot(fx,fz);
-        if(length<0.5f){floorY=Float.NaN;floorSince=0;return empty(now,"请调整姿势，让镜头朝向前方");}fx/=length;fz/=length;
+        if(length<0.5f){floorY=Float.NaN;floorSince=0;return empty(now,"请调整姿势，让镜头朝向前方",DepthSnapshot.Stage.ORIENT);}fx/=length;fz/=length;
         float found=Float.NaN;
         for(Plane plane:session.getAllTrackables(Plane.class)) {
             if(plane.getTrackingState()!=TrackingState.TRACKING || plane.getSubsumedBy()!=null || plane.getType()!=Plane.Type.HORIZONTAL_UPWARD_FACING)continue;
@@ -98,17 +98,20 @@ final class ArDepthCamera {
             if(!plane.isPoseInPolygon(Pose.makeTranslation(pose.tx()+fx*0.5f,y,pose.tz()+fz*0.5f)))continue;
             if(Float.isNaN(found) || y<found)found=y;
         }
-        if(Float.isNaN(found)){floorY=Float.NaN;floorSince=0;}
+        boolean groundSearching=Float.isNaN(found);
+        if(groundSearching){floorY=Float.NaN;floorSince=0;}
         else if(Float.isNaN(floorY) || Math.abs(found-floorY)>0.08f){floorY=found;floorSince=now;}
         else floorY=found;
         boolean groundKnown=Float.isFinite(floorY) && now-floorSince>=1000;
+        DepthSnapshot.Stage preDepth=groundSearching?DepthSnapshot.Stage.GROUND_SEARCH
+            :groundKnown?DepthSnapshot.Stage.DEPTH_WAIT:DepthSnapshot.Stage.GROUND_HOLD;
         try(Image depth=frame.acquireRawDepthImage16Bits();Image confidence=frame.acquireRawDepthConfidenceImage()) {
-            if(depth.getWidth()!=confidence.getWidth() || depth.getHeight()!=confidence.getHeight())return empty(now,"深度格式不可用");
+            if(depth.getWidth()!=confidence.getWidth() || depth.getHeight()!=confidence.getHeight())return empty(now,"深度格式不可用",DepthSnapshot.Stage.DEPTH_STALE);
             long age=frame.getTimestamp()-depth.getTimestamp();
             DepthTiming.State timing=DepthTiming.check(frame.getTimestamp(),depth.getTimestamp());
-            if(timing!=DepthTiming.State.FRESH)return empty(now,timing==DepthTiming.State.EXPIRED?"深度更新较慢 · 暂停测距":timing==DepthTiming.State.FUTURE_TIMESTAMP?"深度时间不同步 · 暂停测距":"深度时间缺失 · 暂停测距");
+            if(timing!=DepthTiming.State.FRESH)return empty(now,timing==DepthTiming.State.EXPIRED?"深度更新较慢 · 暂停测距":timing==DepthTiming.State.FUTURE_TIMESTAMP?"深度时间不同步 · 暂停测距":"深度时间缺失 · 暂停测距",DepthSnapshot.Stage.DEPTH_STALE);
             // The confidence API returns the matching image for this Frame; its timestamp is not an age contract.
-            if(depth.getTimestamp()==lastDepthStamp)return groundKnown && latest!=null && now-latest.sampledAt<=500?latest:empty(now,"等待新的深度观测");
+            if(depth.getTimestamp()==lastDepthStamp)return groundKnown && latest!=null && now-latest.sampledAt<=500?latest:empty(now,"等待新的深度观测",preDepth);
             lastDepthStamp=depth.getTimestamp();
             int w=DepthObstacles.WIDTH,h=DepthObstacles.HEIGHT,n=w*h;
             float[] view=new float[n*2],textureCoords=new float[n*2],imageCoords=new float[n*2];
@@ -128,11 +131,16 @@ final class ArDepthCamera {
                 float dx=point[0]-pose.tx(),dz=point[2]-pose.tz();grid.forward[i]=dx*fx+dz*fz;grid.lateral[i]=-dx*fz+dz*fx;
                 grid.aboveGround[i]=point[1]-floorY;grid.confidence[i]=c;valid++;
             }
-            if(valid<100)return empty(now,"深度覆盖不足 · 未测到不代表可通行");
-            return new DepthSnapshot(now-age/1000000L,DepthObstacles.detect(grid),groundKnown?"深度增强 · 按空间占用提示，无需认识物体":"正在确认地面 · 暂不判断碰撞距离");
-        }catch(com.google.ar.core.exceptions.NotYetAvailableException e){return empty(now,"等待深度 · 缓慢移动手机以建立环境");}
+            if(valid<100)return empty(now,"深度覆盖不足 · 未测到不代表可通行",DepthSnapshot.Stage.DEPTH_SPARSE);
+            if(!groundKnown)return new DepthSnapshot(now-age/1000000L,DepthObstacles.detect(grid),
+                "正在确认地面 · 暂不判断碰撞距离",DepthSnapshot.Stage.GROUND_HOLD,false,true);
+            return new DepthSnapshot(now-age/1000000L,DepthObstacles.detect(grid),
+                "深度增强 · 按空间占用提示，无需认识物体",DepthSnapshot.Stage.MEASURING,true,true);
+        }catch(com.google.ar.core.exceptions.NotYetAvailableException e){return empty(now,"等待深度 · 缓慢移动手机以建立环境",DepthSnapshot.Stage.DEPTH_WAIT);}
     }
-    private static DepthSnapshot empty(long now,String message){return new DepthSnapshot(now,Collections.emptyList(),message);}
+    private static DepthSnapshot empty(long now,String message,DepthSnapshot.Stage stage){
+        return new DepthSnapshot(now,Collections.emptyList(),message,stage,false,false);
+    }
     private void failure(){if(stopped)return;Callback failedCallback=callback;main.post(()->{if(callback==failedCallback && failedCallback!=null)failedCallback.failed("增强测距暂不可用，已停止；可重新开启普通预览");});stopped=true;release();}
     private void release() {
         if(session!=null){try{session.pause();}catch(RuntimeException ignored){}try{session.close();}catch(RuntimeException ignored){}session=null;}

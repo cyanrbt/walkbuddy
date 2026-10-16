@@ -9,7 +9,8 @@ public class DetectionFeedbackTest {
         return Collections.singletonList(Detection.fromModel("人",0.8f,new float[]{0.1f,0.3f,0.9f,0.7f},320,320,0,0));
     }
     private DepthSnapshot near(long at) {
-        return new DepthSnapshot(at,Collections.singletonList(new Detection("空间障碍",1,.3f,.1f,.7f,.9f,Detection.Risk.NEAR,.7f,null)),"深度有效");
+        return new DepthSnapshot(at,Collections.singletonList(new Detection("空间障碍",1,.3f,.1f,.7f,.9f,Detection.Risk.NEAR,.7f,null)),"深度有效",
+            DepthSnapshot.Stage.MEASURING,true,true);
     }
     @Test public void basicAttentionReturnsYellowAndVibrationWithoutInventingDistance() {
         DetectionFeedback f=new DetectionFeedback();
@@ -21,7 +22,8 @@ public class DetectionFeedbackTest {
     }
     @Test public void unavailableDepthDoesNotEraseOrDisableBasicDetection() {
         DetectionFeedback f=new DetectionFeedback();f.basic(person(),100,100);
-        f.depth(new DepthSnapshot(300,Collections.emptyList(),"深度更新较慢"),0,300);
+        f.depth(new DepthSnapshot(300,Collections.emptyList(),"深度更新较慢",
+            DepthSnapshot.Stage.DEPTH_STALE,false,false),0,300);
         assertTrue(f.basic(person(),600,600));
         f.depth(null,0,700);
         assertEquals(Detection.Risk.CAUTION,f.visible(700).detections.get(0).risk);

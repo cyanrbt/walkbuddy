@@ -1,11 +1,29 @@
 package com.cyanrbt.walkbuddy;
 
-import java.util.*;
-
+/** Depth readiness is structured so the UI can guide setup without parsing status prose. */
 final class DepthSnapshot {
+    enum Stage {
+        TRACKING, ORIENT, GROUND_SEARCH, GROUND_HOLD,
+        DEPTH_WAIT, DEPTH_SPARSE, DEPTH_STALE, MEASURING
+    }
     final long sampledAt;
-    final List<Detection> detections;
+    final java.util.List<Detection> detections;
     final String status;
-    DepthSnapshot(long sampledAt,List<Detection> detections,String status){this.sampledAt=sampledAt;this.detections=Collections.unmodifiableList(new ArrayList<>(detections));this.status=status;}
-    List<Detection> rotated(int degrees){List<Detection> out=new ArrayList<>();for(Detection d:detections)out.add(d.rotate(degrees));return out;}
+    final Stage stage;
+    final boolean groundReady;
+    final boolean depthReady;
+    DepthSnapshot(long sampledAt, java.util.List<Detection> detections, String status,
+                  Stage stage, boolean groundReady, boolean depthReady) {
+        this.sampledAt = sampledAt;
+        this.detections = java.util.Collections.unmodifiableList(new java.util.ArrayList<>(detections));
+        this.status = status;
+        this.stage = stage;
+        this.groundReady = groundReady;
+        this.depthReady = depthReady;
+    }
+    java.util.List<Detection> rotated(int degrees) {
+        java.util.List<Detection> out = new java.util.ArrayList<>();
+        for (Detection d : detections) out.add(d.rotate(degrees));
+        return out;
+    }
 }
