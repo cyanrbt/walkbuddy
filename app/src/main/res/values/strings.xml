@@ -57,6 +57,9 @@
     <string name="risk_captured">● 灰 · 已捕获</string>
     <string name="risk_caution">● 黄 · 请关注</string>
     <string name="risk_near">● 红 · 近处注意</string>
+    <string name="risk_captured_desc">灰色实线角框，表示已捕获，不代表安全</string>
+    <string name="risk_caution_desc">黄色虚线，请关注，基础模式未测距</string>
+    <string name="risk_near_desc">红色实线，近处注意，需要及时看路</string>
     <string name="brand_caption">你的步行观察搭子</string>
     <string name="hero_message">多看一眼\n前方</string>
     <string name="guide_title">认识你的步行搭子</string>

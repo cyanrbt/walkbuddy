@@ -67,6 +67,11 @@ public class ProductSurfaceTest {
         assertTrue(strings.contains("<string name=\"guide_step_ground\">地面</string>"));
         assertTrue(strings.contains("<string name=\"guide_step_depth\">深度</string>"));
         assertTrue(strings.contains("<string name=\"guide_step_alert\">提示</string>"));
+        assertTrue(strings.contains("risk_captured_desc"));
+        assertTrue(strings.contains("risk_caution_desc"));
+        assertTrue(strings.contains("risk_near_desc"));
+        assertTrue(overlay.contains("accessibilityLiveRegion"));
+        assertTrue(overlay.contains("importantForAccessibility"));
         assertFalse(overlay.contains("android:checked=\"true\""));
         String recognition = chunk(overlay, "preview_recognition", "preview_sound");
         String sound = chunk(overlay, "preview_sound", "preview_stop");
@@ -93,7 +98,9 @@ public class ProductSurfaceTest {
         String activity = read(root.resolve("app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java"));
         assertTrue(service.contains("DepthGuide.resolve"));
         assertTrue(service.contains("renderDepthGuide"));
-        assertTrue(activity.contains("status.setText(PreviewActivity.report())"));
+        assertTrue(service.contains("AccessibilitySpeech"));
+        assertTrue(service.contains("announceForAccessibility"));
+        assertTrue(activity.contains("status.setText(report)"));
         assertFalse(activity.contains("帧龄") || activity.contains("毫秒") || activity.contains(" ms"));
         assertFalse(service.contains("帧龄") || service.contains("毫秒") || service.contains(" ms"));
         assertFalse(service.contains("lastLatency"));

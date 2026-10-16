@@ -51,8 +51,14 @@ assert '<string name="window_live">实时</string>' in strings
 assert "毫秒" not in between(strings, "window_live", "</string>")
 for phrase in ("没有提醒", "你自己看", "不保存", "网络权限"):
     assert phrase in strings, phrase
-for id_ in ("preview_header", "preview_stop", "preview_recognition", "preview_sound", "preview_cover"):
+for id_ in ("preview_header", "preview_stop", "preview_recognition", "preview_sound", "preview_cover", "depth_guide", "depth_guide_hint"):
     assert f"@+id/{id_}" in overlay
+for step in ("guide_step_service", "guide_step_ground", "guide_step_depth", "guide_step_alert"):
+    assert f"@+id/{step}" in overlay
+for label in ("guide_step_service", "guide_step_ground", "guide_step_depth", "guide_step_alert"):
+    assert f'<string name="{label}">' in strings
+assert "risk_captured_desc" in strings and "risk_caution_desc" in strings and "risk_near_desc" in strings
+assert "accessibilityLiveRegion" in overlay and "importantForAccessibility" in overlay
 assert 'android:checked="true"' not in overlay
 recognition = chunk(overlay, "preview_recognition", "preview_sound")
 sound = chunk(overlay, "preview_sound", "preview_stop")
@@ -72,7 +78,9 @@ assert "<vector" in mono
 assert (root / "app/src/main/res/drawable-nodpi/walkbuddy_mascot.png").stat().st_size > 0
 service = read("app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java")
 activity = read("app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java")
-assert "status.setText(PreviewActivity.report())" in activity
+assert "DepthGuide.resolve" in service and "renderDepthGuide" in service
+assert "AccessibilitySpeech" in service and "announceForAccessibility" in service
+assert "status.setText(report)" in activity
 assert "帧龄" not in activity and "毫秒" not in activity and " ms" not in activity
 assert "帧龄" not in service and "毫秒" not in service and " ms" not in service
 assert "lastLatency" not in service

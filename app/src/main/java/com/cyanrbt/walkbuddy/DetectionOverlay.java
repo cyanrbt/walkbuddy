@@ -20,13 +20,15 @@ public final class DetectionOverlay extends View {
             float l=geometry.left+d.left*geometry.width,t=geometry.top+d.top*geometry.height,r=geometry.left+d.right*geometry.width,b=geometry.top+d.bottom*geometry.height;
             int color=d.risk==Detection.Risk.NEAR?Color.rgb(255,99,110):d.risk==Detection.Risk.CAUTION?Color.rgb(255,200,87):Color.rgb(174,183,197);
             paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth((d.risk==Detection.Risk.NEAR?2.5f:1.5f)*dp);paint.setStrokeCap(Paint.Cap.ROUND);paint.setColor(color);
+            // Yellow is dashed so caution stays distinct from solid gray/red without relying on hue alone.
+            paint.setPathEffect(d.risk==Detection.Risk.CAUTION?new DashPathEffect(new float[]{6*dp,4*dp},0):null);
             if(d.mask!=null)drawMask(canvas,d.mask,color,dp);
             else {
                 float corner=Math.min(18*dp,Math.min(r-l,b-t)/3);Path p=new Path();
                 p.moveTo(l,t+corner);p.lineTo(l,t);p.lineTo(l+corner,t);p.moveTo(r-corner,t);p.lineTo(r,t);p.lineTo(r,t+corner);
                 p.moveTo(l,b-corner);p.lineTo(l,b);p.lineTo(l+corner,b);p.moveTo(r-corner,b);p.lineTo(r,b);p.lineTo(r,b-corner);canvas.drawPath(p,paint);
             }
-            paint.setStyle(Paint.Style.FILL);paint.setTextSize(11*dp);paint.setTypeface(Typeface.create("sans-serif-medium",Typeface.NORMAL));
+            paint.setStyle(Paint.Style.FILL);paint.setPathEffect(null);paint.setTextSize(11*dp);paint.setTypeface(Typeface.create("sans-serif-medium",Typeface.NORMAL));
             String label=d.label+(Float.isFinite(d.meters)?String.format(Locale.CHINA,"  %.1fm",d.meters):d.attention()?" · 未测距":"");
             float textWidth=Math.min(paint.measureText(label),geometry.width-12*dp);
             while(label.length()>1 && paint.measureText(label)>textWidth)label=label.substring(0,label.length()-1);
@@ -44,7 +46,7 @@ public final class DetectionOverlay extends View {
             if(!mask.at(x-1,y)){edges.moveTo(l,t);edges.lineTo(l,b);}if(!mask.at(x+1,y)){edges.moveTo(r,t);edges.lineTo(r,b);}
             if(!mask.at(x,y-1)){edges.moveTo(l,t);edges.lineTo(l+sx,t);}if(!mask.at(x,y+1)){edges.moveTo(l,b);edges.lineTo(r,b);}
         }
-        paint.setStyle(Paint.Style.FILL);paint.setColor((color&0xFFFFFF)|0x24000000);canvas.drawPath(fill,paint);
+        paint.setStyle(Paint.Style.FILL);paint.setPathEffect(null);paint.setColor((color&0xFFFFFF)|0x24000000);canvas.drawPath(fill,paint);
         paint.setColor(color);paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(1.5f*dp);canvas.drawPath(edges,paint);
     }
 }

@@ -37,6 +37,7 @@ public final class PreviewActivity extends Activity {
     private final Handler main = new Handler(Looper.getMainLooper());
     private final SessionState state = new SessionState();
     private final DetectionFeedback feedback = new DetectionFeedback();
+    private final AccessibilitySpeech speech = new AccessibilitySpeech();
     private boolean restoreDetection,restoreSound;
     private ToneGenerator activeTone;
     private WindowManager wm;
@@ -155,7 +156,7 @@ public final class PreviewActivity extends Activity {
     @Override protected void onDestroy() {
         destroyed = true;
         if (active.get() == this) active.clear();
-        cancelAnalysis(); state.stop(); feedback.clear(); silence();
+        cancelAnalysis(); state.stop(); feedback.clear(); speech.clear(); silence();
         main.removeCallbacksAndMessages(null); stopPosture(); closeCamera();
         unregisterReceiver(events);
         getSystemService(DisplayManager.class).unregisterDisplayListener(displayListener);
@@ -430,6 +431,7 @@ public final class PreviewActivity extends Activity {
     }
     private void alert(){
         if(!state.recognition || state.expired(SystemClock.elapsedRealtime()))return;
+        pendingSpeak=true;
         Vibrator vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);if(vibrator!=null && vibrator.hasVibrator())vibrator.vibrate(VibrationEffect.createOneShot(150,VibrationEffect.DEFAULT_AMPLITUDE));
         if(sound.isChecked())try{activeTone=new ToneGenerator(AudioManager.STREAM_NOTIFICATION,40);ToneGenerator tone=activeTone;tone.startTone(ToneGenerator.TONE_PROP_BEEP,150);main.postDelayed(()->{if(activeTone==tone){tone.release();activeTone=null;}},250);}catch(RuntimeException ignored){silence();}
     }
@@ -455,7 +457,7 @@ public final class PreviewActivity extends Activity {
     private void fail(String message) {
         if(destroyed)return;
         restoreDetection=restoreSound=false;
-        cancelAnalysis();state.unavailable(message);feedback.clear();silence();
+        cancelAnalysis();state.unavailable(message);feedback.clear();speech.clear();pendingSpeak=false;silence();
         if(detectionOverlay!=null)detectionOverlay.clear();
         stopPosture();
         if(recognition!=null)recognition.setChecked(false);
@@ -520,9 +522,15 @@ public final class PreviewActivity extends Activity {
         showFeedback(now);
         if(notify)alert();
     }
+    private boolean pendingSpeak;
     private void showFeedback(long now) {
         AlertPolicy.Decision visible=feedback.visible(now);
         detectionOverlay.show(visible.detections,previewGeometry);info.setText(visible.message);
+        Detection.Risk worst=Detection.Risk.CAPTURED;
+        for(Detection d:visible.detections)if(d.risk.ordinal()>worst.ordinal())worst=d.risk;
+        boolean alert=pendingSpeak;pendingSpeak=false;
+        String spoken=speech.update(visible.message,worst,alert,now);
+        if(spoken!=null && info!=null)info.announceForAccessibility(spoken);
     }
     private void renderDepthGuide() {
         if(root==null || depthGuideHint==null)return;
@@ -536,27 +544,32 @@ public final class PreviewActivity extends Activity {
             if(now-depthSnapshot.sampledAt>500){stage=DepthSnapshot.Stage.DEPTH_STALE;depthReady=false;}
         }
         DepthGuide.Progress progress=DepthGuide.resolve(useDepth,supported,depthChecking,stage,groundReady,depthReady,state.recognition);
-        paintStep(R.id.guide_dot_service,R.id.guide_label_service,progress.serviceDone,progress.active==DepthGuide.Step.SERVICE);
-        paintStep(R.id.guide_dot_ground,R.id.guide_label_ground,progress.groundDone,progress.active==DepthGuide.Step.GROUND);
-        paintStep(R.id.guide_dot_depth,R.id.guide_label_depth,progress.depthDone,progress.active==DepthGuide.Step.DEPTH);
-        paintStep(R.id.guide_dot_alert,R.id.guide_label_alert,progress.alertDone,progress.active==DepthGuide.Step.ALERT);
+        paintStep(R.id.guide_step_service,R.id.guide_dot_service,R.id.guide_label_service,progress.serviceDone,progress.active==DepthGuide.Step.SERVICE);
+        paintStep(R.id.guide_step_ground,R.id.guide_dot_ground,R.id.guide_label_ground,progress.groundDone,progress.active==DepthGuide.Step.GROUND);
+        paintStep(R.id.guide_step_depth,R.id.guide_dot_depth,R.id.guide_label_depth,progress.depthDone,progress.active==DepthGuide.Step.DEPTH);
+        paintStep(R.id.guide_step_alert,R.id.guide_dot_alert,R.id.guide_label_alert,progress.alertDone,progress.active==DepthGuide.Step.ALERT);
         depthGuideHint.setText(progress.hint);
         if(depthButton!=null)depthButton.setText(progress.buttonLabel);
     }
-    private void paintStep(int dotId,int labelId,boolean done,boolean active) {
+    private void paintStep(int stepId,int dotId,int labelId,boolean done,boolean active) {
+        View step=root.findViewById(stepId);
         TextView dot=root.findViewById(dotId),label=root.findViewById(labelId);
+        String name=label.getText().toString();
         if(done){
             dot.setBackgroundResource(R.drawable.bg_step_done);
             dot.setTextColor(getColor(R.color.ink));
             label.setTextColor(getColor(R.color.mint_soft));
+            step.setContentDescription(name+"，已完成");
         }else if(active){
             dot.setBackgroundResource(R.drawable.bg_step_active);
             dot.setTextColor(getColor(R.color.ink));
             label.setTextColor(getColor(R.color.warning));
+            step.setContentDescription(name+"，进行中");
         }else{
             dot.setBackgroundResource(R.drawable.bg_step_todo);
             dot.setTextColor(getColor(R.color.on_ink_dim));
             label.setTextColor(getColor(R.color.on_ink_dim));
+            step.setContentDescription(name+"，未开始");
         }
     }
     private void closeCamera() {

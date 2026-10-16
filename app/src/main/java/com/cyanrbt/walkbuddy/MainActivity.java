@@ -16,7 +16,8 @@ public final class MainActivity extends Activity {
     private boolean visible;
     private final android.os.Handler handler = new android.os.Handler(android.os.Looper.getMainLooper());
     private final Runnable refresh = new Runnable() { public void run() {
-        status.setText(PreviewActivity.report());
+        String report = PreviewActivity.report();
+        if (!report.contentEquals(status.getText())) status.setText(report);
         paintAccess();
         handler.postDelayed(this, 500);
     }};
@@ -93,6 +94,7 @@ public final class MainActivity extends Activity {
         label.setTextColor(getColor(ok ? R.color.muted : R.color.mint));
         badge.setBackgroundResource(ok ? R.drawable.bg_badge_ok : R.drawable.bg_badge);
         badge.setTextColor(getColor(ok ? R.color.ink : R.color.on_ink));
+        badge.setContentDescription(getString(ok ? okText : needText));
     }
 
     private void toast(int value) { Toast.makeText(this, value, Toast.LENGTH_LONG).show(); }
