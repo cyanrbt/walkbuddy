@@ -135,7 +135,9 @@ final class ArDepthCamera {
             if(valid<DepthThresholds.MIN_VALID_DEPTH_SAMPLES)return empty(now,"深度覆盖不足 · 未测到不代表可通行",DepthSnapshot.Stage.DEPTH_SPARSE);
             if(!groundKnown)return new DepthSnapshot(now-age/1000000L,DepthObstacles.detect(grid),
                 "正在确认地面 · 暂不判断碰撞距离",DepthSnapshot.Stage.GROUND_HOLD,false,true);
-            return new DepthSnapshot(now-age/1000000L,DepthObstacles.detect(grid),
+            List<Detection> combined=new ArrayList<>(DepthObstacles.detect(grid));
+            combined.addAll(DepthDrops.detect(grid));
+            return new DepthSnapshot(now-age/1000000L,combined,
                 "深度增强 · 按空间占用提示，无需认识物体",DepthSnapshot.Stage.MEASURING,true,true);
         }catch(com.google.ar.core.exceptions.NotYetAvailableException e){return empty(now,"等待深度 · 缓慢移动手机以建立环境",DepthSnapshot.Stage.DEPTH_WAIT);}
     }

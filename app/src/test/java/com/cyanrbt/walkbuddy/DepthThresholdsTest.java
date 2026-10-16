@@ -37,6 +37,10 @@ public class DepthThresholdsTest {
         assertEquals(0.85f, DepthThresholds.GROUND_PHONE_HEIGHT_MIN, 0f);
         assertEquals(1.8f, DepthThresholds.GROUND_PHONE_HEIGHT_MAX, 0f);
         assertEquals(0.5f, DepthThresholds.GROUND_MIN_AREA, 0f);
+        assertEquals(0.10f, DepthThresholds.FLOOR_BAND, 0f);
+        assertEquals(-0.25f, DepthThresholds.DROP_BELOW_GROUND, 0f);
+        assertEquals(6, DepthThresholds.MIN_DROP_POINTS);
+        assertEquals(4, DepthThresholds.MIN_FLOOR_EDGE_POINTS);
     }
 
     @Test public void occupancyGridUsesThresholdConstants() {

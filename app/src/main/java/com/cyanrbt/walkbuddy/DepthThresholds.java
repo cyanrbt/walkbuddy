@@ -33,5 +33,15 @@ final class DepthThresholds {
     /** Horizontal plane must cover at least this many square meters. */
     static final float GROUND_MIN_AREA = 0.5f;
 
+    // --- Negative obstacles (holes, step-downs). Experimental; calibrate separately. ---
+    /** Samples at or below this height (meters) count as walking floor, not a drop. */
+    static final float FLOOR_BAND = 0.10f;
+    /** A drop needs samples at least this far below the ground plane (meters). */
+    static final float DROP_BELOW_GROUND = -0.25f;
+    /** Connected below-ground region must have at least this many samples. */
+    static final int MIN_DROP_POINTS = 6;
+    /** Edge must touch at least this many floor samples beside the drop. */
+    static final int MIN_FLOOR_EDGE_POINTS = 4;
+
     private DepthThresholds() {}
 }
