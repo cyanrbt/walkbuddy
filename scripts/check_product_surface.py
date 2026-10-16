@@ -38,6 +38,10 @@ assert '<string name="app_name">WalkBuddy</string>' in strings
 assert '<string name="hero_title">WalkBuddy</string>' in strings
 assert "@string/hero_title" in home or "@string/app_name" in home
 assert "@string/caution" in home and "@string/hero_lead" in home and "@string/see_body" in home
+assert "@+id/journey_hint" in home and "@+id/more_panel" in home and "@+id/more_toggle" in home
+assert "@+id/home_step_camera" in home and "@+id/home_step_preview" in home and "@+id/home_step_pip" in home
+assert '<string name="journey_label">三步开始</string>' in strings
+assert '<string name="journey_allow_camera">允许摄像头</string>' in strings
 assert "毫秒" not in home
 assert "@string/app_name" in overlay
 assert 'name="ink"' in colors and 'name="stop_text"' in colors and 'name="scrim"' in colors
@@ -81,6 +85,7 @@ activity = read("app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java")
 assert "DepthGuide.resolve" in service and "renderDepthGuide" in service
 assert "AccessibilitySpeech" in service and "announceForAccessibility" in service
 assert "status.setText(report)" in activity
+assert "paintJourney" in activity
 assert "帧龄" not in activity and "毫秒" not in activity and " ms" not in activity
 assert "帧龄" not in service and "毫秒" not in service and " ms" not in service
 assert "lastLatency" not in service

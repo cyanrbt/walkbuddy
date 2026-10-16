@@ -28,6 +28,13 @@ public class ProductSurfaceTest {
         assertTrue(strings.contains("<string name=\"hero_title\">WalkBuddy</string>"));
         assertTrue(home.contains("@string/app_name") || home.contains("@string/hero_title"));
         assertTrue(home.contains("@string/caution") && home.contains("@string/hero_lead") && home.contains("@string/see_body"));
+        assertTrue(home.contains("@+id/journey_hint") && home.contains("@+id/more_panel") && home.contains("@+id/more_toggle"));
+        for (String step : new String[]{"home_step_camera", "home_step_preview", "home_step_pip"}) {
+            assertTrue(home.contains("@+id/" + step));
+        }
+        assertTrue(strings.contains("<string name=\"journey_label\">三步开始</string>"));
+        assertTrue(strings.contains("<string name=\"journey_allow_camera\">允许摄像头</string>"));
+        assertTrue(strings.contains("<string name=\"more_show\">"));
         assertFalse(home.contains("毫秒"));
         assertTrue(overlay.contains("@string/app_name"));
 
@@ -100,6 +107,7 @@ public class ProductSurfaceTest {
         assertTrue(service.contains("renderDepthGuide"));
         assertTrue(service.contains("AccessibilitySpeech"));
         assertTrue(service.contains("announceForAccessibility"));
+        assertTrue(activity.contains("paintJourney"));
         assertTrue(activity.contains("status.setText(report)"));
         assertFalse(activity.contains("帧龄") || activity.contains("毫秒") || activity.contains(" ms"));
         assertFalse(service.contains("帧龄") || service.contains("毫秒") || service.contains(" ms"));
