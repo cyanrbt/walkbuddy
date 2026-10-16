@@ -94,7 +94,8 @@ final class ArDepthCamera {
         for(Plane plane:session.getAllTrackables(Plane.class)) {
             if(plane.getTrackingState()!=TrackingState.TRACKING || plane.getSubsumedBy()!=null || plane.getType()!=Plane.Type.HORIZONTAL_UPWARD_FACING)continue;
             float y=plane.getCenterPose().ty(),height=pose.ty()-y;
-            if(height<0.85f || height>1.8f || plane.getExtentX()*plane.getExtentZ()<0.5f)continue;
+            if(height<DepthThresholds.GROUND_PHONE_HEIGHT_MIN || height>DepthThresholds.GROUND_PHONE_HEIGHT_MAX
+                || plane.getExtentX()*plane.getExtentZ()<DepthThresholds.GROUND_MIN_AREA)continue;
             if(!plane.isPoseInPolygon(Pose.makeTranslation(pose.tx()+fx*0.5f,y,pose.tz()+fz*0.5f)))continue;
             if(Float.isNaN(found) || y<found)found=y;
         }
@@ -131,7 +132,7 @@ final class ArDepthCamera {
                 float dx=point[0]-pose.tx(),dz=point[2]-pose.tz();grid.forward[i]=dx*fx+dz*fz;grid.lateral[i]=-dx*fz+dz*fx;
                 grid.aboveGround[i]=point[1]-floorY;grid.confidence[i]=c;valid++;
             }
-            if(valid<100)return empty(now,"深度覆盖不足 · 未测到不代表可通行",DepthSnapshot.Stage.DEPTH_SPARSE);
+            if(valid<DepthThresholds.MIN_VALID_DEPTH_SAMPLES)return empty(now,"深度覆盖不足 · 未测到不代表可通行",DepthSnapshot.Stage.DEPTH_SPARSE);
             if(!groundKnown)return new DepthSnapshot(now-age/1000000L,DepthObstacles.detect(grid),
                 "正在确认地面 · 暂不判断碰撞距离",DepthSnapshot.Stage.GROUND_HOLD,false,true);
             return new DepthSnapshot(now-age/1000000L,DepthObstacles.detect(grid),
