@@ -16,6 +16,7 @@ final class DetectorInput implements AutoCloseable {
     private final Paint paint=new Paint(Paint.FILTER_BITMAP_FLAG);
     private final RectF destination=new RectF();
     private final int[] pixels=new int[SIZE*SIZE];
+    private final byte[] rgb=new byte[SIZE*SIZE*3];
     private final ByteBuffer buffer=ByteBuffer.allocateDirect(SIZE*SIZE*3).order(ByteOrder.nativeOrder());
     private boolean closed;
     float width,height,padX,padY;
@@ -31,7 +32,9 @@ final class DetectorInput implements AutoCloseable {
         canvas.drawBitmap(source,null,destination,paint);
         padded.getPixels(pixels,0,SIZE,0,0,SIZE,SIZE);
         buffer.clear();
-        for(int pixel:pixels)buffer.put((byte)Color.red(pixel)).put((byte)Color.green(pixel)).put((byte)Color.blue(pixel));
+        int offset=0;
+        for(int pixel:pixels){rgb[offset++]=(byte)(pixel>>16);rgb[offset++]=(byte)(pixel>>8);rgb[offset++]=(byte)pixel;}
+        buffer.put(rgb); // One bulk copy, avoiding three direct-buffer calls for every pixel.
         buffer.rewind();return buffer;
     }
 

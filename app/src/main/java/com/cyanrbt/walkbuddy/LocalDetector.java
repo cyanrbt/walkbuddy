@@ -20,6 +20,7 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     private final Map<Integer,Object> outputs=new HashMap<>();
     private final float[] box=new float[4];
     private boolean closed;
+    private boolean firstInference=true;
     static final class Result {
         final String category;
         final List<Detection> detections;
@@ -46,9 +47,15 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     }
     @Override public Result detect(BitmapFrame frame) {
         if(closed)throw new IllegalStateException("识别器已释放");
+        long started=android.os.SystemClock.elapsedRealtime();
         inputs[0]=input.prepare(frame.bitmap);
         boxes.clear();classes.clear();scores.clear();count.clear();
+        long prepared=android.os.SystemClock.elapsedRealtime();
         interpreter.runForMultipleInputsOutputs(inputs,outputs);
+        long finished=android.os.SystemClock.elapsedRealtime();
+        if(firstInference || finished-started>=500)android.util.Log.i("WalkBuddyAnalysis","Inference prepareMs="+(prepared-started)
+            +" nativeMs="+(finished-prepared)+" first="+firstInference);
+        firstInference=false;
         float total=count.get(0);
         if(!Float.isFinite(total) || total<0 || total>25)throw new IllegalStateException("模型检测数量无效");
         int size=Math.round(total);int[] indices=new int[size];float[] values=new float[size];String category="";List<Detection> detections=new ArrayList<>();
