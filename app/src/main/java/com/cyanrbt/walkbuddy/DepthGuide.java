@@ -30,6 +30,12 @@ final class DepthGuide {
                 default: return alertDone;
             }
         }
+        boolean samePresentation(Progress other) {
+            return other != null && active == other.active && serviceDone == other.serviceDone
+                && groundDone == other.groundDone && depthDone == other.depthDone
+                && alertDone == other.alertDone && hint.equals(other.hint)
+                && buttonLabel.equals(other.buttonLabel);
+        }
     }
 
     /** @param availability null while AR availability is still unknown. */

@@ -57,4 +57,61 @@ public class DetectionFeedbackTest {
         assertEquals(DepthTiming.State.FUTURE_TIMESTAMP,DepthTiming.check(900000000L,1000000000L));
         assertEquals(DepthTiming.State.MISSING_TIMESTAMP,DepthTiming.check(1000000000L,0));
     }
+    @Test public void repeatedWatchdogChecksReuseTheSameVisibleSnapshot() {
+        DetectionFeedback f=new DetectionFeedback();f.basic(person(),100,100);
+        AlertPolicy.Decision first=f.visible(100);
+        for(long now=101;now<=1100;now++)assertSame(first,f.visible(now));
+        assertFalse(first.alert);
+        AlertPolicy.Decision expired=f.visible(1101);
+        assertNotSame(first,expired);assertTrue(expired.detections.isEmpty());
+        assertSame(expired,f.visible(1500));
+    }
+    @Test public void cachedCombinedSnapshotExpiresEachSourceAtItsOwnBoundary() {
+        DetectionFeedback f=new DetectionFeedback();
+        f.basic(person(),100,100);f.basic(person(),600,600);
+        f.depth(near(300),0,300);f.depth(near(600),0,600);
+        AlertPolicy.Decision both=f.visible(600);
+        assertEquals(2,both.detections.size());assertTrue(both.message.contains("请及时注意"));
+        assertSame(both,f.visible(1100));
+        AlertPolicy.Decision basicOnly=f.visible(1101);
+        assertEquals(1,basicOnly.detections.size());assertTrue(basicOnly.message.contains("未测距"));
+        assertSame(basicOnly,f.visible(1600));
+        assertTrue(f.visible(1601).detections.isEmpty());
+        // An earlier immutable decision must not be changed by later expiry.
+        assertEquals(2,both.detections.size());
+    }
+    @Test public void newConfirmationAndGeometryCannotBeHiddenByCache() {
+        DetectionFeedback f=new DetectionFeedback();f.basic(person(),100,100);
+        AlertPolicy.Decision gray=f.visible(100);
+        f.basic(person(),600,600);
+        AlertPolicy.Decision yellow=f.visible(600);
+        assertNotSame(gray,yellow);
+        assertEquals(Detection.Risk.CAPTURED,gray.detections.get(0).risk);
+        assertEquals(Detection.Risk.CAUTION,yellow.detections.get(0).risk);
+        Detection side=new Detection("人",.8f,.01f,.1f,.2f,.9f);
+        f.basic(Collections.singletonList(side),800,800);
+        AlertPolicy.Decision moved=f.visible(800);
+        assertNotSame(yellow,moved);assertEquals(.01f,moved.detections.get(0).left,0f);
+    }
+    @Test public void clearDropsCachedDataAndDoesNotReplayAlerts() {
+        DetectionFeedback f=new DetectionFeedback();f.depth(near(100),0,100);f.depth(near(400),0,400);
+        AlertPolicy.Decision red=f.visible(400);
+        f.clear();AlertPolicy.Decision empty=f.visible(401);
+        assertNotSame(red,empty);assertTrue(empty.detections.isEmpty());assertFalse(empty.alert);
+        assertFalse(f.depth(near(600),0,600));
+        assertEquals(Detection.Risk.CAPTURED,f.visible(600).detections.get(0).risk);
+    }
+    @Test public void invalidDepthImmediatelyRemovesCachedContours() {
+        DetectionFeedback f=new DetectionFeedback();f.basic(person(),100,100);f.depth(near(200),0,200);
+        AlertPolicy.Decision combined=f.visible(200);
+        assertEquals(2,combined.detections.size());
+        f.depth(null,0,201);
+        AlertPolicy.Decision basicOnly=f.visible(201);
+        assertNotSame(combined,basicOnly);assertEquals(1,basicOnly.detections.size());
+    }
+    @Test public void resultsFromTheFutureAreNotDisplayed() {
+        DetectionFeedback f=new DetectionFeedback();f.basic(person(),200,200);f.depth(near(200),0,200);
+        assertEquals(2,f.visible(200).detections.size());
+        assertTrue(f.visible(199).detections.isEmpty());
+    }
 }

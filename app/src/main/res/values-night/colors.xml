@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Home surfaces follow system night mode; preview stays ink-dark in both. -->
+    <color name="paper">#0E2420</color>
+    <color name="paper_card">#17332E</color>
+    <color name="line">#2C4A43</color>
+    <color name="ink_text">#E7F3ED</color>
+    <color name="muted">#8BA79C</color>
+</resources>

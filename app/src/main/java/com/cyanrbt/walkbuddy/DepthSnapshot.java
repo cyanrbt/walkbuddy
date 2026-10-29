@@ -26,4 +26,5 @@ final class DepthSnapshot {
         for (Detection d : detections) out.add(d.rotate(degrees));
         return out;
     }
+    boolean fresh(long now) {return now>=sampledAt && now-sampledAt<=500;}
 }

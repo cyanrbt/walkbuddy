@@ -50,6 +50,7 @@ public final class PreviewActivity extends Activity {
     private Button depthButton;
     private TextView depthStatus;
     private TextView depthGuideHint;
+    private DepthGuide.Progress displayedDepthGuide;
     private boolean depthChecking = true;
     private ArCoreApk.Availability depthAvailability;
     private TextView postureHint;
@@ -86,6 +87,7 @@ public final class PreviewActivity extends Activity {
     };
     private boolean realtimeTimestamp, destroyed, disableRotateCrop, resumed;
     private boolean initialStart;
+    private boolean previewSeen;
     private Button pipButton, restartButton;
     private long brightnessAt,sampledAt,analysisEpoch;
     private static InferenceWorker<BitmapFrame,LocalDetector.Result> sharedWorker;
@@ -100,7 +102,7 @@ public final class PreviewActivity extends Activity {
         if(destroyed) return;
         long now=SystemClock.elapsedRealtime();
         if(detectionOverlay!=null && state.recognition)showFeedback(now);
-        if(useDepth && depthSnapshot!=null && now-depthSnapshot.sampledAt>500 && depthStatus!=null)depthStatus.setText("深度暂不可用 · 未测到不代表可通行");
+        if(useDepth)renderDepthStatus(now);
         if(useDepth)renderDepthGuide();
         if(postureHint!=null && now-postureAt>1500){postureHint.setVisibility(View.GONE);posturePolicy.reset();}
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
@@ -112,6 +114,8 @@ public final class PreviewActivity extends Activity {
     }};
     @Override public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
+        previewSeen = getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE)
+            .getBoolean(HomeJourney.PREVIEW_SEEN, false);
         active = new WeakReference<>(this);
         wm = getWindowManager();
         sensors=getSystemService(SensorManager.class);
@@ -129,6 +133,11 @@ public final class PreviewActivity extends Activity {
         // Process recreation must not silently reopen the camera.
         initialStart = savedState == null;
         createWindow();
+    }
+
+    @Override protected void onStart() {
+        super.onStart();
+        main.removeCallbacks(watchdog);
         main.post(watchdog);
     }
 
@@ -149,6 +158,7 @@ public final class PreviewActivity extends Activity {
     @Override protected void onStop() {
         // Called when the PiP window is dismissed or the preview is no longer visible.
         // Do not gate this on isInPictureInPictureMode(): it can still be true on dismissal.
+        main.removeCallbacks(watchdog);
         fail("预览已离开屏幕，摄像头已停止；请主动重新开启");
         super.onStop();
     }
@@ -233,6 +243,8 @@ public final class PreviewActivity extends Activity {
 
     @Override public void onPictureInPictureModeChanged(boolean inPip, Configuration config) {
         super.onPictureInPictureModeChanged(inPip, config);
+        if (inPip) getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).edit()
+            .putBoolean(HomeJourney.PIP_SEEN, true).apply();
         setCompactUi(inPip);
     }
 
@@ -258,6 +270,7 @@ public final class PreviewActivity extends Activity {
 
     private void createWindow() {
         previewGeometry = null;
+        displayedDepthGuide = null;
         root=(LinearLayout)getLayoutInflater().inflate(R.layout.activity_preview,
             (ViewGroup)findViewById(android.R.id.content), false);
         titleView=root.findViewById(R.id.preview_title);
@@ -356,7 +369,7 @@ public final class PreviewActivity extends Activity {
                     long now=SystemClock.elapsedRealtime();
                     if(now-capturedAt>500 || state.expired(now)){fail("增强画面已过期，请重新开启");return;}
                     state.capture(timestamp,capturedAt);syncTicket();depthSnapshot=depth;
-                    if(depth!=null && depthStatus!=null)depthStatus.setText(depth.status+" · 基础识别"+(state.recognition?"继续":"未开启"));
+                    renderDepthStatus(now);
                     renderDepthGuide();
                 }
                 public void failed(String reason){if(!destroyed && token==state.generation){useDepth=false;fail(reason);refreshDepthAvailability();}}
@@ -442,16 +455,21 @@ public final class PreviewActivity extends Activity {
     private void render(long now) {
         if(cover==null)return;
         boolean live=state.phase==SessionState.Phase.LIVE && state.fresh(now);
+        if (live && !previewSeen) {
+            previewSeen = true;
+            getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).edit()
+                .putBoolean(HomeJourney.PREVIEW_SEEN, true).apply();
+        }
         cover.setVisibility(live?View.GONE:View.VISIBLE);
-        if(!live) cover.setText(state.reason);
+        if(!live) setTextIfChanged(cover,state.reason);
         recognition.setEnabled(live && LocalDetector.AVAILABLE);
         sound.setEnabled(live && state.recognition);
         if(live && restoreDetection){boolean enableSound=restoreSound;restoreDetection=restoreSound=false;recognition.setChecked(true);sound.setChecked(enableSound);}
         pipButton.setEnabled(live);
         restartButton.setVisibility(state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED ? View.VISIBLE : View.GONE);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
-        if(live){cover.setText("");if(!state.recognition)info.setText(R.string.info_recognition_off);}
-        if(titleView!=null) titleView.setText(live?R.string.window_live:R.string.window_idle);
+        if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(R.string.info_recognition_off));}
+        if(titleView!=null) setTextIfChanged(titleView,getText(live?R.string.window_live:R.string.window_idle));
         renderDepthGuide();
     }
     private void fail(String message) {
@@ -523,9 +541,15 @@ public final class PreviewActivity extends Activity {
         if(notify)alert();
     }
     private boolean pendingSpeak;
+    private void renderDepthStatus(long now) {
+        if(depthSnapshot==null || depthStatus==null)return;
+        setTextIfChanged(depthStatus,depthSnapshot.fresh(now)
+            ?depthSnapshot.status+" · 基础识别"+(state.recognition?"继续":"未开启")
+            :"深度暂不可用 · 未测到不代表可通行");
+    }
     private void showFeedback(long now) {
         AlertPolicy.Decision visible=feedback.visible(now);
-        detectionOverlay.show(visible.detections,previewGeometry);info.setText(visible.message);
+        detectionOverlay.show(visible.detections,previewGeometry);setTextIfChanged(info,visible.message);
         Detection.Risk worst=Detection.Risk.CAPTURED;
         for(Detection d:visible.detections)if(d.risk.ordinal()>worst.ordinal())worst=d.risk;
         boolean alert=pendingSpeak;pendingSpeak=false;
@@ -541,15 +565,20 @@ public final class PreviewActivity extends Activity {
         if(useDepth && depthSnapshot!=null){
             stage=depthSnapshot.stage;groundReady=depthSnapshot.groundReady;depthReady=depthSnapshot.depthReady;
             long now=SystemClock.elapsedRealtime();
-            if(now-depthSnapshot.sampledAt>500){stage=DepthSnapshot.Stage.DEPTH_STALE;depthReady=false;}
+            if(!depthSnapshot.fresh(now)){stage=DepthSnapshot.Stage.DEPTH_STALE;depthReady=false;}
         }
         DepthGuide.Progress progress=DepthGuide.resolve(useDepth,supported,depthChecking,stage,groundReady,depthReady,state.recognition);
+        if(progress.samePresentation(displayedDepthGuide))return;
+        displayedDepthGuide=progress;
         paintStep(R.id.guide_step_service,R.id.guide_dot_service,R.id.guide_label_service,progress.serviceDone,progress.active==DepthGuide.Step.SERVICE);
         paintStep(R.id.guide_step_ground,R.id.guide_dot_ground,R.id.guide_label_ground,progress.groundDone,progress.active==DepthGuide.Step.GROUND);
         paintStep(R.id.guide_step_depth,R.id.guide_dot_depth,R.id.guide_label_depth,progress.depthDone,progress.active==DepthGuide.Step.DEPTH);
         paintStep(R.id.guide_step_alert,R.id.guide_dot_alert,R.id.guide_label_alert,progress.alertDone,progress.active==DepthGuide.Step.ALERT);
-        depthGuideHint.setText(progress.hint);
-        if(depthButton!=null)depthButton.setText(progress.buttonLabel);
+        setTextIfChanged(depthGuideHint,progress.hint);
+        if(depthButton!=null)setTextIfChanged(depthButton,progress.buttonLabel);
+    }
+    private static void setTextIfChanged(TextView view,CharSequence text) {
+        if(!android.text.TextUtils.equals(view.getText(),text))view.setText(text);
     }
     private void paintStep(int stepId,int dotId,int labelId,boolean done,boolean active) {
         View step=root.findViewById(stepId);

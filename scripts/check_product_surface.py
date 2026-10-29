@@ -26,6 +26,9 @@ home = read("app/src/main/res/layout/activity_main.xml")
 overlay = read("app/src/main/res/layout/activity_preview.xml")
 strings = read("app/src/main/res/values/strings.xml")
 colors = read("app/src/main/res/values/colors.xml")
+night_colors = read("app/src/main/res/values-night/colors.xml")
+night_themes = read("app/src/main/res/values-night/themes.xml")
+manifest_text = read("app/src/main/AndroidManifest.xml")
 launcher = read("app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml")
 round_icon = read("app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml")
 foreground = read("app/src/main/res/drawable/walkbuddy_foreground.xml")
@@ -41,10 +44,13 @@ assert "@string/caution" in home and "@string/hero_lead" in home and "@string/se
 assert "@+id/journey_hint" in home and "@+id/more_panel" in home and "@+id/more_toggle" in home
 assert "@+id/home_step_camera" in home and "@+id/home_step_preview" in home and "@+id/home_step_pip" in home
 assert '<string name="journey_label">三步开始</string>' in strings
-assert '<string name="journey_allow_camera">允许摄像头</string>' in strings
+assert '<string name="journey_allow_camera">允许摄像头并预览</string>' in strings
 assert "毫秒" not in home
 assert "@string/app_name" in overlay
 assert 'name="ink"' in colors and 'name="stop_text"' in colors and 'name="scrim"' in colors
+assert 'name="paper"' in night_colors and 'name="paper_card"' in night_colors
+assert 'windowLightStatusBar">false' in night_themes
+assert "uiMode" in manifest_text
 assert "@drawable/bg_primary" in home and "@drawable/bg_stop" in home and "@color/stop_text" in home
 assert "@color/paper" in home
 assert "@color/ink" in overlay and "@drawable/bg_toggle" in overlay and "@drawable/bg_stop" in overlay

@@ -9,11 +9,16 @@
     <string name="journey_label">三步开始</string>
     <string name="journey_camera">摄像头</string>
     <string name="journey_preview">预览</string>
-    <string name="journey_pip">小窗</string>
+    <string name="journey_pip">小窗 · 可选</string>
     <string name="journey_hint_start">先允许摄像头，再打开预览确认取景</string>
     <string name="journey_hint_camera">打开预览后先站着确认镜头方向</string>
     <string name="journey_hint_preview">在预览页点「以小窗观察」，即可切到其他应用</string>
     <string name="journey_hint_done">三步都走过了 · 路还是要你自己看</string>
+    <string name="journey_hint_camera_settings">摄像头未获允许，请在系统设置中开启，再返回打开预览</string>
+    <string name="journey_hint_pip_disabled">小窗权限已关闭，可前往设置开启，也可继续应用内观察</string>
+    <string name="journey_hint_in_app">已体验预览 · 此设备不支持小窗，可继续应用内观察</string>
+    <string name="journey_camera_settings">前往设置允许摄像头</string>
+    <string name="journey_pip_settings">设置小窗权限</string>
     <string name="more_show">了解更多 · 用法与准备</string>
     <string name="more_hide">收起说明</string>
     <string name="prepare">开始之前</string>
@@ -22,7 +27,7 @@
     <string name="access_ok">已允许</string>
     <string name="access_needed">点这里允许</string>
     <string name="start">打开摄像头预览</string>
-    <string name="journey_allow_camera">允许摄像头</string>
+    <string name="journey_allow_camera">允许摄像头并预览</string>
     <string name="caution">先站着确认镜头方向。没有提醒，只说明这次没有出声，路还是要你自己看。</string>
     <string name="section_use">小窗怎么用</string>
     <string name="use_body">先在预览页确认取景，再点「以小窗观察」。点击小窗可返回完整界面或停止。识别和声音每次开启默认关闭；关闭小窗、锁屏或预览离开屏幕后会停止摄像头。</string>

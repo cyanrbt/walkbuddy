@@ -32,8 +32,15 @@ final class PipProbe {
                 byte[] bytes = new byte[1024];
                 while (input.read(bytes) != -1) { /* Wait for the grant command to complete. */ }
             }
+            // Discard probe history; do not confuse device capability or a launch with success.
+            runner.getTargetContext().getSharedPreferences(HomeJourney.PREFERENCES, 0).edit().clear().commit();
             home = runner.startActivitySync(new Intent(runner.getTargetContext(), MainActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            Activity firstHome = home;
+            runner.runOnMainSync(() -> {
+                if (firstHome.findViewById(R.id.home_step_pip).getContentDescription().toString().contains("已完成"))
+                    throw new AssertionError("PiP availability was reported as a completed experience");
+            });
             Instrumentation.ActivityMonitor monitor = runner.addMonitor(PreviewActivity.class.getName(), null, false);
             Activity launcher = home;
             runner.runOnMainSync(() -> launcher.findViewById(R.id.start).performClick());
@@ -42,13 +49,19 @@ final class PipProbe {
             if (preview == null) throw new AssertionError("Preview did not open from the home button");
             PreviewActivity host = preview;
             await(runner, () -> state(host).phase == SessionState.Phase.LIVE, "camera LIVE");
+            await(runner, () -> host.getSharedPreferences(HomeJourney.PREFERENCES, 0)
+                .getBoolean(HomeJourney.PREVIEW_SEEN, false), "live preview history");
             runner.runOnMainSync(() -> {
+                if (host.getSharedPreferences(HomeJourney.PREFERENCES, 0).getBoolean(HomeJourney.PIP_SEEN, false))
+                    throw new AssertionError("PiP marked complete before system entry");
                 if (((CheckBox) host.findViewById(R.id.preview_recognition)).isChecked()
                         || ((CheckBox) host.findViewById(R.id.preview_sound)).isChecked())
                     throw new AssertionError("Recognition and sound must default off");
                 host.findViewById(R.id.enter_pip).performClick();
             });
             await(runner, host::isInPictureInPictureMode, "system PiP entry");
+            await(runner, () -> host.getSharedPreferences(HomeJourney.PREFERENCES, 0)
+                .getBoolean(HomeJourney.PIP_SEEN, false), "successful PiP history");
             long firstCapture = readOnMain(runner, () -> state(host).captureAt);
             await(runner, () -> state(host).captureAt > firstCapture + 500
                 && state(host).phase == SessionState.Phase.LIVE, "camera keeps advancing in PiP");

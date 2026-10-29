@@ -16,6 +16,8 @@ public class ProductSurfaceTest {
         String overlay = read(root.resolve("app/src/main/res/layout/activity_preview.xml"));
         String strings = read(root.resolve("app/src/main/res/values/strings.xml"));
         String colors = read(root.resolve("app/src/main/res/values/colors.xml"));
+        String nightColors = read(root.resolve("app/src/main/res/values-night/colors.xml"));
+        String nightThemes = read(root.resolve("app/src/main/res/values-night/themes.xml"));
         String launcher = read(root.resolve("app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"));
         String round = read(root.resolve("app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"));
         String foreground = read(root.resolve("app/src/main/res/drawable/walkbuddy_foreground.xml"));
@@ -33,12 +35,15 @@ public class ProductSurfaceTest {
             assertTrue(home.contains("@+id/" + step));
         }
         assertTrue(strings.contains("<string name=\"journey_label\">三步开始</string>"));
-        assertTrue(strings.contains("<string name=\"journey_allow_camera\">允许摄像头</string>"));
+        assertTrue(strings.contains("<string name=\"journey_allow_camera\">允许摄像头并预览</string>"));
         assertTrue(strings.contains("<string name=\"more_show\">"));
         assertFalse(home.contains("毫秒"));
         assertTrue(overlay.contains("@string/app_name"));
 
         assertTrue(colors.contains("name=\"ink\""));
+        assertTrue(nightColors.contains("name=\"paper\"") && nightColors.contains("name=\"paper_card\""));
+        assertTrue(nightThemes.contains("windowLightStatusBar\">false"));
+        assertTrue(read(root.resolve("app/src/main/AndroidManifest.xml")).contains("uiMode"));
         assertTrue(colors.contains("name=\"stop_text\""));
         assertTrue(colors.contains("name=\"scrim\""));
         assertTrue(home.contains("@drawable/bg_primary"));

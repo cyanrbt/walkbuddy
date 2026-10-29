@@ -11,7 +11,7 @@
         <activity android:name=".PreviewActivity" android:exported="false"
             android:launchMode="singleTask" android:supportsPictureInPicture="true"
             android:resizeableActivity="true"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"/>
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|uiMode"/>
         <receiver android:name=".StopPreviewReceiver" android:exported="false"/>
     </application>
 </manifest>

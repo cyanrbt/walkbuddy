@@ -15,6 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check release tag and notes
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: python3 scripts/check_release.py "$RELEASE_TAG"
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -52,26 +57,10 @@ jobs:
         run: |
           tag="${GITHUB_REF_NAME}"
           asset="Walk-Buddy-${tag}-arm64-debug.apk"
-          cat > /tmp/release-notes.md <<EOF
-          ARM64 调试包，最低 Android 8。安装后允许摄像头，打开预览确认取景，再点「以小窗观察」进入系统画中画。不需要悬浮窗或通知授权；不支持画中画时可在应用内观察。关闭小窗或锁屏会释放相机，识别和提示音默认关闭。
-
-          0.4.3：新增相机步行小伙伴图标，统一首页、预览页和控件的薄荷绿视觉风格；首页突出观察状态与启动入口；预览控制区支持滚动和自适应文字高度；适配普通、圆形和单色主题图标。保留现有检测、空间增强与画中画行为，包名和签名不变。
-
-          本版已通过本地 53 项单元测试、Android Lint 和 APK 构建；视觉改版尚未完成真机验收。
-
-          预览页打开检测即可获得基础提醒；可选点“空间增强：已关闭”开启测距增强。增强服务未就绪时仍可使用基础识别。
-
-          这是学习原型。坑洞、下台阶、玻璃等仍可能漏检，缺失深度不代表可通行。没有提醒不代表安全。不要在道路、楼梯或骑行时靠它决定下一步。本应用不保存或上传画面，安装包没有网络权限。可选增强功能由 Google Play 服务 AR 提供，服务安装更新及数据处理遵循 Google 隐私政策，应用启用前提供说明。
-
-          从 v0.3.2 起包名为 com.cyanrbt.walkbuddy，旧包 cn.study.window 与它属于不同应用，可以并存，旧设置不会迁移。后续版本保持新包名。
-
-          v0.3.3 起显式使用固定签名，上传前校验 APK 证书与 Secret 中的密钥一致。v0.3.2 的 APK 实际签名不同，若已经安装，需卸载后安装本版（卸载会清除设置）。
-
-          发布使用仓库 Secret 中固定保存的签名密钥。同签名且版本号不降低的包可以覆盖安装；历史版本若签名不同，需先恢复对应旧密钥，或卸载旧包后安装（卸载会清除应用数据）。
-          EOF
+          notes="docs/releases/${tag}.md"
           if gh release view "${tag}" >/dev/null 2>&1; then
             gh release upload "${tag}" "${asset}" --clobber
-            gh release edit "${tag}" --notes-file /tmp/release-notes.md
+            gh release edit "${tag}" --notes-file "${notes}"
           else
-            gh release create "${tag}" "${asset}" --title "WalkBuddy ${tag}" --notes-file /tmp/release-notes.md
+            gh release create "${tag}" "${asset}" --title "WalkBuddy ${tag}" --notes-file "${notes}"
           fi
