@@ -126,7 +126,15 @@ public final class PreviewActivity extends Activity {
         synchronized (PreviewActivity.class) {
             if (sharedWorker == null) {
                 Context app = getApplicationContext();
-                sharedWorker = new InferenceWorker<>(SystemClock::elapsedRealtime, () -> new LocalDetector(app));
+                sharedWorker = new InferenceWorker<>(SystemClock::elapsedRealtime, () -> {
+                    // Set before Interpreter construction so its native workers inherit background scheduling.
+                    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+                    long started=SystemClock.elapsedRealtime();
+                    LocalDetector detector=new LocalDetector(app);
+                    android.util.Log.i("WalkBuddyAnalysis","Model ready initMs="+(SystemClock.elapsedRealtime()-started)
+                        +" priority="+android.os.Process.getThreadPriority(android.os.Process.myTid()));
+                    return detector;
+                });
             }
             worker = sharedWorker;
         }
@@ -422,6 +430,7 @@ public final class PreviewActivity extends Activity {
     private void captureFrame(long token,long stamp,long receivedAt) {
         if(destroyed || token!=state.generation)return;
         long now=SystemClock.elapsedRealtime(),nanos=SystemClock.elapsedRealtimeNanos();
+        long captureAt=state.captureAt,displayAt=state.displayAt;
         CameraFrames.Decision decision=CameraFrames.accept(state,token,stamp,receivedAt,now,nanos,realtimeTimestamp);
         if(decision==CameraFrames.Decision.DEFER) {
             if(pendingCapture!=null)return; // One pending metadata observation, never a queue of old frames.
@@ -430,7 +439,8 @@ public final class PreviewActivity extends Activity {
             main.postDelayed(pendingCapture,CameraFrames.waitMillis(stamp,nanos));
         } else if(decision.failure!=null) {
             android.util.Log.w("WalkBuddyCamera","Rejected capture ageNanos="+(nanos-stamp)
-                +" monotonicAgeNanos="+(System.nanoTime()-stamp)+" pip="+isInPictureInPictureMode());
+                +" monotonicAgeNanos="+(System.nanoTime()-stamp)+" captureGapMs="+(now-captureAt)
+                +" displayGapMs="+(now-displayAt)+" pip="+isInPictureInPictureMode());
             fail(decision.failure);
         } else if(decision==CameraFrames.Decision.ACCEPTED) {
             if(pendingCapture!=null){main.removeCallbacks(pendingCapture);pendingCapture=null;}
@@ -441,7 +451,10 @@ public final class PreviewActivity extends Activity {
     private void sample(long frameAt) {
         if(analysisTicket==null || !analysisTicket.allowed(SystemClock.elapsedRealtime()))return;
         if(previewGeometry==null)return;
+        long copyStarted=SystemClock.elapsedRealtime();
         Bitmap bitmap=samplePreview(texture,previewGeometry);if(bitmap==null){fail("无法读取分析帧：不可用");return;}
+        long copyMs=SystemClock.elapsedRealtime()-copyStarted;
+        if(copyMs>=200)android.util.Log.w("WalkBuddyAnalysis","Slow camera copyMs="+copyMs+" pip="+isInPictureInPictureMode());
         sampledAt=frameAt;long token=state.generation,epoch=analysisEpoch;InferenceWorker.Ticket ticket=analysisTicket;
         worker.submit(ticket,new BitmapFrame(bitmap),frameAt,(result,error)->main.post(()->{
             long now=SystemClock.elapsedRealtime();
