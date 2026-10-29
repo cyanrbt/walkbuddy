@@ -72,7 +72,12 @@ final class PipProbe {
             report.append("PASS Home releases camera; returning requires manual restart\n");
             checkpoint(runner,"home_restart_live");
 
-            read(runner,()->host.findViewById(R.id.preview_recognition).performClick());
+            read(runner,()->{
+                host.findViewById(R.id.preview_recognition).performClick();
+                if((boolean)field(host,"analysisReady") || !((android.widget.TextView)host.findViewById(R.id.preview_info)).getText().toString().contains("准备识别器"))
+                    throw new AssertionError("Cold detection did not show preparation state");
+                return true;
+            });
             checkpoint(runner,"recognition_on");
             await(runner,()->live(host) && basicAt(host)>0,"first actual model result");
             long firstResult=read(runner,()->basicAt(host));
@@ -83,6 +88,7 @@ final class PipProbe {
                 host.findViewById(R.id.preview_recognition).performClick();
                 if(!oldTicket.cancelled || field(host,"analysisTicket")!=null || basicAt(host)!=-1)
                     throw new AssertionError("Detection off retained analysis or feedback");
+                if((boolean)field(host,"analysisReady") || (boolean)field(host,"analysisHasResult"))throw new AssertionError("Detection off retained readiness");
                 return true;
             });
             checkpoint(runner,"recognition_off");

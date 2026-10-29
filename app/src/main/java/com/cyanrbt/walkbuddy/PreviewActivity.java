@@ -96,6 +96,7 @@ public final class PreviewActivity extends Activity {
     private static InferenceWorker<BitmapFrame,LocalDetector.Result> sharedWorker;
     private InferenceWorker<BitmapFrame,LocalDetector.Result> worker;
     private InferenceWorker.Ticket analysisTicket;
+    private boolean analysisReady,analysisHasResult;
     private final BroadcastReceiver events = new BroadcastReceiver() {
         public void onReceive(Context c, Intent intent) {
             if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) fail(RecoveryGuide.Reason.LOCKED,"锁屏：摄像头已停止，请主动重新开启");
@@ -297,8 +298,8 @@ public final class PreviewActivity extends Activity {
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
             b.setText(checked?"检测：已开启":"检测：已关闭");
-            if(checked){long now=SystemClock.elapsedRealtime();state.analysisAt=now;analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;}
-            if(!checked) { if(sound!=null)sound.setChecked(false); silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_on);
+            if(checked)prepareAnalysis(SystemClock.elapsedRealtime());
+            if(!checked) { if(sound!=null)sound.setChecked(false); silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_preparing);
             renderDepthGuide();
         });
         sound=root.findViewById(R.id.preview_sound);
@@ -328,7 +329,9 @@ public final class PreviewActivity extends Activity {
                 state.display(now);state.promote(now);syncTicket();render(now);
                 if(state.phase==SessionState.Phase.LIVE && state.recognition) {
                     if(useDepth)processDepth(now);
-                    if(now-sampledAt>=500 && !worker.busy())sample(now);
+                    if(now-sampledAt>=500 && !worker.busy()) {
+                        if(worker.ready(analysisTicket))sample(now);else requestAnalysisPreparation();
+                    }
                 }
             }
         });
@@ -351,8 +354,7 @@ public final class PreviewActivity extends Activity {
         Matrix matrix=new Matrix();matrix.setValues(next.matrix);texture.setTransform(matrix);
         // 变换后旧结果不再与当前画面对应；等待新显示帧重新采样。
         feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;silence();analysisEpoch++;cancelAnalysis();
-        if(state.recognition){long now=SystemClock.elapsedRealtime();state.analysisAt=now;
-            analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=now;}
+        if(state.recognition)prepareAnalysis(SystemClock.elapsedRealtime());
     }
     static Bitmap samplePreview(TextureView view,PreviewGeometry geometry) {
         // getBitmap 复制的是 SurfaceTexture 内容，不包含 view 的 fit-center Matrix。
@@ -430,7 +432,7 @@ public final class PreviewActivity extends Activity {
     private void captureFrame(long token,long stamp,long receivedAt) {
         if(destroyed || token!=state.generation)return;
         long now=SystemClock.elapsedRealtime(),nanos=SystemClock.elapsedRealtimeNanos();
-        long captureAt=state.captureAt,displayAt=state.displayAt;
+        long captureAt=state.captureAt,displayAt=state.displayAt,analysisAt=state.analysisAt;
         CameraFrames.Decision decision=CameraFrames.accept(state,token,stamp,receivedAt,now,nanos,realtimeTimestamp);
         if(decision==CameraFrames.Decision.DEFER) {
             if(pendingCapture!=null)return; // One pending metadata observation, never a queue of old frames.
@@ -440,14 +442,28 @@ public final class PreviewActivity extends Activity {
         } else if(decision.failure!=null) {
             android.util.Log.w("WalkBuddyCamera","Rejected capture ageNanos="+(nanos-stamp)
                 +" monotonicAgeNanos="+(System.nanoTime()-stamp)+" captureGapMs="+(now-captureAt)
-                +" displayGapMs="+(now-displayAt)+" pip="+isInPictureInPictureMode());
+                +" displayGapMs="+(now-displayAt)+" analysisGapMs="+(now-analysisAt)+" pip="+isInPictureInPictureMode());
             fail(decision.failure);
         } else if(decision==CameraFrames.Decision.ACCEPTED) {
             if(pendingCapture!=null){main.removeCallbacks(pendingCapture);pendingCapture=null;}
             syncTicket();
         }
     }
-    private void cancelAnalysis(){if(analysisTicket!=null){worker.cancel(analysisTicket);analysisTicket=null;}}
+    private void cancelAnalysis(){analysisReady=analysisHasResult=false;if(analysisTicket!=null){worker.cancel(analysisTicket);analysisTicket=null;}}
+    private void prepareAnalysis(long now) {
+        state.analysisAt=now;analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;
+        requestAnalysisPreparation();
+    }
+    private void requestAnalysisPreparation() {
+        long token=state.generation,epoch=analysisEpoch;InferenceWorker.Ticket ticket=analysisTicket;
+        if(ticket==null)return;
+        worker.prepare(ticket,(unused,error)->main.post(()->{
+            if(destroyed || ticket.cancelled || ticket!=analysisTicket || epoch!=analysisEpoch || token!=state.generation)return;
+            if(state.expired(SystemClock.elapsedRealtime())){fail("预览或分析截止时间已过：不可用");return;}
+            if(error!=null){fail(RecoveryGuide.Reason.MODEL,"模型初始化失败：不可用");return;}
+            analysisReady=true;
+        }));
+    }
     private void sample(long frameAt) {
         if(analysisTicket==null || !analysisTicket.allowed(SystemClock.elapsedRealtime()))return;
         if(previewGeometry==null)return;
@@ -463,6 +479,7 @@ public final class PreviewActivity extends Activity {
             if(!state.acceptResult(token,frameAt,now))return;
             if(error!=null){fail(RecoveryGuide.Reason.MODEL,"模型初始化或推理失败：不可用");return;}
             state.analysisAt=now;syncTicket();
+            analysisHasResult=true;
             boolean notify=feedback.basic(result.detections,frameAt,now);
             showFeedback(now);
             if(notify)alert();
@@ -610,7 +627,9 @@ public final class PreviewActivity extends Activity {
     }
     private void showFeedback(long now) {
         AlertPolicy.Decision visible=feedback.visible(now);
-        detectionOverlay.show(visible.detections,previewGeometry);setTextIfChanged(info,visible.message);
+        String message=state.recognition && !analysisHasResult && visible.detections.isEmpty()
+            ?getString(analysisReady?R.string.info_recognition_on:R.string.info_recognition_preparing):visible.message;
+        detectionOverlay.show(visible.detections,previewGeometry);setTextIfChanged(info,message);
         Detection.Risk worst=Detection.Risk.CAPTURED;
         for(Detection d:visible.detections)if(d.risk.ordinal()>worst.ordinal())worst=d.risk;
         boolean alert=pendingSpeak;pendingSpeak=false;

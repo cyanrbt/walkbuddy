@@ -22,9 +22,10 @@ public final class InferenceWorker<F extends AutoCloseable, R> {
     private Ticket owner;
     private final class Job {
         final Ticket ticket; final F frame; final long frameAt;
+        final boolean preparing;
         Callback<R> callback;
-        Job(Ticket t,F f,long at,Callback<R> c) {ticket=t;frame=f;frameAt=at;callback=c;}
-        boolean allowed() {long now=clock.now();return ticket.allowed(now) && now-frameAt<=1000;}
+        Job(Ticket t,F f,long at,Callback<R> c,boolean preparing) {ticket=t;frame=f;frameAt=at;callback=c;this.preparing=preparing;}
+        boolean allowed() {long now=clock.now();return ticket.allowed(now) && (preparing || now-frameAt<=1000);}
     }
     public InferenceWorker(Clock clock,Factory<F,R> factory) {
         this.clock=clock;this.factory=factory;
@@ -34,7 +35,21 @@ public final class InferenceWorker<F extends AutoCloseable, R> {
     public boolean submit(Ticket ticket,F frame,long frameAt,Callback<R> callback) {
         synchronized(lock) {
             if(shutdown || pending!=null || !ticket.allowed(clock.now()) || clock.now()-frameAt>1000) {close(frame);return false;}
-            pending=new Job(ticket,frame,frameAt,callback);lock.notifyAll();return true;
+            pending=new Job(ticket,frame,frameAt,callback,false);lock.notifyAll();return true;
+        }
+    }
+    /** Prepares without holding an image; success calls back with null result/error. */
+    public boolean prepare(Ticket ticket,Callback<R> callback) {
+        synchronized(lock) {
+            if(shutdown || pending!=null || !ticket.allowed(clock.now()))return false;
+            pending=new Job(ticket,null,0,callback,true);lock.notifyAll();return true;
+        }
+    }
+    public boolean ready(Ticket ticket) {
+        synchronized(lock) {
+            // Factory/close writes are published before active/maintenance are cleared under this lock.
+            return ticket!=null && !shutdown && active==null && pending==null && !releaseIdle && !maintenance
+                && owner==ticket && detector!=null && ticket.allowed(clock.now());
         }
     }
     public boolean busy() {synchronized(lock){return active!=null || pending!=null || releaseIdle || maintenance;}}
@@ -70,19 +85,21 @@ public final class InferenceWorker<F extends AutoCloseable, R> {
             try {
                 if(job.allowed()) {
                     if(owner!=job.ticket){closeDetector();if(job.allowed()){detector=factory.create();owner=job.ticket;}}
-                    if(detector!=null && job.allowed())result=detector.detect(job.frame);
+                    if(detector!=null && job.allowed() && !job.preparing)result=detector.detect(job.frame);
                 }
             } catch(Exception|LinkageError error){failure=error;}
             finally{close(job.frame);}
             boolean release;
             synchronized(lock) {
-                if(job.callback!=null && job.allowed() && (result!=null || failure!=null))job.callback.complete(result,failure);
-                job.callback=null;release=job.ticket.cancelled || failure!=null || !job.allowed();
+                if(job.callback!=null && job.allowed() && (job.preparing || result!=null || failure!=null))job.callback.complete(result,failure);
+                // A stale image must be discarded, but a live owner can reuse its warmed model
+                // for a newer image. Rebuilding it here can consume the remaining analysis deadline.
+                job.callback=null;release=owner!=job.ticket || failure!=null || !job.ticket.allowed(clock.now());
             }
             if(release)closeDetector();
             synchronized(lock){active=null;lock.notifyAll();}
         }
     }
     private void closeDetector(){if(detector!=null){close(detector);detector=null;}owner=null;}
-    private static void close(AutoCloseable value){try{value.close();}catch(Exception ignored){}}
+    private static void close(AutoCloseable value){if(value==null)return;try{value.close();}catch(Exception ignored){}}
 }

@@ -7,7 +7,7 @@ final class CameraFrames {
     static final long MAX_EARLY_NANOS=33_333_334L;
     enum Decision {
         ACCEPTED(null), DEFER(null), IGNORED(null),
-        EXPIRED("采集或显示截止时间已过：不可用"),
+        EXPIRED("预览或分析截止时间已过：不可用"),
         STALE("采集时间戳过期：不可用"),
         INVALID("相机时间信息异常：不可用");
         final String failure;

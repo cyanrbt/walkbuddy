@@ -17,10 +17,38 @@ public class InferenceWorkerTest {
         InferenceWorker<Frame,String>w=new InferenceWorker<>(()->100,()->{entered.countDown();await(release);return new InferenceWorker.Detector<Frame,String>(){public String detect(Frame f){called.incrementAndGet();return "人";}public void close(){closed.incrementAndGet();}};});
         try{w.submit(ticket,f,100,(r,e)->fail("取消后不应提交"));await(entered);w.cancel(ticket);release.countDown();assertTrue(w.awaitIdle(3000));assertEquals(0,called.get());assertEquals(1,closed.get());assertEquals(1,f.released.get());}finally{release.countDown();w.shutdown();}
     }
-    @Test public void deadlineDuringFactoryPreventsNativeCall()throws Exception{
+    @Test public void staleFrameDuringFactorySkipsNativeAndKeepsReadyModelForFreshFrame()throws Exception{
         AtomicLong now=new AtomicLong(100);AtomicInteger called=new AtomicInteger(),closed=new AtomicInteger();CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1);Frame f=new Frame();
         InferenceWorker<Frame,String>w=new InferenceWorker<>(now::get,()->{entered.countDown();await(release);return new InferenceWorker.Detector<Frame,String>(){public String detect(Frame f){called.incrementAndGet();return "人";}public void close(){closed.incrementAndGet();}};});
-        try{w.submit(new InferenceWorker.Ticket(100),f,100,(r,e)->fail("逾期后不应提交"));await(entered);now.set(1201);release.countDown();assertTrue(w.awaitIdle(3000));assertEquals(0,called.get());assertEquals(1,closed.get());assertEquals(1,f.released.get());}finally{release.countDown();w.shutdown();}
+        try{InferenceWorker.Ticket t=new InferenceWorker.Ticket(100);w.submit(t,f,100,(r,e)->fail("逾期后不应提交"));await(entered);now.set(1201);release.countDown();assertTrue(w.awaitIdle(3000));assertEquals(0,called.get());assertEquals(0,closed.get());assertEquals(1,f.released.get());
+            AtomicInteger results=new AtomicInteger();Frame fresh=new Frame();assertTrue(w.submit(t,fresh,1201,(r,e)->results.incrementAndGet()));assertTrue(w.awaitIdle(3000));assertEquals(1,called.get());assertEquals(1,results.get());assertEquals(1,fresh.released.get());
+            w.cancel(t);assertTrue(w.awaitIdle(3000));assertEquals(1,closed.get());
+        }finally{release.countDown();w.shutdown();}
+    }
+    @Test public void analysisDeadlineDuringFactoryStillReleasesTheModel()throws Exception{
+        AtomicLong now=new AtomicLong(100);AtomicInteger called=new AtomicInteger(),closed=new AtomicInteger();CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1);
+        InferenceWorker.Ticket t=new InferenceWorker.Ticket(100);Frame frame=new Frame();
+        InferenceWorker<Frame,String>w=new InferenceWorker<>(now::get,()->{entered.countDown();await(release);return new InferenceWorker.Detector<Frame,String>(){public String detect(Frame f){called.incrementAndGet();return "人";}public void close(){closed.incrementAndGet();}};});
+        try{w.submit(t,frame,100,(r,e)->fail("已过分析截止"));await(entered);now.set(1601);t.captureAt=t.displayAt=1601;release.countDown();assertTrue(w.awaitIdle(3000));assertEquals(0,called.get());assertEquals(1,closed.get());assertEquals(1,frame.released.get());
+            Frame rejected=new Frame();assertFalse(w.submit(t,rejected,1601,(r,e)->fail("旧会话不能续活")));assertEquals(1,rejected.released.get());assertEquals(100,t.analysisAt);
+        }finally{release.countDown();w.shutdown();}
+    }
+    @Test public void lateInferenceDropsItsResultAndReusesModelWithoutExtendingTheTicket()throws Exception{
+        AtomicLong now=new AtomicLong(100);AtomicInteger created=new AtomicInteger(),closed=new AtomicInteger(),calls=new AtomicInteger(),results=new AtomicInteger();CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1);
+        InferenceWorker.Ticket t=new InferenceWorker.Ticket(100);Frame old=new Frame(),fresh=new Frame();
+        InferenceWorker<Frame,String>w=new InferenceWorker<>(now::get,()->{created.incrementAndGet();return new InferenceWorker.Detector<Frame,String>(){public String detect(Frame f)throws Exception{if(calls.incrementAndGet()==1){entered.countDown();await(release);}return "人";}public void close(){closed.incrementAndGet();}};});
+        try{w.submit(t,old,100,(r,e)->results.incrementAndGet());await(entered);now.set(1201);t.captureAt=t.displayAt=1201;release.countDown();assertTrue(w.awaitIdle(3000));assertEquals(0,results.get());assertEquals(0,closed.get());assertEquals(1,old.released.get());
+            assertTrue(w.submit(t,fresh,1201,(r,e)->results.incrementAndGet()));assertTrue(w.awaitIdle(3000));assertEquals(1,created.get());assertEquals(2,calls.get());assertEquals(1,results.get());assertEquals(1,fresh.released.get());assertEquals(100,t.analysisAt);
+            now.set(1601);t.captureAt=t.displayAt=1601;Frame rejected=new Frame();assertFalse(w.submit(t,rejected,1601,(r,e)->fail("过期 Ticket")));assertEquals(1,rejected.released.get());w.cancel(t);assertTrue(w.awaitIdle(3000));assertEquals(1,closed.get());
+        }finally{release.countDown();w.shutdown();}
+    }
+    @Test public void aStaleFrameFromANewTicketNeverRetainsThePreviousOwner()throws Exception{
+        AtomicLong now=new AtomicLong(100);AtomicInteger created=new AtomicInteger(),closed=new AtomicInteger(),calls=new AtomicInteger(),results=new AtomicInteger();CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1);
+        InferenceWorker.Ticket a=new InferenceWorker.Ticket(100),b=new InferenceWorker.Ticket(100);Frame queued=new Frame();
+        InferenceWorker<Frame,String>w=new InferenceWorker<>(now::get,()->{created.incrementAndGet();return new InferenceWorker.Detector<Frame,String>(){public String detect(Frame f)throws Exception{if(calls.incrementAndGet()==1){entered.countDown();await(release);}return "人";}public void close(){closed.incrementAndGet();}};});
+        try{w.submit(a,new Frame(),100,(r,e)->fail("旧帧"));await(entered);w.submit(b,queued,100,(r,e)->fail("过期排队帧"));now.set(1201);a.captureAt=a.displayAt=b.captureAt=b.displayAt=1201;release.countDown();assertTrue(w.awaitIdle(3000));assertEquals(1,created.get());assertEquals(1,closed.get());assertEquals(1,calls.get());assertEquals(1,queued.released.get());
+            w.submit(b,new Frame(),1201,(r,e)->results.incrementAndGet());assertTrue(w.awaitIdle(3000));assertEquals(2,created.get());assertEquals(1,results.get());w.cancel(b);assertTrue(w.awaitIdle(3000));assertEquals(2,closed.get());
+        }finally{release.countDown();w.shutdown();}
     }
     @Test public void oneHundredRestartRequestsDoNotCreateParallelNativeWorkers()throws Exception{
         AtomicInteger created=new AtomicInteger(),closed=new AtomicInteger(),results=new AtomicInteger();CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1);AtomicBoolean first=new AtomicBoolean(true);
