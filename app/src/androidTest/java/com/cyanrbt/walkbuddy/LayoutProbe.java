@@ -111,10 +111,11 @@ final class LayoutProbe {
         announcer.update("画面关注 · 人 · 未测距",Detection.Risk.CAUTION,true,200);
         if(banner.getVisibility()!=View.VISIBLE)throw new AssertionError("Missing confirmed warning");
         announcer.update("近处注意 · 约 0.7 米",Detection.Risk.NEAR,false,201);
-        if(!banner.getText().toString().contains("0.7"))throw new AssertionError("Risk upgrade was suppressed");
-        String recent=banner.getText().toString();
+        if(!banner.getContentDescription().toString().contains("0.7")
+            || !banner.getText().toString().contains("近处注意"))throw new AssertionError("Risk upgrade was suppressed");
+        String recent=banner.getContentDescription().toString();
         for(int i=0;i<100;i++)announcer.update("新距离 "+i,Detection.Risk.NEAR,false,300+i);
-        if(!recent.contentEquals(banner.getText()))throw new AssertionError("Every frame updated the live warning");
+        if(!recent.contentEquals(banner.getContentDescription()))throw new AssertionError("Every frame updated the live warning");
         announcer.update("黄",Detection.Risk.CAUTION,false,400);
         if(banner.getVisibility()!=View.GONE)throw new AssertionError("Old red warning survived downgrade");
         announcer.clear();announcer.update("无目标",Detection.Risk.CAPTURED,false,500);
@@ -132,6 +133,8 @@ final class LayoutProbe {
             fullyVisible(root,action);fullyVisible(root,root.findViewById(R.id.preview_stop));
             if(!prompt.button.contentEquals(action.getText()) || action.isEnabled()!=(prompt.action!=RecoveryGuide.Action.WAIT))
                 throw new AssertionError("Wrong recovery action: "+reason);
+            if(root.findViewById(R.id.preview_recognition).isEnabled() || root.findViewById(R.id.preview_sound).isEnabled())
+                throw new AssertionError("Detection controls stayed active on a stopped preview");
             if(cover.getVisibility()!=View.VISIBLE || !prompt.title.contentEquals(cover.getText())
                 || cover.getLayout().getHeight()>cover.getHeight()-cover.getPaddingTop()-cover.getPaddingBottom())
                 throw new AssertionError("Recovery cover title clipped: "+reason+" at "+width+"x"+height);

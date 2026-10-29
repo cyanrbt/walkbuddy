@@ -81,4 +81,6 @@
     <string name="guide_title">认识你的步行搭子</string>
     <string name="privacy_caption">本地处理 · 不保存相机画面</string>
     <string name="recent_alert">最近提醒：%1$s</string>
+    <string name="recent_caution">画面关注</string>
+    <string name="recent_near">近处注意</string>
 </resources>

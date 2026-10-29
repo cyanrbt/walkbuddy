@@ -13,11 +13,15 @@ final class PreviewRecovery {
     static void show(View root,RecoveryGuide.Prompt prompt) {
         TextView cover=root.findViewById(R.id.preview_cover),hint=root.findViewById(R.id.recovery_hint);
         TextView action=root.findViewById(R.id.restart_preview);
+        TextView info=root.findViewById(R.id.preview_info);
         cover.setVisibility(View.VISIBLE);
         if(!prompt.title.contentEquals(cover.getText()))cover.setText(prompt.title);
         if(!prompt.body.contentEquals(hint.getText()))hint.setText(prompt.body);
         if(!prompt.button.contentEquals(action.getText()))action.setText(prompt.button);
         hint.setVisibility(View.VISIBLE);
+        if(!android.text.TextUtils.equals(info.getContext().getText(R.string.info_stopped),info.getText()))info.setText(R.string.info_stopped);
+        root.findViewById(R.id.preview_recognition).setEnabled(false);
+        root.findViewById(R.id.preview_sound).setEnabled(false);
         action.setEnabled(prompt.action!=RecoveryGuide.Action.WAIT);
         root.findViewById(R.id.enable_depth).setEnabled(prompt.action!=RecoveryGuide.Action.WAIT);
     }

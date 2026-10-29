@@ -21,14 +21,17 @@ final class RiskAnnouncer {
         // A downgrade cancels a higher-tier visual reminder as well as its queued speech.
         if(worst.ordinal()<shownRisk.ordinal()){banner.setVisibility(View.GONE);shownRisk=Detection.Risk.CAPTURED;}
         if(spoken==null)return;
-        String text=banner.getContext().getString(R.string.recent_alert,spoken);
+        String description=banner.getContext().getString(R.string.recent_alert,spoken);
+        String text=banner.getContext().getString(R.string.recent_alert,
+            banner.getContext().getString(worst==Detection.Risk.NEAR?R.string.recent_near:R.string.recent_caution));
         banner.setTextColor(banner.getContext().getColor(worst==Detection.Risk.NEAR?R.color.risk_near:R.color.warning));
         if(!text.contentEquals(banner.getText()))banner.setText(text);
+        if(!android.text.TextUtils.equals(description,banner.getContentDescription()))banner.setContentDescription(description);
         banner.setVisibility(View.VISIBLE);
         shownRisk=worst;
     }
 
     void clear() {
-        speech.clear();shownRisk=Detection.Risk.CAPTURED;banner.setVisibility(View.GONE);banner.setText("");
+        speech.clear();shownRisk=Detection.Risk.CAPTURED;banner.setVisibility(View.GONE);banner.setText("");banner.setContentDescription(null);
     }
 }

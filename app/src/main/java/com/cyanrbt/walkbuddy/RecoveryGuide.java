@@ -15,7 +15,7 @@ final class RecoveryGuide {
         if(!cameraGranted)return new Prompt("需要摄像头权限", "在系统应用设置中允许摄像头，返回后再点重新开启。不会自动恢复相机。", "前往摄像头设置", Action.SETTINGS);
         switch(reason) {
             case PERMISSION:return new Prompt("摄像头权限已允许", "准备好后点下方按钮重新开启，先站着确认镜头方向。识别和声音仍默认关闭。", "重新开启预览", Action.RETRY);
-            case DARK:return new Prompt("画面过暗或镜头被遮挡", "请移到明亮处，确认镜头未被遮挡，并检查系统相机隐私开关。准备好后重新开启。", "重新开启预览", Action.RETRY);
+            case DARK:return new Prompt("画面过暗或被遮挡", "请移到明亮处，确认镜头未被遮挡，并检查系统相机隐私开关。准备好后重新开启。", "重新开启预览", Action.RETRY);
             case CAMERA_BUSY:return new Prompt("摄像头暂不可用", "请关闭其他正在使用相机的应用，并检查系统相机隐私开关，再重新开启。", "重新开启预览", Action.RETRY);
             case UNSUPPORTED:return new Prompt("暂不支持此相机配置", "未找到支持当前取景尺寸的后置相机。反复重试无法解决，可返回首页停止本次观察。", "返回首页", Action.HOME);
             case DEPTH:return new Prompt("空间增强暂不可用", "可以先使用基础预览。开启后检测与声音默认关闭，准备好后再按需打开。", "开启基础预览", Action.BASIC);
