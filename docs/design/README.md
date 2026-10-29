@@ -67,6 +67,8 @@
 
 原生布局探针按 320×480、360×640、640×360、800×600 与深浅色、100%/200% 字体测量，覆盖七种操作状态和详细说明展开后的滚动可达性。截图标注“布局检查”，不代表实时相机。实际小窗展开和首页停止由独立 Camera2/PiP 探针检查，TalkBack 朗读与 OEM 小窗遮挡仍待实体设备确认。
 
+[Android 15/16 原生检查](https://github.com/cyanrbt/walkbuddy/actions/runs/40887205991)最终通过；代表截图为布局验证：[小屏 200% 字体](v0.4.10/home-font200.png)、[夜间](v0.4.10/home-night.png)、[横屏](v0.4.10/home-wide.png)。各操作文字允许完整换行，底部操作不随正文滚动。首轮大字体徽标裁切及重复识别超时记录见[验证结果](../验证结果.md)。
+
 ## 图标资源
 
 - `app/src/main/res/drawable-nodpi/walkbuddy_mascot.png`：内置 imagegen 生成的 1254 × 1254 透明 PNG，首页和预览页共用。
