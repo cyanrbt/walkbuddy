@@ -103,32 +103,11 @@ final class PipProbe {
             report.append("PASS deadline inside real TextureView.draw covers/stops immediately, defers layer detach, and supports manual restart\n");
             checkpoint(runner,"texture_deadline_recovered");
 
-            // Simulate a dequeued watchdog expiring its own session, including a stale delivery.
-            read(runner,()->{
-                assertWatching(host);
-                Handler handler=(Handler)field(host,"main");Runnable watchdog=(Runnable)field(host,"watchdog");
-                handler.removeCallbacks(watchdog);
-                state(host).captureAt=android.os.SystemClock.elapsedRealtime()-1201;
-                watchdog.run();
-                if(state(host).phase!=SessionState.Phase.UNAVAILABLE)throw new AssertionError("Watchdog missed capture expiry");
-                assertReleased(host);assertNotPolling(host);
-                watchdog.run();assertNotPolling(host);
-                return true;
-            });
-            Thread.sleep(350);
-            read(runner,()->{assertNotPolling(host);return host.findViewById(R.id.restart_preview).performClick();});
-            await(runner,()->live(host),"manual restart after watchdog expiry");
-            read(runner,()->{assertWatching(host);return true;});
-            report.append("PASS watchdog expiry stops polling while visible; stale delivery stays idle; manual restart re-arms protection\n");
-
             // Real Home transition without PiP must release resources and stay stopped on return.
             shell(runner,"input keyevent KEYCODE_HOME");
             await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE && !(boolean)field(host,"resumed")
                 && !((Handler)field(host,"main")).hasCallbacks((Runnable)field(host,"watchdog")),"Home stops full preview");
             read(runner,()->{assertReleased(host);assertNotPolling(host);if(host.isInPictureInPictureMode())throw new AssertionError("Home auto-entered PiP");return true;});
-            read(runner,()->{host.startActivity(new Intent(host,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
-            await(runner,()->(boolean)field(launcher,"visible") && PreviewActivity.hasPreview()
-                && !((Handler)field(launcher,"handler")).hasCallbacks((Runnable)field(launcher,"refresh")),"home stops polling retained stopped preview");
             bringForward(runner,host);
             await(runner,()->(boolean)field(host,"resumed"),"return to stopped full preview");
             read(runner,()->{assertReleased(host);assertNotPolling(host);if(state(host).phase==SessionState.Phase.LIVE)throw new AssertionError("Return auto-started camera");return true;});
@@ -136,7 +115,7 @@ final class PipProbe {
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
             await(runner,()->live(host),"manual restart after Home");
             read(runner,()->{assertWatching(host);return true;});
-            report.append("PASS Home releases camera; home and returned stopped preview do not poll; returning requires manual restart\n");
+            report.append("PASS Home releases camera; returned stopped preview does not poll; returning requires manual restart\n");
             checkpoint(runner,"home_restart_live");
 
             read(runner,()->{
@@ -241,6 +220,35 @@ final class PipProbe {
 
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
             await(runner,host::isInPictureInPictureMode,"second PiP entry");
+            await(runner,()->(boolean)field(launcher,"visible")
+                && ((Handler)field(launcher,"handler")).hasCallbacks((Runnable)field(launcher,"refresh")),"home polls actual live PiP");
+            // Simulate a dequeued watchdog expiring its own session, with home still visible.
+            read(runner,()->{
+                assertWatching(host);
+                Handler handler=(Handler)field(host,"main");Runnable watchdog=(Runnable)field(host,"watchdog");
+                handler.removeCallbacks(watchdog);
+                state(host).captureAt=android.os.SystemClock.elapsedRealtime()-1201;
+                watchdog.run();
+                if(state(host).phase!=SessionState.Phase.UNAVAILABLE)throw new AssertionError("Watchdog missed capture expiry");
+                assertReleased(host);assertNotPolling(host);
+                watchdog.run();assertNotPolling(host);
+                return true;
+            });
+            await(runner,()->PreviewActivity.hasPreview() && (boolean)field(launcher,"visible")
+                && launcher.findViewById(R.id.stop).getVisibility()==View.GONE
+                && !((Handler)field(launcher,"handler")).hasCallbacks((Runnable)field(launcher,"refresh")),"home stops polling retained stopped PiP");
+            Thread.sleep(350);
+            read(runner,()->{
+                assertNotPolling(host);
+                if(((Handler)field(launcher,"handler")).hasCallbacks((Runnable)field(launcher,"refresh")))throw new AssertionError("Idle home resumed polling");
+                return launcher.findViewById(R.id.start).performClick();
+            });
+            await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"expand stopped PiP without restart");
+            read(runner,()->{assertReleased(host);assertNotPolling(host);return host.findViewById(R.id.restart_preview).performClick();});
+            await(runner,()->live(host),"manual restart after watchdog expiry");
+            read(runner,()->{assertWatching(host);return host.findViewById(R.id.enter_pip).performClick();});
+            await(runner,host::isInPictureInPictureMode,"PiP after watchdog recovery");
+            report.append("PASS watchdog expiry and stale delivery leave visible stopped PiP/home idle; expansion stays stopped; manual restart re-arms protection\n");
             read(runner,()->{
                 try {
                     Method method=PreviewActivity.class.getDeclaredMethod("stopAction");method.setAccessible(true);
