@@ -9,6 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
+import android.os.PowerManager;
+import android.app.KeyguardManager;
 import android.view.View;
 import android.widget.CheckBox;
 import java.io.File;
@@ -108,14 +110,23 @@ final class PipProbe {
 
             // Screen-off must stop even while the camera Activity was recently in PiP.
             shell(runner,"input keyevent KEYCODE_SLEEP");
-            await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE,"screen-off stops camera");
-            read(runner,()->{assertReleased(host);return true;});
+            await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE
+                && !host.getSystemService(PowerManager.class).isInteractive() && !(boolean)field(host,"resumed")
+                && !((Handler)field(host,"main")).hasCallbacks((Runnable)field(host,"watchdog")),"screen-off completes and stops camera");
+            read(runner,()->{assertReleased(host);assertNotPolling(host);return true;});
             shell(runner,"input keyevent KEYCODE_WAKEUP");shell(runner,"wm dismiss-keyguard");
             bringForward(runner,host);
-            await(runner,()->(boolean)field(host,"resumed"),"wake/return to preview");
+            await(runner,()->(boolean)field(host,"resumed") && host.getSystemService(PowerManager.class).isInteractive()
+                && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake, unlock and return to preview");
             read(runner,()->{assertReleased(host);return true;});
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
             await(runner,()->live(host),"manual restart after screen-off");
+            read(runner,()->{
+                if(state(host).recognition || ((CheckBox)host.findViewById(R.id.preview_recognition)).isChecked()
+                    || ((CheckBox)host.findViewById(R.id.preview_sound)).isChecked() || field(host,"analysisTicket")!=null)
+                    throw new AssertionError("New camera session did not default detection/sound off");
+                return true;
+            });
             report.append("PASS screen-off releases resources; wake/return does not restart camera\n");
 
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
