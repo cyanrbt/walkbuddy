@@ -27,12 +27,23 @@ import java.util.function.BooleanSupplier;
 
 /** Emulator-only real Camera2/PiP lifecycle checks, using the configured virtual rear camera. */
 final class PipProbe {
-    static void run(Instrumentation runner) {
+    static void run(Instrumentation runner,Integer profilePriority) {
         Bundle result=new Bundle();Activity home=null;PreviewActivity preview=null;
         StringBuilder report=new StringBuilder();int code=Activity.RESULT_CANCELED;
+        InferenceWorker<BitmapFrame,LocalDetector.Result> profiledWorker=null;
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("PiP probe is restricted to emulators");
+            if(profilePriority!=null) {
+                if(profilePriority!=1 && profilePriority!=10)throw new IllegalArgumentException("Unsupported profile priority");
+                Field shared=PreviewActivity.class.getDeclaredField("sharedWorker");shared.setAccessible(true);
+                if(shared.get(null)!=null)throw new AssertionError("Profile needs a fresh instrumentation process");
+                profiledWorker=new InferenceWorker<>(android.os.SystemClock::elapsedRealtime,
+                    ()->PreviewActivity.createWorkerDetector(runner.getTargetContext(),profilePriority));
+                shared.set(null,profiledWorker);
+                report.append("SCHEDULING_PROFILE priority=").append(profilePriority).append(" processors=")
+                    .append(Runtime.getRuntime().availableProcessors()).append('\n');
+            }
             if(!PipSupport.available(runner.getTargetContext()))throw new IllegalStateException("System PiP is unavailable");
             shell(runner,"pm grant "+runner.getTargetContext().getPackageName()+" android.permission.CAMERA");
             runner.getTargetContext().getSharedPreferences(HomeJourney.PREFERENCES,0).edit().clear().commit();
@@ -236,6 +247,7 @@ final class PipProbe {
             if(preview!=null){PreviewActivity host=preview;runner.runOnMainSync(host::finish);}
             if(home!=null){Activity host=home;runner.runOnMainSync(host::finish);}
         }
+        if(profiledWorker!=null)profiledWorker.shutdown();
         runner.finish(code,result);
     }
 

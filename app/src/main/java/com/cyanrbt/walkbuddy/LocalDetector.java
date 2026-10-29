@@ -47,16 +47,16 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     }
     @Override public Result detect(BitmapFrame frame) {
         if(closed)throw new IllegalStateException("识别器已释放");
-        long started=android.os.SystemClock.elapsedRealtime();
+        long started=android.os.SystemClock.elapsedRealtime(),prepareCpuStarted=android.os.Debug.threadCpuTimeNanos();
         inputs[0]=input.prepare(frame.bitmap);
         boxes.clear();classes.clear();scores.clear();count.clear();
         long prepared=android.os.SystemClock.elapsedRealtime();
-        long cpuStarted=android.os.Debug.threadCpuTimeNanos();
+        long cpuStarted=android.os.Debug.threadCpuTimeNanos(),prepareCpuMs=(cpuStarted-prepareCpuStarted)/1_000_000;
         interpreter.runForMultipleInputsOutputs(inputs,outputs);
         long cpuMs=(android.os.Debug.threadCpuTimeNanos()-cpuStarted)/1_000_000;
         long finished=android.os.SystemClock.elapsedRealtime();
         if(firstInference || finished-started>=500)android.util.Log.i("WalkBuddyAnalysis","Inference prepareMs="+(prepared-started)
-            +" nativeMs="+(finished-prepared)+" workerCpuMs="+cpuMs+" first="+firstInference);
+            +" prepareWorkerCpuMs="+prepareCpuMs+" nativeMs="+(finished-prepared)+" workerCpuMs="+cpuMs+" first="+firstInference);
         firstInference=false;
         float total=count.get(0);
         if(!Float.isFinite(total) || total<0 || total>25)throw new IllegalStateException("模型检测数量无效");

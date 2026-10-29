@@ -141,15 +141,8 @@ public final class PreviewActivity extends Activity {
         synchronized (PreviewActivity.class) {
             if (sharedWorker == null) {
                 Context app = getApplicationContext();
-                sharedWorker = new InferenceWorker<>(SystemClock::elapsedRealtime, () -> {
-                    // Set before Interpreter construction so its native workers inherit background scheduling.
-                    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
-                    long started=SystemClock.elapsedRealtime();
-                    LocalDetector detector=new LocalDetector(app);
-                    android.util.Log.i("WalkBuddyAnalysis","Model ready initMs="+(SystemClock.elapsedRealtime()-started)
-                        +" priority="+android.os.Process.getThreadPriority(android.os.Process.myTid()));
-                    return detector;
-                });
+                sharedWorker = new InferenceWorker<>(SystemClock::elapsedRealtime,
+                    () -> createWorkerDetector(app,android.os.Process.THREAD_PRIORITY_BACKGROUND));
             }
             worker = sharedWorker;
         }
@@ -504,6 +497,19 @@ public final class PreviewActivity extends Activity {
     private void prepareAnalysis(long now) {
         state.analysisAt=now;analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=0;
         requestAnalysisPreparation();
+    }
+    static LocalDetector createWorkerDetector(Context app,int priority) throws java.io.IOException {
+        android.os.Process.setThreadPriority(priority);
+        long started=SystemClock.elapsedRealtime(),cpuStarted=Debug.threadCpuTimeNanos();
+        LocalDetector detector=new LocalDetector(app);
+        long finished=SystemClock.elapsedRealtime(),cpuMs=(Debug.threadCpuTimeNanos()-cpuStarted)/1_000_000;
+        String allowed="unknown";
+        try(java.io.BufferedReader reader=new java.io.BufferedReader(new java.io.FileReader("/proc/thread-self/status"))) {
+            String line;while((line=reader.readLine())!=null)if(line.startsWith("Cpus_allowed_list:")){allowed=line.substring(line.indexOf(':')+1).trim();break;}
+        } catch(java.io.IOException|SecurityException ignored){/* Optional scheduling metadata. */}
+        android.util.Log.i("WalkBuddyAnalysis","Model ready initMs="+(finished-started)+" initWorkerCpuMs="+cpuMs
+            +" priority="+android.os.Process.getThreadPriority(android.os.Process.myTid())+" allowedCpus="+allowed);
+        return detector;
     }
     private void requestAnalysisPreparation() {
         long token=state.generation,epoch=analysisEpoch;InferenceWorker.Ticket ticket=analysisTicket;
