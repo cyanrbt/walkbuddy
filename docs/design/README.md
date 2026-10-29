@@ -49,6 +49,8 @@
 
 恢复页把短标题放在不透明遮挡层，具体操作说明放在滚动面板首部，固定主要按钮指向设置、重新开启、基础预览或返回首页。动作由明确的故障分类选择，不解析错误文案。等待安装/切换时禁用重复恢复；从设置返回后仍需主动开启。这里的语义与策略检查不能证明 TalkBack 实际朗读顺序或设备效果。
 
+[Android 15/16 检查](https://github.com/cyanrbt/walkbuddy/actions/runs/40859349638)均通过，代表截图：[小屏 200% 字体的简短提醒](v0.4.7/recent-alert.png)、[横屏故障恢复](v0.4.7/recovery-wide.png)。完整提醒保留在无障碍描述中，停止状态清除旧检测详情并禁用检测/声音控件。
+
 ## 图标资源
 
 - `app/src/main/res/drawable-nodpi/walkbuddy_mascot.png`：内置 imagegen 生成的 1254 × 1254 透明 PNG，首页和预览页共用。
