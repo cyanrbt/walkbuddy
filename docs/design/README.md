@@ -41,6 +41,8 @@
 
 新增 `LayoutProbe` 在真实 Android 资源/控件中测量并渲染 320×480、360×640、640×360、800×600 四种配置，分别检查 100%/200% 字体和深浅色。截图明确显示“布局测试”占位，不作为实际相机效果图。发布流程在模拟器布局及软件 Canvas 检查通过后才构建正式发布 APK。
 
+[云端验证](https://github.com/cyanrbt/walkbuddy/actions/runs/40854253928)的 16 组布局与轮廓像素检查已通过。代表截图：[320×480、200% 字体](v0.4.6/small-font200.png)、[640×360 分栏](v0.4.6/wide.png)。截图为 Android 控件的软件 Canvas 输出，画面区域是明确标注的测试占位。
+
 ## 图标资源
 
 - `app/src/main/res/drawable-nodpi/walkbuddy_mascot.png`：内置 imagegen 生成的 1254 × 1254 透明 PNG，首页和预览页共用。
