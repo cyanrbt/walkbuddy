@@ -112,7 +112,10 @@ final class HomeProbe {
     }
     private static void fullyVisible(View root,View viewport,View control) {
         Rect visible=bounds(root,viewport),text=bounds(root,control);
-        if(!visible.contains(text))throw new AssertionError("Priority home content needs scrolling: "+text+" viewport="+visible);
+        if(!visible.contains(text))throw new AssertionError("Priority home content needs scrolling: "+text+" viewport="+visible
+            +" intro="+root.findViewById(R.id.home_intro).getHeight()+" dock="+root.findViewById(R.id.home_dock).getHeight()
+            +" hintLines="+((TextView)root.findViewById(R.id.home_action_hint)).getLineCount()
+            +" buttonLines="+((TextView)root.findViewById(R.id.start)).getLineCount());
     }
     private static void awaitIdle(Instrumentation runner,Activity host)throws Exception {
         long end=System.nanoTime()+5_000_000_000L;

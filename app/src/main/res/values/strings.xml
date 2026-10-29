@@ -78,7 +78,7 @@
     <string name="risk_near_desc">红色实线，近处注意，需要及时看路</string>
     <string name="home_summary">白天步行观察</string>
     <string name="home_return_preview">返回预览</string>
-    <string name="home_action_stand">先站稳，再确认镜头方向</string>
+    <string name="home_action_stand">先站稳，再确认取景</string>
     <string name="home_action_starting">正在打开，可随时停止</string>
     <string name="home_action_live">正在观察，可随时停止</string>
     <string name="home_action_restore">预览已停止，返回后主动恢复</string>
