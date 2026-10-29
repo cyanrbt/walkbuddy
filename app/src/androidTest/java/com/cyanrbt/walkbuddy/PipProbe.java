@@ -5,6 +5,7 @@ import android.app.Instrumentation;
 import android.app.RemoteAction;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.SurfaceTexture;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.PowerManager;
 import android.app.KeyguardManager;
 import android.view.View;
+import android.view.TextureView;
 import android.widget.CheckBox;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +21,7 @@ import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
 
 /** Emulator-only real Camera2/PiP lifecycle checks, using the configured virtual rear camera. */
@@ -57,6 +60,34 @@ final class PipProbe {
             });
             report.append("PASS Camera2 capture and display are LIVE; default detection/sound off\n");
             checkpoint(runner,"camera_live");
+
+            // Force expiry from the actual TextureView.draw -> SurfaceTextureUpdated path.
+            AtomicBoolean expiredInDraw=new AtomicBoolean();
+            TextureView retired=read(runner,()->{
+                TextureView view=(TextureView)field(host,"texture");
+                TextureView.SurfaceTextureListener delegate=view.getSurfaceTextureListener();
+                view.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
+                    public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h){delegate.onSurfaceTextureAvailable(s,w,h);}
+                    public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h){delegate.onSurfaceTextureSizeChanged(s,w,h);}
+                    public boolean onSurfaceTextureDestroyed(SurfaceTexture s){return delegate.onSurfaceTextureDestroyed(s);}
+                    public void onSurfaceTextureUpdated(SurfaceTexture s){
+                        if(expiredInDraw.compareAndSet(false,true))state(host).captureAt=android.os.SystemClock.elapsedRealtime()-1201;
+                        delegate.onSurfaceTextureUpdated(s);
+                    }
+                });
+                return view;
+            });
+            await(runner,()->expiredInDraw.get() && state(host).phase==SessionState.Phase.UNAVAILABLE
+                && retired.getParent()==null,"deadline failure inside TextureView.draw safely detaches");
+            read(runner,()->{
+                assertReleased(host);
+                if(host.findViewById(R.id.preview_cover).getVisibility()!=View.VISIBLE)throw new AssertionError("Deadline did not cover the old frame");
+                return true;
+            });
+            read(runner,()->host.findViewById(R.id.restart_preview).performClick());
+            await(runner,()->live(host),"manual restart after deadline in draw");
+            report.append("PASS deadline inside real TextureView.draw covers/stops immediately, defers layer detach, and supports manual restart\n");
+            checkpoint(runner,"texture_deadline_recovered");
 
             // Real Home transition without PiP must release resources and stay stopped on return.
             shell(runner,"input keyevent KEYCODE_HOME");
@@ -176,7 +207,7 @@ final class PipProbe {
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
     }
     private static void assertReleased(PreviewActivity host) {
-        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture"})
+        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback"})
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
         if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
     }

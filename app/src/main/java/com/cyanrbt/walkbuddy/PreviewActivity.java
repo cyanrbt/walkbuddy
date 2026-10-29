@@ -92,6 +92,7 @@ public final class PreviewActivity extends Activity {
     private Button pipButton, restartButton;
     private long brightnessAt,sampledAt,analysisEpoch;
     private Runnable pendingCapture;
+    private Runnable pendingReadback;
     private long deferredCaptureCount;
     private static InferenceWorker<BitmapFrame,LocalDetector.Result> sharedWorker;
     private InferenceWorker<BitmapFrame,LocalDetector.Result> worker;
@@ -321,18 +322,9 @@ public final class PreviewActivity extends Activity {
                 if(texture==null || destroyed || (state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE))return;
                 long now=SystemClock.elapsedRealtime();
                 if(state.expired(now)){fail("采集或显示截止时间已过：不可用");return;}
-                if(now-brightnessAt>=1000) { brightnessAt=now;Bitmap check=texture.getBitmap(16,12);
-                    if(check!=null) {long light=0;for(int y=0;y<12;y++)for(int x=0;x<16;x++){int c=check.getPixel(x,y);light+=Color.red(c)+Color.green(c)+Color.blue(c);}check.recycle();
-                        if(light<16*12*3*3){fail(RecoveryGuide.Reason.DARK,"画面过暗或隐私占位：不可用（仅白天）");return;}
-                    }
-                }
                 state.display(now);state.promote(now);syncTicket();render(now);
-                if(state.phase==SessionState.Phase.LIVE && state.recognition) {
-                    if(useDepth)processDepth(now);
-                    if(now-sampledAt>=500 && !worker.busy()) {
-                        if(worker.ready(analysisTicket))sample(now);else requestAnalysisPreparation();
-                    }
-                }
+                if(state.phase==SessionState.Phase.LIVE && (now-brightnessAt>=1000
+                    || state.recognition && (useDepth || now-sampledAt>=500 && !worker.busy())))queueReadback(now);
             }
         });
         setContentView(root);
@@ -429,6 +421,35 @@ public final class PreviewActivity extends Activity {
         } catch(CameraAccessException|RuntimeException e) { fail(RecoveryGuide.Reason.CAMERA_BUSY,"摄像头不可用：检查占用、权限、隐私开关"); }
     }
     private void syncTicket(){if(analysisTicket!=null){analysisTicket.captureAt=state.captureAt;analysisTicket.displayAt=state.displayAt;analysisTicket.analysisAt=state.analysisAt;}}
+    private void queueReadback(long frameAt) {
+        if(pendingReadback!=null || texture==null)return;
+        TextureView source=texture;long token=state.generation,epoch=analysisEpoch;
+        pendingReadback=()->{
+            pendingReadback=null;
+            if(destroyed || token!=state.generation || texture!=source || state.phase!=SessionState.Phase.LIVE)return;
+            long now=SystemClock.elapsedRealtime();
+            if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
+            if(now-frameAt>1000)return; // Keep the original observation time; a delayed task cannot refresh it.
+            if(frameAt-brightnessAt>=1000) {
+                brightnessAt=frameAt;Bitmap check=source.getBitmap(16,12);
+                if(check!=null) {
+                    long light=0;for(int y=0;y<12;y++)for(int x=0;x<16;x++){int c=check.getPixel(x,y);light+=Color.red(c)+Color.green(c)+Color.blue(c);}check.recycle();
+                    if(light<16*12*3*3){fail(RecoveryGuide.Reason.DARK,"画面过暗或隐私占位：不可用（仅白天）");return;}
+                }
+            }
+            now=SystemClock.elapsedRealtime();
+            if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
+            if(now-frameAt>1000)return;
+            if(state.recognition && epoch==analysisEpoch) {
+                if(useDepth)processDepth(now);
+                if(frameAt-sampledAt>=500 && !worker.busy()) {
+                    if(worker.ready(analysisTicket))sample(frameAt);else requestAnalysisPreparation();
+                }
+            }
+        };
+        // TextureView invokes its update listener from draw(); readback is forbidden inside drawing.
+        main.post(pendingReadback);
+    }
     private void captureFrame(long token,long stamp,long receivedAt) {
         if(destroyed || token!=state.generation)return;
         long now=SystemClock.elapsedRealtime(),nanos=SystemClock.elapsedRealtimeNanos();
@@ -534,7 +555,13 @@ public final class PreviewActivity extends Activity {
         // 先不透明遮挡，再移除纹理，从视图树彻底清除最后一帧。
         if(cover!=null) cover.setVisibility(View.VISIBLE);
         closeCamera();
-        if(texture!=null) {((FrameLayout)texture.getParent()).removeView(texture);texture=null;}
+        if(texture!=null) {
+            TextureView retired=texture;texture=null;
+            retired.setSurfaceTextureListener(null);
+            // SurfaceTextureUpdated runs inside TextureView.draw(). Detaching here would destroy
+            // the TextureLayer that this draw still uses. The opaque cover/camera stop are immediate.
+            main.post(()->{if(retired.getParent() instanceof ViewGroup)((ViewGroup)retired.getParent()).removeView(retired);});
+        }
         if(info!=null)info.setText(R.string.info_stopped);
         if(root!=null){render(SystemClock.elapsedRealtime());renderDepthGuide();}
         if(root!=null)((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
@@ -682,6 +709,7 @@ public final class PreviewActivity extends Activity {
         }
     }
     private void closeCamera() {
+        if(pendingReadback!=null){main.removeCallbacks(pendingReadback);pendingReadback=null;}
         if(pendingCapture!=null){main.removeCallbacks(pendingCapture);pendingCapture=null;}
         if(depthCamera!=null){depthCamera.stop();depthCamera=null;}depthSnapshot=null;
         if(session!=null) {session.close();session=null;}if(camera!=null){camera.close();camera=null;}if(surface!=null){surface.release();surface=null;}
