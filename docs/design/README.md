@@ -51,6 +51,14 @@
 
 [Android 15/16 检查](https://github.com/cyanrbt/walkbuddy/actions/runs/40859349638)均通过，代表截图：[小屏 200% 字体的简短提醒](v0.4.7/recent-alert.png)、[横屏故障恢复](v0.4.7/recovery-wide.png)。完整提醒保留在无障碍描述中，停止状态清除旧检测详情并禁用检测/声音控件。
 
+## 0.4.8 控件状态与画中画恢复
+
+空间模式切换只在实时预览时可用；启动、停止和故障页禁用该按钮。主按钮的背景增加原生 disabled 状态，等待时显示灰暗薄荷色，保留文字与圆角。停止说明指向当前页面的恢复操作。完整预览恢复时根据系统实际 PiP 状态校正控件可见性，避免切换中断后仍显示精简界面。
+
+布局探针除检查按钮 enabled 标记，还比较原生 drawable 在启用/禁用状态下的绘制结果；恢复探针检查停止页不能开启模式切换。系统 PiP 与 Camera2 的实际生命周期由独立模拟器探针覆盖，范围与设备限制见[实机测试](../实机测试.md)。
+
+[Android 15/16 云端检查](https://github.com/cyanrbt/walkbuddy/actions/runs/40864777367)均通过。[Android 16 系统 PiP 截图](v0.4.8/pip-camera-api36.png)展示实际小窗和虚拟 Camera2 场景，与前两版的布局占位图不同；仍不代表实体相机效果。
+
 ## 图标资源
 
 - `app/src/main/res/drawable-nodpi/walkbuddy_mascot.png`：内置 imagegen 生成的 1254 × 1254 透明 PNG，首页和预览页共用。
