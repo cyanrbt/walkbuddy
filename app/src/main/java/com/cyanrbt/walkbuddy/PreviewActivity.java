@@ -141,8 +141,11 @@ public final class PreviewActivity extends Activity {
         synchronized (PreviewActivity.class) {
             if (sharedWorker == null) {
                 Context app = getApplicationContext();
+                // Visible-camera inference has a deadline. Stay below main without joining
+                // the less-urgent background scheduling group before native workers are created.
                 sharedWorker = new InferenceWorker<>(SystemClock::elapsedRealtime,
-                    () -> createWorkerDetector(app,android.os.Process.THREAD_PRIORITY_BACKGROUND));
+                    () -> createWorkerDetector(app,android.os.Process.THREAD_PRIORITY_DEFAULT
+                        +android.os.Process.THREAD_PRIORITY_LESS_FAVORABLE));
             }
             worker = sharedWorker;
         }

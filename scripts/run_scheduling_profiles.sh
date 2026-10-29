@@ -11,6 +11,7 @@ for priority in 10 1 1 10; do
     failed=1
   fi
   cat "$output"
+  adb -s "$serial" logcat -d -b crash > "ui-evidence/profile-${index}-priority-${priority}-crash.txt"
   adb -s "$serial" logcat -d -s WalkBuddyAnalysis:I WalkBuddyTiming:W WalkBuddyCamera:W '*:S' > "ui-evidence/profile-${index}-priority-${priority}-timing.txt"
   if ! python3 - "$output" <<'CHECK'
 from pathlib import Path
@@ -19,7 +20,9 @@ if "PIP_PROBE_PASS" not in Path(sys.argv[1]).read_text():
     raise SystemExit("Scheduling trial did not pass")
 CHECK
   then failed=1; fi
-  adb -s "$serial" exec-out run-as com.cyanrbt.walkbuddy tar -cf - cache/ui-probe | tar -xf - -C ui-evidence || true
+  files="ui-evidence/profile-${index}-priority-${priority}-files"
+  mkdir -p "$files"
+  adb -s "$serial" exec-out run-as com.cyanrbt.walkbuddy tar -cf - cache/ui-probe | tar -xf - -C "$files" || true
 done
 # Every trial must pass for this diagnostic run to be green; failures remain visible.
 exit "$failed"

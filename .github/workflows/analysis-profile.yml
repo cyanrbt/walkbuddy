@@ -2,11 +2,6 @@ name: Inference scheduling profile
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - scripts/run_scheduling_profiles.sh
-      - .github/workflows/analysis-profile.yml
 
 permissions:
   contents: read
