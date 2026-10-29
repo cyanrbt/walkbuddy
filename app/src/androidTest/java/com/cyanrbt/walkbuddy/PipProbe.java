@@ -127,6 +127,9 @@ final class PipProbe {
             await(runner,()->live(host) && basicAt(host)>firstResult && field(host,"analysisTicket")!=oldTicket,"model restart after toggle");
             checkpoint(runner,"recognition_reenabled");
             report.append("PASS actual bundled-model results advance; off cancels Ticket/feedback; re-enable produces new results\n");
+            InferenceWorker.Ticket geometryTicket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
+            Object geometryModel=read(runner,()->field(field(host,"worker"),"detector"));
+            if(geometryModel==null)throw new AssertionError("Actual model was not retained after a valid result");
 
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
             await(runner,host::isInPictureInPictureMode,"system PiP entry");
@@ -141,6 +144,7 @@ final class PipProbe {
                 return true;
             });
             screenshot(runner,"pip-camera.png");
+            read(runner,()->{assertModelRetained(host,geometryTicket,geometryModel);return true;});
             report.append("PASS actual system PiP, advancing capture/display/model results, full controls hidden\n");
             checkpoint(runner,"pip_analysis_live");
 
@@ -151,6 +155,7 @@ final class PipProbe {
                 "full preview controls restored");
             long expandedAt=android.os.SystemClock.elapsedRealtime();
             await(runner,()->live(host) && state(host).recognition && basicAt(host)>expandedAt,"actual analysis after expansion");
+            read(runner,()->{assertModelRetained(host,geometryTicket,geometryModel);return true;});
             report.append("PASS expansion restores controls and keeps preview/model results LIVE\n");
             checkpoint(runner,"expanded_analysis_live");
 
@@ -211,6 +216,10 @@ final class PipProbe {
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
         if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
         if((boolean)field(host,"readingTexture"))throw new AssertionError("Stopped camera retained readback state");
+    }
+    private static void assertModelRetained(PreviewActivity host,InferenceWorker.Ticket ticket,Object model) {
+        if(field(host,"analysisTicket")!=ticket || field(field(host,"worker"),"detector")!=model)
+            throw new AssertionError("Geometry change reloaded the recognition model");
     }
     private static void assertNotPolling(PreviewActivity host) {
         if(Build.VERSION.SDK_INT>=29 && ((Handler)field(host,"main")).hasCallbacks((Runnable)field(host,"watchdog")))

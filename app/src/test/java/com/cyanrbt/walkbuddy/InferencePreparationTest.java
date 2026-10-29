@@ -85,4 +85,32 @@ public class InferencePreparationTest {
             release.countDown();assertTrue(w.awaitIdle(3000));assertEquals(1,created.get());assertEquals(1,closed.get());assertEquals(0,ready.get());assertEquals(1,f.closes.get());assertFalse(w.ready(queued));
         } finally {release.countDown();w.shutdown();}
     }
+
+    @Test public void geometryDiscardReleasesQueuedImageButKeepsActiveInputAndReadyOwner()throws Exception {
+        AtomicInteger created=new AtomicInteger(),closed=new AtomicInteger(),results=new AtomicInteger(),calls=new AtomicInteger();CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1);
+        InferenceWorker.Ticket t=new InferenceWorker.Ticket(100);Frame active=new Frame(),queued=new Frame();
+        InferenceWorker<Frame,String>w=new InferenceWorker<>(()->100,()->{created.incrementAndGet();return new InferenceWorker.Detector<Frame,String>(){
+            public String detect(Frame f)throws Exception{if(calls.incrementAndGet()==1){entered.countDown();await(release);}return "人";}public void close(){closed.incrementAndGet();}
+        };});
+        try {
+            w.submit(t,active,100,(r,e)->fail("Old geometry"));await(entered);w.submit(t,queued,100,(r,e)->fail("Queued old geometry"));w.discard(t);
+            assertEquals(1,queued.closes.get());assertEquals(0,active.closes.get());assertFalse(t.cancelled);assertEquals(100,t.analysisAt);assertEquals(0,closed.get());
+            release.countDown();assertTrue(w.awaitIdle(3000));assertEquals(1,active.closes.get());assertTrue(w.ready(t));assertEquals(0,closed.get());
+            Frame fresh=new Frame();w.submit(t,fresh,100,(r,e)->results.incrementAndGet());assertTrue(w.awaitIdle(3000));assertEquals(1,created.get());assertEquals(1,results.get());assertEquals(1,fresh.closes.get());
+            w.cancel(t);assertTrue(w.awaitIdle(3000));assertEquals(1,closed.get());
+        } finally {release.countDown();w.shutdown();}
+    }
+
+    @Test public void geometryChangeDuringPreparationReusesModelAndOnlyNotifiesTheNewCallback()throws Exception {
+        AtomicInteger created=new AtomicInteger(),closed=new AtomicInteger(),ready=new AtomicInteger();CountDownLatch entered=new CountDownLatch(1),release=new CountDownLatch(1);
+        InferenceWorker.Ticket t=new InferenceWorker.Ticket(100);
+        InferenceWorker<Frame,String>w=new InferenceWorker<>(()->100,()->{created.incrementAndGet();entered.countDown();await(release);return new InferenceWorker.Detector<Frame,String>(){
+            public String detect(Frame f){throw new AssertionError("No image");}public void close(){closed.incrementAndGet();}
+        };});
+        try {
+            w.prepare(t,(r,e)->fail("Old geometry readiness"));await(entered);w.discard(t);assertTrue(w.prepare(t,(r,e)->ready.incrementAndGet()));
+            assertFalse(t.cancelled);assertEquals(100,t.analysisAt);release.countDown();assertTrue(w.awaitIdle(3000));assertTrue(w.ready(t));assertEquals(1,created.get());assertEquals(1,ready.get());assertEquals(0,closed.get());
+            w.cancel(t);assertTrue(w.awaitIdle(3000));assertEquals(1,closed.get());
+        } finally {release.countDown();w.shutdown();}
+    }
 }

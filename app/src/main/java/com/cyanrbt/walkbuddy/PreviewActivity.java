@@ -346,8 +346,11 @@ public final class PreviewActivity extends Activity {
         previewGeometry=next;
         Matrix matrix=new Matrix();matrix.setValues(next.matrix);texture.setTransform(matrix);
         // 变换后旧结果不再与当前画面对应；等待新显示帧重新采样。
-        feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;silence();analysisEpoch++;cancelAnalysis();
-        if(state.recognition)prepareAnalysis(SystemClock.elapsedRealtime());
+        feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;silence();analysisEpoch++;
+        if(state.recognition && analysisTicket!=null) {
+            worker.discard(analysisTicket);analysisHasResult=false;sampledAt=0;
+            state.analysisAt=SystemClock.elapsedRealtime();syncTicket();requestAnalysisPreparation();
+        } else {cancelAnalysis();if(state.recognition)prepareAnalysis(SystemClock.elapsedRealtime());}
     }
     static Bitmap samplePreview(TextureView view,PreviewGeometry geometry) {
         // getBitmap 复制的是 SurfaceTexture 内容，不包含 view 的 fit-center Matrix。

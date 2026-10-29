@@ -57,10 +57,15 @@ public final class InferenceWorker<F extends AutoCloseable, R> {
     public void cancel(Ticket ticket) {
         ticket.cancelled=true;
         synchronized(lock) {
-            if(pending!=null && pending.ticket==ticket) {Job job=pending;pending=null;job.callback=null;close(job.frame);}
-            if(active!=null && active.ticket==ticket) active.callback=null;
+            discardLocked(ticket);
             releaseIdle=true;lock.notifyAll();
         }
+    }
+    /** Geometry changed within the same camera session: drop images/callbacks, keep the model. */
+    public void discard(Ticket ticket) {synchronized(lock){discardLocked(ticket);lock.notifyAll();}}
+    private void discardLocked(Ticket ticket) {
+        if(pending!=null && pending.ticket==ticket){Job job=pending;pending=null;job.callback=null;close(job.frame);}
+        if(active!=null && active.ticket==ticket)active.callback=null;
     }
     /** 仅测试/进程退出使用；service停止只cancel，不创建新worker，也不承诺中断native。 */
     public void shutdown() {synchronized(lock){shutdown=true;if(pending!=null){close(pending.frame);pending=null;}if(active!=null){active.ticket.cancelled=true;active.callback=null;}lock.notifyAll();}}
