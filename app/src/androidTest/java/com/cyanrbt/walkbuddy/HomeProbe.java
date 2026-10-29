@@ -66,11 +66,12 @@ final class HomeProbe {
                 boolean seen=mode>=4,pipSeen=seen && mode!=8,supported=mode!=8,available=mode!=6 && mode!=8;
                 SessionState.Phase phase=mode==3?SessionState.Phase.STARTING:mode==4?SessionState.Phase.LIVE:mode==5?SessionState.Phase.UNAVAILABLE:SessionState.Phase.STOPPED;
                 HomeJourney journey=HomeJourney.resolve(camera,seen,pipSeen,supported,available);
-                int hint=!camera?R.string.journey_hint_start:mode==6?R.string.journey_hint_pip_disabled:mode==8?R.string.journey_hint_in_app:seen?R.string.journey_hint_done:R.string.journey_hint_camera;
+                int hint=!camera?(mode==1 || mode==9?R.string.journey_hint_camera_settings:R.string.journey_hint_start):mode==6?R.string.journey_hint_pip_disabled:mode==8?R.string.journey_hint_in_app:seen?R.string.journey_hint_done:R.string.journey_hint_camera;
                 HomeChrome.journey(root,journey,hint,camera && supported && !available);
-                HomeChrome.actions(root,camera,mode==1,present,phase);
+                HomeChrome.actions(root,camera,mode==1 || mode==9,present,phase);
                 ((TextView)root.findViewById(R.id.status)).setText(mode==4?"布局检查\n识别开着":mode==5?"布局检查 · 观察已停止，请返回预览按提示主动恢复":"布局检查 · 已停止");
                 TextView brand=root.findViewById(R.id.home_brand_name);float chosenTextSize=brand.getTextSize();measure(root,size);
+                if(mode==0 || mode==4)screenshot(root,new File(output,name+(mode==4?"-live":"-permission")+".png"));
                 if(brand.getLineCount()!=1 || brand.getTextSize()!=chosenTextSize)throw new AssertionError("Wordmark wrapped or changed user text size: "+name);
                 boolean compact=mode==4 || mode==5 || mode==7 || mode==8;
                 if(root.findViewById(R.id.home_steps).getVisibility()!=(compact?View.GONE:View.VISIBLE))throw new AssertionError("Wrong onboarding presentation "+mode);
@@ -93,8 +94,6 @@ final class HomeProbe {
                     measure(root,size);
                     if(root.findViewById(R.id.home_brand_art).getVisibility()!=art || brand.getTextSize()!=chosenTextSize)throw new AssertionError("Brand did not reflow on resize");
                 }
-                // Render the initial viewport before programmatic focus/scroll checks.
-                if(mode==0 || mode==4)screenshot(root,new File(output,name+(mode==4?"-live":"-permission")+".png"));
                 Rect before=bounds(root,primary);
                 root.findViewById(R.id.more_panel).setVisibility(View.VISIBLE);measure(root,size);
                 for(int id:new int[]{R.id.more_toggle,R.id.row_camera,R.id.row_pip}) {

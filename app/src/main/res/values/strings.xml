@@ -26,7 +26,7 @@
     <string name="access_ok">已允许</string>
     <string name="access_needed">点这里允许</string>
     <string name="start">打开摄像头预览</string>
-    <string name="journey_allow_camera">允许摄像头并预览</string>
+    <string name="journey_allow_camera">允许相机并预览</string>
     <string name="caution">先站着确认镜头方向。没有提醒，只说明这次没有出声，路还是要你自己看。</string>
     <string name="section_use">小窗怎么用</string>
     <string name="use_body">先在预览页确认取景，再点「以小窗观察」。点击小窗可返回完整界面或停止。识别和声音每次开启默认关闭；关闭小窗、锁屏或预览离开屏幕后会停止摄像头。</string>

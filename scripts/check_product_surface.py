@@ -49,7 +49,7 @@ assert "@string/caution" in home and "@string/hero_lead" in home and "@string/se
 assert "@+id/journey_hint" in home and "@+id/more_panel" in home and "@+id/more_toggle" in home
 assert "@+id/home_step_camera" in home and "@+id/home_step_preview" in home and "@+id/home_step_pip" in home
 assert '<string name="journey_label">三步开始</string>' in strings
-assert '<string name="journey_allow_camera">允许摄像头并预览</string>' in strings
+assert '<string name="journey_allow_camera">允许相机并预览</string>' in strings
 assert "毫秒" not in home
 assert "@string/app_name" in overlay
 assert 'name="ink"' in colors and 'name="stop_text"' in colors and 'name="scrim"' in colors

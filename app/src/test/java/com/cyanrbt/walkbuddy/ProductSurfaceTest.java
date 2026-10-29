@@ -35,7 +35,7 @@ public class ProductSurfaceTest {
             assertTrue(home.contains("@+id/" + step));
         }
         assertTrue(strings.contains("<string name=\"journey_label\">三步开始</string>"));
-        assertTrue(strings.contains("<string name=\"journey_allow_camera\">允许摄像头并预览</string>"));
+        assertTrue(strings.contains("<string name=\"journey_allow_camera\">允许相机并预览</string>"));
         assertTrue(strings.contains("<string name=\"more_show\">"));
         assertFalse(home.contains("毫秒"));
         assertTrue(overlay.contains("@string/app_name"));
