@@ -19,18 +19,22 @@ public final class MainActivity extends Activity {
     private int lastAccess = -1, lastJourney = -1;
     private final android.os.Handler handler = new android.os.Handler(android.os.Looper.getMainLooper());
     private final Runnable refresh = new Runnable() { public void run() {
+        if(!visible)return;
+        refreshHome();
+        if(PreviewActivity.hasPreview())handler.postDelayed(this, 500);
+    }};
+    private void refreshHome() {
         String report = PreviewActivity.report();
         if (!report.contentEquals(status.getText())) status.setText(report);
         paintAccess();
         paintJourney();
-        handler.postDelayed(this, 500);
-    }};
+    }
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
         if (state != null) pendingPreviewPermission = state.getBoolean("pending_preview_permission");
         setContentView(R.layout.activity_main);
-        View home = findViewById(R.id.home_scroll);
+        View home = findViewById(R.id.home_root);
         home.setOnApplyWindowInsetsListener((view, insets) -> {
             view.setPadding(insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(),
                 insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
@@ -65,7 +69,7 @@ public final class MainActivity extends Activity {
         open.setBackgroundTintList(null);
         stop.setBackgroundTintList(null);
         open.setOnClickListener(v -> start());
-        stop.setOnClickListener(v -> PreviewActivity.stopActivePreview());
+        stop.setOnClickListener(v -> {PreviewActivity.stopActivePreview();refreshHome();});
         paintJourney();
     }
 
@@ -91,14 +95,20 @@ public final class MainActivity extends Activity {
             pendingPreviewPermission = !cameraSettingsNeeded();
             requestCamera(); return;
         }
-        startActivity(new Intent(this, PreviewActivity.class));
+        Intent preview=new Intent(this, PreviewActivity.class);
+        if(PreviewActivity.hasPreview())preview.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(preview);
     }
 
     @Override protected void onResume() {
-        super.onResume(); visible = true; handler.post(refresh);
+        super.onResume(); visible = true; handler.removeCallbacks(refresh);handler.post(refresh);
         continueAfterPermission();
     }
     @Override protected void onPause() { visible = false; handler.removeCallbacks(refresh); super.onPause(); }
+    @Override public void onWindowFocusChanged(boolean focused) {
+        super.onWindowFocusChanged(focused);
+        if(focused && visible){handler.removeCallbacks(refresh);handler.post(refresh);}
+    }
     @Override protected void onSaveInstanceState(Bundle state) {
         state.putBoolean("pending_preview_permission", pendingPreviewPermission);
         state.putBoolean("more_open", morePanel.getVisibility() == View.VISIBLE);
@@ -148,14 +158,12 @@ public final class MainActivity extends Activity {
         boolean pipSeen = history.getBoolean(HomeJourney.PIP_SEEN, false);
         boolean supported = PipSupport.supported(this), pip = PipSupport.available(this);
         boolean settings = !camera && cameraSettingsNeeded();
+        boolean present=PreviewActivity.hasPreview();SessionState.Phase phase=PreviewActivity.homePhase();
         int snapshot = (camera ? 1 : 0) | (preview ? 2 : 0) | (pipSeen ? 4 : 0)
-            | (supported ? 8 : 0) | (pip ? 16 : 0) | (settings ? 32 : 0);
+            | (supported ? 8 : 0) | (pip ? 16 : 0) | (settings ? 32 : 0) | (present ? 64 : 0) | (phase.ordinal()<<7);
         if (snapshot == lastJourney) return;
         lastJourney = snapshot;
         HomeJourney journey = HomeJourney.resolve(camera, preview, pipSeen, supported, pip);
-        paintStep(R.id.home_step_camera, R.id.home_dot_camera, R.id.home_label_camera, journey.camera, "1");
-        paintStep(R.id.home_step_preview, R.id.home_dot_preview, R.id.home_label_preview, journey.preview, "2");
-        paintStep(R.id.home_step_pip, R.id.home_dot_pip, R.id.home_label_pip, journey.pip, "3");
         int hint;
         switch (journey.hint) {
             case CAMERA: hint = settings ? R.string.journey_hint_camera_settings : R.string.journey_hint_start; break;
@@ -165,39 +173,13 @@ public final class MainActivity extends Activity {
             case IN_APP: hint = R.string.journey_hint_in_app; break;
             default: hint = R.string.journey_hint_done;
         }
-        journeyHint.setText(hint);
-        findViewById(R.id.journey_pip_settings).setVisibility(camera && supported && !pip ? View.VISIBLE : View.GONE);
-        Button start = findViewById(R.id.start);
-        if (start != null) start.setText(camera ? R.string.start
-            : settings ? R.string.journey_camera_settings : R.string.journey_allow_camera);
-    }
-
-    private void paintStep(int stepId, int dotId, int labelId, HomeJourney.Step state, String number) {
-        View step = findViewById(stepId);
-        TextView dot = findViewById(dotId), label = findViewById(labelId);
-        String name = label.getText().toString();
-        dot.setText(state == HomeJourney.Step.DONE ? "✓" : state == HomeJourney.Step.OPTIONAL ? "–" : number);
-        if (state == HomeJourney.Step.DONE) {
-            dot.setBackgroundResource(R.drawable.bg_badge_ok);
-            dot.setTextColor(getColor(R.color.ink));
-            label.setTextColor(getColor(R.color.ink_text));
-            step.setContentDescription(name + "，已完成");
-        } else if (state == HomeJourney.Step.CURRENT) {
-            dot.setBackgroundResource(R.drawable.bg_step_active);
-            dot.setTextColor(getColor(R.color.ink));
-            label.setTextColor(getColor(R.color.ink_text));
-            step.setContentDescription(name + "，进行中");
-        } else {
-            dot.setBackgroundResource(R.drawable.bg_home_step_todo);
-            dot.setTextColor(getColor(R.color.muted));
-            label.setTextColor(getColor(R.color.muted));
-            step.setContentDescription(name + (state == HomeJourney.Step.OPTIONAL ? "，此设备不支持，可跳过" : "，未开始"));
-        }
+        HomeChrome.journey(findViewById(R.id.home_root),journey,hint,camera && supported && !pip);
+        HomeChrome.actions(findViewById(R.id.home_root),camera,settings,present,phase);
     }
 
     private void mark(TextView badge, TextView label, boolean ok, int okText, int needText) {
         label.setText(ok ? okText : needText);
-        label.setTextColor(getColor(ok ? R.color.muted : R.color.mint));
+        label.setTextColor(getColor(ok ? R.color.muted : R.color.home_accent_text));
         badge.setBackgroundResource(ok ? R.drawable.bg_badge_ok : R.drawable.bg_badge);
         badge.setTextColor(getColor(ok ? R.color.ink : R.color.on_ink));
         badge.setContentDescription(getString(ok ? okText : needText));

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WalkBuddy</string>
-    <string name="hero_kicker">白天步行</string>
     <string name="hero_title">WalkBuddy</string>
     <string name="hero_lead">看见前方，也留意身边。实时取景与空间障碍提示，可放进系统画中画。</string>
     <string name="status_label">观察状态</string>
@@ -78,7 +77,12 @@
     <string name="risk_caution_desc">黄色虚线，请关注，基础模式未测距</string>
     <string name="risk_near_desc">红色实线，近处注意，需要及时看路</string>
     <string name="brand_caption">你的步行观察搭子</string>
-    <string name="hero_message">多看一眼\n前方</string>
+    <string name="home_summary">前方画面，随时小窗查看</string>
+    <string name="home_return_preview">返回预览</string>
+    <string name="home_action_stand">先站稳，再确认镜头方向</string>
+    <string name="home_action_starting">正在打开，可随时停止</string>
+    <string name="home_action_live">正在观察，可随时停止</string>
+    <string name="home_action_restore">预览已停止，返回后主动恢复</string>
     <string name="guide_title">认识你的步行搭子</string>
     <string name="privacy_caption">本地处理 · 不保存相机画面</string>
     <string name="recent_alert">最近提醒：%1$s</string>

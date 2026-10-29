@@ -28,6 +28,14 @@ import java.lang.ref.WeakReference;
 /** Camera is owned by the visible preview Activity, including system PiP. */
 public final class PreviewActivity extends Activity {
     private static WeakReference<PreviewActivity> active = new WeakReference<>(null);
+    static boolean hasPreview() {
+        PreviewActivity preview=active.get();
+        return preview!=null && !preview.destroyed && !preview.isFinishing();
+    }
+    static SessionState.Phase homePhase() {
+        PreviewActivity preview=active.get();
+        return preview==null || preview.destroyed || preview.isFinishing()?SessionState.Phase.STOPPED:preview.state.phase;
+    }
     static void stopActivePreview() {
         PreviewActivity preview = active.get();
         if (preview != null && !preview.destroyed) preview.stopPreview();

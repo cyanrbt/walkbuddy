@@ -12,7 +12,7 @@ collect_evidence() {
 trap collect_evidence EXIT
 adb -s "$serial" install -r app/build/outputs/apk/debug/app-debug.apk
 adb -s "$serial" install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-for evidence in runtime overlay layout recovery pip pip-repeat; do
+for evidence in runtime overlay layout home recovery pip pip-repeat; do
   probe="${evidence%%-*}"
   if [[ "$probe" == recovery ]]; then
     # Revocation can kill the app process: do it before, never inside live instrumentation.

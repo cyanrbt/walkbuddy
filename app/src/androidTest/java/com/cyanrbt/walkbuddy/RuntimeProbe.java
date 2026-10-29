@@ -7,6 +7,7 @@ public final class RuntimeProbe extends PreviewProbe {
         if(overlay){OverlayProbe.run(this);return;}
         if(layout){LayoutProbe.run(this);return;}
         if(recovery){RecoveryProbe.run(this);return;}
+        if(home){HomeProbe.run(this);return;}
         if(preview){super.onStart();return;}
         DetectorProbe.run(this);
     }

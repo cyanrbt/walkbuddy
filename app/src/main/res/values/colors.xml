@@ -6,6 +6,7 @@
     <color name="paper_card">#FFFFFF</color>
     <color name="line">#DBE8E0</color>
     <color name="mint">#087B63</color>
+    <color name="home_accent_text">#087B63</color>
     <color name="mint_bright">#4DE4AC</color>
     <color name="mint_soft">#CBF5E2</color>
     <color name="foam">#E4F5EC</color>

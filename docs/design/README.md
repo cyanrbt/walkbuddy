@@ -59,6 +59,14 @@
 
 [Android 15/16 云端检查](https://github.com/cyanrbt/walkbuddy/actions/runs/40864777367)均通过。[Android 16 系统 PiP 截图](v0.4.8/pip-camera-api36.png)展示实际小窗和虚拟 Camera2 场景，与前两版的布局占位图不同；仍不代表实体相机效果。
 
+## 0.4.10 首页固定操作与对比度
+
+参考 [Google Lookout 的无障碍设计实践](https://design.google/library/google-lookout-design-accessibility)对清晰视觉、熟悉操作和减少查找负担的重视，结合 [Android 无障碍控件建议](https://developer.android.com/guide/topics/ui/accessibility/apps)，将首页主要操作与长说明分开。底部保持授权/打开/返回预览，运行中增加停止；简短状态说明与操作放在一起，正文允许完整滚动。顶部品牌介绍收紧，详细用途仍能展开查看。
+
+夜间强调文字从深薄荷绿改为明亮薄荷绿，按钮背景独立保留。首页普通文字按至少 4.5:1 检查，操作触达区域至少 48dp。无预览会话时不再每半秒刷新首页，进入前台和重新获得焦点仍会同步权限与小窗状态。
+
+原生布局探针按 320×480、360×640、640×360、800×600 与深浅色、100%/200% 字体测量，覆盖七种操作状态和详细说明展开后的滚动可达性。截图标注“布局检查”，不代表实时相机。实际小窗展开和首页停止由独立 Camera2/PiP 探针检查，TalkBack 朗读与 OEM 小窗遮挡仍待实体设备确认。
+
 ## 图标资源
 
 - `app/src/main/res/drawable-nodpi/walkbuddy_mascot.png`：内置 imagegen 生成的 1254 × 1254 透明 PNG，首页和预览页共用。

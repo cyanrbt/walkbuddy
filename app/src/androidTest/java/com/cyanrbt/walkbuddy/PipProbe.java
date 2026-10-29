@@ -148,9 +148,11 @@ final class PipProbe {
             read(runner,()->{assertModelRetained(host,geometryTicket,geometryModel);return true;});
             report.append("PASS actual system PiP, advancing capture/display/model results, full controls hidden\n");
             checkpoint(runner,"pip_analysis_live");
+            await(runner,()->launcher.findViewById(R.id.stop).getVisibility()==View.VISIBLE
+                && ((android.widget.TextView)launcher.findViewById(R.id.start)).getText().toString().equals(launcher.getString(R.string.home_return_preview)),"home offers fixed return and stop actions");
 
             // Expand the existing PiP Activity, the same route used by Android's CTS PiP app.
-            bringForward(runner,host);
+            read(runner,()->launcher.findViewById(R.id.start).performClick());
             await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"PiP expansion");
             await(runner,()->live(host) && host.findViewById(R.id.preview_controls).getVisibility()==View.VISIBLE,
                 "full preview controls restored");
@@ -207,7 +209,24 @@ final class PipProbe {
             await(runner,host::isDestroyed,"PiP stop action closes Activity");
             read(runner,()->{assertReleased(host);assertNotPolling(host);return true;});
             report.append("PASS PiP stop action releases resources and destroys Activity; early metadata waits=")
-                .append(read(runner,()->field(host,"deferredCaptureCount"))).append("\nPIP_PROBE_PASS\n");
+                .append(read(runner,()->field(host,"deferredCaptureCount"))).append('\n');
+            await(runner,()->launcher.findViewById(R.id.stop).getVisibility()==View.GONE,"home removes inactive stop action");
+            Instrumentation.ActivityMonitor reopened=runner.addMonitor(PreviewActivity.class.getName(),null,false);
+            try {
+                read(runner,()->launcher.findViewById(R.id.start).performClick());
+                preview=(PreviewActivity)runner.waitForMonitorWithTimeout(reopened,7000);
+            } finally {runner.removeMonitor(reopened);}
+            if(preview==null || preview==host)throw new AssertionError("Home did not start a new preview after stop");
+            PreviewActivity fresh=preview;
+            await(runner,()->live(fresh),"new preview from fixed home action");
+            read(runner,()->fresh.findViewById(R.id.enter_pip).performClick());
+            await(runner,fresh::isInPictureInPictureMode,"home-stop PiP entry");
+            await(runner,()->launcher.findViewById(R.id.stop).getVisibility()==View.VISIBLE,"home stop available for new preview");
+            read(runner,()->launcher.findViewById(R.id.stop).performClick());
+            await(runner,fresh::isDestroyed,"home stop closes actual PiP camera");
+            read(runner,()->{assertReleased(fresh);assertNotPolling(fresh);return true;});
+            await(runner,()->launcher.findViewById(R.id.stop).getVisibility()==View.GONE,"home stop disappears immediately");
+            report.append("PASS fixed home action expands the existing PiP, reopens after stop, and stops the new PiP session\nPIP_PROBE_PASS\n");
             result.putString("stream",report.toString());code=Activity.RESULT_OK;
         } catch(Throwable error) {
             try{screenshot(runner,"pip-failure.png");}catch(Exception ignored){/* Preserve the original failure. */}
