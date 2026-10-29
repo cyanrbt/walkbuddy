@@ -93,6 +93,7 @@ public final class PreviewActivity extends Activity {
     private long brightnessAt,sampledAt,analysisEpoch;
     private Runnable pendingCapture;
     private Runnable pendingReadback;
+    private boolean readingTexture;
     private long deferredCaptureCount;
     private static InferenceWorker<BitmapFrame,LocalDetector.Result> sharedWorker;
     private InferenceWorker<BitmapFrame,LocalDetector.Result> worker;
@@ -319,7 +320,7 @@ public final class PreviewActivity extends Activity {
             public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h) { transform(); }
             public boolean onSurfaceTextureDestroyed(SurfaceTexture s) { if(!destroyed && (state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE)) fail("显示 Surface 已销毁：不可用");return true; }
             public void onSurfaceTextureUpdated(SurfaceTexture s) {
-                if(texture==null || destroyed || (state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE))return;
+                if(readingTexture || texture==null || destroyed || (state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE))return;
                 long now=SystemClock.elapsedRealtime();
                 if(state.expired(now)){fail("采集或显示截止时间已过：不可用");return;}
                 state.display(now);state.promote(now);syncTicket();render(now);
@@ -425,11 +426,13 @@ public final class PreviewActivity extends Activity {
         if(pendingReadback!=null || texture==null)return;
         TextureView source=texture;long token=state.generation,epoch=analysisEpoch;
         pendingReadback=()->{
-            pendingReadback=null;
+            try {
             if(destroyed || token!=state.generation || texture!=source || state.phase!=SessionState.Phase.LIVE)return;
             long now=SystemClock.elapsedRealtime();
             if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
             if(now-frameAt>1000)return; // Keep the original observation time; a delayed task cannot refresh it.
+            // getBitmap can itself call SurfaceTextureUpdated; that is not a displayed frame.
+            readingTexture=true;
             if(frameAt-brightnessAt>=1000) {
                 brightnessAt=frameAt;Bitmap check=source.getBitmap(16,12);
                 if(check!=null) {
@@ -446,6 +449,7 @@ public final class PreviewActivity extends Activity {
                     if(worker.ready(analysisTicket))sample(frameAt);else requestAnalysisPreparation();
                 }
             }
+            } finally {readingTexture=false;pendingReadback=null;}
         };
         // TextureView invokes its update listener from draw(); readback is forbidden inside drawing.
         main.post(pendingReadback);
@@ -486,13 +490,17 @@ public final class PreviewActivity extends Activity {
         }));
     }
     private void sample(long frameAt) {
-        if(analysisTicket==null || !analysisTicket.allowed(SystemClock.elapsedRealtime()))return;
-        if(previewGeometry==null)return;
+        InferenceWorker.Ticket ticket=analysisTicket;long token=state.generation,epoch=analysisEpoch;
+        TextureView source=texture;PreviewGeometry geometry=previewGeometry;
+        if(ticket==null || !ticket.allowed(SystemClock.elapsedRealtime()) || source==null || geometry==null)return;
         long copyStarted=SystemClock.elapsedRealtime();
-        Bitmap bitmap=samplePreview(texture,previewGeometry);if(bitmap==null){fail("无法读取分析帧：不可用");return;}
+        Bitmap bitmap=samplePreview(source,geometry);if(bitmap==null){fail("无法读取分析帧：不可用");return;}
         long copyMs=SystemClock.elapsedRealtime()-copyStarted;
         if(copyMs>=200)android.util.Log.w("WalkBuddyAnalysis","Slow camera copyMs="+copyMs+" pip="+isInPictureInPictureMode());
-        sampledAt=frameAt;long token=state.generation,epoch=analysisEpoch;InferenceWorker.Ticket ticket=analysisTicket;
+        long copiedAt=SystemClock.elapsedRealtime();
+        if(destroyed || token!=state.generation || epoch!=analysisEpoch || ticket!=analysisTicket || texture!=source
+            || state.phase!=SessionState.Phase.LIVE || !ticket.allowed(copiedAt) || copiedAt-frameAt>1000){bitmap.recycle();return;}
+        sampledAt=frameAt;
         worker.submit(ticket,new BitmapFrame(bitmap),frameAt,(result,error)->main.post(()->{
             long now=SystemClock.elapsedRealtime();
             if(destroyed || ticket.cancelled || ticket!=analysisTicket || epoch!=analysisEpoch || token!=state.generation)return;

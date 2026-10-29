@@ -71,7 +71,7 @@ final class PipProbe {
                     public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h){delegate.onSurfaceTextureSizeChanged(s,w,h);}
                     public boolean onSurfaceTextureDestroyed(SurfaceTexture s){return delegate.onSurfaceTextureDestroyed(s);}
                     public void onSurfaceTextureUpdated(SurfaceTexture s){
-                        if(expiredInDraw.compareAndSet(false,true))state(host).captureAt=android.os.SystemClock.elapsedRealtime()-1201;
+                        if(!(boolean)field(host,"readingTexture") && expiredInDraw.compareAndSet(false,true))state(host).captureAt=android.os.SystemClock.elapsedRealtime()-1201;
                         delegate.onSurfaceTextureUpdated(s);
                     }
                 });
@@ -210,6 +210,7 @@ final class PipProbe {
         for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback"})
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
         if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
+        if((boolean)field(host,"readingTexture"))throw new AssertionError("Stopped camera retained readback state");
     }
     private static void assertNotPolling(PreviewActivity host) {
         if(Build.VERSION.SDK_INT>=29 && ((Handler)field(host,"main")).hasCallbacks((Runnable)field(host,"watchdog")))
