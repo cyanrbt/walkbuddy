@@ -99,6 +99,7 @@ public final class PreviewActivity extends Activity {
     private boolean previewSeen;
     private Button pipButton, restartButton;
     private long brightnessAt,sampledAt,analysisEpoch;
+    private long lastReadbackQueueMs=-1,lastSampleCopyMs=-1,lastResultDeliveryMs=-1;
     private Runnable pendingCapture;
     private Runnable pendingReadback;
     private boolean readingTexture;
@@ -210,6 +211,7 @@ public final class PreviewActivity extends Activity {
         if (state.phase == SessionState.Phase.STARTING || state.phase == SessionState.Phase.LIVE) return;
         if (texture != null) texture.setSurfaceTextureListener(null);
         state.start(SystemClock.elapsedRealtime());
+        lastReadbackQueueMs=lastSampleCopyMs=lastResultDeliveryMs=-1;
         brightnessAt = sampledAt = 0;depthSnapshot=null;
         // Rebuild only after a stopped/failed session, never on a PiP size change.
         createWindow();
@@ -333,7 +335,7 @@ public final class PreviewActivity extends Activity {
             public void onSurfaceTextureUpdated(SurfaceTexture s) {
                 if(readingTexture || texture==null || destroyed || (state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE))return;
                 long now=SystemClock.elapsedRealtime();
-                if(state.expired(now)){fail("采集或显示截止时间已过：不可用");return;}
+                if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
                 state.display(now);state.promote(now);syncTicket();render(now);
                 if(state.phase==SessionState.Phase.LIVE && (now-brightnessAt>=1000
                     || state.recognition && (useDepth || now-sampledAt>=500 && !worker.busy())))queueReadback(now);
@@ -365,12 +367,14 @@ public final class PreviewActivity extends Activity {
     }
     static Bitmap samplePreview(TextureView view,PreviewGeometry geometry) {
         // getBitmap 复制的是 SurfaceTexture 内容，不包含 view 的 fit-center Matrix。
-        // 读取系统已补偿 sensor 的天然尺寸，避免按浮窗尺寸拉伸；只补偿 display 一次。
-        Bitmap natural=view.getBitmap(geometry.naturalWidth,geometry.naturalHeight);if(natural==null)return null;
+        // 保留系统已补偿 sensor 的天然比例，直接读到模型所需尺寸；只补偿 display 一次。
+        Bitmap natural=view.getBitmap(geometry.sampleWidth,geometry.sampleHeight);if(natural==null)return null;
         if(geometry.displayDegrees==0)return natural;
         Matrix rotation=new Matrix();rotation.setRotate(-geometry.displayDegrees);
-        Bitmap sampled=Bitmap.createBitmap(natural,0,0,natural.getWidth(),natural.getHeight(),rotation,true);
-        if(sampled!=natural)natural.recycle();return sampled;
+        try {
+            Bitmap sampled=Bitmap.createBitmap(natural,0,0,natural.getWidth(),natural.getHeight(),rotation,true);
+            if(sampled!=natural)natural.recycle();return sampled;
+        } catch(RuntimeException|Error error){natural.recycle();throw error;}
     }
     @SuppressWarnings("MissingPermission") private void openCamera(SurfaceTexture surfaceTexture) {
         if(state.phase!=SessionState.Phase.STARTING) return;
@@ -439,30 +443,35 @@ public final class PreviewActivity extends Activity {
     private void queueReadback(long frameAt) {
         if(pendingReadback!=null || texture==null)return;
         TextureView source=texture;long token=state.generation,epoch=analysisEpoch;
+        long queuedAt=SystemClock.elapsedRealtime();
         pendingReadback=()->{
             try {
-            if(destroyed || token!=state.generation || texture!=source || state.phase!=SessionState.Phase.LIVE)return;
-            long now=SystemClock.elapsedRealtime();
-            if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
-            if(now-frameAt>1000)return; // Keep the original observation time; a delayed task cannot refresh it.
-            // getBitmap can itself call SurfaceTextureUpdated; that is not a displayed frame.
-            readingTexture=true;
-            if(frameAt-brightnessAt>=1000) {
-                brightnessAt=frameAt;Bitmap check=source.getBitmap(16,12);
-                if(check!=null) {
-                    long light=0;for(int y=0;y<12;y++)for(int x=0;x<16;x++){int c=check.getPixel(x,y);light+=Color.red(c)+Color.green(c)+Color.blue(c);}check.recycle();
-                    if(light<16*12*3*3){fail(RecoveryGuide.Reason.DARK,"画面过暗或隐私占位：不可用（仅白天）");return;}
+                if(destroyed || token!=state.generation || texture!=source || state.phase!=SessionState.Phase.LIVE)return;
+                long now=SystemClock.elapsedRealtime();
+                lastReadbackQueueMs=now-queuedAt;
+                if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
+                if(now-frameAt>1000)return; // Keep the original observation time; a delayed task cannot refresh it.
+                // getBitmap can itself call SurfaceTextureUpdated; that is not a displayed frame.
+                readingTexture=true;
+                if(frameAt-brightnessAt>=1000) {
+                    brightnessAt=frameAt;Bitmap check=source.getBitmap(16,12);
+                    if(check!=null) {
+                        long light=0;for(int y=0;y<12;y++)for(int x=0;x<16;x++){int c=check.getPixel(x,y);light+=Color.red(c)+Color.green(c)+Color.blue(c);}check.recycle();
+                        if(light<16*12*3*3){fail(RecoveryGuide.Reason.DARK,"画面过暗或隐私占位：不可用（仅白天）");return;}
+                    }
                 }
-            }
-            now=SystemClock.elapsedRealtime();
-            if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
-            if(now-frameAt>1000)return;
-            if(state.recognition && epoch==analysisEpoch) {
-                if(useDepth)processDepth(now);
-                if(frameAt-sampledAt>=500 && !worker.busy()) {
-                    if(worker.ready(analysisTicket))sample(frameAt);else requestAnalysisPreparation();
+                now=SystemClock.elapsedRealtime();
+                if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
+                if(now-frameAt>1000)return;
+                if(state.recognition && epoch==analysisEpoch) {
+                    if(useDepth)processDepth(now);
+                    if(frameAt-sampledAt>=500 && !worker.busy()) {
+                        if(worker.ready(analysisTicket))sample(frameAt);else requestAnalysisPreparation();
+                    }
                 }
-            }
+            } catch(RuntimeException error) {
+                android.util.Log.w("WalkBuddyTiming","Readback error="+error.getClass().getSimpleName());
+                fail(getString(R.string.preview_readback_failed));
             } finally {readingTexture=false;pendingReadback=null;}
         };
         // TextureView invokes its update listener from draw(); readback is forbidden inside drawing.
@@ -512,24 +521,28 @@ public final class PreviewActivity extends Activity {
         if(ticket==null || !ticket.allowed(SystemClock.elapsedRealtime()) || source==null || geometry==null)return;
         long copyStarted=SystemClock.elapsedRealtime();
         Bitmap bitmap=samplePreview(source,geometry);if(bitmap==null){fail("无法读取分析帧：不可用");return;}
-        long copyMs=SystemClock.elapsedRealtime()-copyStarted;
+        long copyMs=SystemClock.elapsedRealtime()-copyStarted;lastSampleCopyMs=copyMs;
         if(copyMs>=200)android.util.Log.w("WalkBuddyAnalysis","Slow camera copyMs="+copyMs+" pip="+isInPictureInPictureMode());
         long copiedAt=SystemClock.elapsedRealtime();
         if(destroyed || token!=state.generation || epoch!=analysisEpoch || ticket!=analysisTicket || texture!=source
             || state.phase!=SessionState.Phase.LIVE || !ticket.allowed(copiedAt) || copiedAt-frameAt>1000){bitmap.recycle();return;}
         sampledAt=frameAt;
-        worker.submit(ticket,new BitmapFrame(bitmap),frameAt,(result,error)->main.post(()->{
-            long now=SystemClock.elapsedRealtime();
-            if(destroyed || ticket.cancelled || ticket!=analysisTicket || epoch!=analysisEpoch || token!=state.generation)return;
-            if(state.expired(now)){fail("采集/显示/分析截止时间已过：不可用");return;}
-            if(!state.acceptResult(token,frameAt,now))return;
-            if(error!=null){fail(RecoveryGuide.Reason.MODEL,"模型初始化或推理失败：不可用");return;}
-            state.analysisAt=now;syncTicket();
-            analysisHasResult=true;
-            boolean notify=feedback.basic(result.detections,frameAt,now);
-            showFeedback(now);
-            if(notify)alert();
-        }));
+        worker.submit(ticket,new BitmapFrame(bitmap),frameAt,(result,error)->{
+            long completedAt=SystemClock.elapsedRealtime();
+            main.post(()->{
+                long now=SystemClock.elapsedRealtime();
+                if(destroyed || ticket.cancelled || ticket!=analysisTicket || epoch!=analysisEpoch || token!=state.generation)return;
+                lastResultDeliveryMs=now-completedAt;
+                if(state.expired(now)){fail("采集/显示/分析截止时间已过：不可用");return;}
+                if(!state.acceptResult(token,frameAt,now))return;
+                if(error!=null){fail(RecoveryGuide.Reason.MODEL,"模型初始化或推理失败：不可用");return;}
+                state.analysisAt=now;syncTicket();
+                analysisHasResult=true;
+                boolean notify=feedback.basic(result.detections,frameAt,now);
+                showFeedback(now);
+                if(notify)alert();
+            });
+        });
     }
     private void alert(){
         if(!state.recognition || state.expired(SystemClock.elapsedRealtime()))return;
@@ -571,6 +584,16 @@ public final class PreviewActivity extends Activity {
     }
     private void fail(RecoveryGuide.Reason reason,String message) {
         if(destroyed)return;
+        if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
+            long now=SystemClock.elapsedRealtime();
+            android.util.Log.w("WalkBuddyTiming","Preview stopped reason="+reason+" phase="+state.phase
+                +" recognition="+state.recognition+" captureGapMs="+(state.captureAt>0?now-state.captureAt:-1)
+                +" displayGapMs="+(state.displayAt>0?now-state.displayAt:-1)
+                +" analysisGapMs="+(state.analysisAt>0?now-state.analysisAt:-1)
+                +" sampleAgeMs="+(sampledAt>0?now-sampledAt:-1)+" queueMs="+lastReadbackQueueMs
+                +" copyMs="+lastSampleCopyMs+" deliveryMs="+lastResultDeliveryMs
+                +" workerBusy="+(worker!=null && worker.busy())+" pip="+isInPictureInPictureMode());
+        }
         recoveryReason=reason;
         restoreDetection=restoreSound=false;
         cancelAnalysis();state.unavailable(message);feedback.clear();if(announcer!=null)announcer.clear();pendingSpeak=false;silence();

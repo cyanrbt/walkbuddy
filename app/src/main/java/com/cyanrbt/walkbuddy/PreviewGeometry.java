@@ -2,8 +2,10 @@ package com.cyanrbt.walkbuddy;
 
 /** TextureView 的默认纹理已补偿 sensor rotation，但被铺满到 view。后置镜头，无镜像。 */
 final class PreviewGeometry {
+    static final int ANALYSIS_EDGE=320;
     final float[] matrix;
     final float left,top,width,height;
+    final int sampleWidth,sampleHeight;
     final int relativeRotation,viewWidth,viewHeight,naturalWidth,naturalHeight,displayDegrees;
     PreviewGeometry(int bufferWidth,int bufferHeight,int sensorDegrees,int displayDegrees,int viewWidth,int viewHeight) {
         if(bufferWidth<=0 || bufferHeight<=0 || viewWidth<=0 || viewHeight<=0 || sensorDegrees%90!=0 || displayDegrees%90!=0)
@@ -14,6 +16,9 @@ final class PreviewGeometry {
         this.displayDegrees=display;
         naturalWidth=sensor%180==0?bufferWidth:bufferHeight;
         naturalHeight=sensor%180==0?bufferHeight:bufferWidth;
+        float sampleScale=Math.min(1f,ANALYSIS_EDGE/(float)Math.max(naturalWidth,naturalHeight));
+        sampleWidth=Math.max(1,Math.round(naturalWidth*sampleScale));
+        sampleHeight=Math.max(1,Math.round(naturalHeight*sampleScale));
         float rotatedWidth=display%180==0?naturalWidth:naturalHeight;
         float rotatedHeight=display%180==0?naturalHeight:naturalWidth;
         float fit=Math.min(viewWidth/rotatedWidth,viewHeight/rotatedHeight);

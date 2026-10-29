@@ -10,7 +10,7 @@ import java.nio.ByteOrder;
 
 /** One worker owns this letterbox workspace for the lifetime of its detector. */
 final class DetectorInput implements AutoCloseable {
-    private static final int SIZE=320;
+    private static final int SIZE=PreviewGeometry.ANALYSIS_EDGE;
     private final Bitmap padded=Bitmap.createBitmap(SIZE,SIZE,Bitmap.Config.ARGB_8888);
     private final Canvas canvas=new Canvas(padded);
     private final Paint paint=new Paint(Paint.FILTER_BITMAP_FLAG);

@@ -17,7 +17,8 @@ public class PreviewProbe extends Instrumentation {
  private static boolean enabled(Bundle args,String name){return args!=null && "true".equals(args.getString(name));}
  @Override public void onStart(){Bundle result=new Bundle();Activity activity=null;StringBuilder report=new StringBuilder();try{
   activity=startActivitySync(new Intent(getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-  final Activity host=activity;int cases=0;
+  final Activity host=activity;int cases=0;long baselineNs=0,sampledNs=0;
+  File evidence=new File(getTargetContext().getCacheDir(),"ui-probe");if(!evidence.isDirectory() && !evidence.mkdirs())throw new AssertionError("Evidence directory unavailable");
   for(int sensor:new int[]{0,90,180,270})for(int display:new int[]{0,90,180,270})for(int[] size:new int[][]{{300,400},{280,210}}){
    int w=size[0],h=size[1],bw=sensor%180==0?640:480,bh=sensor%180==0?480:640;
    PreviewGeometry geometry=new PreviewGeometry(640,480,sensor,display,w,h);
@@ -39,30 +40,50 @@ public class PreviewProbe extends Instrumentation {
     if(!updated.await(5,TimeUnit.SECONDS))throw new AssertionError("frame timeout");
     CountDownLatch drawn=new CountDownLatch(1);runOnMainSync(()->ref.get().postOnAnimation(()->ref.get().postOnAnimation(drawn::countDown)));
     if(!drawn.await(5,TimeUnit.SECONDS))throw new AssertionError("draw timeout");
-    AtomicReference<Bitmap> shot=new AtomicReference<>(),sample=new AtomicReference<>();CountDownLatch copied=new CountDownLatch(1);int[] copyResult={-1};
+    AtomicReference<Bitmap> shot=new AtomicReference<>(),sample=new AtomicReference<>(),baseline=new AtomicReference<>();long[] copyNs=new long[2];final int order=cases;CountDownLatch copied=new CountDownLatch(1);int[] copyResult={-1};
     runOnMainSync(()->{int[] location=new int[2];ref.get().getLocationInWindow(location);report.append("view=").append(ref.get().getWidth()).append("x").append(ref.get().getHeight()).append(" location=").append(java.util.Arrays.toString(location)).append(" matrix=").append(ref.get().getTransform(null)).append("\n");Bitmap capture=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);shot.set(capture);
      PixelCopy.request(host.getWindow(),new Rect(location[0],location[1],location[0]+w,location[1]+h),capture,status->{copyResult[0]=status;copied.countDown();},new android.os.Handler(android.os.Looper.getMainLooper()));
-     sample.set(PreviewActivity.samplePreview(ref.get(),geometry));});
+     // Alternate order to avoid always giving one path the first readback/cache state.
+     if(order%2==0){copy(ref.get(),geometry,true,baseline,copyNs,0);copy(ref.get(),geometry,false,sample,copyNs,1);}
+     else {copy(ref.get(),geometry,false,sample,copyNs,1);copy(ref.get(),geometry,true,baseline,copyNs,0);}});
     if(!copied.await(5,TimeUnit.SECONDS) || copyResult[0]!=PixelCopy.SUCCESS)throw new AssertionError("PixelCopy failed "+copyResult[0]);
-    Bitmap image=shot.get(),input=sample.get();if(image==null || input==null)throw new AssertionError("bitmap unavailable");
-    try(FileOutputStream stream=new FileOutputStream(new File(getTargetContext().getCacheDir(),"preview-last.png"))){image.compress(Bitmap.CompressFormat.PNG,100,stream);}
-    try(FileOutputStream stream=new FileOutputStream(new File(getTargetContext().getCacheDir(),"preview-sample-last.png"))){input.compress(Bitmap.CompressFormat.PNG,100,stream);}
+    Bitmap image=shot.get(),input=sample.get(),original=baseline.get();if(image==null || input==null || original==null)throw new AssertionError("bitmap unavailable");
+    if(Math.max(input.getWidth(),input.getHeight())!=320 || input.getWidth()*input.getHeight()!=640*480/4)throw new AssertionError("Readback was not bounded to the model edge");
+    if(input.getAllocationByteCount()*4!=original.getAllocationByteCount())throw new AssertionError("Expected quarter-sized readback bitmap");
+    baselineNs+=copyNs[0];sampledNs+=copyNs[1];
+    try(FileOutputStream stream=new FileOutputStream(new File(evidence,"preview-last.png"))){image.compress(Bitmap.CompressFormat.PNG,100,stream);}
+    try(FileOutputStream stream=new FileOutputStream(new File(evidence,"preview-sample-last.png"))){input.compress(Bitmap.CompressFormat.PNG,100,stream);}
     float[] marker=geometry.map(w/2f,h*.15f);int color=image.getPixel(Math.round(marker[0]),Math.round(marker[1]));
     if(Color.red(color)<180 || Color.green(color)>80)throw new AssertionError("方向标记错误 s="+sensor+" d="+display+" color="+color);
     int sx=Math.round((marker[0]-geometry.left)/geometry.width*input.getWidth()),sy=Math.round((marker[1]-geometry.top)/geometry.height*input.getHeight());
     int sampledColor=input.getPixel(sx,sy);if(Color.red(sampledColor)<180 || Color.green(sampledColor)>80)throw new AssertionError("识别采样方向不一致 s="+sensor+" d="+display+" color="+sampledColor);
-    checkCircle(image);checkCircle(input);
+    checkCircle(image);checkCircle(input);checkCircle(original);
     float expected=geometry.width/geometry.height;if(Math.abs(input.getWidth()/(float)input.getHeight()-expected)>0.015)throw new AssertionError("采样比例错误");
-    File output=new File(getTargetContext().getCacheDir(),"preview-s"+sensor+"-d"+display+"-"+w+".png");
+    File output=new File(evidence,"preview-s"+sensor+"-d"+display+"-"+w+".png");
     try(FileOutputStream stream=new FileOutputStream(output)){image.compress(Bitmap.CompressFormat.PNG,100,stream);}
-    report.append("PASS sensor=").append(sensor).append(" display=").append(display).append(" view=").append(w).append('x').append(h).append(" sample=").append(input.getWidth()).append('x').append(input.getHeight()).append('\n');
-    image.recycle();input.recycle();cases++;
+    report.append("PASS sensor=").append(sensor).append(" display=").append(display).append(" view=").append(w).append('x').append(h).append(" sample=").append(input.getWidth()).append('x').append(input.getHeight()).append(" baselineCopyUs=").append(copyNs[0]/1000).append(" limitedCopyUs=").append(copyNs[1]/1000)
+     .append(" baselineBytes=").append(original.getAllocationByteCount()).append(" limitedBytes=").append(input.getAllocationByteCount()).append('\n');
+    image.recycle();input.recycle();original.recycle();cases++;
    }finally{surface.release();}
   }
+  report.append("READBACK_OBSERVATION baselineUs=").append(baselineNs/1000).append(" limitedUs=").append(sampledNs/1000).append(" cases=32; alternating order, software producer, includes display rotation; not camera end-to-end timing\n");
   report.append("PREVIEW_PROBE_PASS cases=").append(cases).append("; direction marker + circle in displayed and sampled bitmap\n");result.putString("stream",report.toString());finish(Activity.RESULT_OK,result);
  }catch(Throwable error){result.putString("stream",report+"PREVIEW_PROBE_FAIL: "+error);finish(Activity.RESULT_CANCELED,result);}finally{if(activity!=null){final Activity host=activity;runOnMainSync(host::finish);}}}
+ private static void copy(TextureView view,PreviewGeometry g,boolean old,AtomicReference<Bitmap> result,long[] times,int slot){
+  long started=android.os.SystemClock.elapsedRealtimeNanos();
+  result.set(old?baseline(view,g):PreviewActivity.samplePreview(view,g));
+  times[slot]=android.os.SystemClock.elapsedRealtimeNanos()-started;
+ }
+ /** Frozen full-resolution v0.4.10 readback, only in the test APK. */
+ private static Bitmap baseline(TextureView view,PreviewGeometry g){
+  Bitmap natural=view.getBitmap(g.naturalWidth,g.naturalHeight);if(natural==null || g.displayDegrees==0)return natural;
+  Matrix rotation=new Matrix();rotation.setRotate(-g.displayDegrees);
+  try {Bitmap output=Bitmap.createBitmap(natural,0,0,natural.getWidth(),natural.getHeight(),rotation,true);if(output!=natural)natural.recycle();return output;}
+  catch(RuntimeException|Error error){natural.recycle();throw error;}
+ }
  private static void checkCircle(Bitmap image){int left=image.getWidth(),top=image.getHeight(),right=-1,bottom=-1;
-  for(int y=0;y<image.getHeight();y++)for(int x=0;x<image.getWidth();x++){int c=image.getPixel(x,y);if(Color.green(c)>180 && Color.red(c)<80 && Color.blue(c)<80){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}}
+  int[] pixels=new int[image.getWidth()*image.getHeight()];image.getPixels(pixels,0,image.getWidth(),0,0,image.getWidth(),image.getHeight());
+  for(int y=0;y<image.getHeight();y++)for(int x=0;x<image.getWidth();x++){int c=pixels[y*image.getWidth()+x];if(Color.green(c)>180 && Color.red(c)<80 && Color.blue(c)<80){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}}
   if(right<left || Math.abs((right-left+1)/(float)(bottom-top+1)-1)>0.07)throw new AssertionError("圆形被拉伸："+(right-left+1)+"x"+(bottom-top+1));
  }
 }

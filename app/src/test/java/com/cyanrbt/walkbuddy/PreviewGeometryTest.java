@@ -22,5 +22,16 @@ public class PreviewGeometryTest {
   }
  }
  @Test public void reopenAndResizeDeterministic(){PreviewGeometry a=new PreviewGeometry(640,480,90,270,320,180);new PreviewGeometry(640,480,90,0,210,400);assertArrayEquals(a.matrix,new PreviewGeometry(640,480,90,270,320,180).matrix,0);}
+ @Test public void readbackMatchesTheModelEdgeForEveryOrientationWithoutUpscaling(){
+  for(int sensor:new int[]{0,90,180,270})for(int display:new int[]{0,90,180,270}){
+   PreviewGeometry g=new PreviewGeometry(640,480,sensor,display,300,400);
+   assertEquals(sensor%180==0?320:240,g.sampleWidth);
+   assertEquals(sensor%180==0?240:320,g.sampleHeight);
+   assertEquals(640*480/4,g.sampleWidth*g.sampleHeight);
+   assertEquals(g.naturalWidth/(float)g.naturalHeight,g.sampleWidth/(float)g.sampleHeight,0.0001);
+   PreviewGeometry small=new PreviewGeometry(160,120,sensor,display,300,400);
+   assertEquals(small.naturalWidth,small.sampleWidth);assertEquals(small.naturalHeight,small.sampleHeight);
+  }
+ }
  @Test(expected=IllegalArgumentException.class) public void rejectsZeroView(){new PreviewGeometry(640,480,90,0,0,400);}
 }

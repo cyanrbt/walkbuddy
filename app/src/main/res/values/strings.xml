@@ -88,4 +88,5 @@
     <string name="recent_alert">最近提醒：%1$s</string>
     <string name="recent_caution">画面关注</string>
     <string name="recent_near">近处注意</string>
+    <string name="preview_readback_failed">读取画面失败，请主动重新开启</string>
 </resources>

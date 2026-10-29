@@ -4,6 +4,7 @@ serial="${WALKBUDDY_EMULATOR_SERIAL:-emulator-5554}"
 mkdir -p ui-evidence
 collect_evidence() {
   adb -s "$serial" logcat -d -s WalkBuddyCamera:W '*:S' > ui-evidence/camera-timing.txt || true
+  adb -s "$serial" logcat -d -s WalkBuddyTiming:W '*:S' > ui-evidence/pipeline-timing.txt || true
   adb -s "$serial" logcat -d -b crash > ui-evidence/crash.txt || true
   adb -s "$serial" logcat -d -s WalkBuddyAnalysis:I '*:S' > ui-evidence/analysis-timing.txt || true
   adb -s "$serial" logcat -d -s ActivityManager:I ActivityTaskManager:I PowerManagerService:I lmkd:I AndroidRuntime:E libc:F DEBUG:F '*:S' > ui-evidence/lifecycle.txt || true
@@ -12,7 +13,7 @@ collect_evidence() {
 trap collect_evidence EXIT
 adb -s "$serial" install -r app/build/outputs/apk/debug/app-debug.apk
 adb -s "$serial" install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-for evidence in runtime overlay layout home recovery pip pip-repeat; do
+for evidence in runtime preview overlay layout home recovery pip pip-repeat; do
   probe="${evidence%%-*}"
   if [[ "$probe" == recovery ]]; then
     # Revocation can kill the app process: do it before, never inside live instrumentation.
