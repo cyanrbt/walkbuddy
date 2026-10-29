@@ -2,7 +2,6 @@ package com.cyanrbt.walkbuddy;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
-import android.graphics.*;
 import java.io.*;
 import java.nio.*;
 import java.nio.channels.FileChannel;
@@ -15,6 +14,12 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     static final boolean AVAILABLE=true;
     final Interpreter interpreter;
     final List<String> labels;
+    private DetectorInput input;
+    private Object[] inputs;
+    private final FloatBuffer boxes=outputBuffer(100),classes=outputBuffer(25),scores=outputBuffer(25),count=outputBuffer(1);
+    private final Map<Integer,Object> outputs=new HashMap<>();
+    private final float[] box=new float[4];
+    private boolean closed;
     static final class Result {
         final String category;
         final List<Detection> detections;
@@ -35,33 +40,27 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
             if(interpreter.getInputTensor(0).dataType()!=DataType.UINT8 || !Arrays.equals(interpreter.getInputTensor(0).shape(),new int[]{1,320,320,3}))throw new IOException("模型输入不匹配");
             int[][] shapes={{1,25,4},{1,25},{1,25},{1}};
             for(int i=0;i<4;i++)if(interpreter.getOutputTensor(i).dataType()!=DataType.FLOAT32 || !Arrays.equals(interpreter.getOutputTensor(i).shape(),shapes[i]))throw new IOException("模型输出不匹配："+i);
-        }catch(IOException|RuntimeException e){interpreter.close();throw e;}
+            input=new DetectorInput();inputs=new Object[1];
+            outputs.put(0,boxes);outputs.put(1,classes);outputs.put(2,scores);outputs.put(3,count);
+        }catch(IOException|RuntimeException|Error e){interpreter.close();if(input!=null)input.close();throw e;}
     }
     @Override public Result detect(BitmapFrame frame) {
-        Bitmap source=frame.bitmap;
-        float scale=Math.min(320f/source.getWidth(),320f/source.getHeight());
-        float width=source.getWidth()*scale,height=source.getHeight()*scale,padX=(320-width)/2,padY=(320-height)/2;
-        Bitmap padded=Bitmap.createBitmap(320,320,Bitmap.Config.ARGB_8888);
-        ByteBuffer input=ByteBuffer.allocateDirect(320*320*3).order(ByteOrder.nativeOrder());
-        try {
-            Canvas canvas=new Canvas(padded);canvas.drawColor(Color.BLACK);Paint paint=new Paint(Paint.FILTER_BITMAP_FLAG);
-            canvas.drawBitmap(source,null,new RectF(padX,padY,padX+width,padY+height),paint);
-            int[] pixels=new int[320*320];padded.getPixels(pixels,0,320,0,0,320,320);
-            for(int pixel:pixels){input.put((byte)Color.red(pixel));input.put((byte)Color.green(pixel));input.put((byte)Color.blue(pixel));}input.rewind();
-        }finally{padded.recycle();}
-        float[][][] boxes=new float[1][25][4];float[][] classes=new float[1][25],scores=new float[1][25];float[] count=new float[1];
-        Map<Integer,Object> output=new HashMap<>();output.put(0,boxes);output.put(1,classes);output.put(2,scores);output.put(3,count);
-        interpreter.runForMultipleInputsOutputs(new Object[]{input},output);
-        if(!Float.isFinite(count[0]) || count[0]<0 || count[0]>25)throw new IllegalStateException("模型检测数量无效");
-        int size=Math.round(count[0]);int[] indices=new int[size];float[] values=new float[size];String category="";List<Detection> detections=new ArrayList<>();
+        if(closed)throw new IllegalStateException("识别器已释放");
+        inputs[0]=input.prepare(frame.bitmap);
+        boxes.clear();classes.clear();scores.clear();count.clear();
+        interpreter.runForMultipleInputsOutputs(inputs,outputs);
+        float total=count.get(0);
+        if(!Float.isFinite(total) || total<0 || total>25)throw new IllegalStateException("模型检测数量无效");
+        int size=Math.round(total);int[] indices=new int[size];float[] values=new float[size];String category="";List<Detection> detections=new ArrayList<>();
         for(int i=0;i<size;i++) {
-            if(!Float.isFinite(classes[0][i]) || Math.abs(classes[0][i]-Math.round(classes[0][i]))>0.001f)throw new IllegalStateException("模型类别值无效");
-            for(float coordinate:boxes[0][i])if(!Float.isFinite(coordinate))throw new IllegalStateException("模型框坐标无效");
-            int index=Math.round(classes[0][i]);float score=scores[0][i];
+            float categoryIndex=classes.get(i);
+            if(!Float.isFinite(categoryIndex) || Math.abs(categoryIndex-Math.round(categoryIndex))>0.001f)throw new IllegalStateException("模型类别值无效");
+            for(int j=0;j<4;j++){box[j]=boxes.get(i*4+j);if(!Float.isFinite(box[j]))throw new IllegalStateException("模型框坐标无效");}
+            int index=Math.round(categoryIndex);float score=scores.get(i);
             if(index<0 || index>=labels.size() || !Float.isFinite(score) || score<0 || score>1)throw new IllegalStateException("模型结果/标签索引无效");
             indices[i]=index;values[i]=score;String name=labels.get(index);
             if(score>=0.35f && !"???".equals(name)) {
-                Detection detection=Detection.fromModel(chinese(name),score,boxes[0][i],width,height,padX,padY);
+                Detection detection=Detection.fromModel(chinese(name),score,box,input.width,input.height,input.padX,input.padY);
                 if(detection!=null){detections.add(detection);if(category.isEmpty() && score>=0.5f)category=detection.label;}
             }
         }
@@ -69,5 +68,6 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     }
     String tensorReport(){StringBuilder out=new StringBuilder();out.append("input ").append(interpreter.getInputTensor(0).name()).append(" ").append(interpreter.getInputTensor(0).dataType()).append(" ").append(Arrays.toString(interpreter.getInputTensor(0).shape()));for(int i=0;i<4;i++)out.append("\noutput ").append(i).append(" ").append(interpreter.getOutputTensor(i).name()).append(" ").append(interpreter.getOutputTensor(i).dataType()).append(" ").append(Arrays.toString(interpreter.getOutputTensor(i).shape()));return out.toString();}
     private static String chinese(String name){switch(name){case"person":return"人";case"bicycle":return"自行车";case"car":return"汽车";case"motorcycle":return"摩托车";case"bus":return"公交车";case"truck":return"卡车";case"chair":return"椅子";case"bench":return"长凳";case"dining table":return"桌子";case"couch":return"沙发";case"potted plant":return"盆栽";case"dog":return"狗";case"cat":return"猫";case"suitcase":return"行李箱";case"backpack":return"背包";case"bottle":return"瓶子";case"bed":return"床";case"stop sign":return"停车标志";case"fire hydrant":return"消防栓";default:return name;}}
-    @Override public void close(){interpreter.close();}
+    private static FloatBuffer outputBuffer(int size){return ByteBuffer.allocateDirect(size*Float.BYTES).order(ByteOrder.nativeOrder()).asFloatBuffer();}
+    @Override public void close(){if(closed)return;closed=true;try{interpreter.close();}finally{input.close();input=null;inputs=null;outputs.clear();}}
 }

@@ -34,7 +34,9 @@ jobs:
           keytool -genkeypair -noprompt -keystore "$test_keystore" -storepass android -keypass android -alias androiddebugkey -dname CN=WalkBuddyUITest -keyalg RSA -keysize 2048 -validity 1
           echo "WALKBUDDY_SIGNING_KEYSTORE=${test_keystore}" >> "$GITHUB_ENV"
       - name: Build emulator test APKs
-        run: ./gradlew assembleDebug assembleDebugAndroidTest -PuniversalApk --no-daemon --no-watch-fs
+        run: |
+          bash scripts/fetch_test_fixture.sh
+          ./gradlew assembleDebug assembleDebugAndroidTest -PuniversalApk --no-daemon --no-watch-fs
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules

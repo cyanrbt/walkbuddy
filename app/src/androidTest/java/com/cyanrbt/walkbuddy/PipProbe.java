@@ -68,26 +68,43 @@ final class PipProbe {
             await(runner,()->live(host),"manual restart after Home");
             report.append("PASS Home releases camera; returning requires manual restart\n");
 
+            read(runner,()->host.findViewById(R.id.preview_recognition).performClick());
+            await(runner,()->live(host) && basicAt(host)>0,"first actual model result");
+            long firstResult=read(runner,()->basicAt(host));
+            await(runner,()->live(host) && basicAt(host)>firstResult+400,"repeated actual model results");
+            InferenceWorker.Ticket oldTicket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
+            read(runner,()->{
+                host.findViewById(R.id.preview_recognition).performClick();
+                if(!oldTicket.cancelled || field(host,"analysisTicket")!=null || basicAt(host)!=-1)
+                    throw new AssertionError("Detection off retained analysis or feedback");
+                return true;
+            });
+            read(runner,()->host.findViewById(R.id.preview_recognition).performClick());
+            await(runner,()->live(host) && basicAt(host)>firstResult && field(host,"analysisTicket")!=oldTicket,"model restart after toggle");
+            report.append("PASS actual bundled-model results advance; off cancels Ticket/feedback; re-enable produces new results\n");
+
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
             await(runner,host::isInPictureInPictureMode,"system PiP entry");
             await(runner,()->host.getSharedPreferences(HomeJourney.PREFERENCES,0).getBoolean(HomeJourney.PIP_SEEN,false),"PiP history");
             long first=read(runner,()->state(host).captureAt);
             await(runner,()->state(host).phase==SessionState.Phase.LIVE && state(host).captureAt>first+500
-                && state(host).displayAt>first+500,"capture and display advance in PiP");
+                && state(host).displayAt>first+500 && basicAt(host)>first+500,"capture, display and actual analysis advance in PiP");
             read(runner,()->{
                 for(int id:new int[]{R.id.preview_header,R.id.preview_controls,R.id.preview_actions})
                     if(host.findViewById(id).getVisibility()!=View.GONE)throw new AssertionError("Full controls leaked into PiP");
                 return true;
             });
             screenshot(runner,"pip-camera.png");
-            report.append("PASS actual system PiP, advancing capture/display, full controls hidden\n");
+            report.append("PASS actual system PiP, advancing capture/display/model results, full controls hidden\n");
 
             // Expand the existing PiP Activity, the same route used by Android's CTS PiP app.
             bringForward(runner,host);
             await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"PiP expansion");
             await(runner,()->live(host) && host.findViewById(R.id.preview_controls).getVisibility()==View.VISIBLE,
                 "full preview controls restored");
-            report.append("PASS expansion restores controls and keeps preview LIVE\n");
+            long expandedAt=android.os.SystemClock.elapsedRealtime();
+            await(runner,()->live(host) && state(host).recognition && basicAt(host)>expandedAt,"actual analysis after expansion");
+            report.append("PASS expansion restores controls and keeps preview/model results LIVE\n");
 
             // Screen-off must stop even while the camera Activity was recently in PiP.
             shell(runner,"input keyevent KEYCODE_SLEEP");
@@ -132,6 +149,7 @@ final class PipProbe {
     private static void assertReleased(PreviewActivity host) {
         for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture"})
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
+        if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
     }
     private static void assertNotPolling(PreviewActivity host) {
         if(Build.VERSION.SDK_INT>=29 && ((Handler)field(host,"main")).hasCallbacks((Runnable)field(host,"watchdog")))
@@ -159,12 +177,13 @@ final class PipProbe {
         } catch(Exception error){throw new AssertionError(error);}
     }
     private static SessionState state(PreviewActivity host){return (SessionState)field(host,"state");}
+    private static long basicAt(PreviewActivity host){return (long)field(field(host,"feedback"),"basicAt");}
     private static boolean live(PreviewActivity host) {
         return state(host).phase==SessionState.Phase.LIVE && host.findViewById(R.id.preview_cover).getVisibility()==View.GONE
             && host.findViewById(R.id.enable_depth).isEnabled();
     }
     private static Object field(Object host,String name) {
-        try{Field f=PreviewActivity.class.getDeclaredField(name);f.setAccessible(true);return f.get(host);}
+        try{Field f=host.getClass().getDeclaredField(name);f.setAccessible(true);return f.get(host);}
         catch(Exception error){throw new AssertionError(error);}
     }
 }
