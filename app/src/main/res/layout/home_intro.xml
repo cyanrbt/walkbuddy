@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginTop="0dp" android:background="@drawable/bg_hero" android:padding="14dp" android:id="@+id/home_intro">
+    <com.cyanrbt.walkbuddy.HomeBrandLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:id="@+id/home_brand_name" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/hero_title" android:textSize="18sp" android:textColor="@color/on_ink" android:fontFamily="sans-serif-medium" />
+        <ImageView android:id="@+id/home_brand_art" android:layout_width="48dp" android:layout_height="48dp" android:layout_marginStart="12dp" android:src="@drawable/walkbuddy_mascot" android:scaleType="fitCenter" android:importantForAccessibility="no" android:contentDescription="@null" />
+    </com.cyanrbt.walkbuddy.HomeBrandLayout>
+    <TextView android:id="@+id/home_summary" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/home_summary" android:textSize="12sp" android:textColor="@color/on_ink_dim" android:lineSpacingExtra="4dp" />
+</LinearLayout>
+            

@@ -69,6 +69,12 @@
 
 [Android 15/16 原生检查](https://github.com/cyanrbt/walkbuddy/actions/runs/40887205991)最终通过；代表截图为布局验证：[小屏 200% 字体](v0.4.10/home-font200.png)、[夜间](v0.4.10/home-night.png)、[横屏](v0.4.10/home-wide.png)。各操作文字允许完整换行，底部操作不随正文滚动。首轮大字体徽标裁切及重复识别超时记录见[验证结果](../验证结果.md)。
 
+## 0.4.12 首页阅读顺序与文字空间
+
+参考 [Lookout 对清晰视觉和可学习体验的设计说明](https://design.google/library/google-lookout-design-accessibility)与 [Android Views 无障碍建议](https://developer.android.com/guide/topics/ui/accessibility/views/apps-views)，减少顶部重复营销文字，保留用途和品牌；按实际文字宽度让装饰图让出空间，用户选择的字号保持不变。首次当前说明放在步骤之前，完成后突出当前观察状态；限制变化时重新引导。
+
+宽度至少 600dp 时品牌与状态/引导并排，让横屏短窗口保留状态空间；窄窗口纵向展示。原生布局检查包含 100%/150%/200% 字体与深浅色，另在同一 View 上测窄→宽→窄，核对装饰恢复且字号不变。截图在初始视口生成，状态标注“布局检查”；仍需检查实际图片与实体设备。按钮触达面积和夜间对比度沿用既有标准。
+
 ## 图标资源
 
 - `app/src/main/res/drawable-nodpi/walkbuddy_mascot.png`：内置 imagegen 生成的 1254 × 1254 透明 PNG，首页和预览页共用。

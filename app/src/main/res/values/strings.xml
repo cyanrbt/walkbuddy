@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WalkBuddy</string>
-    <string name="hero_title">WalkBuddy</string>
+    <string name="hero_title">Walk Buddy</string>
     <string name="hero_lead">看见前方，也留意身边。实时取景与空间障碍提示，可放进系统画中画。</string>
     <string name="status_label">观察状态</string>
     <string name="status_initial">已停止</string>
@@ -9,7 +9,7 @@
     <string name="journey_camera">摄像头</string>
     <string name="journey_preview">预览</string>
     <string name="journey_pip">小窗 · 可选</string>
-    <string name="journey_hint_start">先允许摄像头，再打开预览确认取景</string>
+    <string name="journey_hint_start">允许摄像头，再确认取景</string>
     <string name="journey_hint_camera">打开预览后先站着确认镜头方向</string>
     <string name="journey_hint_preview">在预览页点「以小窗观察」，即可切到其他应用</string>
     <string name="journey_hint_done">三步都走过了 · 路还是要你自己看</string>
@@ -76,8 +76,7 @@
     <string name="risk_captured_desc">灰色实线角框，表示已捕获，不代表安全</string>
     <string name="risk_caution_desc">黄色虚线，请关注，基础模式未测距</string>
     <string name="risk_near_desc">红色实线，近处注意，需要及时看路</string>
-    <string name="brand_caption">你的步行观察搭子</string>
-    <string name="home_summary">前方画面，随时小窗查看</string>
+    <string name="home_summary">白天步行观察</string>
     <string name="home_return_preview">返回预览</string>
     <string name="home_action_stand">先站稳，再确认镜头方向</string>
     <string name="home_action_starting">正在打开，可随时停止</string>

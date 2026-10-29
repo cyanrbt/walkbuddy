@@ -18,8 +18,15 @@ final class HomeChrome {
             :phase==SessionState.Phase.LIVE?R.string.home_action_live
             :camera && present?R.string.home_action_restore:R.string.home_action_stand;
         ((TextView)root.findViewById(R.id.home_action_hint)).setText(hint);
+        boolean observing=present || running || root.findViewById(R.id.home_steps).getVisibility()==View.GONE;
+        root.findViewById(R.id.home_status_container).setVisibility(observing?View.VISIBLE:View.GONE);
     }
     static void journey(View root,HomeJourney journey,int hint,boolean settings) {
+        boolean compact=journey.hint==HomeJourney.Hint.READY || journey.hint==HomeJourney.Hint.IN_APP;
+        root.findViewById(R.id.home_steps).setVisibility(compact?View.GONE:View.VISIBLE);
+        ((TextView)root.findViewById(R.id.home_journey_label)).setText(compact?R.string.status_label:R.string.journey_label);
+        root.findViewById(R.id.home_status_label).setVisibility(compact?View.GONE:View.VISIBLE);
+        root.findViewById(R.id.journey_hint).setVisibility(journey.hint==HomeJourney.Hint.READY?View.GONE:View.VISIBLE);
         paintStep(root,R.id.home_step_camera,R.id.home_dot_camera,R.id.home_label_camera,journey.camera,"1");
         paintStep(root,R.id.home_step_preview,R.id.home_dot_preview,R.id.home_label_preview,journey.preview,"2");
         paintStep(root,R.id.home_step_pip,R.id.home_dot_pip,R.id.home_label_pip,journey.pip,"3");

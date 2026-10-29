@@ -161,6 +161,12 @@ final class PipProbe {
             checkpoint(runner,"pip_analysis_live");
             await(runner,()->launcher.findViewById(R.id.stop).getVisibility()==View.VISIBLE
                 && ((android.widget.TextView)launcher.findViewById(R.id.start)).getText().toString().equals(launcher.getString(R.string.home_return_preview)),"home offers fixed return and stop actions");
+            read(runner,()->{
+                if(launcher.findViewById(R.id.home_steps).getVisibility()!=View.GONE
+                    || launcher.findViewById(R.id.home_status_container).getVisibility()!=View.VISIBLE)
+                    throw new AssertionError("Completed onboarding displaced the actual observation status");
+                return true;
+            });
 
             // Expand the existing PiP Activity, the same route used by Android's CTS PiP app.
             read(runner,()->launcher.findViewById(R.id.start).performClick());

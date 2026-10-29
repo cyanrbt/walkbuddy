@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Same assertions as ProductSurfaceTest, for a machine without a JDK."""
 from pathlib import Path
+import re
 import sys
 
 root = Path(__file__).resolve().parents[1]
@@ -22,7 +23,11 @@ def chunk(text, id_, until):
     assert stop > at
     return text[at:stop]
 
-home = read("app/src/main/res/layout/activity_main.xml")
+def layout(name):
+    source = read(f"app/src/main/res/layout/{name}.xml")
+    return re.sub(r'<include\b[^>]*layout="@layout/([a-z0-9_]+)"[^>]*/>', lambda match: layout(match[1]), source)
+
+home = layout("activity_main")
 overlay = read("app/src/main/res/layout/activity_preview.xml")
 strings = read("app/src/main/res/values/strings.xml")
 colors = read("app/src/main/res/values/colors.xml")
@@ -38,7 +43,7 @@ stop = read("app/src/main/res/drawable/bg_stop.xml")
 toggle = read("app/src/main/res/drawable/bg_toggle.xml")
 
 assert '<string name="app_name">WalkBuddy</string>' in strings
-assert '<string name="hero_title">WalkBuddy</string>' in strings
+assert between(strings, "hero_title", "</string>").replace(" ", "") == "WalkBuddy"
 assert "@string/hero_title" in home or "@string/app_name" in home
 assert "@string/caution" in home and "@string/hero_lead" in home and "@string/see_body" in home
 assert "@+id/journey_hint" in home and "@+id/more_panel" in home and "@+id/more_toggle" in home

@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class ProductSurfaceTest {
     @Test public void homeAndPreviewAreOneProduct() throws Exception {
         Path root = root();
-        String home = read(root.resolve("app/src/main/res/layout/activity_main.xml"));
+        String home = layout(root.resolve("app/src/main/res/layout"), "activity_main");
         String overlay = read(root.resolve("app/src/main/res/layout/activity_preview.xml"));
         String strings = read(root.resolve("app/src/main/res/values/strings.xml"));
         String colors = read(root.resolve("app/src/main/res/values/colors.xml"));
@@ -27,7 +27,7 @@ public class ProductSurfaceTest {
         String toggle = read(root.resolve("app/src/main/res/drawable/bg_toggle.xml"));
 
         assertTrue(strings.contains("<string name=\"app_name\">WalkBuddy</string>"));
-        assertTrue(strings.contains("<string name=\"hero_title\">WalkBuddy</string>"));
+        assertEquals("WalkBuddy", between(strings, "hero_title", "</string>").replace(" ", ""));
         assertTrue(home.contains("@string/app_name") || home.contains("@string/hero_title"));
         assertTrue(home.contains("@string/caution") && home.contains("@string/hero_lead") && home.contains("@string/see_body"));
         assertTrue(home.contains("@+id/journey_hint") && home.contains("@+id/more_panel") && home.contains("@+id/more_toggle"));
@@ -118,6 +118,14 @@ public class ProductSurfaceTest {
         assertFalse(service.contains("帧龄") || service.contains("毫秒") || service.contains(" ms"));
         assertFalse(service.contains("lastLatency"));
         assertTrue(service.contains("publicReport=state.reason+\"\\n\"+(state.recognition?\"识别开着\":\"识别关着\");"));
+    }
+
+    private static String layout(Path directory,String name) throws Exception {
+        String xml=read(directory.resolve(name+".xml"));
+        java.util.regex.Matcher include=java.util.regex.Pattern.compile("<include\\b[^>]*layout=\"@layout/([a-z0-9_]+)\"[^>]*/>").matcher(xml);
+        StringBuffer result=new StringBuffer();
+        while(include.find())include.appendReplacement(result,java.util.regex.Matcher.quoteReplacement(layout(directory,include.group(1))));
+        include.appendTail(result);return result.toString();
     }
 
     private static String between(String text, String name, String end) {
