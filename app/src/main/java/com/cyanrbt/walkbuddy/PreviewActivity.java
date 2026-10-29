@@ -556,7 +556,13 @@ public final class PreviewActivity extends Activity {
         boolean detection=state.recognition,audio=sound.isChecked();
         fail(RecoveryGuide.Reason.SWITCHING,"正在切换观察模式");useDepth=enabled;restoreDetection=detection;restoreSound=audio;
         long token=state.generation;
-        ArDepthCamera.afterRelease(()->main.postDelayed(()->{if(token==state.generation)startPreview();},250));
+        ArDepthCamera.afterRelease(()->main.postDelayed(()->{
+            if(token!=state.generation)return;
+            startPreview();
+            // Losing focus/locking can reject the delayed start without changing generation.
+            // Leave a manual recovery action instead of a permanently disabled waiting button.
+            if(token==state.generation)fail(RecoveryGuide.Reason.HIDDEN,"切换已暂停，请主动重新开启预览");
+        },250));
     }
     private void processDepth(long now) {
         boolean notify=feedback.depth(depthSnapshot,-wm.getDefaultDisplay().getRotation()*90,now);

@@ -2,6 +2,10 @@
 set -euo pipefail
 serial="${WALKBUDDY_EMULATOR_SERIAL:-emulator-5554}"
 mkdir -p ui-evidence
+collect_evidence() {
+  adb -s "$serial" exec-out run-as com.cyanrbt.walkbuddy tar -cf - cache/ui-probe | tar -xf - -C ui-evidence || true
+}
+trap collect_evidence EXIT
 adb -s "$serial" install -r app/build/outputs/apk/debug/app-debug.apk
 adb -s "$serial" install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 for probe in overlay layout recovery; do
@@ -20,4 +24,3 @@ if f"{probe.upper()}_PROBE_PASS" not in result:
     raise SystemExit(f"Android {probe} probe did not pass")
 PY
 done
-adb -s "$serial" exec-out run-as com.cyanrbt.walkbuddy tar -cf - cache/ui-probe | tar -xf - -C ui-evidence

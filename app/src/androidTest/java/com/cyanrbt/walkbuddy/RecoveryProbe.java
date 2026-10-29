@@ -32,7 +32,9 @@ final class RecoveryProbe {
                 if(!((TextView)host.findViewById(R.id.restart_preview)).getText().toString().contains("设置"))
                     throw new AssertionError("Missing permission still offers camera retry");
             });
-            Instrumentation.ActivityMonitor settings=runner.addMonitor(new IntentFilter(Settings.ACTION_APPLICATION_DETAILS_SETTINGS),
+            IntentFilter settingsFilter=new IntentFilter(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            settingsFilter.addDataScheme("package");
+            Instrumentation.ActivityMonitor settings=runner.addMonitor(settingsFilter,
                 new Instrumentation.ActivityResult(Activity.RESULT_OK,null),true);
             try {
                 checkOnMain(runner,()->host.findViewById(R.id.restart_preview).performClick());
