@@ -33,6 +33,8 @@ final class RecoveryProbe {
                 if(!((TextView)host.findViewById(R.id.restart_preview)).getText().toString().contains("设置"))
                     throw new AssertionError("Missing permission still offers camera retry");
             });
+            Thread.sleep(350);
+            checkOnMain(runner,()->assertNoCamera(host));
             IntentFilter settingsFilter=new IntentFilter(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             settingsFilter.addDataScheme("package");
             Instrumentation.ActivityMonitor settings=runner.addMonitor(settingsFilter,
@@ -68,8 +70,10 @@ final class RecoveryProbe {
                     if(!button.isEnabled() || !button.getText().toString().contains("重新开启"))
                         throw new AssertionError("Grant/recreation did not leave an explicit restart action");
                 });
+                Thread.sleep(350);
+                checkOnMain(runner,()->assertNoCamera(replacement));
             } finally {runner.removeMonitor(recreated);}
-            result.putString("stream","RECOVERY_PROBE_PASS: denied permission, settings intent, grant and real Activity recreation; no camera auto-start\n");
+            result.putString("stream","RECOVERY_PROBE_PASS: denied permission, settings intent, grant and real Activity recreation; no camera auto-start or stopped watchdog polling\n");
             resultCode=Activity.RESULT_OK;
         } catch(Throwable error) {
             result.putString("stream","RECOVERY_PROBE_FAIL: "+error);
@@ -85,6 +89,13 @@ final class RecoveryProbe {
                 Field f=PreviewActivity.class.getDeclaredField(name);f.setAccessible(true);
                 if(f.get(activity)!=null)throw new AssertionError("Resource opened unexpectedly: "+name);
             }
+            Field handlerField=PreviewActivity.class.getDeclaredField("main");handlerField.setAccessible(true);
+            Field taskField=PreviewActivity.class.getDeclaredField("watchdog");taskField.setAccessible(true);
+            android.os.Handler handler=(android.os.Handler)handlerField.get(activity);
+            Runnable watchdog=(Runnable)taskField.get(activity);
+            if(Build.VERSION.SDK_INT>=29 && handler.hasCallbacks(watchdog))throw new AssertionError("Stopped preview kept polling");
+            watchdog.run(); // A stale delivery must not start a new callback chain.
+            if(Build.VERSION.SDK_INT>=29 && handler.hasCallbacks(watchdog))throw new AssertionError("Stale watchdog re-armed a stopped preview");
         } catch(ReflectiveOperationException error) {throw new AssertionError(error);}
     }
     private static void checkOnMain(Instrumentation runner,Runnable check) {

@@ -21,7 +21,8 @@ public final class MainActivity extends Activity {
     private final Runnable refresh = new Runnable() { public void run() {
         if(!visible)return;
         refreshHome();
-        if(PreviewActivity.hasPreview())handler.postDelayed(this, 500);
+        SessionState.Phase phase=PreviewActivity.homePhase();
+        if(phase==SessionState.Phase.STARTING || phase==SessionState.Phase.LIVE)handler.postDelayed(this, 500);
     }};
     private void refreshHome() {
         String report = PreviewActivity.report();
@@ -69,7 +70,7 @@ public final class MainActivity extends Activity {
         open.setBackgroundTintList(null);
         stop.setBackgroundTintList(null);
         open.setOnClickListener(v -> start());
-        stop.setOnClickListener(v -> {PreviewActivity.stopActivePreview();refreshHome();});
+        stop.setOnClickListener(v -> {PreviewActivity.stopActivePreview();handler.removeCallbacks(refresh);refreshHome();});
         paintJourney();
     }
 

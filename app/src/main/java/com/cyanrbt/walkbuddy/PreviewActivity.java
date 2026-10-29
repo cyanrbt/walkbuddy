@@ -117,7 +117,7 @@ public final class PreviewActivity extends Activity {
         }
     };
     private final Runnable watchdog = new Runnable() { public void run() {
-        if(destroyed) return;
+        if(!needsWatchdog()) return;
         long now=SystemClock.elapsedRealtime();
         if(detectionOverlay!=null && state.recognition)showFeedback(now);
         if(useDepth)renderDepthStatus(now);
@@ -128,8 +128,17 @@ public final class PreviewActivity extends Activity {
             else if(state.expired(now)) fail("画面或分析帧过期：不可用，请重新开启");
             else { state.promote(now); render(now); }
         }
-        main.postDelayed(this,100);
+        // fail() can run from this callback: never re-arm a stopped session.
+        if(needsWatchdog())main.postDelayed(this,100);
     }};
+    private boolean needsWatchdog() {
+        // PiP is paused but visible, so resumed is deliberately not a condition.
+        return !destroyed && (state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE);
+    }
+    private void scheduleWatchdog() {
+        main.removeCallbacks(watchdog);
+        if(needsWatchdog())main.postDelayed(watchdog,100);
+    }
     @Override public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         previewSeen = getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE)
@@ -159,8 +168,7 @@ public final class PreviewActivity extends Activity {
 
     @Override protected void onStart() {
         super.onStart();
-        main.removeCallbacks(watchdog);
-        main.post(watchdog);
+        scheduleWatchdog();
     }
 
     @Override protected void onResume() {
@@ -207,6 +215,7 @@ public final class PreviewActivity extends Activity {
         if (state.phase == SessionState.Phase.STARTING || state.phase == SessionState.Phase.LIVE) return;
         if (texture != null) texture.setSurfaceTextureListener(null);
         state.start(SystemClock.elapsedRealtime());
+        scheduleWatchdog();
         lastReadbackQueueMs=lastSampleCopyMs=lastResultDeliveryMs=-1;
         brightnessAt = sampledAt = 0;depthSnapshot=null;
         // Rebuild only after a stopped/failed session, never on a PiP size change.
@@ -593,6 +602,7 @@ public final class PreviewActivity extends Activity {
     }
     private void fail(RecoveryGuide.Reason reason,String message) {
         if(destroyed)return;
+        main.removeCallbacks(watchdog);
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
             long now=SystemClock.elapsedRealtime();
             android.util.Log.w("WalkBuddyTiming","Preview stopped reason="+reason+" phase="+state.phase
