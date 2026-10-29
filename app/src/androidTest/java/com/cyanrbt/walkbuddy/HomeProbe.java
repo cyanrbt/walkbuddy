@@ -89,9 +89,12 @@ final class HomeProbe {
                 if(mode==0 && size[0]==320 && size[1]==480)fullyVisible(root,scroll,root.findViewById(R.id.journey_hint));
                 if(mode==0) {
                     int art=root.findViewById(R.id.home_brand_art).getVisibility();
-                    measure(root,new int[]{800,600});
+                    View brandRow=(View)brand.getParent();
+                    brandRow.measure(View.MeasureSpec.makeMeasureSpec(180,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));
+                    if(font==2 && root.findViewById(R.id.home_brand_art).getVisibility()!=View.GONE)throw new AssertionError("Decoration did not yield space to large text");
+                    brandRow.measure(View.MeasureSpec.makeMeasureSpec(500,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));
                     if(root.findViewById(R.id.home_brand_art).getVisibility()!=View.VISIBLE)throw new AssertionError("Wide layout failed to restore decoration");
-                    measure(root,size);
+                    root.forceLayout();measure(root,size);
                     if(root.findViewById(R.id.home_brand_art).getVisibility()!=art || brand.getTextSize()!=chosenTextSize)throw new AssertionError("Brand did not reflow on resize");
                 }
                 Rect before=bounds(root,primary);
