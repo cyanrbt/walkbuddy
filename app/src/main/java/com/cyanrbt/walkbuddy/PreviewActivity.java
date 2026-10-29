@@ -91,6 +91,8 @@ public final class PreviewActivity extends Activity {
     private boolean previewSeen;
     private Button pipButton, restartButton;
     private long brightnessAt,sampledAt,analysisEpoch;
+    private Runnable pendingCapture;
+    private long deferredCaptureCount;
     private static InferenceWorker<BitmapFrame,LocalDetector.Result> sharedWorker;
     private InferenceWorker<BitmapFrame,LocalDetector.Result> worker;
     private InferenceWorker.Ticket analysisTicket;
@@ -403,15 +405,7 @@ public final class PreviewActivity extends Activity {
                                     @Override public void onCaptureCompleted(CameraCaptureSession s,CaptureRequest r,TotalCaptureResult result) {
                                         if(token!=state.generation || destroyed) return;
                                         Long stamp=result.get(CaptureResult.SENSOR_TIMESTAMP);if(stamp==null)return;
-                                        long now=SystemClock.elapsedRealtime();
-                                        if(state.expired(now)){fail("采集或显示截止时间已过：不可用");return;}
-                                        long captureAgeNanos=SystemClock.elapsedRealtimeNanos()-stamp;
-                                        if(realtimeTimestamp && (captureAgeNanos>1200000000L || captureAgeNanos<0)) {
-                                            android.util.Log.w("WalkBuddyCamera","Rejected capture ageNanos="+captureAgeNanos
-                                                +" monotonicAgeNanos="+(System.nanoTime()-stamp)+" pip="+isInPictureInPictureMode());
-                                            fail("采集时间戳过期：不可用");return;
-                                        }
-                                        state.capture(stamp,now);state.promote(now);syncTicket();
+                                        captureFrame(token,stamp,SystemClock.elapsedRealtime());
                                     }
                                 },main);
                             } catch(CameraAccessException|RuntimeException e) { fail("无法开始采集：不可用"); }
@@ -425,6 +419,24 @@ public final class PreviewActivity extends Activity {
         } catch(CameraAccessException|RuntimeException e) { fail(RecoveryGuide.Reason.CAMERA_BUSY,"摄像头不可用：检查占用、权限、隐私开关"); }
     }
     private void syncTicket(){if(analysisTicket!=null){analysisTicket.captureAt=state.captureAt;analysisTicket.displayAt=state.displayAt;analysisTicket.analysisAt=state.analysisAt;}}
+    private void captureFrame(long token,long stamp,long receivedAt) {
+        if(destroyed || token!=state.generation)return;
+        long now=SystemClock.elapsedRealtime(),nanos=SystemClock.elapsedRealtimeNanos();
+        CameraFrames.Decision decision=CameraFrames.accept(state,token,stamp,receivedAt,now,nanos,realtimeTimestamp);
+        if(decision==CameraFrames.Decision.DEFER) {
+            if(pendingCapture!=null)return; // One pending metadata observation, never a queue of old frames.
+            deferredCaptureCount++;
+            pendingCapture=()->{pendingCapture=null;captureFrame(token,stamp,receivedAt);};
+            main.postDelayed(pendingCapture,CameraFrames.waitMillis(stamp,nanos));
+        } else if(decision.failure!=null) {
+            android.util.Log.w("WalkBuddyCamera","Rejected capture ageNanos="+(nanos-stamp)
+                +" monotonicAgeNanos="+(System.nanoTime()-stamp)+" pip="+isInPictureInPictureMode());
+            fail(decision.failure);
+        } else if(decision==CameraFrames.Decision.ACCEPTED) {
+            if(pendingCapture!=null){main.removeCallbacks(pendingCapture);pendingCapture=null;}
+            syncTicket();
+        }
+    }
     private void cancelAnalysis(){if(analysisTicket!=null){worker.cancel(analysisTicket);analysisTicket=null;}}
     private void sample(long frameAt) {
         if(analysisTicket==null || !analysisTicket.allowed(SystemClock.elapsedRealtime()))return;
@@ -638,6 +650,7 @@ public final class PreviewActivity extends Activity {
         }
     }
     private void closeCamera() {
+        if(pendingCapture!=null){main.removeCallbacks(pendingCapture);pendingCapture=null;}
         if(depthCamera!=null){depthCamera.stop();depthCamera=null;}depthSnapshot=null;
         if(session!=null) {session.close();session=null;}if(camera!=null){camera.close();camera=null;}if(surface!=null){surface.release();surface=null;}
     }

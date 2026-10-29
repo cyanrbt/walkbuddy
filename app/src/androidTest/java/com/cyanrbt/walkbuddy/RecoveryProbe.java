@@ -81,7 +81,7 @@ final class RecoveryProbe {
 
     private static void assertNoCamera(Activity activity) {
         try {
-            for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket"}) {
+            for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","pendingCapture"}) {
                 Field f=PreviewActivity.class.getDeclaredField(name);f.setAccessible(true);
                 if(f.get(activity)!=null)throw new AssertionError("Resource opened unexpectedly: "+name);
             }

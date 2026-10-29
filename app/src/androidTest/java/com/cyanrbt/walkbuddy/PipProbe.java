@@ -44,7 +44,7 @@ final class PipProbe {
             } finally {runner.removeMonitor(monitor);}
             if(preview==null)throw new AssertionError("Preview did not open from home");
             PreviewActivity host=preview;
-            await(runner,()->state(host).phase==SessionState.Phase.LIVE,"Camera2 LIVE");
+            await(runner,()->live(host),"Camera2 LIVE");
             read(runner,()->{
                 if(((CheckBox)host.findViewById(R.id.preview_recognition)).isChecked()
                     || ((CheckBox)host.findViewById(R.id.preview_sound)).isChecked())throw new AssertionError("Detection/sound must default off");
@@ -65,7 +65,7 @@ final class PipProbe {
             read(runner,()->{assertReleased(host);if(state(host).phase==SessionState.Phase.LIVE)throw new AssertionError("Return auto-started camera");return true;});
             read(runner,()->{if(host.findViewById(R.id.enable_depth).isEnabled())throw new AssertionError("Stopped preview allows mode switching");return true;});
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
-            await(runner,()->state(host).phase==SessionState.Phase.LIVE,"manual restart after Home");
+            await(runner,()->live(host),"manual restart after Home");
             report.append("PASS Home releases camera; returning requires manual restart\n");
 
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
@@ -85,7 +85,7 @@ final class PipProbe {
             // Expand the existing PiP Activity, the same route used by Android's CTS PiP app.
             bringForward(runner,host);
             await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"PiP expansion");
-            await(runner,()->state(host).phase==SessionState.Phase.LIVE && host.findViewById(R.id.preview_controls).getVisibility()==View.VISIBLE,
+            await(runner,()->live(host) && host.findViewById(R.id.preview_controls).getVisibility()==View.VISIBLE,
                 "full preview controls restored");
             report.append("PASS expansion restores controls and keeps preview LIVE\n");
 
@@ -98,7 +98,7 @@ final class PipProbe {
             await(runner,()->(boolean)field(host,"resumed"),"wake/return to preview");
             read(runner,()->{assertReleased(host);return true;});
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
-            await(runner,()->state(host).phase==SessionState.Phase.LIVE,"manual restart after screen-off");
+            await(runner,()->live(host),"manual restart after screen-off");
             report.append("PASS screen-off releases resources; wake/return does not restart camera\n");
 
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
@@ -112,7 +112,8 @@ final class PipProbe {
             });
             await(runner,host::isDestroyed,"PiP stop action closes Activity");
             read(runner,()->{assertReleased(host);assertNotPolling(host);return true;});
-            report.append("PASS PiP stop action releases resources and destroys Activity\nPIP_PROBE_PASS\n");
+            report.append("PASS PiP stop action releases resources and destroys Activity; early metadata waits=")
+                .append(read(runner,()->field(host,"deferredCaptureCount"))).append("\nPIP_PROBE_PASS\n");
             result.putString("stream",report.toString());code=Activity.RESULT_OK;
         } catch(Throwable error) {
             try{screenshot(runner,"pip-failure.png");}catch(Exception ignored){/* Preserve the original failure. */}
@@ -129,7 +130,7 @@ final class PipProbe {
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
     }
     private static void assertReleased(PreviewActivity host) {
-        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone"})
+        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture"})
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
     }
     private static void assertNotPolling(PreviewActivity host) {
@@ -158,6 +159,10 @@ final class PipProbe {
         } catch(Exception error){throw new AssertionError(error);}
     }
     private static SessionState state(PreviewActivity host){return (SessionState)field(host,"state");}
+    private static boolean live(PreviewActivity host) {
+        return state(host).phase==SessionState.Phase.LIVE && host.findViewById(R.id.preview_cover).getVisibility()==View.GONE
+            && host.findViewById(R.id.enable_depth).isEnabled();
+    }
     private static Object field(Object host,String name) {
         try{Field f=PreviewActivity.class.getDeclaredField(name);f.setAccessible(true);return f.get(host);}
         catch(Exception error){throw new AssertionError(error);}
