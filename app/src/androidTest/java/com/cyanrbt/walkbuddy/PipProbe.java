@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.RemoteAction;
 import android.content.Intent;
+import android.content.BroadcastReceiver;
 import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.os.Build;
@@ -182,6 +183,17 @@ final class PipProbe {
             });
             report.append("PASS screen-off releases resources; wake/return does not restart camera\n");
             checkpoint(runner,"wake_restart_live");
+            read(runner,()->{
+                if(!host.getSystemService(PowerManager.class).isInteractive() || host.getSystemService(KeyguardManager.class).isKeyguardLocked())
+                    throw new AssertionError("Replay requires an awake, unlocked device");
+                long generation=state(host).generation;Object camera=field(host,"camera");
+                ((BroadcastReceiver)field(host,"events")).onReceive(host,new Intent(Intent.ACTION_SCREEN_OFF));
+                if(!live(host) || state(host).generation!=generation || field(host,"camera")!=camera)
+                    throw new AssertionError("Late screen-off delivery stopped the explicitly restarted session");
+                return true;
+            });
+            report.append("PASS replayed late screen-off delivery while awake/unlocked leaves the new session LIVE\n");
+            checkpoint(runner,"late_screen_off_ignored");
 
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
             await(runner,host::isInPictureInPictureMode,"second PiP entry");

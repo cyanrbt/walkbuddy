@@ -102,7 +102,9 @@ public final class PreviewActivity extends Activity {
     private boolean analysisReady,analysisHasResult;
     private final BroadcastReceiver events = new BroadcastReceiver() {
         public void onReceive(Context c, Intent intent) {
-            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) fail(RecoveryGuide.Reason.LOCKED,"锁屏：摄像头已停止，请主动重新开启");
+            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())
+                && (!getSystemService(PowerManager.class).isInteractive() || getSystemService(KeyguardManager.class).isKeyguardLocked()))
+                fail(RecoveryGuide.Reason.LOCKED,"锁屏：摄像头已停止，请主动重新开启");
         }
     };
     private final Runnable watchdog = new Runnable() { public void run() {
