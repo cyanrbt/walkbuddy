@@ -95,6 +95,7 @@ public final class PreviewActivity extends Activity {
     private Runnable pendingReadback;
     private boolean readingTexture;
     private long deferredCaptureCount;
+    private long staleStartupGeneration=-1;
     private static InferenceWorker<BitmapFrame,LocalDetector.Result> sharedWorker;
     private InferenceWorker<BitmapFrame,LocalDetector.Result> worker;
     private InferenceWorker.Ticket analysisTicket;
@@ -467,6 +468,9 @@ public final class PreviewActivity extends Activity {
             deferredCaptureCount++;
             pendingCapture=()->{pendingCapture=null;captureFrame(token,stamp,receivedAt);};
             main.postDelayed(pendingCapture,CameraFrames.waitMillis(stamp,nanos));
+        } else if(decision==CameraFrames.Decision.STARTUP_STALE) {
+            if(staleStartupGeneration!=token){staleStartupGeneration=token;android.util.Log.w("WalkBuddyCamera",
+                "Discarding stale startup metadata ageNanos="+(nanos-stamp)+"; original startup deadline unchanged");}
         } else if(decision.failure!=null) {
             android.util.Log.w("WalkBuddyCamera","Rejected capture ageNanos="+(nanos-stamp)
                 +" monotonicAgeNanos="+(System.nanoTime()-stamp)+" captureGapMs="+(now-captureAt)

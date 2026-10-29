@@ -6,7 +6,7 @@ final class CameraFrames {
     // At most one 30fps frame: wait for an early result, never mark it fresh in the future.
     static final long MAX_EARLY_NANOS=33_333_334L;
     enum Decision {
-        ACCEPTED(null), DEFER(null), IGNORED(null),
+        ACCEPTED(null), DEFER(null), IGNORED(null), STARTUP_STALE(null),
         EXPIRED("预览或分析截止时间已过：不可用"),
         STALE("采集时间戳过期：不可用"),
         INVALID("相机时间信息异常：不可用");
@@ -23,9 +23,9 @@ final class CameraFrames {
         if(receivedAt<state.captureAt)return Decision.IGNORED;
         if(realtime) {
             if(stamp>nowNanos) return stamp-nowNanos<=MAX_EARLY_NANOS?Decision.DEFER:fail(state,Decision.INVALID);
-            if(nowNanos-stamp>MAX_AGE_NANOS)return fail(state,Decision.STALE);
+            if(nowNanos-stamp>MAX_AGE_NANOS)return stale(state);
         }
-        if(now-receivedAt>1200)return fail(state,Decision.STALE);
+        if(now-receivedAt>1200)return stale(state);
         // Waiting must not make this observation newer than when the callback first arrived.
         state.capture(stamp,receivedAt);state.promote(now);
         return Decision.ACCEPTED;
@@ -36,5 +36,9 @@ final class CameraFrames {
     }
     private static Decision fail(SessionState state,Decision reason) {
         state.unavailable(reason.failure);return reason;
+    }
+    private static Decision stale(SessionState state) {
+        // An old first packet is not a fresh capture. Keep the cover and original 5s deadline.
+        return state.phase==SessionState.Phase.STARTING?Decision.STARTUP_STALE:fail(state,Decision.STALE);
     }
 }

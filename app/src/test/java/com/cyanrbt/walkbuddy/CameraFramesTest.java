@@ -88,4 +88,19 @@ public class CameraFramesTest {
         assertEquals(1,CameraFrames.waitMillis(1_100_000_001L,1_100_000_000L));
         assertEquals(2,CameraFrames.waitMillis(1_101_000_001L,1_100_000_000L));
     }
+    @Test public void oldStartupMetadataCannotCompletePreviewButAFreshCaptureCan() {
+        SessionState s=new SessionState();s.start(1000);s.display(2500);long token=s.generation;
+        assertEquals(STARTUP_STALE,CameraFrames.accept(s,token,1_000_000_000L,2500,2500,2_500_000_000L,true));
+        assertEquals(0,s.captureAt);assertEquals(SessionState.Phase.STARTING,s.phase);assertEquals(1000,s.startedAt);
+        assertEquals(ACCEPTED,CameraFrames.accept(s,token,2_501_000_000L,2501,2501,2_501_000_000L,true));
+        assertEquals(2501,s.captureAt);assertEquals(SessionState.Phase.LIVE,s.phase);
+    }
+    @Test public void discardingOldStartupPacketsNeverMovesTheFiveSecondDeadline() {
+        SessionState s=new SessionState();s.start(1000);s.display(5999);long token=s.generation;
+        assertEquals(STARTUP_STALE,CameraFrames.accept(s,token,1_000_000_000L,5999,6000,6_000_000_000L,true));
+        assertEquals(1000,s.startedAt);assertEquals(0,s.captureAt);assertEquals(SessionState.Phase.STARTING,s.phase);
+        assertEquals(EXPIRED,CameraFrames.accept(s,token,1_000_000_000L,6001,6001,6_001_000_000L,true));
+        assertEquals(SessionState.Phase.UNAVAILABLE,s.phase);
+        assertEquals(IGNORED,CameraFrames.accept(s,token,6_002_000_000L,6002,6002,6_002_000_000L,true));
+    }
 }
