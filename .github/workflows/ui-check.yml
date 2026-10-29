@@ -13,6 +13,10 @@ jobs:
   layout:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [35, 36]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -39,7 +43,7 @@ jobs:
       - name: Run camera-free Android checks
         uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2
         with:
-          api-level: 35
+          api-level: ${{ matrix.api-level }}
           target: google_apis
           arch: x86_64
           disable-animations: true
@@ -49,6 +53,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: android-ui-evidence
+          name: android-ui-evidence-api-${{ matrix.api-level }}
           path: ui-evidence/
           if-no-files-found: warn

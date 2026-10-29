@@ -43,6 +43,12 @@
 
 [云端验证](https://github.com/cyanrbt/walkbuddy/actions/runs/40854253928)的 16 组布局与轮廓像素检查已通过。代表截图：[320×480、200% 字体](v0.4.6/small-font200.png)、[640×360 分栏](v0.4.6/wide.png)。截图为 Android 控件的软件 Canvas 输出，画面区域是明确标注的测试占位。
 
+## 0.4.7 最近提醒与恢复引导
+
+依据 [Android 16 对无障碍 announcement 的调整](https://developer.android.com/about/versions/16/behavior-changes-all#disruptive-a11y)，把风险提醒迁移到实际可见的礼貌 live region。检测详情不再同时作为自动播报源；画面底部“最近提醒”仅在应用提醒策略允许时更新。详情仍能通过焦点读取最新位置/距离，最近提醒明确表示较早一次提示，避免把低频内容冒充实时测量。相同文字不重复提交；过期、降级与停止会隐藏旧提醒。
+
+恢复页把短标题放在不透明遮挡层，具体操作说明放在滚动面板首部，固定主要按钮指向设置、重新开启、基础预览或返回首页。动作由明确的故障分类选择，不解析错误文案。等待安装/切换时禁用重复恢复；从设置返回后仍需主动开启。这里的语义与策略检查不能证明 TalkBack 实际朗读顺序或设备效果。
+
 ## 图标资源
 
 - `app/src/main/res/drawable-nodpi/walkbuddy_mascot.png`：内置 imagegen 生成的 1254 × 1254 透明 PNG，首页和预览页共用。

@@ -110,8 +110,8 @@ public class ProductSurfaceTest {
         String activity = read(root.resolve("app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java"));
         assertTrue(service.contains("DepthGuide.resolve"));
         assertTrue(service.contains("renderDepthGuide"));
-        assertTrue(service.contains("AccessibilitySpeech"));
-        assertTrue(service.contains("announceForAccessibility"));
+        assertTrue(service.contains("RiskAnnouncer"));
+        assertFalse(service.contains("announceForAccessibility"));
         assertTrue(activity.contains("paintJourney"));
         assertTrue(activity.contains("status.setText(report)"));
         assertFalse(activity.contains("帧龄") || activity.contains("毫秒") || activity.contains(" ms"));

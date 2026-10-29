@@ -89,7 +89,7 @@ assert (root / "app/src/main/res/drawable-nodpi/walkbuddy_mascot.png").stat().st
 service = read("app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java")
 activity = read("app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java")
 assert "DepthGuide.resolve" in service and "renderDepthGuide" in service
-assert "AccessibilitySpeech" in service and "announceForAccessibility" in service
+assert "RiskAnnouncer" in service and "announceForAccessibility" not in service
 assert "status.setText(report)" in activity
 assert "paintJourney" in activity
 assert "帧龄" not in activity and "毫秒" not in activity and " ms" not in activity

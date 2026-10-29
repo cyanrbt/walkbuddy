@@ -4,7 +4,11 @@ serial="${WALKBUDDY_EMULATOR_SERIAL:-emulator-5554}"
 mkdir -p ui-evidence
 adb -s "$serial" install -r app/build/outputs/apk/debug/app-debug.apk
 adb -s "$serial" install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-for probe in overlay layout; do
+for probe in overlay layout recovery; do
+  if [[ "$probe" == recovery ]]; then
+    # Revocation can kill the app process: do it before, never inside live instrumentation.
+    adb -s "$serial" shell pm revoke com.cyanrbt.walkbuddy android.permission.CAMERA
+  fi
   adb -s "$serial" shell am instrument -w -e "$probe" true com.cyanrbt.walkbuddy.test/com.cyanrbt.walkbuddy.RuntimeProbe > "ui-evidence/${probe}.txt"
   cat "ui-evidence/${probe}.txt"
   python3 - "$probe" <<'PY'

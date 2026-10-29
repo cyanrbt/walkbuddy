@@ -37,7 +37,7 @@ public final class PreviewActivity extends Activity {
     private final Handler main = new Handler(Looper.getMainLooper());
     private final SessionState state = new SessionState();
     private final DetectionFeedback feedback = new DetectionFeedback();
-    private final AccessibilitySpeech speech = new AccessibilitySpeech();
+    private RiskAnnouncer announcer;
     private boolean restoreDetection,restoreSound;
     private ToneGenerator activeTone;
     private WindowManager wm;
@@ -87,6 +87,7 @@ public final class PreviewActivity extends Activity {
     };
     private boolean realtimeTimestamp, destroyed, disableRotateCrop, resumed;
     private boolean initialStart;
+    private RecoveryGuide.Reason recoveryReason=RecoveryGuide.Reason.HIDDEN;
     private boolean previewSeen;
     private Button pipButton, restartButton;
     private long brightnessAt,sampledAt,analysisEpoch;
@@ -95,7 +96,7 @@ public final class PreviewActivity extends Activity {
     private InferenceWorker.Ticket analysisTicket;
     private final BroadcastReceiver events = new BroadcastReceiver() {
         public void onReceive(Context c, Intent intent) {
-            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) fail("锁屏：摄像头已停止，请主动重新开启");
+            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) fail(RecoveryGuide.Reason.LOCKED,"锁屏：摄像头已停止，请主动重新开启");
         }
     };
     private final Runnable watchdog = new Runnable() { public void run() {
@@ -106,7 +107,7 @@ public final class PreviewActivity extends Activity {
         if(useDepth)renderDepthGuide();
         if(postureHint!=null && now-postureAt>1500){postureHint.setVisibility(View.GONE);posturePolicy.reset();}
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
-            if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED) fail("权限已撤回：不可用");
+            if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED) fail(RecoveryGuide.Reason.PERMISSION,"权限已撤回：不可用");
             else if(state.expired(now)) fail("画面或分析帧过期：不可用，请重新开启");
             else { state.promote(now); render(now); }
         }
@@ -159,14 +160,14 @@ public final class PreviewActivity extends Activity {
         // Called when the PiP window is dismissed or the preview is no longer visible.
         // Do not gate this on isInPictureInPictureMode(): it can still be true on dismissal.
         main.removeCallbacks(watchdog);
-        fail("预览已离开屏幕，摄像头已停止；请主动重新开启");
+        fail(RecoveryGuide.Reason.HIDDEN,"预览已离开屏幕，摄像头已停止；请主动重新开启");
         super.onStop();
     }
 
     @Override protected void onDestroy() {
         destroyed = true;
         if (active.get() == this) active.clear();
-        cancelAnalysis(); state.stop(); feedback.clear(); speech.clear(); silence();
+        cancelAnalysis(); state.stop(); feedback.clear(); if(announcer!=null)announcer.clear(); silence();
         main.removeCallbacksAndMessages(null); stopPosture(); closeCamera();
         unregisterReceiver(events);
         getSystemService(DisplayManager.class).unregisterDisplayListener(displayListener);
@@ -179,7 +180,7 @@ public final class PreviewActivity extends Activity {
         KeyguardManager lock = getSystemService(KeyguardManager.class);
         if (lock.isKeyguardLocked() || !getSystemService(PowerManager.class).isInteractive()) return;
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            fail("请返回首页允许摄像头，再开启预览"); return;
+            fail(RecoveryGuide.Reason.PERMISSION,"摄像头未获允许，预览已停止"); return;
         }
         if (state.phase == SessionState.Phase.STARTING || state.phase == SessionState.Phase.LIVE) return;
         if (texture != null) texture.setSurfaceTextureListener(null);
@@ -270,6 +271,7 @@ public final class PreviewActivity extends Activity {
         texture=root.findViewById(R.id.camera_preview);texture.setOpaque(false);
         cover=root.findViewById(R.id.preview_cover);
         detectionOverlay=root.findViewById(R.id.detection_overlay);
+        announcer=new RiskAnnouncer(root);
         postureHint=root.findViewById(R.id.posture_hint);
         info=root.findViewById(R.id.preview_info);
         depthStatus=root.findViewById(R.id.depth_status);
@@ -280,7 +282,7 @@ public final class PreviewActivity extends Activity {
         renderDepthGuide();
         recognition=root.findViewById(R.id.preview_recognition);
         recognition.setOnCheckedChangeListener((b,checked)-> {
-            feedback.clear();detectionOverlay.clear();analysisEpoch++;cancelAnalysis();
+            feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
             b.setText(checked?"检测：已开启":"检测：已关闭");
@@ -297,7 +299,7 @@ public final class PreviewActivity extends Activity {
         pipButton.setOnClickListener(v->enterPip());
         restartButton=root.findViewById(R.id.restart_preview);
         restartButton.setBackgroundTintList(null);
-        restartButton.setOnClickListener(v->startPreview());
+        restartButton.setOnClickListener(v->recoverPreview());
         sound.setOnCheckedChangeListener((button, checked) -> { button.setText(checked?"声音：已开启":"声音：已关闭"); if (!checked) silence(); });
         texture.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h) { openCamera(s); }
@@ -309,7 +311,7 @@ public final class PreviewActivity extends Activity {
                 if(state.expired(now)){fail("采集或显示截止时间已过：不可用");return;}
                 if(now-brightnessAt>=1000) { brightnessAt=now;Bitmap check=texture.getBitmap(16,12);
                     if(check!=null) {long light=0;for(int y=0;y<12;y++)for(int x=0;x<16;x++){int c=check.getPixel(x,y);light+=Color.red(c)+Color.green(c)+Color.blue(c);}check.recycle();
-                        if(light<16*12*3*3){fail("画面过暗或隐私占位：不可用（仅白天）");return;}
+                        if(light<16*12*3*3){fail(RecoveryGuide.Reason.DARK,"画面过暗或隐私占位：不可用（仅白天）");return;}
                     }
                 }
                 state.display(now);state.promote(now);syncTicket();render(now);
@@ -337,7 +339,7 @@ public final class PreviewActivity extends Activity {
         previewGeometry=next;
         Matrix matrix=new Matrix();matrix.setValues(next.matrix);texture.setTransform(matrix);
         // 变换后旧结果不再与当前画面对应；等待新显示帧重新采样。
-        feedback.clear();detectionOverlay.clear();silence();analysisEpoch++;cancelAnalysis();
+        feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;silence();analysisEpoch++;cancelAnalysis();
         if(state.recognition){long now=SystemClock.elapsedRealtime();state.analysisAt=now;
             analysisTicket=new InferenceWorker.Ticket(now);syncTicket();sampledAt=now;}
     }
@@ -365,7 +367,7 @@ public final class PreviewActivity extends Activity {
                     renderDepthStatus(now);
                     renderDepthGuide();
                 }
-                public void failed(String reason){if(!destroyed && token==state.generation){useDepth=false;fail(reason);refreshDepthAvailability();}}
+                public void failed(String reason){if(!destroyed && token==state.generation){useDepth=false;fail(RecoveryGuide.Reason.DEPTH,reason);refreshDepthAvailability();}}
             });depthCamera.start();return;
         }
         try {
@@ -382,7 +384,7 @@ public final class PreviewActivity extends Activity {
                     realtimeTimestamp=Integer.valueOf(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE_REALTIME).equals(c.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE));break;
                 }
             }
-            if(selected==null) { fail("没有支持 640×480 的后置摄像头：不可用");return; }
+            if(selected==null) { fail(RecoveryGuide.Reason.UNSUPPORTED,"没有支持 640×480 的后置摄像头：不可用");return; }
             surfaceTexture.setDefaultBufferSize(BUFFER_WIDTH,BUFFER_HEIGHT);transform();surface=new Surface(surfaceTexture);
             manager.openCamera(selected,new CameraDevice.StateCallback() {
                 public void onOpened(CameraDevice device) {
@@ -411,10 +413,10 @@ public final class PreviewActivity extends Activity {
                         public void onConfigureFailed(CameraCaptureSession s) { s.close();if(token==state.generation)fail("摄像头配置失败：不可用"); }
                     },main); } catch(CameraAccessException|RuntimeException e) { fail("建立采集会话失败：不可用"); }
                 }
-                public void onDisconnected(CameraDevice device) {device.close();if(token==state.generation)fail("摄像头断开或被其他应用占用：不可用");}
-                public void onError(CameraDevice device,int error) {device.close();if(token==state.generation)fail("摄像头错误 / 被占用（"+error+"）：不可用");}
+                public void onDisconnected(CameraDevice device) {device.close();if(token==state.generation)fail(RecoveryGuide.Reason.CAMERA_BUSY,"摄像头断开或被其他应用占用：不可用");}
+                public void onError(CameraDevice device,int error) {device.close();if(token==state.generation)fail(RecoveryGuide.Reason.CAMERA_BUSY,"摄像头错误 / 被占用（"+error+"）：不可用");}
             },main);
-        } catch(CameraAccessException|RuntimeException e) { fail("摄像头不可用：检查占用、权限、隐私开关"); }
+        } catch(CameraAccessException|RuntimeException e) { fail(RecoveryGuide.Reason.CAMERA_BUSY,"摄像头不可用：检查占用、权限、隐私开关"); }
     }
     private void syncTicket(){if(analysisTicket!=null){analysisTicket.captureAt=state.captureAt;analysisTicket.displayAt=state.displayAt;analysisTicket.analysisAt=state.analysisAt;}}
     private void cancelAnalysis(){if(analysisTicket!=null){worker.cancel(analysisTicket);analysisTicket=null;}}
@@ -428,7 +430,7 @@ public final class PreviewActivity extends Activity {
             if(destroyed || ticket.cancelled || ticket!=analysisTicket || epoch!=analysisEpoch || token!=state.generation)return;
             if(state.expired(now)){fail("采集/显示/分析截止时间已过：不可用");return;}
             if(!state.acceptResult(token,frameAt,now))return;
-            if(error!=null){fail("模型初始化或推理失败：不可用");return;}
+            if(error!=null){fail(RecoveryGuide.Reason.MODEL,"模型初始化或推理失败：不可用");return;}
             state.analysisAt=now;syncTicket();
             boolean notify=feedback.basic(result.detections,frameAt,now);
             showFeedback(now);
@@ -454,31 +456,39 @@ public final class PreviewActivity extends Activity {
                 .putBoolean(HomeJourney.PREVIEW_SEEN, true).apply();
         }
         cover.setVisibility(live?View.GONE:View.VISIBLE);
-        if(!live) setTextIfChanged(cover,state.reason);
+        if(!live && state.phase==SessionState.Phase.STARTING) setTextIfChanged(cover,state.reason);
         recognition.setEnabled(live && LocalDetector.AVAILABLE);
         sound.setEnabled(live && state.recognition);
         if(live && restoreDetection){boolean enableSound=restoreSound;restoreDetection=restoreSound=false;recognition.setChecked(true);sound.setChecked(enableSound);}
         pipButton.setEnabled(live);
         boolean restart=state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED;
         PreviewChrome.showRestart(root,restart);
+        if(restart)PreviewRecovery.show(root,RecoveryGuide.resolve(recoveryReason,
+            checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED));
+        else PreviewRecovery.clear(root);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(R.string.info_recognition_off));}
         if(titleView!=null) setTextIfChanged(titleView,getText(live?R.string.window_live:R.string.window_idle));
         renderDepthGuide();
     }
     private void fail(String message) {
+        fail(RecoveryGuide.Reason.GENERAL,message);
+    }
+    private void fail(RecoveryGuide.Reason reason,String message) {
         if(destroyed)return;
+        recoveryReason=reason;
         restoreDetection=restoreSound=false;
-        cancelAnalysis();state.unavailable(message);feedback.clear();speech.clear();pendingSpeak=false;silence();
+        cancelAnalysis();state.unavailable(message);feedback.clear();if(announcer!=null)announcer.clear();pendingSpeak=false;silence();
         if(detectionOverlay!=null)detectionOverlay.clear();
         stopPosture();
         if(recognition!=null)recognition.setChecked(false);
         // 先不透明遮挡，再移除纹理，从视图树彻底清除最后一帧。
-        if(cover!=null) {cover.setText(message);cover.setVisibility(View.VISIBLE);}
+        if(cover!=null) cover.setVisibility(View.VISIBLE);
         closeCamera();
         if(texture!=null) {((FrameLayout)texture.getParent()).removeView(texture);texture=null;}
         if(info!=null)info.setText(R.string.info_stopped);
         if(root!=null){render(SystemClock.elapsedRealtime());renderDepthGuide();}
+        if(root!=null)((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
         publicReport=message+"；提醒已停止";
     }
     private void startPosture() {
@@ -519,13 +529,32 @@ public final class PreviewActivity extends Activity {
         if(!resumed || destroyed)return;
         if(userRequested){installDetection=state.recognition;installSound=sound.isChecked();}
         try{
-            if(ArCoreApk.getInstance().requestInstall(this,userRequested)==ArCoreApk.InstallStatus.INSTALL_REQUESTED){pendingDepthInstall=true;fail("等待增强服务安装；返回后继续");return;}
+            if(ArCoreApk.getInstance().requestInstall(this,userRequested)==ArCoreApk.InstallStatus.INSTALL_REQUESTED){pendingDepthInstall=true;fail(RecoveryGuide.Reason.INSTALLING,"等待增强服务安装；返回后继续");return;}
             switchDepth(true);restoreDetection=installDetection;restoreSound=installSound;
-        }catch(Exception|LinkageError error){pendingDepthInstall=false;useDepth=false;refreshDepthAvailability();info.setText("增强服务暂不可用，请继续基础模式");}
+        }catch(Exception|LinkageError error){pendingDepthInstall=false;useDepth=false;fail(RecoveryGuide.Reason.DEPTH,"增强服务暂不可用，请继续基础模式");refreshDepthAvailability();}
+    }
+    private void recoverPreview() {
+        if(!resumed || destroyed || isInPictureInPictureMode())return;
+        RecoveryGuide.Prompt prompt=RecoveryGuide.resolve(recoveryReason,
+            checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED);
+        switch(prompt.action) {
+            case SETTINGS:
+                try{startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    android.net.Uri.parse("package:"+getPackageName())));}
+                catch(RuntimeException error){Toast.makeText(this,R.string.settings_unavailable,Toast.LENGTH_LONG).show();}
+                return;
+            case HOME: finish();return;
+            case WAIT: return;
+            case BASIC:
+                if(useDepth || recoveryReason==RecoveryGuide.Reason.DEPTH)switchDepth(false);
+                else {useDepth=false;startPreview();}
+                return;
+            default: startPreview();
+        }
     }
     private void switchDepth(boolean enabled) {
         boolean detection=state.recognition,audio=sound.isChecked();
-        fail("正在切换观察模式");useDepth=enabled;restoreDetection=detection;restoreSound=audio;
+        fail(RecoveryGuide.Reason.SWITCHING,"正在切换观察模式");useDepth=enabled;restoreDetection=detection;restoreSound=audio;
         long token=state.generation;
         ArDepthCamera.afterRelease(()->main.postDelayed(()->{if(token==state.generation)startPreview();},250));
     }
@@ -547,8 +576,7 @@ public final class PreviewActivity extends Activity {
         Detection.Risk worst=Detection.Risk.CAPTURED;
         for(Detection d:visible.detections)if(d.risk.ordinal()>worst.ordinal())worst=d.risk;
         boolean alert=pendingSpeak;pendingSpeak=false;
-        String spoken=speech.update(visible.message,worst,alert,now);
-        if(spoken!=null && info!=null)info.announceForAccessibility(spoken);
+        announcer.update(visible.message,worst,alert,now);
     }
     private void renderDepthGuide() {
         if(root==null || depthGuideHint==null)return;

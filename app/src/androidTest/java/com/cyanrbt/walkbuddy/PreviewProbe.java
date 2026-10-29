@@ -12,8 +12,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /** 模拟器真实 TextureView/Surface 管线：合成生产者模拟系统已补偿 sensor 的纹理。 */
 public class PreviewProbe extends Instrumentation {
- protected boolean preview, pip, overlay, layout;
- @Override public void onCreate(Bundle args){super.onCreate(args);pip=args!=null && "true".equals(args.getString("pip"));overlay=args!=null && "true".equals(args.getString("overlay"));layout=args!=null && "true".equals(args.getString("layout"));preview=args!=null && "true".equals(args.getString("preview"));start();}
+ protected boolean preview, pip, overlay, layout, recovery;
+ @Override public void onCreate(Bundle args){super.onCreate(args);pip=enabled(args,"pip");overlay=enabled(args,"overlay");layout=enabled(args,"layout");recovery=enabled(args,"recovery");preview=enabled(args,"preview");start();}
+ private static boolean enabled(Bundle args,String name){return args!=null && "true".equals(args.getString(name));}
  @Override public void onStart(){Bundle result=new Bundle();Activity activity=null;StringBuilder report=new StringBuilder();try{
   activity=startActivitySync(new Intent(getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
   final Activity host=activity;int cases=0;

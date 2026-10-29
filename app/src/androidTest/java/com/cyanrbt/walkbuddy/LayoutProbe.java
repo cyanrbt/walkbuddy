@@ -32,7 +32,8 @@ final class LayoutProbe {
             AtomicReference<Throwable> failure=new AtomicReference<>();
             runner.runOnMainSync(()->{try{check(runner.getTargetContext(),report);}catch(Throwable error){failure.set(error);}});
             if(failure.get()!=null)throw new AssertionError(failure.get());
-            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=16; fixed actions, camera space, scroll reach, compact/restore\n");
+            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=16; recovery-presentations="
+                +(RecoveryGuide.Reason.values().length*32)+"; risk live region; fixed actions, camera space, scroll reach, compact/restore\n");
             runner.finish(Activity.RESULT_OK,result);
         } catch(Throwable error) {
             result.putString("stream",report+"LAYOUT_PROBE_FAIL: "+error);
@@ -61,6 +62,8 @@ final class LayoutProbe {
                     new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
                 ((TextView)root.findViewById(R.id.preview_info)).setText("画面关注 · 人 · 中间 · 未测距");
                 ((TextView)root.findViewById(R.id.depth_guide_hint)).setText("深度覆盖不足 · 对准地面与前方障碍再试");
+                checkFeedback(root);
+                ((TextView)root.findViewById(R.id.preview_title)).setText(R.string.window_live);
                 measure(root,size[0],size[1]);
                 View camera=root.findViewById(R.id.preview_frame),pane=root.findViewById(R.id.preview_content);
                 if(camera.getWidth()<=0 || camera.getHeight()<pane.getHeight()/2)
@@ -82,16 +85,61 @@ final class LayoutProbe {
                 PreviewChrome.showRestart(root,true);measure(root,size[0],size[1]);
                 fullyVisible(root,root.findViewById(R.id.restart_preview));
                 if(root.findViewById(R.id.enter_pip).getVisibility()!=View.GONE)throw new AssertionError("PiP action survived restart state");
+                checkRecovery(root,size[0],size[1],new File(output,name+"-recovery.png"));
                 PreviewChrome.compact(root,true,true);measure(root,180,240);
                 if(camera.getWidth()!=180 || camera.getHeight()!=240)throw new AssertionError("PiP lost camera space to hidden controls");
                 if(root.findViewById(R.id.pip_depth_status).getVisibility()!=View.VISIBLE)throw new AssertionError("Missing compact depth status");
                 PreviewChrome.compact(root,false,false);PreviewChrome.showRestart(root,false);
+                root.findViewById(R.id.preview_cover).setVisibility(View.GONE);
+                PreviewRecovery.clear(root);
                 root.setPadding(0,24,0,24);measure(root,size[0],size[1]);
                 fullyVisible(root,root.findViewById(R.id.preview_stop));
                 fullyVisible(root,root.findViewById(R.id.enter_pip));
                 if(scroll.getVisibility()!=View.VISIBLE || scroll.getWidth()<=0)throw new AssertionError("Panel did not restore");
                 report.append("PASS ").append(name).append(" camera=").append(camera.getWidth()).append('x').append(camera.getHeight()).append('\n');
             }
+    }
+
+    private static void checkFeedback(View root) {
+        TextView details=root.findViewById(R.id.preview_info),banner=root.findViewById(R.id.recent_alert);
+        if(details.getAccessibilityLiveRegion()!=View.ACCESSIBILITY_LIVE_REGION_NONE
+            || banner.getAccessibilityLiveRegion()!=View.ACCESSIBILITY_LIVE_REGION_POLITE)
+            throw new AssertionError("Detection feedback has duplicate or missing live regions");
+        RiskAnnouncer announcer=new RiskAnnouncer(root);
+        announcer.update("候选",Detection.Risk.CAPTURED,false,100);
+        if(banner.getVisibility()!=View.GONE)throw new AssertionError("Gray candidate created a warning");
+        announcer.update("画面关注 · 人 · 未测距",Detection.Risk.CAUTION,true,200);
+        if(banner.getVisibility()!=View.VISIBLE)throw new AssertionError("Missing confirmed warning");
+        announcer.update("近处注意 · 约 0.7 米",Detection.Risk.NEAR,false,201);
+        if(!banner.getText().toString().contains("0.7"))throw new AssertionError("Risk upgrade was suppressed");
+        String recent=banner.getText().toString();
+        for(int i=0;i<100;i++)announcer.update("新距离 "+i,Detection.Risk.NEAR,false,300+i);
+        if(!recent.contentEquals(banner.getText()))throw new AssertionError("Every frame updated the live warning");
+        announcer.update("黄",Detection.Risk.CAUTION,false,400);
+        if(banner.getVisibility()!=View.GONE)throw new AssertionError("Old red warning survived downgrade");
+        announcer.clear();announcer.update("无目标",Detection.Risk.CAPTURED,false,500);
+        if(banner.getVisibility()!=View.GONE)throw new AssertionError("Warning survived stop/clear");
+        announcer.update("画面关注 · 人 · 中间 · 未测距",Detection.Risk.CAUTION,true,600);
+    }
+
+    private static void checkRecovery(View root,int width,int height,File screenshot) throws Exception {
+        root.findViewById(R.id.recent_alert).setVisibility(View.GONE);
+        ((TextView)root.findViewById(R.id.preview_title)).setText(R.string.window_idle);
+        TextView cover=root.findViewById(R.id.preview_cover),action=root.findViewById(R.id.restart_preview);
+        for(RecoveryGuide.Reason reason:RecoveryGuide.Reason.values())for(boolean granted:new boolean[]{false,true}) {
+            RecoveryGuide.Prompt prompt=RecoveryGuide.resolve(reason,granted);
+            PreviewRecovery.show(root,prompt);measure(root,width,height);
+            fullyVisible(root,action);fullyVisible(root,root.findViewById(R.id.preview_stop));
+            if(!prompt.button.contentEquals(action.getText()) || action.isEnabled()!=(prompt.action!=RecoveryGuide.Action.WAIT))
+                throw new AssertionError("Wrong recovery action: "+reason);
+            if(cover.getVisibility()!=View.VISIBLE || !prompt.title.contentEquals(cover.getText())
+                || cover.getLayout().getHeight()>cover.getHeight()-cover.getPaddingTop()-cover.getPaddingBottom())
+                throw new AssertionError("Recovery cover title clipped: "+reason+" at "+width+"x"+height);
+            if(reason==RecoveryGuide.Reason.DARK && granted) {
+                ((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
+                screenshot(root,screenshot);
+            }
+        }
     }
 
     private static void measure(View root,int w,int h) {
