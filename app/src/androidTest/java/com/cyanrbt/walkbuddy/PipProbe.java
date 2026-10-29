@@ -56,6 +56,7 @@ final class PipProbe {
                 return true;
             });
             report.append("PASS Camera2 capture and display are LIVE; default detection/sound off\n");
+            checkpoint(runner,"camera_live");
 
             // Real Home transition without PiP must release resources and stay stopped on return.
             shell(runner,"input keyevent KEYCODE_HOME");
@@ -69,11 +70,14 @@ final class PipProbe {
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
             await(runner,()->live(host),"manual restart after Home");
             report.append("PASS Home releases camera; returning requires manual restart\n");
+            checkpoint(runner,"home_restart_live");
 
             read(runner,()->host.findViewById(R.id.preview_recognition).performClick());
+            checkpoint(runner,"recognition_on");
             await(runner,()->live(host) && basicAt(host)>0,"first actual model result");
             long firstResult=read(runner,()->basicAt(host));
             await(runner,()->live(host) && basicAt(host)>firstResult+400,"repeated actual model results");
+            checkpoint(runner,"recognition_results");
             InferenceWorker.Ticket oldTicket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
             read(runner,()->{
                 host.findViewById(R.id.preview_recognition).performClick();
@@ -81,12 +85,15 @@ final class PipProbe {
                     throw new AssertionError("Detection off retained analysis or feedback");
                 return true;
             });
+            checkpoint(runner,"recognition_off");
             read(runner,()->host.findViewById(R.id.preview_recognition).performClick());
             await(runner,()->live(host) && basicAt(host)>firstResult && field(host,"analysisTicket")!=oldTicket,"model restart after toggle");
+            checkpoint(runner,"recognition_reenabled");
             report.append("PASS actual bundled-model results advance; off cancels Ticket/feedback; re-enable produces new results\n");
 
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
             await(runner,host::isInPictureInPictureMode,"system PiP entry");
+            checkpoint(runner,"pip_entered");
             await(runner,()->host.getSharedPreferences(HomeJourney.PREFERENCES,0).getBoolean(HomeJourney.PIP_SEEN,false),"PiP history");
             long first=read(runner,()->state(host).captureAt);
             await(runner,()->state(host).phase==SessionState.Phase.LIVE && state(host).captureAt>first+500
@@ -98,6 +105,7 @@ final class PipProbe {
             });
             screenshot(runner,"pip-camera.png");
             report.append("PASS actual system PiP, advancing capture/display/model results, full controls hidden\n");
+            checkpoint(runner,"pip_analysis_live");
 
             // Expand the existing PiP Activity, the same route used by Android's CTS PiP app.
             bringForward(runner,host);
@@ -107,6 +115,7 @@ final class PipProbe {
             long expandedAt=android.os.SystemClock.elapsedRealtime();
             await(runner,()->live(host) && state(host).recognition && basicAt(host)>expandedAt,"actual analysis after expansion");
             report.append("PASS expansion restores controls and keeps preview/model results LIVE\n");
+            checkpoint(runner,"expanded_analysis_live");
 
             // Screen-off must stop even while the camera Activity was recently in PiP.
             shell(runner,"input keyevent KEYCODE_SLEEP");
@@ -114,10 +123,12 @@ final class PipProbe {
                 && !host.getSystemService(PowerManager.class).isInteractive() && !(boolean)field(host,"resumed")
                 && !((Handler)field(host,"main")).hasCallbacks((Runnable)field(host,"watchdog")),"screen-off completes and stops camera");
             read(runner,()->{assertReleased(host);assertNotPolling(host);return true;});
+            checkpoint(runner,"screen_off_complete");
             shell(runner,"input keyevent KEYCODE_WAKEUP");shell(runner,"wm dismiss-keyguard");
             bringForward(runner,host);
             await(runner,()->(boolean)field(host,"resumed") && host.getSystemService(PowerManager.class).isInteractive()
                 && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake, unlock and return to preview");
+            checkpoint(runner,"wake_ready");
             read(runner,()->{assertReleased(host);return true;});
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
             await(runner,()->live(host),"manual restart after screen-off");
@@ -128,6 +139,7 @@ final class PipProbe {
                 return true;
             });
             report.append("PASS screen-off releases resources; wake/return does not restart camera\n");
+            checkpoint(runner,"wake_restart_live");
 
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
             await(runner,host::isInPictureInPictureMode,"second PiP entry");
@@ -169,7 +181,11 @@ final class PipProbe {
     private static void await(Instrumentation runner,BooleanSupplier condition,String label) throws Exception {
         long deadline=System.nanoTime()+10_000_000_000L;
         while(System.nanoTime()<deadline){if(read(runner,condition::getAsBoolean))return;Thread.sleep(50);}
-        throw new AssertionError("Timed out: "+label+"; "+PreviewActivity.report());
+        throw new AssertionError("Timed out: "+label+"; interactive="+runner.getTargetContext().getSystemService(PowerManager.class).isInteractive()
+            +" keyguard="+runner.getTargetContext().getSystemService(KeyguardManager.class).isKeyguardLocked()+"; "+PreviewActivity.report());
+    }
+    private static void checkpoint(Instrumentation runner,String stage) {
+        Bundle status=new Bundle();status.putString("stream","PIP_STAGE "+stage+" elapsedMs="+android.os.SystemClock.elapsedRealtime()+"\n");runner.sendStatus(0,status);
     }
     private interface Value<T>{T get();}
     private static <T>T read(Instrumentation runner,Value<T> value) {
