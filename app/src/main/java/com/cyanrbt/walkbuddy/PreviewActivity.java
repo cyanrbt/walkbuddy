@@ -145,6 +145,7 @@ public final class PreviewActivity extends Activity {
     @Override protected void onResume() {
         super.onResume();
         resumed = true;
+        setCompactUi(isInPictureInPictureMode());
         if (initialStart) { initialStart = false; startPreview(); }
         if(pendingDepthInstall){pendingDepthInstall=false;enableDepth(false);}
         render(SystemClock.elapsedRealtime());
@@ -404,7 +405,12 @@ public final class PreviewActivity extends Activity {
                                         Long stamp=result.get(CaptureResult.SENSOR_TIMESTAMP);if(stamp==null)return;
                                         long now=SystemClock.elapsedRealtime();
                                         if(state.expired(now)){fail("采集或显示截止时间已过：不可用");return;}
-                                        if(realtimeTimestamp && (SystemClock.elapsedRealtimeNanos()-stamp>1200000000L || SystemClock.elapsedRealtimeNanos()-stamp<0)) { fail("采集时间戳过期：不可用");return; }
+                                        long captureAgeNanos=SystemClock.elapsedRealtimeNanos()-stamp;
+                                        if(realtimeTimestamp && (captureAgeNanos>1200000000L || captureAgeNanos<0)) {
+                                            android.util.Log.w("WalkBuddyCamera","Rejected capture ageNanos="+captureAgeNanos
+                                                +" monotonicAgeNanos="+(System.nanoTime()-stamp)+" pip="+isInPictureInPictureMode());
+                                            fail("采集时间戳过期：不可用");return;
+                                        }
                                         state.capture(stamp,now);state.promote(now);syncTicket();
                                     }
                                 },main);
@@ -466,6 +472,7 @@ public final class PreviewActivity extends Activity {
         if(restart)PreviewRecovery.show(root,RecoveryGuide.resolve(recoveryReason,
             checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED));
         else PreviewRecovery.clear(root);
+        depthButton.setEnabled(live);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(R.string.info_recognition_off));}
         if(titleView!=null) setTextIfChanged(titleView,getText(live?R.string.window_live:R.string.window_idle));
@@ -514,7 +521,7 @@ public final class PreviewActivity extends Activity {
         }));}catch(RuntimeException|LinkageError error){depthChecking=false;depthAvailability=ArCoreApk.Availability.UNSUPPORTED_DEVICE_NOT_CAPABLE;depthStatus.setText("基础识别 · 增强服务暂不可用");renderDepthGuide();}
     }
     private void chooseDepth() {
-        if(!resumed || isInPictureInPictureMode())return;
+        if(!resumed || isInPictureInPictureMode() || state.phase!=SessionState.Phase.LIVE)return;
         if(useDepth){switchDepth(false);return;}
         if(depthAvailability==ArCoreApk.Availability.UNSUPPORTED_DEVICE_NOT_CAPABLE){
             new AlertDialog.Builder(this).setTitle("此设备暂不支持增强测距").setMessage("基础模式仍可捕获模型认识的物体，但无法提供深度轮廓或距离分级。").setPositiveButton("知道了",null).show();return;

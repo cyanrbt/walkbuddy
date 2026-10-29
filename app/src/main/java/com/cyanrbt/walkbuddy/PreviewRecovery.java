@@ -23,6 +23,6 @@ final class PreviewRecovery {
         root.findViewById(R.id.preview_recognition).setEnabled(false);
         root.findViewById(R.id.preview_sound).setEnabled(false);
         action.setEnabled(prompt.action!=RecoveryGuide.Action.WAIT);
-        root.findViewById(R.id.enable_depth).setEnabled(prompt.action!=RecoveryGuide.Action.WAIT);
+        root.findViewById(R.id.enable_depth).setEnabled(false);
     }
 }

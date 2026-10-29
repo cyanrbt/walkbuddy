@@ -50,17 +50,20 @@ final class PipProbe {
                     || ((CheckBox)host.findViewById(R.id.preview_sound)).isChecked())throw new AssertionError("Detection/sound must default off");
                 if(!host.getSharedPreferences(HomeJourney.PREFERENCES,0).getBoolean(HomeJourney.PREVIEW_SEEN,false))
                     throw new AssertionError("Fresh camera preview was not recorded");
+                if(!host.findViewById(R.id.enable_depth).isEnabled())throw new AssertionError("LIVE camera cannot switch mode");
                 return true;
             });
             report.append("PASS Camera2 capture and display are LIVE; default detection/sound off\n");
 
             // Real Home transition without PiP must release resources and stay stopped on return.
             shell(runner,"input keyevent KEYCODE_HOME");
-            await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE,"Home stops full preview");
+            await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE && !(boolean)field(host,"resumed")
+                && !((Handler)field(host,"main")).hasCallbacks((Runnable)field(host,"watchdog")),"Home stops full preview");
             read(runner,()->{assertReleased(host);assertNotPolling(host);if(host.isInPictureInPictureMode())throw new AssertionError("Home auto-entered PiP");return true;});
             bringForward(runner,host);
             await(runner,()->(boolean)field(host,"resumed"),"return to stopped full preview");
             read(runner,()->{assertReleased(host);if(state(host).phase==SessionState.Phase.LIVE)throw new AssertionError("Return auto-started camera");return true;});
+            read(runner,()->{if(host.findViewById(R.id.enable_depth).isEnabled())throw new AssertionError("Stopped preview allows mode switching");return true;});
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
             await(runner,()->state(host).phase==SessionState.Phase.LIVE,"manual restart after Home");
             report.append("PASS Home releases camera; returning requires manual restart\n");
@@ -112,6 +115,7 @@ final class PipProbe {
             report.append("PASS PiP stop action releases resources and destroys Activity\nPIP_PROBE_PASS\n");
             result.putString("stream",report.toString());code=Activity.RESULT_OK;
         } catch(Throwable error) {
+            try{screenshot(runner,"pip-failure.png");}catch(Exception ignored){/* Preserve the original failure. */}
             result.putString("stream",report+"PIP_PROBE_FAIL: "+error+"; "+PreviewActivity.report());
         } finally {
             shell(runner,"input keyevent KEYCODE_WAKEUP");

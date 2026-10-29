@@ -29,6 +29,7 @@ final class RecoveryProbe {
             Activity host=activity;
             checkOnMain(runner,()->{
                 assertNoCamera(host);
+                if(host.findViewById(R.id.enable_depth).isEnabled())throw new AssertionError("Stopped camera still allows mode switching");
                 if(!((TextView)host.findViewById(R.id.restart_preview)).getText().toString().contains("设置"))
                     throw new AssertionError("Missing permission still offers camera retry");
             });

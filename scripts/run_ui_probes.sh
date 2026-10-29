@@ -3,6 +3,7 @@ set -euo pipefail
 serial="${WALKBUDDY_EMULATOR_SERIAL:-emulator-5554}"
 mkdir -p ui-evidence
 collect_evidence() {
+  adb -s "$serial" logcat -d -s WalkBuddyCamera:W '*:S' > ui-evidence/camera-timing.txt || true
   adb -s "$serial" exec-out run-as com.cyanrbt.walkbuddy tar -cf - cache/ui-probe | tar -xf - -C ui-evidence || true
 }
 trap collect_evidence EXIT

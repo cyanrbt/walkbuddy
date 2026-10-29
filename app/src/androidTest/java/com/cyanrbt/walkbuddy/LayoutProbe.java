@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
@@ -65,6 +66,7 @@ final class LayoutProbe {
                 checkFeedback(root);
                 ((TextView)root.findViewById(R.id.preview_title)).setText(R.string.window_live);
                 measure(root,size[0],size[1]);
+                checkDisabledButton(root.findViewById(R.id.enter_pip));
                 View camera=root.findViewById(R.id.preview_frame),pane=root.findViewById(R.id.preview_content);
                 if(camera.getWidth()<=0 || camera.getHeight()<pane.getHeight()/2)
                     throw new AssertionError("Camera space collapsed: "+camera.getWidth()+"x"+camera.getHeight());
@@ -133,7 +135,8 @@ final class LayoutProbe {
             fullyVisible(root,action);fullyVisible(root,root.findViewById(R.id.preview_stop));
             if(!prompt.button.contentEquals(action.getText()) || action.isEnabled()!=(prompt.action!=RecoveryGuide.Action.WAIT))
                 throw new AssertionError("Wrong recovery action: "+reason);
-            if(root.findViewById(R.id.preview_recognition).isEnabled() || root.findViewById(R.id.preview_sound).isEnabled())
+            if(root.findViewById(R.id.preview_recognition).isEnabled() || root.findViewById(R.id.preview_sound).isEnabled()
+                || root.findViewById(R.id.enable_depth).isEnabled())
                 throw new AssertionError("Detection controls stayed active on a stopped preview");
             if(cover.getVisibility()!=View.VISIBLE || !prompt.title.contentEquals(cover.getText())
                 || cover.getLayout().getHeight()>cover.getHeight()-cover.getPaddingTop()-cover.getPaddingBottom())
@@ -143,6 +146,18 @@ final class LayoutProbe {
                 screenshot(root,screenshot);
             }
         }
+    }
+
+    private static void checkDisabledButton(View button) {
+        Drawable drawable=button.getBackground().getConstantState().newDrawable().mutate();
+        Bitmap bitmap=Bitmap.createBitmap(100,60,Bitmap.Config.ARGB_8888);
+        try {
+            Canvas canvas=new Canvas(bitmap);drawable.setBounds(0,0,100,60);
+            drawable.setState(new int[]{android.R.attr.state_enabled});drawable.draw(canvas);
+            int enabled=bitmap.getPixel(50,30);bitmap.eraseColor(Color.TRANSPARENT);
+            drawable.setState(new int[]{});drawable.draw(canvas);
+            if(enabled==bitmap.getPixel(50,30))throw new AssertionError("Disabled primary button looks enabled");
+        } finally {bitmap.recycle();}
     }
 
     private static void measure(View root,int w,int h) {
