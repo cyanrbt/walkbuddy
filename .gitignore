@@ -13,3 +13,5 @@ app/src/androidTest/assets/portrait.jpg
 .idea/
 *.iml
 .DS_Store
+
+ui-evidence/

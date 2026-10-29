@@ -71,7 +71,7 @@ assert "risk_captured_desc" in strings and "risk_caution_desc" in strings and "r
 assert "accessibilityLiveRegion" in overlay and "importantForAccessibility" in overlay
 assert 'android:checked="true"' not in overlay
 recognition = chunk(overlay, "preview_recognition", "preview_sound")
-sound = chunk(overlay, "preview_sound", "preview_stop")
+sound = chunk(overlay, "preview_sound", "/>")
 assert "@drawable/bg_toggle" in recognition and "@drawable/bg_toggle" in sound
 assert 'android:button="@null"' not in recognition and 'android:button="@null"' not in sound
 cover = chunk(overlay, "preview_cover", "/>")

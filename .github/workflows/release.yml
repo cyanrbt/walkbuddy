@@ -9,7 +9,13 @@ permissions:
   contents: write
 
 jobs:
+  ui:
+    uses: ./.github/workflows/ui-check.yml
+    permissions:
+      contents: read
+
   apk:
+    needs: ui
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:

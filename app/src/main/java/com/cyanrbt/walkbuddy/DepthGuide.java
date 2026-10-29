@@ -36,6 +36,12 @@ final class DepthGuide {
                 && alertDone == other.alertDone && hint.equals(other.hint)
                 && buttonLabel.equals(other.buttonLabel);
         }
+        String compactHint() {
+            if(active==Step.GROUND)return "确认地面中 · 未测距";
+            if(active==Step.DEPTH)return "深度未就绪 · 未测距";
+            if(depthDone)return alertDone?"空间检测 · 提醒已开启":"深度就绪 · 检测未开启";
+            return "增强启动中 · 未测距";
+        }
     }
 
     /** @param availability null while AR availability is still unknown. */

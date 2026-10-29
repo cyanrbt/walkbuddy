@@ -250,14 +250,7 @@ public final class PreviewActivity extends Activity {
 
     private void setCompactUi(boolean compact) {
         if (root == null) return;
-        int visibility = compact ? View.GONE : View.VISIBLE;
-        root.findViewById(R.id.preview_header).setVisibility(visibility);
-        root.findViewById(R.id.preview_controls).setVisibility(visibility);
-        root.findViewById(R.id.preview_info).setVisibility(visibility);
-        root.findViewById(R.id.depth_status).setVisibility(useDepth?View.VISIBLE:visibility);
-        root.findViewById(R.id.depth_guide).setVisibility(compact && !useDepth ? View.GONE : View.VISIBLE);
-        root.findViewById(R.id.risk_legend).setVisibility(visibility);
-        if (compact) root.setPadding(0, 0, 0, 0);
+        PreviewChrome.compact(root,compact,useDepth);
         root.requestApplyInsets();
         if (compact) getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         else getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
@@ -466,7 +459,8 @@ public final class PreviewActivity extends Activity {
         sound.setEnabled(live && state.recognition);
         if(live && restoreDetection){boolean enableSound=restoreSound;restoreDetection=restoreSound=false;recognition.setChecked(true);sound.setChecked(enableSound);}
         pipButton.setEnabled(live);
-        restartButton.setVisibility(state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED ? View.VISIBLE : View.GONE);
+        boolean restart=state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED;
+        PreviewChrome.showRestart(root,restart);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(R.string.info_recognition_off));}
         if(titleView!=null) setTextIfChanged(titleView,getText(live?R.string.window_live:R.string.window_idle));
@@ -570,6 +564,7 @@ public final class PreviewActivity extends Activity {
         DepthGuide.Progress progress=DepthGuide.resolve(useDepth,supported,depthChecking,stage,groundReady,depthReady,state.recognition);
         if(progress.samePresentation(displayedDepthGuide))return;
         displayedDepthGuide=progress;
+        setTextIfChanged(root.findViewById(R.id.pip_depth_status),progress.compactHint());
         paintStep(R.id.guide_step_service,R.id.guide_dot_service,R.id.guide_label_service,progress.serviceDone,progress.active==DepthGuide.Step.SERVICE);
         paintStep(R.id.guide_step_ground,R.id.guide_dot_ground,R.id.guide_label_ground,progress.groundDone,progress.active==DepthGuide.Step.GROUND);
         paintStep(R.id.guide_step_depth,R.id.guide_dot_depth,R.id.guide_label_depth,progress.depthDone,progress.active==DepthGuide.Step.DEPTH);

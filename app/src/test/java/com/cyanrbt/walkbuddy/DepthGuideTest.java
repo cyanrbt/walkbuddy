@@ -85,4 +85,18 @@ public class DepthGuideTest {
         assertFalse(p.depthDone);
         assertTrue(p.hint.contains("深度"));
     }
+    @Test public void compactStatusKeepsUnavailableDepthHonest() {
+        for(DepthSnapshot.Stage stage:new DepthSnapshot.Stage[]{DepthSnapshot.Stage.DEPTH_STALE,DepthSnapshot.Stage.DEPTH_SPARSE,DepthSnapshot.Stage.DEPTH_WAIT}) {
+            DepthGuide.Progress p=DepthGuide.resolve(true,true,false,stage,true,false,true);
+            assertEquals("深度未就绪 · 未测距",p.compactHint());
+        }
+        assertEquals("确认地面中 · 未测距",DepthGuide.resolve(true,true,false,
+            DepthSnapshot.Stage.GROUND_SEARCH,false,false,true).compactHint());
+    }
+    @Test public void compactStatusDistinguishesReadyDepthFromEnabledAlerts() {
+        assertEquals("深度就绪 · 检测未开启",DepthGuide.resolve(true,true,false,
+            DepthSnapshot.Stage.MEASURING,true,true,false).compactHint());
+        assertEquals("空间检测 · 提醒已开启",DepthGuide.resolve(true,true,false,
+            DepthSnapshot.Stage.MEASURING,true,true,true).compactHint());
+    }
 }

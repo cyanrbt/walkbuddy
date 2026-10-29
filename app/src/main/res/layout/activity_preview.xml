@@ -1,119 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:background="@color/ink">
-    <LinearLayout android:id="@+id/preview_header" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="64dp" android:paddingTop="8dp" android:paddingBottom="8dp"
-        android:gravity="center_vertical" android:paddingStart="20dp" android:paddingEnd="20dp">
-        <ImageView android:layout_width="40dp" android:layout_height="40dp" android:layout_marginEnd="8dp" android:src="@drawable/walkbuddy_mascot" android:contentDescription="@null" android:importantForAccessibility="no"/>
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-            android:text="@string/app_name" android:textColor="@color/on_ink" android:textSize="18sp" android:fontFamily="sans-serif-medium"/>
-        <TextView android:id="@+id/preview_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="28dp" android:paddingTop="4dp" android:paddingBottom="4dp"
-            android:gravity="center" android:paddingStart="12dp" android:paddingEnd="12dp" android:background="@drawable/bg_status_pill"
-            android:text="@string/window_idle" android:textColor="@color/mint_soft" android:textSize="12sp"/>
-    </LinearLayout>
-    <FrameLayout android:id="@+id/preview_frame" android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1" android:background="@color/scrim">
-        <TextureView android:id="@+id/camera_preview" android:layout_width="match_parent" android:layout_height="match_parent"/>
-        <com.cyanrbt.walkbuddy.DetectionOverlay android:id="@+id/detection_overlay" android:layout_width="match_parent" android:layout_height="match_parent"/>
-        <TextView android:id="@+id/posture_hint" android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_gravity="top" android:padding="12dp" android:background="#EE102C28" android:textColor="#FFFFC857"
-            android:textSize="13sp" android:accessibilityLiveRegion="polite" android:visibility="gone" android:text="@string/posture_hint"/>
-        <TextView android:id="@+id/preview_cover" android:layout_width="match_parent" android:layout_height="match_parent"
-            android:gravity="center" android:background="@color/scrim" android:padding="28dp" android:text="@string/preview_starting"
-            android:textColor="@color/on_ink" android:textSize="16sp" android:lineSpacingExtra="6dp"
-            android:accessibilityLiveRegion="polite"/>
-    </FrameLayout>
-    <LinearLayout android:id="@+id/risk_legend" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="36dp" android:paddingTop="6dp" android:paddingBottom="6dp"
-        android:orientation="horizontal" android:gravity="center" android:paddingStart="16dp" android:paddingEnd="16dp">
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center"
-            android:text="@string/risk_captured" android:textColor="@color/risk_captured" android:textSize="12sp"
-            android:contentDescription="@string/risk_captured_desc"/>
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center"
-            android:text="@string/risk_caution" android:textColor="@color/warning" android:textSize="12sp"
-            android:contentDescription="@string/risk_caution_desc"/>
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center"
-            android:text="@string/risk_near" android:textColor="@color/risk_near" android:textSize="12sp"
-            android:contentDescription="@string/risk_near_desc"/>
-    </LinearLayout>
-    <TextView android:id="@+id/preview_info" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:paddingStart="20dp" android:paddingEnd="20dp" android:paddingTop="8dp" android:paddingBottom="4dp" android:text="@string/preview_info_idle"
-        android:textColor="@color/on_ink" android:textSize="15sp" android:fontFamily="sans-serif-medium"
-        android:accessibilityLiveRegion="polite"/>
-    <LinearLayout android:id="@+id/depth_guide" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="vertical" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="4dp" android:paddingBottom="4dp">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-            <LinearLayout android:id="@+id/guide_step_service" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                android:orientation="horizontal" android:gravity="center_vertical" android:focusable="true">
-                <TextView android:id="@+id/guide_dot_service" android:layout_width="22dp" android:layout_height="22dp" android:gravity="center"
-                    android:background="@drawable/bg_step_todo" android:text="1" android:textColor="@color/on_ink" android:textSize="11sp"
-                    android:importantForAccessibility="no"/>
-                <TextView android:id="@+id/guide_label_service" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp" android:text="@string/guide_step_service" android:textColor="@color/on_ink_dim" android:textSize="11sp"
-                    android:importantForAccessibility="no"/>
-            </LinearLayout>
-            <LinearLayout android:id="@+id/guide_step_ground" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                android:orientation="horizontal" android:gravity="center_vertical" android:focusable="true">
-                <TextView android:id="@+id/guide_dot_ground" android:layout_width="22dp" android:layout_height="22dp" android:gravity="center"
-                    android:background="@drawable/bg_step_todo" android:text="2" android:textColor="@color/on_ink" android:textSize="11sp"
-                    android:importantForAccessibility="no"/>
-                <TextView android:id="@+id/guide_label_ground" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp" android:text="@string/guide_step_ground" android:textColor="@color/on_ink_dim" android:textSize="11sp"
-                    android:importantForAccessibility="no"/>
-            </LinearLayout>
-            <LinearLayout android:id="@+id/guide_step_depth" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                android:orientation="horizontal" android:gravity="center_vertical" android:focusable="true">
-                <TextView android:id="@+id/guide_dot_depth" android:layout_width="22dp" android:layout_height="22dp" android:gravity="center"
-                    android:background="@drawable/bg_step_todo" android:text="3" android:textColor="@color/on_ink" android:textSize="11sp"
-                    android:importantForAccessibility="no"/>
-                <TextView android:id="@+id/guide_label_depth" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp" android:text="@string/guide_step_depth" android:textColor="@color/on_ink_dim" android:textSize="11sp"
-                    android:importantForAccessibility="no"/>
-            </LinearLayout>
-            <LinearLayout android:id="@+id/guide_step_alert" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                android:orientation="horizontal" android:gravity="center_vertical" android:focusable="true">
-                <TextView android:id="@+id/guide_dot_alert" android:layout_width="22dp" android:layout_height="22dp" android:gravity="center"
-                    android:background="@drawable/bg_step_todo" android:text="4" android:textColor="@color/on_ink" android:textSize="11sp"
-                    android:importantForAccessibility="no"/>
-                <TextView android:id="@+id/guide_label_alert" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp" android:text="@string/guide_step_alert" android:textColor="@color/on_ink_dim" android:textSize="11sp"
-                    android:importantForAccessibility="no"/>
-            </LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/ink">
+    <LinearLayout android:id="@+id/preview_header" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56dp" android:paddingTop="8dp" android:paddingBottom="8dp" android:gravity="center_vertical" android:paddingStart="16dp" android:paddingEnd="16dp">
+        <ImageView android:layout_width="40dp" android:layout_height="40dp" android:layout_marginEnd="8dp" android:src="@drawable/walkbuddy_mascot" android:contentDescription="@null" android:importantForAccessibility="no" />
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="8dp">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/app_name" android:textColor="@color/on_ink" android:textSize="18sp" android:fontFamily="sans-serif-medium" />
+            <TextView android:id="@+id/preview_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="28dp" android:paddingTop="4dp" android:paddingBottom="4dp" android:gravity="center" android:paddingStart="12dp" android:paddingEnd="12dp" android:background="@drawable/bg_status_pill" android:text="@string/window_idle" android:textColor="@color/mint_soft" android:textSize="12sp" android:layout_marginTop="2dp" />
         </LinearLayout>
-        <TextView android:id="@+id/depth_guide_hint" android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="6dp" android:text="@string/guide_hint_default" android:textColor="@color/mint_soft" android:textSize="12sp"
-            android:accessibilityLiveRegion="polite"/>
+        <Button style="@style/Buddy.Button" android:id="@+id/preview_stop" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:background="@drawable/bg_stop" android:text="@string/preview_stop" android:textColor="@color/stop_text" android:textSize="14sp" android:textAllCaps="false" android:minWidth="72dp" />
     </LinearLayout>
-    <TextView android:id="@+id/depth_status" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:paddingStart="20dp" android:paddingEnd="20dp" android:paddingTop="2dp" android:paddingBottom="12dp"
-        android:text="@string/depth_status_initial" android:textColor="@color/on_ink_dim" android:textSize="12sp"
-        android:accessibilityLiveRegion="polite"/>
-    <com.cyanrbt.walkbuddy.ControlScrollView android:id="@+id/preview_controls" android:layout_width="match_parent" android:layout_height="wrap_content" android:fillViewport="true">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
-            android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingBottom="12dp">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                <CheckBox android:id="@+id/preview_recognition" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1"
-                    android:layout_marginEnd="8dp" android:saveEnabled="false" android:buttonTint="@color/toggle_text" android:background="@drawable/bg_toggle"
-                    android:backgroundTint="@null" android:gravity="center_vertical" android:paddingEnd="10dp" android:text="@string/check_recognition" android:textColor="@color/toggle_text" android:textSize="14sp"/>
-                <CheckBox android:id="@+id/preview_sound" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1"
-                    android:saveEnabled="false" android:buttonTint="@color/toggle_text" android:background="@drawable/bg_toggle" android:backgroundTint="@null"
-                    android:gravity="center_vertical" android:paddingEnd="10dp" android:text="@string/check_sound" android:textColor="@color/toggle_text" android:textSize="14sp"/>
+    <com.cyanrbt.walkbuddy.PreviewContentLayout android:id="@+id/preview_content" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <FrameLayout android:id="@+id/preview_frame" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/scrim">
+            <TextureView android:id="@+id/camera_preview" android:layout_width="match_parent" android:layout_height="match_parent" />
+            <com.cyanrbt.walkbuddy.DetectionOverlay android:id="@+id/detection_overlay" android:layout_width="match_parent" android:layout_height="match_parent" />
+            <TextView android:id="@+id/posture_hint" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="top" android:padding="12dp" android:background="#EE102C28" android:textColor="#FFFFC857" android:textSize="13sp" android:accessibilityLiveRegion="polite" android:visibility="gone" android:text="@string/posture_hint" />
+            <TextView android:id="@+id/pip_depth_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="bottom" android:padding="6dp" android:background="#E6102C28" android:textColor="@color/mint_soft" android:textSize="11sp" android:maxLines="2" android:ellipsize="end" android:visibility="gone" android:accessibilityLiveRegion="polite" />
+            <TextView android:id="@+id/preview_cover" android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center" android:background="@color/scrim" android:padding="28dp" android:text="@string/preview_starting" android:textColor="@color/on_ink" android:textSize="16sp" android:lineSpacingExtra="6dp" android:accessibilityLiveRegion="polite" />
+        </FrameLayout>
+        <com.cyanrbt.walkbuddy.ControlScrollView android:id="@+id/preview_controls" android:layout_width="match_parent" android:layout_height="wrap_content" android:fillViewport="true" android:scrollbars="vertical">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingBottom="12dp">
+                <TextView android:id="@+id/preview_info" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="4dp" android:paddingEnd="4dp" android:paddingTop="8dp" android:paddingBottom="4dp" android:text="@string/preview_info_idle" android:textColor="@color/on_ink" android:textSize="15sp" android:fontFamily="sans-serif-medium" android:accessibilityLiveRegion="polite" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <CheckBox android:id="@+id/preview_recognition" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1" android:layout_marginEnd="8dp" android:saveEnabled="false" android:buttonTint="@color/toggle_text" android:background="@drawable/bg_toggle" android:backgroundTint="@null" android:gravity="center_vertical" android:paddingEnd="10dp" android:text="@string/check_recognition" android:textColor="@color/toggle_text" android:textSize="14sp" />
+                    <CheckBox android:id="@+id/preview_sound" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1" android:saveEnabled="false" android:buttonTint="@color/toggle_text" android:background="@drawable/bg_toggle" android:backgroundTint="@null" android:gravity="center_vertical" android:paddingEnd="10dp" android:text="@string/check_sound" android:textColor="@color/toggle_text" android:textSize="14sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:orientation="horizontal">
+                    <Button style="@style/Buddy.Button" android:id="@+id/enable_depth" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_marginEnd="0dp" android:background="@drawable/bg_quiet" android:backgroundTint="@null" android:text="@string/enable_depth" android:textColor="@color/on_ink" android:textSize="13sp" android:textAllCaps="false" />
+                </LinearLayout>
+                <LinearLayout android:id="@+id/depth_guide" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingStart="4dp" android:paddingEnd="4dp" android:paddingTop="4dp" android:paddingBottom="4dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                        <LinearLayout android:id="@+id/guide_step_service" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:focusable="true" android:padding="4dp" android:minHeight="52dp">
+                            <TextView android:id="@+id/guide_dot_service" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:background="@drawable/bg_step_todo" android:text="1" android:textColor="@color/on_ink" android:textSize="11sp" android:importantForAccessibility="no" android:minWidth="24dp" android:minHeight="24dp" android:padding="4dp" />
+                            <TextView android:id="@+id/guide_label_service" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/guide_step_service" android:textColor="@color/on_ink_dim" android:textSize="12sp" android:importantForAccessibility="no" android:layout_marginTop="4dp" android:gravity="center" />
+                        </LinearLayout>
+                        <LinearLayout android:id="@+id/guide_step_ground" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:focusable="true" android:padding="4dp" android:minHeight="52dp">
+                            <TextView android:id="@+id/guide_dot_ground" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:background="@drawable/bg_step_todo" android:text="2" android:textColor="@color/on_ink" android:textSize="11sp" android:importantForAccessibility="no" android:minWidth="24dp" android:minHeight="24dp" android:padding="4dp" />
+                            <TextView android:id="@+id/guide_label_ground" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/guide_step_ground" android:textColor="@color/on_ink_dim" android:textSize="12sp" android:importantForAccessibility="no" android:layout_marginTop="4dp" android:gravity="center" />
+                        </LinearLayout>
+                        <LinearLayout android:id="@+id/guide_step_depth" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:focusable="true" android:padding="4dp" android:minHeight="52dp">
+                            <TextView android:id="@+id/guide_dot_depth" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:background="@drawable/bg_step_todo" android:text="3" android:textColor="@color/on_ink" android:textSize="11sp" android:importantForAccessibility="no" android:minWidth="24dp" android:minHeight="24dp" android:padding="4dp" />
+                            <TextView android:id="@+id/guide_label_depth" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/guide_step_depth" android:textColor="@color/on_ink_dim" android:textSize="12sp" android:importantForAccessibility="no" android:layout_marginTop="4dp" android:gravity="center" />
+                        </LinearLayout>
+                        <LinearLayout android:id="@+id/guide_step_alert" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:focusable="true" android:padding="4dp" android:minHeight="52dp">
+                            <TextView android:id="@+id/guide_dot_alert" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:background="@drawable/bg_step_todo" android:text="4" android:textColor="@color/on_ink" android:textSize="11sp" android:importantForAccessibility="no" android:minWidth="24dp" android:minHeight="24dp" android:padding="4dp" />
+                            <TextView android:id="@+id/guide_label_alert" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/guide_step_alert" android:textColor="@color/on_ink_dim" android:textSize="12sp" android:importantForAccessibility="no" android:layout_marginTop="4dp" android:gravity="center" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView android:id="@+id/depth_guide_hint" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="@string/guide_hint_default" android:textColor="@color/mint_soft" android:textSize="12sp" android:accessibilityLiveRegion="polite" />
+                </LinearLayout>
+                <TextView android:id="@+id/depth_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="4dp" android:paddingEnd="4dp" android:paddingTop="2dp" android:paddingBottom="12dp" android:text="@string/depth_status_initial" android:textColor="@color/on_ink_dim" android:textSize="12sp" android:accessibilityLiveRegion="polite" />
+                <LinearLayout android:id="@+id/risk_legend" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="36dp" android:paddingTop="6dp" android:paddingBottom="6dp" android:orientation="horizontal" android:gravity="center" android:paddingStart="4dp" android:paddingEnd="4dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/risk_captured" android:textColor="@color/risk_captured" android:textSize="12sp" android:contentDescription="@string/risk_captured_desc" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/risk_caution" android:textColor="@color/warning" android:textSize="12sp" android:contentDescription="@string/risk_caution_desc" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/risk_near" android:textColor="@color/risk_near" android:textSize="12sp" android:contentDescription="@string/risk_near_desc" />
+                </LinearLayout>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/preview_hint" android:textColor="@color/on_ink_dim" android:textSize="11sp" android:gravity="center" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:orientation="horizontal">
-                <Button style="@style/Buddy.Button" android:id="@+id/enable_depth" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1"
-                    android:layout_marginEnd="8dp" android:background="@drawable/bg_quiet" android:backgroundTint="@null" android:text="@string/enable_depth"
-                    android:textColor="@color/on_ink" android:textSize="13sp" android:textAllCaps="false"/>
-                <Button style="@style/Buddy.Button" android:id="@+id/enter_pip" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1"
-                    android:background="@drawable/bg_primary" android:text="@string/enter_pip" android:textColor="@color/on_ink" android:textSize="14sp" android:textAllCaps="false"/>
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="8dp">
-                <Button style="@style/Buddy.Button" android:id="@+id/restart_preview" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1"
-                    android:layout_marginEnd="8dp" android:background="@drawable/bg_quiet" android:text="@string/restart_preview"
-                    android:textColor="@color/on_ink" android:textSize="13sp" android:textAllCaps="false"/>
-                <Button style="@style/Buddy.Button" android:id="@+id/preview_stop" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1"
-                    android:background="@drawable/bg_stop" android:text="@string/preview_stop" android:textColor="@color/stop_text" android:textSize="13sp" android:textAllCaps="false"/>
-            </LinearLayout>
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"
-                android:text="@string/preview_hint" android:textColor="@color/on_ink_dim" android:textSize="11sp" android:gravity="center"/>
-        </LinearLayout>
-    </com.cyanrbt.walkbuddy.ControlScrollView>
+        </com.cyanrbt.walkbuddy.ControlScrollView>
+    </com.cyanrbt.walkbuddy.PreviewContentLayout>
+    <LinearLayout android:id="@+id/preview_actions" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="8dp" android:paddingBottom="12dp">
+        <Button style="@style/Buddy.Button" android:id="@+id/enter_pip" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1" android:background="@drawable/bg_primary" android:text="@string/enter_pip" android:textColor="@color/on_ink" android:textSize="14sp" android:textAllCaps="false" />
+        <Button style="@style/Buddy.Button" android:id="@+id/restart_preview" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="52dp" android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_weight="1" android:background="@drawable/bg_primary" android:text="@string/restart_preview" android:textColor="@color/on_ink" android:textSize="13sp" android:textAllCaps="false" android:visibility="gone" />
+    </LinearLayout>
 </LinearLayout>

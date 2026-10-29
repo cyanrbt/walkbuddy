@@ -86,7 +86,7 @@ public class ProductSurfaceTest {
         assertTrue(overlay.contains("importantForAccessibility"));
         assertFalse(overlay.contains("android:checked=\"true\""));
         String recognition = chunk(overlay, "preview_recognition", "preview_sound");
-        String sound = chunk(overlay, "preview_sound", "preview_stop");
+        String sound = chunk(overlay, "preview_sound", "/>");
         assertTrue(recognition.contains("@drawable/bg_toggle"));
         assertTrue(sound.contains("@drawable/bg_toggle"));
         assertFalse(recognition.contains("android:button=\"@null\""));

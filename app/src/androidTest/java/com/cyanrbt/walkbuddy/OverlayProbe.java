@@ -10,6 +10,7 @@ import android.os.Bundle;
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /** Camera-free raster regression for masks, dash gaps, redraw reuse, resize and clear. */
 final class OverlayProbe {
@@ -18,7 +19,9 @@ final class OverlayProbe {
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("Overlay probe is restricted to emulators");
-            runner.runOnMainSync(()->check(runner));
+            AtomicReference<Throwable> failure=new AtomicReference<>();
+            runner.runOnMainSync(()->{try{check(runner);}catch(Throwable error){failure.set(error);}});
+            if(failure.get()!=null)throw new AssertionError(failure.get());
             result.putString("stream","OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label");
             runner.finish(Activity.RESULT_OK,result);
         } catch(Throwable error) {

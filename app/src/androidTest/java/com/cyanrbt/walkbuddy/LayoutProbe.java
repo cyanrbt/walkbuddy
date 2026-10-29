@@ -1,0 +1,114 @@
+package com.cyanrbt.walkbuddy;
+
+import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.ContextThemeWrapper;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.concurrent.atomic.AtomicReference;
+
+/** Inflates shipped views on Android; tests layout/chrome only, never opens a camera or AR. */
+final class LayoutProbe {
+    static void run(Instrumentation runner) {
+        Bundle result=new Bundle();StringBuilder report=new StringBuilder();
+        try {
+            if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
+                throw new IllegalStateException("Layout probe is restricted to emulators");
+            AtomicReference<Throwable> failure=new AtomicReference<>();
+            runner.runOnMainSync(()->{try{check(runner.getTargetContext(),report);}catch(Throwable error){failure.set(error);}});
+            if(failure.get()!=null)throw new AssertionError(failure.get());
+            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=16; fixed actions, camera space, scroll reach, compact/restore\n");
+            runner.finish(Activity.RESULT_OK,result);
+        } catch(Throwable error) {
+            result.putString("stream",report+"LAYOUT_PROBE_FAIL: "+error);
+            runner.finish(Activity.RESULT_CANCELED,result);
+        }
+    }
+
+    private static void check(Context target,StringBuilder report) throws Exception {
+        File output=new File(target.getCacheDir(),"ui-probe");
+        if(!output.isDirectory() && !output.mkdirs())throw new IllegalStateException("Cannot create UI evidence directory");
+        for(int[] size:new int[][]{{320,480},{360,640},{640,360},{800,600}})
+            for(float font:new float[]{1f,2f})for(boolean night:new boolean[]{false,true}) {
+                Configuration config=new Configuration(target.getResources().getConfiguration());
+                config.fontScale=font;config.densityDpi=160;
+                config.screenWidthDp=size[0];config.screenHeightDp=size[1];
+                config.orientation=size[0]>size[1]?Configuration.ORIENTATION_LANDSCAPE:Configuration.ORIENTATION_PORTRAIT;
+                config.uiMode=(config.uiMode&~Configuration.UI_MODE_NIGHT_MASK)
+                    |(night?Configuration.UI_MODE_NIGHT_YES:Configuration.UI_MODE_NIGHT_NO);
+                Context context=new ContextThemeWrapper(target.createConfigurationContext(config),R.style.Theme_WalkBuddy);
+                View root=LayoutInflater.from(context).inflate(R.layout.activity_preview,null);
+                root.setPadding(0,24,0,24);
+                root.findViewById(R.id.preview_cover).setVisibility(View.GONE);
+                TextView placeholder=new TextView(context);
+                placeholder.setText("取景区域（布局测试）");placeholder.setTextColor(Color.GRAY);placeholder.setGravity(Gravity.CENTER);
+                ((FrameLayout)root.findViewById(R.id.preview_frame)).addView(placeholder,1,
+                    new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+                ((TextView)root.findViewById(R.id.preview_info)).setText("画面关注 · 人 · 中间 · 未测距");
+                ((TextView)root.findViewById(R.id.depth_guide_hint)).setText("深度覆盖不足 · 对准地面与前方障碍再试");
+                measure(root,size[0],size[1]);
+                View camera=root.findViewById(R.id.preview_frame),pane=root.findViewById(R.id.preview_content);
+                if(camera.getWidth()<=0 || camera.getHeight()<pane.getHeight()/2)
+                    throw new AssertionError("Camera space collapsed: "+camera.getWidth()+"x"+camera.getHeight());
+                if(size[0]>=600 && camera.getWidth()>=pane.getWidth())throw new AssertionError("Wide preview did not use side panel");
+                fullyVisible(root,root.findViewById(R.id.preview_stop));
+                fullyVisible(root,root.findViewById(R.id.enter_pip));
+                ScrollView scroll=root.findViewById(R.id.preview_controls);
+                for(int id:new int[]{R.id.preview_recognition,R.id.preview_sound,R.id.enable_depth}) {
+                    View control=root.findViewById(id);
+                    scroll.requestChildFocus(control,control);
+                    Rect visible=new Rect();
+                    if(!control.getLocalVisibleRect(visible) || visible.height()<Math.min(48,control.getHeight()))
+                        throw new AssertionError("Unreachable scroll control "+id+": "+visible);
+                }
+                scroll.scrollTo(0,0);
+                String name=size[0]+"x"+size[1]+"-font"+(int)font+(night?"-night":"-day");
+                screenshot(root,new File(output,name+".png"));
+                PreviewChrome.showRestart(root,true);measure(root,size[0],size[1]);
+                fullyVisible(root,root.findViewById(R.id.restart_preview));
+                if(root.findViewById(R.id.enter_pip).getVisibility()!=View.GONE)throw new AssertionError("PiP action survived restart state");
+                PreviewChrome.compact(root,true,true);measure(root,180,240);
+                if(camera.getWidth()!=180 || camera.getHeight()!=240)throw new AssertionError("PiP lost camera space to hidden controls");
+                if(root.findViewById(R.id.pip_depth_status).getVisibility()!=View.VISIBLE)throw new AssertionError("Missing compact depth status");
+                PreviewChrome.compact(root,false,false);PreviewChrome.showRestart(root,false);
+                root.setPadding(0,24,0,24);measure(root,size[0],size[1]);
+                fullyVisible(root,root.findViewById(R.id.preview_stop));
+                fullyVisible(root,root.findViewById(R.id.enter_pip));
+                if(scroll.getVisibility()!=View.VISIBLE || scroll.getWidth()<=0)throw new AssertionError("Panel did not restore");
+                report.append("PASS ").append(name).append(" camera=").append(camera.getWidth()).append('x').append(camera.getHeight()).append('\n');
+            }
+    }
+
+    private static void measure(View root,int w,int h) {
+        root.measure(View.MeasureSpec.makeMeasureSpec(w,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(h,View.MeasureSpec.EXACTLY));
+        root.layout(0,0,w,h);
+    }
+    private static void fullyVisible(View root,View control) {
+        Rect rect=new Rect(0,0,control.getWidth(),control.getHeight());
+        ((ViewGroup)root).offsetDescendantRectToMyCoords(control,rect);
+        if(control.getVisibility()!=View.VISIBLE || rect.left<0 || rect.top<0 || rect.right>root.getWidth()
+            || rect.bottom>root.getHeight() || rect.width()<48 || rect.height()<48)
+            throw new AssertionError("Fixed action clipped: "+rect);
+    }
+    private static void screenshot(View root,File output) throws Exception {
+        Bitmap bitmap=Bitmap.createBitmap(root.getWidth(),root.getHeight(),Bitmap.Config.ARGB_8888);
+        try(FileOutputStream stream=new FileOutputStream(output)) {
+            root.draw(new Canvas(bitmap));bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
+        } finally {bitmap.recycle();}
+    }
+}
