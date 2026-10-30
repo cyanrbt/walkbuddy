@@ -6,6 +6,40 @@
   "baseline_production_matches_tag": "v0.4.35",
   "files": {
     "baseline-compact-font150.png": "253dab37e437f2346cdceb8561b2226c77c2e92ae2310edf21dca8c9f30a9c8d",
-    "baseline-compact-font200.png": "b1d61bb0504eec65a769923741cabde4e90936cc4593024094c67c1bce846df6"
+    "baseline-compact-font200.png": "b1d61bb0504eec65a769923741cabde4e90936cc4593024094c67c1bce846df6",
+    "candidate-compact-font200.png": "4c6743b1d1e07b15022b5e3037ad566052b9c2770f1730ceffb784550eb99637",
+    "candidate-full-font200.png": "03092ab5b785e33698a2df6b77fa00cee2d86a050584265977d049a7b5cec62a",
+    "candidate-wide-font200.png": "09c05463fea82820a49691b84e3813f965e52b243cf1f816c4ca8f30e3144d7c",
+    "candidate-system-pip.png": "fac809365ed4748a2067b41f67b57267e7e42fd75865471fad7c6d298d0738a7",
+    "candidate-expanded.png": "f7aadc4dc38da99aae0afaa3056496ec2d5283556b4b9f2b1216e25250379c8c"
+  },
+  "candidate": {
+    "run_id": 41141509019,
+    "source_commit": "bac3c163bc7930df5fee68d9d881095d7e444ae9",
+    "artifact_id": 13019032325,
+    "archive_sha256": "179f51410051c45936f5bd72d21b7c17ed506557fff3fabb80fae76dc9422981",
+    "scope": "Static native constructed recovery views and actual stopped virtual Camera2 system PiP; no physical-device acceptance",
+    "files": {
+      "candidate-compact-font200.png": {
+        "source": "recovery-compact-96x128-font200-day.png",
+        "sha256": "4c6743b1d1e07b15022b5e3037ad566052b9c2770f1730ceffb784550eb99637"
+      },
+      "candidate-full-font200.png": {
+        "source": "320x480-font200-day-recovery-initial.png",
+        "sha256": "03092ab5b785e33698a2df6b77fa00cee2d86a050584265977d049a7b5cec62a"
+      },
+      "candidate-wide-font200.png": {
+        "source": "600x360-font200-day-recovery-initial.png",
+        "sha256": "09c05463fea82820a49691b84e3813f965e52b243cf1f816c4ca8f30e3144d7c"
+      },
+      "candidate-system-pip.png": {
+        "source": "pip-recovery-stopped.png",
+        "sha256": "fac809365ed4748a2067b41f67b57267e7e42fd75865471fad7c6d298d0738a7"
+      },
+      "candidate-expanded.png": {
+        "source": "preview-recovery-expanded.png",
+        "sha256": "f7aadc4dc38da99aae0afaa3056496ec2d5283556b4b9f2b1216e25250379c8c"
+      }
+    }
   }
 }

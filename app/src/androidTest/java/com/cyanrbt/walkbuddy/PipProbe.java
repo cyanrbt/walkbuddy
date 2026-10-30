@@ -433,6 +433,8 @@ final class PipProbe {
             String stoppedReport=PreviewActivity.report();
             read(runner,()->{RecoveryPresentationProbe.compact((View)field(idleHost,"root"),
                 RecoveryGuide.resolve((RecoveryGuide.Reason)field(idleHost,"recoveryReason"),true));return true;});
+            // The stopped home views have updated; allow their queued draw to reach the screen capture.
+            Thread.sleep(150);
             screenshot(runner,"pip-recovery-stopped.png");
             Thread.sleep(350);
             read(runner,()->{

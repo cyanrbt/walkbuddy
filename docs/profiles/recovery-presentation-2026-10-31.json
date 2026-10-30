@@ -8,7 +8,7 @@
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "e9fbc7d0ef3f07dd1c4bc209e057ce68b94fbf2974c8e8fc5f2da56ef89be70d",
-    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "3ac243a37e9564ce5b2dce6497be9b88e65b1e17ccd4e5eaacada3db011afcab",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "68e2268ca66c7d34da37193634f013f036af085fdc0c79c8c51dbcb7e8e86194",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java": "99fdf32bd8fc5f1fc3a681cc119ec183743ef477da558bb1f65fbe2f6c22bc52",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryPresentationProbe.java": "002e6d446f7a2f11a497ad6436e18064df5249f68da8b35612c790d7fa96c0f6",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryProbe.java": "f881792292cc3134a56d452e56d645be78947531ad607eaa43c9853c554c5bee",
@@ -62,7 +62,7 @@
     },
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": {
       "v0.4.35": "3a88e689b55a582acbb573e3d003a96af74ae69eeb857309043f8a7b07ebaec2",
-      "current": "3ac243a37e9564ce5b2dce6497be9b88e65b1e17ccd4e5eaacada3db011afcab"
+      "current": "68e2268ca66c7d34da37193634f013f036af085fdc0c79c8c51dbcb7e8e86194"
     },
     "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": {
       "v0.4.35": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
@@ -129,5 +129,20 @@
   "home_report_fix": "Retain last published tuple across terminal failure; identical renders keep terminal object; next state change clears failure presentation; owner guards retained",
   "ci_userdata_size": "2048M",
   "ci_disk_size_reference": "https://github.com/ReactiveCircus/android-emulator-runner/blob/a421e43855164a8197daf9d8d40fe71c6996bb0d/src/emulator-manager.ts",
-  "support_probe_render_readiness": "Require fresh LIVE, opaque cover gone and shown/enabled vibration control before retaining original checked/enabled assertions; before/after evidence recorded; no preference reset or deadline change"
+  "support_probe_render_readiness": "Require fresh LIVE, opaque cover gone and shown/enabled vibration control before retaining original checked/enabled assertions; before/after evidence recorded; no preference reset or deadline change",
+  "candidate_run_id": 41141509019,
+  "candidate_source_commit": "bac3c163bc7930df5fee68d9d881095d7e444ae9",
+  "candidate_native_artifacts_verified": true,
+  "recovery_layout_configurations": 30,
+  "recovery_full_presentations_per_api": 660,
+  "recovery_compact_presentations_per_api_including_duplicates": 1320,
+  "recovery_restore_presentations_per_api": 660,
+  "compact_selected_samples_per_api": 12,
+  "compact_selected_overflow_count_per_api": 0,
+  "candidate_attempts": {
+    "35": 1,
+    "36": 2
+  },
+  "candidate_first_attempt_preserved": true,
+  "tag_evidence_only_change": "150ms off-main wait before stopped-home screenshot; no production or assertion change"
 }
