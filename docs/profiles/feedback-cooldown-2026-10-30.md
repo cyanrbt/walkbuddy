@@ -32,6 +32,10 @@ v0.4.25 中，各来源的 `AlertPolicy` 先决定并记下目标已经提醒，
 
 首个候选 [41073282182](https://github.com/cyanrbt/walkbuddy/actions/runs/41073282182) 两套 API 的 `FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400` 均通过，原生控件及三组时序得到实际执行。API 36 九项通过；API 35 原有恢复触摸超时，其余八项通过，整轮仍失败。两个原始附件已下载并核对摘要，详见[原始结果](feedback-native-initial-2026-10-30.json)及[PiP 展开输入记录](input-after-pip-expand-2026-10-30.md)。该轮未发布标签、未重跑掩盖失败；在仅测试代码补充展开后输入就绪条件后，重新核对完整原生结果。
 
-修正提交 `2ad8018622124bb3582d5f66c6567c1ac9660838` 的 [41075111797](https://github.com/cyanrbt/walkbuddy/actions/runs/41075111797) attempt 1 两套 API 首次全部成功，job `124129104044` / `124129104369`。已直接读取完成后的原始 job 日志，各九项 PASS、无探针 FAIL，新增 30 配置 / 三场景提醒检查和 11 项输入规则均通过。首个失败记录保留；附件下载与结构化复核、正式发布核验另行补记。
+修正提交 `2ad8018622124bb3582d5f66c6567c1ac9660838` 的 [41075111797](https://github.com/cyanrbt/walkbuddy/actions/runs/41075111797) attempt 1 两套 API 首次全部成功，job `124129104044` / `124129104369`。已直接读取完成后的原始 job 日志，各九项 PASS、无探针 FAIL，新增 30 配置 / 三场景提醒检查和 11 项输入规则均通过。
+
+两个修正附件已完整下载并核对服务端摘要：API 35 artifact `12987525208`，8,877,308 字节，SHA-256 `fe8b6968abb796f8559db80e92b469bbf8525005edf4b2b2d78d8bdd5223e1b0`；API 36 artifact `12986509105`，8,892,463 字节，SHA-256 `cafadc508233814a8f17ca61bf051b9cd3def47dfc598552f5e40789544ddce2`。API 35 首次下载 300 秒超时后续传同一文件，最终退出 0 且完整摘要相同；没有重跑构建。逐一读取九项原始报告、新提醒 marker 及四条 PiP 展开输入就绪记录，无 FAIL、缺失探针或 ANR 观察，原字体/连续性/密集标签/风险绘制回归均通过。[修正结构化记录](feedback-native-fixed-2026-10-30.json)保留来源、摘要及原始文字。首个失败继续保留，正式发布附件核验见[验证结果](../验证结果.md)。
 
 目标设备的振动是否发生、声音与系统朗读是否清晰、真实深度稳定性、近距离时序及厂商策略仍待[实体设备验收](../实机测试.md)。
+
+[v0.4.26 标签发布 41076188374](https://github.com/cyanrbt/walkbuddy/actions/runs/41076188374) 的两套 Android 与固定签名 APK 作业均首次成功，标签只比最终候选增加文档。实际 [ARM64 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.26/Walk-Buddy-v0.4.26-arm64-debug.apk) 已下载核验版本 0.4.26 / 38、固定证书与服务端摘要，轨迹中的五个纯 Java 源码摘要与标签逐一一致；测试探针及驱动未进入主包，详见[附件记录](apk-v0.4.26.json)。
