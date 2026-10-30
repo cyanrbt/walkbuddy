@@ -141,6 +141,14 @@ final class LayoutProbe {
                 fullyVisible(root,root.findViewById(R.id.enter_pip));
                 if(scroll.getVisibility()!=View.VISIBLE || scroll.getWidth()<=0)throw new AssertionError("Panel did not restore");
                 if(root.findViewById(R.id.depth_steps).getVisibility()!=View.GONE)throw new AssertionError("Basic restore exposed depth steps");
+                // Export a coherent constructed LIVE presentation after the recovery fixtures.
+                title.setText(R.string.window_live);info.setText(basic);
+                detection.setEnabled(true);detection.setChecked(true);
+                sound.setEnabled(true);sound.setChecked(false);
+                root.findViewById(R.id.enable_depth).setEnabled(true);
+                root.findViewById(R.id.enter_pip).setEnabled(true);
+                ((TextView)root.findViewById(R.id.depth_guide_hint)).setText(R.string.guide_hint_default);
+                measure(root,size[0],size[1]);
                 checkHapticLegend(root,size[0],size[1],new File(output,"haptics-"+name+".png"));
                 report.append("PASS ").append(name).append(" camera=").append(camera.getWidth()).append('x').append(camera.getHeight()).append('\n');
             }
