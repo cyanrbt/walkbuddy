@@ -24,9 +24,10 @@
     "app/src/main/java/com/cyanrbt/walkbuddy/PreviewChrome.java": "c9fb0356293ae2e37a87f07a6be4da3e7aa7952ef7704259dd8d23a08d2f9106",
     "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java": "979289f8d8e5240f4d4ecab15364260db0ecadb9151cf70ba146a83f7f098507",
     "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048",
-    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "2a37b5c2c314cba9e78213ecc967825fc953b67ea39ad9b45187db2de3e0b8b5",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "afb53b18abbdde007ad46e44dfe1feb7710fe7d1f8a63cbd60a0ea5d092f584d",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "c825124fb2ea5d546e3346e6cf6a3e901f19ae52ac561f68c6b7140c059941bb",
     "app/src/main/res/layout/activity_preview.xml": "59c670b1e553f29a9af1574feb7f8e6cb39609d590020cfb3fd675a475459279",
     "app/src/main/res/values/strings.xml": "5331672686559709a4cdbdea188441ed08a1d2ceb8353c59b3652de6cdc6255b"
-  }
+  },
+  "native_geometry_probe_rebuild": "success; production and JVM-tested state sources unchanged"
 }

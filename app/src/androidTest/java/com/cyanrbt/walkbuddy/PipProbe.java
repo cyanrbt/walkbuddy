@@ -588,10 +588,21 @@ final class PipProbe {
             report.append("SCREEN_IDLE_FULL_PASS requestedMs=1000 effectiveMinimumMs=").append(effective)
                 .append(" observedWithoutInputMs=").append(effective+1500).append('\n');
             powerEvidence(runner,"screen-idle-full-power.txt",shellText(runner,"dumpsys -t 3 power"));
+            int fullWidth=read(runner,()->((View)field(host,"root")).getWidth());
+            int fullHeight=read(runner,()->((View)field(host,"root")).getHeight());
             tap(runner,host,R.id.enter_pip);
             await(runner,()->host.isInPictureInPictureMode() && !keepsScreenOn(host),"PiP releases screen hold");
-            await(runner,()->warningReady(host),"default preview-only PiP notice laid out");
+            await(runner,()->warningReady(host) && ((View)field(host,"root")).getWidth()<fullWidth
+                && ((View)field(host,"root")).getHeight()<fullHeight && publishedPipBoundsMatch(host),
+                "default preview-only PiP actually shrinks");
+            long settledAt=android.os.SystemClock.elapsedRealtime();
+            await(runner,()->live(host) && state(host).captureAt>settledAt+150 && state(host).displayAt>settledAt+150,
+                "new frames in settled default preview-only PiP");
             read(runner,()->{assertDefaultPreviewOnly(host,true);return true;});
+            String dimensions=read(runner,()->"PREVIEW_ONLY_GEOMETRY_PASS full="+fullWidth+"x"+fullHeight
+                +" compact="+((View)field(host,"root")).getWidth()+"x"+((View)field(host,"root")).getHeight()
+                +" frames_advance=true default_detection=false sound=false\n");
+            report.append(dimensions);SupportProbe.write(runner,"default-preview-only-size.txt",dimensions);
             screenshot(runner,"pip-default-preview-only.png");
             long deadline=android.os.SystemClock.elapsedRealtime()+effective+8000;
             while(read(runner,()->host.getSystemService(PowerManager.class).isInteractive())
