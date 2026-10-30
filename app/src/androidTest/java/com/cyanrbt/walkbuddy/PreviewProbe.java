@@ -55,6 +55,8 @@ public class PreviewProbe extends Instrumentation {
     try(DetectorInput prepared=new DetectorInput()) {
      java.nio.ByteBuffer expected=DetectorProbe.baseline(input),actual=prepared.prepare(frame.bitmap,frame.displayDegrees);
      for(int i=0;i<expected.capacity();i++)if(expected.get(i)!=actual.get(i))throw new AssertionError("Texture input parity failed s="+sensor+" d="+display+" byte="+i);
+     Bitmap storage=DetectorProbe.rotationBitmap(prepared);prepared.prepare(frame.bitmap,frame.displayDegrees);
+     if(DetectorProbe.rotationBitmap(prepared)!=storage)throw new AssertionError("Repeated camera input reallocated rotation storage");
     }
     int naturalBytes=frame.bitmap.getAllocationByteCount();
     if(limitedBytes[0]!=naturalBytes*(display==0?1:2))throw new AssertionError("Unexpected legacy/new bitmap allocation: "+limitedBytes[0]+" vs "+naturalBytes);
@@ -73,12 +75,12 @@ public class PreviewProbe extends Instrumentation {
     try(FileOutputStream stream=new FileOutputStream(output)){image.compress(Bitmap.CompressFormat.PNG,100,stream);}
     report.append("PASS sensor=").append(sensor).append(" display=").append(display).append(" view=").append(w).append('x').append(h).append(" sample=").append(input.getWidth()).append('x').append(input.getHeight()).append(" baselineCopyUs=").append(copyNs[0]/1000).append(" naturalCopyUs=").append(copyNs[1]/1000)
      .append(" baselineBytes=").append(original.getAllocationByteCount()).append(" limitedBytes=").append(input.getAllocationByteCount())
-     .append(" legacyLimitedAllocatedBytes=").append(limitedBytes[0]).append(" naturalAllocatedBytes=").append(naturalBytes).append("; fused input RGB identical\n");
+     .append(" legacyLimitedAllocatedBytes=").append(limitedBytes[0]).append(" naturalAllocatedBytes=").append(naturalBytes).append("; worker-rotated input RGB identical\n");
     image.recycle();input.recycle();original.recycle();frame.close();cases++;
    }finally{surface.release();}
   }
   report.append("READBACK_OBSERVATION baselineUs=").append(baselineNs/1000).append(" naturalUs=").append(sampledNs/1000).append(" cases=32; alternating order, full baseline includes rotation, natural readback rotates later on worker; not camera end-to-end timing\n");
-  report.append("ROTATION_FUSION_PASS cases=32; all RGB input bytes identical to v0.4.16; one readback bitmap, removes rotated bitmap for display 90/180/270\n");
+  report.append("ROTATION_BUFFER_PASS cases=32; all RGB input bytes identical to v0.4.16; one readback bitmap, worker rotation storage reused for display 90/180/270\n");
   report.append("PREVIEW_PROBE_PASS cases=").append(cases).append("; direction marker + circle in displayed and sampled bitmap\n");result.putString("stream",report.toString());finish(Activity.RESULT_OK,result);
  }catch(Throwable error){result.putString("stream",report+"PREVIEW_PROBE_FAIL: "+error);finish(Activity.RESULT_CANCELED,result);}finally{if(activity!=null){final Activity host=activity;runOnMainSync(host::finish);}}}
  private static void copy(TextureView view,PreviewGeometry g,boolean old,AtomicReference<Bitmap> result,AtomicReference<BitmapFrame> raw,long[] times,int slot){

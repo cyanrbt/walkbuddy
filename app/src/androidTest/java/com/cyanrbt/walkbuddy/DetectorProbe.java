@@ -70,8 +70,8 @@ final class DetectorProbe {
         }
     }
 
-    private static void pixels(StringBuilder report) {
-        DetectorInput workspace=new DetectorInput();ByteBuffer identity=null;int cases=0;
+    private static void pixels(StringBuilder report) throws Exception {
+        DetectorInput workspace=new DetectorInput();ByteBuffer identity=null;Bitmap rotationIdentity=null;int cases=0;
         try {
             for(int cycle=0;cycle<2;cycle++)for(int rotation:new int[]{0,90,180,270})for(int[] size:new int[][]{{640,480},{480,640},{320,320},{137,59},{1,719},{719,1},{113,211}}) {
                 Bitmap source=Bitmap.createBitmap(size[0],size[1],Bitmap.Config.ARGB_8888);
@@ -82,6 +82,11 @@ final class DetectorProbe {
                     Paint paint=new Paint();paint.setColor(cycle==0?Color.rgb(7,131,239):Color.argb(91,250,70,10));
                     new Canvas(source).drawRect(0,0,size[0]*0.7f,size[1]*0.6f,paint);
                     ByteBuffer expected=baseline(source,rotation),actual=workspace.prepare(source,rotation);
+                    if(rotation!=0) {
+                        Bitmap storage=rotationBitmap(workspace);
+                        if(storage==null || rotationIdentity!=null && storage!=rotationIdentity)throw new AssertionError("Rotation storage was reallocated within capacity");
+                        rotationIdentity=storage;
+                    }
                     if(identity!=null && actual!=identity)throw new AssertionError("Input buffer changed identity");identity=actual;
                     if(!actual.isDirect() || actual.position()!=0 || actual.remaining()!=320*320*3)
                         throw new AssertionError("Input buffer has invalid layout");
@@ -108,14 +113,18 @@ final class DetectorProbe {
                     before=allocated();for(int i=0;i<30;i++)sink+=workspace.prepare(source).get(0);after=allocated();
                     if(before>=0 && after>=before)newBytes+=after-before;else newBytes=-1;
                 }
-                report.append("PREPROCESS_PARITY_PASS cases=").append(cases).append("; RGB bytes, all display rotations, alternating padding/alpha, geometry, fixed input buffer, consumer positions\n");
+                report.append("PREPROCESS_PARITY_PASS cases=").append(cases).append("; RGB bytes, all display rotations, alternating padding/alpha/density, geometry, fixed input and rotation buffers, consumer positions\n");
                 report.append("PREPROCESS_ALLOCATION_OBSERVATION rounds=3 frames=90 baselineBytes=").append(oldBytes)
                     .append(" reusedBytes=").append(newBytes).append("; ART process-wide managed allocation, excludes native bitmap memory\n");
             } finally {source.recycle();}
         } finally {workspace.close();workspace.close();}
+        if(rotationIdentity==null || !rotationIdentity.isRecycled())throw new AssertionError("Rotation storage survived workspace close");
         Bitmap source=Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888);
         try {try{workspace.prepare(source);throw new AssertionError("Closed workspace accepted an image");}catch(IllegalStateException expected){/* closed */}}
         finally{source.recycle();}
+    }
+    static Bitmap rotationBitmap(DetectorInput workspace) throws Exception {
+        Field field=DetectorInput.class.getDeclaredField("rotationBitmap");field.setAccessible(true);return (Bitmap)field.get(workspace);
     }
 
     private static void model(Instrumentation runner,StringBuilder report) throws Exception {

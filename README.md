@@ -99,7 +99,7 @@ python3 scripts/check_model.py
 
 ## 版本
 
-- **0.4.17**：将显示方向旋转合并进识别 worker 的复用输入画布，减少横屏采样的临时位图和主线程工作；逐字节与完整模型输出对照覆盖四个方向，验证进度见[本版说明](docs/releases/v0.4.17.md)。
+- **0.4.17**：将显示方向旋转移到识别 worker 并复用旋转缓冲，减少横屏逐帧分配和主线程工作；逐字节与完整模型输出对照覆盖四个方向，验证进度见[本版说明](docs/releases/v0.4.17.md)。
 
 - **0.4.16**：预览开关前置，简短标签配合原生勾选状态；检测详情先显示测距限定。空间增强未开启时收起四步进度和重复状态，保留能力说明与入口。扩展大字体和状态检查，验证进度见[本版说明](docs/releases/v0.4.16.md)。
 - **0.4.15**：可用 CPU 不超过两个时采用单线程识别，更多 CPU 保持双线程；增加完整模型输出对照与可复核的线程实验。135 项单测和 Android 15/16 默认配置完整原生回归通过，[GitHub 打包成功](https://github.com/cyanrbt/walkbuddy/actions/runs/40996293458)，已实际下载并核验 [APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.15/Walk-Buddy-v0.4.15-arm64-debug.apk)。双核模拟器多数轮次的 native 中位数较低，实机收益待测。详见[本版说明](docs/releases/v0.4.15.md)。
