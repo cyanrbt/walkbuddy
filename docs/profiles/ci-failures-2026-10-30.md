@@ -11,6 +11,8 @@
 - [修订候选 41133558071](https://github.com/cyanrbt/walkbuddy/actions/runs/41133558071)两套 API 均 attempt 1 成功；[正式 v0.4.35 41134864899](https://github.com/cyanrbt/walkbuddy/actions/runs/41134864899)的两套 UI、APK 和整体终态均 attempt 1 成功。直接重读 APK 日志确认 `BUILD SUCCESSFUL in 1m 5s`、固定签名检查及发布步骤成功；Release 实际有 9,978,729 字节的 [ARM64 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.35/Walk-Buddy-v0.4.35-arm64-debug.apk)，服务端摘要与[此前完整下载核验](apk-v0.4.35.json)相符。
 - 最新[既有恢复界面基线观测 41137921559](https://github.com/cyanrbt/walkbuddy/actions/runs/41137921559)当时仍在运行，API 36 已成功、API 35 编译成功且在模拟器检查；不能提前写为成功或失败。运行中暂时取不到归档日志不构成构建失败。
 
+随后再次查询，基线观测 `41137921559` 于北京时间 06:31:39 终态成功，两套 Android 作业均成功，仍为 attempt 1。JSON 的 `terminal_follow_up` 保留后续查询；上面的 06:31 快照不回写为当时已完成。本次仅核对终态，不冒充已完成新基线附件重放或新版本发布。
+
 `Release APK` 保留 `apk.needs: ui`：标签发布必须先通过 Android 15/16 检查，前置失败会跳过打包。main 上的 `Android UI checks` 本身是开发检查；Actions 列表同时保留这些候选红叉和后续成功的正式发布，因此应点开具体流程与失败步骤判断。已有布局和输入/窗口问题分别记录；没有用重跑抹去红叉，也不以当前成功宣称旧瞬时故障已全部定位。模拟器及发布验证不替代实体设备验收。
 
 ## v0.4.35 发布核对

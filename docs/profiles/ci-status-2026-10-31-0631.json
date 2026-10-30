@@ -1,5 +1,27 @@
 {
   "checked_at_utc": "2026-10-30 22:31:15 UTC",
+  "terminal_follow_up": {
+  "checked_at_utc": "2026-10-30 22:32:33 UTC",
+  "run_id": 41137921559,
+  "status": "completed",
+  "conclusion": "success",
+  "updated_at": "2026-10-30T22:31:39Z",
+  "jobs": [
+    {
+      "id": 124344849082,
+      "name": "layout (35)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124344849529,
+      "name": "layout (36)",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "scope": "Terminal run/job status only; native artifact replay is separate."
+},
   "checked_at_beijing": "2026-10-31 06:31:15 +08:00",
   "scope": "Actions status and decoded job-log audit; existing failures preserved; no workflow reruns or new release in this audit; not physical-device acceptance",
   "source": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/runs?per_page=40",
