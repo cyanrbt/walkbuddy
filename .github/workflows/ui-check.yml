@@ -31,6 +31,8 @@ jobs:
         api-level: [35, 36]
     steps:
       - uses: actions/checkout@v4
+      - name: Test CI report interpretation
+        run: python3 -m unittest discover -s scripts/tests -v
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -46,6 +48,7 @@ jobs:
           keytool -genkeypair -noprompt -keystore "$test_keystore" -storepass android -keypass android -alias androiddebugkey -dname CN=WalkBuddyUITest -keyalg RSA -keysize 2048 -validity 1
           echo "WALKBUDDY_SIGNING_KEYSTORE=${test_keystore}" >> "$GITHUB_ENV"
       - name: Build emulator test APKs
+        id: build
         run: |
           bash scripts/fetch_test_fixture.sh
           ./gradlew assembleDebug assembleDebugAndroidTest -PuniversalApk --no-daemon --no-watch-fs
@@ -55,6 +58,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
       - name: Run Android UI and virtual camera checks
+        id: emulator
         uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2
         with:
           api-level: ${{ matrix.api-level }}
@@ -63,6 +67,17 @@ jobs:
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -camera-back emulated -camera-front none
           script: bash scripts/${{ inputs.thread_profile && 'run_thread_profiles' || inputs.scheduling_profile && 'run_scheduling_profiles' || 'run_ui_probes' }}.sh
+      - name: Summarize build, probes and system evidence
+        if: always()
+        env:
+          BUILD_RESULT: ${{ steps.build.outcome }}
+          EMULATOR_RESULT: ${{ steps.emulator.outcome }}
+          PROBE_MODE: ${{ inputs.thread_profile && 'thread' || inputs.scheduling_profile && 'scheduling' || 'ui' }}
+        run: |
+          python3 scripts/report_ui_checks.py ui-evidence \
+            --build-result "${BUILD_RESULT:-skipped}" \
+            --emulator-result "${EMULATOR_RESULT:-skipped}" --mode "$PROBE_MODE"
+          cat ui-evidence/check-summary.md >> "$GITHUB_STEP_SUMMARY"
       - name: Upload layout evidence
         if: always()
         uses: actions/upload-artifact@v4

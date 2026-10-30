@@ -108,7 +108,7 @@ final class PipProbe {
             result.putString("stream",report+"PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore\n");
             code=Activity.RESULT_OK;
         } catch(Throwable error) {
-            try{screenshot(runner,"pip-recovery-failure.png");}catch(Exception ignored){/* Preserve failure. */}
+            failureEvidence(runner,"pip-recovery-failure");
             result.putString("stream",report+"PIP_RECOVERY_PROBE_FAIL: "+error+"; "+PreviewActivity.report());
         } finally {
             shell(runner,"input keyevent KEYCODE_WAKEUP");
@@ -404,7 +404,7 @@ final class PipProbe {
             report.append("PIP_PROBE_PASS\n");
             result.putString("stream",report.toString());code=Activity.RESULT_OK;
         } catch(Throwable error) {
-            try{screenshot(runner,"pip-failure.png");}catch(Exception ignored){/* Preserve the original failure. */}
+            failureEvidence(runner,"pip-failure");
             result.putString("stream",report+"PIP_PROBE_FAIL: "+error+"; "+PreviewActivity.report());
         } finally {
             shell(runner,"input keyevent KEYCODE_WAKEUP");
@@ -420,7 +420,7 @@ final class PipProbe {
     }
     private static void tap(Instrumentation runner,Activity host,int id) throws Exception {
         // Real input respects focus and enabled state, unlike directly invoking performClick.
-        await(runner,()->{
+        try {await(runner,()->{
             View view=host.findViewById(id);android.graphics.Rect bounds=new android.graphics.Rect();
             if(view==null)return false;
             for(View node=view;node!=null;) {
@@ -429,7 +429,9 @@ final class PipProbe {
             }
             return host.hasWindowFocus() && view!=null && view.isShown() && view.isEnabled()
                 && view.isAttachedToWindow() && view.getGlobalVisibleRect(bounds) && !bounds.isEmpty();
-        },"touch target ready id="+id);
+        },"touch target ready id="+id);} catch(AssertionError failure) {
+            throw new AssertionError(failure.getMessage()+"; "+read(runner,()->touchState(host,id)),failure);
+        }
         android.graphics.Rect bounds=read(runner,()->{
             android.graphics.Rect rect=new android.graphics.Rect();host.findViewById(id).getGlobalVisibleRect(rect);return rect;
         });
@@ -440,7 +442,9 @@ final class PipProbe {
             android.view.MotionEvent event=android.view.MotionEvent.obtain(at,android.os.SystemClock.uptimeMillis(),action,bounds.exactCenterX(),bounds.exactCenterY(),0);
             event.setSource(android.view.InputDevice.SOURCE_TOUCHSCREEN);
             try{
-                runner.sendPointerSync(event);
+                try {runner.sendPointerSync(event);} catch(RuntimeException failure) {
+                    throw new AssertionError("Input injection failed action="+action+"; "+failure+"; "+read(runner,()->touchState(host,id)),failure);
+                }
                 if(action==android.view.MotionEvent.ACTION_DOWN)read(runner,()->{
                     android.graphics.Rect observed=new android.graphics.Rect();View current=host.findViewById(id);
                     if(current!=null)current.getGlobalVisibleRect(observed);
@@ -449,6 +453,24 @@ final class PipProbe {
                 });
             }finally{event.recycle();}
         }
+    }
+    private static String touchState(Activity host,int id) {
+        View view=host.findViewById(id);android.graphics.Rect bounds=new android.graphics.Rect();
+        StringBuilder detail=new StringBuilder("target=").append(host.getResources().getResourceEntryName(id))
+            .append(" activity=").append(host.getClass().getSimpleName())
+            .append(" focus=").append(host.hasWindowFocus()).append(" pip=").append(host.isInPictureInPictureMode())
+            .append(" finishing=").append(host.isFinishing()).append(" destroyed=").append(host.isDestroyed());
+        if(view==null)return detail.append(" view=null").toString();
+        detail.append(" attached=").append(view.isAttachedToWindow()).append(" shown=").append(view.isShown())
+            .append(" enabled=").append(view.isEnabled()).append(" windowVisibility=").append(view.getWindowVisibility())
+            .append(" visibleRect=").append(view.getGlobalVisibleRect(bounds)).append(" bounds=").append(bounds);
+        int depth=0;
+        for(View node=view;node!=null;) {
+            detail.append(" ancestor[").append(depth++).append("]=").append(node.getClass().getSimpleName())
+                .append(" laidOut=").append(node.isLaidOut()).append(" layoutRequested=").append(node.isLayoutRequested());
+            android.view.ViewParent parent=node.getParent();node=parent instanceof View?(View)parent:null;
+        }
+        return detail.toString();
     }
     private static void assertReleased(PreviewActivity host) {
         for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback"})
@@ -498,6 +520,27 @@ final class PipProbe {
         Bitmap bitmap=runner.getUiAutomation().takeScreenshot();if(bitmap==null)throw new AssertionError("Screenshot unavailable");
         File dir=new File(runner.getTargetContext().getCacheDir(),"ui-probe");if(!dir.isDirectory() && !dir.mkdirs())throw new IllegalStateException("Evidence directory unavailable");
         try(FileOutputStream stream=new FileOutputStream(new File(dir,name))){bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);}finally{bitmap.recycle();}
+    }
+    private static void failureEvidence(Instrumentation runner,String prefix) {
+        // Capture before finish()/instrumentation teardown changes the focused window.
+        try{screenshot(runner,prefix+".png");}catch(Exception ignored){/* Keep the original failure. */}
+        for(String service:new String[]{"window windows","input","activity activities"}) {
+            String suffix=service.split(" ",2)[0];
+            try {
+                File directory=new File(runner.getTargetContext().getCacheDir(),"ui-probe");
+                if(!directory.isDirectory() && !directory.mkdirs())continue;
+                try(ParcelFileDescriptor pipe=runner.getUiAutomation().executeShellCommand("dumpsys -t 3 "+service);
+                    FileInputStream input=new FileInputStream(pipe.getFileDescriptor());
+                    FileOutputStream output=new FileOutputStream(new File(directory,prefix+"-"+suffix+".txt"))) {
+                    byte[] buffer=new byte[8192];int count,total=0;
+                    while((count=input.read(buffer))!=-1) {
+                        int used=Math.min(count,4*1024*1024-total);
+                        output.write(buffer,0,used);total+=used;
+                        if(total>=4*1024*1024)break;
+                    }
+                }
+            }catch(Exception ignored){/* Evidence must not replace the original failure. */}
+        }
     }
     private static void shell(Instrumentation runner,String command) {
         try(ParcelFileDescriptor pipe=runner.getUiAutomation().executeShellCommand(command);FileInputStream input=new FileInputStream(pipe.getFileDescriptor())) {

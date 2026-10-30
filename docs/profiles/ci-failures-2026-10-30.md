@@ -13,6 +13,8 @@
 
 已直接读取的 job：`123880977735`、`123884714492`、`123901411736`、`123929214335`。完整历史和对应应用修正见[验证结果](../验证结果.md)。不重跑已被后续实现替代的历史失败来消除红叉，也不删除失败记录。
 
+后续实际下载并复核 `41014998568` 首轮失败附件，确认该次首页被 **Pixel Launcher 未响应弹窗**遮挡，Launcher ANR 早于应用启动；这是这一次首次触摸超时的直接阻挡证据。原图、时间线与其它锁屏失败仍未证明因果关系的边界见[系统 ANR 复核](input-2026-10-30-launcher-anr.md)。本轮补充失败时焦点/输入快照和 Actions 分阶段摘要，没有放宽触摸条件或自动关闭系统弹窗。
+
 ## 当前可下载发布
 
 [v0.4.18 发布流程 41011135290](https://github.com/cyanrbt/walkbuddy/actions/runs/41011135290) 首次成功，含 Android 15/16 检查及固定签名 APK 作业。Release 实际存在 [Walk-Buddy-v0.4.18-arm64-debug.apk](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.18/Walk-Buddy-v0.4.18-arm64-debug.apk)，9,947,545 字节。发布后已实际下载核验包名、版本、模型和签名，记录见[发布附件核验](../验证结果.md#v0418-发布附件核验)；不代表 Find X8 Ultra、真实道路或 TalkBack 已验收。
