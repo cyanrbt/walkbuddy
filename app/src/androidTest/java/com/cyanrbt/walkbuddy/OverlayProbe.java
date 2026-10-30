@@ -87,6 +87,7 @@ final class OverlayProbe {
         }
         checkLabels(runner,report);
         checkCrowdedLabels(runner,report);
+        checkLabelLayering(runner,report);
         // A narrow PiP image must not send a negative label width to ellipsize.
         overlay.layout(0,0,1,1);
         overlay.show(Collections.singletonList(new Detection("很长的标签",1,0,0,1,1)),
@@ -189,25 +190,66 @@ final class OverlayProbe {
                 labels.put(new JSONObject().put("index",i).put("risk",data.get(i).risk.name()).put("text",text)
                     .put("left",l).put("top",t).put("right",r).put("bottom",b));
                 if(text.isEmpty())continue;visible++;
+                labelBounds(overlay,geometry,1,i);
+                if(data.get(i).attention())qualifiedLabel(text,Float.isFinite(data.get(i).meters)?"约 0.7 米":"未测距");
                 for(int j=0;j<i;j++) {
                     Object other=entries[j];if(((String)field(other,"label")).isEmpty())continue;
                     float ol=(float)field(other,"labelX"),ot=(float)field(other,"labelTop");
                     float or=ol+(float)field(other,"labelWidth")+8,ob=(float)field(other,"labelBottom");
-                    if(l<or && r>ol && t<ob && b>ot)pairs++;
+                    if(l<or+2-.001f && r+2>ol+.001f && t<ob+2-.001f && b+2>ot+.001f)pairs++;
                 }
             }
             String filename="crowd-font"+Math.round(font*100)+"-"+scene+"-"+width+".png";
             save(overlay,width,height,new File(output,filename));
+            if(visible==0 || ((scene.equals("mixed") || scene.equals("dense"))
+                && ((String)field(entries[entries.length-1],"label")).isEmpty()))
+                throw new AssertionError("Crowded labels omitted the highest-priority target: "+scene+" / "+width+" / "+font);
+            List<Detection> reversed=new ArrayList<>(data);Collections.reverse(reversed);overlay.show(reversed,geometry);
+            Object[] reordered=(Object[])entries(overlay);
+            for(int i=0;i<entries.length;i++) {
+                Object a=entries[i],bEntry=reordered[entries.length-i-1];
+                if(!field(a,"label").equals(field(bEntry,"label")) || !field(a,"labelX").equals(field(bEntry,"labelX"))
+                    || !field(a,"labelTop").equals(field(bEntry,"labelTop")))
+                    throw new AssertionError("Reordered detections moved their labels: "+scene);
+            }
+            overlay.show(reversed,geometry);
+            if(reordered!=entries(overlay))throw new AssertionError("Repeated crowded snapshot rebuilt labels");
             scenes.put(new JSONObject().put("scene",scene).put("font_scale",font).put("width_dp",width)
                 .put("height_dp",height).put("visible",visible).put("detections",data.size()).put("overlap_pairs",pairs)
                 .put("labels",labels).put("image",filename));cases++;collisions+=pairs;
         }
-        JSONObject result=new JSONObject().put("scope","Native constructed crowded-label baseline; no real recognition")
-            .put("source_behavior","v0.4.22 independent label placement").put("cases",cases).put("overlap_pairs",collisions).put("scenes",scenes);
-        try(FileOutputStream stream=new FileOutputStream(new File(output,"overlay-crowd-baseline.json"))) {
+        JSONObject result=new JSONObject().put("scope","Native constructed crowded labels; no real recognition")
+            .put("source_behavior","Risk-prioritized bounded placement; shapes before labels").put("cases",cases).put("overlap_pairs",collisions).put("scenes",scenes);
+        try(FileOutputStream stream=new FileOutputStream(new File(output,"overlay-crowd.json"))) {
             stream.write(result.toString(2).getBytes(StandardCharsets.UTF_8));
         }
-        report.append("LABEL_CROWD_BASELINE cases=").append(cases).append(" overlap_pairs=").append(collisions).append('\n');
+        if(collisions!=0)throw new AssertionError("Crowded label bubbles overlap or lack a 2dp gap: "+collisions);
+        report.append("LABEL_CROWD_PASS cases=").append(cases).append(" overlap_pairs=").append(collisions)
+            .append("; bounds, qualifiers, near-risk priority, reordered input, cache reuse\n");
+    }
+    private static void checkLabelLayering(Instrumentation runner,StringBuilder report) throws Exception {
+        File output=new File(runner.getTargetContext().getCacheDir(),"ui-probe");
+        for(float font:new float[]{1f,1.5f,2f}) {
+            Configuration config=new Configuration(runner.getTargetContext().getResources().getConfiguration());
+            config.fontScale=font;config.densityDpi=160;
+            DetectionOverlay overlay=new DetectionOverlay(runner.getTargetContext().createConfigurationContext(config),null);
+            overlay.layout(0,0,320,240);PreviewGeometry geometry=new PreviewGeometry(640,480,0,0,320,240);
+            boolean[] pixels=new boolean[16*12];java.util.Arrays.fill(pixels,true);
+            Detection label=new Detection("停车计时器",1,.2f,.6f,.8f,.9f,Detection.Risk.CAUTION,Float.NaN,null);
+            Detection mask=new Detection("",1,0,0,1,1,Detection.Risk.CAPTURED,Float.NaN,new ObstacleMask(16,12,pixels));
+            overlay.show(java.util.Arrays.asList(label,mask),geometry);
+            Object entry=((Object[])entries(overlay))[0];
+            int l=(int)(float)field(entry,"labelX"),t=(int)(float)field(entry,"labelTop");
+            int r=(int)Math.ceil(l+(float)field(entry,"labelWidth")+8),b=(int)Math.ceil((float)field(entry,"labelBottom"));
+            Bitmap first=draw(overlay,320,240),second=null;
+            try {
+                save(overlay,320,240,new File(output,"label-over-mask-font"+Math.round(font*100)+".png"));
+                overlay.show(java.util.Arrays.asList(mask,label),geometry);second=draw(overlay,320,240);
+                for(int y=t;y<b;y++)for(int x=l;x<r;x++)if(first.getPixel(x,y)!=second.getPixel(x,y))
+                    throw new AssertionError("Later mask or outline repainted a label at "+x+","+y+" font="+font);
+            } finally {first.recycle();if(second!=null)second.recycle();}
+        }
+        report.append("LABEL_LAYERING_PASS cases=3; native label pixels unchanged by later full-image mask\n");
     }
     private static List<Detection> crowd(String scene) {
         List<Detection> data=new ArrayList<>();
@@ -236,7 +278,10 @@ final class OverlayProbe {
             .put("bubble_top",(float)field(entry,"labelTop")).put("bubble_bottom",(float)field(entry,"labelBottom"));
     }
     private static void labelBounds(DetectionOverlay overlay,PreviewGeometry geometry,float dp) throws Exception {
-        Object entry=((Object[])entries(overlay))[0];String shown=label(overlay);
+        labelBounds(overlay,geometry,dp,0);
+    }
+    private static void labelBounds(DetectionOverlay overlay,PreviewGeometry geometry,float dp,int index) throws Exception {
+        Object entry=((Object[])entries(overlay))[index];String shown=(String)field(entry,"label");
         if(shown.isEmpty())throw new AssertionError("Expected a readable label");
         float x=(float)field(entry,"labelX"),top=(float)field(entry,"labelTop"),bottom=(float)field(entry,"labelBottom");
         float baseline=(float)field(entry,"labelY"),width=(float)field(entry,"labelWidth");

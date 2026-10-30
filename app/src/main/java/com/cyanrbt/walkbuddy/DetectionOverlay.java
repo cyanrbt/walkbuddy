@@ -24,6 +24,7 @@ public final class DetectionOverlay extends View {
         Path fill;
         int color;
         float stroke, labelX, labelY, labelWidth, labelTop, labelBottom;
+        float anchorX,anchorY,leaderX,leaderY;
         boolean caution;
         String label;
     }
@@ -56,6 +57,7 @@ public final class DetectionOverlay extends View {
 
     private Entry[] prepare(List<Detection> detections,PreviewGeometry g) {
         Entry[] out=new Entry[detections.size()];
+        OverlayLabelLayout.Label[] labels=new OverlayLabelLayout.Label[out.length];
         for(int i=0;i<out.length;i++) {
             Detection d=detections.get(i);Entry e=new Entry();out[i]=e;
             float l=g.left+d.left*g.width,t=g.top+d.top*g.height,r=g.left+d.right*g.width,b=g.top+d.bottom*g.height;
@@ -85,10 +87,19 @@ public final class DetectionOverlay extends View {
             float above=Math.max(textAbove,-glyphBounds.top),below=Math.max(textBelow,glyphBounds.bottom);
             float height=above+below+8*dp;
             if(height+4*dp>g.height){e.label="";e.labelWidth=0;}
-            e.labelX=Math.max(g.left+2*dp,Math.min(l,g.left+g.width-e.labelWidth-10*dp));
-            e.labelTop=Math.max(g.top+2*dp,Math.min(t-3*dp-height,g.top+g.height-2*dp-height));
-            e.labelY=e.labelTop+4*dp+above;
-            e.labelBottom=e.labelTop+height;
+            e.labelY=4*dp+above;
+            if(!e.label.isEmpty())labels[i]=new OverlayLabelLayout.Label(d,l,t,r,b,e.labelWidth+8*dp,height);
+        }
+        OverlayLabelLayout.Position[] positions=OverlayLabelLayout.place(labels,g.left,g.top,g.width,g.height,dp);
+        for(int i=0;i<out.length;i++) {
+            Entry e=out[i];OverlayLabelLayout.Position position=positions[i];
+            if(position==null){e.label="";e.labelWidth=0;continue;}
+            OverlayLabelLayout.Label size=labels[i];
+            e.labelX=position.left;e.labelTop=position.top;e.labelBottom=position.top+size.height;e.labelY+=position.top;
+            e.anchorX=Math.max(size.left,Math.min(size.right,e.labelX+size.width/2));
+            e.anchorY=position.bottomAnchor?size.bottom:size.top;
+            e.leaderX=Math.max(e.labelX+4*dp,Math.min(e.anchorX,e.labelX+size.width-4*dp));
+            e.leaderY=Math.max(e.labelTop,Math.min(e.anchorY,e.labelBottom));
         }
         return out;
     }
@@ -112,15 +123,23 @@ public final class DetectionOverlay extends View {
         super.onDraw(canvas);
         if(geometry==null || entries.length==0)return;
         canvas.save();canvas.clipRect(geometry.left,geometry.top,geometry.left+geometry.width,geometry.top+geometry.height);
-        for(int i=0;i<entries.length;i++) {
-            Entry e=entries[i];
+        // Draw every shape before any text, so later masks or borders cannot tint a label.
+        for(Entry e:entries) {
             if(e.fill!=null) {
                 paint.setStyle(Paint.Style.FILL);paint.setPathEffect(null);
                 paint.setColor((e.color&0xFFFFFF)|0x24000000);canvas.drawPath(e.fill,paint);
             }
+        }
+        for(Entry e:entries) {
             paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(e.stroke);paint.setColor(e.color);
             // Restore the dash after the translucent fill, for depth masks as well as RGB boxes.
             paint.setPathEffect(e.caution?cautionDash:null);canvas.drawPath(e.edges,paint);
+        }
+        paint.setPathEffect(null);paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(dp);
+        for(Entry e:entries)if(!e.label.isEmpty()) {
+            paint.setColor(e.color);canvas.drawLine(e.anchorX,e.anchorY,e.leaderX,e.leaderY,paint);
+        }
+        for(Entry e:entries) {
             if(!e.label.isEmpty()) {
                 paint.setStyle(Paint.Style.FILL);paint.setPathEffect(null);paint.setColor(Color.argb(235,18,23,32));
                 canvas.drawRoundRect(e.labelX,e.labelTop,e.labelX+e.labelWidth+8*dp,e.labelBottom,6*dp,6*dp,paint);
