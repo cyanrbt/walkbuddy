@@ -1,6 +1,6 @@
 # WalkBuddy
 
-白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，开发版本 **0.4.31**（versionCode 43）；最近已发布版本见下方下载。
+白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前版本 **0.4.31**（versionCode 43），已发布固定签名安装包。
 
 它多留一个画面，并提供基础物体识别和实验性的空间障碍检测。空间检测按深度占用判断前方是否可能受阻，无需先认识物体名称。路还是要自己看。不要在马路、楼梯或骑行时靠它决定下一步。
 
@@ -52,7 +52,7 @@
 
 ## 安装
 
-当前 [v0.4.30 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.30/Walk-Buddy-v0.4.30-arm64-debug.apk) 已通过 [发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41103784224)，候选和标签 Android 15/16 检查均首次成功，固定签名 APK 已从 Release 下载并核验版本、签名、摘要及振动设置代码。[关闭状态原图](docs/design/v0.4.30/README.md)展示普通/大字体布局；[验证记录](docs/验证结果.md)包含原生开关、记录输出、页面重建和关闭状态报告。实体振感、厂商系统、TalkBack 与真实 AR 仍待验收。
+当前 [v0.4.31 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.31/Walk-Buddy-v0.4.31-arm64-debug.apk) 已通过[正式发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41110471304)，候选与标签 Android 15/16 均首次十项全部成功。提示音改由独立线程准备、复用、播放与释放；阻塞/取消、独立失败回退与实际音频 API 线程记录通过，实际 APK 已下载核验版本、固定签名和摘要。[验证记录](docs/profiles/tone-threading-2026-10-31.md)区分线程行为、API 接受和真实声音；实体音频、蓝牙/勿扰、性能、TalkBack 与真实 AR 仍待验收。
 
 Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
 
@@ -112,7 +112,7 @@ python3 scripts/check_model.py
 
 ## 版本
 
-- **0.4.31**：提示音由独立串行线程准备、复用、播放和释放；关闭/降级/过期取消旧请求，音频失败关闭声音并保留画面、检测与振动。212 项 JVM 与 Android 15/16 候选检查已通过，见[本版说明](docs/releases/v0.4.31.md)。
+- **0.4.31**：提示音由独立串行线程准备、复用、播放和释放；关闭/降级/过期取消旧请求，音频失败关闭声音并保留画面、检测与振动。212 项 JVM 与 Android 15/16 候选/标签检查均首次通过，固定签名 APK 已发布并实际下载核验，见[本版说明](docs/releases/v0.4.31.md)。
 - **0.4.30**：新增独立的「振动提醒」开关，记住用户选择，关闭即取消、重新开启不补播；图例和问题报告同步反映设置，见[本版说明](docs/releases/v0.4.30.md)。
 
 - **0.4.29**：小窗动画矩形对应实际相机像素并扣除黑边，跟随布局、方向及展开目标变化；相同边界去重提交，停止后移除监听，见[本版说明](docs/releases/v0.4.29.md)。

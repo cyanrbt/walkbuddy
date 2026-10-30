@@ -25,4 +25,8 @@
 
 ## 发布状态
 
-候选验证通过，正式标签与 APK 发布结果待补。
+[正式发布 41110471304](https://github.com/cyanrbt/walkbuddy/actions/runs/41110471304) attempt 1 已终态成功：Android 15 job `124251260617`、Android 16 job `124251260100` 与 APK job `124254126316` 均首次成功。标签固定于 `9f46371b9281eb882413e813c9b932e3d27f7cff`，生产/测试代码与候选一致。两套标签原始日志各十项 PASS，每套两轮新增音频三项通过，真实 AndroidTone 各创建/关闭一次、两次播放请求均被接受、全部操作在后台线程。两套完整 ZIP 已下载核对服务端大小/SHA-256，重放摘要与原始记录一致，两套摘要无 ANR 观察，[发布原始 JSON](tone-threading-native-release-2026-10-31.json)保留线程时间。
+
+Release `429386749` 的 asset `693103519` 实际存在 [v0.4.31 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.31/Walk-Buddy-v0.4.31-arm64-debug.apk)。通过 Release 下载地址完整下载，curl 退出 0；9,975,340 字节，SHA-256 `22a629c94a18f0b016bde7024111dd7fd9bc52310476655787da2d0bfc8b59a9` 与 GitHub 一致。apksigner verify 通过、单签名且 v2 有效，固定证书 `ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d`。包名、0.4.31 / 43、min 26 / target 36、仅 ARM64/原两项权限、模型/中文表/11sp 均通过。主包存在新音频线程、输出与错误提示，预览 Activity 不直接引用 ToneGenerator；原生音频探针和记录不在主包，五个提醒核心文件与重新执行的时序对照摘要一致。[APK 核验 JSON](apk-v0.4.31.json)保留结果。
+
+状态接口曾在原始日志结束、附件上传及 Release 已有 APK 后继续返回旧的 queued / in_progress，公开 API 也曾返回旧值；最终明确取得 completed / success 与三个作业终态成功后才记录流程成功。没有重跑，具体状态滞后原因未定位。这与音频功能或历史显示停顿根因分别处理。
