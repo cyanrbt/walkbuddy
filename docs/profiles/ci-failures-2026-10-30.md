@@ -1,6 +1,18 @@
 # 2026-10-30 Actions 失败原因核对
 
-用户询问 GitHub 打包持续失败。本次直接查询最近 20 次 Actions、最近五个 Releases，并读取相关失败 job 日志。最近 v0.4.15、v0.4.16、v0.4.17、v0.4.18 的 `Release APK` 均首次成功，各自的 Release 确有 APK；近期红叉主要发生在 main 分支的 `Android UI checks` 模拟器运行步骤，之前的 `Build emulator test APKs` 已成功。构建成功与设备验收仍是不同范围。
+本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
+
+## 最新核对：2026-10-31 02:35（北京时间）
+
+用户再次询问持续失败后，重新查询最近 40 次 Actions、最新 Release、最近保留红叉和最近失败首轮的作业步骤，并直接重读两个失败 job 的完整日志。最近连续五次运行均为 attempt 1 成功：v0.4.28 正式发布、v0.4.29 候选与正式发布、v0.4.30 候选与正式发布。
+
+- 最近发生过失败的首轮是 [41091065722 attempt 1](https://github.com/cyanrbt/walkbuddy/actions/runs/41091065722/attempts/1)：API 36 job `124184760241` 已 `BUILD SUCCESSFUL`，随后在 `recovery PiP frames advance` 超时；已保留的失败附件记录显示显示帧龄 1352ms，超过 1200ms 保护截止。原提交失败作业重跑后整轮成功，但停顿根因仍未确定，不能称为已修复，见[原始时序与截图](pip-display-expiry-2026-10-31.md)。
+- 最近仍保留红叉的 [41073282182](https://github.com/cyanrbt/walkbuddy/actions/runs/41073282182) 也是编译成功后失败：API 35 job `124122673655` 在 `recovery manual restart` 超时。其失败时输入附件明确目标窗口暂停，后续补充展开后系统输入就绪检查；证据与修正范围见[输入追踪](input-after-pip-expand-2026-10-30.md)。不能将末尾画面过期提示直接当作这次触摸失败的原因。
+- 最新 [v0.4.30 正式发布 41103784224](https://github.com/cyanrbt/walkbuddy/actions/runs/41103784224) 的 API 35 job `124227479617`、API 36 job `124227479142`、APK job `124230917143` 均已终态成功。Release 实有 [Walk-Buddy-v0.4.30-arm64-debug.apk](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.30/Walk-Buddy-v0.4.30-arm64-debug.apk)，9,974,776 字节，GitHub 摘要 `00d0e8968610879741256cf3806dbbe464ad05987a986b0a4ab5a53a7c69956e`，与此前实际下载核验的[附件记录](apk-v0.4.30.json)一致。
+
+本次核对没有重跑或删除历史失败，也未放宽检查门槛。旧红叉包含应用/布局回归、测试输入时序和系统异常等不同问题，不能全部归因于模拟器不稳定。此次只更新核对记录，没有应用版本变更；不另发标签制造重复安装包。
+
+最初核对时，直接查询最近 20 次 Actions、最近五个 Releases，并读取相关失败 job 日志。当时 v0.4.15、v0.4.16、v0.4.17、v0.4.18 的 `Release APK` 均首次成功，各自的 Release 确有 APK；红叉主要发生在 main 分支的 `Android UI checks` 模拟器运行步骤，之前的 `Build emulator test APKs` 已成功。
 
 ## 再次核对：最近红叉与当前状态
 
@@ -51,7 +63,7 @@ v0.4.26 提醒候选 [41073282182](https://github.com/cyanrbt/walkbuddy/actions/
 
 标签发布 [41033072437](https://github.com/cyanrbt/walkbuddy/actions/runs/41033072437/attempts/1) 首轮 API 35 在首次首页触摸准备处失败，此时相机和模型尚未开启。已下载并查看原图：**Pixel Launcher 未响应弹窗**挡住首页；失败时 input 快照也明确显示该弹窗占有焦点。API 36 首次通过，APK 作业因前置检查未过而跳过，并非 APK 编译失败。随后仅重跑原标签失败作业，attempt 2 的 API 35 和 APK 作业成功。该次证据见[发布首轮记录](release-v0.4.19-first-attempt.md)，不能推断所有旧触摸失败都由 Launcher 引起。
 
-## 当前可下载发布
+## v0.4.27 发布
 
 [v0.4.27 发布流程 41083803493](https://github.com/cyanrbt/walkbuddy/actions/runs/41083803493) attempt 1 成功，Android 15/16 与固定签名 APK 作业均首次通过，同提交 main 两套也首次成功。两套发布原始日志各九项 PASS，新触觉、图例/缩放和两轮 Activity 接线检查通过；标签 API 36 附件已实际下载核对摘要并查看新图，摘要没有 ANR 观察。Release 实际存在 [v0.4.27 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.27/Walk-Buddy-v0.4.27-arm64-debug.apk)，已完整下载核对版本 0.4.27 / 39、固定签名和 GitHub 摘要，详见[附件 JSON](apk-v0.4.27.json)。候选外部 Google 服务 ANR 仍保留，真实设备仍待验收。
 
