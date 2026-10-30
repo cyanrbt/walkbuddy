@@ -8,7 +8,9 @@
 
 后续 [41043678006](https://github.com/cyanrbt/walkbuddy/actions/runs/41043678006)、[41044965636](https://github.com/cyanrbt/walkbuddy/actions/runs/41044965636) 及当前标签改进首个候选 [41048695368](https://github.com/cyanrbt/walkbuddy/actions/runs/41048695368) 的两套 Android 检查均首次成功；v0.4.21 发布流程和 APK 附件也已成功。历史失败保留，不用后续成功覆盖其原因未定的事实。向用户报告时分别给出“触发”“模拟器结果”“APK 发布及下载”，避免将任何 Actions 红叉统称为打包失败。
 
-随后标签尾部改进候选 [41050305115](https://github.com/cyanrbt/walkbuddy/actions/runs/41050305115) 的 API 36 再次失败，API 35 通过。本次新路由证据明确显示：点击时输入视口尚未活动，应用窗口仍不可触摸，292ms 后视口才恢复；并非 APK 编译失败。已据此补充系统输入就绪条件，保持原真实触摸、截止和失败门槛，详见[失败时间线与修正](input-target-ready-2026-10-30.md)。本轮尚未发布 v0.4.22，不能把此前绿勾当作后续结果。
+随后标签尾部改进候选 [41050305115](https://github.com/cyanrbt/walkbuddy/actions/runs/41050305115) 的 API 36 再次失败，API 35 通过。本次新路由证据明确显示：点击时输入视口尚未活动，应用窗口仍不可触摸，292ms 后视口才恢复；并非 APK 编译失败。已据此补充系统输入就绪条件，保持原真实触摸、截止和失败门槛，详见[失败时间线与修正](input-target-ready-2026-10-30.md)。该失败轮次未发布 v0.4.22，不能把此前绿勾当作后续结果。
+
+修正后的 [41051697662](https://github.com/cyanrbt/walkbuddy/actions/runs/41051697662) 两套 API 首次全部成功；随后 v0.4.22 标签的发布流程也首次全部成功，实际 APK 已下载并核验，详见下一节。此次确认的是输入就绪条件补充及本轮回归，仍保留其它历史故障与实机边界。
 
 ## 已查明的失败
 
@@ -32,6 +34,10 @@
 标签发布 [41033072437](https://github.com/cyanrbt/walkbuddy/actions/runs/41033072437/attempts/1) 首轮 API 35 在首次首页触摸准备处失败，此时相机和模型尚未开启。已下载并查看原图：**Pixel Launcher 未响应弹窗**挡住首页；失败时 input 快照也明确显示该弹窗占有焦点。API 36 首次通过，APK 作业因前置检查未过而跳过，并非 APK 编译失败。随后仅重跑原标签失败作业，attempt 2 的 API 35 和 APK 作业成功。该次证据见[发布首轮记录](release-v0.4.19-first-attempt.md)，不能推断所有旧触摸失败都由 Launcher 引起。
 
 ## 当前可下载发布
+
+[v0.4.22 发布流程 41052842543](https://github.com/cyanrbt/walkbuddy/actions/runs/41052842543) attempt 1 成功：Android 15/16 和 APK 作业均首次通过，原始 job 日志各有九项 PASS、10 项输入规则、1530 组标签布局和 18 组对比度，无探针 FAIL。Release 实际存在 [Walk-Buddy-v0.4.22-arm64-debug.apk](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.22/Walk-Buddy-v0.4.22-arm64-debug.apk)，已实际下载核验版本 0.4.22 / 34、固定证书、模型、中文表和 11sp 资源；[附件 JSON](apk-v0.4.22.json)保存完整摘要。真机仍待验收。
+
+## v0.4.21 发布
 
 [v0.4.21 发布流程 41044965502](https://github.com/cyanrbt/walkbuddy/actions/runs/41044965502) attempt 1 成功：Android 15/16 与 APK 作业均首次通过，同提交 main 两套 API 也首次成功。Release 实际存在 [Walk-Buddy-v0.4.21-arm64-debug.apk](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.21/Walk-Buddy-v0.4.21-arm64-debug.apk)，已下载核对固定签名、0.4.21 / 33、资产摘要和亮屏资源，见[附件 JSON](apk-v0.4.21.json)。
 
