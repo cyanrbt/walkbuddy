@@ -52,4 +52,30 @@ public class AlertPolicyTest {
         Detection full=Detection.fromModel("人",0.8f,new float[]{0,0,1,1},320,240,0,40);
         assertEquals(0,full.top,0);assertEquals(1,full.bottom,0);
     }
+    @Test public void uncertaintyPrecedesLongObjectDetailsAfterConfirmation() {
+        String label="很长的模型类别名称仍应保留完整内容";
+        Detection object=Detection.fromModel(label,.8f,new float[]{.1f,.3f,.9f,.7f},320,320,0,0);
+        AlertPolicy policy=new AlertPolicy();
+        AlertPolicy.Decision candidate=update(policy,100,object);
+        assertTrue(candidate.message.startsWith("灰色不代表安全"));assertFalse(candidate.alert);
+        AlertPolicy.Decision confirmed=update(policy,600,object);
+        assertTrue(confirmed.message.startsWith("未测距 · "));
+        assertTrue(confirmed.message.contains(label));assertTrue(confirmed.message.endsWith(object.position()));
+        assertTrue(confirmed.alert);assertEquals(Detection.Risk.CAUTION,confirmed.detections.get(0).risk);
+        assertTrue(Float.isNaN(confirmed.detections.get(0).meters));
+        assertTrue(update(policy,1100).message.startsWith("不代表可通行"));
+    }
+    @Test public void measuredDistancePrecedesDetailsWithoutChangingRiskEscalation() {
+        AlertPolicy policy=new AlertPolicy();Detection caution=person(.3f,.6f);
+        update(policy,100,caution);
+        AlertPolicy.Decision yellow=update(policy,600,caution);
+        assertTrue(yellow.message.startsWith("约 1.5 米 · "));assertTrue(yellow.message.contains("前方可能受阻"));
+        Detection near=new Detection("空间障碍",1,.3f,.2f,.6f,.8f,Detection.Risk.NEAR,.7f,null);
+        AlertPolicy.Decision firstNear=update(policy,1100,near);
+        assertEquals(Detection.Risk.CAUTION,firstNear.detections.get(0).risk);assertFalse(firstNear.alert);
+        AlertPolicy.Decision red=update(policy,1600,near);
+        assertTrue(red.message.startsWith("约 0.7 米 · "));assertTrue(red.message.contains("请及时注意"));
+        assertTrue(red.message.endsWith(near.position()));assertTrue(red.alert);
+        assertEquals(Detection.Risk.NEAR,red.detections.get(0).risk);
+    }
 }

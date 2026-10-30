@@ -70,14 +70,17 @@ final class LayoutProbe {
                 String name=size[0]+"x"+size[1]+"-font"+Math.round(font*100)+(night?"-night":"-day");
                 CheckBox detection=root.findViewById(R.id.preview_recognition),sound=root.findViewById(R.id.preview_sound);
                 TextView info=root.findViewById(R.id.preview_info);
+                String basic=confirmedMessage(Detection.fromModel("人",.8f,new float[]{.1f,.3f,.9f,.7f},320,320,0,0));
+                String measured=confirmedMessage(new Detection("空间障碍",1,.3f,.1f,.7f,.9f,Detection.Risk.CAUTION,1.7f,null));
                 for(int mode=0;mode<4;mode++) {
                     detection.setChecked(mode!=0);sound.setChecked(false);sound.setEnabled(mode!=0);
                     info.setText(mode==0?context.getString(R.string.info_recognition_off):mode==1
-                        ?context.getString(R.string.info_recognition_preparing):"画面关注 · 人 · 中间 · 未测距");
+                        ?context.getString(R.string.info_recognition_preparing):mode==2?basic:measured);
                     root.findViewById(R.id.recent_alert).setVisibility(mode>=2?View.VISIBLE:View.GONE);
+                    if(mode>=2)new RiskAnnouncer(root).update(info.getText().toString(),Detection.Risk.CAUTION,true,200);
                     PreviewChrome.depth(root,mode==3);
                     ((TextView)root.findViewById(R.id.depth_guide_hint)).setText(mode==3
-                        ?"深度覆盖不足 · 对准地面与前方障碍再试":"基础模式 · 空间增强可选");
+                        ?"深度有效 · 实验测距提示":"基础模式 · 空间增强可选");
                     ((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
                     measure(root,size[0],size[1]);
                     screenshot(root,new File(output,name+"-current.png"));
@@ -85,6 +88,7 @@ final class LayoutProbe {
                     initialVisible(root,detection);initialVisible(root,sound);
                     if(detection.getLineCount()!=1 || sound.getLineCount()!=1)throw new AssertionError("Toggle label wrapped: "+name);
                     if(mode<=1)initialVisible(root,info);
+                    else initialQualifierVisible(root,info,mode==2?"未测距":"约 1.7 米");
                     if(root.findViewById(R.id.depth_steps).getVisibility()!=(mode==3?View.VISIBLE:View.GONE)
                         || root.findViewById(R.id.depth_status).getVisibility()!=(mode==3?View.VISIBLE:View.GONE))
                         throw new AssertionError("Optional depth details have wrong visibility");
@@ -136,6 +140,21 @@ final class LayoutProbe {
             }
     }
 
+    private static String confirmedMessage(Detection detection) {
+        AlertPolicy policy=new AlertPolicy();
+        policy.update(java.util.Collections.singletonList(detection),100);
+        return policy.update(java.util.Collections.singletonList(detection),600).message;
+    }
+    private static void initialQualifierVisible(View root,TextView info,String qualifier) {
+        if(info.getLayout()==null || !info.getText().subSequence(0,info.getLayout().getLineEnd(0)).toString().contains(qualifier))
+            throw new AssertionError("Distance qualifier lost from first line: "+info.getText());
+        Rect first=new Rect(0,0,info.getWidth(),info.getCompoundPaddingTop()+info.getLayout().getLineBottom(0));
+        View panel=root.findViewById(R.id.preview_controls);
+        Rect viewport=new Rect(0,0,panel.getWidth(),panel.getHeight());
+        ((ViewGroup)root).offsetDescendantRectToMyCoords(info,first);
+        ((ViewGroup)root).offsetDescendantRectToMyCoords(panel,viewport);
+        if(!viewport.contains(first))throw new AssertionError("First distance qualifier outside initial viewport: "+first+" viewport="+viewport);
+    }
     private static void initialVisible(View root,View view) {
         View scroll=root.findViewById(R.id.preview_controls);
         Rect bounds=new Rect(0,0,view.getWidth(),view.getHeight()),viewport=new Rect(0,0,scroll.getWidth(),scroll.getHeight());

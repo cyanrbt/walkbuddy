@@ -41,9 +41,9 @@ final class AlertPolicy {
             boolean alert=now-lastAlert>=(escalation?1000:3000) && (escalation || now-target.alertedAt>=(urgent?4000:8000));
             if(alert){target.alertedAt=now;target.alertedRisk=confirmed(target).ordinal();lastAlert=now;}
             String distance=Float.isFinite(target.detection.meters)?String.format(Locale.CHINA,"约 %.1f 米",target.detection.meters):"未测距";
-            return new Decision((urgent?"请及时注意":Float.isFinite(target.detection.meters)?"前方可能受阻":"画面关注 · "+target.detection.label)+" · "+target.detection.position()+" · "+distance,alert,visible);
+            return new Decision(distance+" · "+(urgent?"请及时注意":Float.isFinite(target.detection.meters)?"前方可能受阻":"画面关注 · "+target.detection.label)+" · "+target.detection.position(),alert,visible);
         }
-        return new Decision(detections.isEmpty()?"尚未捕获目标 · 不代表前方可通行":"已捕获 "+detections.size()+" 处目标 · 灰色不代表安全",false,visible);
+        return new Decision(detections.isEmpty()?"不代表可通行 · 尚未捕获目标":"灰色不代表安全 · 已捕获 "+detections.size()+" 处目标",false,visible);
     }
     private static Detection.Risk confirmed(Track track){return track.detection.risk==Detection.Risk.NEAR && track.nearHits<2?Detection.Risk.CAUTION:track.detection.risk;}
     void clear(){previous=Collections.emptyList();previousAt=0;}

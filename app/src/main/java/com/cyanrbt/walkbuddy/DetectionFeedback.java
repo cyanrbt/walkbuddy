@@ -7,7 +7,7 @@ final class DetectionFeedback {
     private final AlertPolicy basicPolicy=new AlertPolicy(),depthPolicy=new AlertPolicy();
     private AlertPolicy.Decision basic,depth;
     private static final AlertPolicy.Decision EMPTY = new AlertPolicy.Decision(
-        "尚未捕获目标 · 不代表前方可通行", false, Collections.emptyList());
+        "不代表可通行 · 尚未捕获目标", false, Collections.emptyList());
     private AlertPolicy.Decision visibleBasic, visibleDepth, visible = EMPTY;
     private long basicAt=-1,depthAt=-1,lastDepth=-1,lastAlert=-3000;
     boolean basic(List<Detection> detections,long capturedAt,long now) {
