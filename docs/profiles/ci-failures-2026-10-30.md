@@ -17,7 +17,17 @@
 
 诊断提交 `a408b0d` 的 [41022973332](https://github.com/cyanrbt/walkbuddy/actions/runs/41022973332) 两套 API 首次通过。已下载两套 artifacts，确认各九项探针原始记录齐全，新增 JSON/Markdown 摘要与本地重放一致；本轮未触发失败时采集分支，不能据成功结果宣称其它故障已修复，完整验证边界见上方复核记录。
 
+## v0.4.19 后续核对
+
+[41025609152](https://github.com/cyanrbt/walkbuddy/actions/runs/41025609152) 的新增提示条检查误用了按钮最小 48px 触摸尺寸要求，已改成非交互提示的完整边界和文字断言，按钮尺寸要求保留。最终候选 [41031071106](https://github.com/cyanrbt/walkbuddy/actions/runs/41031071106) API 35/36 均首次成功；中间锁屏输入失败仍单独保留[快照与范围](input-after-wake-2026-10-30-v0.4.19.md)，没有凭重跑下根因结论。
+
+标签发布 [41033072437](https://github.com/cyanrbt/walkbuddy/actions/runs/41033072437/attempts/1) 首轮 API 35 在首次首页触摸准备处失败，此时相机和模型尚未开启。已下载并查看原图：**Pixel Launcher 未响应弹窗**挡住首页；失败时 input 快照也明确显示该弹窗占有焦点。API 36 首次通过，APK 作业因前置检查未过而跳过，并非 APK 编译失败。随后仅重跑原标签失败作业，attempt 2 的 API 35 和 APK 作业成功。该次证据见[发布首轮记录](release-v0.4.19-first-attempt.md)，不能推断所有旧触摸失败都由 Launcher 引起。
+
 ## 当前可下载发布
+
+[v0.4.19 发布流程 41033072437](https://github.com/cyanrbt/walkbuddy/actions/runs/41033072437) attempt 2 已成功，Release 实际存在 [Walk-Buddy-v0.4.19-arm64-debug.apk](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.19/Walk-Buddy-v0.4.19-arm64-debug.apk)。已下载核对 9,950,381 字节、GitHub 资产摘要、固定签名与版本 0.4.19 / 31，详见[核验 JSON](apk-v0.4.19.json)。此为模拟器及发布附件检查，实机仍待验收。
+
+## 此前发布
 
 [v0.4.18 发布流程 41011135290](https://github.com/cyanrbt/walkbuddy/actions/runs/41011135290) 首次成功，含 Android 15/16 检查及固定签名 APK 作业。Release 实际存在 [Walk-Buddy-v0.4.18-arm64-debug.apk](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.18/Walk-Buddy-v0.4.18-arm64-debug.apk)，9,947,545 字节。发布后已实际下载核验包名、版本、模型和签名，记录见[发布附件核验](../验证结果.md#v0418-发布附件核验)；不代表 Find X8 Ultra、真实道路或 TalkBack 已验收。
 

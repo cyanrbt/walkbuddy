@@ -1,6 +1,6 @@
 # WalkBuddy
 
-白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前开发版本 **0.4.19**（versionCode 31），发布验证进行中。
+白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前版本 **0.4.19**（versionCode 31）。
 
 它多留一个画面，并提供基础物体识别和实验性的空间障碍检测。空间检测按深度占用判断前方是否可能受阻，无需先认识物体名称。路还是要自己看。不要在马路、楼梯或骑行时靠它决定下一步。
 
@@ -42,7 +42,7 @@
 
 ## 安装
 
-当前 [v0.4.18 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.18/Walk-Buddy-v0.4.18-arm64-debug.apk) 已通过 [发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41011135290)，并实际下载核验版本、固定签名与完整中文资源；[验证记录](docs/验证结果.md)含完整摘要和模拟器/实机范围。
+当前 [v0.4.19 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.19/Walk-Buddy-v0.4.19-arm64-debug.apk) 已通过 [发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41033072437)，并实际下载核验版本、固定签名、模型与完整中文资源。API 35 首轮被系统 Launcher 未响应弹窗阻挡，同一标签重跑失败作业后通过；[验证记录](docs/验证结果.md)含完整摘要和模拟器/实机范围。
 
 Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、已修正问题和仍待定位的触摸超时见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
 
