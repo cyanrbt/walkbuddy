@@ -12,6 +12,10 @@ assert card['licenseName']=='Apache 2.0' and card['id']==992 and card['versionId
 labels=zipfile.ZipFile(p).read('labelmap.txt').decode().splitlines()
 assert len(labels)==90 and labels[0]=='person'
 assert (root/'app/src/main/assets/labelmap.txt').read_text().splitlines()==labels
+translated=[line.split('\t') for line in (root/'app/src/main/assets/labelmap_zh.tsv').read_text().splitlines()]
+assert len(translated)==90 and all(len(row)==2 and row[0]==labels[i] for i,row in enumerate(translated))
+assert all(zh=='???' if en=='???' else bool(zh) and all('\u4e00'<=c<='\u9fff' for c in zh) for en,zh in translated)
+assert len({zh for en,zh in translated if en!='???'})==80
 def u32(buf,pos):return struct.unpack_from('<I',buf,pos)[0]
 def field(buf,pos,i):
     vt=pos-struct.unpack_from('<i',buf,pos)[0];entry=vt+4+2*i

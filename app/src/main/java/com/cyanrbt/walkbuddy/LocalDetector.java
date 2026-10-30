@@ -16,7 +16,7 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     private final int threads;
     private final boolean traceAll;
     final Interpreter interpreter;
-    final List<String> labels;
+    final ModelLabels labels;
     private DetectorInput input;
     private Object[] inputs;
     private final FloatBuffer boxes=outputBuffer(100),classes=outputBuffer(25),scores=outputBuffer(25),count=outputBuffer(1);
@@ -40,9 +40,10 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     LocalDetector(Context context,int threads,boolean traceAll) throws IOException {
         if(threads!=1 && threads!=2)throw new IllegalArgumentException("Only 1/2 CPU threads are supported");
         this.threads=threads;this.traceAll=traceAll;
-        labels=new ArrayList<>();
-        try(BufferedReader reader=new BufferedReader(new InputStreamReader(context.getAssets().open("labelmap.txt"),java.nio.charset.StandardCharsets.UTF_8))) {String line;while((line=reader.readLine())!=null)labels.add(line);}
-        if(labels.size()!=90 || !"person".equals(labels.get(0)))throw new IOException("模型标签映射不匹配");
+        try(Reader original=new InputStreamReader(context.getAssets().open("labelmap.txt"),java.nio.charset.StandardCharsets.UTF_8);
+            Reader translated=new InputStreamReader(context.getAssets().open("labelmap_zh.tsv"),java.nio.charset.StandardCharsets.UTF_8)) {
+            labels=ModelLabels.read(original,translated);
+        }
         try(AssetFileDescriptor fd=context.getAssets().openFd("efficientdet_lite0_v1.tflite");FileInputStream stream=new FileInputStream(fd.getFileDescriptor())) {
             ByteBuffer model=stream.getChannel().map(FileChannel.MapMode.READ_ONLY,fd.getStartOffset(),fd.getDeclaredLength());
             interpreter=new Interpreter(model,new Interpreter.Options().setNumThreads(threads));
@@ -78,16 +79,16 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
             for(int j=0;j<4;j++){box[j]=boxes.get(i*4+j);if(!Float.isFinite(box[j]))throw new IllegalStateException("模型框坐标无效");}
             int index=Math.round(categoryIndex);float score=scores.get(i);
             if(index<0 || index>=labels.size() || !Float.isFinite(score) || score<0 || score>1)throw new IllegalStateException("模型结果/标签索引无效");
-            indices[i]=index;values[i]=score;String name=labels.get(index);
-            if(score>=0.35f && !"???".equals(name)) {
-                Detection detection=Detection.fromModel(chinese(name),score,box,input.width,input.height,input.padX,input.padY);
+            indices[i]=index;values[i]=score;
+            if(score>=0.35f && labels.defined(index)) {
+                Detection detection=Detection.fromModel(labels.displayName(index),score,box,input.width,input.height,input.padX,input.padY);
                 if(detection!=null){detections.add(detection);if(category.isEmpty() && score>=0.5f)category=detection.label;}
             }
         }
         return new Result(category,indices,values,detections);
     }
     String tensorReport(){StringBuilder out=new StringBuilder();out.append("threads ").append(threads).append("\ninput ").append(interpreter.getInputTensor(0).name()).append(" ").append(interpreter.getInputTensor(0).dataType()).append(" ").append(Arrays.toString(interpreter.getInputTensor(0).shape()));for(int i=0;i<4;i++)out.append("\noutput ").append(i).append(" ").append(interpreter.getOutputTensor(i).name()).append(" ").append(interpreter.getOutputTensor(i).dataType()).append(" ").append(Arrays.toString(interpreter.getOutputTensor(i).shape()));return out.toString();}
-    private static String chinese(String name){switch(name){case"person":return"人";case"bicycle":return"自行车";case"car":return"汽车";case"motorcycle":return"摩托车";case"bus":return"公交车";case"truck":return"卡车";case"chair":return"椅子";case"bench":return"长凳";case"dining table":return"桌子";case"couch":return"沙发";case"potted plant":return"盆栽";case"dog":return"狗";case"cat":return"猫";case"suitcase":return"行李箱";case"backpack":return"背包";case"bottle":return"瓶子";case"bed":return"床";case"stop sign":return"停车标志";case"fire hydrant":return"消防栓";default:return name;}}
+
     private static FloatBuffer outputBuffer(int size){return ByteBuffer.allocateDirect(size*Float.BYTES).order(ByteOrder.nativeOrder()).asFloatBuffer();}
     @Override public void close(){if(closed)return;closed=true;try{interpreter.close();}finally{input.close();input=null;inputs=null;outputs.clear();}}
 }

@@ -74,7 +74,8 @@ public final class DetectionOverlay extends View {
                 e.edges.moveTo(l,b-corner);e.edges.lineTo(l,b);e.edges.lineTo(l+corner,b);
                 e.edges.moveTo(r-corner,b);e.edges.lineTo(r,b);e.edges.lineTo(r,b-corner);
             }
-            String label=d.label+(Float.isFinite(d.meters)?String.format(Locale.CHINA,"  %.1fm",d.meters):d.attention()?" · 未测距":"");
+            String label=Float.isFinite(d.meters)?String.format(Locale.CHINA,"约 %.1f 米 · %s",d.meters,d.label)
+                :d.attention()?"未测距 · "+d.label:d.label;
             e.label=TextUtils.ellipsize(label,textPaint,Math.max(0,g.width-12*dp),TextUtils.TruncateAt.END).toString();
             e.labelWidth=textPaint.measureText(e.label);
             e.labelX=Math.max(g.left+2*dp,Math.min(l,g.left+g.width-e.labelWidth-12*dp));

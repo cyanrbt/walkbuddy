@@ -134,6 +134,15 @@ final class DetectorProbe {
         Bitmap blank=Bitmap.createBitmap(320,320,Bitmap.Config.ARGB_8888),white=Bitmap.createBitmap(640,480,Bitmap.Config.ARGB_8888);white.eraseColor(Color.WHITE);
         try(LocalDetector detector=new LocalDetector(runner.getTargetContext())) {
             report.append(detector.tensorReport()).append('\n');
+            int localized=0;
+            for(int i=0;i<detector.labels.size();i++) {
+                if(detector.labels.defined(i)) {
+                    if(!detector.labels.displayName(i).matches("[\\u4e00-\\u9fff]+"))throw new AssertionError("Packaged label is not Chinese at "+i);
+                    localized++;
+                }else if(!"???".equals(detector.labels.displayName(i)))throw new AssertionError("Unused slot acquired a category");
+            }
+            if(localized!=80 || detector.labels.size()!=90)throw new AssertionError("Packaged model-label count changed");
+            report.append("LABEL_MAP_PASS slots=90 categories=80; Chinese display names, unused slots retained; raw tensor indices unchanged\n");
             LocalDetector.Result retained=null;int[] savedIndices=null;float[] savedScores=null;String savedDetections=null;int cases=0;
             for(int rotation:new int[]{0,90,180,270})for(Bitmap source:new Bitmap[]{portrait,blank,white,portrait}) {
                 float[][][] boxes=new float[1][25][4];float[][] classes=new float[1][25],scores=new float[1][25];float[] count=new float[1];
