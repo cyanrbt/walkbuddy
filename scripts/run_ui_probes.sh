@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 source "$(dirname "$0")/ui_probe_setup.sh"
-for evidence in runtime preview overlay layout home recovery pip pip-repeat; do
+for evidence in pip_recovery runtime preview overlay layout home recovery pip pip-repeat; do
   probe="${evidence%%-*}"
   if [[ "$probe" == recovery ]]; then
     # Revocation can kill the app process: do it before, never inside live instrumentation.

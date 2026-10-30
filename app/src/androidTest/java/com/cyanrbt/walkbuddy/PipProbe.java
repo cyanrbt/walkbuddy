@@ -27,6 +27,68 @@ import java.util.function.BooleanSupplier;
 
 /** Emulator-only real Camera2/PiP lifecycle checks, using the configured virtual rear camera. */
 final class PipProbe {
+    /** Independent no-model reproduction: fault in PiP, expand, restart, immediately re-enter. */
+    static void runRecovery(Instrumentation runner) {
+        Bundle result=new Bundle();Activity home=null;PreviewActivity preview=null;
+        StringBuilder report=new StringBuilder();int code=Activity.RESULT_CANCELED;
+        try {
+            if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
+                throw new IllegalStateException("PiP recovery probe is restricted to emulators");
+            if(!PipSupport.available(runner.getTargetContext()))throw new IllegalStateException("System PiP is unavailable");
+            shell(runner,"pm grant "+runner.getTargetContext().getPackageName()+" android.permission.CAMERA");
+            home=runner.startActivitySync(new Intent(runner.getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            Activity launcher=home;
+            Instrumentation.ActivityMonitor monitor=runner.addMonitor(PreviewActivity.class.getName(),null,false);
+            try {
+                read(runner,()->launcher.findViewById(R.id.start).performClick());
+                preview=(PreviewActivity)runner.waitForMonitorWithTimeout(monitor,7000);
+            } finally {runner.removeMonitor(monitor);}
+            if(preview==null)throw new AssertionError("Recovery preview did not open");
+            PreviewActivity host=preview;
+            await(runner,()->live(host),"recovery Camera2 LIVE");
+            read(runner,()->host.findViewById(R.id.enter_pip).performClick());
+            await(runner,host::isInPictureInPictureMode,"recovery initial PiP");
+            for(int cycle=0;cycle<4;cycle++) {
+                await(runner,()->(boolean)field(launcher,"visible"),"home visible behind PiP");
+                read(runner,()->{
+                    Handler handler=(Handler)field(host,"main");Runnable watchdog=(Runnable)field(host,"watchdog");
+                    handler.removeCallbacks(watchdog);
+                    state(host).captureAt=android.os.SystemClock.elapsedRealtime()-1201;
+                    watchdog.run();assertReleased(host);assertNotPolling(host);
+                    return true;
+                });
+                read(runner,()->launcher.findViewById(R.id.start).performClick());
+                await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"recovery expansion");
+                read(runner,()->{assertReleased(host);return host.findViewById(R.id.restart_preview).performClick();});
+                await(runner,()->live(host),"recovery manual restart");
+                int iteration=cycle;
+                read(runner,()->{
+                    View button=host.findViewById(R.id.enter_pip);
+                    report.append("RECOVERY_CLICK cycle=").append(iteration).append(" resumed=").append(field(host,"resumed"))
+                        .append(" phase=").append(state(host).phase).append(" fresh=").append(state(host).fresh(android.os.SystemClock.elapsedRealtime()))
+                        .append(" focus=").append(host.hasWindowFocus()).append(" enabled=").append(button.isEnabled())
+                        .append(" attached=").append(button.isAttachedToWindow()).append(" shown=").append(button.isShown())
+                        .append(" listener=").append(button.hasOnClickListeners()).append(" current=").append(button==field(host,"pipButton"))
+                        .append(" clicked=").append(button.performClick()).append('\n');
+                    return true;
+                });
+                await(runner,host::isInPictureInPictureMode,"immediate PiP re-entry cycle="+cycle);
+                long started=android.os.SystemClock.elapsedRealtime();
+                await(runner,()->live(host) && state(host).captureAt>started+300 && state(host).displayAt>started+300,"recovery PiP frames advance");
+                report.append("PASS immediate PiP recovery cycle=").append(cycle).append('\n');
+            }
+            result.putString("stream",report+"PIP_RECOVERY_PROBE_PASS cycles=4; real Camera2, stopped PiP expansion, manual restart and immediate re-entry\n");
+            code=Activity.RESULT_OK;
+        } catch(Throwable error) {
+            try{screenshot(runner,"pip-recovery-failure.png");}catch(Exception ignored){/* Preserve failure. */}
+            result.putString("stream",report+"PIP_RECOVERY_PROBE_FAIL: "+error+"; "+PreviewActivity.report());
+        } finally {
+            if(preview!=null){PreviewActivity host=preview;runner.runOnMainSync(host::finish);}
+            if(home!=null){Activity host=home;runner.runOnMainSync(host::finish);}
+        }
+        runner.finish(code,result);
+    }
+
     static void run(Instrumentation runner,Integer profilePriority) {
         Bundle result=new Bundle();Activity home=null;PreviewActivity preview=null;
         StringBuilder report=new StringBuilder();int code=Activity.RESULT_CANCELED;

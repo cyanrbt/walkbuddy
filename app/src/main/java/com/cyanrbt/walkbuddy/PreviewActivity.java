@@ -178,10 +178,12 @@ public final class PreviewActivity extends Activity {
         if (initialStart) { initialStart = false; startPreview(); }
         if(pendingDepthInstall){pendingDepthInstall=false;enableDepth(false);}
         render(SystemClock.elapsedRealtime());
+        tracePip("resume");
     }
 
     @Override protected void onPause() {
         resumed = false;
+        tracePip("pause");
         // A PiP Activity is paused but still visible: keep its camera running.
         super.onPause();
     }
@@ -253,16 +255,28 @@ public final class PreviewActivity extends Activity {
     }
 
     private void enterPip() {
+        tracePip("request");
         if (!resumed || state.phase != SessionState.Phase.LIVE || !state.fresh(SystemClock.elapsedRealtime())) return;
         if (!PipSupport.available(this)) { showPipFallback(); return; }
         try {
             setCompactUi(true);
-            if (!enterPictureInPictureMode(pipParams())) {
+            boolean entered=enterPictureInPictureMode(pipParams());
+            tracePip("accepted="+entered);
+            if (!entered) {
                 setCompactUi(false); showPipFallback();
             }
         } catch (RuntimeException error) {
+            tracePip("rejected="+error.getClass().getSimpleName());
             setCompactUi(false); showPipFallback();
         }
+    }
+
+    private void tracePip(String event) {
+        long now=SystemClock.elapsedRealtime();
+        android.util.Log.i("WalkBuddyPip",event+" resumed="+resumed+" phase="+state.phase
+            +" pip="+isInPictureInPictureMode()+" focus="+hasWindowFocus()
+            +" captureGapMs="+(state.captureAt>0?now-state.captureAt:-1)
+            +" displayGapMs="+(state.displayAt>0?now-state.displayAt:-1));
     }
 
     private void showPipFallback() {
@@ -279,6 +293,7 @@ public final class PreviewActivity extends Activity {
         if (inPip) getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).edit()
             .putBoolean(HomeJourney.PIP_SEEN, true).apply();
         setCompactUi(inPip);
+        tracePip("mode="+inPip);
     }
 
     private void setCompactUi(boolean compact) {

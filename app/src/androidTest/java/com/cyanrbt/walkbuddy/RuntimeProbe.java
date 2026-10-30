@@ -3,6 +3,7 @@ package com.cyanrbt.walkbuddy;
 /** Explicit emulator probes; no arguments select the actual bundled-model and buffer checks. */
 public final class RuntimeProbe extends PreviewProbe {
     @Override public void onStart() {
+        if(pipRecovery){PipProbe.runRecovery(this);return;}
         if(pip){PipProbe.run(this,profilePriority);return;}
         if(overlay){OverlayProbe.run(this);return;}
         if(layout){LayoutProbe.run(this);return;}
