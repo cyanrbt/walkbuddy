@@ -109,6 +109,7 @@ public final class PreviewActivity extends Activity {
     private InferenceWorker<BitmapFrame,LocalDetector.Result> worker;
     private InferenceWorker.Ticket analysisTicket;
     private boolean analysisReady,analysisHasResult;
+    private int analysisFailure;
     private final BroadcastReceiver events = new BroadcastReceiver() {
         public void onReceive(Context c, Intent intent) {
             if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())
@@ -119,13 +120,13 @@ public final class PreviewActivity extends Activity {
     private final Runnable watchdog = new Runnable() { public void run() {
         if(!needsWatchdog()) return;
         long now=SystemClock.elapsedRealtime();
+        if(!checkHealth(now))return;
         if(detectionOverlay!=null && state.recognition)showFeedback(now);
         if(useDepth)renderDepthStatus(now);
         if(useDepth)renderDepthGuide();
         if(postureHint!=null && now-postureAt>1500){postureHint.setVisibility(View.GONE);posturePolicy.reset();}
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
             if(checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED) fail(RecoveryGuide.Reason.PERMISSION,"权限已撤回：不可用");
-            else if(state.expired(now)) fail("画面或分析帧过期：不可用，请重新开启");
             else { state.promote(now); render(now); }
         }
         // fail() can run from this callback: never re-arm a stopped session.
@@ -300,6 +301,7 @@ public final class PreviewActivity extends Activity {
     private void setCompactUi(boolean compact) {
         if (root == null) return;
         PreviewChrome.compact(root,compact,useDepth);
+        PreviewChrome.detectionStopped(root,analysisFailure!=0 && state.phase==SessionState.Phase.LIVE,compact);
         root.requestApplyInsets();
         if (compact) getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         else getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
@@ -330,12 +332,14 @@ public final class PreviewActivity extends Activity {
         renderDepthGuide();
         recognition=root.findViewById(R.id.preview_recognition);
         recognition.setOnCheckedChangeListener((b,checked)-> {
+            analysisFailure=0;
             feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
             if(checked)prepareAnalysis(SystemClock.elapsedRealtime());
             if(!checked) { if(sound!=null)sound.setChecked(false); silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_preparing);
             renderDepthGuide();
+            render(SystemClock.elapsedRealtime());
         });
         sound=root.findViewById(R.id.preview_sound);
         Button stop=(Button)root.findViewById(R.id.preview_stop);
@@ -355,7 +359,7 @@ public final class PreviewActivity extends Activity {
             public void onSurfaceTextureUpdated(SurfaceTexture s) {
                 if(readingTexture || texture==null || destroyed || (state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE))return;
                 long now=SystemClock.elapsedRealtime();
-                if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
+                if(!checkHealth(now))return;
                 state.display(now);state.promote(now);syncTicket();render(now);
                 if(state.phase==SessionState.Phase.LIVE && (now-brightnessAt>=1000
                     || state.recognition && (useDepth || now-sampledAt>=500 && !worker.busy())))queueReadback(now);
@@ -401,7 +405,8 @@ public final class PreviewActivity extends Activity {
                 public void frame(long timestamp,long capturedAt,DepthSnapshot depth){
                     if(destroyed || token!=state.generation)return;
                     long now=SystemClock.elapsedRealtime();
-                    if(now-capturedAt>500 || state.expired(now)){fail("增强画面已过期，请重新开启");return;}
+                    if(now-capturedAt>500){fail("增强画面已过期，请重新开启");return;}
+                    if(!checkHealth(now))return;
                     state.capture(timestamp,capturedAt);syncTicket();depthSnapshot=depth;
                     renderDepthStatus(now);
                     renderDepthGuide();
@@ -464,7 +469,7 @@ public final class PreviewActivity extends Activity {
                 if(destroyed || token!=state.generation || texture!=source || state.phase!=SessionState.Phase.LIVE)return;
                 long now=SystemClock.elapsedRealtime();
                 lastReadbackQueueMs=now-queuedAt;
-                if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
+                if(!checkHealth(now))return;
                 if(now-frameAt>1000)return; // Keep the original observation time; a delayed task cannot refresh it.
                 // getBitmap can itself call SurfaceTextureUpdated; that is not a displayed frame.
                 readingTexture=true;
@@ -476,7 +481,7 @@ public final class PreviewActivity extends Activity {
                     }
                 }
                 now=SystemClock.elapsedRealtime();
-                if(state.expired(now)){fail("预览或分析截止时间已过：不可用");return;}
+                if(!checkHealth(now))return;
                 if(now-frameAt>1000)return;
                 if(state.recognition && epoch==analysisEpoch) {
                     if(useDepth)processDepth(now);
@@ -495,6 +500,7 @@ public final class PreviewActivity extends Activity {
     private void captureFrame(long token,long stamp,long receivedAt) {
         if(destroyed || token!=state.generation)return;
         long now=SystemClock.elapsedRealtime(),nanos=SystemClock.elapsedRealtimeNanos();
+        if(!checkHealth(now))return;
         long captureAt=state.captureAt,displayAt=state.displayAt,analysisAt=state.analysisAt;
         CameraFrames.Decision decision=CameraFrames.accept(state,token,stamp,receivedAt,now,nanos,realtimeTimestamp);
         if(decision==CameraFrames.Decision.DEFER) {
@@ -541,8 +547,8 @@ public final class PreviewActivity extends Activity {
         if(ticket==null)return;
         worker.prepare(ticket,(unused,error)->main.post(()->{
             if(destroyed || ticket.cancelled || ticket!=analysisTicket || epoch!=analysisEpoch || token!=state.generation)return;
-            if(state.expired(SystemClock.elapsedRealtime())){fail("预览或分析截止时间已过：不可用");return;}
-            if(error!=null){fail(RecoveryGuide.Reason.MODEL,"模型初始化失败：不可用");return;}
+            if(!checkHealth(SystemClock.elapsedRealtime()) || ticket.cancelled)return;
+            if(error!=null){pauseDetection(R.string.info_detection_failed);return;}
             analysisReady=true;
         }));
     }
@@ -564,9 +570,9 @@ public final class PreviewActivity extends Activity {
                 long now=SystemClock.elapsedRealtime();
                 if(destroyed || ticket.cancelled || ticket!=analysisTicket || epoch!=analysisEpoch || token!=state.generation)return;
                 lastResultDeliveryMs=now-completedAt;
-                if(state.expired(now)){fail("采集/显示/分析截止时间已过：不可用");return;}
+                if(!checkHealth(now) || ticket.cancelled)return;
                 if(!state.acceptResult(token,frameAt,now))return;
-                if(error!=null){fail(RecoveryGuide.Reason.MODEL,"模型初始化或推理失败：不可用");return;}
+                if(error!=null){pauseDetection(R.string.info_detection_failed);return;}
                 state.analysisAt=now;syncTicket();
                 analysisHasResult=true;
                 boolean notify=feedback.basic(result.detections,frameAt,now);
@@ -580,6 +586,29 @@ public final class PreviewActivity extends Activity {
         pendingSpeak=true;
         Vibrator vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);if(vibrator!=null && vibrator.hasVibrator())vibrator.vibrate(VibrationEffect.createOneShot(150,VibrationEffect.DEFAULT_AMPLITUDE));
         if(sound.isChecked())try{activeTone=new ToneGenerator(AudioManager.STREAM_NOTIFICATION,40);ToneGenerator tone=activeTone;tone.startTone(ToneGenerator.TONE_PROP_BEEP,150);main.postDelayed(()->{if(activeTone==tone){tone.release();activeTone=null;}},250);}catch(RuntimeException ignored){silence();}
+    }
+    private boolean checkHealth(long now) {
+        PreviewHealth.Decision decision=PreviewHealth.check(state,now);
+        if(decision==PreviewHealth.Decision.STOP_PREVIEW){fail("画面已过期：不可用，请重新开启");return false;}
+        if(decision==PreviewHealth.Decision.STOP_DETECTION) {
+            pauseDetection(R.string.info_detection_timeout);
+            return state.phase==SessionState.Phase.LIVE;
+        }
+        return true;
+    }
+    private void pauseDetection(int message) {
+        if(destroyed)return;
+        if(!getSystemService(PowerManager.class).isInteractive() || getSystemService(KeyguardManager.class).isKeyguardLocked()) {
+            fail(RecoveryGuide.Reason.LOCKED,"锁屏：摄像头已停止，请主动重新开启");return;
+        }
+        long now=SystemClock.elapsedRealtime();
+        if(state.phase!=SessionState.Phase.LIVE || !state.fresh(now)){fail(RecoveryGuide.Reason.MODEL,getString(message));return;}
+        android.util.Log.w("WalkBuddyAnalysis","Detection stopped; preview continues message="+getString(message));
+        recognition.setChecked(false);
+        state.recognition=false;state.analysisAt=0;cancelAnalysis();
+        feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;silence();
+        sound.setChecked(false);analysisFailure=message;
+        render(now);
     }
     private void silence() {
         Vibrator vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);if(vibrator!=null)vibrator.cancel();
@@ -606,8 +635,10 @@ public final class PreviewActivity extends Activity {
         else PreviewRecovery.clear(root);
         depthButton.setEnabled(live);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
-        if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(R.string.info_recognition_off));}
-        if(titleView!=null) setTextIfChanged(titleView,getText(live?R.string.window_live:state.phase==SessionState.Phase.STARTING?R.string.window_starting:R.string.window_idle));
+        if(analysisFailure!=0)publicReport+="\n"+getString(analysisFailure);
+        PreviewChrome.detectionStopped(root,live && analysisFailure!=0,isInPictureInPictureMode());
+        if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(analysisFailure!=0?analysisFailure:R.string.info_recognition_off));}
+        if(titleView!=null) setTextIfChanged(titleView,getText(live?(analysisFailure!=0?R.string.window_preview_only:R.string.window_live):state.phase==SessionState.Phase.STARTING?R.string.window_starting:R.string.window_idle));
         renderDepthGuide();
     }
     private void fail(String message) {
@@ -627,6 +658,7 @@ public final class PreviewActivity extends Activity {
                 +" workerBusy="+(worker!=null && worker.busy())+" pip="+isInPictureInPictureMode());
         }
         recoveryReason=reason;
+        analysisFailure=0;
         restoreDetection=restoreSound=false;
         cancelAnalysis();state.unavailable(message);feedback.clear();if(announcer!=null)announcer.clear();pendingSpeak=false;silence();
         if(detectionOverlay!=null)detectionOverlay.clear();

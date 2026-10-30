@@ -45,6 +45,11 @@
     <string name="info_recognition_off">检测已关闭</string>
     <string name="info_recognition_on">正在分析画面</string>
     <string name="info_recognition_preparing">准备识别器…</string>
+    <string name="window_preview_only">仅预览</string>
+    <string name="detection_stopped_preview_only">检测已停止 · 仅看画面</string>
+    <string name="detection_stopped_compact">未检测\n仅预览</string>
+    <string name="info_detection_timeout">检测超时，提醒已停止；可重新勾选检测。</string>
+    <string name="info_detection_failed">检测失败，提醒已停止；可重新勾选检测。</string>
     <string name="info_stopped">观察与提醒已停止，请按页面提示恢复。</string>
     <string name="step_pip">系统画中画（可选）</string>
     <string name="step_pip_hint">跨应用看画面，无需悬浮窗授权</string>

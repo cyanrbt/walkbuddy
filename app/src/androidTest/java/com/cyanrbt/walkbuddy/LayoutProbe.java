@@ -103,6 +103,7 @@ final class LayoutProbe {
                         }
                     }
                 }
+                checkDetectionFailure(root,size[0],size[1],new File(output,name+"-detection-stopped.png"));
                 measure(root,size[0],size[1]);
                 checkDisabledButton(root.findViewById(R.id.enter_pip));
                 View camera=root.findViewById(R.id.preview_frame),pane=root.findViewById(R.id.preview_content);
@@ -144,6 +145,28 @@ final class LayoutProbe {
         AlertPolicy policy=new AlertPolicy();
         policy.update(java.util.Collections.singletonList(detection),100);
         return policy.update(java.util.Collections.singletonList(detection),600).message;
+    }
+    private static void checkDetectionFailure(View root,int width,int height,File output) throws Exception {
+        TextView info=root.findViewById(R.id.preview_info),title=root.findViewById(R.id.preview_title);
+        CharSequence previousInfo=info.getText(),previousTitle=title.getText();
+        boolean depth=root.findViewById(R.id.depth_steps).getVisibility()==View.VISIBLE;
+        int previousAlert=root.findViewById(R.id.recent_alert).getVisibility();
+        root.findViewById(R.id.recent_alert).setVisibility(View.GONE);
+        info.setText(R.string.info_detection_timeout);title.setText(R.string.window_preview_only);
+        PreviewChrome.detectionStopped(root,true,false);measure(root,width,height);
+        TextView warning=root.findViewById(R.id.detection_status);
+        textFits(root);fullyVisible(root,warning);
+        if(warning.getAccessibilityLiveRegion()!=View.ACCESSIBILITY_LIVE_REGION_POLITE)
+            throw new AssertionError("Detection fault is not announced");
+        if(width==320 && root.getResources().getConfiguration().fontScale==2f)screenshot(root,output);
+        PreviewChrome.compact(root,true,false);PreviewChrome.detectionStopped(root,true,true);
+        measure(root,96,128);textFits(warning);fullyVisible(root,warning);
+        if(!warning.getText().toString().contains("未检测") || !warning.getText().toString().contains("仅预览"))
+            throw new AssertionError("Compact detection fault lost its meaning");
+        PreviewChrome.compact(root,false,depth);PreviewChrome.detectionStopped(root,false,false);
+        root.setPadding(0,24,0,24);info.setText(previousInfo);title.setText(previousTitle);
+        root.findViewById(R.id.recent_alert).setVisibility(previousAlert);measure(root,width,height);
+        if(warning.getVisibility()!=View.GONE)throw new AssertionError("Fault warning survived explicit clearing");
     }
     private static void initialQualifierVisible(View root,TextView info,String qualifier) {
         if(info.getLayout()==null || !info.getText().subSequence(0,info.getLayout().getLineEnd(0)).toString().contains(qualifier))

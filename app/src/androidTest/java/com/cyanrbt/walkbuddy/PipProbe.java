@@ -248,6 +248,7 @@ final class PipProbe {
                 return true;
             });
             checkpoint(runner,"recognition_off");
+            analysisRecovery(runner,host,launcher,report);
             read(runner,()->host.findViewById(R.id.preview_recognition).performClick());
             await(runner,()->live(host) && basicAt(host)>firstResult && field(host,"analysisTicket")!=oldTicket,"model restart after toggle");
             checkpoint(runner,"recognition_reenabled");
@@ -417,6 +418,95 @@ final class PipProbe {
 
     private static void bringForward(Instrumentation runner,PreviewActivity host) {
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
+    }
+    private static void analysisRecovery(Instrumentation runner,PreviewActivity host,Activity launcher,StringBuilder report) throws Exception {
+        @SuppressWarnings("unchecked") InferenceWorker<BitmapFrame,LocalDetector.Result> original=
+            (InferenceWorker<BitmapFrame,LocalDetector.Result>)field(host,"worker");
+        if(!original.awaitIdle(3000))throw new AssertionError("Original worker did not close after detection off");
+        Object camera=read(runner,()->field(host,"camera")),texture=read(runner,()->field(host,"texture"));
+        InferenceWorker<BitmapFrame,LocalDetector.Result> broken=new InferenceWorker<>(android.os.SystemClock::elapsedRealtime,
+            ()->{throw new java.io.IOException("Injected model load failure");});
+        try {
+            read(runner,()->{setField(host,"worker",broken);host.findViewById(R.id.preview_recognition).performClick();return true;});
+            await(runner,()->(int)field(host,"analysisFailure")==R.string.info_detection_failed,"model failure becomes preview-only");
+            read(runner,()->{assertPreviewOnly(host,camera,texture);return true;});
+            await(runner,()->warningReady(host),"model failure warning laid out");
+            read(runner,()->{assertWarningFits(host);return true;});
+        } finally {broken.shutdown();if(!broken.awaitIdle(3000))throw new AssertionError("Broken worker did not close");}
+        java.util.concurrent.CountDownLatch entered=new java.util.concurrent.CountDownLatch(1),release=new java.util.concurrent.CountDownLatch(1);
+        java.util.concurrent.atomic.AtomicReference<BitmapFrame> retained=new java.util.concurrent.atomic.AtomicReference<>();
+        java.util.concurrent.atomic.AtomicInteger closed=new java.util.concurrent.atomic.AtomicInteger();
+        InferenceWorker<BitmapFrame,LocalDetector.Result> blocked=new InferenceWorker<>(android.os.SystemClock::elapsedRealtime,
+            ()->new InferenceWorker.Detector<BitmapFrame,LocalDetector.Result>() {
+                public LocalDetector.Result detect(BitmapFrame frame) throws Exception {
+                    retained.set(frame);entered.countDown();release.await();
+                    return new LocalDetector.Result("人",new int[0],new float[0],java.util.Collections.emptyList());
+                }
+                public void close(){closed.incrementAndGet();}
+            });
+        try {
+            read(runner,()->{setField(host,"worker",blocked);host.findViewById(R.id.preview_recognition).performClick();return true;});
+            if(!entered.await(3,java.util.concurrent.TimeUnit.SECONDS))throw new AssertionError("Injected native work did not start");
+            read(runner,()->{
+                state(host).analysisAt=android.os.SystemClock.elapsedRealtime()-1501;
+                ((Runnable)field(host,"watchdog")).run();
+                assertPreviewOnly(host,camera,texture);
+                if(retained.get().bitmap.isRecycled())throw new AssertionError("Cancelled active frame was recycled during native work");
+                return true;
+            });
+            long stoppedAt=android.os.SystemClock.elapsedRealtime();
+            await(runner,()->live(host) && state(host).captureAt>stoppedAt+300 && state(host).displayAt>stoppedAt+300,
+                "camera advances after analysis timeout");
+            await(runner,()->warningReady(host),"timeout warning laid out");
+            read(runner,()->{assertWarningFits(host);return true;});
+            screenshot(runner,"detection-timeout-preview.png");
+            tap(runner,host,R.id.enter_pip);
+            await(runner,host::isInPictureInPictureMode,"preview-only PiP after analysis timeout");
+            read(runner,()->{assertPreviewOnly(host,camera,texture);return true;});
+            await(runner,()->warningReady(host),"PiP timeout warning laid out");
+            read(runner,()->{assertWarningFits(host);return true;});
+            screenshot(runner,"detection-timeout-pip.png");
+            release.countDown();
+            if(!blocked.awaitIdle(3000) || closed.get()!=1 || !retained.get().bitmap.isRecycled())
+                throw new AssertionError("Cancelled native result did not release its frame/model exactly once");
+            read(runner,()->{assertPreviewOnly(host,camera,texture);return true;});
+            tap(runner,launcher,R.id.start);
+            await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"return from preview-only PiP");
+            read(runner,()->{assertPreviewOnly(host,camera,texture);return true;});
+            report.append("PASS injected model load failure and blocked analysis keep camera/texture; detection/sound/feedback stop; native frame retained until return; late result ignored; preview-only warning persists in PiP/expansion\n");
+        } finally {
+            release.countDown();blocked.shutdown();blocked.awaitIdle(3000);
+            read(runner,()->{setField(host,"worker",original);return true;});
+        }
+    }
+    private static void assertPreviewOnly(PreviewActivity host,Object camera,Object texture) {
+        if(!live(host) || field(host,"camera")!=camera || field(host,"texture")!=texture || state(host).recognition
+            || field(host,"analysisTicket")!=null || basicAt(host)!=-1 || field(host,"activeTone")!=null
+            || (boolean)field(host,"pendingSpeak") || ((CheckBox)host.findViewById(R.id.preview_recognition)).isChecked()
+            || ((CheckBox)host.findViewById(R.id.preview_sound)).isChecked() || host.findViewById(R.id.preview_sound).isEnabled()
+            || ((Object[])field(field(host,"detectionOverlay"),"entries")).length!=0
+            || host.findViewById(R.id.recent_alert).getVisibility()!=View.GONE)
+            throw new AssertionError("Detection fault did not preserve only the healthy camera");
+        if(host.findViewById(R.id.detection_status).getVisibility()!=View.VISIBLE)
+            throw new AssertionError("Preview-only warning was not enabled");
+        assertWatching(host);
+    }
+    private static boolean warningReady(PreviewActivity host) {
+        android.widget.TextView warning=host.findViewById(R.id.detection_status);
+        return warning.isShown() && warning.getWidth()>0 && warning.getHeight()>0
+            && warning.getLayout()!=null && !warning.isLayoutRequested();
+    }
+    private static void assertWarningFits(PreviewActivity host) {
+        android.widget.TextView warning=host.findViewById(R.id.detection_status);
+        android.graphics.Rect visible=new android.graphics.Rect();
+        if(!warning.isShown() || !warning.getGlobalVisibleRect(visible) || warning.getLayout()==null || visible.height()<warning.getHeight())
+            throw new AssertionError("Preview-only warning is not visible");
+        for(int line=0;line<warning.getLineCount();line++)if(warning.getLayout().getEllipsisCount(line)>0)
+            throw new AssertionError("Preview-only warning was truncated");
+    }
+    private static void setField(Object host,String name,Object value) {
+        try{Field field=host.getClass().getDeclaredField(name);field.setAccessible(true);field.set(host,value);}
+        catch(Exception error){throw new AssertionError(error);}
     }
     private static void tap(Instrumentation runner,Activity host,int id) throws Exception {
         // Real input respects focus and enabled state, unlike directly invoking performClick.
