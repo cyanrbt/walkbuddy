@@ -19,7 +19,11 @@ final class PipSupport {
     }
 
     static boolean available(Context context) {
-        if (!supported(context)) return false;
+        return available(context,supported(context));
+    }
+
+    static boolean available(Context context,boolean supported) {
+        if (!supported) return false;
         try {
             AppOpsManager ops = context.getSystemService(AppOpsManager.class);
             return ops != null && ops.checkOpNoThrow(AppOpsManager.OPSTR_PICTURE_IN_PICTURE,

@@ -2,6 +2,7 @@ package com.cyanrbt.walkbuddy;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AppOpsManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,24 +12,66 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.function.Supplier;
 
 public final class MainActivity extends Activity {
     private TextView status, cameraState, pipState, cameraBadge, pipBadge, journeyHint, moreToggle;
     private View morePanel;
     private boolean visible, pendingPreviewPermission, openAfterPermission;
     private int lastAccess = -1, lastJourney = -1;
+    private AppOpsManager pipOps;
+    private AppOpsManager.OnOpChangedListener pipWatcher;
+    private long watchGeneration;
+    private Supplier<Access> accessReader=this::readAccess;
+    private final Runnable stateChanged=this::requestRefresh;
     private final android.os.Handler handler = new android.os.Handler(android.os.Looper.getMainLooper());
     private final Runnable refresh = new Runnable() { public void run() {
         if(!visible)return;
         refreshHome();
         SessionState.Phase phase=PreviewActivity.homePhase();
-        if(phase==SessionState.Phase.STARTING || phase==SessionState.Phase.LIVE)handler.postDelayed(this, 500);
+        if(pipWatcher==null && (phase==SessionState.Phase.STARTING || phase==SessionState.Phase.LIVE))
+            handler.postDelayed(this, 500);
     }};
     private void refreshHome() {
         String report = PreviewActivity.report();
         if (!report.contentEquals(status.getText())) status.setText(report);
-        paintAccess();
-        paintJourney();
+        Access access=accessReader.get();
+        paintAccess(access);
+        paintJourney(access);
+    }
+    private void requestRefresh(){if(visible){handler.removeCallbacks(refresh);handler.post(refresh);}}
+
+    static final class Access {
+        final boolean camera,supported,pip,settings;
+        Access(boolean camera,boolean supported,boolean pip,boolean settings) {
+            this.camera=camera;this.supported=supported;this.pip=pip;this.settings=settings;
+        }
+    }
+    private Access readAccess() {
+        boolean camera=checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED;
+        boolean supported=PipSupport.supported(this);
+        return new Access(camera,supported,PipSupport.available(this,supported),!camera && cameraSettingsNeeded());
+    }
+    private void watchPip() {
+        final long generation=++watchGeneration;
+        AppOpsManager ops=getSystemService(AppOpsManager.class);
+        if(ops==null)return;
+        AppOpsManager.OnOpChangedListener watcher=(op,pkg)->{
+            if(AppOpsManager.OPSTR_PICTURE_IN_PICTURE.equals(op) && (pkg==null || getPackageName().equals(pkg)))
+                handler.post(()->{if(visible && watchGeneration==generation)requestRefresh();});
+        };
+        try {
+            ops.startWatchingMode(AppOpsManager.OPSTR_PICTURE_IN_PICTURE,getPackageName(),watcher);
+            pipOps=ops;pipWatcher=watcher;
+        } catch(RuntimeException unavailable) {
+            // Preserve the old visible/live polling path if an OEM cannot register this watcher.
+            try{ops.stopWatchingMode(watcher);}catch(RuntimeException ignored){}
+        }
+    }
+    private void unwatchPip() {
+        ++watchGeneration;
+        if(pipWatcher!=null)try{pipOps.stopWatchingMode(pipWatcher);}catch(RuntimeException ignored){}
+        pipWatcher=null;pipOps=null;
     }
 
     @Override public void onCreate(Bundle state) {
@@ -70,8 +113,8 @@ public final class MainActivity extends Activity {
         open.setBackgroundTintList(null);
         stop.setBackgroundTintList(null);
         open.setOnClickListener(v -> start());
-        stop.setOnClickListener(v -> {PreviewActivity.stopActivePreview();handler.removeCallbacks(refresh);refreshHome();});
-        paintJourney();
+        stop.setOnClickListener(v -> {PreviewActivity.stopActivePreview();requestRefresh();});
+        refreshHome();
     }
 
     private void requestCamera() {
@@ -102,13 +145,17 @@ public final class MainActivity extends Activity {
     }
 
     @Override protected void onResume() {
-        super.onResume(); visible = true; handler.removeCallbacks(refresh);handler.post(refresh);
+        super.onResume(); visible = true;
+        PreviewActivity.homeState.subscribe(stateChanged);watchPip();requestRefresh();
         continueAfterPermission();
     }
-    @Override protected void onPause() { visible = false; handler.removeCallbacks(refresh); super.onPause(); }
+    @Override protected void onPause() {
+        visible=false;PreviewActivity.homeState.unsubscribe(stateChanged);unwatchPip();
+        handler.removeCallbacks(refresh);super.onPause();
+    }
     @Override public void onWindowFocusChanged(boolean focused) {
         super.onWindowFocusChanged(focused);
-        if(focused && visible){handler.removeCallbacks(refresh);handler.post(refresh);}
+        if(focused)requestRefresh();
     }
     @Override protected void onSaveInstanceState(Bundle state) {
         state.putBoolean("pending_preview_permission", pendingPreviewPermission);
@@ -123,8 +170,7 @@ public final class MainActivity extends Activity {
         pendingPreviewPermission = false;
         if (!openAfterPermission) toast(granted ? R.string.toast_granted : R.string.toast_denied);
         continueAfterPermission();
-        paintAccess();
-        paintJourney();
+        requestRefresh();
     }
 
     private void continueAfterPermission() {
@@ -139,9 +185,8 @@ public final class MainActivity extends Activity {
             && !shouldShowRequestPermissionRationale(Manifest.permission.CAMERA);
     }
 
-    private void paintAccess() {
-        boolean camera = checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
-        boolean supported = PipSupport.supported(this), pip = PipSupport.available(this);
+    private void paintAccess(Access value) {
+        boolean camera=value.camera,supported=value.supported,pip=value.pip;
         int access = (camera ? 1 : 0) | (supported ? 2 : 0) | (pip ? 4 : 0);
         if (access == lastAccess) return;
         lastAccess = access;
@@ -151,14 +196,13 @@ public final class MainActivity extends Activity {
             supported ? R.string.pip_disabled : R.string.pip_in_app_only);
     }
 
-    private void paintJourney() {
+    private void paintJourney(Access value) {
         if (journeyHint == null) return;
-        boolean camera = checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+        boolean camera=value.camera;
         android.content.SharedPreferences history = getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE);
         boolean preview = history.getBoolean(HomeJourney.PREVIEW_SEEN, false);
         boolean pipSeen = history.getBoolean(HomeJourney.PIP_SEEN, false);
-        boolean supported = PipSupport.supported(this), pip = PipSupport.available(this);
-        boolean settings = !camera && cameraSettingsNeeded();
+        boolean supported=value.supported,pip=value.pip,settings=value.settings;
         boolean present=PreviewActivity.hasPreview();SessionState.Phase phase=PreviewActivity.homePhase();
         int snapshot = (camera ? 1 : 0) | (preview ? 2 : 0) | (pipSeen ? 4 : 0)
             | (supported ? 8 : 0) | (pip ? 16 : 0) | (settings ? 32 : 0) | (present ? 64 : 0) | (phase.ordinal()<<7);

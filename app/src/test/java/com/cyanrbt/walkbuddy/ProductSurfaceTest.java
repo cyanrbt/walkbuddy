@@ -118,7 +118,7 @@ public class ProductSurfaceTest {
         assertFalse(activity.contains("帧龄") || activity.contains("毫秒") || activity.contains(" ms"));
         assertFalse(service.contains("帧龄") || service.contains("毫秒") || service.contains(" ms"));
         assertFalse(service.contains("lastLatency"));
-        assertTrue(service.contains("publicReport=state.reason+\"\\n\"+(state.recognition?\"识别开着\":\"识别关着\");"));
+        assertTrue(service.contains("homeState.publish(homeOwner,state.phase,state.reason,state.recognition"));
     }
 
     private static String layout(Path directory,String name) throws Exception {

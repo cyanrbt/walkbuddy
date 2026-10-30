@@ -45,8 +45,10 @@ public final class PreviewActivity extends Activity {
             || !preview.isInPictureInPictureMode() || !preview.state.recognition)return;
         preview.pauseDetection(R.string.info_detection_paused);
     }
-    private static volatile String publicReport = "已停止；请主动开启";
-    public static String report() { return publicReport; }
+    static final HomeState homeState=new HomeState();
+    private final Object homeOwner=new Object();
+    private final java.util.function.Supplier<String> homeNotice=this::detectionNoticeText;
+    public static String report() { return homeState.report(); }
     private final Handler main = new Handler(Looper.getMainLooper());
     private final SessionState state = new SessionState();
     private final DetectionFeedback feedback = new DetectionFeedback();
@@ -165,6 +167,7 @@ public final class PreviewActivity extends Activity {
         previewSeen = getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE)
             .getBoolean(HomeJourney.PREVIEW_SEEN, false);
         active = new WeakReference<>(this);
+        homeState.attach(homeOwner);
         wm = getWindowManager();
         sensors=getSystemService(SensorManager.class);
         getSystemService(DisplayManager.class).registerDisplayListener(displayListener, main);
@@ -234,7 +237,7 @@ public final class PreviewActivity extends Activity {
         main.removeCallbacksAndMessages(null); stopPosture(); closeCamera();
         unregisterReceiver(events);
         getSystemService(DisplayManager.class).unregisterDisplayListener(displayListener);
-        publicReport = "已停止；请主动开启";
+        homeState.detach(homeOwner);
         super.onDestroy();
     }
 
@@ -398,8 +401,11 @@ public final class PreviewActivity extends Activity {
 
     @Override public void onPictureInPictureModeChanged(boolean inPip, Configuration config) {
         super.onPictureInPictureModeChanged(inPip, config);
-        if (inPip) getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).edit()
-            .putBoolean(HomeJourney.PIP_SEEN, true).apply();
+        if (inPip && !getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).getBoolean(HomeJourney.PIP_SEEN,false)) {
+            getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).edit()
+                .putBoolean(HomeJourney.PIP_SEEN, true).apply();
+            homeState.historyChanged(homeOwner);
+        }
         setCompactUi(inPip);
         pipActionState=-1;
         syncPipActions();
@@ -779,6 +785,7 @@ public final class PreviewActivity extends Activity {
             previewSeen = true;
             getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).edit()
                 .putBoolean(HomeJourney.PREVIEW_SEEN, true).apply();
+            homeState.historyChanged(homeOwner);
         }
         cover.setVisibility(live?View.GONE:View.VISIBLE);
         if(!live && state.phase==SessionState.Phase.STARTING) setTextIfChanged(cover,state.reason);
@@ -794,8 +801,7 @@ public final class PreviewActivity extends Activity {
         else PreviewRecovery.clear(root);
         PreviewRecovery.problemInfo(root,diagnostics.available());
         depthButton.setEnabled(live);
-        publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
-        if(detectionNotice!=0)publicReport+="\n"+getString(detectionNotice);
+        homeState.publish(homeOwner,state.phase,state.reason,state.recognition,detectionNotice,homeNotice);
         PreviewChrome.detectionStatus(root,live,state.recognition,detectionNotice!=0,compactUi);
         if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(detectionNotice!=0?detectionNotice:R.string.info_recognition_off));}
         if(titleView!=null)PreviewChrome.title(titleView,PreviewStatus.heading(state.phase,live,state.recognition));
@@ -842,8 +848,9 @@ public final class PreviewActivity extends Activity {
         if(info!=null)info.setText(R.string.info_stopped);
         if(root!=null){render(SystemClock.elapsedRealtime());renderDepthGuide();}
         if(root!=null)((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
-        publicReport=message+"；提醒已停止";
+        homeState.failure(homeOwner,message);
     }
+    private String detectionNoticeText(){return getString(detectionNotice);}
     private SessionDiagnostics.Snapshot diagnosticSnapshot(String category,String message,long now) {
         boolean active=state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE;
         SessionDiagnostics.Pipeline pipeline=new SessionDiagnostics.Pipeline(active && analysisReady,active && analysisHasResult,

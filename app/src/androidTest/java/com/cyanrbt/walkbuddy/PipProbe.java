@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.TextureView;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -395,8 +396,7 @@ final class PipProbe {
             await(runner,()->live(idleHost),"idle-check actual camera LIVE");
             read(runner,()->idleHost.findViewById(R.id.enter_pip).performClick());
             await(runner,idleHost::isInPictureInPictureMode,"idle-check system PiP entry");
-            await(runner,()->(boolean)field(launcher,"visible")
-                && ((Handler)field(launcher,"handler")).hasCallbacks((Runnable)field(launcher,"refresh")),"home polls actual live PiP");
+            HomeEventProbe.live(runner,(MainActivity)launcher,idleHost,report);
             // Simulate a dequeued watchdog expiring its own session, with home still visible.
             read(runner,()->{
                 assertWatching(idleHost);
@@ -411,6 +411,7 @@ final class PipProbe {
             });
             await(runner,()->PreviewActivity.hasPreview() && (boolean)field(launcher,"visible")
                 && launcher.findViewById(R.id.stop).getVisibility()==View.GONE
+                && ((TextView)launcher.findViewById(R.id.status)).getText().toString().equals(PreviewActivity.report())
                 && !((Handler)field(launcher,"handler")).hasCallbacks((Runnable)field(launcher,"refresh")),"home stops polling retained stopped PiP");
             Thread.sleep(350);
             read(runner,()->{

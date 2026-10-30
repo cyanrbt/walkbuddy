@@ -22,6 +22,8 @@ final class HomeProbe {
             activity=runner.startActivitySync(new Intent(runner.getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             Activity first=activity;runner.waitForIdleSync();
             awaitIdle(runner,first);
+            HomeEventProbe.idle(runner,(MainActivity)first,report);
+            AppOpsManager.OnOpChangedListener retired=(AppOpsManager.OnOpChangedListener)read(runner,()->field(first,"pipWatcher"));
             read(runner,()->{
                 if(PreviewActivity.hasPreview() || first.findViewById(R.id.stop).getVisibility()!=View.GONE)
                     throw new AssertionError("Idle home offered a camera stop");
@@ -35,6 +37,7 @@ final class HomeProbe {
                 if(activity==null || activity==first)throw new AssertionError("Home did not recreate");
             } finally {runner.removeMonitor(monitor);}
             Activity restored=activity;runner.waitForIdleSync();awaitIdle(runner,restored);
+            HomeEventProbe.retired(runner,(MainActivity)first,(MainActivity)restored,retired,report);
             read(runner,()->{
                 if(restored.findViewById(R.id.more_panel).getVisibility()!=View.VISIBLE
                     || !((TextView)restored.findViewById(R.id.more_toggle)).getText().toString().contains("收起"))
