@@ -15,6 +15,7 @@ public final class DetectionOverlay extends View {
     private final float textAbove,textBelow;
     private final Rect glyphBounds=new Rect();
     private final DashPathEffect cautionDash;
+    private final OverlayLabelMemory labelMemory=new OverlayLabelMemory();
     private List<Detection> detections=Collections.emptyList();
     private PreviewGeometry geometry;
     private Entry[] entries=new Entry[0];
@@ -47,6 +48,7 @@ public final class DetectionOverlay extends View {
     void show(List<Detection> detections,PreviewGeometry geometry) {
         if(this.detections==detections && this.geometry==geometry)return;
         this.detections=detections;this.geometry=geometry;
+        if(geometry==null)labelMemory.clear();
         entries=geometry==null?new Entry[0]:prepare(detections,geometry);
         drawingEntries=entries.clone();
         // Low-risk shapes first; a later low-risk result must not repaint a near outline.
@@ -55,6 +57,7 @@ public final class DetectionOverlay extends View {
     }
 
     void clear() {
+        labelMemory.clear();
         if(detections.isEmpty())return;
         detections=Collections.emptyList();entries=drawingEntries=new Entry[0];invalidate();
     }
@@ -95,7 +98,7 @@ public final class DetectionOverlay extends View {
             e.labelY=4*dp+above;
             if(!e.label.isEmpty())labels[i]=new OverlayLabelLayout.Label(d,l,t,r,b,e.labelWidth+8*dp,height);
         }
-        OverlayLabelLayout.Position[] positions=OverlayLabelLayout.place(labels,g.left,g.top,g.width,g.height,dp);
+        OverlayLabelLayout.Position[] positions=labelMemory.place(labels,g.left,g.top,g.width,g.height,dp,g,android.os.SystemClock.elapsedRealtime());
         for(int i=0;i<out.length;i++) {
             Entry e=out[i];OverlayLabelLayout.Position position=positions[i];
             if(position==null){e.label="";e.labelWidth=0;continue;}

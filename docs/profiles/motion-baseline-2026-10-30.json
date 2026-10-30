@@ -1,0 +1,2938 @@
+[
+  {
+    "api": 35,
+    "source_commit": "be786f79fc173c25136ff2b5e367c83b99cb2ba7",
+    "run_id": 41065235226,
+    "attempt": 1,
+    "artifact_id": 12981144243,
+    "archive_size_bytes": 8890144,
+    "archive_sha256": "f8c5331c836fe3bd22f35bf70db4d996c7a39eba401f0e52bc6e4e498e03616b",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "overlay_report": "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0\nLABEL_FONT_PASS scale=1.5 pixels=16.5\nLABEL_FONT_PASS scale=2.0 pixels=22.0\nLABEL_LAYOUT_PASS cases=1530; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; LABEL_CONTRAST_PASS cases=18; white/black backgrounds, minimum 4.5:1\nLABEL_CROWD_PASS cases=36 overlap_pairs=0; bounds, qualifiers, near-risk priority, reordered input, cache reuse\nLABEL_LAYERING_PASS cases=3; native label pixels unchanged by later full-image mask\nRISK_PAINT_PASS cases=14 mismatches=0; risk-prioritized outlines/fills, labels retained, cached drawing order\nLABEL_MOTION_BASELINE frames=48 vertical_switches=84\n\n",
+    "motion": {
+      "scope": "Native constructed score-flip sequence with slow horizontal motion; no real object tracking",
+      "frames": 48,
+      "vertical_switches": 84,
+      "sequences": [
+        {
+          "font_scale": 1,
+          "width_dp": 160,
+          "height_dp": 120,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 28.80000114440918,
+                  "label_top": 20.001365661621094,
+                  "label_right": 133.8000030517578,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 28.80000114440918,
+                  "label_top": 48.599998474121094,
+                  "label_right": 133.8000030517578,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.12000274658203,
+                  "label_top": 20.001365661621094,
+                  "label_right": 134.1199951171875,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.12000274658203,
+                  "label_top": 48.599998474121094,
+                  "label_right": 134.1199951171875,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.440000534057617,
+                  "label_top": 20.001365661621094,
+                  "label_right": 134.44000244140625,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.440000534057617,
+                  "label_top": 48.599998474121094,
+                  "label_right": 134.44000244140625,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.760000228881836,
+                  "label_top": 20.001365661621094,
+                  "label_right": 134.760009765625,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.760000228881836,
+                  "label_top": 48.599998474121094,
+                  "label_right": 134.760009765625,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.080001831054688,
+                  "label_top": 20.001365661621094,
+                  "label_right": 135.0800018310547,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.080001831054688,
+                  "label_top": 48.599998474121094,
+                  "label_right": 135.0800018310547,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.400001525878906,
+                  "label_top": 20.001365661621094,
+                  "label_right": 135.39999389648438,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.400001525878906,
+                  "label_top": 48.599998474121094,
+                  "label_right": 135.39999389648438,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.720001220703125,
+                  "label_top": 20.001365661621094,
+                  "label_right": 135.72000122070312,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.720001220703125,
+                  "label_top": 48.599998474121094,
+                  "label_right": 135.72000122070312,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 31.040000915527344,
+                  "label_top": 20.001365661621094,
+                  "label_right": 136.04000854492188,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 31.040000915527344,
+                  "label_top": 48.599998474121094,
+                  "label_right": 136.04000854492188,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 320,
+          "height_dp": 240,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 65.60136413574219,
+                  "label_right": 162.60000610351562,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 94.19999694824219,
+                  "label_right": 162.60000610351562,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 65.60136413574219,
+                  "label_right": 163.24000549316406,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 94.19999694824219,
+                  "label_right": 163.24000549316406,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 65.60136413574219,
+                  "label_right": 163.8800048828125,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 94.19999694824219,
+                  "label_right": 163.8800048828125,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 65.60136413574219,
+                  "label_right": 164.52000427246094,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 94.19999694824219,
+                  "label_right": 164.52000427246094,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 65.60136413574219,
+                  "label_right": 165.16000366210938,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 94.19999694824219,
+                  "label_right": 165.16000366210938,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 65.60136413574219,
+                  "label_right": 165.8000030517578,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 94.19999694824219,
+                  "label_right": 165.8000030517578,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 65.60136413574219,
+                  "label_right": 166.44000244140625,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 94.19999694824219,
+                  "label_right": 166.44000244140625,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 65.60136413574219,
+                  "label_right": 167.0800018310547,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 94.19999694824219,
+                  "label_right": 167.0800018310547,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 160,
+          "height_dp": 120,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 320,
+          "height_dp": 240,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 58.30204772949219,
+                  "label_right": 206.60000610351562,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 94.19999694824219,
+                  "label_right": 206.60000610351562,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 58.30204772949219,
+                  "label_right": 207.24000549316406,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 94.19999694824219,
+                  "label_right": 207.24000549316406,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 58.30204772949219,
+                  "label_right": 207.8800048828125,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 94.19999694824219,
+                  "label_right": 207.8800048828125,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 58.30204772949219,
+                  "label_right": 208.52000427246094,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 94.19999694824219,
+                  "label_right": 208.52000427246094,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 58.30204772949219,
+                  "label_right": 209.16000366210938,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 94.19999694824219,
+                  "label_right": 209.16000366210938,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 58.30204772949219,
+                  "label_right": 209.8000030517578,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 94.19999694824219,
+                  "label_right": 209.8000030517578,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 58.30204772949219,
+                  "label_right": 210.44000244140625,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 94.19999694824219,
+                  "label_right": 210.44000244140625,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 58.30204772949219,
+                  "label_right": 211.0800018310547,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 94.19999694824219,
+                  "label_right": 211.0800018310547,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 160,
+          "height_dp": 120,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车…",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通…",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通…",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车…",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车…",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通…",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通…",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车…",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车…",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通…",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通…",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车…",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车…",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通…",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通…",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车…",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 320,
+          "height_dp": 240,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 51.00273132324219,
+                  "label_right": 257.6000061035156,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 94.19999694824219,
+                  "label_right": 257.6000061035156,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 51.00273132324219,
+                  "label_right": 258.239990234375,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 94.19999694824219,
+                  "label_right": 258.239990234375,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 51.00273132324219,
+                  "label_right": 258.8800048828125,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 94.19999694824219,
+                  "label_right": 258.8800048828125,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 51.00273132324219,
+                  "label_right": 259.52001953125,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 94.19999694824219,
+                  "label_right": 259.52001953125,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 51.00273132324219,
+                  "label_right": 260.1600036621094,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 94.19999694824219,
+                  "label_right": 260.1600036621094,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 51.00273132324219,
+                  "label_right": 260.79998779296875,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 94.19999694824219,
+                  "label_right": 260.79998779296875,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 51.00273132324219,
+                  "label_right": 261.44000244140625,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 94.19999694824219,
+                  "label_right": 261.44000244140625,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 51.00273132324219,
+                  "label_right": 262.08001708984375,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 94.19999694824219,
+                  "label_right": 262.08001708984375,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        }
+      ]
+    },
+    "independent_coordinate_check": true
+  },
+  {
+    "api": 36,
+    "source_commit": "be786f79fc173c25136ff2b5e367c83b99cb2ba7",
+    "run_id": 41065235226,
+    "attempt": 1,
+    "artifact_id": 12980699971,
+    "archive_size_bytes": 8818421,
+    "archive_sha256": "e1a44b04972f64f2a67fbf795bb66b4169e0d8e8fae6b24517006e9fcfba1b3a",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "overlay_report": "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0\nLABEL_FONT_PASS scale=1.5 pixels=16.5\nLABEL_FONT_PASS scale=2.0 pixels=22.0\nLABEL_LAYOUT_PASS cases=1530; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; LABEL_CONTRAST_PASS cases=18; white/black backgrounds, minimum 4.5:1\nLABEL_CROWD_PASS cases=36 overlap_pairs=0; bounds, qualifiers, near-risk priority, reordered input, cache reuse\nLABEL_LAYERING_PASS cases=3; native label pixels unchanged by later full-image mask\nRISK_PAINT_PASS cases=14 mismatches=0; risk-prioritized outlines/fills, labels retained, cached drawing order\nLABEL_MOTION_BASELINE frames=48 vertical_switches=84\n\n",
+    "motion": {
+      "scope": "Native constructed score-flip sequence with slow horizontal motion; no real object tracking",
+      "frames": 48,
+      "vertical_switches": 84,
+      "sequences": [
+        {
+          "font_scale": 1,
+          "width_dp": 160,
+          "height_dp": 120,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 28.80000114440918,
+                  "label_top": 20.001365661621094,
+                  "label_right": 133.8000030517578,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 28.80000114440918,
+                  "label_top": 48.599998474121094,
+                  "label_right": 133.8000030517578,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.12000274658203,
+                  "label_top": 20.001365661621094,
+                  "label_right": 134.1199951171875,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.12000274658203,
+                  "label_top": 48.599998474121094,
+                  "label_right": 134.1199951171875,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.440000534057617,
+                  "label_top": 20.001365661621094,
+                  "label_right": 134.44000244140625,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.440000534057617,
+                  "label_top": 48.599998474121094,
+                  "label_right": 134.44000244140625,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.760000228881836,
+                  "label_top": 20.001365661621094,
+                  "label_right": 134.760009765625,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 29.760000228881836,
+                  "label_top": 48.599998474121094,
+                  "label_right": 134.760009765625,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.080001831054688,
+                  "label_top": 20.001365661621094,
+                  "label_right": 135.0800018310547,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.080001831054688,
+                  "label_top": 48.599998474121094,
+                  "label_right": 135.0800018310547,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.400001525878906,
+                  "label_top": 20.001365661621094,
+                  "label_right": 135.39999389648438,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.400001525878906,
+                  "label_top": 48.599998474121094,
+                  "label_right": 135.39999389648438,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.720001220703125,
+                  "label_top": 20.001365661621094,
+                  "label_right": 135.72000122070312,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 30.720001220703125,
+                  "label_top": 48.599998474121094,
+                  "label_right": 135.72000122070312,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 31.040000915527344,
+                  "label_top": 20.001365661621094,
+                  "label_right": 136.04000854492188,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 31.040000915527344,
+                  "label_top": 48.599998474121094,
+                  "label_right": 136.04000854492188,
+                  "label_bottom": 71.1986312866211
+                }
+              ],
+              "image": "motion-font100-160-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 320,
+          "height_dp": 240,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 65.60136413574219,
+                  "label_right": 162.60000610351562,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 94.19999694824219,
+                  "label_right": 162.60000610351562,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 65.60136413574219,
+                  "label_right": 163.24000549316406,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 94.19999694824219,
+                  "label_right": 163.24000549316406,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 65.60136413574219,
+                  "label_right": 163.8800048828125,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 94.19999694824219,
+                  "label_right": 163.8800048828125,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 65.60136413574219,
+                  "label_right": 164.52000427246094,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 94.19999694824219,
+                  "label_right": 164.52000427246094,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 65.60136413574219,
+                  "label_right": 165.16000366210938,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 94.19999694824219,
+                  "label_right": 165.16000366210938,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 65.60136413574219,
+                  "label_right": 165.8000030517578,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 94.19999694824219,
+                  "label_right": 165.8000030517578,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 65.60136413574219,
+                  "label_right": 166.44000244140625,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 94.19999694824219,
+                  "label_right": 166.44000244140625,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 65.60136413574219,
+                  "label_right": 167.0800018310547,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 94.19999694824219,
+                  "label_right": 167.0800018310547,
+                  "label_bottom": 116.79862976074219
+                }
+              ],
+              "image": "motion-font100-320-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 160,
+          "height_dp": 120,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 12.702049255371094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 9,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 78.4979476928711
+                }
+              ],
+              "image": "motion-font150-160-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 320,
+          "height_dp": 240,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 58.30204772949219,
+                  "label_right": 206.60000610351562,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 94.19999694824219,
+                  "label_right": 206.60000610351562,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 58.30204772949219,
+                  "label_right": 207.24000549316406,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 94.19999694824219,
+                  "label_right": 207.24000549316406,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 58.30204772949219,
+                  "label_right": 207.8800048828125,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 94.19999694824219,
+                  "label_right": 207.8800048828125,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 58.30204772949219,
+                  "label_right": 208.52000427246094,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 94.19999694824219,
+                  "label_right": 208.52000427246094,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 58.30204772949219,
+                  "label_right": 209.16000366210938,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 94.19999694824219,
+                  "label_right": 209.16000366210938,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 58.30204772949219,
+                  "label_right": 209.8000030517578,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 94.19999694824219,
+                  "label_right": 209.8000030517578,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 58.30204772949219,
+                  "label_right": 210.44000244140625,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 94.19999694824219,
+                  "label_right": 210.44000244140625,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 58.30204772949219,
+                  "label_right": 211.0800018310547,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 94.19999694824219,
+                  "label_right": 211.0800018310547,
+                  "label_bottom": 124.09794616699219
+                }
+              ],
+              "image": "motion-font150-320-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 160,
+          "height_dp": 120,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车…",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通…",
+                  "object_left": 28.80000114440918,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通…",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车…",
+                  "object_left": 29.12000274658203,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车…",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通…",
+                  "object_left": 29.440000534057617,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通…",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车…",
+                  "object_left": 29.760000228881836,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车…",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通…",
+                  "object_left": 30.080001831054688,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通…",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车…",
+                  "object_left": 30.400001525878906,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车…",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通…",
+                  "object_left": 30.720001220703125,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通…",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 5.402732849121094,
+                  "label_right": 158,
+                  "label_bottom": 42.599998474121094
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车…",
+                  "object_left": 31.040000915527344,
+                  "object_top": 45.599998474121094,
+                  "label_left": 8,
+                  "label_top": 48.599998474121094,
+                  "label_right": 158,
+                  "label_bottom": 85.7972640991211
+                }
+              ],
+              "image": "motion-font200-160-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 320,
+          "height_dp": 240,
+          "frames": [
+            {
+              "frame": 0,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 51.00273132324219,
+                  "label_right": 257.6000061035156,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 57.60000228881836,
+                  "object_top": 91.19999694824219,
+                  "label_left": 57.60000228881836,
+                  "label_top": 94.19999694824219,
+                  "label_right": 257.6000061035156,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame0.png"
+            },
+            {
+              "frame": 1,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 51.00273132324219,
+                  "label_right": 258.239990234375,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.24000549316406,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.24000549316406,
+                  "label_top": 94.19999694824219,
+                  "label_right": 258.239990234375,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame1.png"
+            },
+            {
+              "frame": 2,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 51.00273132324219,
+                  "label_right": 258.8800048828125,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 58.880001068115234,
+                  "object_top": 91.19999694824219,
+                  "label_left": 58.880001068115234,
+                  "label_top": 94.19999694824219,
+                  "label_right": 258.8800048828125,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame2.png"
+            },
+            {
+              "frame": 3,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 51.00273132324219,
+                  "label_right": 259.52001953125,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 59.52000045776367,
+                  "object_top": 91.19999694824219,
+                  "label_left": 59.52000045776367,
+                  "label_top": 94.19999694824219,
+                  "label_right": 259.52001953125,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame3.png"
+            },
+            {
+              "frame": 4,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 51.00273132324219,
+                  "label_right": 260.1600036621094,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.160003662109375,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.160003662109375,
+                  "label_top": 94.19999694824219,
+                  "label_right": 260.1600036621094,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame4.png"
+            },
+            {
+              "frame": 5,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 51.00273132324219,
+                  "label_right": 260.79998779296875,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 60.80000305175781,
+                  "object_top": 91.19999694824219,
+                  "label_left": 60.80000305175781,
+                  "label_top": 94.19999694824219,
+                  "label_right": 260.79998779296875,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame5.png"
+            },
+            {
+              "frame": 6,
+              "labels": [
+                {
+                  "name": "停车计时器",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 51.00273132324219,
+                  "label_right": 261.44000244140625,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "交通信号灯",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 61.44000244140625,
+                  "object_top": 91.19999694824219,
+                  "label_left": 61.44000244140625,
+                  "label_top": 94.19999694824219,
+                  "label_right": 261.44000244140625,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame6.png"
+            },
+            {
+              "frame": 7,
+              "labels": [
+                {
+                  "name": "交通信号灯",
+                  "score": 0.8100000023841858,
+                  "text": "未测距 · 交通信号灯",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 51.00273132324219,
+                  "label_right": 262.08001708984375,
+                  "label_bottom": 88.19999694824219
+                },
+                {
+                  "name": "停车计时器",
+                  "score": 0.7900000214576721,
+                  "text": "未测距 · 停车计时器",
+                  "object_left": 62.08000183105469,
+                  "object_top": 91.19999694824219,
+                  "label_left": 62.08000183105469,
+                  "label_top": 94.19999694824219,
+                  "label_right": 262.08001708984375,
+                  "label_bottom": 131.3972625732422
+                }
+              ],
+              "image": "motion-font200-320-frame7.png"
+            }
+          ],
+          "vertical_switches": 14
+        }
+      ]
+    },
+    "independent_coordinate_check": true
+  }
+]

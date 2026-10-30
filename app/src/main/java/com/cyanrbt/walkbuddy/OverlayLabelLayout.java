@@ -16,9 +16,13 @@ final class OverlayLabelLayout {
     static final class Position {
         final float left,top;
         final boolean bottomAnchor;
-        Position(float left,float top,boolean bottomAnchor){this.left=left;this.top=top;this.bottomAnchor=bottomAnchor;}
+        final int slot;
+        Position(float left,float top,int slot){this.left=left;this.top=top;this.slot=slot;this.bottomAnchor=slot/3>=2;}
     }
     static Position[] place(Label[] labels,float left,float top,float width,float height,float dp) {
+        return place(labels,left,top,width,height,dp,null);
+    }
+    static Position[] place(Label[] labels,float left,float top,float width,float height,float dp,int[] preferred) {
         Position[] out=new Position[labels.length];List<Integer> order=new ArrayList<>();
         float margin=2*dp,gap=2*dp,offset=3*dp;
         float minX=left+margin,minY=top+margin,maxX=left+width-margin,maxY=top+height-margin;
@@ -31,16 +35,17 @@ final class OverlayLabelLayout {
             Label label=labels[index];
             float[] xs={label.left,label.right-label.width,(label.left+label.right-label.width)/2};
             float[] ys={label.top-label.height-offset,label.top+offset,label.bottom+offset,label.bottom-label.height-offset};
-            search:for(int yIndex=0;yIndex<ys.length;yIndex++) {
-              candidate:for(float desiredX:xs) {
-                float x=clamp(desiredX,minX,maxX-label.width),y=clamp(ys[yIndex],minY,maxY-label.height);
+            int first=preferred==null?-1:preferred[index];
+            candidate:for(int attempt=-1;attempt<12;attempt++) {
+                int slot=attempt<0?first:attempt;
+                if(slot<0 || slot>=12 || attempt>=0 && slot==first)continue;
+                float x=clamp(xs[slot%3],minX,maxX-label.width),y=clamp(ys[slot/3],minY,maxY-label.height);
                 for(int other:order) {
                     Position used=out[other];if(used==null)continue;Label size=labels[other];
                     if(x<used.left+size.width+gap && x+label.width+gap>used.left
                         && y<used.top+size.height+gap && y+label.height+gap>used.top)continue candidate;
                 }
-                out[index]=new Position(x,y,yIndex>=2);break search;
-              }
+                out[index]=new Position(x,y,slot);break;
             }
         }
         return out;

@@ -81,11 +81,13 @@ final class OverlayProbe {
                 overlay.show(data,geometry);
                 overlay.clear();
                 if(((Object[])field(overlay,"drawingEntries")).length!=0)throw new AssertionError("Clear retained risk drawing entries");
+                if(((Object[])field(field(overlay,"labelMemory"),"previousLabels")).length!=0)throw new AssertionError("Clear retained label preferences");
                 Bitmap cleared=draw(overlay,w,h);
                 try{assertEmpty(cleared);}finally{cleared.recycle();}
                 overlay.show(data,geometry);
                 overlay.show(data,null);
                 if(((Object[])field(overlay,"drawingEntries")).length!=0)throw new AssertionError("Missing geometry retained risk drawing entries");
+                if(((Object[])field(field(overlay,"labelMemory"),"previousLabels")).length!=0)throw new AssertionError("Missing geometry retained label preferences");
                 Bitmap pending=draw(overlay,w,h);
                 try{assertEmpty(pending);}finally{pending.recycle();}
             } finally {first.recycle();if(repeat!=null)repeat.recycle();}
@@ -351,12 +353,38 @@ final class OverlayProbe {
             sequences.put(new JSONObject().put("font_scale",font).put("width_dp",width).put("height_dp",height)
                 .put("frames",snapshots).put("vertical_switches",changes));switches+=changes;
         }
+        int resets=checkMotionResets(runner);
         JSONObject result=new JSONObject().put("scope","Native constructed score-flip sequence with slow horizontal motion; no real object tracking")
-            .put("frames",frames).put("vertical_switches",switches).put("sequences",sequences);
-        try(FileOutputStream stream=new FileOutputStream(new File(output,"label-motion-baseline.json"))) {
+            .put("frames",frames).put("vertical_switches",switches).put("reset_cases",resets).put("sequences",sequences);
+        try(FileOutputStream stream=new FileOutputStream(new File(output,"label-motion.json"))) {
             stream.write(result.toString(2).getBytes(StandardCharsets.UTF_8));
         }
-        report.append("LABEL_MOTION_BASELINE frames=").append(frames).append(" vertical_switches=").append(switches).append('\n');
+        if(switches!=0)throw new AssertionError("Matched labels switched vertical edges during score flips: "+switches);
+        report.append("LABEL_MOTION_PASS frames=").append(frames).append(" vertical_switches=").append(switches)
+            .append(" resets=").append(resets).append("; current boxes/text, local preferences, clear/geometry reset\n");
+    }
+    private static int checkMotionResets(Instrumentation runner) throws Exception {
+        Configuration config=new Configuration(runner.getTargetContext().getResources().getConfiguration());
+        config.fontScale=1;config.densityDpi=160;
+        Context context=runner.getTargetContext().createConfigurationContext(config);
+        for(int kind=0;kind<3;kind++) {
+            DetectionOverlay overlay=new DetectionOverlay(context,null);overlay.layout(0,0,320,240);
+            PreviewGeometry original=new PreviewGeometry(640,480,0,0,320,240);
+            overlay.show(motionFrame(0),original);
+            List<Detection> fresh=motionFrame(1);PreviewGeometry next=original;
+            if(kind==0)overlay.clear();
+            if(kind==1)overlay.show(fresh,null);
+            if(kind==2){overlay.layout(0,0,200,150);next=new PreviewGeometry(640,480,0,0,200,150);}
+            overlay.show(fresh,next);
+            DetectionOverlay reference=new DetectionOverlay(context,null);
+            reference.layout(0,0,next.viewWidth,next.viewHeight);reference.show(fresh,next);
+            Object[] actual=(Object[])entries(overlay),expected=(Object[])entries(reference);
+            for(int i=0;i<actual.length;i++)if(!field(actual[i],"label").equals(field(expected[i],"label"))
+                || !field(actual[i],"labelX").equals(field(expected[i],"labelX"))
+                || !field(actual[i],"labelTop").equals(field(expected[i],"labelTop")))
+                throw new AssertionError("Retired label preference survived reset kind="+kind);
+        }
+        return 3;
     }
     private static List<Detection> motionFrame(int frame) {
         List<Detection> data=new ArrayList<>();float shift=frame*.002f;
