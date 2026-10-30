@@ -32,4 +32,6 @@ v0.4.25 中，各来源的 `AlertPolicy` 先决定并记下目标已经提醒，
 
 首个候选 [41073282182](https://github.com/cyanrbt/walkbuddy/actions/runs/41073282182) 两套 API 的 `FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400` 均通过，原生控件及三组时序得到实际执行。API 36 九项通过；API 35 原有恢复触摸超时，其余八项通过，整轮仍失败。两个原始附件已下载并核对摘要，详见[原始结果](feedback-native-initial-2026-10-30.json)及[PiP 展开输入记录](input-after-pip-expand-2026-10-30.md)。该轮未发布标签、未重跑掩盖失败；在仅测试代码补充展开后输入就绪条件后，重新核对完整原生结果。
 
+修正提交 `2ad8018622124bb3582d5f66c6567c1ac9660838` 的 [41075111797](https://github.com/cyanrbt/walkbuddy/actions/runs/41075111797) attempt 1 两套 API 首次全部成功，job `124129104044` / `124129104369`。已直接读取完成后的原始 job 日志，各九项 PASS、无探针 FAIL，新增 30 配置 / 三场景提醒检查和 11 项输入规则均通过。首个失败记录保留；附件下载与结构化复核、正式发布核验另行补记。
+
 目标设备的振动是否发生、声音与系统朗读是否清晰、真实深度稳定性、近距离时序及厂商策略仍待[实体设备验收](../实机测试.md)。
