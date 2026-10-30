@@ -11,7 +11,12 @@
     "candidate-full-font200.png": "03092ab5b785e33698a2df6b77fa00cee2d86a050584265977d049a7b5cec62a",
     "candidate-wide-font200.png": "09c05463fea82820a49691b84e3813f965e52b243cf1f816c4ca8f30e3144d7c",
     "candidate-system-pip.png": "fac809365ed4748a2067b41f67b57267e7e42fd75865471fad7c6d298d0738a7",
-    "candidate-expanded.png": "f7aadc4dc38da99aae0afaa3056496ec2d5283556b4b9f2b1216e25250379c8c"
+    "candidate-expanded.png": "f7aadc4dc38da99aae0afaa3056496ec2d5283556b4b9f2b1216e25250379c8c",
+    "release-compact-font200.png": "4c6743b1d1e07b15022b5e3037ad566052b9c2770f1730ceffb784550eb99637",
+    "release-full-font200.png": "03092ab5b785e33698a2df6b77fa00cee2d86a050584265977d049a7b5cec62a",
+    "release-wide-font200.png": "09c05463fea82820a49691b84e3813f965e52b243cf1f816c4ca8f30e3144d7c",
+    "release-system-pip.png": "552aede72a1bcc975b2d8b9a6b49bf65d6effed6a28dbed0dbad5fea52a4d690",
+    "release-expanded.png": "0f892fdc9484f12420232fae40b6e2ca45064f28f61673e1e5f4149d499d3ecf"
   },
   "candidate": {
     "run_id": 41141509019,
@@ -41,5 +46,35 @@
         "sha256": "f7aadc4dc38da99aae0afaa3056496ec2d5283556b4b9f2b1216e25250379c8c"
       }
     }
+  },
+  "release": {
+    "tag": "v0.4.36",
+    "run_id": 41143546103,
+    "source_commit": "10a6c99c3b1d1b6e7735850137a9650b000f259f",
+    "artifact_id": 13020243481,
+    "archive_sha256": "23575f170643a9a0b34aa0f6d88992cb63537fc34ac0b4d71539c60f3690b063",
+    "files": {
+      "release-compact-font200.png": {
+        "source": "recovery-compact-96x128-font200-day.png",
+        "sha256": "4c6743b1d1e07b15022b5e3037ad566052b9c2770f1730ceffb784550eb99637"
+      },
+      "release-full-font200.png": {
+        "source": "320x480-font200-day-recovery-initial.png",
+        "sha256": "03092ab5b785e33698a2df6b77fa00cee2d86a050584265977d049a7b5cec62a"
+      },
+      "release-wide-font200.png": {
+        "source": "600x360-font200-day-recovery-initial.png",
+        "sha256": "09c05463fea82820a49691b84e3813f965e52b243cf1f816c4ca8f30e3144d7c"
+      },
+      "release-system-pip.png": {
+        "source": "pip-recovery-stopped.png",
+        "sha256": "552aede72a1bcc975b2d8b9a6b49bf65d6effed6a28dbed0dbad5fea52a4d690"
+      },
+      "release-expanded.png": {
+        "source": "preview-recovery-expanded.png",
+        "sha256": "0f892fdc9484f12420232fae40b6e2ca45064f28f61673e1e5f4149d499d3ecf"
+      }
+    },
+    "scope": "Native static layouts plus actual stopped virtual Camera2 system PiP and expansion; not physical-device acceptance"
   }
 }
