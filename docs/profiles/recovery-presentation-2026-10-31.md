@@ -33,3 +33,9 @@ JVM/静态原生布局、虚拟 Camera2 的系统 PiP 与实际 ARM64 安装包�
 ## CI 分区大小
 
 针对首轮 API 36 的明确磁盘分配错误，配置一次性模拟器的 `disk-size: 2048M`，不再依赖系统镜像超过 7 GiB 的默认用户分区。[固定版本 action 的输入](https://github.com/ReactiveCircus/android-emulator-runner/blob/a421e43855164a8197daf9d8d40fe71c6996bb0d/action.yml)明确支持该单位；其[实现](https://github.com/ReactiveCircus/android-emulator-runner/blob/a421e43855164a8197daf9d8d40fe71c6996bb0d/src/emulator-manager.ts)将值写入 `disk.dataPartition.size`。仅控制测试数据分区，保持两套 API、虚拟相机、全部十项检查、发布依赖与失败门槛。实际足够运行全部检查仍由新候选和正式标签结果证明，不凭配置宣称已通过。
+
+## 停止报告修订与控件就绪采证
+
+[报告修订候选 41140406598](https://github.com/cyanrbt/walkbuddy/actions/runs/41140406598)两套编译和全部新恢复布局、两轮实际 PiP 恢复均成功。API 35 十项全部通过；API 36 九项通过，最后 support 在默认振动断言失败。两套完整 ZIP 已下载核对摘要并重放，[实际记录](recovery-native-cachefix-2026-10-31.json)明确 API 36 尚未完成振动持久化，不能把部分通过写成整轮通过；没有 ANR 观察。
+
+该首轮断言把 enabled/checked 合并为同一消息，没有采集各值，故不能认定究竟是哪一项不符。源码存在状态与呈现之间的先后：`CameraFrames.accept` 可晋升 LIVE，`captureFrame` 此时不调用 render，而后续纹理/看门狗再渲染控件；support 原先只等待 LIVE/fresh。现补充等待遮罩隐藏、振动控件呈现且启用，保留原默认已勾选/已启用断言；不写入默认偏好、不强制启用控件、不改变生产截止。原生包编译通过；将 before/after 的 phase、fresh、cover、shown、enabled、checked、preference 和等待时长保存为 `support-vibration-ready.txt`，失败消息也保留实际各值。后续成功不能补证本次未采集到的瞬时值。

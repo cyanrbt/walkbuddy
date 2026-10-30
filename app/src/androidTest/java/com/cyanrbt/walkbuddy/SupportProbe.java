@@ -92,10 +92,21 @@ final class SupportProbe {
             android.content.SharedPreferences preferences=current.getSharedPreferences(PreviewActivity.REMINDERS_PREFERENCES,0);
             hadVibration=preferences.contains(PreviewActivity.VIBRATION_PREFERENCE);
             oldVibration=preferences.getBoolean(PreviewActivity.VIBRATION_PREFERENCE,true);touchedVibration=true;
+            String beforeReady=read(runner,()->vibrationState(current));
+            write(runner,"support-vibration-ready.txt","before "+beforeReady+"\n");
+            // Capture metadata can promote LIVE before the next view render. Require the rendered control too.
+            long readyAt=SystemClock.uptimeMillis();
+            await(runner,()->state(current).phase==SessionState.Phase.LIVE && state(current).fresh(SystemClock.elapsedRealtime())
+                && current.findViewById(R.id.preview_cover).getVisibility()==View.GONE
+                && current.findViewById(R.id.preview_vibration).isShown()
+                && current.findViewById(R.id.preview_vibration).isEnabled(),"rendered vibration control after explicit restart");
+            String afterReady=read(runner,()->vibrationState(current));
+            write(runner,"support-vibration-ready.txt","before "+beforeReady+"\nafter "+afterReady
+                +" waitMs="+(SystemClock.uptimeMillis()-readyAt)+"\n");
             String mutedReport=read(runner,()->{
                 CheckBox toggle=current.findViewById(R.id.preview_vibration);
                 Object camera=field(current,"camera");long muteGeneration=state(current).generation;
-                if(!toggle.isEnabled() || !toggle.isChecked())throw new AssertionError("Missing default vibration control");
+                if(!toggle.isEnabled() || !toggle.isChecked())throw new AssertionError("Missing default vibration control: "+vibrationState(current));
                 toggle.performClick();
                 if(toggle.isChecked() || ((RiskHaptics)field(current,"haptics")).enabled()
                     || preferences.getBoolean(PreviewActivity.VIBRATION_PREFERENCE,true)
@@ -157,6 +168,13 @@ final class SupportProbe {
         try(FileOutputStream output=new FileOutputStream(new File(directory,name))){output.write(text.getBytes(StandardCharsets.UTF_8));}
     }
     private static SessionState state(PreviewActivity host){return (SessionState)field(host,"state");}
+    private static String vibrationState(PreviewActivity host) {
+        CheckBox toggle=host.findViewById(R.id.preview_vibration);
+        return "phase="+state(host).phase+" fresh="+state(host).fresh(SystemClock.elapsedRealtime())
+            +" cover="+host.findViewById(R.id.preview_cover).getVisibility()+" shown="+toggle.isShown()
+            +" enabled="+toggle.isEnabled()+" checked="+toggle.isChecked()
+            +" preference="+host.getSharedPreferences(PreviewActivity.REMINDERS_PREFERENCES,0).getBoolean(PreviewActivity.VIBRATION_PREFERENCE,true);
+    }
     private static SessionDiagnostics diagnostics(PreviewActivity host){return (SessionDiagnostics)field(host,"diagnostics");}
     private static Object field(Object host,String name) {
         try {Field value=host.getClass().getDeclaredField(name);value.setAccessible(true);return value.get(host);}

@@ -34,7 +34,8 @@
     "app/src/test/java/com/cyanrbt/walkbuddy/PipMenuTest.java": "68db6bf81a5a0afcde7dfce5f9f9379a6a2cc6ac3ee65191adb9b4c8b63b9847",
     "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048",
     "app/src/test/java/com/cyanrbt/walkbuddy/ProductSurfaceTest.java": "bedb92ef2c1e01b66839a10e411a904178fa6201ce31a9eb72aa4728a845e450",
-    ".github/workflows/ui-check.yml": "b238a4db15b9f316d598dc55f6e6ad9c3c0a29e37c5f487261aa12271d0bcd84"
+    ".github/workflows/ui-check.yml": "b238a4db15b9f316d598dc55f6e6ad9c3c0a29e37c5f487261aa12271d0bcd84",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/SupportProbe.java": "96b8943fd6e42d3756df60b275302ae089d5fa629ffd5c9cd80be627f1643c41"
   },
   "preserved_v035_source_sha256": {
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
@@ -127,5 +128,6 @@
   "local_app_and_test_build": "success",
   "home_report_fix": "Retain last published tuple across terminal failure; identical renders keep terminal object; next state change clears failure presentation; owner guards retained",
   "ci_userdata_size": "2048M",
-  "ci_disk_size_reference": "https://github.com/ReactiveCircus/android-emulator-runner/blob/a421e43855164a8197daf9d8d40fe71c6996bb0d/src/emulator-manager.ts"
+  "ci_disk_size_reference": "https://github.com/ReactiveCircus/android-emulator-runner/blob/a421e43855164a8197daf9d8d40fe71c6996bb0d/src/emulator-manager.ts",
+  "support_probe_render_readiness": "Require fresh LIVE, opaque cover gone and shown/enabled vibration control before retaining original checked/enabled assertions; before/after evidence recorded; no preference reset or deadline change"
 }
