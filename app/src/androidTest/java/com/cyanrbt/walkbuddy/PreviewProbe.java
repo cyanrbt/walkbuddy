@@ -18,7 +18,7 @@ public class PreviewProbe extends Instrumentation {
  private static boolean enabled(Bundle args,String name){return args!=null && "true".equals(args.getString(name));}
  @Override public void onStart(){Bundle result=new Bundle();Activity activity=null;StringBuilder report=new StringBuilder();try{
   activity=startActivitySync(new Intent(getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-  final Activity host=activity;int cases=0;long baselineNs=0,sampledNs=0;
+  final Activity host=activity;int cases=0;long baselineNs=0,sampledNs=0;org.json.JSONArray brightnessSamples=new org.json.JSONArray();
   File evidence=new File(getTargetContext().getCacheDir(),"ui-probe");if(!evidence.isDirectory() && !evidence.mkdirs())throw new AssertionError("Evidence directory unavailable");
   for(int sensor:new int[]{0,90,180,270})for(int display:new int[]{0,90,180,270})for(int[] size:new int[][]{{300,400},{280,210}}){
    int w=size[0],h=size[1],bw=sensor%180==0?640:480,bh=sensor%180==0?480:640;
@@ -76,9 +76,12 @@ public class PreviewProbe extends Instrumentation {
     report.append("PASS sensor=").append(sensor).append(" display=").append(display).append(" view=").append(w).append('x').append(h).append(" sample=").append(input.getWidth()).append('x').append(input.getHeight()).append(" baselineCopyUs=").append(copyNs[0]/1000).append(" naturalCopyUs=").append(copyNs[1]/1000)
      .append(" baselineBytes=").append(original.getAllocationByteCount()).append(" limitedBytes=").append(input.getAllocationByteCount())
      .append(" legacyLimitedAllocatedBytes=").append(limitedBytes[0]).append(" naturalAllocatedBytes=").append(naturalBytes).append("; worker-rotated input RGB identical\n");
+    brightnessSamples.put(BrightnessProbe.baseline(this,ref.get(),sensor,display,w,h));
     image.recycle();input.recycle();original.recycle();frame.close();cases++;
    }finally{surface.release();}
   }
+  try(FileOutputStream stream=new FileOutputStream(new File(evidence,"brightness-baseline.json"))){stream.write(brightnessSamples.toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+  report.append("BRIGHTNESS_BASELINE_CAPTURE cases=32; frozen v0.4.36 16x12 readback and per-pixel RGB sum, not end-to-end timing\n");
   report.append("READBACK_OBSERVATION baselineUs=").append(baselineNs/1000).append(" naturalUs=").append(sampledNs/1000).append(" cases=32; alternating order, full baseline includes rotation, natural readback rotates later on worker; not camera end-to-end timing\n");
   report.append("ROTATION_BUFFER_PASS cases=32; all RGB input bytes identical to v0.4.16; one readback bitmap, worker rotation storage reused for display 90/180/270\n");
   report.append("PREVIEW_PROBE_PASS cases=").append(cases).append("; direction marker + circle in displayed and sampled bitmap\n");result.putString("stream",report.toString());finish(Activity.RESULT_OK,result);
