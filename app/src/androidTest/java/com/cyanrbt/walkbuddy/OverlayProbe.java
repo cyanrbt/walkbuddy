@@ -55,6 +55,7 @@ final class OverlayProbe {
             List<Detection> data=Collections.singletonList(new Detection("空间障碍",1,.25f,.25f,.75f,.75f,risk,1.2f,mask));
             overlay.show(data,geometry);
             Object entries=entries(overlay);
+            Object drawing=field(overlay,"drawingEntries");
             Bitmap first=draw(overlay,w,h),repeat=null;
             try {
                 int bright=0,gaps=0;
@@ -70,17 +71,21 @@ final class OverlayProbe {
                 if(first.getPixel(Math.round(10*dp),h/2)!=Color.TRANSPARENT)throw new AssertionError("Mask leaked outside occupancy");
                 overlay.show(data,geometry);
                 if(entries!=entries(overlay))throw new AssertionError("Identical snapshot rebuilt drawing paths");
+                if(drawing!=field(overlay,"drawingEntries"))throw new AssertionError("Identical snapshot rebuilt risk paint order");
                 repeat=draw(overlay,w,h);
                 if(!first.sameAs(repeat))throw new AssertionError("Cached redraw changed pixels");
                 PreviewGeometry resized=new PreviewGeometry(640,480,0,0,w/2,h/2);
                 overlay.show(data,resized);
                 if(entries==entries(overlay))throw new AssertionError("Resize reused old coordinates");
+                if(drawing==field(overlay,"drawingEntries"))throw new AssertionError("Resize kept the old risk drawing cache");
                 overlay.show(data,geometry);
                 overlay.clear();
+                if(((Object[])field(overlay,"drawingEntries")).length!=0)throw new AssertionError("Clear retained risk drawing entries");
                 Bitmap cleared=draw(overlay,w,h);
                 try{assertEmpty(cleared);}finally{cleared.recycle();}
                 overlay.show(data,geometry);
                 overlay.show(data,null);
+                if(((Object[])field(overlay,"drawingEntries")).length!=0)throw new AssertionError("Missing geometry retained risk drawing entries");
                 Bitmap pending=draw(overlay,w,h);
                 try{assertEmpty(pending);}finally{pending.recycle();}
             } finally {first.recycle();if(repeat!=null)repeat.recycle();}
@@ -303,12 +308,14 @@ final class OverlayProbe {
                 cases++;if(!matches)mismatches++;
             }
         }
-        JSONObject result=new JSONObject().put("scope","Native constructed risk-layer baseline with normal labels; sampled points verified outside label bubbles, not real recognition or tracking")
+        JSONObject result=new JSONObject().put("scope","Native constructed risk layers with normal labels; sampled points verified outside label bubbles, not real recognition or tracking")
             .put("cases",cases).put("mismatches",mismatches).put("rows",rows);
-        try(FileOutputStream stream=new FileOutputStream(new File(output,"risk-paint-baseline.json"))) {
+        try(FileOutputStream stream=new FileOutputStream(new File(output,"risk-paint.json"))) {
             stream.write(result.toString(2).getBytes(StandardCharsets.UTF_8));
         }
-        report.append("RISK_PAINT_BASELINE cases=").append(cases).append(" mismatches=").append(mismatches).append('\n');
+        if(mismatches!=0)throw new AssertionError("Lower-risk shape repainted a higher-risk color: "+mismatches);
+        report.append("RISK_PAINT_PASS cases=").append(cases).append(" mismatches=").append(mismatches)
+            .append("; risk-prioritized outlines/fills, labels retained, cached drawing order\n");
     }
     private static List<Detection> crowd(String scene) {
         List<Detection> data=new ArrayList<>();

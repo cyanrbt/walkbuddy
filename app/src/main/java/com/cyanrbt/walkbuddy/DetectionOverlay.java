@@ -18,11 +18,12 @@ public final class DetectionOverlay extends View {
     private List<Detection> detections=Collections.emptyList();
     private PreviewGeometry geometry;
     private Entry[] entries=new Entry[0];
+    private Entry[] drawingEntries=entries;
 
     private static final class Entry {
         final Path edges=new Path();
         Path fill;
-        int color;
+        int color,priority;
         float stroke, labelX, labelY, labelWidth, labelTop, labelBottom;
         float anchorX,anchorY,leaderX,leaderY;
         boolean caution;
@@ -47,12 +48,15 @@ public final class DetectionOverlay extends View {
         if(this.detections==detections && this.geometry==geometry)return;
         this.detections=detections;this.geometry=geometry;
         entries=geometry==null?new Entry[0]:prepare(detections,geometry);
+        drawingEntries=entries.clone();
+        // Low-risk shapes first; a later low-risk result must not repaint a near outline.
+        Arrays.sort(drawingEntries,Comparator.comparingInt(entry->entry.priority));
         invalidate();
     }
 
     void clear() {
         if(detections.isEmpty())return;
-        detections=Collections.emptyList();entries=new Entry[0];invalidate();
+        detections=Collections.emptyList();entries=drawingEntries=new Entry[0];invalidate();
     }
 
     private Entry[] prepare(List<Detection> detections,PreviewGeometry g) {
@@ -60,6 +64,7 @@ public final class DetectionOverlay extends View {
         OverlayLabelLayout.Label[] labels=new OverlayLabelLayout.Label[out.length];
         for(int i=0;i<out.length;i++) {
             Detection d=detections.get(i);Entry e=new Entry();out[i]=e;
+            e.priority=d.risk.ordinal();
             float l=g.left+d.left*g.width,t=g.top+d.top*g.height,r=g.left+d.right*g.width,b=g.top+d.bottom*g.height;
             e.color=d.risk==Detection.Risk.NEAR?Color.rgb(255,99,110):d.risk==Detection.Risk.CAUTION?Color.rgb(255,200,87):Color.rgb(174,183,197);
             e.caution=d.risk==Detection.Risk.CAUTION;
@@ -124,22 +129,22 @@ public final class DetectionOverlay extends View {
         if(geometry==null || entries.length==0)return;
         canvas.save();canvas.clipRect(geometry.left,geometry.top,geometry.left+geometry.width,geometry.top+geometry.height);
         // Draw every shape before any text, so later masks or borders cannot tint a label.
-        for(Entry e:entries) {
+        for(Entry e:drawingEntries) {
             if(e.fill!=null) {
                 paint.setStyle(Paint.Style.FILL);paint.setPathEffect(null);
                 paint.setColor((e.color&0xFFFFFF)|0x24000000);canvas.drawPath(e.fill,paint);
             }
         }
-        for(Entry e:entries) {
+        for(Entry e:drawingEntries) {
             paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(e.stroke);paint.setColor(e.color);
             // Restore the dash after the translucent fill, for depth masks as well as RGB boxes.
             paint.setPathEffect(e.caution?cautionDash:null);canvas.drawPath(e.edges,paint);
         }
         paint.setPathEffect(null);paint.setStyle(Paint.Style.STROKE);paint.setStrokeWidth(dp);
-        for(Entry e:entries)if(!e.label.isEmpty()) {
+        for(Entry e:drawingEntries)if(!e.label.isEmpty()) {
             paint.setColor(e.color);canvas.drawLine(e.anchorX,e.anchorY,e.leaderX,e.leaderY,paint);
         }
-        for(Entry e:entries) {
+        for(Entry e:drawingEntries) {
             if(!e.label.isEmpty()) {
                 paint.setStyle(Paint.Style.FILL);paint.setPathEffect(null);paint.setColor(Color.argb(235,18,23,32));
                 canvas.drawRoundRect(e.labelX,e.labelTop,e.labelX+e.labelWidth+8*dp,e.labelBottom,6*dp,6*dp,paint);
