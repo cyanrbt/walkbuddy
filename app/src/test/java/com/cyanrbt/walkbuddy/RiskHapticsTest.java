@@ -73,4 +73,27 @@ public class RiskHapticsTest {
         assertEquals(100,RiskHaptics.Cue.DOUBLE.fallbackTimings()[1]);
         assertEquals(0,RiskHaptics.Cue.NONE.fallbackTimings().length);
     }
+    @Test public void disablingCancelsRemainingCueAndSuppressesEveryRisk() {
+        Output output=new Output();RiskHaptics player=new RiskHaptics(output);
+        player.alert(Detection.Risk.NEAR);player.setEnabled(false);
+        assertFalse(player.enabled());assertEquals(1,output.cancels);
+        for(Detection.Risk risk:Detection.Risk.values()){player.update(risk);player.alert(risk);}
+        assertEquals(Collections.singletonList(RiskHaptics.Cue.DOUBLE),output.cues);
+        assertEquals(1,output.cancels);
+    }
+    @Test public void enablingDoesNotReplayMutedRiskAndOnlyANewAlertCanPlay() {
+        Output output=new Output();RiskHaptics player=new RiskHaptics(output);
+        player.setEnabled(false);player.alert(Detection.Risk.NEAR);player.setEnabled(true);
+        player.update(Detection.Risk.NEAR);assertTrue(output.cues.isEmpty());
+        player.update(Detection.Risk.CAUTION);assertEquals(1,output.cancels);
+        player.alert(Detection.Risk.CAUTION);assertEquals(Collections.singletonList(RiskHaptics.Cue.SINGLE),output.cues);
+    }
+    @Test public void repeatedChoiceAndSessionClearDoNotForgetMuteOrInterruptAnEnabledCue() {
+        Output output=new Output();RiskHaptics player=new RiskHaptics(output);
+        player.alert(Detection.Risk.NEAR);player.setEnabled(true);assertEquals(0,output.cancels);
+        player.setEnabled(false);player.setEnabled(false);assertEquals(1,output.cancels);
+        player.clear();player.setEnabled(false);player.alert(Detection.Risk.NEAR);
+        assertFalse(player.enabled());assertEquals(2,output.cancels);
+        assertEquals(Collections.singletonList(RiskHaptics.Cue.DOUBLE),output.cues);
+    }
 }

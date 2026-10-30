@@ -770,7 +770,9 @@ final class PipProbe {
             HapticsProbe.Output output=new HapticsProbe.Output();RiskHaptics recorded=new RiskHaptics(output);
             DetectionFeedback feedback=(DetectionFeedback)field(host,"feedback");
             CheckBox sound=host.findViewById(R.id.preview_sound);
+            CheckBox vibration=host.findViewById(R.id.preview_vibration);
             if(!sound.isEnabled() || sound.isChecked())throw new AssertionError("Haptic check requires active detection and sound off");
+            if(!vibration.isEnabled() || !vibration.isChecked())throw new AssertionError("Haptic check requires the default vibration choice");
             setField(host,"haptics",recorded);
             try {
                 long now=android.os.SystemClock.elapsedRealtime();feedback.clear();
@@ -794,8 +796,28 @@ final class PipProbe {
                 if(output.cancels!=3 || field(recorded,"requested")!=Detection.Risk.CAPTURED)
                     throw new AssertionError("Stop did not clear the tactile request");
                 report.append("HAPTIC_ACTIVITY_PASS cases=5; current near, Sound-off independence, downgrade, empty current, stop; recorded output, no physical motor\n");
+                Object camera=field(host,"camera");long generation=state(host).generation;
+                sound.setChecked(true);vibration.performClick();checkedNode(vibration);
+                if(recorded.enabled() || output.cancels!=4 || !sound.isChecked() || !state(host).recognition
+                    || field(host,"camera")!=camera || state(host).generation!=generation)
+                    throw new AssertionError("Vibration mute did not cancel independently");
+                if(!((android.widget.TextView)host.findViewById(R.id.legend_near)).getText().toString().contains("振动已关"))
+                    throw new AssertionError("Activity legend disagrees with the vibration choice");
+                long fresh=android.os.SystemClock.elapsedRealtime();feedback.clear();
+                for(long at:new long[]{fresh-2,fresh-1})feedback.depth(new DepthSnapshot(at,java.util.Collections.singletonList(near),
+                    "构造关闭振动",DepthSnapshot.Stage.MEASURING,true,true),0,at);
+                sound.setChecked(false);
+                alert.invoke(host);
+                if(output.plays!=3)throw new AssertionError("Muted Activity still requested tactile feedback");
+                vibration.performClick();checkedNode(vibration);
+                if(!recorded.enabled() || output.plays!=3)throw new AssertionError("Enabling vibration replayed the old cue");
+                alert.invoke(host);
+                if(output.plays!=4 || output.last!=RiskHaptics.Cue.DOUBLE)throw new AssertionError("New explicit alert did not honor re-enabled vibration");
+                report.append("HAPTIC_SETTINGS_ACTIVITY_PASS cases=3; mute cancels independently, muted alert silent, enable waits for new dispatch; constructed risks and recorded output\n");
             } catch(ReflectiveOperationException error){throw new AssertionError(error);}
             finally {
+                sound.setChecked(false);
+                vibration.setChecked(true);
                 recorded.clear();feedback.clear();((RiskAnnouncer)field(host,"announcer")).clear();
                 setField(host,"pendingSpeak",false);setField(host,"haptics",original);
             }

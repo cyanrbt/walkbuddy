@@ -98,7 +98,7 @@ final class DepthGuide {
                 }
                 if (!recognitionOn) {
                     return new Progress(Step.ALERT, true, true, true, false,
-                        "测距已就绪 · 打开「检测」后黄/红会振动提醒",
+                        "测距已就绪 · 打开「检测」后查看黄/红提示",
                         "空间检测：已开启");
                 }
                 return new Progress(Step.ALERT, true, true, true, true,

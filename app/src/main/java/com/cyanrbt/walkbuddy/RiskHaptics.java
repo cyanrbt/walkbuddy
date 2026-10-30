@@ -19,8 +19,15 @@ final class RiskHaptics {
     }
     private final Output output;
     private Detection.Risk requested=Detection.Risk.CAPTURED;
+    private boolean enabled=true;
 
     RiskHaptics(Output output){this.output=output;}
+    boolean enabled(){return enabled;}
+    void setEnabled(boolean enabled) {
+        if(this.enabled==enabled)return;
+        this.enabled=enabled;
+        if(!enabled)clear();
+    }
 
     static Detection.Risk strongest(List<Detection> detections) {
         Detection.Risk worst=Detection.Risk.CAPTURED;
@@ -28,6 +35,7 @@ final class RiskHaptics {
         return worst;
     }
     void alert(Detection.Risk risk) {
+        if(!enabled)return;
         if(risk==Detection.Risk.CAPTURED){update(risk);return;}
         requested=risk;
         output.play(risk==Detection.Risk.NEAR?Cue.DOUBLE:Cue.SINGLE);

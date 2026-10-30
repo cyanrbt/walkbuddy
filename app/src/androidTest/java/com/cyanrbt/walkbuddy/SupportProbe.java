@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.ScrollView;
+import android.widget.CheckBox;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
@@ -25,6 +26,7 @@ import java.util.function.BooleanSupplier;
 final class SupportProbe {
     static void run(Instrumentation runner) {
         Bundle result=new Bundle();PreviewActivity activity=null;int code=Activity.RESULT_CANCELED;
+        boolean touchedVibration=false,hadVibration=false,oldVibration=true;
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("Support probe is restricted to emulators");
@@ -86,10 +88,61 @@ final class SupportProbe {
                         throw new AssertionError("New observation retained old evidence");return true;
                 });
             } finally {runner.removeMonitor(monitor);}
-            result.putString("stream","SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2\n");
+            PreviewActivity current=activity;
+            android.content.SharedPreferences preferences=current.getSharedPreferences(PreviewActivity.REMINDERS_PREFERENCES,0);
+            hadVibration=preferences.contains(PreviewActivity.VIBRATION_PREFERENCE);
+            oldVibration=preferences.getBoolean(PreviewActivity.VIBRATION_PREFERENCE,true);touchedVibration=true;
+            String mutedReport=read(runner,()->{
+                CheckBox toggle=current.findViewById(R.id.preview_vibration);
+                Object camera=field(current,"camera");long muteGeneration=state(current).generation;
+                if(!toggle.isEnabled() || !toggle.isChecked())throw new AssertionError("Missing default vibration control");
+                toggle.performClick();
+                if(toggle.isChecked() || ((RiskHaptics)field(current,"haptics")).enabled()
+                    || preferences.getBoolean(PreviewActivity.VIBRATION_PREFERENCE,true)
+                    || field(current,"camera")!=camera || state(current).generation!=muteGeneration)
+                    throw new AssertionError("Muted choice did not persist independently");
+                Method fail=PreviewActivity.class.getDeclaredMethod("fail",RecoveryGuide.Reason.class,String.class);fail.setAccessible(true);
+                fail.invoke(current,RecoveryGuide.Reason.GENERAL,"构造关闭振动的问题信息");
+                String text=diagnostics(current).report(BuildConfig.VERSION_NAME,BuildConfig.VERSION_CODE,
+                    Build.MANUFACTURER,Build.MODEL,Build.VERSION.RELEASE,Build.VERSION.SDK_INT);
+                if(!text.contains("振动：关"))throw new AssertionError("Incident report lost the actual vibration choice");return text;
+            });
+            write(runner,"vibration-muted-report.txt",mutedReport);
+            Instrumentation.ActivityMonitor retainedMonitor=runner.addMonitor(PreviewActivity.class.getName(),null,false);
+            try {
+                runner.runOnMainSync(current::recreate);
+                PreviewActivity retained=(PreviewActivity)runner.waitForMonitorWithTimeout(retainedMonitor,7000);
+                if(retained==null || retained==current)throw new AssertionError("Vibration page did not recreate");
+                activity=retained;runner.waitForIdleSync();
+                read(runner,()->{
+                    if(state(retained).phase!=SessionState.Phase.STOPPED || field(retained,"camera")!=null
+                        || ((CheckBox)retained.findViewById(R.id.preview_vibration)).isChecked()
+                        || ((RiskHaptics)field(retained,"haptics")).enabled())throw new AssertionError("Recreation lost the muted preference or opened camera");
+                    if(!diagnostics(retained).report("unused",0,"unused","unused","unused",0).contains("振动：关"))
+                        throw new AssertionError("Recreated incident changed the saved vibration choice");
+                    retained.findViewById(R.id.restart_preview).performClick();return true;
+                });
+                await(runner,()->state(retained).phase==SessionState.Phase.LIVE && state(retained).fresh(SystemClock.elapsedRealtime()),"muted new observation");
+                read(runner,()->{
+                    CheckBox toggle=retained.findViewById(R.id.preview_vibration);
+                    if(toggle.isChecked() || ((RiskHaptics)field(retained,"haptics")).enabled())throw new AssertionError("New observation forgot mute");
+                    Object camera=field(retained,"camera");long enabledGeneration=state(retained).generation;toggle.performClick();
+                    if(!toggle.isChecked() || !preferences.getBoolean(PreviewActivity.VIBRATION_PREFERENCE,false)
+                        || field(retained,"camera")!=camera || state(retained).generation!=enabledGeneration)
+                        throw new AssertionError("Re-enabling vibration changed the camera or failed to persist");return true;
+                });
+            } finally {runner.removeMonitor(retainedMonitor);}
+            String vibrationEvidence="VIBRATION_PERSISTENCE_PASS cases=3; CheckBox mute keeps camera, actual Activity recreation and new manual observation preserve mute, explicit enable persists independently\n";
+            write(runner,"vibration-preference.txt",vibrationEvidence);
+            result.putString("stream",vibrationEvidence+"SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2\n");
             code=Activity.RESULT_OK;
         } catch(Throwable error) {result.putString("stream","SUPPORT_PROBE_FAIL: "+error);}
         finally {
+            if(touchedVibration){
+                android.content.SharedPreferences.Editor editor=runner.getTargetContext().getSharedPreferences(PreviewActivity.REMINDERS_PREFERENCES,0).edit();
+                if(hadVibration)editor.putBoolean(PreviewActivity.VIBRATION_PREFERENCE,oldVibration);else editor.remove(PreviewActivity.VIBRATION_PREFERENCE);
+                editor.apply();
+            }
             if(activity!=null){PreviewActivity host=activity;runner.runOnMainSync(()->{
                 try {ClipboardManager clipboard=host.getSystemService(ClipboardManager.class);if(clipboard!=null)clipboard.clearPrimaryClip();}
                 catch(RuntimeException ignored){/* Preserve the original probe result. */}

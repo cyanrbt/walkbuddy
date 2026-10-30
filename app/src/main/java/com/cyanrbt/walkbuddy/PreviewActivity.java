@@ -54,6 +54,7 @@ public final class PreviewActivity extends Activity {
     private final DetectionFeedback feedback = new DetectionFeedback();
     private final SessionDiagnostics diagnostics=new SessionDiagnostics();
     private static final String PROBLEM_INFO_STATE="walkbuddy.problem_info.v1";
+    static final String REMINDERS_PREFERENCES="walkbuddy_reminders",VIBRATION_PREFERENCE="vibration_enabled";
     private RiskAnnouncer announcer;
     private boolean restoreDetection,restoreSound;
     private ToneGenerator activeTone;
@@ -92,7 +93,7 @@ public final class PreviewActivity extends Activity {
         }
     };
     private TextView cover, info, titleView;
-    private CheckBox recognition, sound;
+    private CheckBox recognition, sound, vibration;
     private CameraDevice camera;
     private CameraCaptureSession session;
     private Surface surface;
@@ -453,6 +454,15 @@ public final class PreviewActivity extends Activity {
             render(SystemClock.elapsedRealtime());
         });
         sound=root.findViewById(R.id.preview_sound);
+        vibration=root.findViewById(R.id.preview_vibration);
+        vibration.setChecked(getSharedPreferences(REMINDERS_PREFERENCES,MODE_PRIVATE).getBoolean(VIBRATION_PREFERENCE,true));
+        haptics.setEnabled(vibration.isChecked());
+        ((RiskLegendLayout)root.findViewById(R.id.risk_legend)).setVibrationEnabled(vibration.isChecked());
+        vibration.setOnCheckedChangeListener((button,checked)->{
+            haptics.setEnabled(checked);
+            getSharedPreferences(REMINDERS_PREFERENCES,MODE_PRIVATE).edit().putBoolean(VIBRATION_PREFERENCE,checked).apply();
+            ((RiskLegendLayout)root.findViewById(R.id.risk_legend)).setVibrationEnabled(checked);
+        });
         Button stop=(Button)root.findViewById(R.id.preview_stop);
         stop.setBackgroundTintList(null);
         stop.setOnClickListener(v->stopPreview());
@@ -749,6 +759,7 @@ public final class PreviewActivity extends Activity {
         if(!live && state.phase==SessionState.Phase.STARTING) setTextIfChanged(cover,state.reason);
         recognition.setEnabled(live && LocalDetector.AVAILABLE);
         sound.setEnabled(live && state.recognition);
+        vibration.setEnabled(live);
         if(live && restoreDetection){boolean enableSound=restoreSound;restoreDetection=restoreSound=false;recognition.setChecked(true);sound.setChecked(enableSound);}
         pipButton.setEnabled(live);
         boolean restart=state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED;
@@ -814,7 +825,7 @@ public final class PreviewActivity extends Activity {
             worker!=null && worker.busy(),active?SessionDiagnostics.age(now,sampledAt):-1,
             active?lastReadbackQueueMs:-1,active?lastSampleCopyMs:-1,active?lastResultDeliveryMs:-1);
         return new SessionDiagnostics.Snapshot(category,message,state,now,useDepth || depthCamera!=null,
-            isInPictureInPictureMode(),sound!=null && sound.isChecked(),pipeline);
+            isInPictureInPictureMode(),sound!=null && sound.isChecked(),haptics!=null && haptics.enabled(),pipeline);
     }
     private String problemInfoText() {
         return diagnostics.report(BuildConfig.VERSION_NAME,BuildConfig.VERSION_CODE,

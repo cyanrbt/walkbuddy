@@ -31,7 +31,7 @@
     <string name="section_use">小窗怎么用</string>
     <string name="use_body">先在预览页确认取景，再点「以小窗观察」。点击小窗可返回完整界面或停止。识别和声音每次开启默认关闭；关闭小窗、锁屏或预览离开屏幕后会停止摄像头。</string>
     <string name="section_see">两种观察方式</string>
-    <string name="see_body">基础模式展示常见物体；画面中央目标连续确认后显示黄框并振动，未测距。空间检测模式通过深度与地面位置寻找前方障碍，不要求知道物体名称；需设备及 AR 服务支持。深度缺失、透明物体和细小目标仍会漏检。相机画面不保存，应用没有网络权限。</string>
+    <string name="see_body">基础模式展示常见物体；画面中央目标连续确认后显示黄框，可按设置振动提醒，未测距。空间检测模式通过深度与地面位置寻找前方障碍，不要求知道物体名称；需设备及 AR 服务支持。深度缺失、透明物体和细小目标仍会漏检。相机画面不保存，应用没有网络权限。</string>
     <string name="toast_granted">已允许。准备好了再点开启。</string>
     <string name="toast_denied">还没有允许，窗口不会打开。</string>
     <string name="window_live">实时</string>
@@ -41,6 +41,7 @@
     <string name="preview_info_idle">实时画面还不可用</string>
     <string name="check_recognition">检测</string>
     <string name="check_sound">声音</string>
+    <string name="check_vibration">振动提醒</string>
     <string name="copy_problem_info">复制问题信息</string>
     <string name="problem_info_title">WalkBuddy 问题信息</string>
     <string name="problem_info_copied">问题信息已复制，可粘贴反馈</string>
@@ -71,7 +72,7 @@
     <string name="settings_unavailable">无法打开设置，请在系统应用设置中查看。</string>
     <string name="enter_pip">以小窗观察</string>
     <string name="restart_preview">重新开启预览</string>
-    <string name="preview_hint">黄框：画面关注（未测距） · 红色：深度确认很近\n声音开关只控制提示音，系统朗读单独设置\n应用内取景保持亮屏，小窗按系统自动息屏</string>
+    <string name="preview_hint">黄框：画面关注（未测距） · 红色：深度确认很近\n声音/振动分别控制，振动选择会记住；系统朗读单独设置\n应用内取景保持亮屏，小窗按系统自动息屏</string>
     <string name="posture_hint">镜头可能偏向地面或天空，请调整持机姿势，确认画面能看到前方</string>
     <string name="depth_status_initial">正在检查增强能力</string>
     <string name="enable_depth">空间检测</string>
@@ -89,6 +90,10 @@
     <string name="risk_captured_desc">灰色实线角框，表示已捕获，不代表安全，不触发振动</string>
     <string name="risk_caution_desc">黄色虚线，请关注，确认提醒时单次振动；基础模式未测距，重复提醒有间隔</string>
     <string name="risk_near_desc">红色实线，近处注意，确认提醒时双次振动，需要及时看路；重复提醒有间隔</string>
+    <string name="risk_caution_muted">● 黄 · 请关注\n振动已关</string>
+    <string name="risk_near_muted">● 红 · 近处注意\n振动已关</string>
+    <string name="risk_caution_muted_desc">黄色虚线，请关注，振动已关闭；基础模式未测距，视觉提示继续</string>
+    <string name="risk_near_muted_desc">红色实线，近处注意，振动已关闭，视觉提示继续，需要及时看路</string>
     <string name="home_summary">白天步行观察</string>
     <string name="home_return_preview">返回预览</string>
     <string name="home_action_stand">先站稳，再确认取景</string>

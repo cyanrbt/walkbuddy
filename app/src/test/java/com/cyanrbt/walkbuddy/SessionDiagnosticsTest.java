@@ -9,7 +9,7 @@ public class SessionDiagnosticsTest {
         state.recognition=true;state.analysisAt=240;return state;
     }
     private SessionDiagnostics.Snapshot snapshot(String category,SessionState state) {
-        return new SessionDiagnostics.Snapshot(category,"测试提示",state,400,true,true,true,
+        return new SessionDiagnostics.Snapshot(category,"测试提示",state,400,true,true,true,true,
             new SessionDiagnostics.Pipeline(true,true,false,120,5,6,7));
     }
     private String report(SessionDiagnostics diagnostics) {
@@ -57,7 +57,7 @@ public class SessionDiagnosticsTest {
     @Test public void missingAndFutureTimingAreReportedAsUnavailableAndZeroDurationsRemainValid() {
         SessionState state=new SessionState();state.captureAt=500;
         SessionDiagnostics diagnostics=new SessionDiagnostics();
-        diagnostics.preview(new SessionDiagnostics.Snapshot("PERMISSION","权限提示",state,400,false,false,false,
+        diagnostics.preview(new SessionDiagnostics.Snapshot("PERMISSION","权限提示",state,400,false,false,false,false,
             new SessionDiagnostics.Pipeline(false,false,false,-1,0,-1,0)));
         String text=report(diagnostics);assertTrue(text.contains("采集帧龄(ms)：未取得"));
         assertTrue(text.contains("读回排队(ms)：0"));assertTrue(text.contains("结果交付(ms)：0"));
@@ -67,7 +67,7 @@ public class SessionDiagnosticsTest {
     @Test public void copiedTextHasBoundedSingleLineMetadataAndNoStateReferences() {
         SessionDiagnostics diagnostics=new SessionDiagnostics();String huge="x".repeat(10000);
         SessionState state=live();
-        diagnostics.preview(new SessionDiagnostics.Snapshot("TYPE\nsecond",huge,state,400,false,false,false,
+        diagnostics.preview(new SessionDiagnostics.Snapshot("TYPE\nsecond",huge,state,400,false,false,false,false,
             new SessionDiagnostics.Pipeline(false,false,false,-1,-1,-1,-1)));
         String text=diagnostics.report("v\nnext",40,huge,"model\r\nnext",null,35);
         assertTrue(text.length()<1800);assertTrue(text.contains("TYPE second"));assertFalse(text.contains("TYPE\nsecond"));
@@ -92,5 +92,13 @@ public class SessionDiagnosticsTest {
         assertFalse(diagnostics.available());
         diagnostics.preview(snapshot("CAMERA_BUSY",live()));String first=report(diagnostics);
         diagnostics.restore("WalkBuddy 问题信息\n替换内容");assertEquals(first,report(diagnostics));
+    }
+    @Test public void incidentPreservesIndependentSoundAndVibrationChoices() {
+        SessionDiagnostics diagnostics=new SessionDiagnostics();
+        diagnostics.preview(new SessionDiagnostics.Snapshot("GENERAL","提示",live(),400,false,false,true,false,
+            new SessionDiagnostics.Pipeline(false,false,false,-1,-1,-1,-1)));
+        assertTrue(report(diagnostics).contains("声音：开；振动：关"));
+        SessionDiagnostics restored=new SessionDiagnostics();restored.restore(report(diagnostics));
+        assertTrue(report(restored).contains("声音：开；振动：关"));
     }
 }

@@ -25,6 +25,7 @@ final class PreviewRecovery {
         if(!android.text.TextUtils.equals(info.getContext().getText(R.string.info_stopped),info.getText()))info.setText(R.string.info_stopped);
         root.findViewById(R.id.preview_recognition).setEnabled(false);
         root.findViewById(R.id.preview_sound).setEnabled(false);
+        root.findViewById(R.id.preview_vibration).setEnabled(false);
         action.setEnabled(prompt.action!=RecoveryGuide.Action.WAIT);
         root.findViewById(R.id.enable_depth).setEnabled(false);
     }

@@ -13,12 +13,12 @@ final class SessionDiagnostics {
     static final class Snapshot {
         final String category,message;
         final SessionState.Phase phase;
-        final boolean depth,pip,recognition,sound;
+        final boolean depth,pip,recognition,sound,vibration;
         final long captureAge,displayAge,analysisAge;
         final Pipeline pipeline;
-        Snapshot(String category,String message,SessionState state,long now,boolean depth,boolean pip,boolean sound,Pipeline pipeline) {
+        Snapshot(String category,String message,SessionState state,long now,boolean depth,boolean pip,boolean sound,boolean vibration,Pipeline pipeline) {
             this.category=line(category,40);this.message=line(message,240);this.phase=state.phase;
-            this.depth=depth;this.pip=pip;this.recognition=state.recognition;this.sound=sound;
+            this.depth=depth;this.pip=pip;this.recognition=state.recognition;this.sound=sound;this.vibration=vibration;
             captureAge=age(now,state.captureAt);displayAge=age(now,state.displayAt);analysisAge=age(now,state.analysisAt);
             this.pipeline=pipeline;
         }
@@ -53,7 +53,7 @@ final class SessionDiagnostics {
     private static void append(StringBuilder text,String title,Snapshot s) {
         text.append('\n').append(title).append('\n').append("分类：").append(s.category).append("\n提示：").append(s.message)
             .append("\n触发阶段：").append(s.phase).append(" / ").append(s.depth?"空间增强":"基础模式")
-            .append("\n画中画：").append(yes(s.pip)).append("；检测：").append(setting(s.recognition)).append("；声音：").append(setting(s.sound))
+            .append("\n画中画：").append(yes(s.pip)).append("；检测：").append(setting(s.recognition)).append("；声音：").append(setting(s.sound)).append("；振动：").append(setting(s.vibration))
             .append("\n采集帧龄(ms)：").append(metric(s.captureAge)).append("；显示帧龄(ms)：").append(metric(s.displayAge))
             .append("；分析龄(ms)：").append(metric(s.analysisAge))
             .append("\n模型就绪：").append(yes(s.pipeline.ready)).append("；已有结果：").append(yes(s.pipeline.result))

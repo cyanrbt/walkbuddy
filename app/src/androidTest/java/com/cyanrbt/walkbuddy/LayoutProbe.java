@@ -60,6 +60,7 @@ final class LayoutProbe {
                 Context context=new ContextThemeWrapper(target.createConfigurationContext(config),R.style.Theme_WalkBuddy);
                 View root=LayoutInflater.from(context).inflate(R.layout.activity_preview,null);
                 root.setPadding(0,24,0,24);
+                ((CheckBox)root.findViewById(R.id.preview_vibration)).setChecked(true);
                 root.findViewById(R.id.preview_cover).setVisibility(View.GONE);
                 TextView placeholder=new TextView(context);
                 placeholder.setText("取景区域（布局测试）");placeholder.setTextColor(Color.GRAY);placeholder.setGravity(Gravity.CENTER);
@@ -155,10 +156,13 @@ final class LayoutProbe {
         report.append("FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\n");
         report.append("HAPTIC_LEGEND_PASS configurations=30 resize_cycles=30; full cue text and descriptions, responsive columns/list\n");
         report.append("DIAGNOSTIC_LAYOUT_PASS configurations=30; recovery copy action text and scroll reachability\n");
+        report.append("VIBRATION_SETTING_LAYOUT_PASS configurations=30; enabled/muted legend, native checkbox, full text and scroll reach\n");
     }
 
     private static void checkHapticLegend(View root,int width,int height,File output) throws Exception {
         RiskLegendLayout legend=root.findViewById(R.id.risk_legend);
+        CheckBox vibration=root.findViewById(R.id.preview_vibration);
+        vibration.setEnabled(true);vibration.setChecked(true);legend.setVibrationEnabled(true);
         int[] ids={R.id.legend_captured,R.id.legend_caution,R.id.legend_near};
         String[] cues={"不触发振动","提醒时单振","提醒时双振"};
         float widest=0;
@@ -185,6 +189,18 @@ final class LayoutProbe {
         Rect visible=new Rect();
         if(!near.getLocalVisibleRect(visible) || visible.height()<=0)throw new AssertionError("Haptic legend unreachable");
         screenshot(root,output);scroll.scrollTo(0,0);
+        vibration.setChecked(false);legend.setVibrationEnabled(false);root.forceLayout();measure(root,width,height);
+        textFits(root);
+        for(int id:new int[]{R.id.legend_caution,R.id.legend_near}) {
+            TextView label=root.findViewById(id);
+            if(!label.getText().toString().contains("振动已关") || !label.getContentDescription().toString().contains("振动已关闭"))
+                throw new AssertionError("Muted legend still promises tactile feedback");
+        }
+        scroll.requestChildFocus(vibration,vibration);
+        if(!vibration.getLocalVisibleRect(visible) || visible.height()!=vibration.getHeight() || !vibration.isEnabled())
+            throw new AssertionError("Vibration checkbox is clipped or disabled in live layout");
+        screenshot(root,new File(output.getParentFile(),"muted-"+output.getName()));
+        vibration.setChecked(true);legend.setVibrationEnabled(true);root.forceLayout();measure(root,width,height);scroll.scrollTo(0,0);
     }
 
     private static String confirmedMessage(Detection detection) {
