@@ -102,8 +102,10 @@ final class PipProbe {
                 await(runner,host::isInPictureInPictureMode,"immediate PiP re-entry cycle="+cycle);
                 long started=android.os.SystemClock.elapsedRealtime();
                 await(runner,()->live(host) && state(host).captureAt>started+300 && state(host).displayAt>started+300,"recovery PiP frames advance");
+                read(runner,()->{assertDefaultPreviewOnly(host,true);return true;});
                 report.append("PASS immediate PiP recovery cycle=").append(cycle).append('\n');
             }
+            report.append("PREVIEW_ONLY_RECOVERY_PASS cycles=4; default detection-off notice survives real manual recovery and PiP re-entry\n");
             screenshot(runner,"pip-home-controls.png");
             tap(runner,launcher,R.id.stop);
             await(runner,host::isDestroyed,"native home stop closes PiP");
@@ -164,6 +166,7 @@ final class PipProbe {
             await(runner,()->live(host),"Camera2 LIVE");
             read(runner,()->{
                 assertWatching(host);
+                assertDefaultPreviewOnly(host,false);
                 if(((CheckBox)host.findViewById(R.id.preview_recognition)).isChecked()
                     || ((CheckBox)host.findViewById(R.id.preview_sound)).isChecked())throw new AssertionError("Detection/sound must default off");
                 if(!host.getSharedPreferences(HomeJourney.PREFERENCES,0).getBoolean(HomeJourney.PREVIEW_SEEN,false))
@@ -244,6 +247,11 @@ final class PipProbe {
             await(runner,()->live(host) && basicAt(host)>0,"first actual model result");
             long firstResult=read(runner,()->basicAt(host));
             await(runner,()->live(host) && basicAt(host)>firstResult+400,"repeated actual model results");
+            read(runner,()->{
+                if(!((android.widget.TextView)host.findViewById(R.id.preview_title)).getText().toString().equals(host.getString(R.string.window_live))
+                    || host.findViewById(R.id.detection_status).getVisibility()!=View.GONE)
+                    throw new AssertionError("Detection-on retained a preview-only presentation");return true;
+            });
             checkpoint(runner,"recognition_results");
             read(runner,()->{checkedNode((CheckBox)host.findViewById(R.id.preview_recognition));checkedNode((CheckBox)host.findViewById(R.id.preview_sound));return true;});
             report.append("PASS attached checkbox labels, checked and enabled states before/during actual detection\n");
@@ -255,6 +263,7 @@ final class PipProbe {
                 if(!oldTicket.cancelled || field(host,"analysisTicket")!=null || basicAt(host)!=-1)
                     throw new AssertionError("Detection off retained analysis or feedback");
                 if((boolean)field(host,"analysisReady") || (boolean)field(host,"analysisHasResult"))throw new AssertionError("Detection off retained readiness");
+                assertDefaultPreviewOnly(host,false);
                 return true;
             });
             checkpoint(runner,"recognition_off");
@@ -547,6 +556,7 @@ final class PipProbe {
         throw new AssertionError("Timed out waiting for active input viewport and touchable target: "+component+" display="+displayId);
     }
     private static void screenIdleLifecycle(Instrumentation runner,PreviewActivity host,Activity launcher,StringBuilder report) throws Exception {
+        read(runner,()->{assertDefaultPreviewOnly(host,false);return true;});
         String originalTimeout=shellText(runner,"settings get system screen_off_timeout").trim();
         String originalStayOn=shellText(runner,"settings get global stay_on_while_plugged_in").trim();
         if(!originalTimeout.matches("null|[0-9]+") || !originalStayOn.matches("null|[0-9]+"))
@@ -580,6 +590,9 @@ final class PipProbe {
             powerEvidence(runner,"screen-idle-full-power.txt",shellText(runner,"dumpsys -t 3 power"));
             tap(runner,host,R.id.enter_pip);
             await(runner,()->host.isInPictureInPictureMode() && !keepsScreenOn(host),"PiP releases screen hold");
+            await(runner,()->warningReady(host),"default preview-only PiP notice laid out");
+            read(runner,()->{assertDefaultPreviewOnly(host,true);return true;});
+            screenshot(runner,"pip-default-preview-only.png");
             long deadline=android.os.SystemClock.elapsedRealtime()+effective+8000;
             while(read(runner,()->host.getSystemService(PowerManager.class).isInteractive())
                 && android.os.SystemClock.elapsedRealtime()<deadline)Thread.sleep(100);
@@ -609,6 +622,8 @@ final class PipProbe {
         read(runner,()->{assertReleased(host);return true;});
         tap(runner,host,R.id.restart_preview);
         await(runner,()->live(host) && keepsScreenOn(host),"manual restart restores full preview screen hold");
+        read(runner,()->{assertDefaultPreviewOnly(host,false);return true;});
+        report.append("PREVIEW_ONLY_ACTIVITY_PASS cases=3; default full, first actual PiP, explicit restart; actual virtual camera, no automatic detection or sound\n");
         report.append("PASS screen hold only for active full preview; real idle timeout keeps full preview awake, PiP sleeps, wake stays stopped, manual restart restores hold\n");
     }
     private static boolean keepsScreenOn(Activity host) {
@@ -836,6 +851,22 @@ final class PipProbe {
             Build.VERSION.RELEASE,Build.VERSION.SDK_INT);
     }
 
+    private static void assertDefaultPreviewOnly(PreviewActivity host,boolean compact) {
+        if(!live(host) || state(host).recognition || (int)field(host,"detectionNotice")!=0 || field(host,"analysisTicket")!=null
+            || ((CheckBox)host.findViewById(R.id.preview_recognition)).isChecked() || field(host,"activeTone")!=null
+            || ((CheckBox)host.findViewById(R.id.preview_sound)).isChecked() || host.findViewById(R.id.preview_sound).isEnabled()
+            || host.isInPictureInPictureMode()!=compact)
+            throw new AssertionError("Expected an unchanged default camera-only session");
+        android.widget.TextView title=host.findViewById(R.id.preview_title),notice=host.findViewById(R.id.detection_status);
+        if(!title.getText().toString().equals(host.getString(R.string.window_preview_only))
+            || notice.getVisibility()!=(compact?View.VISIBLE:View.GONE))throw new AssertionError("Default detection-off status is misleading");
+        if(compact) {
+            assertWarningFits(host);
+            if(!notice.getText().toString().equals(host.getString(R.string.detection_stopped_compact))
+                || host.findViewById(R.id.pip_depth_status).getVisibility()!=View.GONE || host.findViewById(R.id.posture_hint).getVisibility()!=View.GONE)
+                throw new AssertionError("Default preview-only PiP notice lost priority or meaning");
+        }
+    }
     private static void assertPreviewOnly(PreviewActivity host,Object camera,Object texture) {
         if(!live(host) || field(host,"camera")!=camera || field(host,"texture")!=texture || state(host).recognition
             || field(host,"analysisTicket")!=null || basicAt(host)!=-1 || field(host,"activeTone")!=null

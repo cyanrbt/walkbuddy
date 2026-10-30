@@ -79,6 +79,8 @@ final class LayoutProbe {
                 String measured=confirmedMessage(new Detection("空间障碍",1,.3f,.1f,.7f,.9f,Detection.Risk.CAUTION,1.7f,null));
                 for(int mode=0;mode<4;mode++) {
                     detection.setChecked(mode!=0);sound.setChecked(false);sound.setEnabled(mode!=0);
+                    PreviewChrome.title(title,PreviewStatus.heading(SessionState.Phase.LIVE,true,mode!=0));
+                    PreviewChrome.detectionStatus(root,true,mode!=0,false,false);
                     info.setText(mode==0?context.getString(R.string.info_recognition_off):mode==1
                         ?context.getString(R.string.info_recognition_preparing):mode==2?basic:measured);
                     root.findViewById(R.id.recent_alert).setVisibility(mode>=2?View.VISIBLE:View.GONE);
@@ -109,6 +111,7 @@ final class LayoutProbe {
                     }
                 }
                 checkDetectionFailure(root,size[0],size[1],new File(output,name+"-detection-stopped.png"));
+                checkDefaultPreviewOnly(root,size[0],size[1],output,name);
                 measure(root,size[0],size[1]);
                 checkDisabledButton(root.findViewById(R.id.enter_pip));
                 View camera=root.findViewById(R.id.preview_frame),pane=root.findViewById(R.id.preview_content);
@@ -157,6 +160,7 @@ final class LayoutProbe {
         report.append("HAPTIC_LEGEND_PASS configurations=30 resize_cycles=30; full cue text and descriptions, responsive columns/list\n");
         report.append("DIAGNOSTIC_LAYOUT_PASS configurations=30; recovery copy action text and scroll reachability\n");
         report.append("VIBRATION_SETTING_LAYOUT_PASS configurations=30; enabled/muted legend, native checkbox, full text and scroll reach\n");
+        report.append("PREVIEW_ONLY_LAYOUT_PASS configurations=30 compact=96x128; default full heading, persistent compact notice, no clipping, unchanged repeated text, detection-on and expansion clear notice\n");
     }
 
     private static void checkHapticLegend(View root,int width,int height,File output) throws Exception {
@@ -207,6 +211,41 @@ final class LayoutProbe {
         AlertPolicy policy=new AlertPolicy();
         policy.update(java.util.Collections.singletonList(detection),100);
         return policy.update(java.util.Collections.singletonList(detection),600).message;
+    }
+    private static void checkDefaultPreviewOnly(View root,int width,int height,File output,String name) throws Exception {
+        TextView title=root.findViewById(R.id.preview_title),info=root.findViewById(R.id.preview_info),warning=root.findViewById(R.id.detection_status);
+        CheckBox detection=root.findViewById(R.id.preview_recognition),sound=root.findViewById(R.id.preview_sound);
+        boolean oldDetection=detection.isChecked(),oldSound=sound.isChecked(),oldEnabled=sound.isEnabled();
+        boolean depth=root.findViewById(R.id.depth_steps).getVisibility()==View.VISIBLE;
+        CharSequence oldTitle=title.getText(),oldInfo=info.getText();int alert=root.findViewById(R.id.recent_alert).getVisibility();
+        ScrollView controls=root.findViewById(R.id.preview_controls);int scroll=controls.getScrollY();
+        detection.setChecked(false);sound.setChecked(false);sound.setEnabled(false);controls.scrollTo(0,0);
+        root.findViewById(R.id.recent_alert).setVisibility(View.GONE);info.setText(R.string.info_recognition_off);
+        PreviewChrome.title(title,PreviewStatus.heading(SessionState.Phase.LIVE,true,false));
+        PreviewChrome.detectionStatus(root,true,false,false,false);measure(root,width,height);
+        textFits(title);initialVisible(root,detection);initialVisible(root,sound);initialVisible(root,info);
+        if(title.getLineCount()!=1 || !title.getText().toString().equals(root.getResources().getString(R.string.window_preview_only))
+            || warning.getVisibility()!=View.GONE)throw new AssertionError("Default full preview has a misleading status");
+        screenshot(root,new File(output,name+"-preview-only.png"));
+        root.findViewById(R.id.posture_hint).setVisibility(View.VISIBLE);
+        PreviewChrome.compact(root,true,true);PreviewChrome.detectionStatus(root,true,false,false,true);
+        measure(root,96,128);textFits(warning);warningInsideCamera(root,warning);
+        if(!warning.getText().toString().equals(root.getResources().getString(R.string.detection_stopped_compact))
+            || warning.getAccessibilityLiveRegion()!=View.ACCESSIBILITY_LIVE_REGION_POLITE
+            || root.findViewById(R.id.pip_depth_status).getVisibility()!=View.GONE || root.findViewById(R.id.posture_hint).getVisibility()!=View.GONE)
+            throw new AssertionError("Default PiP did not retain an unobscured preview-only status");
+        CharSequence label=warning.getText();
+        for(int frame=0;frame<20;frame++)PreviewChrome.detectionStatus(root,true,false,false,true);
+        if(warning.getText()!=label)throw new AssertionError("Repeated status renders replaced the live-region text");
+        screenshot(root,new File(output,name+"-preview-only-pip.png"));
+        PreviewChrome.detectionStatus(root,true,true,false,true);
+        if(warning.getVisibility()!=View.GONE)throw new AssertionError("Detection-on retained default preview-only notice");
+        PreviewChrome.compact(root,false,depth);PreviewChrome.detectionStatus(root,true,false,false,false);
+        root.setPadding(0,24,0,24);measure(root,width,height);
+        if(warning.getVisibility()!=View.GONE)throw new AssertionError("Expanded default preview duplicated the notice");
+        detection.setChecked(oldDetection);sound.setChecked(oldSound);sound.setEnabled(oldEnabled);
+        title.setText(oldTitle);info.setText(oldInfo);root.findViewById(R.id.recent_alert).setVisibility(alert);
+        controls.scrollTo(0,scroll);measure(root,width,height);
     }
     private static void checkDetectionFailure(View root,int width,int height,File output) throws Exception {
         TextView info=root.findViewById(R.id.preview_info),title=root.findViewById(R.id.preview_title);

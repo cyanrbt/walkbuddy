@@ -89,7 +89,8 @@ public final class PreviewActivity extends Activity {
                 ? event.values[i] : 0.8f*gravity[i]+0.2f*event.values[i];
             gravityReady=true;
             boolean warn=posturePolicy.update(gravity[0],gravity[1],gravity[2],now);
-            postureHint.setVisibility(warn && !(compactUi && detectionNotice!=0)?View.VISIBLE:View.GONE);
+            boolean previewOnly=PreviewStatus.showNotice(state.fresh(now),state.recognition,detectionNotice!=0,compactUi);
+            postureHint.setVisibility(warn && !previewOnly?View.VISIBLE:View.GONE);
         }
     };
     private TextView cover, info, titleView;
@@ -410,7 +411,8 @@ public final class PreviewActivity extends Activity {
         syncKeepScreenOn();
         if (root == null) return;
         PreviewChrome.compact(root,compact,useDepth);
-        PreviewChrome.detectionStopped(root,detectionNotice!=0 && state.phase==SessionState.Phase.LIVE,compact);
+        PreviewChrome.detectionStatus(root,state.phase==SessionState.Phase.LIVE && state.fresh(SystemClock.elapsedRealtime()),
+            state.recognition,detectionNotice!=0,compact);
         root.requestApplyInsets();
         if (compact) getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         else getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
@@ -794,9 +796,9 @@ public final class PreviewActivity extends Activity {
         depthButton.setEnabled(live);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(detectionNotice!=0)publicReport+="\n"+getString(detectionNotice);
-        PreviewChrome.detectionStopped(root,live && detectionNotice!=0,compactUi);
+        PreviewChrome.detectionStatus(root,live,state.recognition,detectionNotice!=0,compactUi);
         if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(detectionNotice!=0?detectionNotice:R.string.info_recognition_off));}
-        if(titleView!=null) setTextIfChanged(titleView,getText(live?(detectionNotice!=0?R.string.window_preview_only:R.string.window_live):state.phase==SessionState.Phase.STARTING?R.string.window_starting:R.string.window_idle));
+        if(titleView!=null)PreviewChrome.title(titleView,PreviewStatus.heading(state.phase,live,state.recognition));
         renderDepthGuide();
         syncPipActions();
     }

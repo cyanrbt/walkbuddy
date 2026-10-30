@@ -4,6 +4,19 @@ import android.view.View;
 
 /** Shared by the Activity and real Android layout checks, without opening the camera. */
 final class PreviewChrome {
+    static void title(android.widget.TextView title,PreviewStatus.Heading heading) {
+        int text=switch(heading) {
+            case IDLE -> R.string.window_idle;
+            case STARTING -> R.string.window_starting;
+            case PREVIEW_ONLY -> R.string.window_preview_only;
+            case LIVE -> R.string.window_live;
+        };
+        CharSequence label=title.getResources().getText(text);
+        if(!android.text.TextUtils.equals(title.getText(),label))title.setText(label);
+    }
+    static void detectionStatus(View root,boolean live,boolean recognition,boolean stoppedNotice,boolean compact) {
+        detectionStopped(root,PreviewStatus.showNotice(live,recognition,stoppedNotice,compact),compact);
+    }
     static void detectionStopped(View root,boolean stopped,boolean compact) {
         android.widget.TextView warning=root.findViewById(R.id.detection_status);
         warning.setVisibility(stopped?View.VISIBLE:View.GONE);
