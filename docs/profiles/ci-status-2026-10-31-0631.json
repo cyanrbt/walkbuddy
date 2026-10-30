@@ -1,0 +1,1093 @@
+{
+  "checked_at_utc": "2026-10-30 22:31:15 UTC",
+  "checked_at_beijing": "2026-10-31 06:31:15 +08:00",
+  "scope": "Actions status and decoded job-log audit; existing failures preserved; no workflow reruns or new release in this audit; not physical-device acceptance",
+  "source": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/runs?per_page=40",
+  "total_runs_reported": 146,
+  "runs_checked": 40,
+  "counts": {
+    "in_progress": 1,
+    "success": 35,
+    "failure": 4
+  },
+  "runs": [
+    {
+      "id": 41137921559,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "in_progress",
+      "conclusion": null,
+      "attempt": 1,
+      "commit": "14f10ee17530db253ad12163d1185e1092154774",
+      "created_at": "2026-10-30T22:24:31Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41137921559"
+    },
+    {
+      "id": 41134864899,
+      "workflow": "Release APK",
+      "ref": "v0.4.35",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "ef096a5db035d61bcafc8bdb2f2f59e78cce3155",
+      "created_at": "2026-10-30T21:58:14Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41134864899"
+    },
+    {
+      "id": 41133558071,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "4c3c9777cec41f14132b3e0955d90e6a9804492b",
+      "created_at": "2026-10-30T21:47:03Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41133558071"
+    },
+    {
+      "id": 41131327523,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "failure",
+      "attempt": 1,
+      "commit": "30aaa22bfa57f220cc2b6731cb1587f714ac0964",
+      "created_at": "2026-10-30T21:28:40Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41131327523"
+    },
+    {
+      "id": 41127878227,
+      "workflow": "Release APK",
+      "ref": "v0.4.34",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "df15f7558e33c9538721c4e07ab37074a0bd00c3",
+      "created_at": "2026-10-30T21:01:59Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41127878227"
+    },
+    {
+      "id": 41126691713,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "fcca5edfa20415d6cc71e603404f0b3a7d2bc3c8",
+      "created_at": "2026-10-30T20:52:53Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41126691713"
+    },
+    {
+      "id": 41125243534,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "failure",
+      "attempt": 1,
+      "commit": "760cd18d25cf0cb8b1a7ee379a16ba3160962796",
+      "created_at": "2026-10-30T20:41:57Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41125243534"
+    },
+    {
+      "id": 41120796047,
+      "workflow": "Release APK",
+      "ref": "v0.4.33",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "61e435c4d7e622b48a4ee09a36bca53c2bb674da",
+      "created_at": "2026-10-30T20:07:38Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41120796047"
+    },
+    {
+      "id": 41119141180,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "b169d12b618d9064291117631f1ec52ec6ea6cc0",
+      "created_at": "2026-10-30T19:55:13Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41119141180"
+    },
+    {
+      "id": 41117582608,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "4c4e5a5fe09cff5c12a498efc86c26fe56af692d",
+      "created_at": "2026-10-30T19:43:35Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41117582608"
+    },
+    {
+      "id": 41114533950,
+      "workflow": "Release APK",
+      "ref": "v0.4.32",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "511241bb6bbb058830dee187b8ec8f1835dcb545",
+      "created_at": "2026-10-30T19:21:05Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41114533950"
+    },
+    {
+      "id": 41113481089,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "9e6862f1dda6d1f84822f0a39f70fb70b39a8d7a",
+      "created_at": "2026-10-30T19:13:31Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41113481089"
+    },
+    {
+      "id": 41110471304,
+      "workflow": "Release APK",
+      "ref": "v0.4.31",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "9f46371b9281eb882413e813c9b932e3d27f7cff",
+      "created_at": "2026-10-30T18:51:39Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41110471304"
+    },
+    {
+      "id": 41109403901,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "cb05d8a69ee73381e7318a944c0d86c6da93e0e2",
+      "created_at": "2026-10-30T18:43:59Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41109403901"
+    },
+    {
+      "id": 41103784224,
+      "workflow": "Release APK",
+      "ref": "v0.4.30",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "b9cbc05e249cc4654ad0088f3fff75a3d5732200",
+      "created_at": "2026-10-30T18:05:06Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41103784224"
+    },
+    {
+      "id": 41101431137,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "5880150b5fce5a976e5ce950bde4903e094d6faf",
+      "created_at": "2026-10-30T17:46:35Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41101431137"
+    },
+    {
+      "id": 41098199220,
+      "workflow": "Release APK",
+      "ref": "v0.4.29",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "42ac0130439ba28d6be5737645b8c2e1635ab60b",
+      "created_at": "2026-10-30T17:22:03Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41098199220"
+    },
+    {
+      "id": 41096792807,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "996c9f0d91bf3ae7e6625a09c1983e5db35ec4bd",
+      "created_at": "2026-10-30T17:12:31Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41096792807"
+    },
+    {
+      "id": 41093630773,
+      "workflow": "Release APK",
+      "ref": "v0.4.28",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "52c95a26ec6314295dc3a1bfe5b78363b544858d",
+      "created_at": "2026-10-30T16:51:17Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41093630773"
+    },
+    {
+      "id": 41091065722,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 2,
+      "commit": "f1b32c951e8217b495b4d38662818527e455b544",
+      "created_at": "2026-10-30T16:34:05Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41091065722"
+    },
+    {
+      "id": 41083803753,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "7cd5dfcfed9ad78d076f4c3cd9a34d281e920cc0",
+      "created_at": "2026-10-30T15:46:33Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41083803753"
+    },
+    {
+      "id": 41083803493,
+      "workflow": "Release APK",
+      "ref": "v0.4.27",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "7cd5dfcfed9ad78d076f4c3cd9a34d281e920cc0",
+      "created_at": "2026-10-30T15:46:33Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41083803493"
+    },
+    {
+      "id": 41081394886,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "67bbbaea8638d18367793daa68d764589b882456",
+      "created_at": "2026-10-30T15:30:50Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41081394886"
+    },
+    {
+      "id": 41076188374,
+      "workflow": "Release APK",
+      "ref": "v0.4.26",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "d9915300333ff75224c61ea23ac5ed28b4be5519",
+      "created_at": "2026-10-30T14:57:03Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41076188374"
+    },
+    {
+      "id": 41075111797,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "2ad8018622124bb3582d5f66c6567c1ac9660838",
+      "created_at": "2026-10-30T14:49:51Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41075111797"
+    },
+    {
+      "id": 41073282182,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "failure",
+      "attempt": 1,
+      "commit": "bec94bb4fa998283d387d895aba2f0730d6ba118",
+      "created_at": "2026-10-30T14:37:43Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41073282182"
+    },
+    {
+      "id": 41070696616,
+      "workflow": "Release APK",
+      "ref": "v0.4.25",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "3a9456b6b49d5ef02f2c78bf1aa7305b7d1d92fc",
+      "created_at": "2026-10-30T14:18:21Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41070696616"
+    },
+    {
+      "id": 41067870083,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "83b8106cb2e403b0043b24f45a80b2ae7e94c707",
+      "created_at": "2026-10-30T13:59:27Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41067870083"
+    },
+    {
+      "id": 41065235226,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "be786f79fc173c25136ff2b5e367c83b99cb2ba7",
+      "created_at": "2026-10-30T13:40:57Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41065235226"
+    },
+    {
+      "id": 41061317021,
+      "workflow": "Release APK",
+      "ref": "v0.4.24",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "eb5786070af457872f6a41c95ddf5f16d73ac252",
+      "created_at": "2026-10-30T13:12:31Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41061317021"
+    },
+    {
+      "id": 41059784053,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "fc684e098bfab0ef1e5eeb86561e310063a23cda",
+      "created_at": "2026-10-30T13:01:12Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41059784053"
+    },
+    {
+      "id": 41059529348,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "9a29432b240cebdf60a743b4f19b73f3dd110ce3",
+      "created_at": "2026-10-30T12:59:21Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41059529348"
+    },
+    {
+      "id": 41056676300,
+      "workflow": "Release APK",
+      "ref": "v0.4.23",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "572a97eaf616302e183733ff3b04e64c8140696b",
+      "created_at": "2026-10-30T12:36:58Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41056676300"
+    },
+    {
+      "id": 41055342617,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "7715207d6c3959d7522279fc8cbf32de8c979619",
+      "created_at": "2026-10-30T12:26:23Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41055342617"
+    },
+    {
+      "id": 41054551654,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "d20d74fc4ee0b34cdd5df97e45f24496c97f7dec",
+      "created_at": "2026-10-30T12:20:06Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41054551654"
+    },
+    {
+      "id": 41052842543,
+      "workflow": "Release APK",
+      "ref": "v0.4.22",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "22011b1ebc44bc0c71b83503140834d385188089",
+      "created_at": "2026-10-30T12:06:11Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41052842543"
+    },
+    {
+      "id": 41051697662,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "a6d5f91bf720d0b48f268af9fa2382b4e2228c57",
+      "created_at": "2026-10-30T11:56:42Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41051697662"
+    },
+    {
+      "id": 41050305115,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "failure",
+      "attempt": 1,
+      "commit": "1f7e512eb815e9a63b2bbac56b14ca6fbf44399a",
+      "created_at": "2026-10-30T11:44:59Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41050305115"
+    },
+    {
+      "id": 41048695368,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "cd4e1b6cf40a3986c2dcf7b5cc2d44501f507c6a",
+      "created_at": "2026-10-30T11:31:33Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41048695368"
+    },
+    {
+      "id": 41044965636,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "4c9ae2372bd56dd69c5e0146474cbdd902604a73",
+      "created_at": "2026-10-30T11:01:00Z",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41044965636"
+    }
+  ],
+  "latest_observation_jobs": [
+    {
+      "id": 124344849082,
+      "name": "layout (35)",
+      "status": "in_progress",
+      "conclusion": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "pending",
+          "conclusion": null
+        }
+      ]
+    },
+    {
+      "id": 124344849529,
+      "name": "layout (36)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "latest_failed_candidate_jobs": [
+    {
+      "id": 124322708303,
+      "name": "layout (35)",
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 124322708701,
+      "name": "layout (36)",
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "revised_candidate_jobs": [
+    {
+      "id": 124330310327,
+      "name": "layout (35)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124330310903,
+      "name": "layout (36)",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "release_jobs": [
+    {
+      "id": 124334717201,
+      "name": "ui / layout (35)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 124334717651,
+      "name": "ui / layout (36)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 124337454310,
+      "name": "apk",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check release tag and notes",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Restore fixed signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Android SDK 36",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check model",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test and build arm64 debug APK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify APK signature matches restored key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Collect APK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Publish GitHub Release",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "raw_log_excerpts": {
+    "124322708303": [
+      "2026-10-30T21:29:53.0320411Z BUILD SUCCESSFUL in 50s",
+      "2026-10-30T21:32:35.5241492Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Toggle label wrapped: 600x360-font150-day",
+      "2026-10-30T21:33:30.4091552Z PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 打开提示音; 实时画面",
+      "2026-10-30T21:34:12.6084125Z PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 打开提示音; 实时画面"
+    ],
+    "124322708701": [
+      "2026-10-30T21:29:40.4193511Z BUILD SUCCESSFUL in 39s",
+      "2026-10-30T21:33:02.1486584Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Toggle label wrapped: 600x360-font150-day",
+      "2026-10-30T21:33:59.4043860Z PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: SystemUI disables prompt tones; 实时画面",
+      "2026-10-30T21:34:41.3163810Z PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 打开提示音; 实时画面"
+    ],
+    "124337454310": [
+      "2026-10-30T22:06:31.7266614Z BUILD SUCCESSFUL in 1m 5s",
+      "2026-10-30T22:06:36.1308423Z https://github.com/cyanrbt/walkbuddy/releases/tag/v0.4.35"
+    ]
+  },
+  "release": {
+    "id": 429533325,
+    "tag": "v0.4.35",
+    "published_at": "2026-10-30T22:06:35Z",
+    "url": "https://github.com/cyanrbt/walkbuddy/releases/tag/v0.4.35",
+    "assets": [
+      {
+        "id": 693559585,
+        "name": "Walk-Buddy-v0.4.35-arm64-debug.apk",
+        "state": "uploaded",
+        "size": 9978729,
+        "digest": "sha256:e67ec6f3001b7e42648416065ce777bbd69c9567dedc827efc7e92884c71583b",
+        "url": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.35/Walk-Buddy-v0.4.35-arm64-debug.apk"
+      }
+    ]
+  },
+  "findings": [
+    "Latest failed candidate compiled successfully on both API 35/36, then failed layout and SystemUI touch checks.",
+    "Toggle label wrapped at 600x360/font150/day is a confirmed application layout regression; revised sidebar sizing passed subsequent checks.",
+    "First failed SystemUI menu checks lack per-touch traces; later stable-target observations passed, but exact transient cause is not established for every failed touch.",
+    "Release APK job requires both Android UI matrix jobs; a failed prerequisite skips packaging on release runs.",
+    "Latest v0.4.35 release has completed successfully; actual uploaded APK is independently present.",
+    "The latest baseline observation run is still in progress in this snapshot (API36 success/API35 running); not counted as success or failure."
+  ]
+}

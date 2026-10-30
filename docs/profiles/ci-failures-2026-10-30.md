@@ -2,6 +2,17 @@
 
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
+## 2026-10-31 06:31 核对快照（北京时间）
+
+用户再次询问“GitHub 打包一直失败”后，直接查询最近 40 次 Actions、最新 Release 和三个相关流程的作业步骤，并重读最近失败候选的两套完整日志及正式 APK 作业日志。[本次状态、作业与原始日志摘录](ci-status-2026-10-31-0631.json)保留查询范围和时间，下面为该时点状态：
+
+- 最近 40 次运行的当前结果为 35 次成功、4 次失败、1 次进行中；包含重跑后成功的历史任务，不作连续首次成功计数。
+- 最近保留红叉的[开发候选 41131327523](https://github.com/cyanrbt/walkbuddy/actions/runs/41131327523)两套均先 `BUILD SUCCESSFUL`，再出现 `Toggle label wrapped: 600x360-font150-day` 和系统小窗菜单操作超时。前者是本次实际布局回归；已按完整文字宽度调整侧栏。首轮菜单没有逐次触摸轨迹，不能把每次超时归因于相同原因，也不能统一归因于模拟器。
+- [修订候选 41133558071](https://github.com/cyanrbt/walkbuddy/actions/runs/41133558071)两套 API 均 attempt 1 成功；[正式 v0.4.35 41134864899](https://github.com/cyanrbt/walkbuddy/actions/runs/41134864899)的两套 UI、APK 和整体终态均 attempt 1 成功。直接重读 APK 日志确认 `BUILD SUCCESSFUL in 1m 5s`、固定签名检查及发布步骤成功；Release 实际有 9,978,729 字节的 [ARM64 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.35/Walk-Buddy-v0.4.35-arm64-debug.apk)，服务端摘要与[此前完整下载核验](apk-v0.4.35.json)相符。
+- 最新[既有恢复界面基线观测 41137921559](https://github.com/cyanrbt/walkbuddy/actions/runs/41137921559)当时仍在运行，API 36 已成功、API 35 编译成功且在模拟器检查；不能提前写为成功或失败。运行中暂时取不到归档日志不构成构建失败。
+
+`Release APK` 保留 `apk.needs: ui`：标签发布必须先通过 Android 15/16 检查，前置失败会跳过打包。main 上的 `Android UI checks` 本身是开发检查；Actions 列表同时保留这些候选红叉和后续成功的正式发布，因此应点开具体流程与失败步骤判断。已有布局和输入/窗口问题分别记录；没有用重跑抹去红叉，也不以当前成功宣称旧瞬时故障已全部定位。模拟器及发布验证不替代实体设备验收。
+
 ## v0.4.35 发布核对
 
 [首轮 41131327523](https://github.com/cyanrbt/walkbuddy/actions/runs/41131327523) attempt 1 两套编译成功后各有三项失败：大字体横屏「提示音」换行，以及两轮系统菜单触摸未完成。原图确认固定侧栏宽度不够，是本次真实布局回归；菜单首轮缺少逐步轨迹，不能认定每次触摸的精确原因。完整失败附件已下载核对摘要，API 35 另有外部系统服务 ANR，与两套共同的换行问题分开记录。
