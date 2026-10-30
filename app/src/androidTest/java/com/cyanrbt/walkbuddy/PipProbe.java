@@ -15,6 +15,7 @@ import android.os.PowerManager;
 import android.app.KeyguardManager;
 import android.view.View;
 import android.view.TextureView;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CheckBox;
 import java.io.File;
 import java.io.FileInputStream;
@@ -170,6 +171,7 @@ final class PipProbe {
                     View control=host.findViewById(id);android.graphics.Rect visible=new android.graphics.Rect();
                     if(!control.getGlobalVisibleRect(visible) || visible.height()!=control.getHeight() || visible.width()!=control.getWidth())
                         throw new AssertionError("Initial live toggle is clipped");
+                    checkedNode((CheckBox)control);
                 }
                 if(host.findViewById(R.id.depth_steps).getVisibility()!=View.GONE || host.findViewById(R.id.depth_status).getVisibility()!=View.GONE)
                     throw new AssertionError("Basic camera exposed inactive depth progress");
@@ -235,6 +237,8 @@ final class PipProbe {
             long firstResult=read(runner,()->basicAt(host));
             await(runner,()->live(host) && basicAt(host)>firstResult+400,"repeated actual model results");
             checkpoint(runner,"recognition_results");
+            read(runner,()->{checkedNode((CheckBox)host.findViewById(R.id.preview_recognition));checkedNode((CheckBox)host.findViewById(R.id.preview_sound));return true;});
+            report.append("PASS attached checkbox labels, checked and enabled states before/during actual detection\n");
             InferenceWorker.Ticket oldTicket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
             read(runner,()->{
                 host.findViewById(R.id.preview_recognition).performClick();
@@ -441,6 +445,17 @@ final class PipProbe {
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
         if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
         if((boolean)field(host,"readingTexture"))throw new AssertionError("Stopped camera retained readback state");
+    }
+    private static void checkedNode(CheckBox view) {
+        if(!view.isAttachedToWindow())throw new AssertionError("Checkbox semantics need an attached window");
+        AccessibilityNodeInfo node=view.createAccessibilityNodeInfo();
+        try {
+            if(!node.isCheckable() || node.isChecked()!=view.isChecked() || node.isEnabled()!=view.isEnabled()
+                || !android.text.TextUtils.equals(view.getText(),node.getText()))
+                throw new AssertionError("Checkbox node mismatch: label="+node.getText()+" expected="+view.getText()
+                    +" checkable="+node.isCheckable()+" checked="+node.isChecked()+"/"+view.isChecked()
+                    +" enabled="+node.isEnabled()+"/"+view.isEnabled());
+        } finally {node.recycle();}
     }
     private static void assertModelRetained(PreviewActivity host,InferenceWorker.Ticket ticket,Object model) {
         if(field(host,"analysisTicket")!=ticket || field(field(host,"worker"),"detector")!=model)

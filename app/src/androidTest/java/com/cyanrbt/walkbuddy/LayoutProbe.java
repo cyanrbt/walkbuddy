@@ -20,7 +20,6 @@ import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.CheckBox;
-import android.view.accessibility.AccessibilityNodeInfo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.concurrent.atomic.AtomicReference;
@@ -35,8 +34,8 @@ final class LayoutProbe {
             AtomicReference<Throwable> failure=new AtomicReference<>();
             runner.runOnMainSync(()->{try{check(runner.getTargetContext(),report);}catch(Throwable error){failure.set(error);}});
             if(failure.get()!=null)throw new AssertionError(failure.get());
-            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=24 states=96; recovery-presentations="
-                +(RecoveryGuide.Reason.values().length*48)+"; initial toggles, native checked states, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore\n");
+            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=30 states=120; recovery-presentations="
+                +(RecoveryGuide.Reason.values().length*60)+"; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore\n");
             runner.finish(Activity.RESULT_OK,result);
         } catch(Throwable error) {
             result.putString("stream",report+"LAYOUT_PROBE_FAIL: "+error);
@@ -47,7 +46,7 @@ final class LayoutProbe {
     private static void check(Context target,StringBuilder report) throws Exception {
         File output=new File(target.getCacheDir(),"ui-probe");
         if(!output.isDirectory() && !output.mkdirs())throw new IllegalStateException("Cannot create UI evidence directory");
-        for(int[] size:new int[][]{{320,480},{360,640},{640,360},{800,600}})
+        for(int[] size:new int[][]{{320,480},{360,640},{600,360},{640,360},{800,600}})
             for(float font:new float[]{1f,1.5f,2f})for(boolean night:new boolean[]{false,true}) {
                 Configuration config=new Configuration(target.getResources().getConfiguration());
                 config.fontScale=font;config.densityDpi=160;
@@ -83,7 +82,6 @@ final class LayoutProbe {
                     initialVisible(root,detection);initialVisible(root,sound);
                     if(detection.getLineCount()!=1 || sound.getLineCount()!=1)throw new AssertionError("Toggle label wrapped: "+name);
                     if(mode<=1)initialVisible(root,info);
-                    checkedNode(detection);checkedNode(sound);
                     if(root.findViewById(R.id.depth_steps).getVisibility()!=(mode==3?View.VISIBLE:View.GONE)
                         || root.findViewById(R.id.depth_status).getVisibility()!=(mode==3?View.VISIBLE:View.GONE))
                         throw new AssertionError("Optional depth details have wrong visibility");
@@ -142,13 +140,6 @@ final class LayoutProbe {
         ((ViewGroup)root).offsetDescendantRectToMyCoords(scroll,viewport);
         if(!viewport.contains(bounds))throw new AssertionError("Initial control outside panel: "+bounds+" viewport="+viewport);
         if(view instanceof CheckBox && (bounds.height()<48 || bounds.width()<48))throw new AssertionError("Small toggle target");
-    }
-    private static void checkedNode(CheckBox view) {
-        AccessibilityNodeInfo node=view.createAccessibilityNodeInfo();
-        try {
-            if(!node.isCheckable() || node.isChecked()!=view.isChecked() || node.isEnabled()!=view.isEnabled()
-                || !view.getText().toString().contentEquals(node.getText()))throw new AssertionError("Native checkbox lost label/state");
-        } finally {node.recycle();}
     }
     private static void textFits(View view) {
         if(view.getVisibility()!=View.VISIBLE)return;

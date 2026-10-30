@@ -43,7 +43,7 @@
     <string name="preview_stop">停止</string>
     <string name="info_recognition_off">检测已关闭</string>
     <string name="info_recognition_on">正在分析画面</string>
-    <string name="info_recognition_preparing">正在准备识别器…</string>
+    <string name="info_recognition_preparing">准备识别器…</string>
     <string name="info_stopped">观察与提醒已停止，请按页面提示恢复。</string>
     <string name="step_pip">系统画中画（可选）</string>
     <string name="step_pip_hint">跨应用看画面，无需悬浮窗授权</string>
