@@ -55,6 +55,7 @@ public final class PreviewActivity extends Activity {
     private RiskAnnouncer announcer;
     private boolean restoreDetection,restoreSound;
     private ToneGenerator activeTone;
+    private RiskHaptics haptics;
     private WindowManager wm;
     private LinearLayout root;
     private TextureView texture;
@@ -152,6 +153,7 @@ public final class PreviewActivity extends Activity {
     }
     @Override public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
+        haptics=new RiskHaptics(new AndroidHaptics((Vibrator)getSystemService(VIBRATOR_SERVICE)));
         previewSeen = getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE)
             .getBoolean(HomeJourney.PREVIEW_SEEN, false);
         active = new WeakReference<>(this);
@@ -412,7 +414,7 @@ public final class PreviewActivity extends Activity {
         restartButton=root.findViewById(R.id.restart_preview);
         restartButton.setBackgroundTintList(null);
         restartButton.setOnClickListener(v->recoverPreview());
-        sound.setOnCheckedChangeListener((button, checked) -> { if (!checked) silence(); });
+        sound.setOnCheckedChangeListener((button, checked) -> { if (!checked) stopTone(); });
         texture.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h) { openCamera(s); }
             public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h) { transform(); }
@@ -643,10 +645,14 @@ public final class PreviewActivity extends Activity {
         });
     }
     private void alert(){
-        if(!state.recognition || state.expired(SystemClock.elapsedRealtime()))return;
+        long now=SystemClock.elapsedRealtime();
+        if(!state.recognition || state.expired(now))return;
+        Detection.Risk risk=RiskHaptics.strongest(feedback.visible(now).detections);
+        haptics.update(risk);
+        if(risk==Detection.Risk.CAPTURED)return;
         pendingSpeak=true;
-        Vibrator vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);if(vibrator!=null && vibrator.hasVibrator())vibrator.vibrate(VibrationEffect.createOneShot(150,VibrationEffect.DEFAULT_AMPLITUDE));
-        if(sound.isChecked())try{activeTone=new ToneGenerator(AudioManager.STREAM_NOTIFICATION,40);ToneGenerator tone=activeTone;tone.startTone(ToneGenerator.TONE_PROP_BEEP,150);main.postDelayed(()->{if(activeTone==tone){tone.release();activeTone=null;}},250);}catch(RuntimeException ignored){silence();}
+        haptics.alert(risk);
+        if(sound.isChecked())try{activeTone=new ToneGenerator(AudioManager.STREAM_NOTIFICATION,40);ToneGenerator tone=activeTone;tone.startTone(ToneGenerator.TONE_PROP_BEEP,150);main.postDelayed(()->{if(activeTone==tone){tone.release();activeTone=null;}},250);}catch(RuntimeException ignored){stopTone();}
     }
     private boolean checkHealth(long now) {
         PreviewHealth.Decision decision=PreviewHealth.check(state,now);
@@ -673,7 +679,10 @@ public final class PreviewActivity extends Activity {
         ((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
     }
     private void silence() {
-        Vibrator vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);if(vibrator!=null)vibrator.cancel();
+        if(haptics!=null)haptics.clear();
+        stopTone();
+    }
+    private void stopTone() {
         if(activeTone!=null){activeTone.stopTone();activeTone.release();activeTone=null;}
     }
     private void render(long now) {
@@ -834,8 +843,8 @@ public final class PreviewActivity extends Activity {
         String message=state.recognition && !analysisHasResult && visible.detections.isEmpty()
             ?getString(analysisReady?R.string.info_recognition_on:R.string.info_recognition_preparing):visible.message;
         detectionOverlay.show(visible.detections,previewGeometry);setTextIfChanged(info,message);
-        Detection.Risk worst=Detection.Risk.CAPTURED;
-        for(Detection d:visible.detections)if(d.risk.ordinal()>worst.ordinal())worst=d.risk;
+        Detection.Risk worst=RiskHaptics.strongest(visible.detections);
+        haptics.update(worst);
         boolean alert=pendingSpeak;pendingSpeak=false;
         announcer.update(visible.message,worst,alert,now);
     }

@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.CheckBox;
@@ -46,6 +47,8 @@ final class LayoutProbe {
     private static void check(Context target,StringBuilder report) throws Exception {
         File output=new File(target.getCacheDir(),"ui-probe");
         if(!output.isDirectory() && !output.mkdirs())throw new IllegalStateException("Cannot create UI evidence directory");
+        HapticsProbe.checkEffects();
+        report.append("HAPTIC_EFFECT_PASS presets=2 fallback_patterns=2 parcel_roundtrips=4; no physical motor\n");
         for(int[] size:new int[][]{{320,480},{360,640},{600,360},{640,360},{800,600}})
             for(float font:new float[]{1f,1.5f,2f})for(boolean night:new boolean[]{false,true}) {
                 Configuration config=new Configuration(target.getResources().getConfiguration());
@@ -138,9 +141,41 @@ final class LayoutProbe {
                 fullyVisible(root,root.findViewById(R.id.enter_pip));
                 if(scroll.getVisibility()!=View.VISIBLE || scroll.getWidth()<=0)throw new AssertionError("Panel did not restore");
                 if(root.findViewById(R.id.depth_steps).getVisibility()!=View.GONE)throw new AssertionError("Basic restore exposed depth steps");
+                checkHapticLegend(root,size[0],size[1],new File(output,"haptics-"+name+".png"));
                 report.append("PASS ").append(name).append(" camera=").append(camera.getWidth()).append('x').append(camera.getHeight()).append('\n');
             }
         report.append("FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\n");
+        report.append("HAPTIC_LEGEND_PASS configurations=30 resize_cycles=30; full cue text and descriptions, responsive columns/list\n");
+    }
+
+    private static void checkHapticLegend(View root,int width,int height,File output) throws Exception {
+        RiskLegendLayout legend=root.findViewById(R.id.risk_legend);
+        int[] ids={R.id.legend_captured,R.id.legend_caution,R.id.legend_near};
+        String[] cues={"不触发振动","提醒时单振","提醒时双振"};
+        float widest=0;
+        for(int i=0;i<ids.length;i++) {
+            TextView label=root.findViewById(ids[i]);
+            if(!label.getText().toString().contains(cues[i]) || label.getContentDescription()==null
+                || !label.getContentDescription().toString().contains(i==0?"不触发振动":i==1?"单次振动":"双次振动"))
+                throw new AssertionError("Haptic legend text/description missing");
+            for(String line:label.getText().toString().split("\n"))widest=Math.max(widest,label.getPaint().measureText(line));
+        }
+        int wide=(int)Math.ceil(widest)*3+legend.getPaddingLeft()+legend.getPaddingRight()+12;
+        for(int testWidth:new int[]{Math.max(1,wide/3),wide}) {
+            legend.measure(View.MeasureSpec.makeMeasureSpec(testWidth,View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED));
+            legend.layout(0,0,testWidth,legend.getMeasuredHeight());
+            if(legend.getOrientation()!=(testWidth==wide?LinearLayout.HORIZONTAL:LinearLayout.VERTICAL))
+                throw new AssertionError("Haptic legend did not adapt/restore");
+            textFits(legend);
+        }
+        root.forceLayout();measure(root,width,height);textFits(legend);
+        ScrollView scroll=root.findViewById(R.id.preview_controls);
+        TextView near=root.findViewById(R.id.legend_near);
+        scroll.requestChildFocus(near,near);
+        Rect visible=new Rect();
+        if(!near.getLocalVisibleRect(visible) || visible.height()<=0)throw new AssertionError("Haptic legend unreachable");
+        screenshot(root,output);scroll.scrollTo(0,0);
     }
 
     private static String confirmedMessage(Detection detection) {

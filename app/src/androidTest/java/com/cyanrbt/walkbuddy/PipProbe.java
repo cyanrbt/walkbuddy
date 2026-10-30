@@ -246,6 +246,7 @@ final class PipProbe {
             checkpoint(runner,"recognition_results");
             read(runner,()->{checkedNode((CheckBox)host.findViewById(R.id.preview_recognition));checkedNode((CheckBox)host.findViewById(R.id.preview_sound));return true;});
             report.append("PASS attached checkbox labels, checked and enabled states before/during actual detection\n");
+            hapticActivity(runner,host,report);
             InferenceWorker.Ticket oldTicket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
             read(runner,()->{
                 host.findViewById(R.id.preview_recognition).performClick();
@@ -685,6 +686,45 @@ final class PipProbe {
             read(runner,()->{setField(host,"worker",original);return true;});
         }
     }
+    private static void hapticActivity(Instrumentation runner,PreviewActivity host,StringBuilder report) {
+        read(runner,()->{
+            RiskHaptics original=(RiskHaptics)field(host,"haptics");original.clear();
+            HapticsProbe.Output output=new HapticsProbe.Output();RiskHaptics recorded=new RiskHaptics(output);
+            DetectionFeedback feedback=(DetectionFeedback)field(host,"feedback");
+            CheckBox sound=host.findViewById(R.id.preview_sound);
+            if(!sound.isEnabled() || sound.isChecked())throw new AssertionError("Haptic check requires active detection and sound off");
+            setField(host,"haptics",recorded);
+            try {
+                long now=android.os.SystemClock.elapsedRealtime();feedback.clear();
+                Detection near=new Detection("构造触觉检查",1,.3f,.1f,.7f,.9f,Detection.Risk.NEAR,.7f,null);
+                for(long at:new long[]{now-3,now-2})feedback.depth(new DepthSnapshot(at,java.util.Collections.singletonList(near),
+                    "构造触觉检查",DepthSnapshot.Stage.MEASURING,true,true),0,at);
+                Method alert=PreviewActivity.class.getDeclaredMethod("alert");alert.setAccessible(true);alert.invoke(host);
+                if(output.plays!=1 || output.last!=RiskHaptics.Cue.DOUBLE)throw new AssertionError("Activity did not select current near cue");
+                sound.setChecked(true);sound.setChecked(false);
+                if(output.cancels!=0)throw new AssertionError("Sound toggle cancelled tactile feedback");
+                Method show=PreviewActivity.class.getDeclaredMethod("showFeedback",long.class);show.setAccessible(true);
+                feedback.depth(new DepthSnapshot(now-1,java.util.Collections.singletonList(near.withRisk(Detection.Risk.CAUTION)),
+                    "构造降级",DepthSnapshot.Stage.MEASURING,true,true),0,now-1);
+                show.invoke(host,now);
+                if(output.cancels!=1 || output.plays!=1)throw new AssertionError("Downgrade did not cancel remaining cue");
+                recorded.alert(Detection.Risk.NEAR);
+                feedback.clear();alert.invoke(host);
+                if(output.cancels!=2 || output.plays!=2)throw new AssertionError("Empty current result replayed or retained a cue");
+                recorded.alert(Detection.Risk.NEAR);
+                Method silence=PreviewActivity.class.getDeclaredMethod("silence");silence.setAccessible(true);silence.invoke(host);
+                if(output.cancels!=3 || field(recorded,"requested")!=Detection.Risk.CAPTURED)
+                    throw new AssertionError("Stop did not clear the tactile request");
+                report.append("HAPTIC_ACTIVITY_PASS cases=5; current near, Sound-off independence, downgrade, empty current, stop; recorded output, no physical motor\n");
+            } catch(ReflectiveOperationException error){throw new AssertionError(error);}
+            finally {
+                recorded.clear();feedback.clear();((RiskAnnouncer)field(host,"announcer")).clear();
+                setField(host,"pendingSpeak",false);setField(host,"haptics",original);
+            }
+            return true;
+        });
+    }
+
     private static void assertPreviewOnly(PreviewActivity host,Object camera,Object texture) {
         if(!live(host) || field(host,"camera")!=camera || field(host,"texture")!=texture || state(host).recognition
             || field(host,"analysisTicket")!=null || basicAt(host)!=-1 || field(host,"activeTone")!=null
@@ -773,6 +813,7 @@ final class PipProbe {
     }
     private static void assertReleased(PreviewActivity host) {
         if(keepsScreenOn(host))throw new AssertionError("Stopped preview retained screen hold");
+        if(field(field(host,"haptics"),"requested")!=Detection.Risk.CAPTURED)throw new AssertionError("Stopped preview retained tactile feedback");
         for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback"})
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
         if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
