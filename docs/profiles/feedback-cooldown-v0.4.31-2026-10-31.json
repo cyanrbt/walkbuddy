@@ -1,0 +1,2096 @@
+{
+  "scope": "Constructed JVM timestamps/results; app notification eligibility, not physical delivery or AR latency",
+  "cadence_ms": 100,
+  "steps_per_variant": 147,
+  "current_messages_match_at_every_step": true,
+  "variants": {
+    "baseline": {
+      "source_sha256": {
+        "Detection.java": "7d91ecfe65839cb4f23bcdac84c0f97e2fd01b3f3e0ee124bc00ea0d39dac880",
+        "ObstacleMask.java": "eeabdd97762f6bdece16957808b3e3555a34ec0c30e5a775a1b1cefebf301295",
+        "DepthSnapshot.java": "58ad0857536d2495de08345db6498cb5bf447fb26fc9abc71f7b202653289bdf",
+        "AlertPolicy.java": "486a1fe690769f8ec900948a5d112b21f4490b4f360d2af0854d38dab3ca72aa",
+        "DetectionFeedback.java": "9b0b06b6c10190cabd85f89afa70c52c03111ebe59d3da447fc6ca6cbd691b2a"
+      },
+      "first_eligible_source_notifications_ms": {
+        "near": 4900,
+        "caution": 8700
+      },
+      "rows": [
+        {
+          "scenario": "near",
+          "at_ms": 100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "灰色不代表安全 · 已捕获 1 处目标"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 600,
+          "source": "basic",
+          "notify": true,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1600,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2600,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3600,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4600,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4900,
+          "source": "depth",
+          "notify": true,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5600,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 6000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "不代表可通行 · 尚未捕获目标"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 400,
+          "source": "depth",
+          "notify": true,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8700,
+          "source": "basic",
+          "notify": true,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        }
+      ]
+    },
+    "fixed": {
+      "source_sha256": {
+        "Detection.java": "7d91ecfe65839cb4f23bcdac84c0f97e2fd01b3f3e0ee124bc00ea0d39dac880",
+        "ObstacleMask.java": "eeabdd97762f6bdece16957808b3e3555a34ec0c30e5a775a1b1cefebf301295",
+        "DepthSnapshot.java": "58ad0857536d2495de08345db6498cb5bf447fb26fc9abc71f7b202653289bdf",
+        "AlertPolicy.java": "e78df8e6c265ea598380b87252dca65b23159639b8b36d8c57be42d94a88439b",
+        "DetectionFeedback.java": "93d05a28549569e2f4778ec9a34377a0e974295ae29f44007c00ebf03c40b29d"
+      },
+      "first_eligible_source_notifications_ms": {
+        "near": 1600,
+        "caution": 3400
+      },
+      "rows": [
+        {
+          "scenario": "near",
+          "at_ms": 100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "灰色不代表安全 · 已捕获 1 处目标"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 600,
+          "source": "basic",
+          "notify": true,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1600,
+          "source": "depth",
+          "notify": true,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 1900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2600,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 2900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3600,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 3900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4600,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 4900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5200,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5300,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5400,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5500,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5600,
+          "source": "depth",
+          "notify": true,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5700,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5800,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 5900,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "near",
+          "at_ms": 6000,
+          "source": "depth",
+          "notify": false,
+          "current_message": "约 0.7 米 · 请及时注意 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 100,
+          "source": "depth",
+          "notify": false,
+          "current_message": "不代表可通行 · 尚未捕获目标"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 400,
+          "source": "depth",
+          "notify": true,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "约 1.5 米 · 前方可能受阻 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 1900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 2900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3400,
+          "source": "basic",
+          "notify": true,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 3900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 4900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 5900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 6900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 7900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8600,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8700,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8800,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 8900,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9000,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9100,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9200,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9300,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9400,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        },
+        {
+          "scenario": "caution",
+          "at_ms": 9500,
+          "source": "basic",
+          "notify": false,
+          "current_message": "未测距 · 画面关注 · 人 · 中间"
+        }
+      ]
+    }
+  }
+}

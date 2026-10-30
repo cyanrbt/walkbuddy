@@ -3,7 +3,7 @@ android {
     namespace 'com.cyanrbt.walkbuddy'
     compileSdk 36
     buildToolsVersion '36.0.0'
-    defaultConfig { applicationId 'com.cyanrbt.walkbuddy'; minSdk 26; targetSdk 36; versionCode 42; versionName '0.4.30'; testInstrumentationRunner 'com.cyanrbt.walkbuddy.RuntimeProbe'; ndk { if (!project.hasProperty('universalApk')) abiFilters 'arm64-v8a' } }
+    defaultConfig { applicationId 'com.cyanrbt.walkbuddy'; minSdk 26; targetSdk 36; versionCode 43; versionName '0.4.31'; testInstrumentationRunner 'com.cyanrbt.walkbuddy.RuntimeProbe'; ndk { if (!project.hasProperty('universalApk')) abiFilters 'arm64-v8a' } }
     signingConfigs {
         debug {
             def fixedKeystore = System.getenv('WALKBUDDY_SIGNING_KEYSTORE')

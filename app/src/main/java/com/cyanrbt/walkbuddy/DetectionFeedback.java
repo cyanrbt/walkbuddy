@@ -40,5 +40,17 @@ final class DetectionFeedback {
         }
         return visible=new AlertPolicy.Decision(message,false,out);
     }
+    /** Last instant at which an already allowed generic cue still has a contributing result. */
+    long validUntil(long now,Detection.Risk risk) {
+        if(risk==Detection.Risk.CAPTURED)return -1;
+        long until=-1;
+        if(basic!=null && now>=basicAt && now-basicAt<=1000 && containsRisk(basic,risk))until=basicAt+1000;
+        if(depth!=null && now>=depthAt && now-depthAt<=500 && containsRisk(depth,risk))until=Math.max(until,depthAt+500);
+        return until;
+    }
+    private static boolean containsRisk(AlertPolicy.Decision decision,Detection.Risk risk) {
+        for(Detection detection:decision.detections)if(detection.risk.ordinal()>=risk.ordinal())return true;
+        return false;
+    }
     void clear(){basic=depth=visibleBasic=visibleDepth=null;visible=EMPTY;basicAt=depthAt=lastDepth=-1;basicPolicy.clear();depthPolicy.clear();}
 }

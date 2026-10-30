@@ -114,4 +114,24 @@ public class DetectionFeedbackTest {
         assertEquals(2,f.visible(200).detections.size());
         assertTrue(f.visible(199).detections.isEmpty());
     }
+    @Test public void soundDeadlineUsesConfirmedSourceCaptureTimeAndOriginalExpiry() {
+        DetectionFeedback f=new DetectionFeedback();f.basic(person(),100,100);
+        assertEquals(-1,f.validUntil(100,Detection.Risk.CAUTION));
+        f.basic(person(),600,700);
+        assertEquals(1600,f.validUntil(700,Detection.Risk.CAUTION));
+        assertEquals(1600,f.validUntil(1600,Detection.Risk.CAUTION));
+        assertEquals(-1,f.validUntil(1601,Detection.Risk.CAUTION));
+        assertEquals(-1,f.validUntil(599,Detection.Risk.CAUTION));
+    }
+    @Test public void yellowBasicResultCannotExtendANearDepthCue() {
+        DetectionFeedback f=new DetectionFeedback();f.basic(person(),100,100);f.basic(person(),600,600);
+        f.depth(near(300),0,300);f.depth(near(600),0,600);
+        assertEquals(1100,f.validUntil(600,Detection.Risk.NEAR));
+        assertEquals(1600,f.validUntil(600,Detection.Risk.CAUTION));
+        assertEquals(1100,f.validUntil(1100,Detection.Risk.NEAR));
+        assertEquals(-1,f.validUntil(1101,Detection.Risk.NEAR));
+        assertEquals(-1,f.validUntil(600,Detection.Risk.CAPTURED));
+        f.depth(null,0,601);assertEquals(-1,f.validUntil(601,Detection.Risk.NEAR));
+        f.clear();assertEquals(-1,f.validUntil(601,Detection.Risk.CAUTION));
+    }
 }

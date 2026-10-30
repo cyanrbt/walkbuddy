@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="info_sound_unavailable">提示音暂不可用，画面与检测继续</string>
     <string name="app_name">WalkBuddy</string>
     <string name="hero_title">Walk Buddy</string>
     <string name="hero_lead">看见前方，也留意身边。实时取景与空间障碍提示，可放进系统画中画。</string>

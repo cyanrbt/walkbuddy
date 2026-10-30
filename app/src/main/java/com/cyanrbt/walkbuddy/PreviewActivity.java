@@ -13,8 +13,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.hardware.display.DisplayManager;
 import android.hardware.camera2.params.StreamConfigurationMap;
-import android.media.ToneGenerator;
-import android.media.AudioManager;
 import android.os.*;
 import android.util.Size;
 import android.util.Rational;
@@ -57,7 +55,9 @@ public final class PreviewActivity extends Activity {
     static final String REMINDERS_PREFERENCES="walkbuddy_reminders",VIBRATION_PREFERENCE="vibration_enabled";
     private RiskAnnouncer announcer;
     private boolean restoreDetection,restoreSound;
-    private ToneGenerator activeTone;
+    private TonePlayer.Session activeTone;
+    private static TonePlayer sharedToneWorker;
+    private TonePlayer toneWorker;
     private RiskHaptics haptics;
     private WindowManager wm;
     private LinearLayout root;
@@ -177,6 +177,8 @@ public final class PreviewActivity extends Activity {
                         +android.os.Process.THREAD_PRIORITY_LESS_FAVORABLE));
             }
             worker = sharedWorker;
+            if(sharedToneWorker==null)sharedToneWorker=new TonePlayer(SystemClock::elapsedRealtime,AndroidTone::new);
+            toneWorker=sharedToneWorker;
         }
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         if (Build.VERSION.SDK_INT >= 33) registerReceiver(events, filter, Context.RECEIVER_NOT_EXPORTED);
@@ -472,7 +474,7 @@ public final class PreviewActivity extends Activity {
         restartButton=root.findViewById(R.id.restart_preview);
         restartButton.setBackgroundTintList(null);
         restartButton.setOnClickListener(v->recoverPreview());
-        sound.setOnCheckedChangeListener((button, checked) -> { if (!checked) stopTone(); });
+        sound.setOnCheckedChangeListener((button, checked) -> { if(checked)ensureToneSession();else stopTone(); });
         texture.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h) { openCamera(s); }
             public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h) { transform(); }
@@ -708,10 +710,15 @@ public final class PreviewActivity extends Activity {
         if(!state.recognition || state.expired(now))return;
         Detection.Risk risk=RiskHaptics.strongest(feedback.visible(now).detections);
         haptics.update(risk);
+        toneWorker.observe(activeTone,risk);
         if(risk==Detection.Risk.CAPTURED)return;
         pendingSpeak=true;
         haptics.alert(risk);
-        if(sound.isChecked())try{activeTone=new ToneGenerator(AudioManager.STREAM_NOTIFICATION,40);ToneGenerator tone=activeTone;tone.startTone(ToneGenerator.TONE_PROP_BEEP,150);main.postDelayed(()->{if(activeTone==tone){tone.release();activeTone=null;}},250);}catch(RuntimeException ignored){stopTone();}
+        if(sound.isChecked()) {
+            TonePlayer.Session session=ensureToneSession();
+            toneWorker.observe(session,risk);
+            toneWorker.play(session,feedback.validUntil(now,risk));
+        }
     }
     private boolean checkHealth(long now) {
         PreviewHealth.Decision decision=PreviewHealth.check(state,now);
@@ -744,7 +751,23 @@ public final class PreviewActivity extends Activity {
         stopTone();
     }
     private void stopTone() {
-        if(activeTone!=null){activeTone.stopTone();activeTone.release();activeTone=null;}
+        TonePlayer.Session retired=activeTone;activeTone=null;
+        if(retired!=null)toneWorker.cancel(retired);
+    }
+    private TonePlayer.Session ensureToneSession() {
+        long now=SystemClock.elapsedRealtime();
+        if(destroyed || !sound.isChecked() || !state.recognition || state.phase!=SessionState.Phase.LIVE
+            || state.expired(now) || analysisTicket==null)return null;
+        if(activeTone==null || activeTone.frames!=analysisTicket) {
+            stopTone();
+            activeTone=new TonePlayer.Session(analysisTicket,(session,error)->main.post(()->{
+                if(destroyed || activeTone!=session || !sound.isChecked())return;
+                sound.setChecked(false);
+                Toast.makeText(this,R.string.info_sound_unavailable,Toast.LENGTH_LONG).show();
+            }));
+            toneWorker.prepare(activeTone);
+        }
+        return activeTone;
     }
     private void render(long now) {
         syncKeepScreenOn();
@@ -934,6 +957,7 @@ public final class PreviewActivity extends Activity {
         detectionOverlay.show(visible.detections,previewGeometry);setTextIfChanged(info,message);
         Detection.Risk worst=RiskHaptics.strongest(visible.detections);
         haptics.update(worst);
+        toneWorker.observe(activeTone,worst);
         boolean alert=pendingSpeak;pendingSpeak=false;
         announcer.update(visible.message,worst,alert,now);
     }

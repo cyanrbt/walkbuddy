@@ -248,6 +248,7 @@ final class PipProbe {
             read(runner,()->{checkedNode((CheckBox)host.findViewById(R.id.preview_recognition));checkedNode((CheckBox)host.findViewById(R.id.preview_sound));return true;});
             report.append("PASS attached checkbox labels, checked and enabled states before/during actual detection\n");
             hapticActivity(runner,host,report);
+            if(profilePriority==null && profileThreads==null)ToneProbe.run(runner,host,report);
             InferenceWorker.Ticket oldTicket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
             read(runner,()->{
                 host.findViewById(R.id.preview_recognition).performClick();
