@@ -1,0 +1,180 @@
+[
+  {
+    "api": 35,
+    "source_commit": "cb05d8a69ee73381e7318a944c0d86c6da93e0e2",
+    "run_id": 41109403901,
+    "attempt": 1,
+    "artifact_id": 13002438094,
+    "archive_size_bytes": 11103501,
+    "archive_sha256": "5f6c26dd0795f8db60fdc12e54f64b5877a28d3fa149759c09d08e27c6450f51",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.31 / 43\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：29；显示帧龄(ms)：25；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：346；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "tone_thread_samples": "BLOCKED\ncreate_blocked thread=WalkBuddy sound at_ms=205455\nclose thread=WalkBuddy sound at_ms=205860\nNATIVE\ncreate_begin thread=WalkBuddy sound at_ms=205956\ncreate_end thread=WalkBuddy sound at_ms=205972\nplay_begin thread=WalkBuddy sound at_ms=205986\nplay_end accepted=true thread=WalkBuddy sound at_ms=205992\nplay_begin thread=WalkBuddy sound at_ms=206192\nplay_end accepted=true thread=WalkBuddy sound at_ms=206193\nclose_begin thread=WalkBuddy sound at_ms=206193\nclose_end thread=WalkBuddy sound at_ms=206204\n",
+    "tone_activity_checks_per_pip_run": 3,
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.31 / 43\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.31 / 43\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：65；显示帧龄(ms)：4；分析龄(ms)：19\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：10；复制(ms)：8；结果交付(ms)：1\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.31 / 43\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：65；显示帧龄(ms)：4；分析龄(ms)：1502\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：37；读回排队(ms)：19；复制(ms)：3；结果交付(ms)：1\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "scope": "Android emulator controlled audio blocking/cancellation/failure with advancing virtual Camera2 and actual native audio API thread records; no audibility, latency, physical motor or TalkBack acceptance"
+  },
+  {
+    "api": 36,
+    "source_commit": "cb05d8a69ee73381e7318a944c0d86c6da93e0e2",
+    "run_id": 41109403901,
+    "attempt": 1,
+    "artifact_id": 13001753889,
+    "archive_size_bytes": 11079805,
+    "archive_sha256": "ce9b9866b367ad02d8056d40049346c44248741b9867b519290f071a81d4a7bd",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.31 / 43\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：144；显示帧龄(ms)：196；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：172；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "tone_thread_samples": "BLOCKED\ncreate_blocked thread=WalkBuddy sound at_ms=187168\nclose thread=WalkBuddy sound at_ms=187555\nNATIVE\ncreate_begin thread=WalkBuddy sound at_ms=187619\ncreate_end thread=WalkBuddy sound at_ms=187622\nplay_begin thread=WalkBuddy sound at_ms=187634\nplay_end accepted=true thread=WalkBuddy sound at_ms=187638\nplay_begin thread=WalkBuddy sound at_ms=187839\nplay_end accepted=true thread=WalkBuddy sound at_ms=187840\nclose_begin thread=WalkBuddy sound at_ms=187848\nclose_end thread=WalkBuddy sound at_ms=187850\n",
+    "tone_activity_checks_per_pip_run": 3,
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.31 / 43\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.31 / 43\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：49；显示帧龄(ms)：17；分析龄(ms)：15\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：1；复制(ms)：3；结果交付(ms)：1\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.31 / 43\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：50；显示帧龄(ms)：19；分析龄(ms)：1502\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：19；读回排队(ms)：3；复制(ms)：4；结果交付(ms)：1\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "scope": "Android emulator controlled audio blocking/cancellation/failure with advancing virtual Camera2 and actual native audio API thread records; no audibility, latency, physical motor or TalkBack acceptance"
+  }
+]
