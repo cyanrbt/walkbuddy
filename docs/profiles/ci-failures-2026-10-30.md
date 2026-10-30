@@ -4,6 +4,8 @@
 
 ## 再次核对：最近红叉与当前状态
 
+用户再次询问后，直接重新查询最近 20 次 Actions，并读取最近失败 API 36 job `124044411424` 的原始日志：`BUILD SUCCESSFUL` 后在 `PIP_RECOVERY_PROBE_FAIL` 的目标 UID 触摸注入处失败。查询时最近连续 10 次运行均为 attempt 1 成功，包括 v0.4.22、v0.4.23、v0.4.24 三次标签发布；最新候选 [41067870083](https://github.com/cyanrbt/walkbuddy/actions/runs/41067870083) 两套 API 也首次成功。v0.4.24 三个 job 和实际 APK 附件均再次确认存在。旧红叉仍保留，不能把历史检查失败当成当前发布仍失败，也不能以这组成功保证后续运行不会失败。
+
 再次查询最近 100 次运行，并读取最近失败 job `124018124877` 的原始日志：最近连续三个红叉 [41040368806](https://github.com/cyanrbt/walkbuddy/actions/runs/41040368806)、[41041267876](https://github.com/cyanrbt/walkbuddy/actions/runs/41041267876)、[41042398884](https://github.com/cyanrbt/walkbuddy/actions/runs/41042398884) 均为 Android 16 唤醒后恢复触摸检查失败，编译已通过。日志显示目标 `restart_preview` 的按下被系统以目标 UID 不匹配拒绝；不能据此确定注入瞬间的实际窗口，也不能把所有历史失败都归为同一原因。
 
 后续 [41043678006](https://github.com/cyanrbt/walkbuddy/actions/runs/41043678006)、[41044965636](https://github.com/cyanrbt/walkbuddy/actions/runs/41044965636) 及当前标签改进首个候选 [41048695368](https://github.com/cyanrbt/walkbuddy/actions/runs/41048695368) 的两套 Android 检查均首次成功；v0.4.21 发布流程和 APK 附件也已成功。历史失败保留，不用后续成功覆盖其原因未定的事实。向用户报告时分别给出“触发”“模拟器结果”“APK 发布及下载”，避免将任何 Actions 红叉统称为打包失败。
