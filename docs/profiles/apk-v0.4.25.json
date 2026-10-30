@@ -1,0 +1,101 @@
+{
+  "scope": "Downloaded published ARM64 APK structural/signature checks; no hardware/device acceptance",
+  "tag": "v0.4.25",
+  "source_commit": "3a9456b6b49d5ef02f2c78bf1aa7305b7d1d92fc",
+  "workflow_run_id": 41070696616,
+  "workflow_conclusion": "success",
+  "release_id": 429123430,
+  "asset_id": 692358390,
+  "asset_name": "Walk-Buddy-v0.4.25-arm64-debug.apk",
+  "download_url": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.25/Walk-Buddy-v0.4.25-arm64-debug.apk",
+  "size_bytes": 9952892,
+  "sha256": "d79411ae1aa544994ad16df5774ce8bb6aa9310b137c24a62f348a7f35aa41e0",
+  "github_asset_digest_matches": true,
+  "apksigner_verify": "passed",
+  "apk_signature_v2": true,
+  "signer_count": 1,
+  "certificate_sha256": "ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d",
+  "package": "com.cyanrbt.walkbuddy",
+  "version_name": "0.4.25",
+  "version_code": 37,
+  "min_sdk": 26,
+  "target_sdk": 36,
+  "abis": [
+    "arm64-v8a"
+  ],
+  "permissions": [
+    "android.permission.CAMERA",
+    "android.permission.VIBRATE"
+  ],
+  "model": {
+    "sha256": "2e04c53bfeac0ac2a30c057c7e2a777594ce39baaac35a92f74fb1e8c4fc4e0b",
+    "size_bytes": 4563519,
+    "zip_stored": true
+  },
+  "labels": {
+    "match_tag_source_bytes": true,
+    "sha256": {
+      "labelmap.txt": "f8803ef7900160c629d570848dfda4175e21667bf7b71f73f8ece4938c9f2bf2",
+      "labelmap_zh.tsv": "d1ca7131ef7ae222cd06547f14e02b1a2358b39e987e1cc37d6ffb752f4026b6"
+    },
+    "slots": 90,
+    "unique_chinese_names": 80,
+    "empty_slots": 10
+  },
+  "control_strings_present": [
+    "pip_stop_detection",
+    "pip_stop_detection_description",
+    "info_detection_paused",
+    "detection_stopped_compact",
+    "detection_stopped_preview_only"
+  ],
+  "control_icon_present": true,
+  "label_font_resource": "11sp",
+  "label_fitter_method_present": true,
+  "crowded_label_layout_class_present": true,
+  "crowd_probe_absent": true,
+  "risk_drawing_cache_field_present": true,
+  "risk_probe_absent": true,
+  "label_memory_class_present": true,
+  "label_memory_field_present": true,
+  "motion_probe_absent": true,
+  "stop_detection_action_present": true,
+  "screen_hold_method_present": true,
+  "screen_hold_hint_present": true,
+  "preview_health_class_present": true,
+  "input_readiness_test_class_and_fixture_absent": true,
+  "test_failure_string_absent": true,
+  "test_portrait_and_candidate_models_absent": true,
+  "workflow_run_attempt": 1,
+  "release_ui_scope": "Android 15/16 x86_64 emulator APKs from the tag; published ARM64 APK checked structurally, not executed on hardware",
+  "release_ui_jobs": [
+    {
+      "api": 35,
+      "conclusion": "success",
+      "job_id": 124113679122,
+      "probe_passes": 9,
+      "probe_failure": false,
+      "label_motion": true,
+      "risk_paint": true,
+      "crowd_layout": true,
+      "mask_layering": true,
+      "font_layout": true,
+      "contrast": true
+    },
+    {
+      "api": 36,
+      "conclusion": "success",
+      "job_id": 124113678821,
+      "probe_passes": 9,
+      "probe_failure": false,
+      "label_motion": true,
+      "risk_paint": true,
+      "crowd_layout": true,
+      "mask_layering": true,
+      "font_layout": true,
+      "contrast": true
+    }
+  ],
+  "download_transport": "GitHub Release Asset API with Accept application/octet-stream; curl exit 0",
+  "asset_api_url": "https://api.github.com/repos/cyanrbt/walkbuddy/releases/assets/692358390"
+}
