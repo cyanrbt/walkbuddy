@@ -52,11 +52,9 @@
 
 ## 安装
 
-当前 [v0.4.33 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.33/Walk-Buddy-v0.4.33-arm64-debug.apk) 已通过[正式发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41120796047)。检测默认关闭时完整页显示「仅预览」，首次进入小窗即有「未检测 / 仅预览」；[前后对比与实际小窗](docs/design/v0.4.33/README.md)保留原样图。224 项 JVM、Android 15/16 候选与标签检查通过，原始标签附件和实际 APK 的版本、固定签名及摘要均已下载核验。[验证记录](docs/profiles/preview-only-default-2026-10-31.md)保留初轮/修订采证、候选外部系统 ANR 和状态接口滞后情况；实体可读性、TalkBack、厂商小窗和真实 AR 仍待验收。
+当前 [v0.4.34 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.34/Walk-Buddy-v0.4.34-arm64-debug.apk) 已通过[正式发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41127878227)。首页随会话和小窗授权变化更新，相同状态复用报告，正常监听时小窗持续播放不再触发每 500ms 的首页查询；监听不可用时保留活动期间的定时回退。231 项 JVM、Android 15/16 修订候选与标签十项检查通过，完整原始附件和实际 APK 0.4.34 / 46 的固定签名、摘要均已下载核验。[验证记录](docs/profiles/home-events-2026-10-31.md)保留初轮失败、测量前提修订、实际标签小窗及 API 36 外部系统服务 ANR；真实设备、TalkBack、AR 和耗电收益仍待验收。
 
 Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
-
-**0.4.34** 已完成本地 231 项 JVM 与 Android 15/16 候选十项检查，准备正式标签打包：首页随会话和小窗授权变化更新，相同预览状态复用报告，合并访问查询并解除离屏观察；监听不可用时保留活动期间的定时回退。[验证记录](docs/profiles/home-events-2026-10-31.md)保留初轮失败及修订、完整下载附件和设备范围。
 
 推送 `v` 开头的标签后，GitHub Actions 会构建 **arm64** 调试包，并挂到 [Releases](https://github.com/cyanrbt/walkbuddy/releases)。文件名是 `Walk-Buddy-<标签>-arm64-debug.apk`，只含 arm64-v8a，最低 Android 8。同一页上的 Source code 压缩包是源码，不是可安装的应用。
 
@@ -113,6 +111,8 @@ python3 scripts/check_model.py
 源码：https://github.com/cyanrbt/walkbuddy
 
 ## 版本
+
+- **0.4.34**：首页改为会话/小窗授权事件更新、合并一次访问快照；未变化报告复用，页面离屏解除观察，旧回调拒绝，监听不可用时定时回退。231 项 JVM、两套模拟器候选与标签检查通过，实际固定签名 APK 已下载核验；初轮失败与设备边界保留，见[本版说明](docs/releases/v0.4.34.md)。
 
 - **0.4.33**：检测默认关闭时，完整页明确标「仅预览」，首次进入小窗就保留「未检测 / 仅预览」；检测开启后撤下提示，故障/暂停提示保持，224 项 JVM 与 Android 15/16 检查通过，固定签名 APK 已发布并实际下载核验，见[本版说明](docs/releases/v0.4.33.md)。
 
