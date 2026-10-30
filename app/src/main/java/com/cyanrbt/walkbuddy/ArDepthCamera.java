@@ -31,6 +31,7 @@ final class ArDepthCamera {
     private float floorY=Float.NaN;
     private long floorSince;
     private DepthSnapshot latest;
+    private DepthProjection projection; // Created and used only on WORK after fresh depth is available.
     private final FloatBuffer vertices=buffer(new float[]{-1,-1,1,-1,-1,1,1,1});
     private final FloatBuffer uv=buffer(new float[8]);
     ArDepthCamera(Context context,SurfaceTexture target,Callback callback){this.context=context.getApplicationContext();this.target=target;this.callback=callback;}
@@ -115,22 +116,23 @@ final class ArDepthCamera {
             if(depth.getTimestamp()==lastDepthStamp)return groundKnown && latest!=null && now-latest.sampledAt<=500?latest:empty(now,"等待新的深度观测",preDepth);
             lastDepthStamp=depth.getTimestamp();
             int w=DepthObstacles.WIDTH,h=DepthObstacles.HEIGHT,n=w*h;
-            float[] view=new float[n*2],textureCoords=new float[n*2],imageCoords=new float[n*2];
-            for(int y=0;y<h;y++)for(int x=0;x<w;x++){int i=(y*w+x)*2;view[i]=(x+0.5f)/w;view[i+1]=(y+0.5f)/h;}
-            frame.transformCoordinates2d(Coordinates2d.VIEW_NORMALIZED,view,Coordinates2d.TEXTURE_NORMALIZED,textureCoords);
-            frame.transformCoordinates2d(Coordinates2d.VIEW_NORMALIZED,view,Coordinates2d.IMAGE_PIXELS,imageCoords);
-            CameraIntrinsics intrinsics=frame.getCamera().getImageIntrinsics();float[] focal=intrinsics.getFocalLength(),center=intrinsics.getPrincipalPoint();
+            if(projection==null)projection=new DepthProjection(w,h);
+            projection.reset();
+            float[] textureCoords=projection.textureCoords;
+            frame.transformCoordinates2d(Coordinates2d.VIEW_NORMALIZED,projection.view,Coordinates2d.TEXTURE_NORMALIZED,textureCoords);
+            frame.transformCoordinates2d(Coordinates2d.VIEW_NORMALIZED,projection.view,Coordinates2d.IMAGE_PIXELS,projection.imageCoords);
+            CameraIntrinsics intrinsics=frame.getCamera().getImageIntrinsics();
+            intrinsics.getFocalLength(projection.focal,0);intrinsics.getPrincipalPoint(projection.center,0);
             Image.Plane dp=depth.getPlanes()[0],cp=confidence.getPlanes()[0];ByteBuffer db=dp.getBuffer().order(ByteOrder.nativeOrder()),cb=cp.getBuffer();
             DepthObstacles.Grid grid=new DepthObstacles.Grid(w,h,groundKnown);int valid=0;
             for(int i=0;i<n;i++) {
-                float u=textureCoords[2*i],v=textureCoords[2*i+1];if(u<0 || u>=1 || v<0 || v>=1)continue;
+                if(!projection.mapped(i))continue;
+                float u=textureCoords[2*i],v=textureCoords[2*i+1];
                 int x=(int)(u*depth.getWidth()),y=(int)(v*depth.getHeight());
                 int dIndex=y*dp.getRowStride()+x*dp.getPixelStride(),cIndex=y*cp.getRowStride()+x*cp.getPixelStride();
                 if(dIndex+1>=db.limit() || cIndex>=cb.limit())continue;
                 float z=(db.getShort(dIndex)&65535)/1000f,c=(cb.get(cIndex)&255)/255f;if(z<0.2f || z>5 || c<0.65f)continue;
-                float[] point=pose.transformPoint(new float[]{(imageCoords[2*i]-center[0])*z/focal[0],-(imageCoords[2*i+1]-center[1])*z/focal[1],-z});
-                float dx=point[0]-pose.tx(),dz=point[2]-pose.tz();grid.forward[i]=dx*fx+dz*fz;grid.lateral[i]=-dx*fz+dz*fx;
-                grid.aboveGround[i]=point[1]-floorY;grid.confidence[i]=c;valid++;
+                projection.project(pose,i,z,fx,fz,floorY,grid);grid.confidence[i]=c;valid++;
             }
             if(valid<DepthThresholds.MIN_VALID_DEPTH_SAMPLES)return empty(now,"深度覆盖不足 · 未测到不代表可通行",DepthSnapshot.Stage.DEPTH_SPARSE);
             if(!groundKnown)return new DepthSnapshot(now-age/1000000L,DepthObstacles.detect(grid),
@@ -146,6 +148,7 @@ final class ArDepthCamera {
     }
     private void failure(){if(stopped)return;Callback failedCallback=callback;main.post(()->{if(callback==failedCallback && failedCallback!=null)failedCallback.failed("增强测距暂不可用，已停止；可重新开启普通预览");});stopped=true;release();}
     private void release() {
+        projection=null;
         if(session!=null){try{session.pause();}catch(RuntimeException ignored){}try{session.close();}catch(RuntimeException ignored){}session=null;}
         if(display!=EGL14.EGL_NO_DISPLAY){EGL14.eglMakeCurrent(display,EGL14.EGL_NO_SURFACE,EGL14.EGL_NO_SURFACE,EGL14.EGL_NO_CONTEXT);if(window!=EGL14.EGL_NO_SURFACE)EGL14.eglDestroySurface(display,window);if(glContext!=EGL14.EGL_NO_CONTEXT)EGL14.eglDestroyContext(display,glContext);EGL14.eglTerminate(display);}
         display=EGL14.EGL_NO_DISPLAY;window=EGL14.EGL_NO_SURFACE;glContext=EGL14.EGL_NO_CONTEXT;

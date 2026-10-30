@@ -63,6 +63,7 @@ final class DetectorProbe {
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("Detector probe is restricted to emulators");
+            report.append(DepthProjectionCases.all());
             pixels(report);model(runner,report);threadOutputs(runner);report.append(THREAD_PASS);
             result.putString("stream",report+"RUNTIME_PROBE_PASS\n");runner.finish(Activity.RESULT_OK,result);
         } catch(Throwable error) {

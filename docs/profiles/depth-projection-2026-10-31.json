@@ -1,0 +1,31 @@
+{
+  "scope": "Constructed JVM observations and source/bytecode array-construction bounds; no AR session, ART allocation measurement, FPS, power or device accuracy claim",
+  "arcore_version": "1.56.0",
+  "arcore_classes_jar_sha256": "1617746d3ec52ffad783aa6acdc8562e4ec8294f7d8579095378bd447df28950",
+  "baseline_tag": "v0.4.31",
+  "baseline_ar_depth_camera_sha256": "1ae49bb43c8b7fd4e0b3afbdc04c905c3fc9583cb3d36096e3f4c857d976dafd",
+  "source_sha256": {
+    "app/src/main/java/com/cyanrbt/walkbuddy/DepthProjection.java": "4b4a51a80512eb43758e107db30193ef9ea8d100559bcac2dd8b73c656802805",
+    "app/src/main/java/com/cyanrbt/walkbuddy/DepthThresholds.java": "1d781e36916abfd38a9dff3caaabba31be5ff94f92e659fb6bd9253221f5e1d7",
+    "app/src/main/java/com/cyanrbt/walkbuddy/DepthObstacles.java": "bd6be8d27a60bffcbd72751349c5a1cb5649826b6a318e16337cbb6ce342efe8",
+    "app/src/main/java/com/cyanrbt/walkbuddy/DepthDrops.java": "14ca4e854909f3b6f47d99265104e61227c371b39af3571166cca38a852fa14b",
+    "app/src/main/java/com/cyanrbt/walkbuddy/Detection.java": "7d91ecfe65839cb4f23bcdac84c0f97e2fd01b3f3e0ee124bc00ea0d39dac880",
+    "app/src/main/java/com/cyanrbt/walkbuddy/ObstacleMask.java": "eeabdd97762f6bdece16957808b3e3555a34ec0c30e5a775a1b1cefebf301295",
+    "app/src/checks/java/com/cyanrbt/walkbuddy/DepthProjectionCases.java": "afa6db30b3d5611e8301410581b3ab84fbbc295a674018bae61779565dfa2e32",
+    "docs/profiles/DepthProjectionAudit.java": "a7a9711fbe50bd954dd79a64e6b011b8f4b72c51704fcc0c356c4e4639f0e6aa",
+    "app/src/main/java/com/cyanrbt/walkbuddy/ArDepthCamera.java": "b731ae49b4305300ffc54f6a2b1bc48ba301c6e21e46b590085a0c61987856b5",
+    "docs/profiles/reproduce_depth_projection.py": "f8cd9f69edabe92645855a5c75b63b9798eb748a7a26dc7184a7222e38285330"
+  },
+  "report": "DEPTH_PROJECTION_PARITY_PASS cases=96 grid_points=589824; raw float bits, obstacle/drop outputs, moving pose/intrinsics, sparse updates; constructed observations, not AR camera accuracy\nDEPTH_PROJECTION_STATE_PASS cases=5; sample centers, incomplete transform reset, independent workspaces/grids, nonfinite boundary math, near obstacle/drop\n",
+  "grid_width": 64,
+  "grid_height": 96,
+  "visible_array_constructors_per_sampling_pass": {
+    "baseline_formula": "5 + 2 * valid_points",
+    "baseline_all_6144_valid": 12293,
+    "new_projection_workspace_per_pass": 0,
+    "new_workspace_once": 7
+  },
+  "retained_workspace_float_payload_bytes": 147496,
+  "new_project_method_has_no_array_creation_bytecode": true,
+  "limits": "Bounds cover the replaced coordinate/intrinsics/point arrays only; unchanged grid/mask/traversal and ARCore internal allocations remain. JVM/ART may eliminate allocations; object headers are excluded."
+}
