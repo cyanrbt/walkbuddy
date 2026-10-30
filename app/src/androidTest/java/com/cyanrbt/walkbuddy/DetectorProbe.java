@@ -73,19 +73,24 @@ final class DetectorProbe {
     private static void pixels(StringBuilder report) {
         DetectorInput workspace=new DetectorInput();ByteBuffer identity=null;int cases=0;
         try {
-            for(int cycle=0;cycle<2;cycle++)for(int[] size:new int[][]{{640,480},{480,640},{320,320},{137,59},{1,719},{719,1},{113,211}}) {
+            for(int cycle=0;cycle<2;cycle++)for(int rotation:new int[]{0,90,180,270})for(int[] size:new int[][]{{640,480},{480,640},{320,320},{137,59},{1,719},{719,1},{113,211}}) {
                 Bitmap source=Bitmap.createBitmap(size[0],size[1],Bitmap.Config.ARGB_8888);
                 try {
+                    source.setDensity(cycle==0?Bitmap.DENSITY_NONE:320);
                     // Alternating shapes, alpha and colors expose old image/padding remnants.
                     source.eraseColor(cycle==0?Color.WHITE:Color.TRANSPARENT);
                     Paint paint=new Paint();paint.setColor(cycle==0?Color.rgb(7,131,239):Color.argb(91,250,70,10));
                     new Canvas(source).drawRect(0,0,size[0]*0.7f,size[1]*0.6f,paint);
-                    ByteBuffer expected=baseline(source),actual=workspace.prepare(source);
+                    ByteBuffer expected=baseline(source,rotation),actual=workspace.prepare(source,rotation);
                     if(identity!=null && actual!=identity)throw new AssertionError("Input buffer changed identity");identity=actual;
                     if(!actual.isDirect() || actual.position()!=0 || actual.remaining()!=320*320*3)
                         throw new AssertionError("Input buffer has invalid layout");
                     for(int i=0;i<expected.capacity();i++)if(expected.get(i)!=actual.get(i))
-                        throw new AssertionError("RGB parity failed for "+Arrays.toString(size)+" cycle="+cycle+" byte="+i);
+                        throw new AssertionError("RGB parity failed for "+Arrays.toString(size)+" rotation="+rotation+" cycle="+cycle+" byte="+i);
+                    float scale=Math.min(320f/size[0],320f/size[1]);
+                    equal((rotation%180==0?size[0]:size[1])*scale,workspace.width);
+                    equal((rotation%180==0?size[1]:size[0])*scale,workspace.height);
+                    equal((320-workspace.width)/2,workspace.padX);equal((320-workspace.height)/2,workspace.padY);
                     if(source.isRecycled())throw new AssertionError("Preparing input took ownership of the source");
                     // A consumer may move the buffer position/limit; the next frame must reset both.
                     actual.limit(3);actual.position(3);cases++;
@@ -102,7 +107,7 @@ final class DetectorProbe {
                     before=allocated();for(int i=0;i<30;i++)sink+=workspace.prepare(source).get(0);after=allocated();
                     if(before>=0 && after>=before)newBytes+=after-before;else newBytes=-1;
                 }
-                report.append("PREPROCESS_PARITY_PASS cases=").append(cases).append("; RGB bytes, alternating padding/alpha, fixed input buffer, consumer positions\n");
+                report.append("PREPROCESS_PARITY_PASS cases=").append(cases).append("; RGB bytes, all display rotations, alternating padding/alpha, geometry, fixed input buffer, consumer positions\n");
                 report.append("PREPROCESS_ALLOCATION_OBSERVATION rounds=3 frames=90 baselineBytes=").append(oldBytes)
                     .append(" reusedBytes=").append(newBytes).append("; ART process-wide managed allocation, excludes native bitmap memory\n");
             } finally {source.recycle();}
@@ -120,15 +125,15 @@ final class DetectorProbe {
         try(LocalDetector detector=new LocalDetector(runner.getTargetContext())) {
             report.append(detector.tensorReport()).append('\n');
             LocalDetector.Result retained=null;int[] savedIndices=null;float[] savedScores=null;String savedDetections=null;int cases=0;
-            for(Bitmap source:new Bitmap[]{portrait,blank,white,portrait}) {
+            for(int rotation:new int[]{0,90,180,270})for(Bitmap source:new Bitmap[]{portrait,blank,white,portrait}) {
                 float[][][] boxes=new float[1][25][4];float[][] classes=new float[1][25],scores=new float[1][25];float[] count=new float[1];
                 Map<Integer,Object> outputs=new HashMap<>();outputs.put(0,boxes);outputs.put(1,classes);outputs.put(2,scores);outputs.put(3,count);
-                detector.interpreter.runForMultipleInputsOutputs(new Object[]{baseline(source)},outputs);
+                detector.interpreter.runForMultipleInputsOutputs(new Object[]{baseline(source,rotation)},outputs);
                 for(String name:new String[]{"boxes","classes","scores","count"}) {
                     FloatBuffer buffer=buffer(detector,name);for(int i=0;i<buffer.capacity();i++)buffer.put(i,Float.NaN);
                     buffer.limit(1);buffer.position(1); // Reused outputs must reset limits as well as positions.
                 }
-                LocalDetector.Result found=detector.detect(new BitmapFrame(source));
+                LocalDetector.Result found=detector.detect(new BitmapFrame(source,rotation));
                 equal(count[0],buffer(detector,"count").get(0));
                 for(int i=0;i<25;i++) {
                     equal(classes[0][i],buffer(detector,"classes").get(i));equal(scores[0][i],buffer(detector,"scores").get(i));
@@ -136,14 +141,14 @@ final class DetectorProbe {
                 }
                 if(found.classIndices.length!=Math.round(count[0]))throw new AssertionError("Result count mismatch");
                 for(int i=0;i<found.classIndices.length;i++){if(found.classIndices[i]!=Math.round(classes[0][i]))throw new AssertionError("Class mismatch");equal(scores[0][i],found.scores[i]);}
-                if(source==portrait && !"人".equals(found.category))throw new AssertionError("Portrait no longer confirms person index 0");
+                if(source==portrait && rotation==0 && !"人".equals(found.category))throw new AssertionError("Portrait no longer confirms person index 0");
                 if(source==blank && !found.category.isEmpty())throw new AssertionError("Black input has a high-score target");
                 if(retained!=null && (!Arrays.equals(savedIndices,retained.classIndices) || !Arrays.equals(savedScores,retained.scores)
                     || !savedDetections.equals(describe(retained))))throw new AssertionError("Reused output mutated a previously delivered result");
                 if(retained==null){retained=found;savedIndices=found.classIndices.clone();savedScores=found.scores.clone();savedDetections=describe(found);}
                 if(source.isRecycled())throw new AssertionError("Detector recycled the worker-owned frame");cases++;
             }
-            report.append("MODEL_PARITY_PASS cases=").append(cases).append("; all 151 floats match array-output baseline within 1e-6; person, blank, repeated portrait; delivered results independent\n");
+            report.append("MODEL_PARITY_PASS cases=").append(cases).append("; all 151 floats match rotated-bitmap/array-output baseline within 1e-6; all display rotations, person, blank, repeated portrait; delivered results independent\n");
             detector.close();detector.close();
             try{detector.detect(new BitmapFrame(blank));throw new AssertionError("Closed detector accepted a frame");}catch(IllegalStateException expected){/* closed */}
         } finally {portrait.recycle();blank.recycle();white.recycle();}
@@ -164,7 +169,13 @@ final class DetectorProbe {
         String value=Debug.getRuntimeStat("art.gc.bytes-allocated");return value==null?-1:Long.parseLong(value);
     }
     /** Frozen v0.4.8 preprocessing, kept only in the test APK as the parity/measurement baseline. */
-    private static ByteBuffer baseline(Bitmap source) {
+    static ByteBuffer baseline(Bitmap source,int rotation) {
+        if(rotation==0)return baseline(source);
+        Matrix matrix=new Matrix();matrix.setRotate(-rotation);
+        Bitmap rotated=Bitmap.createBitmap(source,0,0,source.getWidth(),source.getHeight(),matrix,true);
+        try{return baseline(rotated);}finally{if(rotated!=source)rotated.recycle();}
+    }
+    static ByteBuffer baseline(Bitmap source) {
         float scale=Math.min(320f/source.getWidth(),320f/source.getHeight());
         float width=source.getWidth()*scale,height=source.getHeight()*scale,padX=(320-width)/2,padY=(320-height)/2;
         Bitmap padded=Bitmap.createBitmap(320,320,Bitmap.Config.ARGB_8888);

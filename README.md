@@ -1,6 +1,6 @@
 # WalkBuddy
 
-白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前版本 **0.4.16**（versionCode 28）。
+白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前版本 **0.4.17**（versionCode 29）。
 
 它多留一个画面，并提供基础物体识别和实验性的空间障碍检测。空间检测按深度占用判断前方是否可能受阻，无需先认识物体名称。路还是要自己看。不要在马路、楼梯或骑行时靠它决定下一步。
 
@@ -41,7 +41,7 @@
 
 ## 安装
 
-当前 [v0.4.16 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.16/Walk-Buddy-v0.4.16-arm64-debug.apk) 已通过 [发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41004932094)，并实际下载核验版本与固定签名；[验证记录](docs/验证结果.md)含完整摘要和模拟器/实机范围。
+已核验的 [v0.4.16 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.16/Walk-Buddy-v0.4.16-arm64-debug.apk) 已通过 [发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41004932094)，并实际下载核验版本与固定签名；[验证记录](docs/验证结果.md)含完整摘要和模拟器/实机范围。
 
 推送 `v` 开头的标签后，GitHub Actions 会构建 **arm64** 调试包，并挂到 [Releases](https://github.com/cyanrbt/walkbuddy/releases)。文件名是 `Walk-Buddy-<标签>-arm64-debug.apk`，只含 arm64-v8a，最低 Android 8。同一页上的 Source code 压缩包是源码，不是可安装的应用。
 
@@ -98,6 +98,8 @@ python3 scripts/check_model.py
 源码：https://github.com/cyanrbt/walkbuddy
 
 ## 版本
+
+- **0.4.17**：将显示方向旋转合并进识别 worker 的复用输入画布，减少横屏采样的临时位图和主线程工作；逐字节与完整模型输出对照覆盖四个方向，验证进度见[本版说明](docs/releases/v0.4.17.md)。
 
 - **0.4.16**：预览开关前置，简短标签配合原生勾选状态；检测详情先显示测距限定。空间增强未开启时收起四步进度和重复状态，保留能力说明与入口。扩展大字体和状态检查，验证进度见[本版说明](docs/releases/v0.4.16.md)。
 - **0.4.15**：可用 CPU 不超过两个时采用单线程识别，更多 CPU 保持双线程；增加完整模型输出对照与可复核的线程实验。135 项单测和 Android 15/16 默认配置完整原生回归通过，[GitHub 打包成功](https://github.com/cyanrbt/walkbuddy/actions/runs/40996293458)，已实际下载并核验 [APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.15/Walk-Buddy-v0.4.15-arm64-debug.apk)。双核模拟器多数轮次的 native 中位数较低，实机收益待测。详见[本版说明](docs/releases/v0.4.15.md)。

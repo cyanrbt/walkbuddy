@@ -385,16 +385,11 @@ public final class PreviewActivity extends Activity {
             state.analysisAt=SystemClock.elapsedRealtime();syncTicket();requestAnalysisPreparation();
         } else {cancelAnalysis();if(state.recognition)prepareAnalysis(SystemClock.elapsedRealtime());}
     }
-    static Bitmap samplePreview(TextureView view,PreviewGeometry geometry) {
+    static BitmapFrame samplePreview(TextureView view,PreviewGeometry geometry) {
         // getBitmap 复制的是 SurfaceTexture 内容，不包含 view 的 fit-center Matrix。
-        // 保留系统已补偿 sensor 的天然比例，直接读到模型所需尺寸；只补偿 display 一次。
+        // 保留系统已补偿 sensor 的天然比例；display 补偿在 worker 的输入画布完成。
         Bitmap natural=view.getBitmap(geometry.sampleWidth,geometry.sampleHeight);if(natural==null)return null;
-        if(geometry.displayDegrees==0)return natural;
-        Matrix rotation=new Matrix();rotation.setRotate(-geometry.displayDegrees);
-        try {
-            Bitmap sampled=Bitmap.createBitmap(natural,0,0,natural.getWidth(),natural.getHeight(),rotation,true);
-            if(sampled!=natural)natural.recycle();return sampled;
-        } catch(RuntimeException|Error error){natural.recycle();throw error;}
+        return new BitmapFrame(natural,geometry.displayDegrees);
     }
     @SuppressWarnings("MissingPermission") private void openCamera(SurfaceTexture surfaceTexture) {
         if(state.phase!=SessionState.Phase.STARTING) return;
@@ -556,14 +551,14 @@ public final class PreviewActivity extends Activity {
         TextureView source=texture;PreviewGeometry geometry=previewGeometry;
         if(ticket==null || !ticket.allowed(SystemClock.elapsedRealtime()) || source==null || geometry==null)return;
         long copyStarted=SystemClock.elapsedRealtime();
-        Bitmap bitmap=samplePreview(source,geometry);if(bitmap==null){fail("无法读取分析帧：不可用");return;}
+        BitmapFrame frame=samplePreview(source,geometry);if(frame==null){fail("无法读取分析帧：不可用");return;}
         long copyMs=SystemClock.elapsedRealtime()-copyStarted;lastSampleCopyMs=copyMs;
         if(copyMs>=200)android.util.Log.w("WalkBuddyAnalysis","Slow camera copyMs="+copyMs+" pip="+isInPictureInPictureMode());
         long copiedAt=SystemClock.elapsedRealtime();
         if(destroyed || token!=state.generation || epoch!=analysisEpoch || ticket!=analysisTicket || texture!=source
-            || state.phase!=SessionState.Phase.LIVE || !ticket.allowed(copiedAt) || copiedAt-frameAt>1000){bitmap.recycle();return;}
+            || state.phase!=SessionState.Phase.LIVE || !ticket.allowed(copiedAt) || copiedAt-frameAt>1000){frame.close();return;}
         sampledAt=frameAt;
-        worker.submit(ticket,new BitmapFrame(bitmap),frameAt,(result,error)->{
+        worker.submit(ticket,frame,frameAt,(result,error)->{
             long completedAt=SystemClock.elapsedRealtime();
             main.post(()->{
                 long now=SystemClock.elapsedRealtime();

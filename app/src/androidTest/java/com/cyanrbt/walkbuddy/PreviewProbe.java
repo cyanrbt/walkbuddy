@@ -41,14 +41,23 @@ public class PreviewProbe extends Instrumentation {
     if(!updated.await(5,TimeUnit.SECONDS))throw new AssertionError("frame timeout");
     CountDownLatch drawn=new CountDownLatch(1);runOnMainSync(()->ref.get().postOnAnimation(()->ref.get().postOnAnimation(drawn::countDown)));
     if(!drawn.await(5,TimeUnit.SECONDS))throw new AssertionError("draw timeout");
-    AtomicReference<Bitmap> shot=new AtomicReference<>(),sample=new AtomicReference<>(),baseline=new AtomicReference<>();long[] copyNs=new long[2];final int order=cases;CountDownLatch copied=new CountDownLatch(1);int[] copyResult={-1};
+    AtomicReference<Bitmap> shot=new AtomicReference<>(),sample=new AtomicReference<>(),baseline=new AtomicReference<>();AtomicReference<BitmapFrame> raw=new AtomicReference<>();long[] copyNs=new long[2],limitedBytes={0};final int order=cases;CountDownLatch copied=new CountDownLatch(1);int[] copyResult={-1};
     runOnMainSync(()->{int[] location=new int[2];ref.get().getLocationInWindow(location);report.append("view=").append(ref.get().getWidth()).append("x").append(ref.get().getHeight()).append(" location=").append(java.util.Arrays.toString(location)).append(" matrix=").append(ref.get().getTransform(null)).append("\n");Bitmap capture=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);shot.set(capture);
      PixelCopy.request(host.getWindow(),new Rect(location[0],location[1],location[0]+w,location[1]+h),capture,status->{copyResult[0]=status;copied.countDown();},new android.os.Handler(android.os.Looper.getMainLooper()));
      // Alternate order to avoid always giving one path the first readback/cache state.
-     if(order%2==0){copy(ref.get(),geometry,true,baseline,copyNs,0);copy(ref.get(),geometry,false,sample,copyNs,1);}
-     else {copy(ref.get(),geometry,false,sample,copyNs,1);copy(ref.get(),geometry,true,baseline,copyNs,0);}});
+     if(order%2==0){copy(ref.get(),geometry,true,baseline,raw,copyNs,0);copy(ref.get(),geometry,false,baseline,raw,copyNs,1);}
+     else {copy(ref.get(),geometry,false,baseline,raw,copyNs,1);copy(ref.get(),geometry,true,baseline,raw,copyNs,0);}
+     sample.set(limitedBaseline(ref.get(),geometry,limitedBytes));});
     if(!copied.await(5,TimeUnit.SECONDS) || copyResult[0]!=PixelCopy.SUCCESS)throw new AssertionError("PixelCopy failed "+copyResult[0]);
     Bitmap image=shot.get(),input=sample.get(),original=baseline.get();if(image==null || input==null || original==null)throw new AssertionError("bitmap unavailable");
+    BitmapFrame frame=raw.get();if(frame==null || frame.displayDegrees!=display)throw new AssertionError("Missing natural frame/rotation");
+    if(frame.bitmap.getWidth()!=geometry.sampleWidth || frame.bitmap.getHeight()!=geometry.sampleHeight)throw new AssertionError("Readback changed natural dimensions");
+    try(DetectorInput prepared=new DetectorInput()) {
+     java.nio.ByteBuffer expected=DetectorProbe.baseline(input),actual=prepared.prepare(frame.bitmap,frame.displayDegrees);
+     for(int i=0;i<expected.capacity();i++)if(expected.get(i)!=actual.get(i))throw new AssertionError("Texture input parity failed s="+sensor+" d="+display+" byte="+i);
+    }
+    int naturalBytes=frame.bitmap.getAllocationByteCount();
+    if(limitedBytes[0]!=naturalBytes*(display==0?1:2))throw new AssertionError("Unexpected legacy/new bitmap allocation: "+limitedBytes[0]+" vs "+naturalBytes);
     if(Math.max(input.getWidth(),input.getHeight())!=320 || input.getWidth()*input.getHeight()!=640*480/4)throw new AssertionError("Readback was not bounded to the model edge");
     if(input.getAllocationByteCount()*4!=original.getAllocationByteCount())throw new AssertionError("Expected quarter-sized readback bitmap");
     baselineNs+=copyNs[0];sampledNs+=copyNs[1];
@@ -62,18 +71,28 @@ public class PreviewProbe extends Instrumentation {
     float expected=geometry.width/geometry.height;if(Math.abs(input.getWidth()/(float)input.getHeight()-expected)>0.015)throw new AssertionError("采样比例错误");
     File output=new File(evidence,"preview-s"+sensor+"-d"+display+"-"+w+".png");
     try(FileOutputStream stream=new FileOutputStream(output)){image.compress(Bitmap.CompressFormat.PNG,100,stream);}
-    report.append("PASS sensor=").append(sensor).append(" display=").append(display).append(" view=").append(w).append('x').append(h).append(" sample=").append(input.getWidth()).append('x').append(input.getHeight()).append(" baselineCopyUs=").append(copyNs[0]/1000).append(" limitedCopyUs=").append(copyNs[1]/1000)
-     .append(" baselineBytes=").append(original.getAllocationByteCount()).append(" limitedBytes=").append(input.getAllocationByteCount()).append('\n');
-    image.recycle();input.recycle();original.recycle();cases++;
+    report.append("PASS sensor=").append(sensor).append(" display=").append(display).append(" view=").append(w).append('x').append(h).append(" sample=").append(input.getWidth()).append('x').append(input.getHeight()).append(" baselineCopyUs=").append(copyNs[0]/1000).append(" naturalCopyUs=").append(copyNs[1]/1000)
+     .append(" baselineBytes=").append(original.getAllocationByteCount()).append(" limitedBytes=").append(input.getAllocationByteCount())
+     .append(" legacyLimitedAllocatedBytes=").append(limitedBytes[0]).append(" naturalAllocatedBytes=").append(naturalBytes).append("; fused input RGB identical\n");
+    image.recycle();input.recycle();original.recycle();frame.close();cases++;
    }finally{surface.release();}
   }
-  report.append("READBACK_OBSERVATION baselineUs=").append(baselineNs/1000).append(" limitedUs=").append(sampledNs/1000).append(" cases=32; alternating order, software producer, includes display rotation; not camera end-to-end timing\n");
+  report.append("READBACK_OBSERVATION baselineUs=").append(baselineNs/1000).append(" naturalUs=").append(sampledNs/1000).append(" cases=32; alternating order, full baseline includes rotation, natural readback rotates later on worker; not camera end-to-end timing\n");
+  report.append("ROTATION_FUSION_PASS cases=32; all RGB input bytes identical to v0.4.16; one readback bitmap, removes rotated bitmap for display 90/180/270\n");
   report.append("PREVIEW_PROBE_PASS cases=").append(cases).append("; direction marker + circle in displayed and sampled bitmap\n");result.putString("stream",report.toString());finish(Activity.RESULT_OK,result);
  }catch(Throwable error){result.putString("stream",report+"PREVIEW_PROBE_FAIL: "+error);finish(Activity.RESULT_CANCELED,result);}finally{if(activity!=null){final Activity host=activity;runOnMainSync(host::finish);}}}
- private static void copy(TextureView view,PreviewGeometry g,boolean old,AtomicReference<Bitmap> result,long[] times,int slot){
+ private static void copy(TextureView view,PreviewGeometry g,boolean old,AtomicReference<Bitmap> result,AtomicReference<BitmapFrame> raw,long[] times,int slot){
   long started=android.os.SystemClock.elapsedRealtimeNanos();
-  result.set(old?baseline(view,g):PreviewActivity.samplePreview(view,g));
+  if(old)result.set(baseline(view,g));else raw.set(PreviewActivity.samplePreview(view,g));
   times[slot]=android.os.SystemClock.elapsedRealtimeNanos()-started;
+ }
+ /** Frozen v0.4.16 bounded readback and rotation, only in the test APK. */
+ private static Bitmap limitedBaseline(TextureView view,PreviewGeometry g,long[] allocated){
+  Bitmap natural=view.getBitmap(g.sampleWidth,g.sampleHeight);if(natural==null)return null;
+  allocated[0]=natural.getAllocationByteCount();if(g.displayDegrees==0)return natural;
+  Matrix rotation=new Matrix();rotation.setRotate(-g.displayDegrees);
+  try {Bitmap output=Bitmap.createBitmap(natural,0,0,natural.getWidth(),natural.getHeight(),rotation,true);if(output!=natural){allocated[0]+=output.getAllocationByteCount();natural.recycle();}return output;}
+  catch(RuntimeException|Error error){natural.recycle();throw error;}
  }
  /** Frozen full-resolution v0.4.10 readback, only in the test APK. */
  private static Bitmap baseline(TextureView view,PreviewGeometry g){

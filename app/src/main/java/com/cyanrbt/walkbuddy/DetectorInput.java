@@ -22,14 +22,33 @@ final class DetectorInput implements AutoCloseable {
     float width,height,padX,padY;
 
     ByteBuffer prepare(Bitmap source) {
+        return prepare(source,0);
+    }
+    ByteBuffer prepare(Bitmap source,int displayDegrees) {
         if(closed)throw new IllegalStateException("识别输入已释放");
+        if(displayDegrees%90!=0)throw new IllegalArgumentException("方向必须为90度整数倍");
+        int rotation=Math.floorMod(displayDegrees,360);
         float scale=Math.min(SIZE/(float)source.getWidth(),SIZE/(float)source.getHeight());
-        width=source.getWidth()*scale;height=source.getHeight()*scale;
+        width=(rotation%180==0?source.getWidth():source.getHeight())*scale;
+        height=(rotation%180==0?source.getHeight():source.getWidth())*scale;
         padX=(SIZE-width)/2;padY=(SIZE-height)/2;
         destination.set(padX,padY,padX+width,padY+height);
         // Clear the whole image, including padding left by a differently shaped previous frame.
         canvas.drawColor(Color.BLACK);
-        canvas.drawBitmap(source,null,destination,paint);
+        if(rotation==0)canvas.drawBitmap(source,null,destination,paint);
+        else {
+            // Rotate directly into the reused model image; no intermediate camera bitmap.
+            int saved=canvas.save();
+            try {
+                canvas.translate(padX,padY);canvas.scale(scale,scale);
+                if(rotation==90)canvas.translate(0,source.getWidth());
+                else if(rotation==180)canvas.translate(source.getWidth(),source.getHeight());
+                else canvas.translate(source.getHeight(),0);
+                canvas.rotate(-rotation);
+                destination.set(0,0,source.getWidth(),source.getHeight());
+                canvas.drawBitmap(source,null,destination,paint);
+            } finally {canvas.restoreToCount(saved);}
+        }
         padded.getPixels(pixels,0,SIZE,0,0,SIZE,SIZE);
         buffer.clear();
         int offset=0;

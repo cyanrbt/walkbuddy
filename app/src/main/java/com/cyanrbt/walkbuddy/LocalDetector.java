@@ -59,7 +59,7 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
     @Override public Result detect(BitmapFrame frame) {
         if(closed)throw new IllegalStateException("识别器已释放");
         long started=android.os.SystemClock.elapsedRealtime(),prepareCpuStarted=android.os.Debug.threadCpuTimeNanos();
-        inputs[0]=input.prepare(frame.bitmap);
+        inputs[0]=input.prepare(frame.bitmap,frame.displayDegrees);
         boxes.clear();classes.clear();scores.clear();count.clear();
         long prepared=android.os.SystemClock.elapsedRealtime();
         long cpuStarted=android.os.Debug.threadCpuTimeNanos(),prepareCpuMs=(cpuStarted-prepareCpuStarted)/1_000_000;
