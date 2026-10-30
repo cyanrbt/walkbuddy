@@ -56,7 +56,7 @@
 
 Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
 
-下一版 **0.4.34** 正在验证：首页随会话和小窗授权变化更新，相同预览状态复用报告，合并访问查询并解除离屏观察；监听不可用时保留活动期间的定时回退。[验证记录](docs/profiles/home-events-2026-10-31.md)区分本地、模拟器、实际发布与设备范围。
+**0.4.34** 已完成本地 231 项 JVM 与 Android 15/16 候选十项检查，准备正式标签打包：首页随会话和小窗授权变化更新，相同预览状态复用报告，合并访问查询并解除离屏观察；监听不可用时保留活动期间的定时回退。[验证记录](docs/profiles/home-events-2026-10-31.md)保留初轮失败及修订、完整下载附件和设备范围。
 
 推送 `v` 开头的标签后，GitHub Actions 会构建 **arm64** 调试包，并挂到 [Releases](https://github.com/cyanrbt/walkbuddy/releases)。文件名是 `Walk-Buddy-<标签>-arm64-debug.apk`，只含 arm64-v8a，最低 Android 8。同一页上的 Source code 压缩包是源码，不是可安装的应用。
 
