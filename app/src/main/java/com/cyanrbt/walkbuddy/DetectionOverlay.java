@@ -12,6 +12,8 @@ public final class DetectionOverlay extends View {
     private final Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);
     private final android.text.TextPaint textPaint=new android.text.TextPaint(Paint.ANTI_ALIAS_FLAG);
     private final float dp;
+    private final float textAbove,textBelow;
+    private final Rect glyphBounds=new Rect();
     private final DashPathEffect cautionDash;
     private List<Detection> detections=Collections.emptyList();
     private PreviewGeometry geometry;
@@ -21,7 +23,7 @@ public final class DetectionOverlay extends View {
         final Path edges=new Path();
         Path fill;
         int color;
-        float stroke, labelX, labelY, labelWidth;
+        float stroke, labelX, labelY, labelWidth, labelTop, labelBottom;
         boolean caution;
         String label;
     }
@@ -31,8 +33,11 @@ public final class DetectionOverlay extends View {
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         dp=getResources().getDisplayMetrics().density;
         cautionDash=new DashPathEffect(new float[]{6*dp,4*dp},0);
-        textPaint.setTextSize(11*dp);
+        // Let Resources apply platform sp conversion, including nonlinear font scaling.
+        textPaint.setTextSize(getResources().getDimension(R.dimen.detection_label_text_size));
         textPaint.setTypeface(Typeface.create("sans-serif-medium",Typeface.NORMAL));
+        Paint.FontMetrics metrics=textPaint.getFontMetrics();
+        textAbove=-metrics.top;textBelow=metrics.bottom;
         paint.setStrokeCap(Paint.Cap.ROUND);
     }
 
@@ -74,14 +79,31 @@ public final class DetectionOverlay extends View {
                 e.edges.moveTo(l,b-corner);e.edges.lineTo(l,b);e.edges.lineTo(l+corner,b);
                 e.edges.moveTo(r-corner,b);e.edges.lineTo(r,b);e.edges.lineTo(r,b-corner);
             }
-            String label=Float.isFinite(d.meters)?String.format(Locale.CHINA,"约 %.1f 米 · %s",d.meters,d.label)
-                :d.attention()?"未测距 · "+d.label:d.label;
-            e.label=TextUtils.ellipsize(label,textPaint,Math.max(0,g.width-12*dp),TextUtils.TruncateAt.END).toString();
+            e.label=fitLabel(d,Math.max(0,g.width-12*dp));
             e.labelWidth=textPaint.measureText(e.label);
-            e.labelX=Math.max(g.left+2*dp,Math.min(l,g.left+g.width-e.labelWidth-12*dp));
-            e.labelY=Math.max(g.top+19*dp,Math.min(t-5*dp,g.top+g.height-5*dp));
+            textPaint.getTextBounds(e.label,0,e.label.length(),glyphBounds);
+            float above=Math.max(textAbove,-glyphBounds.top),below=Math.max(textBelow,glyphBounds.bottom);
+            float height=above+below+8*dp;
+            if(height+4*dp>g.height){e.label="";e.labelWidth=0;}
+            e.labelX=Math.max(g.left+2*dp,Math.min(l,g.left+g.width-e.labelWidth-10*dp));
+            e.labelTop=Math.max(g.top+2*dp,Math.min(t-3*dp-height,g.top+g.height-2*dp-height));
+            e.labelY=e.labelTop+4*dp+above;
+            e.labelBottom=e.labelTop+height;
         }
         return out;
+    }
+
+    private String fitLabel(Detection detection,float width) {
+        String qualifier=Float.isFinite(detection.meters)?String.format(Locale.CHINA,"约 %.1f 米",detection.meters)
+            :detection.attention()?"未测距":null;
+        String full=qualifier==null?detection.label:qualifier+" · "+detection.label;
+        String fitted=TextUtils.ellipsize(full,textPaint,width,TextUtils.TruncateAt.END).toString();
+        if(qualifier!=null && !fitted.startsWith(qualifier)) {
+            if(textPaint.measureText(qualifier)<=width)return qualifier;
+            String compact=qualifier.replace(" ","");
+            return textPaint.measureText(compact)<=width?compact:"";
+        }
+        return "…".equals(fitted)?"":fitted;
     }
 
     @Override protected void onDraw(Canvas canvas) {
@@ -98,9 +120,9 @@ public final class DetectionOverlay extends View {
             // Restore the dash after the translucent fill, for depth masks as well as RGB boxes.
             paint.setPathEffect(e.caution?cautionDash:null);canvas.drawPath(e.edges,paint);
             if(!e.label.isEmpty()) {
-                paint.setStyle(Paint.Style.FILL);paint.setPathEffect(null);paint.setColor(Color.argb(215,18,23,32));
-                canvas.drawRoundRect(e.labelX,e.labelY-16*dp,e.labelX+e.labelWidth+10*dp,e.labelY+5*dp,6*dp,6*dp,paint);
-                textPaint.setColor(e.color);canvas.drawText(e.label,e.labelX+5*dp,e.labelY,textPaint);
+                paint.setStyle(Paint.Style.FILL);paint.setPathEffect(null);paint.setColor(Color.argb(235,18,23,32));
+                canvas.drawRoundRect(e.labelX,e.labelTop,e.labelX+e.labelWidth+8*dp,e.labelBottom,6*dp,6*dp,paint);
+                textPaint.setColor(e.color);canvas.drawText(e.label,e.labelX+4*dp,e.labelY,textPaint);
             }
         }
         canvas.restore();
