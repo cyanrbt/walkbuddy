@@ -94,6 +94,7 @@ final class OverlayProbe {
         checkCrowdedLabels(runner,report);
         checkLabelLayering(runner,report);
         checkRiskPaint(runner,report);
+        checkLabelMotion(runner,report);
         // A narrow PiP image must not send a negative label width to ellipsize.
         overlay.layout(0,0,1,1);
         overlay.show(Collections.singletonList(new Detection("很长的标签",1,0,0,1,1)),
@@ -316,6 +317,53 @@ final class OverlayProbe {
         if(mismatches!=0)throw new AssertionError("Lower-risk shape repainted a higher-risk color: "+mismatches);
         report.append("RISK_PAINT_PASS cases=").append(cases).append(" mismatches=").append(mismatches)
             .append("; risk-prioritized outlines/fills, labels retained, cached drawing order\n");
+    }
+    private static void checkLabelMotion(Instrumentation runner,StringBuilder report) throws Exception {
+        File output=new File(runner.getTargetContext().getCacheDir(),"ui-probe");
+        JSONArray sequences=new JSONArray();int frames=0,switches=0;
+        for(float font:new float[]{1f,1.5f,2f})for(int width:new int[]{160,320}) {
+            Configuration config=new Configuration(runner.getTargetContext().getResources().getConfiguration());
+            config.fontScale=font;config.densityDpi=160;
+            DetectionOverlay overlay=new DetectionOverlay(runner.getTargetContext().createConfigurationContext(config),null);
+            int height=width*3/4;overlay.layout(0,0,width,height);
+            PreviewGeometry geometry=new PreviewGeometry(640,480,0,0,width,height);
+            float[] lastTop={Float.NaN,Float.NaN};JSONArray snapshots=new JSONArray();int changes=0;
+            for(int frame=0;frame<8;frame++) {
+                List<Detection> data=motionFrame(frame);overlay.show(data,geometry);
+                Object[] entries=(Object[])entries(overlay);JSONArray labels=new JSONArray();
+                for(int i=0;i<entries.length;i++) {
+                    Object entry=entries[i];Detection d=data.get(i);String shown=(String)field(entry,"label");
+                    if(shown.isEmpty())throw new AssertionError("Motion fixture requires both labels: "+font+" / "+width);
+                    labelBounds(overlay,geometry,1,i);qualifiedLabel(shown,"未测距");
+                    int key=d.label.equals("停车计时器")?0:1;float top=(float)field(entry,"labelTop");
+                    if(Float.isFinite(lastTop[key]) && Math.abs(top-lastTop[key])>8)changes++;
+                    lastTop[key]=top;
+                    labels.put(new JSONObject().put("name",d.label).put("score",d.score).put("text",shown)
+                        .put("object_left",d.left*width).put("object_top",d.top*height)
+                        .put("label_left",(float)field(entry,"labelX")).put("label_top",top)
+                        .put("label_right",(float)field(entry,"labelX")+(float)field(entry,"labelWidth")+8)
+                        .put("label_bottom",(float)field(entry,"labelBottom")));
+                }
+                String filename="motion-font"+Math.round(font*100)+"-"+width+"-frame"+frame+".png";
+                save(overlay,width,height,new File(output,filename));
+                snapshots.put(new JSONObject().put("frame",frame).put("labels",labels).put("image",filename));frames++;
+            }
+            sequences.put(new JSONObject().put("font_scale",font).put("width_dp",width).put("height_dp",height)
+                .put("frames",snapshots).put("vertical_switches",changes));switches+=changes;
+        }
+        JSONObject result=new JSONObject().put("scope","Native constructed score-flip sequence with slow horizontal motion; no real object tracking")
+            .put("frames",frames).put("vertical_switches",switches).put("sequences",sequences);
+        try(FileOutputStream stream=new FileOutputStream(new File(output,"label-motion-baseline.json"))) {
+            stream.write(result.toString(2).getBytes(StandardCharsets.UTF_8));
+        }
+        report.append("LABEL_MOTION_BASELINE frames=").append(frames).append(" vertical_switches=").append(switches).append('\n');
+    }
+    private static List<Detection> motionFrame(int frame) {
+        List<Detection> data=new ArrayList<>();float shift=frame*.002f;
+        data.add(new Detection("停车计时器",frame%2==0?.81f:.79f,.18f+shift,.38f,.82f+shift,.9f,Detection.Risk.CAUTION,Float.NaN,null));
+        data.add(new Detection("交通信号灯",frame%2==0?.79f:.81f,.18f+shift,.38f,.82f+shift,.9f,Detection.Risk.CAUTION,Float.NaN,null));
+        if(frame%2!=0)Collections.reverse(data);
+        return data;
     }
     private static List<Detection> crowd(String scene) {
         List<Detection> data=new ArrayList<>();
