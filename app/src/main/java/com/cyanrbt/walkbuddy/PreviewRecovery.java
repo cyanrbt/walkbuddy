@@ -9,16 +9,32 @@ final class PreviewRecovery {
         root.findViewById(R.id.copy_problem_info).setVisibility(available?View.VISIBLE:View.GONE);
     }
     static void clear(View root) {
+        root.findViewById(R.id.preview_live_settings).setVisibility(View.VISIBLE);
+        root.findViewById(R.id.preview_optional_settings).setVisibility(View.VISIBLE);
+        ((PreviewContentLayout)root.findViewById(R.id.preview_content)).setRecovering(false);
+        PreviewCover cover=root.findViewById(R.id.preview_cover);cover.preview();
+        if(cover.getContentDescription()!=null)cover.setContentDescription(null);
         root.findViewById(R.id.recovery_hint).setVisibility(View.GONE);
         root.findViewById(R.id.restart_preview).setEnabled(true);
-        root.findViewById(R.id.enable_depth).setEnabled(true);
     }
     static void show(View root,RecoveryGuide.Prompt prompt) {
-        TextView cover=root.findViewById(R.id.preview_cover),hint=root.findViewById(R.id.recovery_hint);
+        show(root,prompt,false);
+    }
+    static void show(View root,RecoveryGuide.Prompt prompt,boolean compact) {
+        PreviewCover cover=root.findViewById(R.id.preview_cover);cover.recovery(compact);
+        TextView hint=root.findViewById(R.id.recovery_hint);
         TextView action=root.findViewById(R.id.restart_preview);
         TextView info=root.findViewById(R.id.preview_info);
         cover.setVisibility(View.VISIBLE);
-        if(!prompt.title.contentEquals(cover.getText()))cover.setText(prompt.title);
+        CharSequence title=compact?root.getContext().getText(prompt.action==RecoveryGuide.Action.WAIT
+            ?R.string.recovery_compact_wait:R.string.recovery_compact_stopped):prompt.title;
+        if(!title.equals(cover.getText()))cover.setText(title);
+        String description=compact?root.getContext().getString(R.string.recovery_compact_description,prompt.title,prompt.body):null;
+        if(!android.text.TextUtils.equals(description,cover.getContentDescription()))cover.setContentDescription(description);
+        root.findViewById(R.id.preview_live_settings).setVisibility(View.GONE);
+        root.findViewById(R.id.preview_optional_settings).setVisibility(View.GONE);
+        ((PreviewContentLayout)root.findViewById(R.id.preview_content)).setRecovering(true);
+        for(int id:new int[]{R.id.pip_depth_status,R.id.recent_alert,R.id.posture_hint})root.findViewById(id).setVisibility(View.GONE);
         if(!prompt.body.contentEquals(hint.getText()))hint.setText(prompt.body);
         if(!prompt.button.contentEquals(action.getText()))action.setText(prompt.button);
         hint.setVisibility(View.VISIBLE);

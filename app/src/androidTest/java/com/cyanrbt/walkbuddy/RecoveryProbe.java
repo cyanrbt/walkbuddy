@@ -27,8 +27,11 @@ final class RecoveryProbe {
             activity=runner.startActivitySync(new Intent(runner.getTargetContext(),PreviewActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             Activity host=activity;
+            runner.waitForIdleSync();
             checkOnMain(runner,()->{
                 assertNoCamera(host);
+                RecoveryPresentationProbe.full((android.view.View)host.findViewById(R.id.preview_content).getParent(),
+                    RecoveryGuide.resolve(RecoveryGuide.Reason.PERMISSION,false));
                 if(host.findViewById(R.id.enable_depth).isEnabled())throw new AssertionError("Stopped camera still allows mode switching");
                 if(!((TextView)host.findViewById(R.id.restart_preview)).getText().toString().contains("设置"))
                     throw new AssertionError("Missing permission still offers camera retry");
@@ -60,6 +63,8 @@ final class RecoveryProbe {
                 runner.waitForIdleSync();
                 checkOnMain(runner,()->{
                     assertNoCamera(replacement);
+                    RecoveryPresentationProbe.full((android.view.View)replacement.findViewById(R.id.preview_content).getParent(),
+                        RecoveryGuide.resolve(RecoveryGuide.Reason.HIDDEN,true));
                     try {
                         Field field=PreviewActivity.class.getDeclaredField("state");field.setAccessible(true);
                         SessionState state=(SessionState)field.get(replacement);

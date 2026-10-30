@@ -1,0 +1,11 @@
+{
+  "scope": "Original native Android images; baseline is static production-v0.4.35 layout; candidate/release images separate",
+  "baseline_run_id": 41137921559,
+  "baseline_source_commit": "14f10ee17530db253ad12163d1185e1092154774",
+  "baseline_artifact_id": 13017940417,
+  "baseline_production_matches_tag": "v0.4.35",
+  "files": {
+    "baseline-compact-font150.png": "253dab37e437f2346cdceb8561b2226c77c2e92ae2310edf21dca8c9f30a9c8d",
+    "baseline-compact-font200.png": "b1d61bb0504eec65a769923741cabde4e90936cc4593024094c67c1bce846df6"
+  }
+}

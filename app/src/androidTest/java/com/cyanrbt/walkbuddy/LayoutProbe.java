@@ -143,6 +143,7 @@ final class LayoutProbe {
                 PreviewChrome.compact(root,false,false);PreviewChrome.showRestart(root,false);
                 root.findViewById(R.id.preview_cover).setVisibility(View.GONE);
                 PreviewRecovery.clear(root);
+                RecoveryPresentationProbe.preview(root);
                 root.setPadding(0,24,0,24);measure(root,size[0],size[1]);
                 fullyVisible(root,root.findViewById(R.id.preview_stop));
                 fullyVisible(root,root.findViewById(R.id.enter_pip));
@@ -159,10 +160,10 @@ final class LayoutProbe {
                 checkHapticLegend(root,size[0],size[1],new File(output,"haptics-"+name+".png"));
                 report.append("PASS ").append(name).append(" camera=").append(camera.getWidth()).append('x').append(camera.getHeight()).append('\n');
             }
-        RecoveryCoverBaseline.record(target,output,report);
         report.append("FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\n");
         report.append("HAPTIC_LEGEND_PASS configurations=30 resize_cycles=30; full cue text and descriptions, responsive columns/list\n");
         report.append("DIAGNOSTIC_LAYOUT_PASS configurations=30; recovery copy action text and scroll reachability\n");
+        report.append("RECOVERY_PRESENTATION_LAYOUT_PASS configurations=30 full=660 compact=1320 restored=660; native full text, opaque cover, hidden settings, accessible reason, fixed actions, scroll and original preview style\n");
         report.append("VIBRATION_SETTING_LAYOUT_PASS configurations=30; enabled/muted legend, native checkbox, full text and scroll reach\n");
         report.append("PREVIEW_ONLY_LAYOUT_PASS configurations=30 compact=96x128; default full heading, persistent compact notice, no clipping, unchanged repeated text, detection-on and expansion clear notice\n");
     }
@@ -420,6 +421,9 @@ final class LayoutProbe {
             RecoveryGuide.Prompt prompt=RecoveryGuide.resolve(reason,granted);
             PreviewRecovery.problemInfo(root,prompt.action!=RecoveryGuide.Action.WAIT);
             PreviewRecovery.show(root,prompt);measure(root,width,height);
+            RecoveryPresentationProbe.full(root,prompt);
+            ((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
+            RecoveryPresentationProbe.initiallyReadable(root);
             fullyVisible(root,action);fullyVisible(root,root.findViewById(R.id.preview_stop));
             if(!prompt.button.contentEquals(action.getText()) || action.isEnabled()!=(prompt.action!=RecoveryGuide.Action.WAIT))
                 throw new AssertionError("Wrong recovery action: "+reason);
@@ -430,6 +434,7 @@ final class LayoutProbe {
                 || cover.getLayout().getHeight()>cover.getHeight()-cover.getPaddingTop()-cover.getPaddingBottom())
                 throw new AssertionError("Recovery cover title clipped: "+reason+" at "+width+"x"+height);
             if(reason==RecoveryGuide.Reason.DARK && granted) {
+                screenshot(root,new File(screenshot.getPath().replace("-recovery.png","-recovery-initial.png")));
                 View copy=root.findViewById(R.id.copy_problem_info);
                 ((ScrollView)root.findViewById(R.id.preview_controls)).requestChildFocus(copy,copy);
                 Rect visible=new Rect();
@@ -438,6 +443,8 @@ final class LayoutProbe {
                     throw new AssertionError("Problem information action is clipped or unavailable");
                 screenshot(root,screenshot);
             }
+            RecoveryPresentationProbe.fixtures(root,prompt,width,height,screenshot,
+                reason==RecoveryGuide.Reason.GENERAL && granted && width==320 && height==480);
         }
         PreviewRecovery.problemInfo(root,false);
     }

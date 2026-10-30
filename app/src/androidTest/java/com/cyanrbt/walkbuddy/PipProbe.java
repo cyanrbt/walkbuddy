@@ -429,6 +429,11 @@ final class PipProbe {
                 && launcher.findViewById(R.id.stop).getVisibility()==View.GONE
                 && ((TextView)launcher.findViewById(R.id.status)).getText().toString().equals(PreviewActivity.report())
                 && !((Handler)field(launcher,"handler")).hasCallbacks((Runnable)field(launcher,"refresh")),"home stops polling retained stopped PiP");
+            await(runner,()->RecoveryPresentationProbe.laidOut((View)field(idleHost,"root")),"stopped compact recovery layout");
+            String stoppedReport=PreviewActivity.report();
+            read(runner,()->{RecoveryPresentationProbe.compact((View)field(idleHost,"root"),
+                RecoveryGuide.resolve((RecoveryGuide.Reason)field(idleHost,"recoveryReason"),true));return true;});
+            screenshot(runner,"pip-recovery-stopped.png");
             Thread.sleep(350);
             read(runner,()->{
                 assertNotPolling(idleHost);
@@ -436,13 +441,24 @@ final class PipProbe {
                 return launcher.findViewById(R.id.start).performClick();
             });
             await(runner,()->!idleHost.isInPictureInPictureMode() && (boolean)field(idleHost,"resumed"),"expand stopped PiP without restart");
+            await(runner,()->RecoveryPresentationProbe.laidOut((View)field(idleHost,"root"))
+                && idleHost.findViewById(R.id.preview_controls).getVisibility()==View.VISIBLE,"expanded stopped recovery layout");
+            read(runner,()->{
+                RecoveryPresentationProbe.full((View)field(idleHost,"root"),
+                    RecoveryGuide.resolve((RecoveryGuide.Reason)field(idleHost,"recoveryReason"),true));
+                if(!stoppedReport.equals(PreviewActivity.report()))throw new AssertionError("Presentation change overwrote terminal home report");
+                return true;
+            });
+            screenshot(runner,"preview-recovery-expanded.png");
             read(runner,()->{assertReleased(idleHost);assertNotPolling(idleHost);return idleHost.findViewById(R.id.restart_preview).performClick();});
             await(runner,()->live(idleHost),"manual restart after watchdog expiry");
+            read(runner,()->{RecoveryPresentationProbe.preview((View)field(idleHost,"root"));return true;});
             read(runner,()->{assertWatching(idleHost);return true;});
             long recoveredAt=android.os.SystemClock.elapsedRealtime();
             await(runner,()->live(idleHost) && state(idleHost).captureAt>recoveredAt+500
                 && state(idleHost).displayAt>recoveredAt+500,"restarted camera keeps advancing with watchdog");
             report.append("PASS watchdog expiry and stale delivery leave visible stopped PiP/home idle; expansion stays stopped; manual restart re-arms protection\n");
+            report.append("RECOVERY_PRESENTATION_ACTIVITY_PASS compact=2_lines full=reason_and_instructions settings=hidden manual_restart=restored no_auto_camera=true stopped_polling=false home_report_preserved=true\n");
             report.append("PIP_PROBE_PASS\n");
             result.putString("stream",report.toString());code=Activity.RESULT_OK;
         } catch(Throwable error) {

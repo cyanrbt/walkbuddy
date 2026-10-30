@@ -447,6 +447,7 @@ public final class PreviewActivity extends Activity {
         root.requestApplyInsets();
         if (compact) getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         else getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+        renderRecovery();
     }
 
     @Override public void onConfigurationChanged(Configuration config) {
@@ -825,9 +826,6 @@ public final class PreviewActivity extends Activity {
         pipButton.setEnabled(live);
         boolean restart=state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED;
         PreviewChrome.showRestart(root,restart);
-        if(restart)PreviewRecovery.show(root,RecoveryGuide.resolve(recoveryReason,
-            checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED));
-        else PreviewRecovery.clear(root);
         PreviewRecovery.problemInfo(root,diagnostics.available());
         depthButton.setEnabled(live);
         homeState.publish(homeOwner,state.phase,state.reason,state.recognition,detectionNotice,homeNotice);
@@ -835,7 +833,15 @@ public final class PreviewActivity extends Activity {
         if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(detectionNotice!=0?detectionNotice:R.string.info_recognition_off));}
         if(titleView!=null)PreviewChrome.title(titleView,PreviewStatus.heading(state.phase,live,state.recognition));
         renderDepthGuide();
+        renderRecovery();
         syncPipActions();
+    }
+    private void renderRecovery() {
+        if(root==null)return;
+        if(state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED)
+            PreviewRecovery.show(root,RecoveryGuide.resolve(recoveryReason,
+                checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED),compactUi);
+        else PreviewRecovery.clear(root);
     }
     private void fail(String message) {
         fail(RecoveryGuide.Reason.GENERAL,message);

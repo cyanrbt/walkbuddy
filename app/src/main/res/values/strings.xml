@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="recovery_compact_stopped">已停止\n请展开</string>
+    <string name="recovery_compact_wait">请稍候\n可展开</string>
+    <string name="recovery_compact_description">%1$s。请展开查看。%2$s</string>
     <string name="info_sound_unavailable">提示音暂不可用，画面与检测继续</string>
     <string name="app_name">WalkBuddy</string>
     <string name="hero_title">Walk Buddy</string>

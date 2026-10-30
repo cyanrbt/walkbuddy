@@ -9,14 +9,29 @@ import android.text.Layout;
 
 /** Reserves camera space; the complete settings panel scrolls inside the remaining bounds. */
 public final class PreviewContentLayout extends ViewGroup {
-    private boolean sideBySide;
+    private boolean sideBySide,recovering;
 
     public PreviewContentLayout(Context context,AttributeSet attrs) {super(context,attrs);}
+    void setRecovering(boolean value) {
+        if(recovering==value)return;
+        recovering=value;
+        if(value)getChildAt(1).scrollTo(0,0);
+        requestLayout();
+    }
 
     @Override protected void onMeasure(int widthSpec,int heightSpec) {
         int width=MeasureSpec.getSize(widthSpec),height=MeasureSpec.getSize(heightSpec);
         float dp=getResources().getDisplayMetrics().density;
         View camera=getChildAt(0),panel=getChildAt(1);
+        if(recovering && panel.getVisibility()!=GONE) {
+            sideBySide=false;
+            View cover=camera.findViewById(R.id.preview_cover);
+            cover.measure(exact(width),MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED));
+            int titleHeight=Math.min(height,cover.getMeasuredHeight());
+            camera.measure(exact(width),exact(titleHeight));
+            panel.measure(exact(width),exact(height-titleHeight));
+            setMeasuredDimension(width,height);return;
+        }
         sideBySide=width>=600*dp && width>height;
         int panelWidth=width,panelHeight=0;
         if(panel.getVisibility()!=GONE) {

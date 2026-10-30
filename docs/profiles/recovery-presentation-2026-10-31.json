@@ -1,0 +1,123 @@
+{
+  "scope": "Recovery presentation; local build and native evidence recorded separately; no physical-device/TalkBack/AR acceptance",
+  "baseline_tag": "v0.4.35",
+  "version_name": "0.4.36",
+  "version_code": 48,
+  "source_sha256": {
+    "app/build.gradle": "6dc8a5fcf9c0501ce764e915358e45c51c7d45b693b7d196df4e55610c136d2c",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "e9fbc7d0ef3f07dd1c4bc209e057ce68b94fbf2974c8e8fc5f2da56ef89be70d",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "88130270f4ad775ebca233f1341842f3ae2ccd53b5a4004cd4aa5e62da115917",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java": "99fdf32bd8fc5f1fc3a681cc119ec183743ef477da558bb1f65fbe2f6c22bc52",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryPresentationProbe.java": "002e6d446f7a2f11a497ad6436e18064df5249f68da8b35612c790d7fa96c0f6",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryProbe.java": "f881792292cc3134a56d452e56d645be78947531ad607eaa43c9853c554c5bee",
+    "app/src/main/java/com/cyanrbt/walkbuddy/AndroidTone.java": "1c7b783d317aca69e9ad4e0dd17d504e25f8d735ea105d1970ec28dcfcad7c45",
+    "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
+    "app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java": "1b34efd7f69932c739720779dc9a363f62328ca139b01b46c2d0c926f0aa0b57",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PipMenu.java": "b745902bcc4fd49223cdebff345bc7963d8c22b6a31b83ed97f721dde20ca1c0",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PipSupport.java": "9ffcf73b673cd8c81f23ab5a9970abd6fb9daf1b11888f78eeb0832dd1e55e1b",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java": "fcbf87a70d714a96ea6f26a61caaeddd82698f88511d85c5aa9d18ced398f560",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewChrome.java": "c9fb0356293ae2e37a87f07a6be4da3e7aa7952ef7704259dd8d23a08d2f9106",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewContentLayout.java": "508fe4e30f3f625c0ac5aad2ca4cf75a05e32231fa8fbf7eea28ec49d1052f67",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewCover.java": "5373e193a7be575c8851dbb59054493214fd6ae8cbb047d13d1b888e5c23b63d",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewRecovery.java": "a620c0238c3a8b2d1592b0590cd2f93226f4ec34ef9bcd151c1caf73b14c69eb",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewStatus.java": "8cecbf49da9af250c117047d61abbb43c2dd35c979cd253430cad88af61f26e4",
+    "app/src/main/java/com/cyanrbt/walkbuddy/RecoveryGuide.java": "a7d7ca50e070f82df43db068122bf7f5dd80fa5f93b1ba8ef4fdf089d81d0e6c",
+    "app/src/main/java/com/cyanrbt/walkbuddy/StopPreviewReceiver.java": "d13a850b45498242acdbbf9fc123f5db898b6a3afe493880e4c0dcbe76a85748",
+    "app/src/main/java/com/cyanrbt/walkbuddy/TonePlayer.java": "daf17a0288b0a906812c3880db12db3521004e6cb2d2bb7268730ffbf228dc72",
+    "app/src/main/res/drawable/ic_sound_off.xml": "deec30ddb2d7a0f0bdfabd39024a8026fa3377a6408c6b775f6d46f175a8a908",
+    "app/src/main/res/drawable/ic_sound_on.xml": "5c74f669a40f252ce2d707b89341518b72bdf77ad740b868cc0da3b7a8e38033",
+    "app/src/main/res/layout/activity_preview.xml": "a98ff60e648ea004ce85d14877df29bbeda8d952a327d7739b8a994c4f4614e6",
+    "app/src/main/res/values/strings.xml": "742f09acf52b33b8e545940989fcb582f292b4fde258ad18871691256b4f1770",
+    "app/src/test/java/com/cyanrbt/walkbuddy/HomeStateTest.java": "ae4dff71194f8ea805023a4851710cda3ac770c6ceecd0e452fc7d0c3bca4b48",
+    "app/src/test/java/com/cyanrbt/walkbuddy/PipMenuTest.java": "68db6bf81a5a0afcde7dfce5f9f9379a6a2cc6ac3ee65191adb9b4c8b63b9847",
+    "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048",
+    "app/src/test/java/com/cyanrbt/walkbuddy/ProductSurfaceTest.java": "bedb92ef2c1e01b66839a10e411a904178fa6201ce31a9eb72aa4728a845e450"
+  },
+  "preserved_v035_source_sha256": {
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java": "99fdf32bd8fc5f1fc3a681cc119ec183743ef477da558bb1f65fbe2f6c22bc52",
+    "app/src/main/java/com/cyanrbt/walkbuddy/AndroidTone.java": "1c7b783d317aca69e9ad4e0dd17d504e25f8d735ea105d1970ec28dcfcad7c45",
+    "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
+    "app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java": "1b34efd7f69932c739720779dc9a363f62328ca139b01b46c2d0c926f0aa0b57",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PipMenu.java": "b745902bcc4fd49223cdebff345bc7963d8c22b6a31b83ed97f721dde20ca1c0",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PipSupport.java": "9ffcf73b673cd8c81f23ab5a9970abd6fb9daf1b11888f78eeb0832dd1e55e1b",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewChrome.java": "c9fb0356293ae2e37a87f07a6be4da3e7aa7952ef7704259dd8d23a08d2f9106",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewStatus.java": "8cecbf49da9af250c117047d61abbb43c2dd35c979cd253430cad88af61f26e4",
+    "app/src/main/java/com/cyanrbt/walkbuddy/StopPreviewReceiver.java": "d13a850b45498242acdbbf9fc123f5db898b6a3afe493880e4c0dcbe76a85748",
+    "app/src/main/java/com/cyanrbt/walkbuddy/TonePlayer.java": "daf17a0288b0a906812c3880db12db3521004e6cb2d2bb7268730ffbf228dc72",
+    "app/src/main/res/drawable/ic_sound_off.xml": "deec30ddb2d7a0f0bdfabd39024a8026fa3377a6408c6b775f6d46f175a8a908",
+    "app/src/main/res/drawable/ic_sound_on.xml": "5c74f669a40f252ce2d707b89341518b72bdf77ad740b868cc0da3b7a8e38033",
+    "app/src/test/java/com/cyanrbt/walkbuddy/HomeStateTest.java": "ae4dff71194f8ea805023a4851710cda3ac770c6ceecd0e452fc7d0c3bca4b48",
+    "app/src/test/java/com/cyanrbt/walkbuddy/PipMenuTest.java": "68db6bf81a5a0afcde7dfce5f9f9379a6a2cc6ac3ee65191adb9b4c8b63b9847",
+    "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048",
+    "app/src/test/java/com/cyanrbt/walkbuddy/ProductSurfaceTest.java": "bedb92ef2c1e01b66839a10e411a904178fa6201ce31a9eb72aa4728a845e450"
+  },
+  "explicitly_changed_prior_proof_sources": {
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": {
+      "v0.4.35": "dd90e56722d384eb1ba94727cd785cec07a5744438e499d616ff2155fd48dfba",
+      "current": "e9fbc7d0ef3f07dd1c4bc209e057ce68b94fbf2974c8e8fc5f2da56ef89be70d"
+    },
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": {
+      "v0.4.35": "3a88e689b55a582acbb573e3d003a96af74ae69eeb857309043f8a7b07ebaec2",
+      "current": "88130270f4ad775ebca233f1341842f3ae2ccd53b5a4004cd4aa5e62da115917"
+    },
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java": {
+      "v0.4.35": "ca72281ddc5cfad11feea8833a68ccd7a61b7bbc8dbdcb08a80c48d827fd8e4e",
+      "current": "fcbf87a70d714a96ea6f26a61caaeddd82698f88511d85c5aa9d18ced398f560"
+    },
+    "app/src/main/res/layout/activity_preview.xml": {
+      "v0.4.35": "59c670b1e553f29a9af1574feb7f8e6cb39609d590020cfb3fd675a475459279",
+      "current": "a98ff60e648ea004ce85d14877df29bbeda8d952a327d7739b8a994c4f4614e6"
+    },
+    "app/src/main/res/values/strings.xml": {
+      "v0.4.35": "ce5a2ee6143837ce8cdc61f8c3c5727eb3e81d333555f247f32444f579128f30",
+      "current": "742f09acf52b33b8e545940989fcb582f292b4fde258ad18871691256b4f1770"
+    },
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewContentLayout.java": {
+      "v0.4.35": "1d5e2707d620b323c621583b6cd9962087603393e7932b0142c5e6c086080bbc",
+      "current": "508fe4e30f3f625c0ac5aad2ca4cf75a05e32231fa8fbf7eea28ec49d1052f67"
+    }
+  },
+  "preserved_home_events_source_sha256": {
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
+    "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
+    "app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java": "1b34efd7f69932c739720779dc9a363f62328ca139b01b46c2d0c926f0aa0b57",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PipSupport.java": "9ffcf73b673cd8c81f23ab5a9970abd6fb9daf1b11888f78eeb0832dd1e55e1b",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewChrome.java": "c9fb0356293ae2e37a87f07a6be4da3e7aa7952ef7704259dd8d23a08d2f9106",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewStatus.java": "8cecbf49da9af250c117047d61abbb43c2dd35c979cd253430cad88af61f26e4",
+    "app/src/test/java/com/cyanrbt/walkbuddy/HomeStateTest.java": "ae4dff71194f8ea805023a4851710cda3ac770c6ceecd0e452fc7d0c3bca4b48",
+    "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048"
+  },
+  "preserved_preview_policy_source_sha256": {
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewStatus.java": "8cecbf49da9af250c117047d61abbb43c2dd35c979cd253430cad88af61f26e4",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewChrome.java": "c9fb0356293ae2e37a87f07a6be4da3e7aa7952ef7704259dd8d23a08d2f9106",
+    "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048"
+  },
+  "unchanged_preview_activity_methods_sha256": {
+    "private boolean needsWatchdog()": "ed14e27ef71dce9b165e3ea722d5ace35723bbcfc7c54ff9025d36c8698c4763",
+    "private void scheduleWatchdog()": "aac1e0c470411484246f39ded6a38ec84e5a5f9c295107d7c25a3d43118583ae",
+    "private void startPreview()": "7e0fc06c3dc4474b3fa5353f3980181ce2a80f605cacb5d3528ce3912a0abb74",
+    "private void fail(RecoveryGuide.Reason reason,String message)": "44a9a06cac76950605b4ad2601d706116440f8745db46339d9067e62567e5047"
+  },
+  "baseline_strings_sha256": "ce5a2ee6143837ce8cdc61f8c3c5727eb3e81d333555f247f32444f579128f30",
+  "preserved_string_values_count": 111,
+  "added_strings": [
+    "recovery_compact_description",
+    "recovery_compact_stopped",
+    "recovery_compact_wait"
+  ],
+  "reference_url": "https://github.com/android/camera-samples/blob/2f10e46fc7a09f7208f8d6de72482ecf3e5fb85a/core-ui/src/main/java/com/android/camera/coreui/state/StateViews.kt",
+  "jvm_results": {
+    "tests": 237,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint_errors": 0,
+  "lint_warnings": 22,
+  "local_app_and_test_build": "success"
+}
