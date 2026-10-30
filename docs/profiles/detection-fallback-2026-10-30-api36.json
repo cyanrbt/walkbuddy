@@ -1,0 +1,77 @@
+{
+  "source_commit": "9d9880511273f66f9e36b879a46bd52bf39c4df9",
+  "run_id": 41031071106,
+  "api": 36,
+  "artifact_id": 12965044139,
+  "archive_sha256": "f707809d266cba852a5cae62a8541b5b831c5ca1123c9af448d4ba28c1c39f49",
+  "summary": {
+    "status": "passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "success",
+    "mode": "ui",
+    "probes": [
+      {
+        "name": "pip_recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "runtime",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "preview",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "overlay",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "layout",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "home",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip-repeat",
+        "status": "passed",
+        "failures": []
+      }
+    ],
+    "observations": [
+      "external_anr_observed"
+    ],
+    "anrs": [
+      {
+        "package": "com.google.android.as",
+        "event": "10-30 09:10:01.230   655  2793 E ActivityManager: ANR in com.google.android.as",
+        "reason": "No response to onStartJob"
+      }
+    ],
+    "failure_time_focus": [],
+    "focused_external_anr_dialogs": []
+  },
+  "fault_reports": [
+    "PASS injected model load failure and blocked analysis keep camera/texture; detection/sound/feedback stop; native frame retained until return; late result ignored; preview-only warning persists in PiP/expansion",
+    "PASS injected model load failure and blocked analysis keep camera/texture; detection/sound/feedback stop; native frame retained until return; late result ignored; preview-only warning persists in PiP/expansion"
+  ]
+}
