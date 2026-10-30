@@ -155,18 +155,26 @@ final class LayoutProbe {
         info.setText(R.string.info_detection_timeout);title.setText(R.string.window_preview_only);
         PreviewChrome.detectionStopped(root,true,false);measure(root,width,height);
         TextView warning=root.findViewById(R.id.detection_status);
-        textFits(root);fullyVisible(root,warning);
+        textFits(root);warningInsideCamera(root,warning);
         if(warning.getAccessibilityLiveRegion()!=View.ACCESSIBILITY_LIVE_REGION_POLITE)
             throw new AssertionError("Detection fault is not announced");
         if(width==320 && root.getResources().getConfiguration().fontScale==2f)screenshot(root,output);
         PreviewChrome.compact(root,true,false);PreviewChrome.detectionStopped(root,true,true);
-        measure(root,96,128);textFits(warning);fullyVisible(root,warning);
+        measure(root,96,128);textFits(warning);warningInsideCamera(root,warning);
         if(!warning.getText().toString().contains("未检测") || !warning.getText().toString().contains("仅预览"))
             throw new AssertionError("Compact detection fault lost its meaning");
         PreviewChrome.compact(root,false,depth);PreviewChrome.detectionStopped(root,false,false);
         root.setPadding(0,24,0,24);info.setText(previousInfo);title.setText(previousTitle);
         root.findViewById(R.id.recent_alert).setVisibility(previousAlert);measure(root,width,height);
         if(warning.getVisibility()!=View.GONE)throw new AssertionError("Fault warning survived explicit clearing");
+    }
+    private static void warningInsideCamera(View root,View warning) {
+        View camera=root.findViewById(R.id.preview_frame);
+        Rect label=new Rect(0,0,warning.getWidth(),warning.getHeight()),frame=new Rect(0,0,camera.getWidth(),camera.getHeight());
+        ((ViewGroup)root).offsetDescendantRectToMyCoords(warning,label);
+        ((ViewGroup)root).offsetDescendantRectToMyCoords(camera,frame);
+        if(warning.getVisibility()!=View.VISIBLE || label.isEmpty() || !frame.contains(label))
+            throw new AssertionError("Detection status outside camera: "+label+" frame="+frame);
     }
     private static void initialQualifierVisible(View root,TextView info,String qualifier) {
         if(info.getLayout()==null || !info.getText().subSequence(0,info.getLayout().getLineEnd(0)).toString().contains(qualifier))
