@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.CheckBox;
+import android.view.accessibility.AccessibilityNodeInfo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.concurrent.atomic.AtomicReference;
@@ -33,8 +35,8 @@ final class LayoutProbe {
             AtomicReference<Throwable> failure=new AtomicReference<>();
             runner.runOnMainSync(()->{try{check(runner.getTargetContext(),report);}catch(Throwable error){failure.set(error);}});
             if(failure.get()!=null)throw new AssertionError(failure.get());
-            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=16; recovery-presentations="
-                +(RecoveryGuide.Reason.values().length*32)+"; risk live region; fixed actions, camera space, scroll reach, compact/restore\n");
+            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=24 states=96; recovery-presentations="
+                +(RecoveryGuide.Reason.values().length*48)+"; initial toggles, native checked states, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore\n");
             runner.finish(Activity.RESULT_OK,result);
         } catch(Throwable error) {
             result.putString("stream",report+"LAYOUT_PROBE_FAIL: "+error);
@@ -46,7 +48,7 @@ final class LayoutProbe {
         File output=new File(target.getCacheDir(),"ui-probe");
         if(!output.isDirectory() && !output.mkdirs())throw new IllegalStateException("Cannot create UI evidence directory");
         for(int[] size:new int[][]{{320,480},{360,640},{640,360},{800,600}})
-            for(float font:new float[]{1f,2f})for(boolean night:new boolean[]{false,true}) {
+            for(float font:new float[]{1f,1.5f,2f})for(boolean night:new boolean[]{false,true}) {
                 Configuration config=new Configuration(target.getResources().getConfiguration());
                 config.fontScale=font;config.densityDpi=160;
                 config.screenWidthDp=size[0];config.screenHeightDp=size[1];
@@ -61,10 +63,41 @@ final class LayoutProbe {
                 placeholder.setText("取景区域（布局测试）");placeholder.setTextColor(Color.GRAY);placeholder.setGravity(Gravity.CENTER);
                 ((FrameLayout)root.findViewById(R.id.preview_frame)).addView(placeholder,1,
                     new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
-                ((TextView)root.findViewById(R.id.preview_info)).setText("画面关注 · 人 · 中间 · 未测距");
-                ((TextView)root.findViewById(R.id.depth_guide_hint)).setText("深度覆盖不足 · 对准地面与前方障碍再试");
                 checkFeedback(root);
                 ((TextView)root.findViewById(R.id.preview_title)).setText(R.string.window_live);
+                String name=size[0]+"x"+size[1]+"-font"+Math.round(font*100)+(night?"-night":"-day");
+                CheckBox detection=root.findViewById(R.id.preview_recognition),sound=root.findViewById(R.id.preview_sound);
+                TextView info=root.findViewById(R.id.preview_info);
+                for(int mode=0;mode<4;mode++) {
+                    detection.setChecked(mode!=0);sound.setChecked(false);sound.setEnabled(mode!=0);
+                    info.setText(mode==0?context.getString(R.string.info_recognition_off):mode==1
+                        ?context.getString(R.string.info_recognition_preparing):"画面关注 · 人 · 中间 · 未测距");
+                    root.findViewById(R.id.recent_alert).setVisibility(mode>=2?View.VISIBLE:View.GONE);
+                    PreviewChrome.depth(root,mode==3);
+                    ((TextView)root.findViewById(R.id.depth_guide_hint)).setText(mode==3
+                        ?"深度覆盖不足 · 对准地面与前方障碍再试":"基础模式 · 空间增强可选");
+                    ((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
+                    measure(root,size[0],size[1]);
+                    screenshot(root,new File(output,name+"-current.png"));
+                    if(mode==0 || mode==2)screenshot(root,new File(output,name+(mode==0?"-basic":"-warning")+".png"));
+                    initialVisible(root,detection);initialVisible(root,sound);
+                    if(detection.getLineCount()!=1 || sound.getLineCount()!=1)throw new AssertionError("Toggle label wrapped: "+name);
+                    if(mode<=1)initialVisible(root,info);
+                    checkedNode(detection);checkedNode(sound);
+                    if(root.findViewById(R.id.depth_steps).getVisibility()!=(mode==3?View.VISIBLE:View.GONE)
+                        || root.findViewById(R.id.depth_status).getVisibility()!=(mode==3?View.VISIBLE:View.GONE))
+                        throw new AssertionError("Optional depth details have wrong visibility");
+                    textFits(root);
+                    if(mode==3) {
+                        ScrollView panel=root.findViewById(R.id.preview_controls);
+                        for(int id:new int[]{R.id.guide_label_service,R.id.guide_label_ground,R.id.guide_label_depth,R.id.guide_label_alert})
+                            if(((TextView)root.findViewById(id)).getLineCount()!=1)throw new AssertionError("Depth step label wrapped");
+                        for(int id:new int[]{R.id.guide_step_service,R.id.guide_step_ground,R.id.guide_step_depth,R.id.guide_step_alert}) {
+                            View step=root.findViewById(id);panel.requestChildFocus(step,step);Rect visible=new Rect();
+                            if(!step.getLocalVisibleRect(visible) || visible.height()<48)throw new AssertionError("Depth step unreachable");
+                        }
+                    }
+                }
                 measure(root,size[0],size[1]);
                 checkDisabledButton(root.findViewById(R.id.enter_pip));
                 View camera=root.findViewById(R.id.preview_frame),pane=root.findViewById(R.id.preview_content);
@@ -82,8 +115,7 @@ final class LayoutProbe {
                         throw new AssertionError("Unreachable scroll control "+id+": "+visible);
                 }
                 scroll.scrollTo(0,0);
-                String name=size[0]+"x"+size[1]+"-font"+(int)font+(night?"-night":"-day");
-                screenshot(root,new File(output,name+".png"));
+                detection.setChecked(false);sound.setChecked(false);
                 PreviewChrome.showRestart(root,true);measure(root,size[0],size[1]);
                 fullyVisible(root,root.findViewById(R.id.restart_preview));
                 if(root.findViewById(R.id.enter_pip).getVisibility()!=View.GONE)throw new AssertionError("PiP action survived restart state");
@@ -98,8 +130,36 @@ final class LayoutProbe {
                 fullyVisible(root,root.findViewById(R.id.preview_stop));
                 fullyVisible(root,root.findViewById(R.id.enter_pip));
                 if(scroll.getVisibility()!=View.VISIBLE || scroll.getWidth()<=0)throw new AssertionError("Panel did not restore");
+                if(root.findViewById(R.id.depth_steps).getVisibility()!=View.GONE)throw new AssertionError("Basic restore exposed depth steps");
                 report.append("PASS ").append(name).append(" camera=").append(camera.getWidth()).append('x').append(camera.getHeight()).append('\n');
             }
+    }
+
+    private static void initialVisible(View root,View view) {
+        View scroll=root.findViewById(R.id.preview_controls);
+        Rect bounds=new Rect(0,0,view.getWidth(),view.getHeight()),viewport=new Rect(0,0,scroll.getWidth(),scroll.getHeight());
+        ((ViewGroup)root).offsetDescendantRectToMyCoords(view,bounds);
+        ((ViewGroup)root).offsetDescendantRectToMyCoords(scroll,viewport);
+        if(!viewport.contains(bounds))throw new AssertionError("Initial control outside panel: "+bounds+" viewport="+viewport);
+        if(view instanceof CheckBox && (bounds.height()<48 || bounds.width()<48))throw new AssertionError("Small toggle target");
+    }
+    private static void checkedNode(CheckBox view) {
+        AccessibilityNodeInfo node=view.createAccessibilityNodeInfo();
+        try {
+            if(!node.isCheckable() || node.isChecked()!=view.isChecked() || node.isEnabled()!=view.isEnabled()
+                || !view.getText().toString().contentEquals(node.getText()))throw new AssertionError("Native checkbox lost label/state");
+        } finally {node.recycle();}
+    }
+    private static void textFits(View view) {
+        if(view.getVisibility()!=View.VISIBLE)return;
+        if(view instanceof TextView && view.getId()!=R.id.recent_alert && view.getId()!=R.id.pip_depth_status) {
+            TextView text=(TextView)view;
+            if(text.getLayout()==null || text.getLayout().getHeight()>text.getHeight()-text.getCompoundPaddingTop()-text.getCompoundPaddingBottom())
+                throw new AssertionError("Text vertically clipped: "+text.getText());
+            for(int line=0;line<text.getLineCount();line++)if(text.getLayout().getEllipsisCount(line)>0)
+                throw new AssertionError("Text ellipsized: "+text.getText());
+        }
+        if(view instanceof ViewGroup)for(int i=0;i<((ViewGroup)view).getChildCount();i++)textFits(((ViewGroup)view).getChildAt(i));
     }
 
     private static void checkFeedback(View root) {

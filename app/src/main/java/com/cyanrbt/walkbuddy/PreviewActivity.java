@@ -332,7 +332,6 @@ public final class PreviewActivity extends Activity {
             feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
-            b.setText(checked?"检测：已开启":"检测：已关闭");
             if(checked)prepareAnalysis(SystemClock.elapsedRealtime());
             if(!checked) { if(sound!=null)sound.setChecked(false); silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_preparing);
             renderDepthGuide();
@@ -347,7 +346,7 @@ public final class PreviewActivity extends Activity {
         restartButton=root.findViewById(R.id.restart_preview);
         restartButton.setBackgroundTintList(null);
         restartButton.setOnClickListener(v->recoverPreview());
-        sound.setOnCheckedChangeListener((button, checked) -> { button.setText(checked?"声音：已开启":"声音：已关闭"); if (!checked) silence(); });
+        sound.setOnCheckedChangeListener((button, checked) -> { if (!checked) silence(); });
         texture.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h) { openCamera(s); }
             public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h) { transform(); }
@@ -749,6 +748,7 @@ public final class PreviewActivity extends Activity {
     }
     private void renderDepthGuide() {
         if(root==null || depthGuideHint==null)return;
+        PreviewChrome.depth(root,useDepth);
         Boolean supported=null;
         if(!depthChecking && depthAvailability!=null)supported=depthAvailability.isSupported();
         DepthSnapshot.Stage stage=null;

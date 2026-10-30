@@ -165,6 +165,17 @@ final class PipProbe {
                 return true;
             });
             report.append("PASS Camera2 capture and display are LIVE; default detection/sound off\n");
+            read(runner,()->{
+                for(int id:new int[]{R.id.preview_recognition,R.id.preview_sound}) {
+                    View control=host.findViewById(id);android.graphics.Rect visible=new android.graphics.Rect();
+                    if(!control.getGlobalVisibleRect(visible) || visible.height()!=control.getHeight() || visible.width()!=control.getWidth())
+                        throw new AssertionError("Initial live toggle is clipped");
+                }
+                if(host.findViewById(R.id.depth_steps).getVisibility()!=View.GONE || host.findViewById(R.id.depth_status).getVisibility()!=View.GONE)
+                    throw new AssertionError("Basic camera exposed inactive depth progress");
+                return true;
+            });
+            screenshot(runner,"preview-controls-live.png");
             checkpoint(runner,"camera_live");
 
             // Force expiry from the actual TextureView.draw -> SurfaceTextureUpdated path.
@@ -213,6 +224,8 @@ final class PipProbe {
 
             read(runner,()->{
                 host.findViewById(R.id.preview_recognition).performClick();
+                if(!((CheckBox)host.findViewById(R.id.preview_recognition)).getText().toString().equals(host.getString(R.string.check_recognition)))
+                    throw new AssertionError("Detection changed the concise toggle label");
                 if((boolean)field(host,"analysisReady") || !((android.widget.TextView)host.findViewById(R.id.preview_info)).getText().toString().contains("准备识别器"))
                     throw new AssertionError("Cold detection did not show preparation state");
                 return true;
