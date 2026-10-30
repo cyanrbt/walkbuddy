@@ -16,7 +16,7 @@ v0.4.28 的 `pipParams()` 仅在进入时使用整个 TextureView 的 `getGlobal
 
 原生检查用 Android `TextureView.getTransform().mapRect()` 独立计算实际图像范围，与应用成功提交的 PiP 参数对照，允许像素取整引起的 1px 差；不调用新的纯 Java 边界函数作为预期值。真实 Activity 转向后恢复，要求相机、纹理和会话代数保持，采集/显示继续推进，至少一组实际排版存在黑边；进入实际系统小窗和展开后另核对当前图像边界。
 
-现有十项探针、真实触摸与全部 1200ms/1500ms/启动截止保持。原始坐标和截图将由独立测试包导出，不进入主 APK。本地完整 194 项 JVM 为 0 失败 / 错误 / 跳过，Lint 0 错误 / 22 警告，应用与原生测试包构建通过；发布元数据、产品表面和差异格式检查通过。云端实际结果待完成后补记。
+现有十项探针、真实触摸与全部 1200ms/1500ms/启动截止保持。原始坐标和截图将由独立测试包导出，不进入主 APK。本地完整 194 项 JVM 为 0 失败 / 错误 / 跳过，Lint 0 错误 / 22 警告，应用与原生测试包构建通过；发布元数据、产品表面和差异格式检查通过。云端实际结果见下文。
 
 此处证明参数与实时几何一致，不以它证明动画帧率提升、v0.4.28 候选显示停顿已修复或实体设备体验已验收。
 
@@ -34,4 +34,16 @@ v0.4.28 的 `pipParams()` 仅在进入时使用整个 TextureView 的 `getGlobal
 
 [两张原始系统截图](../design/v0.4.29/README.md)已查看。API 35 观察到系统服务 `com.google.android.as` 的 `No response to onStartJob` ANR，未观察到本应用 ANR；API 36 无 ANR 观察。不把同时出现的系统记录解释为初轮显示停顿的原因，亦不据本轮成功声称全部输入/图形问题消失。
 
-标签版本将独立执行 Android 15/16 发布检查，实际发布与 APK 核验待完成后记录。
+标签版本独立完成 Android 15/16 发布检查，实际结果与 APK 核验见下一节。
+
+## 正式发布与 APK
+
+[41098199220](https://github.com/cyanrbt/walkbuddy/actions/runs/41098199220) attempt 1 成功：Android 15 job `124209345908`、Android 16 job `124209346308` 与 APK job `124212455815` 均首次通过。新标签固定于 `42ac0130439ba28d6be5737645b8c2e1635ab60b`，相对候选只增加文档/证据，`app`、`scripts`、`.github` 无差异，历史标签未覆盖。
+
+两个标签原始附件均完整下载并匹配 GitHub 大小和 SHA-256，重放摘要与各十份原始 PASS 一致；每套两轮新增三组旋转/恢复、两组实际小窗/展开通过，坐标与候选一致，[发布附件 JSON](pip-source-native-release-2026-10-31.json)保留来源和样本。两套标签摘要无 ANR 观察，候选 API 35 的外部服务 ANR 仍保留，不扩展为全部历史问题已解决。
+
+Release `429310815` 实有 APK asset `692872516`，9,971,852 字节，经官方资产 API 完整下载，curl 退出 0。SHA-256 `26cf7ecf5b50aaa7f23da37ec23a88a97d36a7c0e095902122ebc5825446a681` 与 GitHub 一致，apksigner verify 通过，固定证书 SHA-256 `ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d`，单签名且 v2 有效。
+
+实际包名 `com.cyanrbt.walkbuddy`、版本 0.4.29 / 41、最低 API 26 / target 36、仅 ARM64，权限仅 CAMERA/VIBRATE。模型及中英文表摘要、90 槽 / 80 个中文名 / 10 空槽、11sp 标签核验通过；新 `pipSourceBounds`、`syncPipSourceBounds`、`visibleBounds` 方法及监听/缓存字段存在，原生 Matrix 探针不在主包。[APK JSON](apk-v0.4.29.json)保存完整核验。
+
+本轮验证 JVM、x86_64 模拟器实际旋转/剪贴板/虚拟 Camera2、小窗生命周期和 ARM64 附件结构/签名；不验证实体动画帧率、OEM 策略、真实 AR 或 TalkBack，不认定 v0.4.28 候选显示停顿根因已修复。

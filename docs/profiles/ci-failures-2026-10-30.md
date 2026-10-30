@@ -4,6 +4,8 @@
 
 ## 再次核对：最近红叉与当前状态
 
+v0.4.29 的 [候选 41096792807](https://github.com/cyanrbt/walkbuddy/actions/runs/41096792807) 与 [正式发布 41098199220](https://github.com/cyanrbt/walkbuddy/actions/runs/41098199220) 两套 Android 检查均首次十项全部通过，标签 APK 作业首次成功。Release 实际 APK 已下载核对版本 41、固定签名和 GitHub 摘要；本版只修正动画来源/目标边界及跟踪，不称旧显示停顿已修复。候选 API 35 有外部系统服务 ANR 观察，标签两套摘要无 ANR 观察，原记录均保留；[完整来源与范围](pip-source-bounds-2026-10-31.md)区分参数、模拟器行为与真机效果。
+
 v0.4.28 候选同源码单次重跑 Android 16 后十项通过，Android 15 首次结果保留，初轮失败仍保留。随后 [正式发布 41093630773](https://github.com/cyanrbt/walkbuddy/actions/runs/41093630773) attempt 1 的 Android 15/16 与 APK 作业均首次通过，Release 实际 [v0.4.28 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.28/Walk-Buddy-v0.4.28-arm64-debug.apk)已下载核对版本 40、固定签名与 GitHub 摘要。两套原始标签附件已下载，API 36 有系统服务 `com.google.android.as` ANR 观察，不能归因于初轮显示停顿；[完整结果](diagnostics-2026-10-31.md)保留来源和边界。未把重跑通过称为根因修复。
 
 随后 v0.4.28 新候选 [41091065722 attempt 1](https://github.com/cyanrbt/walkbuddy/actions/runs/41091065722/attempts/1) 出现新的失败，不能沿用此前“最近五次成功”当作当前结果：API 35 十项通过，API 36 旧恢复流程的第二次小窗进入时显示龄 1352ms，超过原 1200ms 截止，应用停止预览，其余九项通过。编译和新增复制功能均通过，整轮仍失败，未发标签。原始截图和时序已下载核对，[专门记录](pip-display-expiry-2026-10-31.md)区分本次显示停顿与旧触摸输入失败；仅请求失败作业重跑一次，不改安全截止，不称根因已修复。
