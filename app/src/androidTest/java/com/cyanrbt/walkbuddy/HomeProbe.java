@@ -83,7 +83,10 @@ final class HomeProbe {
                 if(mode==3 || mode==4){fixed(root,stop);textFits((TextView)stop);}
                 if(scroll.getHeight()<(size[1]-48)/2)throw new AssertionError("Home content collapsed behind actions");
                 for(View parent=primary;parent!=root;parent=(View)parent.getParent())if(parent==scroll)throw new AssertionError("Primary action is still inside scrolling content");
-                if(primary.getAccessibilityTraversalBefore()!=R.id.home_journey_label)throw new AssertionError("Missing action traversal anchor");
+                if(primary.getAccessibilityTraversalBefore()!=(present?R.id.home_brand_name:R.id.home_journey_label))throw new AssertionError("Missing action traversal anchor");
+                View dock=root.findViewById(R.id.home_dock);
+                if(present && bounds(root,dock).bottom>bounds(root,scroll).top
+                    || !present && bounds(root,dock).top<bounds(root,scroll).bottom)throw new AssertionError("Home controls did not follow session placement");
                 // A live returning user should see the complete short status without scrolling.
                 if(mode==4)fullyVisible(root,scroll,root.findViewById(R.id.status));
                 if(mode==0 && size[0]==320 && size[1]==480)fullyVisible(root,scroll,root.findViewById(R.id.journey_hint));
@@ -98,6 +101,12 @@ final class HomeProbe {
                     if(root.findViewById(R.id.home_brand_art).getVisibility()!=art || brand.getTextSize()!=chosenTextSize)throw new AssertionError("Brand did not reflow on resize");
                 }
                 Rect before=bounds(root,primary);
+                if(present) {
+                    HomeChrome.actions(root,camera,false,false,SessionState.Phase.STOPPED);measure(root,size);
+                    if(bounds(root,dock).top<bounds(root,scroll).bottom)throw new AssertionError("Ended session did not restore bottom controls");
+                    HomeChrome.actions(root,camera,false,true,phase);measure(root,size);
+                    if(!before.equals(bounds(root,primary)))throw new AssertionError("Session controls failed to return to top");
+                }
                 root.findViewById(R.id.more_panel).setVisibility(View.VISIBLE);measure(root,size);
                 for(int id:new int[]{R.id.more_toggle,R.id.row_camera,R.id.row_pip}) {
                     View control=root.findViewById(id);scroll.requestChildFocus(control,control);Rect visible=new Rect();

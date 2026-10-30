@@ -97,7 +97,14 @@ final class PipProbe {
                 await(runner,()->live(host) && state(host).captureAt>started+300 && state(host).displayAt>started+300,"recovery PiP frames advance");
                 report.append("PASS immediate PiP recovery cycle=").append(cycle).append('\n');
             }
-            result.putString("stream",report+"PIP_RECOVERY_PROBE_PASS cycles=4; real Camera2, stopped PiP expansion, manual restart and immediate re-entry\n");
+            screenshot(runner,"pip-home-controls.png");
+            tap(runner,launcher,R.id.stop);
+            await(runner,host::isDestroyed,"native home stop closes PiP");
+            read(runner,()->{assertReleased(host);assertNotPolling(host);return true;});
+            await(runner,()->launcher.findViewById(R.id.stop).getVisibility()==View.GONE
+                && launcher.findViewById(R.id.home_dock).getTop()>launcher.findViewById(R.id.home_scroll).getTop(),"idle home controls return to bottom");
+            screenshot(runner,"pip-home-stopped.png");
+            result.putString("stream",report+"PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore\n");
             code=Activity.RESULT_OK;
         } catch(Throwable error) {
             try{screenshot(runner,"pip-recovery-failure.png");}catch(Exception ignored){/* Preserve failure. */}
@@ -395,6 +402,11 @@ final class PipProbe {
         // Real input respects focus and enabled state, unlike directly invoking performClick.
         await(runner,()->{
             View view=host.findViewById(id);android.graphics.Rect bounds=new android.graphics.Rect();
+            if(view==null)return false;
+            for(View node=view;node!=null;) {
+                if(node.isLayoutRequested() || !node.isLaidOut())return false;
+                android.view.ViewParent parent=node.getParent();node=parent instanceof View?(View)parent:null;
+            }
             return host.hasWindowFocus() && view!=null && view.isShown() && view.isEnabled()
                 && view.isAttachedToWindow() && view.getGlobalVisibleRect(bounds) && !bounds.isEmpty();
         },"touch target ready id="+id);

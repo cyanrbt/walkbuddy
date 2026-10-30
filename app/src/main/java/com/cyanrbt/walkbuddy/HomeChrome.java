@@ -1,13 +1,25 @@
 package com.cyanrbt.walkbuddy;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /** Shared by the Activity and native layout checks; actions stay outside the scroll content. */
 final class HomeChrome {
     static void actions(View root,boolean camera,boolean settings,boolean present,SessionState.Phase phase) {
+        // System PiP defaults to the bottom-right and can cover the primary home action.
+        // Keep both controls above it while an Activity exists, including a failed PiP.
+        LinearLayout home=(LinearLayout)root;
+        View dock=root.findViewById(R.id.home_dock);
+        int position=present?0:home.getChildCount()-1;
+        if(home.indexOfChild(dock)!=position) {
+            home.removeView(dock);home.addView(dock,position);
+        }
+        dock.setBackgroundResource(present?R.drawable.bg_home_controls_top:R.drawable.bg_home_dock);
+        root.findViewById(R.id.home_action_hint).setAccessibilityTraversalAfter(present?View.NO_ID:R.id.home_summary);
         boolean running=phase==SessionState.Phase.STARTING || phase==SessionState.Phase.LIVE;
         TextView start=root.findViewById(R.id.start);
+        start.setAccessibilityTraversalBefore(present?R.id.home_brand_name:R.id.home_journey_label);
         int label=camera?(present?R.string.home_return_preview:R.string.start)
             :(settings?R.string.journey_camera_settings:R.string.journey_allow_camera);
         start.setText(label);
