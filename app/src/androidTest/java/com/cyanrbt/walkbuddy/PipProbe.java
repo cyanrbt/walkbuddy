@@ -433,7 +433,7 @@ final class PipProbe {
     private static void awaitWakeInputReady(Instrumentation runner,PreviewActivity host) throws Exception {
         awaitPreviewInputReady(runner,host,"wake");
     }
-    private static void awaitPreviewInputReady(Instrumentation runner,PreviewActivity host,String reason) throws Exception {
+    static void awaitPreviewInputReady(Instrumentation runner,PreviewActivity host,String reason) throws Exception {
         // Wake/PiP transitions can resume/pause the Activity while input windows are changing.
         // Wait for observed UI events to settle, then revalidate; do not retry an injected click.
         runner.getUiAutomation().waitForIdle(500,5000);
@@ -628,7 +628,8 @@ final class PipProbe {
         try {
             read(runner,()->{setField(host,"worker",broken);host.findViewById(R.id.preview_recognition).performClick();return true;});
             await(runner,()->(int)field(host,"detectionNotice")==R.string.info_detection_failed,"model failure becomes preview-only");
-            read(runner,()->{assertPreviewOnly(host,camera,texture);return true;});
+            String failedReport=read(runner,()->{assertPreviewOnly(host,camera,texture);return detectionProblem(host,"DETECTION_ERROR");});
+            SupportProbe.write(runner,"diagnostics-model-error.txt",failedReport);
             await(runner,()->warningReady(host),"model failure warning laid out");
             read(runner,()->{assertWarningFits(host);return true;});
         } finally {broken.shutdown();if(!broken.awaitIdle(3000))throw new AssertionError("Broken worker did not close");}
@@ -654,6 +655,7 @@ final class PipProbe {
                 if(retained.get().bitmap.isRecycled())throw new AssertionError("Cancelled active frame was recycled during native work");
                 return true;
             });
+            SupportProbe.write(runner,"diagnostics-model-timeout.txt",read(runner,()->detectionProblem(host,"DETECTION_TIMEOUT")));
             long stoppedAt=android.os.SystemClock.elapsedRealtime();
             await(runner,()->live(host) && state(host).captureAt>stoppedAt+300 && state(host).displayAt>stoppedAt+300,
                 "camera advances after analysis timeout");
@@ -725,6 +727,16 @@ final class PipProbe {
         });
     }
 
+    private static String detectionProblem(PreviewActivity host,String category) {
+        SessionDiagnostics diagnostics=(SessionDiagnostics)field(host,"diagnostics");SessionDiagnostics.Snapshot snapshot=diagnostics.detection();
+        if(snapshot==null || !category.equals(snapshot.category) || !snapshot.recognition
+            || host.findViewById(R.id.copy_problem_info).getVisibility()!=View.VISIBLE)
+            throw new AssertionError("Detection evidence was lost before state reset");
+        if(category.equals("DETECTION_TIMEOUT") && snapshot.analysisAge<1501)throw new AssertionError("Original timeout age was lost");
+        return diagnostics.report(BuildConfig.VERSION_NAME,BuildConfig.VERSION_CODE,Build.MANUFACTURER,Build.MODEL,
+            Build.VERSION.RELEASE,Build.VERSION.SDK_INT);
+    }
+
     private static void assertPreviewOnly(PreviewActivity host,Object camera,Object texture) {
         if(!live(host) || field(host,"camera")!=camera || field(host,"texture")!=texture || state(host).recognition
             || field(host,"analysisTicket")!=null || basicAt(host)!=-1 || field(host,"activeTone")!=null
@@ -757,7 +769,7 @@ final class PipProbe {
         try{Field field=host.getClass().getDeclaredField(name);field.setAccessible(true);field.set(host,value);}
         catch(Exception error){throw new AssertionError(error);}
     }
-    private static void tap(Instrumentation runner,Activity host,int id) throws Exception {
+    static void tap(Instrumentation runner,Activity host,int id) throws Exception {
         // Real input respects focus and enabled state, unlike directly invoking performClick.
         try {await(runner,()->{
             View view=host.findViewById(id);android.graphics.Rect bounds=new android.graphics.Rect();

@@ -5,6 +5,9 @@ import android.widget.TextView;
 
 /** Keeps the opaque camera cover in place and puts the next step before settings. */
 final class PreviewRecovery {
+    static void problemInfo(View root,boolean available) {
+        root.findViewById(R.id.copy_problem_info).setVisibility(available?View.VISIBLE:View.GONE);
+    }
     static void clear(View root) {
         root.findViewById(R.id.recovery_hint).setVisibility(View.GONE);
         root.findViewById(R.id.restart_preview).setEnabled(true);

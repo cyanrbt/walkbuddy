@@ -6,7 +6,7 @@ from pathlib import Path
 import re
 
 PACKAGE = "com.cyanrbt.walkbuddy"
-PROBES = ["pip_recovery", "runtime", "preview", "overlay", "layout", "home", "recovery", "pip", "pip-repeat"]
+PROBES = ["pip_recovery", "runtime", "preview", "overlay", "layout", "home", "recovery", "pip", "pip-repeat", "support"]
 
 
 def read(path: Path) -> str:

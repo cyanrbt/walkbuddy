@@ -154,6 +154,7 @@ final class LayoutProbe {
             }
         report.append("FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\n");
         report.append("HAPTIC_LEGEND_PASS configurations=30 resize_cycles=30; full cue text and descriptions, responsive columns/list\n");
+        report.append("DIAGNOSTIC_LAYOUT_PASS configurations=30; recovery copy action text and scroll reachability\n");
     }
 
     private static void checkHapticLegend(View root,int width,int height,File output) throws Exception {
@@ -201,8 +202,10 @@ final class LayoutProbe {
         controls.scrollTo(0,0);
         boolean depth=root.findViewById(R.id.depth_steps).getVisibility()==View.VISIBLE;
         int previousAlert=root.findViewById(R.id.recent_alert).getVisibility();
+        boolean previousProblemInfo=root.findViewById(R.id.copy_problem_info).getVisibility()==View.VISIBLE;
         root.findViewById(R.id.recent_alert).setVisibility(View.GONE);
         info.setText(R.string.info_detection_timeout);title.setText(R.string.window_preview_only);
+        PreviewRecovery.problemInfo(root,true);
         PreviewChrome.detectionStopped(root,true,false);measure(root,width,height);
         TextView warning=root.findViewById(R.id.detection_status);
         textFits(root);warningInsideCamera(root,warning);
@@ -226,6 +229,7 @@ final class LayoutProbe {
         PreviewChrome.compact(root,false,depth);PreviewChrome.detectionStopped(root,false,false);
         root.setPadding(0,24,0,24);info.setText(previousInfo);title.setText(previousTitle);
         root.findViewById(R.id.recent_alert).setVisibility(previousAlert);measure(root,width,height);
+        PreviewRecovery.problemInfo(root,previousProblemInfo);
         controls.scrollTo(0,previousScroll);
         detection.setChecked(previousDetection);sound.setChecked(previousSound);sound.setEnabled(previousSoundEnabled);
         if(warning.getVisibility()!=View.GONE)throw new AssertionError("Fault warning survived explicit clearing");
@@ -355,6 +359,7 @@ final class LayoutProbe {
         TextView cover=root.findViewById(R.id.preview_cover),action=root.findViewById(R.id.restart_preview);
         for(RecoveryGuide.Reason reason:RecoveryGuide.Reason.values())for(boolean granted:new boolean[]{false,true}) {
             RecoveryGuide.Prompt prompt=RecoveryGuide.resolve(reason,granted);
+            PreviewRecovery.problemInfo(root,prompt.action!=RecoveryGuide.Action.WAIT);
             PreviewRecovery.show(root,prompt);measure(root,width,height);
             fullyVisible(root,action);fullyVisible(root,root.findViewById(R.id.preview_stop));
             if(!prompt.button.contentEquals(action.getText()) || action.isEnabled()!=(prompt.action!=RecoveryGuide.Action.WAIT))
@@ -366,10 +371,16 @@ final class LayoutProbe {
                 || cover.getLayout().getHeight()>cover.getHeight()-cover.getPaddingTop()-cover.getPaddingBottom())
                 throw new AssertionError("Recovery cover title clipped: "+reason+" at "+width+"x"+height);
             if(reason==RecoveryGuide.Reason.DARK && granted) {
-                ((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
+                View copy=root.findViewById(R.id.copy_problem_info);
+                ((ScrollView)root.findViewById(R.id.preview_controls)).requestChildFocus(copy,copy);
+                Rect visible=new Rect();
+                if(!copy.getLocalVisibleRect(visible) || visible.height()!=copy.getHeight()
+                    || !copy.isEnabled() || !((TextView)copy).getText().toString().contains("复制问题信息"))
+                    throw new AssertionError("Problem information action is clipped or unavailable");
                 screenshot(root,screenshot);
             }
         }
+        PreviewRecovery.problemInfo(root,false);
     }
 
     private static void checkDisabledButton(View button) {

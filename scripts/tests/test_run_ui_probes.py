@@ -7,7 +7,7 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[2]
-EXPECTED = ["pip_recovery", "runtime", "preview", "overlay", "layout", "home", "recovery", "pip", "pip"]
+EXPECTED = ["pip_recovery", "runtime", "preview", "overlay", "layout", "home", "recovery", "pip", "pip", "support"]
 ADB = '''#!/usr/bin/env python3
 import os, sys, tarfile
 from pathlib import Path
@@ -40,11 +40,18 @@ class UiProbeRunnerTest(unittest.TestCase):
             records = {p.name: p.read_text() for p in (directory/"ui-evidence").glob("*.txt")}
             return result, calls, records
 
-    def test_all_nine_successful_records_are_required_for_success(self):
+    def test_all_ten_successful_records_are_required_for_success(self):
         result, calls, records = self.run_fixture()
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertEqual(EXPECTED, calls)
         self.assertIn("PIP_PROBE_PASS", records["pip-repeat.txt"])
+
+    def test_last_support_probe_failure_still_fails_the_complete_run(self):
+        result, calls, records = self.run_fixture(PROBE_FIXTURE_FAIL="support")
+        self.assertEqual(1, result.returncode)
+        self.assertEqual(EXPECTED, calls)
+        self.assertIn("PIP_PROBE_PASS", records["pip-repeat.txt"])
+        self.assertIn("SUPPORT_PROBE_FAIL", records["support.txt"])
 
     def test_first_probe_failure_does_not_hide_later_evidence_or_pass_the_run(self):
         result, calls, records = self.run_fixture(PROBE_FIXTURE_FAIL="pip_recovery")

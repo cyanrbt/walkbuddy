@@ -28,12 +28,15 @@ class UiCheckReportTest(unittest.TestCase):
                    "10-30 06:38:19.415 559 2188 E ActivityManager: PID: 1195\n"
                    "10-30 06:38:19.415 559 2188 E ActivityManager: Reason: Input dispatching timed out (Application does not have a focused window).\n")
 
-    def test_success_requires_both_step_results_and_all_nine_records(self):
+    def test_success_requires_both_step_results_and_all_ten_records(self):
         self.passing_probes()
         report = summarize(self.directory, "success", "success")
         self.assertEqual("passed", report["status"])
-        self.assertEqual(9, len(report["probes"]))
+        self.assertEqual(10, len(report["probes"]))
         (self.directory / "pip-repeat.txt").unlink()
+        self.assertEqual("evidence_incomplete", summarize(self.directory, "success", "success")["status"])
+        self.passing_probes()
+        (self.directory / "support.txt").unlink()
         self.assertEqual("evidence_incomplete", summarize(self.directory, "success", "success")["status"])
 
     def test_probe_failure_is_not_overridden_by_pass_marker(self):
@@ -86,7 +89,7 @@ class UiCheckReportTest(unittest.TestCase):
         self.assertIn("模拟器运行 | 未运行", markdown(report))
         self.assertEqual("checks_not_passed", summarize(self.directory, "success", "skipped")["status"])
 
-    def test_diagnostic_modes_do_not_claim_nine_standard_probes_were_run(self):
+    def test_profiling_modes_do_not_claim_standard_probes_were_run(self):
         report = summarize(self.directory, "success", "success", mode="thread")
         self.assertEqual([], report["probes"])
         self.assertEqual("passed", report["status"])

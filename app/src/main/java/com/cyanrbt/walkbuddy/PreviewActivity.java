@@ -52,6 +52,8 @@ public final class PreviewActivity extends Activity {
     private final Handler main = new Handler(Looper.getMainLooper());
     private final SessionState state = new SessionState();
     private final DetectionFeedback feedback = new DetectionFeedback();
+    private final SessionDiagnostics diagnostics=new SessionDiagnostics();
+    private static final String PROBLEM_INFO_STATE="walkbuddy.problem_info.v1";
     private RiskAnnouncer announcer;
     private boolean restoreDetection,restoreSound;
     private ToneGenerator activeTone;
@@ -154,6 +156,7 @@ public final class PreviewActivity extends Activity {
     @Override public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         haptics=new RiskHaptics(new AndroidHaptics((Vibrator)getSystemService(VIBRATOR_SERVICE)));
+        if(savedState!=null)diagnostics.restore(savedState.getString(PROBLEM_INFO_STATE));
         previewSeen = getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE)
             .getBoolean(HomeJourney.PREVIEW_SEEN, false);
         active = new WeakReference<>(this);
@@ -177,6 +180,12 @@ public final class PreviewActivity extends Activity {
         // Process recreation must not silently reopen the camera.
         initialStart = savedState == null;
         createWindow();
+    }
+
+    @Override protected void onSaveInstanceState(Bundle out) {
+        String report=problemInfoText();
+        if(report.isEmpty())out.remove(PROBLEM_INFO_STATE);else out.putString(PROBLEM_INFO_STATE,report);
+        super.onSaveInstanceState(out);
     }
 
     @Override protected void onStart() {
@@ -241,6 +250,7 @@ public final class PreviewActivity extends Activity {
         if (destroyed || !resumed || isInPictureInPictureMode()) return;
         KeyguardManager lock = getSystemService(KeyguardManager.class);
         if (lock.isKeyguardLocked() || !getSystemService(PowerManager.class).isInteractive()) return;
+        if(state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE)diagnostics.clear();
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             fail(RecoveryGuide.Reason.PERMISSION,"摄像头未获允许，预览已停止"); return;
         }
@@ -391,6 +401,7 @@ public final class PreviewActivity extends Activity {
         depthGuideHint=root.findViewById(R.id.depth_guide_hint);
         depthButton=root.findViewById(R.id.enable_depth);
         depthButton.setOnClickListener(v->chooseDepth());
+        root.findViewById(R.id.copy_problem_info).setOnClickListener(v->copyProblemInfo());
         refreshDepthAvailability();
         renderDepthGuide();
         recognition=root.findViewById(R.id.preview_recognition);
@@ -399,7 +410,7 @@ public final class PreviewActivity extends Activity {
             feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
-            if(checked)prepareAnalysis(SystemClock.elapsedRealtime());
+            if(checked){diagnostics.clearDetection();prepareAnalysis(SystemClock.elapsedRealtime());}
             if(!checked) { if(sound!=null)sound.setChecked(false); silence();if(info!=null)info.setText(R.string.info_recognition_off); }else if(info!=null)info.setText(R.string.info_recognition_preparing);
             renderDepthGuide();
             render(SystemClock.elapsedRealtime());
@@ -671,6 +682,8 @@ public final class PreviewActivity extends Activity {
         long now=SystemClock.elapsedRealtime();
         if(state.phase!=SessionState.Phase.LIVE || !state.fresh(now)){fail("画面已过期：不可用，请重新开启");return;}
         android.util.Log.i("WalkBuddyAnalysis","Detection stopped; preview continues message="+getString(message));
+        if(message==R.string.info_detection_failed || message==R.string.info_detection_timeout)
+            diagnostics.detection(diagnosticSnapshot(message==R.string.info_detection_timeout?"DETECTION_TIMEOUT":"DETECTION_ERROR",getString(message),now));
         recognition.setChecked(false);
         state.recognition=false;state.analysisAt=0;cancelAnalysis();
         feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;silence();
@@ -705,6 +718,7 @@ public final class PreviewActivity extends Activity {
         if(restart)PreviewRecovery.show(root,RecoveryGuide.resolve(recoveryReason,
             checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED));
         else PreviewRecovery.clear(root);
+        PreviewRecovery.problemInfo(root,diagnostics.available());
         depthButton.setEnabled(live);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(detectionNotice!=0)publicReport+="\n"+getString(detectionNotice);
@@ -719,6 +733,10 @@ public final class PreviewActivity extends Activity {
     }
     private void fail(RecoveryGuide.Reason reason,String message) {
         if(destroyed)return;
+        boolean observing=state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE;
+        if(reason!=RecoveryGuide.Reason.INSTALLING && reason!=RecoveryGuide.Reason.SWITCHING
+            && (observing || reason!=RecoveryGuide.Reason.HIDDEN && reason!=RecoveryGuide.Reason.LOCKED))
+            diagnostics.preview(diagnosticSnapshot(reason.name(),message,SystemClock.elapsedRealtime()));
         main.removeCallbacks(watchdog);
         if(state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE) {
             long now=SystemClock.elapsedRealtime();
@@ -751,6 +769,28 @@ public final class PreviewActivity extends Activity {
         if(root!=null){render(SystemClock.elapsedRealtime());renderDepthGuide();}
         if(root!=null)((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
         publicReport=message+"；提醒已停止";
+    }
+    private SessionDiagnostics.Snapshot diagnosticSnapshot(String category,String message,long now) {
+        boolean active=state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE;
+        SessionDiagnostics.Pipeline pipeline=new SessionDiagnostics.Pipeline(active && analysisReady,active && analysisHasResult,
+            worker!=null && worker.busy(),active?SessionDiagnostics.age(now,sampledAt):-1,
+            active?lastReadbackQueueMs:-1,active?lastSampleCopyMs:-1,active?lastResultDeliveryMs:-1);
+        return new SessionDiagnostics.Snapshot(category,message,state,now,useDepth || depthCamera!=null,
+            isInPictureInPictureMode(),sound!=null && sound.isChecked(),pipeline);
+    }
+    private String problemInfoText() {
+        return diagnostics.report(BuildConfig.VERSION_NAME,BuildConfig.VERSION_CODE,
+            Build.MANUFACTURER,Build.MODEL,Build.VERSION.RELEASE,Build.VERSION.SDK_INT);
+    }
+    private void copyProblemInfo() {
+        String report=problemInfoText();
+        if(report.isEmpty())return;
+        try {
+            ClipboardManager clipboard=(ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+            if(clipboard==null)throw new IllegalStateException("Clipboard unavailable");
+            clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.problem_info_title),report));
+            if(Build.VERSION.SDK_INT<33)Toast.makeText(this,R.string.problem_info_copied,Toast.LENGTH_SHORT).show();
+        } catch(RuntimeException error){Toast.makeText(this,R.string.problem_info_copy_failed,Toast.LENGTH_SHORT).show();}
     }
     private void startPosture() {
         stopPosture();
