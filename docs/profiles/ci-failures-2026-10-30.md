@@ -2,6 +2,12 @@
 
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
+## v0.4.33 后续发布核对
+
+[首轮候选 41117582608](https://github.com/cyanrbt/walkbuddy/actions/runs/41117582608)、[仅采证修订候选 41119141180](https://github.com/cyanrbt/walkbuddy/actions/runs/41119141180) 与[正式发布 41120796047](https://github.com/cyanrbt/walkbuddy/actions/runs/41120796047) 均 attempt 1 成功。首轮原图没有证明缩小后尺寸，修订等待实际窗口缩小和新帧后再截图，生产代码未改；两轮候选和标签附件均保留。修订 API 36 有外部系统服务 ANR 观察，无聚焦对话框或本应用 ANR 观察；标签两套摘要无 ANR 观察，不能据此称外部问题或旧显示停顿已修复。
+
+三个发布作业与整轮终态成功已确认，原始附件均下载复核，实际 Release APK 已下载核验 0.4.33 / 45、固定签名、摘要、新状态实现及测试/样例排除。状态接口在实际日志结束、Release 已有 APK 时仍返回 queued/in_progress，最终终态已取得，正式流程未重跑，具体滞后原因未定位；[完整状态与来源](preview-only-default-2026-10-31.md)区分触发、构建日志、实际附件、整体终态和设备范围。
+
 ## v0.4.32 后续发布核对
 
 [候选 41113481089](https://github.com/cyanrbt/walkbuddy/actions/runs/41113481089) 与[正式发布 41114533950](https://github.com/cyanrbt/walkbuddy/actions/runs/41114533950) attempt 1 两套 Android 首次十项通过，APK 作业首次成功，三个发布作业与整轮终态成功已确认。四套原始附件均下载核对摘要并重放通过，无 ANR 观察；实际 Release APK 已下载核验 0.4.32 / 44、固定签名、摘要、新投影实现及测试代码排除。[投影验证记录](depth-projection-2026-10-31.md)区分构造数据、真实 AR 和性能范围，未重跑或覆盖旧失败，不对历史显示停顿作新根因结论。

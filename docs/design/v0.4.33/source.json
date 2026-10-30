@@ -66,6 +66,20 @@
       "source_entry": "cache/ui-probe/pip-default-preview-only.png",
       "sha256": "01b8f5e78e8f8725df4f870deb5cac3ebdeb3079eb401a150e8831ffc960dc66",
       "scope": "Initial screenshot before stronger geometry assertion; not proof of reduced PiP bounds"
+    },
+    {
+      "file": "released-pip.png",
+      "source_run_id": 41120796047,
+      "source_commit": "61e435c4d7e622b48a4ee09a36bca53c2bb674da",
+      "artifact_id": 13009076099,
+      "archive_sha256": "4618f64c7ee8101d404d65ba35c2d9f277421084453d0cf5b4e9400402bc9e64",
+      "source_entry": "cache/ui-probe/pip-default-preview-only.png",
+      "image_dimensions": [
+        320,
+        640
+      ],
+      "sha256": "698c1fae35a199dee30a6f57a6d2533fddf922fed059f834899a84c1c1019c48",
+      "scope": "Formal v0.4.33 tag actual system PiP after root shrink to 116x155 and advancing frames; virtual Camera2; visually reviewed"
     }
   ]
 }

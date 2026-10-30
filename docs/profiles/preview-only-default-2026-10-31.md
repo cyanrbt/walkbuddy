@@ -23,7 +23,7 @@ v0.4.32 的相机已实时但检测默认关闭时，完整页仍标「实时」
 - 实际虚拟 Camera2/Activity 检查默认完整页、第一次真实 PiP、息屏后主动重开，检测开启/关闭，以及独立恢复流程四次重新进入小窗的提示。复用既有进入/恢复流程，不降低触摸/帧/分析门槛；默认检测、声音继续关闭，没有加载或提示请求由显示规则触发。
 - 两套原生附件中的截图将分别注明静态布局与真实虚拟相机/系统小窗。APK 需核验新状态实现存在，原生断言与样例图片不进入主包，固定签名和版本保持。
 
-最终 0.4.33 / 45 完整 224 项 JVM 为 0 失败 / 错误 / 跳过；Lint 0 错误 / 22 警告，应用与原生测试包构建、发布元数据、产品表面和差异格式通过。[本地 JSON](preview-only-default-2026-10-31.json)保留新状态用例及源文件摘要。候选、正式发布/实际 APK 结果待确认。设备可读性、实际朗读、厂商小窗与真实 AR 仍待验收，不把 UI 变化当作检测准确率或历史显示停顿根因修复。
+最终 0.4.33 / 45 完整 224 项 JVM 为 0 失败 / 错误 / 跳过；Lint 0 错误 / 22 警告，应用与原生测试包构建、发布元数据、产品表面和差异格式通过。[本地 JSON](preview-only-default-2026-10-31.json)保留新状态用例及源文件摘要。候选与正式发布结果见后文。设备可读性、实际朗读、厂商小窗与真实 AR 仍待验收，不把 UI 变化当作检测准确率或历史显示停顿根因修复。
 
 
 ## 首轮候选与截图证据补充
@@ -32,4 +32,17 @@ v0.4.32 的相机已实时但检测默认关闭时，完整页仍标「实时」
 
 人工查看发现首次 PiP 截图展示接近全屏的相机区域，未证明缩小后尺寸；不将这张图当作最终系统小窗证据，也不据此认定生产 PiP 故障。随后只增强原生采证：等待实际根视图宽高均缩小、来源矩形匹配，再等待新的采集/显示帧推进，记录两种尺寸后截图。没有新增进入/退出循环，相机采集、显示和分析的生产截止保持。原生测试包与 Lint 重编译通过，生产与已通过 224 项 JVM 的状态源码均不变；[修订候选 41119141180](https://github.com/cyanrbt/walkbuddy/actions/runs/41119141180) attempt 1 已成功：API 35 job `124281043254`、API 36 job `124281042769` 首次十项通过。每套两轮实际尺寸均由 320×640 缩到约 116×154/155，新帧推进且默认检测/声音关闭，四轮恢复与 30 配置通过。两套完整 ZIP 已下载匹配服务端大小/SHA-256、重放摘要与原始 PASS，[修订候选 JSON](preview-only-native-candidate-2026-10-31.json)保留尺寸记录。实际普通页、系统小窗及大字体 PNG 已人工查看，[原样图与来源](../design/v0.4.33/README.md)区分真实虚拟相机与静态布局。
 
-修订候选 API 36 采集到 `com.google.android.as` 的 `No response to onStartJob` ANR 及 `com.google.android.gms.persistent` 的 SIM_STATE_CHANGED 广播 ANR；未观察到本应用 ANR，没有聚焦外部 ANR 弹窗。API 35 摘要无 ANR 观察。不能将通过写成两套无 ANR，也不据共存推断截图时机或历史显示停顿的原因。正式发布及实际 APK 待确认。
+修订候选 API 36 采集到 `com.google.android.as` 的 `No response to onStartJob` ANR 及 `com.google.android.gms.persistent` 的 SIM_STATE_CHANGED 广播 ANR；未观察到本应用 ANR，没有聚焦外部 ANR 弹窗。API 35 摘要无 ANR 观察。不能将通过写成两套无 ANR，也不据共存推断截图时机或历史显示停顿的原因。正式发布结果见下一节。
+
+
+## 正式发布与实际 APK
+
+[正式发布 41120796047](https://github.com/cyanrbt/walkbuddy/actions/runs/41120796047) attempt 1 已终态成功：Android 15 job `124286605832`、Android 16 job `124286606265`、APK job `124288748912` 均首次成功。标签固定于 `61e435c4d7e622b48a4ee09a36bca53c2bb674da`，生产/测试源码与修订候选一致，旧标签未覆盖。两套原始日志各十项 PASS，四轮恢复、30 配置及每套两轮三类实际 Activity 状态检查通过，窗口从 320×640 缩至约 116×154/155，新帧继续推进。
+
+两套完整原始 ZIP 已下载匹配服务端大小/SHA-256，摘要重放与原始记录一致，[发布 JSON](preview-only-native-release-2026-10-31.json)保留实际尺寸；两套发布摘要无 ANR 观察，修订候选的两个外部系统 ANR 仍保留。已人工查看标签实际小窗与大字体 PNG，[正式小窗原图](../design/v0.4.33/released-pip.png)及[来源记录](../design/v0.4.33/source.json)没有裁切或重绘。
+
+Release `429449775` 的 asset `693297304` 实际存在 [v0.4.33 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.33/Walk-Buddy-v0.4.33-arm64-debug.apk)。通过 Release 下载地址完整下载，curl 退出 0；9,975,340 字节，SHA-256 `844f950e3c78eccfa6b813940d73fe01d6d6c18a0cffc89eab7fcce0bac52258` 与 GitHub 一致，apksigner verify 通过、单签名/v2 有效，固定证书 `ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d`。
+
+包名、0.4.33 / 45、min 26 / target 36、仅 ARM64、原 CAMERA/VIBRATE 权限、原模型/中英文表/11sp 资源均核验通过。新状态类和显示入口在主包，UI 探针、断言和文档样例图片不在主包；本版 UI、既有深度投影、提醒时序对照的源码摘要均匹配标签。[APK JSON](apk-v0.4.33.json)保存独立内容检查与随后确认的流程终态。
+
+状态接口曾在原始日志已结束、Release 已可下载后继续返回旧的 queued/in_progress；最终整体及三个作业的 completed/success 均已取得，没有重跑正式发布，具体滞后原因未定位。相机、检测、声音的行为与旧显示停顿根因不据此改判。实体设备可读性、TalkBack 实际朗读、厂商小窗、真实 AR 和性能仍待验收。
