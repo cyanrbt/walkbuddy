@@ -49,6 +49,23 @@ final class PipProbe {
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
             await(runner,host::isInPictureInPictureMode,"recovery initial PiP");
             for(int cycle=0;cycle<4;cycle++) {
+                if(cycle==2) {
+                    await(runner,()->(boolean)field(launcher,"visible"),"home before recovery lock sequence");
+                    read(runner,()->launcher.findViewById(R.id.start).performClick());
+                    await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"expand before recovery lock");
+                    shell(runner,"input keyevent KEYCODE_SLEEP");
+                    await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE
+                        && !host.getSystemService(PowerManager.class).isInteractive() && !(boolean)field(host,"resumed"),"recovery screen off");
+                    shell(runner,"input keyevent KEYCODE_WAKEUP");shell(runner,"wm dismiss-keyguard");
+                    bringForward(runner,host);
+                    await(runner,()->(boolean)field(host,"resumed") && host.getSystemService(PowerManager.class).isInteractive()
+                        && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"recovery wake and unlock");
+                    read(runner,()->{assertReleased(host);return host.findViewById(R.id.restart_preview).performClick();});
+                    await(runner,()->live(host),"manual camera restart after recovery lock");
+                    read(runner,()->host.findViewById(R.id.enter_pip).performClick());
+                    await(runner,host::isInPictureInPictureMode,"PiP after recovery lock");
+                    report.append("PASS recovery lock/wake precondition\n");
+                }
                 await(runner,()->(boolean)field(launcher,"visible"),"home visible behind PiP");
                 read(runner,()->{
                     Handler handler=(Handler)field(host,"main");Runnable watchdog=(Runnable)field(host,"watchdog");
@@ -83,6 +100,7 @@ final class PipProbe {
             try{screenshot(runner,"pip-recovery-failure.png");}catch(Exception ignored){/* Preserve failure. */}
             result.putString("stream",report+"PIP_RECOVERY_PROBE_FAIL: "+error+"; "+PreviewActivity.report());
         } finally {
+            shell(runner,"input keyevent KEYCODE_WAKEUP");
             if(preview!=null){PreviewActivity host=preview;runner.runOnMainSync(host::finish);}
             if(home!=null){Activity host=home;runner.runOnMainSync(host::finish);}
         }
