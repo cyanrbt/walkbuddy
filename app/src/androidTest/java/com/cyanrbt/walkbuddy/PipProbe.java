@@ -83,6 +83,8 @@ final class PipProbe {
                 tap(runner,launcher,R.id.start);
                 await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"recovery expansion");
                 read(runner,()->{assertReleased(host);return true;});
+                // PiP expansion can resume the Activity before input dispatch has settled.
+                awaitPreviewInputReady(runner,host,"PiP expansion");
                 tap(runner,host,R.id.restart_preview);
                 await(runner,()->live(host),"recovery manual restart");
                 int iteration=cycle;
@@ -428,22 +430,25 @@ final class PipProbe {
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
     }
     private static void awaitWakeInputReady(Instrumentation runner,PreviewActivity host) throws Exception {
-        // Wake can resume/pause the Activity again while system windows are still changing.
+        awaitPreviewInputReady(runner,host,"wake");
+    }
+    private static void awaitPreviewInputReady(Instrumentation runner,PreviewActivity host,String reason) throws Exception {
+        // Wake/PiP transitions can resume/pause the Activity while input windows are changing.
         // Wait for observed UI events to settle, then revalidate; do not retry an injected click.
         runner.getUiAutomation().waitForIdle(500,5000);
         await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
             && host.getSystemService(PowerManager.class).isInteractive()
-            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake input window ready after event idle");
+            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),reason+" input window ready after event idle");
         awaitSystemInputWindow(runner,host);
         await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
             && host.getSystemService(PowerManager.class).isInteractive()
-            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake state after input window readiness");
+            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),reason+" state after input window readiness");
         AccessibilityNodeInfo root=runner.getUiAutomation().getRootInActiveWindow();
         try {
             if(root==null || !android.text.TextUtils.equals(host.getPackageName(),root.getPackageName()))
-                throw new AssertionError("Wake active accessibility window is not the target application");
+                throw new AssertionError(reason+" active accessibility window is not the target application");
         } finally {if(root!=null)root.recycle();}
-        android.util.Log.i("WalkBuddyInput","wake-ready after event idle and system input viewport/window; resumed/focus/unlocked/active-package checked");
+        android.util.Log.i("WalkBuddyInput",reason+"-ready after event idle and system input viewport/window; resumed/focus/unlocked/active-package checked");
     }
     private static void awaitSystemInputWindow(Instrumentation runner,Activity host) throws Exception {
         String component=host.getComponentName().flattenToString();

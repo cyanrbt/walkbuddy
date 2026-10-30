@@ -31,8 +31,9 @@ final class InputWindowState {
             || touchable(ready,component,1,10216) || touchable(ready,component+"Other",0,10216)
             || touchable("",component,0,10216)
             || touchable(ready.replace("inputConfig=0x0","inputConfig=NOT_VISIBLE"),component,0,10216)
-            || touchable(ready.replace("inputConfig=0x0","inputConfig=NO_INPUT_CHANNEL"),component,0,10216))
+            || touchable(ready.replace("inputConfig=0x0","inputConfig=NO_INPUT_CHANNEL"),component,0,10216)
+            || touchable(ready.replace("inputConfig=0x0","inputConfig=PAUSE_DISPATCHING"),component,0,10216))
             throw new AssertionError("Wake input readiness accepted an inactive/unavailable/wrong target or rejected a ready fixture");
-        return 10;
+        return 11;
     }
 }

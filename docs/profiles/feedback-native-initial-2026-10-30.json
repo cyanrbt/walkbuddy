@@ -1,0 +1,144 @@
+[
+  {
+    "api": 35,
+    "source_commit": "bec94bb4fa998283d387d895aba2f0730d6ba118",
+    "run_id": 41073282182,
+    "attempt": 1,
+    "artifact_id": 12985997703,
+    "archive_size_bytes": 8860368,
+    "archive_sha256": "86872f43711c90b68cb5d0c5173fcc31d681357dfce90f15b18d6498ba4c39c2",
+    "summary": {
+      "status": "checks_not_passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "failure",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "failed",
+          "failures": [
+            "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: recovery manual restart; interactive=true keyguard=false; 画面已过期：不可用，请重新开启"
+          ]
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "layout_report": "PASS 320x480-font100-day camera=320x173\nPASS 320x480-font100-night camera=320x173\nPASS 320x480-font150-day camera=320x164\nPASS 320x480-font150-night camera=320x164\nPASS 320x480-font200-day camera=320x151\nPASS 320x480-font200-night camera=320x151\nPASS 360x640-font100-day camera=360x269\nPASS 360x640-font100-night camera=360x269\nPASS 360x640-font150-day camera=360x260\nPASS 360x640-font150-night camera=360x260\nPASS 360x640-font200-day camera=360x247\nPASS 360x640-font200-night camera=360x247\nPASS 600x360-font100-day camera=360x169\nPASS 600x360-font100-night camera=360x169\nPASS 600x360-font150-day camera=360x153\nPASS 600x360-font150-night camera=360x153\nPASS 600x360-font200-day camera=360x131\nPASS 600x360-font200-night camera=360x131\nPASS 640x360-font100-day camera=384x169\nPASS 640x360-font100-night camera=384x169\nPASS 640x360-font150-day camera=384x153\nPASS 640x360-font150-night camera=384x153\nPASS 640x360-font200-day camera=384x131\nPASS 640x360-font200-night camera=384x131\nPASS 800x600-font100-day camera=480x409\nPASS 800x600-font100-night camera=480x409\nPASS 800x600-font150-day camera=480x393\nPASS 800x600-font150-night camera=480x393\nPASS 800x600-font200-day camera=480x371\nPASS 800x600-font200-night camera=480x371\nFEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\nLAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore\n\n",
+    "overlay_report": "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0\nLABEL_FONT_PASS scale=1.5 pixels=16.5\nLABEL_FONT_PASS scale=2.0 pixels=22.0\nLABEL_LAYOUT_PASS cases=1530; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; LABEL_CONTRAST_PASS cases=18; white/black backgrounds, minimum 4.5:1\nLABEL_CROWD_PASS cases=36 overlap_pairs=0; bounds, qualifiers, near-risk priority, reordered input, cache reuse\nLABEL_LAYERING_PASS cases=3; native label pixels unchanged by later full-image mask\nRISK_PAINT_PASS cases=14 mismatches=0; risk-prioritized outlines/fills, labels retained, cached drawing order\nLABEL_MOTION_PASS frames=48 vertical_switches=0 resets=3; current boxes/text, local preferences, clear/geometry reset\n\n",
+    "scope": "Constructed app notification eligibility and native views; no physical haptic/audio/AR acceptance"
+  },
+  {
+    "api": 36,
+    "source_commit": "bec94bb4fa998283d387d895aba2f0730d6ba118",
+    "run_id": 41073282182,
+    "attempt": 1,
+    "artifact_id": 12986137971,
+    "archive_size_bytes": 8826332,
+    "archive_sha256": "6235600d28a4346b2d14fc684e264e551c0372db08d0094abeb4116b7f719195",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "layout_report": "PASS 320x480-font100-day camera=320x173\nPASS 320x480-font100-night camera=320x173\nPASS 320x480-font150-day camera=320x164\nPASS 320x480-font150-night camera=320x164\nPASS 320x480-font200-day camera=320x151\nPASS 320x480-font200-night camera=320x151\nPASS 360x640-font100-day camera=360x269\nPASS 360x640-font100-night camera=360x269\nPASS 360x640-font150-day camera=360x260\nPASS 360x640-font150-night camera=360x260\nPASS 360x640-font200-day camera=360x247\nPASS 360x640-font200-night camera=360x247\nPASS 600x360-font100-day camera=360x169\nPASS 600x360-font100-night camera=360x169\nPASS 600x360-font150-day camera=360x153\nPASS 600x360-font150-night camera=360x153\nPASS 600x360-font200-day camera=360x131\nPASS 600x360-font200-night camera=360x131\nPASS 640x360-font100-day camera=384x169\nPASS 640x360-font100-night camera=384x169\nPASS 640x360-font150-day camera=384x153\nPASS 640x360-font150-night camera=384x153\nPASS 640x360-font200-day camera=384x131\nPASS 640x360-font200-night camera=384x131\nPASS 800x600-font100-day camera=480x409\nPASS 800x600-font100-night camera=480x409\nPASS 800x600-font150-day camera=480x393\nPASS 800x600-font150-night camera=480x393\nPASS 800x600-font200-day camera=480x371\nPASS 800x600-font200-night camera=480x371\nFEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\nLAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore\n\n",
+    "overlay_report": "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0\nLABEL_FONT_PASS scale=1.5 pixels=16.5\nLABEL_FONT_PASS scale=2.0 pixels=22.0\nLABEL_LAYOUT_PASS cases=1530; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; LABEL_CONTRAST_PASS cases=18; white/black backgrounds, minimum 4.5:1\nLABEL_CROWD_PASS cases=36 overlap_pairs=0; bounds, qualifiers, near-risk priority, reordered input, cache reuse\nLABEL_LAYERING_PASS cases=3; native label pixels unchanged by later full-image mask\nRISK_PAINT_PASS cases=14 mismatches=0; risk-prioritized outlines/fills, labels retained, cached drawing order\nLABEL_MOTION_PASS frames=48 vertical_switches=0 resets=3; current boxes/text, local preferences, clear/geometry reset\n\n",
+    "scope": "Constructed app notification eligibility and native views; no physical haptic/audio/AR acceptance"
+  }
+]

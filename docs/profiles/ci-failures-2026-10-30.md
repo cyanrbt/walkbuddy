@@ -4,6 +4,8 @@
 
 ## 再次核对：最近红叉与当前状态
 
+v0.4.26 提醒候选 [41073282182](https://github.com/cyanrbt/walkbuddy/actions/runs/41073282182) 的 API 35 首次失败在原 PiP 展开后的恢复点击，API 36 九项成功；两套新增提醒检查均成功。实际输入路由明确目标 `because it is paused`，应用未收到恢复请求；不能把末尾“画面已过期”误判为自然相机故障。已下载复核附件并保留[时间线、原图和测试修正范围](input-after-pip-expand-2026-10-30.md)，该轮未发标签、未重跑。
+
 用户再次询问后，直接重新查询最近 20 次 Actions，并读取最近失败 API 36 job `124044411424` 的原始日志：`BUILD SUCCESSFUL` 后在 `PIP_RECOVERY_PROBE_FAIL` 的目标 UID 触摸注入处失败。查询时最近连续 10 次运行均为 attempt 1 成功，包括 v0.4.22、v0.4.23、v0.4.24 三次标签发布；最新候选 [41067870083](https://github.com/cyanrbt/walkbuddy/actions/runs/41067870083) 两套 API 也首次成功。v0.4.24 三个 job 和实际 APK 附件均再次确认存在。旧红叉仍保留，不能把历史检查失败当成当前发布仍失败，也不能以这组成功保证后续运行不会失败。
 
 再次查询最近 100 次运行，并读取最近失败 job `124018124877` 的原始日志：最近连续三个红叉 [41040368806](https://github.com/cyanrbt/walkbuddy/actions/runs/41040368806)、[41041267876](https://github.com/cyanrbt/walkbuddy/actions/runs/41041267876)、[41042398884](https://github.com/cyanrbt/walkbuddy/actions/runs/41042398884) 均为 Android 16 唤醒后恢复触摸检查失败，编译已通过。日志显示目标 `restart_preview` 的按下被系统以目标 UID 不匹配拒绝；不能据此确定注入瞬间的实际窗口，也不能把所有历史失败都归为同一原因。

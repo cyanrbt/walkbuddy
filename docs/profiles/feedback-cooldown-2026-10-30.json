@@ -2096,5 +2096,7 @@
         }
       ]
     }
-  }
+  },
+  "current_messages_match_at_every_step": true,
+  "steps_per_variant": 147
 }
