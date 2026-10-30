@@ -21,4 +21,6 @@
 
 此前每次 main 推送都会跑完整模拟器，包括没有 Android 改动的候选模型研究。现将仅包含 `docs/**`、`experiments/**`、`README.md` 或模型核验工作流的推送从 Android push 检查中排除；有任何其它文件变更仍触发，修改 UI 工作流本身也会触发。模型研究继续由专用 `Candidate model audit` 验证。
 
-标签发布仍通过 `workflow_call` 调用原 Android 15/16 检查，`apk` 作业仍 `needs: ui`，必须通过后才打包和发布；未改发布依赖、检查项目、超时、签名或生产应用。此项调整减少无关运行，不解决已有窗口/触摸时序问题。本轮推送后的实际状态另行核实。
+标签发布仍通过 `workflow_call` 调用原 Android 15/16 检查，`apk` 作业仍 `needs: ui`，必须通过后才打包和发布；未改发布依赖、检查项目、超时、签名或生产应用。此项调整减少无关运行，不解决已有窗口/触摸时序问题。
+
+本轮提交 `c95082d93771ca261195055590afe097bcad799c` 修改了 UI 工作流本身，故仍触发完整模拟器检查。[41021191593](https://github.com/cyanrbt/walkbuddy/actions/runs/41021191593) attempt 1 成功，API 35 job `123948653586` 与 API 36 job `123948653341` 均首次成功；[研究检查 41021191647](https://github.com/cyanrbt/walkbuddy/actions/runs/41021191647) 的 ONNX 和 Open Images 两个作业也首次成功。本地两个隔离环境的 15 项工具测试、三个相关工作流的 actionlint、v0.4.18 发布元数据与生产模型摘要检查通过。应用源码与 v0.4.18 无差异，本次交付为 CI 和研究工具，不生成新应用版本；这些通过结果不构成此前输入/分析时序问题已修复的证据。
