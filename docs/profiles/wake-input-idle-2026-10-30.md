@@ -11,3 +11,13 @@
 这是一项测试同步修正，不能视为生产锁屏根因已解决；后续结果记录在[亮屏验证](screen-idle-2026-10-30.md)。系统事件、窗口焦点与实际输入路由仍有不同范围，OEM 和真实触摸仍需验收。
 
 另已下载首轮 API 35 成功 artifact `12970287287`，7,949,506 字节，SHA-256 `d633ae02f64c0b74b9650edae0bd0f8eeebee18d479910280b813ad2c8df54bf`。两轮均记录 effectiveMinimumMs=10000、无输入观察 11500ms，完整预览电源快照 Awake，小窗自动息屏后 Asleep；两份快照的配置均为 screen_off_timeout=1000 / stay_on_while_plugged_in=0，随后手动恢复通过。该成功不补足同轮 API 36 的缺失验证。
+
+## 事件空闲不足以排除重复启动
+
+增加事件等待的 `4f490ae` 在 [41041267876](https://github.com/cyanrbt/walkbuddy/actions/runs/41041267876) 中 API 35 job `124014374468` 成功，API 36 job `124014375304` 仍在相同恢复触摸处失败。已下载 API 36 artifact `12971170157`，64,616 字节，SHA-256 `169391a3c5b949001f149347e42682771263acbc97f3f19b4aa30960483ed8e3`。不能将事件等待单独称为修复。
+
+该轮时序更清楚：10:33:41.034 UTC 系统唤醒，41.094 应用自然恢复；41.193 测试又发出指向 PreviewActivity 的 START / LAUNCH_SINGLE_TASK，随后 41.204 暂停、41.214 恢复。41.294 事件空闲/包名检查通过，之后目标输入仍失败。最后一次 pause 可能已属于失败清理，不能将所有后续 pause 都当作异常原因。
+
+[Activity.onNewIntent 官方生命周期](https://developer.android.com/reference/android/app/Activity#onNewIntent(android.content.Intent))明确说明，给已恢复 Activity 送新 Intent 会先暂停，再恢复。因此原测试在系统自然返回后重复发启动 Intent，会制造额外生命周期转换；空闲事件流也不能证明尚未发出事件的启动请求已经完成。这是有证据的测试序列问题，仍不把它等同于所有历史 UID 失败的完整根因。
+
+后续验证将完整预览锁屏改为直接观察系统自然返回，不重复启动；小窗自然息屏后则等待首页恢复，通过真实首页按钮主动展开，再检查相机仍停止和手动重开。两种用户路径分别覆盖，原事件就绪、目标 UID 输入和严格失败检查保留。生产代码与首轮候选无差异；结果仍由后续完整原生流程确认。

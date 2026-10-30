@@ -58,7 +58,6 @@ final class PipProbe {
                     await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE
                         && !host.getSystemService(PowerManager.class).isInteractive() && !(boolean)field(host,"resumed"),"recovery screen off");
                     shell(runner,"input keyevent KEYCODE_WAKEUP");shell(runner,"wm dismiss-keyguard");
-                    bringForward(runner,host);
                     await(runner,()->(boolean)field(host,"resumed") && host.getSystemService(PowerManager.class).isInteractive()
                         && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"recovery wake and unlock");
                     awaitWakeInputReady(runner,host);
@@ -180,7 +179,7 @@ final class PipProbe {
             });
             screenshot(runner,"preview-controls-live.png");
             checkpoint(runner,"camera_live");
-            if(profilePriority==null && profileThreads==null)screenIdleLifecycle(runner,host,report);
+            if(profilePriority==null && profileThreads==null)screenIdleLifecycle(runner,host,launcher,report);
 
             // Force expiry from the actual TextureView.draw -> SurfaceTextureUpdated path.
             AtomicBoolean expiredInDraw=new AtomicBoolean();
@@ -306,7 +305,6 @@ final class PipProbe {
             read(runner,()->{assertReleased(host);assertNotPolling(host);return true;});
             checkpoint(runner,"screen_off_complete");
             shell(runner,"input keyevent KEYCODE_WAKEUP");shell(runner,"wm dismiss-keyguard");
-            bringForward(runner,host);
             await(runner,()->(boolean)field(host,"resumed") && host.getSystemService(PowerManager.class).isInteractive()
                 && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake, unlock and return to preview");
             awaitWakeInputReady(runner,host);
@@ -422,6 +420,7 @@ final class PipProbe {
     }
 
     private static void bringForward(Instrumentation runner,PreviewActivity host) {
+        // Explicit return after Home; waking an already foreground preview uses natural resume.
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
     }
     private static void awaitWakeInputReady(Instrumentation runner,PreviewActivity host) throws Exception {
@@ -433,12 +432,12 @@ final class PipProbe {
             && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake input window ready after event idle");
         AccessibilityNodeInfo root=runner.getUiAutomation().getRootInActiveWindow();
         try {
-            if(root==null || !host.getPackageName().contentEquals(root.getPackageName()))
+            if(root==null || !android.text.TextUtils.equals(host.getPackageName(),root.getPackageName()))
                 throw new AssertionError("Wake active accessibility window is not the target application");
         } finally {if(root!=null)root.recycle();}
         android.util.Log.i("WalkBuddyInput","wake-ready after accessibility event idle; resumed/focus/unlocked/active-package checked");
     }
-    private static void screenIdleLifecycle(Instrumentation runner,PreviewActivity host,StringBuilder report) throws Exception {
+    private static void screenIdleLifecycle(Instrumentation runner,PreviewActivity host,Activity launcher,StringBuilder report) throws Exception {
         String originalTimeout=shellText(runner,"settings get system screen_off_timeout").trim();
         String originalStayOn=shellText(runner,"settings get global stay_on_while_plugged_in").trim();
         if(!originalTimeout.matches("null|[0-9]+") || !originalStayOn.matches("null|[0-9]+"))
@@ -489,8 +488,11 @@ final class PipProbe {
             shell(runner,"settings "+("null".equals(originalStayOn)?"delete global stay_on_while_plugged_in":"put global stay_on_while_plugged_in "+originalStayOn));
             shell(runner,"input keyevent KEYCODE_WAKEUP");shell(runner,"wm dismiss-keyguard");
         }
-        bringForward(runner,host);
-        await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
+        runner.getUiAutomation().waitForIdle(500,5000);
+        await(runner,()->(boolean)field(launcher,"visible") && launcher.hasWindowFocus(),"home restored after PiP automatic screen off");
+        read(runner,()->{assertReleased(host);return true;});
+        tap(runner,launcher,R.id.start);
+        await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed") && host.hasWindowFocus()
             && host.getSystemService(PowerManager.class).isInteractive()
             && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"return after automatic screen off");
         awaitWakeInputReady(runner,host);
