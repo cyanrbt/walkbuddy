@@ -45,3 +45,38 @@ jobs:
           name: candidate-model-cpu-evidence
           path: candidate-evidence/
           if-no-files-found: warn
+
+  openimages-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: experiments/model_candidates/requirements-openimages.txt
+      - name: Install isolated TensorFlow reference tools
+        run: python -m pip install -r experiments/model_candidates/requirements-openimages.txt
+      - name: Test actual MID fields and overlap calculations
+        run: python -m unittest discover -s experiments/model_candidates -v
+      - name: Fetch existing image fixture
+        run: bash scripts/fetch_test_fixture.sh
+      - name: Run pinned Open Images reference pilot
+        shell: bash
+        env:
+          TF_CPP_MIN_LOG_LEVEL: '2'
+        run: |
+          set -euo pipefail
+          mkdir -p openimages-evidence
+          python experiments/model_candidates/openimages_reference.py \
+            --download --cache "${RUNNER_TEMP}/walkbuddy-openimages" \
+            --portrait app/src/androidTest/assets/portrait.jpg \
+            --output openimages-evidence/reference.json | tee openimages-evidence/audit.txt
+      - name: Upload reference reports only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: openimages-reference-evidence
+          path: openimages-evidence/
+          if-no-files-found: warn

@@ -1,4 +1,7 @@
 __pycache__/
 *.onnx
 *.part
+*.tar.gz
+*.pb
+*.jpg
 candidate-evidence/

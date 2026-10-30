@@ -1,0 +1,190 @@
+{
+  "checked_on": "2026-10-30",
+  "model": {
+    "id": 2480,
+    "slug": "openimages-v4-ssd-mobilenet-v2",
+    "framework": "tensorFlow1",
+    "versionId": 3327,
+    "versionNumber": 1,
+    "licenseName": "Apache 2.0",
+    "totalUncompressedBytes": 63359844,
+    "url": "https://www.kaggle.com/models/google/mobilenet-v2/tensorFlow1/openimages-v4-ssd-mobilenet-v2/1",
+    "metadata_source": "https://www.kaggle.com/api/v1/models/google/mobilenet-v2/tensorFlow1/openimages-v4-ssd-mobilenet-v2/get",
+    "fixed_download": "https://www.kaggle.com/api/v1/models/google/mobilenet-v2/tensorFlow1/openimages-v4-ssd-mobilenet-v2/1/download",
+    "archive_sha256": "bbdc9c5d34db1bbdcdf360a698ee3c7bc6f1346abec99aa40cbc018acd94bcf2",
+    "archive_bytes": 53210955,
+    "files": {
+      "saved_model.pb": {
+        "bytes": 63359842,
+        "sha256": "9f49e034537b2518001794019869df0710f3089b0859ff10600408931a6a1895"
+      },
+      "tfhub_module.pb": {
+        "bytes": 2,
+        "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+      }
+    }
+  },
+  "target": {
+    "mid": "/m/01lynh",
+    "display_name": "Stairs",
+    "label": 93
+  },
+  "dataset_sources": {
+    "boxes": {
+      "url": "https://storage.googleapis.com/openimages/2018_04/validation/validation-annotations-bbox.csv",
+      "bytes": 17074036,
+      "sha256": "aebdfc1dbae39dc1f25d2079720f95c5963eeaf9ff23fe638522f09aeb306ee7"
+    },
+    "images": {
+      "url": "https://storage.googleapis.com/openimages/2018_04/validation/validation-images-with-rotation.csv",
+      "bytes": 15245485,
+      "sha256": "ed93a0e121fe345effdfc7359b848dbc64a1ff6778c8c73563157cb500b33a17"
+    }
+  },
+  "selection": {
+    "split": "validation",
+    "rule": "First three lexicographically sorted image IDs with Stairs boxes, IsGroupOf=0, IsDepiction=0, numeric Rotation=0, CC BY 2.0; selected before inference",
+    "eligible_images": 26
+  },
+  "fixtures": [
+    {
+      "image_id": "0cccffa267fce7bb",
+      "url": "https://open-images-dataset.s3.amazonaws.com/validation/0cccffa267fce7bb.jpg",
+      "bytes": 398026,
+      "sha256": "eab977f677e3912a2e5c39d2a7e47a89cf91b9cb3f8312bc9459ae6459675fc5",
+      "attribution": {
+        "OriginalLandingURL": "https://www.flickr.com/photos/nikonvscanon/1302296182",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/nikonvscanon/",
+        "Author": "David Blaikie",
+        "Title": "Hotel Spiral Staircase",
+        "Rotation": "0.0"
+      },
+      "boxes": [
+        {
+          "ImageID": "0cccffa267fce7bb",
+          "Source": "freeform",
+          "LabelName": "/m/01lynh",
+          "Confidence": "1",
+          "XMin": "0.000002",
+          "XMax": "0.999973",
+          "YMin": "0.000000",
+          "YMax": "0.999967",
+          "IsOccluded": "0",
+          "IsTruncated": "0",
+          "IsGroupOf": "0",
+          "IsDepiction": "0",
+          "IsInside": "0"
+        }
+      ]
+    },
+    {
+      "image_id": "0d73caebb7a63351",
+      "url": "https://open-images-dataset.s3.amazonaws.com/validation/0d73caebb7a63351.jpg",
+      "bytes": 446902,
+      "sha256": "3e8ed8d48d877ab67e69a7aa33bb43a46a37d7b38d5198ad6a3dd5e08b68b882",
+      "attribution": {
+        "OriginalLandingURL": "https://www.flickr.com/photos/traitlinburke/3085948363",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/traitlinburke/",
+        "Author": "Chalky Lives",
+        "Title": "ESCALATOR -TOKYO MIDTOWN",
+        "Rotation": "0.0"
+      },
+      "boxes": [
+        {
+          "ImageID": "0d73caebb7a63351",
+          "Source": "freeform",
+          "LabelName": "/m/01lynh",
+          "Confidence": "1",
+          "XMin": "0.198694",
+          "XMax": "0.494498",
+          "YMin": "0.070187",
+          "YMax": "0.701947",
+          "IsOccluded": "0",
+          "IsTruncated": "0",
+          "IsGroupOf": "0",
+          "IsDepiction": "0",
+          "IsInside": "0"
+        },
+        {
+          "ImageID": "0d73caebb7a63351",
+          "Source": "freeform",
+          "LabelName": "/m/01lynh",
+          "Confidence": "1",
+          "XMin": "0.545655",
+          "XMax": "0.810546",
+          "YMin": "0.077181",
+          "YMax": "0.698015",
+          "IsOccluded": "0",
+          "IsTruncated": "0",
+          "IsGroupOf": "0",
+          "IsDepiction": "0",
+          "IsInside": "0"
+        },
+        {
+          "ImageID": "0d73caebb7a63351",
+          "Source": "freeform",
+          "LabelName": "/m/01lynh",
+          "Confidence": "1",
+          "XMin": "0.944481",
+          "XMax": "0.978323",
+          "YMin": "0.453501",
+          "YMax": "0.516327",
+          "IsOccluded": "1",
+          "IsTruncated": "0",
+          "IsGroupOf": "0",
+          "IsDepiction": "0",
+          "IsInside": "0"
+        }
+      ]
+    },
+    {
+      "image_id": "11e182562844e361",
+      "url": "https://open-images-dataset.s3.amazonaws.com/validation/11e182562844e361.jpg",
+      "bytes": 311424,
+      "sha256": "977493bde1a669ad56fe5c39c9852b94072f524b9d7a7d446a71d683233d3810",
+      "attribution": {
+        "OriginalLandingURL": "https://www.flickr.com/photos/barneymoss/22067593508",
+        "License": "https://creativecommons.org/licenses/by/2.0/",
+        "AuthorProfileURL": "https://www.flickr.com/people/barneymoss/",
+        "Author": "Barney Moss",
+        "Title": "Who watches the watchmen? - 286/365",
+        "Rotation": "0.0"
+      },
+      "boxes": [
+        {
+          "ImageID": "11e182562844e361",
+          "Source": "freeform",
+          "LabelName": "/m/01lynh",
+          "Confidence": "1",
+          "XMin": "0.078417",
+          "XMax": "0.462117",
+          "YMin": "0.506482",
+          "YMax": "1.000000",
+          "IsOccluded": "0",
+          "IsTruncated": "0",
+          "IsGroupOf": "0",
+          "IsDepiction": "0",
+          "IsInside": "0"
+        },
+        {
+          "ImageID": "11e182562844e361",
+          "Source": "freeform",
+          "LabelName": "/m/01lynh",
+          "Confidence": "1",
+          "XMin": "0.580629",
+          "XMax": "1.000000",
+          "YMin": "0.502205",
+          "YMax": "1.000000",
+          "IsOccluded": "0",
+          "IsTruncated": "1",
+          "IsGroupOf": "0",
+          "IsDepiction": "0",
+          "IsInside": "0"
+        }
+      ]
+    }
+  ],
+  "portrait_sha256": "a6f11efaa834706db23f275b6115058fa87fc7f14362681e6abe14e82749de3e"
+}

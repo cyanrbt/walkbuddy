@@ -32,3 +32,27 @@ python experiments/model_candidates/audit.py \
 - 正确形状、有限输出和重复一致是冒烟检查；人像只有一个固定样本，三个常量背景不能替代标注集召回率、误报率、上下方向分类或实体设备性能测试。
 
 `Candidate model audit` 在研究工具变更时运行，也可手动执行。产物只有 JSON 和文字日志，权重放在 runner 临时目录，不上传为构建附件；本工具不修改 Android 依赖、模型、阈值或版本。
+
+## Open Images 台阶参考推理
+
+Google 的 SSD MobileNet V2 Open Images V4 v1 是另一个候选，发布 API 标明 Apache 2.0。固定归档、解压文件、三个验证集 JPEG、标注来源和照片署名见 `openimages.json`。权重是 TF1 SavedModel，并非已经适配移动端的 TFLite 文件。照片从 CVDF 公开镜像下载，保留原作者、作品标题、原页与 CC BY 2.0 链接；不提交或上传照片、权重。
+
+**另建 Python 3.12 环境**安装 `requirements-openimages.txt`，不要与 ONNX 环境混装（NumPy 版本不同），运行：
+
+```sh
+python -m unittest discover -s experiments/model_candidates -v
+bash scripts/fetch_test_fixture.sh
+TF_CPP_MIN_LOG_LEVEL=2 python experiments/model_candidates/openimages_reference.py \
+  --download --cache /tmp/walkbuddy-openimages \
+  --portrait app/src/androidTest/assets/portrait.jpg \
+  --output /tmp/walkbuddy-openimages-reference.json
+```
+
+已有缓存可省去 `--download`；仍须通过大小和 SHA-256 检查。解压只允许清单中的两个普通文件，拒绝其它路径或类型。GitHub 工作流使用独立作业运行这份参考工具，附件只有 JSON 和文字日志。
+
+- 输入为 RGB FLOAT32 `[1,H,W,3]`、0～1，使用原图尺寸，缩放交给模型。单线程、关闭 oneDNN，每个输入执行两次，全部原始输出含字符串必须逐项相同；计时仅为两次宿主调用，不能外推手机性能。
+- 真实归档的 `detection_class_names` 为 MID，而 `detection_class_entities` 为可读名称，与发布模型卡的描述相反；实际分数/类别输出还带有第二维 `[N,1]`。工具核对真实形状及 MID、数字标签 93、`Stairs` 三者，字段不符时失败，避免静默得到零个台阶。
+- 三张照片在推理前按验证集图像 ID 排序选择：仅保留非 GroupOf、非 Depiction 的 Stairs 框，要求元数据明确为数值旋转 0、CC BY 2.0；26 张符合条件的图像中取前三张。CSV 大小、摘要、所选框与照片摘要已固定，不根据模型输出挑样本。
+- 报告保留全部输出中的台阶框，按 0.35 分数计算每个标注框的最大 IoU。这是独立重叠检查，没有一对一分配，不是 AP、总体召回率或正式验收；没有楼梯上下方向标注。七组输入含三个常量、人像和三张台阶照片，不能替代步行视角正负例评测。
+
+参考结果与限制见 [Open Images 核验记录](../../docs/profiles/openimages-stairs-2026-10-30.md)。

@@ -1,0 +1,1091 @@
+{
+  "status": "passed",
+  "scope": "Host reference contract/repeatability only; not mobile performance or accuracy acceptance",
+  "spec": {
+    "checked_on": "2026-10-30",
+    "model": {
+      "id": 2480,
+      "slug": "openimages-v4-ssd-mobilenet-v2",
+      "framework": "tensorFlow1",
+      "versionId": 3327,
+      "versionNumber": 1,
+      "licenseName": "Apache 2.0",
+      "totalUncompressedBytes": 63359844,
+      "url": "https://www.kaggle.com/models/google/mobilenet-v2/tensorFlow1/openimages-v4-ssd-mobilenet-v2/1",
+      "metadata_source": "https://www.kaggle.com/api/v1/models/google/mobilenet-v2/tensorFlow1/openimages-v4-ssd-mobilenet-v2/get",
+      "fixed_download": "https://www.kaggle.com/api/v1/models/google/mobilenet-v2/tensorFlow1/openimages-v4-ssd-mobilenet-v2/1/download",
+      "archive_sha256": "bbdc9c5d34db1bbdcdf360a698ee3c7bc6f1346abec99aa40cbc018acd94bcf2",
+      "archive_bytes": 53210955,
+      "files": {
+        "saved_model.pb": {
+          "bytes": 63359842,
+          "sha256": "9f49e034537b2518001794019869df0710f3089b0859ff10600408931a6a1895"
+        },
+        "tfhub_module.pb": {
+          "bytes": 2,
+          "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+        }
+      }
+    },
+    "target": {
+      "mid": "/m/01lynh",
+      "display_name": "Stairs",
+      "label": 93
+    },
+    "dataset_sources": {
+      "boxes": {
+        "url": "https://storage.googleapis.com/openimages/2018_04/validation/validation-annotations-bbox.csv",
+        "bytes": 17074036,
+        "sha256": "aebdfc1dbae39dc1f25d2079720f95c5963eeaf9ff23fe638522f09aeb306ee7"
+      },
+      "images": {
+        "url": "https://storage.googleapis.com/openimages/2018_04/validation/validation-images-with-rotation.csv",
+        "bytes": 15245485,
+        "sha256": "ed93a0e121fe345effdfc7359b848dbc64a1ff6778c8c73563157cb500b33a17"
+      }
+    },
+    "selection": {
+      "split": "validation",
+      "rule": "First three lexicographically sorted image IDs with Stairs boxes, IsGroupOf=0, IsDepiction=0, numeric Rotation=0, CC BY 2.0; selected before inference",
+      "eligible_images": 26
+    },
+    "fixtures": [
+      {
+        "image_id": "0cccffa267fce7bb",
+        "url": "https://open-images-dataset.s3.amazonaws.com/validation/0cccffa267fce7bb.jpg",
+        "bytes": 398026,
+        "sha256": "eab977f677e3912a2e5c39d2a7e47a89cf91b9cb3f8312bc9459ae6459675fc5",
+        "attribution": {
+          "OriginalLandingURL": "https://www.flickr.com/photos/nikonvscanon/1302296182",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "AuthorProfileURL": "https://www.flickr.com/people/nikonvscanon/",
+          "Author": "David Blaikie",
+          "Title": "Hotel Spiral Staircase",
+          "Rotation": "0.0"
+        },
+        "boxes": [
+          {
+            "ImageID": "0cccffa267fce7bb",
+            "Source": "freeform",
+            "LabelName": "/m/01lynh",
+            "Confidence": "1",
+            "XMin": "0.000002",
+            "XMax": "0.999973",
+            "YMin": "0.000000",
+            "YMax": "0.999967",
+            "IsOccluded": "0",
+            "IsTruncated": "0",
+            "IsGroupOf": "0",
+            "IsDepiction": "0",
+            "IsInside": "0"
+          }
+        ]
+      },
+      {
+        "image_id": "0d73caebb7a63351",
+        "url": "https://open-images-dataset.s3.amazonaws.com/validation/0d73caebb7a63351.jpg",
+        "bytes": 446902,
+        "sha256": "3e8ed8d48d877ab67e69a7aa33bb43a46a37d7b38d5198ad6a3dd5e08b68b882",
+        "attribution": {
+          "OriginalLandingURL": "https://www.flickr.com/photos/traitlinburke/3085948363",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "AuthorProfileURL": "https://www.flickr.com/people/traitlinburke/",
+          "Author": "Chalky Lives",
+          "Title": "ESCALATOR -TOKYO MIDTOWN",
+          "Rotation": "0.0"
+        },
+        "boxes": [
+          {
+            "ImageID": "0d73caebb7a63351",
+            "Source": "freeform",
+            "LabelName": "/m/01lynh",
+            "Confidence": "1",
+            "XMin": "0.198694",
+            "XMax": "0.494498",
+            "YMin": "0.070187",
+            "YMax": "0.701947",
+            "IsOccluded": "0",
+            "IsTruncated": "0",
+            "IsGroupOf": "0",
+            "IsDepiction": "0",
+            "IsInside": "0"
+          },
+          {
+            "ImageID": "0d73caebb7a63351",
+            "Source": "freeform",
+            "LabelName": "/m/01lynh",
+            "Confidence": "1",
+            "XMin": "0.545655",
+            "XMax": "0.810546",
+            "YMin": "0.077181",
+            "YMax": "0.698015",
+            "IsOccluded": "0",
+            "IsTruncated": "0",
+            "IsGroupOf": "0",
+            "IsDepiction": "0",
+            "IsInside": "0"
+          },
+          {
+            "ImageID": "0d73caebb7a63351",
+            "Source": "freeform",
+            "LabelName": "/m/01lynh",
+            "Confidence": "1",
+            "XMin": "0.944481",
+            "XMax": "0.978323",
+            "YMin": "0.453501",
+            "YMax": "0.516327",
+            "IsOccluded": "1",
+            "IsTruncated": "0",
+            "IsGroupOf": "0",
+            "IsDepiction": "0",
+            "IsInside": "0"
+          }
+        ]
+      },
+      {
+        "image_id": "11e182562844e361",
+        "url": "https://open-images-dataset.s3.amazonaws.com/validation/11e182562844e361.jpg",
+        "bytes": 311424,
+        "sha256": "977493bde1a669ad56fe5c39c9852b94072f524b9d7a7d446a71d683233d3810",
+        "attribution": {
+          "OriginalLandingURL": "https://www.flickr.com/photos/barneymoss/22067593508",
+          "License": "https://creativecommons.org/licenses/by/2.0/",
+          "AuthorProfileURL": "https://www.flickr.com/people/barneymoss/",
+          "Author": "Barney Moss",
+          "Title": "Who watches the watchmen? - 286/365",
+          "Rotation": "0.0"
+        },
+        "boxes": [
+          {
+            "ImageID": "11e182562844e361",
+            "Source": "freeform",
+            "LabelName": "/m/01lynh",
+            "Confidence": "1",
+            "XMin": "0.078417",
+            "XMax": "0.462117",
+            "YMin": "0.506482",
+            "YMax": "1.000000",
+            "IsOccluded": "0",
+            "IsTruncated": "0",
+            "IsGroupOf": "0",
+            "IsDepiction": "0",
+            "IsInside": "0"
+          },
+          {
+            "ImageID": "11e182562844e361",
+            "Source": "freeform",
+            "LabelName": "/m/01lynh",
+            "Confidence": "1",
+            "XMin": "0.580629",
+            "XMax": "1.000000",
+            "YMin": "0.502205",
+            "YMax": "1.000000",
+            "IsOccluded": "0",
+            "IsTruncated": "1",
+            "IsGroupOf": "0",
+            "IsDepiction": "0",
+            "IsInside": "0"
+          }
+        ]
+      }
+    ],
+    "portrait_sha256": "a6f11efaa834706db23f275b6115058fa87fc7f14362681e6abe14e82749de3e"
+  },
+  "script_sha256": "e98c4e8c5be0b5662f32971cf6691a7ccdbae37763ddb9a81459bf4f494bfdd3",
+  "source_commit": null,
+  "load_ms": 11734.249360859394,
+  "versions": {
+    "tensorflow": "2.19.0",
+    "numpy": "2.1.3",
+    "pillow": "11.3.0"
+  },
+  "host": {
+    "architecture": "x86_64",
+    "cpu_count": 4
+  },
+  "threads": 1,
+  "oneDNN": false,
+  "inputs": {
+    "images": {
+      "dtype": "float32",
+      "shape": [
+        null,
+        null,
+        null,
+        3
+      ]
+    }
+  },
+  "outputs": {
+    "detection_class_labels": {
+      "dtype": "int64",
+      "shape": [
+        null,
+        1
+      ]
+    },
+    "detection_class_names": {
+      "dtype": "string",
+      "shape": [
+        null,
+        1
+      ]
+    },
+    "detection_class_entities": {
+      "dtype": "string",
+      "shape": [
+        null,
+        1
+      ]
+    },
+    "detection_boxes": {
+      "dtype": "float32",
+      "shape": [
+        null,
+        4
+      ]
+    },
+    "detection_scores": {
+      "dtype": "float32",
+      "shape": [
+        null,
+        1
+      ]
+    }
+  },
+  "operations": {
+    "Placeholder": 1503,
+    "Const": 8298,
+    "HashTableV2": 2,
+    "Enter": 28,
+    "TensorArrayV3": 11,
+    "Shape": 627,
+    "StridedSlice": 641,
+    "Range": 30,
+    "TensorArrayScatterV3": 5,
+    "TensorArrayReadV3": 5,
+    "ExpandDims": 45,
+    "ResizeBilinear": 1,
+    "Squeeze": 7,
+    "Identity": 450,
+    "TensorArrayWriteV3": 6,
+    "NextIteration": 10,
+    "Merge": 16,
+    "Switch": 31,
+    "Less": 4,
+    "LogicalAnd": 2,
+    "LoopCond": 2,
+    "Add": 647,
+    "GatherV2": 1216,
+    "Split": 2,
+    "Exit": 6,
+    "TensorArraySizeV3": 6,
+    "TensorArrayGatherV3": 6,
+    "Cast": 33,
+    "Unpack": 5,
+    "ZerosLike": 604,
+    "RealDiv": 33,
+    "Pack": 636,
+    "Minimum": 608,
+    "Maximum": 4,
+    "ConcatV2": 55,
+    "Sub": 25,
+    "Mul": 64,
+    "Greater": 7,
+    "Where": 1,
+    "Reshape": 704,
+    "Conv2D": 55,
+    "BiasAdd": 12,
+    "Sigmoid": 1,
+    "Slice": 677,
+    "Fill": 40,
+    "NonMaxSuppressionV3": 602,
+    "FusedBatchNorm": 60,
+    "Relu6": 43,
+    "DepthwiseConv2dNative": 17,
+    "Rank": 3,
+    "Transpose": 3,
+    "Tile": 37,
+    "Sqrt": 6,
+    "Equal": 2,
+    "All": 1,
+    "Assert": 2,
+    "Exp": 2,
+    "Size": 1,
+    "TopKV2": 1,
+    "LookupTableFindV2": 2
+  },
+  "observed_mid_field": "detection_class_names",
+  "observed_display_field": "detection_class_entities",
+  "fixtures": [
+    {
+      "name": "black",
+      "width": 640,
+      "height": 480,
+      "input_sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+      "first_ms": 12326.785780489445,
+      "repeat_ms": 303.560096770525,
+      "same_repeated_output": true,
+      "total_detections": 100,
+      "stairs": [],
+      "stairs_count_at_035": 0
+    },
+    {
+      "name": "gray",
+      "width": 640,
+      "height": 480,
+      "input_sha256": "acacfb0ad52b7fcf66a9a441e2f1dbbe8a2ea04618db2ee8417a8cf37f3a3a75",
+      "first_ms": 311.6830885410309,
+      "repeat_ms": 350.8842810988426,
+      "same_repeated_output": true,
+      "total_detections": 100,
+      "stairs": [],
+      "stairs_count_at_035": 0
+    },
+    {
+      "name": "white",
+      "width": 640,
+      "height": 480,
+      "input_sha256": "b6d5bd2c291ac9c5032b1476012317468a02c5780ef2cc0b05c5268bed6f4cce",
+      "first_ms": 309.66464057564735,
+      "repeat_ms": 297.3453365266323,
+      "same_repeated_output": true,
+      "total_detections": 100,
+      "stairs": [],
+      "stairs_count_at_035": 0
+    },
+    {
+      "name": "portrait",
+      "width": 820,
+      "height": 1024,
+      "input_sha256": "11b69993d6229a746d9476281ddde55d44d635bf1a7273b8b822b1a01881813b",
+      "first_ms": 328.03500071167946,
+      "repeat_ms": 293.6145104467869,
+      "same_repeated_output": true,
+      "total_detections": 100,
+      "stairs": [],
+      "stairs_count_at_035": 0
+    },
+    {
+      "name": "0cccffa267fce7bb",
+      "width": 1024,
+      "height": 768,
+      "input_sha256": "fbe2c3738b0852a31f7a9487e478c54ba2385cdef19cdfc5472c2f86fa4cc09e",
+      "first_ms": 327.6572674512863,
+      "repeat_ms": 326.0594345629215,
+      "same_repeated_output": true,
+      "total_detections": 100,
+      "stairs": [],
+      "stairs_count_at_035": 0,
+      "gt_max_iou_at_035": [
+        0.0
+      ]
+    },
+    {
+      "name": "0d73caebb7a63351",
+      "width": 815,
+      "height": 1024,
+      "input_sha256": "41d2aad9f6894c87a07f782323ca8244b2ba43b664ebeae4e829e39d362556c4",
+      "first_ms": 276.0637626051903,
+      "repeat_ms": 284.5405451953411,
+      "same_repeated_output": true,
+      "total_detections": 100,
+      "stairs": [
+        {
+          "score": 0.3977756202220917,
+          "box_yxyx": [
+            0.06441792845726013,
+            0.12468305230140686,
+            0.936762809753418,
+            0.8705823421478271
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.2255052626132965,
+          "box_yxyx": [
+            0.0012938380241394043,
+            0.5202236771583557,
+            0.7384214997291565,
+            0.9274678826332092
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.18004147708415985,
+          "box_yxyx": [
+            0.047819674015045166,
+            0.20772498846054077,
+            0.7167771458625793,
+            0.48971861600875854
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.15304617583751678,
+          "box_yxyx": [
+            0.03757256269454956,
+            0.22298775613307953,
+            0.7158356308937073,
+            0.6525787711143494
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.15235938131809235,
+          "box_yxyx": [
+            0.0348987877368927,
+            0.32226067781448364,
+            0.710360050201416,
+            0.5647659301757812
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.13296467065811157,
+          "box_yxyx": [
+            0.03848901391029358,
+            0.08168873190879822,
+            0.7500766515731812,
+            0.5500650405883789
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.12786975502967834,
+          "box_yxyx": [
+            0.0776909589767456,
+            0.5388465523719788,
+            0.7114624381065369,
+            0.8046252131462097
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.11352353543043137,
+          "box_yxyx": [
+            0.3268193006515503,
+            0.19149446487426758,
+            0.7007579803466797,
+            0.9787243604660034
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.11171763390302658,
+          "box_yxyx": [
+            0.0720963180065155,
+            0.38227394223213196,
+            0.579688310623169,
+            0.9373965263366699
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.11084429919719696,
+          "box_yxyx": [
+            0.5265496969223022,
+            0.05647656321525574,
+            0.9845418930053711,
+            0.941851019859314
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.10963648557662964,
+          "box_yxyx": [
+            0.08551418781280518,
+            0.23148229718208313,
+            0.48742997646331787,
+            1.0
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.10686416923999786,
+          "box_yxyx": [
+            0.07237020134925842,
+            0.09270557761192322,
+            0.5766555070877075,
+            0.8753069639205933
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.09840716421604156,
+          "box_yxyx": [
+            0.05889853835105896,
+            0.28231316804885864,
+            0.6575006246566772,
+            0.8049814105033875
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.09478294104337692,
+          "box_yxyx": [
+            0.07198113203048706,
+            0.007924258708953857,
+            0.9715057015419006,
+            0.5196127891540527
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.09330373257398605,
+          "box_yxyx": [
+            0.059391915798187256,
+            0.10482868552207947,
+            0.6891825199127197,
+            0.41052356362342834
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.09137347340583801,
+          "box_yxyx": [
+            0.1018775999546051,
+            0.5868985652923584,
+            0.6877244710922241,
+            0.8845384120941162
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.08449135720729828,
+          "box_yxyx": [
+            0.06436210870742798,
+            0.47147077322006226,
+            0.9819648861885071,
+            0.9494414925575256
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.08409301936626434,
+          "box_yxyx": [
+            0.03638213872909546,
+            0.2879817485809326,
+            0.5523185133934021,
+            0.6196432709693909
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.08332440257072449,
+          "box_yxyx": [
+            0.19144918024539948,
+            0.1428488940000534,
+            0.5528980493545532,
+            0.5486560463905334
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.0811324343085289,
+          "box_yxyx": [
+            0.3180062770843506,
+            0.013003319501876831,
+            0.7108522653579712,
+            0.7484128475189209
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.07896295934915543,
+          "box_yxyx": [
+            0.19749756157398224,
+            0.44957825541496277,
+            0.5264787077903748,
+            0.8865807056427002
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.0774674043059349,
+          "box_yxyx": [
+            0.22565612196922302,
+            0.28589120507240295,
+            0.9956874847412109,
+            1.0
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.07731777429580688,
+          "box_yxyx": [
+            0.18884801864624023,
+            0.4565613269805908,
+            0.7555978894233704,
+            0.887628436088562
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.0766163244843483,
+          "box_yxyx": [
+            0.19516721367835999,
+            0.2240111082792282,
+            0.5180063247680664,
+            0.7016977667808533
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.07430512458086014,
+          "box_yxyx": [
+            0.16551081836223602,
+            0.051346153020858765,
+            0.5533828139305115,
+            0.45274093747138977
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.07326444238424301,
+          "box_yxyx": [
+            0.053942590951919556,
+            0.5780906081199646,
+            0.42244958877563477,
+            0.9808552861213684
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.07304456830024719,
+          "box_yxyx": [
+            0.270964115858078,
+            0.06560507416725159,
+            0.672644853591919,
+            0.4717625677585602
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.07150217145681381,
+          "box_yxyx": [
+            0.024347320199012756,
+            0.3533611595630646,
+            0.4683915376663208,
+            0.753724217414856
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.07109716534614563,
+          "box_yxyx": [
+            0.302310585975647,
+            0.47210171818733215,
+            0.6450835466384888,
+            0.899196982383728
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.0700392872095108,
+          "box_yxyx": [
+            0.07611066102981567,
+            0.4393892288208008,
+            0.4023493528366089,
+            0.8778150081634521
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.06905941665172577,
+          "box_yxyx": [
+            0.22655841708183289,
+            0.0,
+            0.9920145273208618,
+            0.7265106439590454
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.06863637268543243,
+          "box_yxyx": [
+            0.3056809604167938,
+            0.2158534973859787,
+            0.6447590589523315,
+            0.6962025165557861
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.06704003363847733,
+          "box_yxyx": [
+            0.33434003591537476,
+            0.385405570268631,
+            0.88214510679245,
+            0.9643641710281372
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.06590408086776733,
+          "box_yxyx": [
+            0.030526846647262573,
+            0.4167296290397644,
+            0.6223045587539673,
+            0.6553115248680115
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.06402449309825897,
+          "box_yxyx": [
+            0.13231638073921204,
+            0.6532468795776367,
+            0.7161848545074463,
+            0.9611707925796509
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.0636904314160347,
+          "box_yxyx": [
+            0.06086406111717224,
+            0.23513641953468323,
+            0.3916988968849182,
+            0.6947697401046753
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.05757978558540344,
+          "box_yxyx": [
+            0.33402055501937866,
+            0.09900727868080139,
+            0.5853272676467896,
+            0.6502825021743774
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.056799642741680145,
+          "box_yxyx": [
+            0.09226599335670471,
+            0.7272319197654724,
+            0.5752278566360474,
+            0.9826093316078186
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.05508200451731682,
+          "box_yxyx": [
+            0.38650262355804443,
+            0.14294523000717163,
+            0.7093192338943481,
+            0.6187594532966614
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.05468260869383812,
+          "box_yxyx": [
+            0.29712963104248047,
+            0.6418161392211914,
+            0.5905857086181641,
+            0.9625726938247681
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.05418391525745392,
+          "box_yxyx": [
+            0.4135309159755707,
+            0.3788281977176666,
+            0.7061160802841187,
+            0.900641918182373
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.05398516356945038,
+          "box_yxyx": [
+            0.5158690214157104,
+            0.2248261570930481,
+            0.8705847263336182,
+            0.9462172389030457
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.053163569420576096,
+          "box_yxyx": [
+            0.1874837726354599,
+            0.6525670289993286,
+            0.5036949515342712,
+            0.9829096794128418
+          ],
+          "label": 93,
+          "name": "Stairs"
+        }
+      ],
+      "stairs_count_at_035": 1,
+      "gt_max_iou_at_035": [
+        0.28720219627215104,
+        0.2527401769187868,
+        0.0
+      ]
+    },
+    {
+      "name": "11e182562844e361",
+      "width": 1024,
+      "height": 683,
+      "input_sha256": "68bb81621e2e921a6fdb8ac3f1a86b65dd59818ea4490e72f80d94eae6f15593",
+      "first_ms": 296.9896048307419,
+      "repeat_ms": 281.30824118852615,
+      "same_repeated_output": true,
+      "total_detections": 100,
+      "stairs": [
+        {
+          "score": 0.14964187145233154,
+          "box_yxyx": [
+            0.7069219350814819,
+            0.3355846405029297,
+            0.997390627861023,
+            0.7548307180404663
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.10501023381948471,
+          "box_yxyx": [
+            0.7107807993888855,
+            0.12562458217144012,
+            0.9991433024406433,
+            0.5479711890220642
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.09900273382663727,
+          "box_yxyx": [
+            0.4242974817752838,
+            0.338951051235199,
+            1.0,
+            0.7271547913551331
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.09270165860652924,
+          "box_yxyx": [
+            0.5512486696243286,
+            0.19425219297409058,
+            1.0,
+            0.7395215630531311
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.09251954406499863,
+          "box_yxyx": [
+            0.6251897215843201,
+            0.4298047721385956,
+            1.0,
+            0.6526851654052734
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.09015034884214401,
+          "box_yxyx": [
+            0.7618387341499329,
+            0.283890038728714,
+            1.0,
+            0.6487970352172852
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.08878177404403687,
+          "box_yxyx": [
+            0.8234270215034485,
+            0.27453678846359253,
+            0.9989015460014343,
+            0.8360536694526672
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.0885571762919426,
+          "box_yxyx": [
+            0.6947294473648071,
+            0.08988785743713379,
+            1.0,
+            0.839834988117218
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.08449193835258484,
+          "box_yxyx": [
+            0.7994740009307861,
+            0.08103740215301514,
+            1.0,
+            0.6213738322257996
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.0804608091711998,
+          "box_yxyx": [
+            0.5467005968093872,
+            0.0,
+            0.99381422996521,
+            0.5350140333175659
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.07726544886827469,
+          "box_yxyx": [
+            0.6186198592185974,
+            0.23340700566768646,
+            1.0,
+            0.4446503520011902
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.07294472306966782,
+          "box_yxyx": [
+            0.46451810002326965,
+            0.034572333097457886,
+            1.0,
+            0.8646172285079956
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.06864620000123978,
+          "box_yxyx": [
+            0.6917765736579895,
+            0.3294292688369751,
+            1.0,
+            0.5917300581932068
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.06025782227516174,
+          "box_yxyx": [
+            0.558327317237854,
+            0.11232469975948334,
+            0.989514946937561,
+            0.39028871059417725
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.058277007192373276,
+          "box_yxyx": [
+            0.7550640106201172,
+            0.055124446749687195,
+            1.0,
+            0.41995060443878174
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.056573186069726944,
+          "box_yxyx": [
+            0.7575422525405884,
+            0.4384062886238098,
+            1.0,
+            0.8127489686012268
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.05023200437426567,
+          "box_yxyx": [
+            0.5573525428771973,
+            0.37395259737968445,
+            0.9924039840698242,
+            0.8240566253662109
+          ],
+          "label": 93,
+          "name": "Stairs"
+        },
+        {
+          "score": 0.048750825226306915,
+          "box_yxyx": [
+            0.5060991048812866,
+            0.3470209240913391,
+            0.9962146282196045,
+            0.605055570602417
+          ],
+          "label": 93,
+          "name": "Stairs"
+        }
+      ],
+      "stairs_count_at_035": 0,
+      "gt_max_iou_at_035": [
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

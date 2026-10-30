@@ -1,0 +1,479 @@
+{
+  "status": "passed",
+  "scope": "Host CPU smoke/contract audit; not Android, camera latency, accuracy, or distribution approval",
+  "model": {
+    "repository": "J4VIS-2026/yolov8n-sidewalk-obstacle",
+    "revision": "8feeca4dbf386e77bc76ce93f34caa7301d76c84",
+    "filename": "model.onnx",
+    "bytes": 3503070,
+    "sha256": "731c55985f7dd1bd41c9112e295c9aa7f411f82c3af4903d496f448525028463",
+    "publisher_license": "AGPL-3.0-only",
+    "publisher_card": "https://huggingface.co/J4VIS-2026/yolov8n-sidewalk-obstacle/blob/8feeca4dbf386e77bc76ce93f34caa7301d76c84/README.md",
+    "license_url": "https://huggingface.co/J4VIS-2026/yolov8n-sidewalk-obstacle/blob/8feeca4dbf386e77bc76ce93f34caa7301d76c84/LICENSE",
+    "attribution": "이 결과물은 AI 허브의 「인도보행 영상」 데이터셋을 활용하였습니다.",
+    "input": {
+      "name": "images",
+      "shape": [
+        1,
+        3,
+        640,
+        640
+      ],
+      "type": "tensor(float)"
+    },
+    "output": {
+      "name": "output0",
+      "shape": [
+        1,
+        28,
+        8400
+      ],
+      "type": "tensor(float)"
+    },
+    "class_count": 24
+  },
+  "script_sha256": "ebef117137e731b3e1055025dc2e459188d9535285341b66b65336efa27b142d",
+  "source_commit": "f9f8beb66cd112e7a99a927a03f568c5d8dc11fd",
+  "versions": {
+    "onnx": "1.19.1",
+    "onnxruntime": "1.23.2",
+    "numpy": "2.2.6",
+    "pillow": "11.3.0"
+  },
+  "host": {
+    "architecture": "x86_64",
+    "cpu_count": 4,
+    "affinity_count": 4
+  },
+  "opsets": [
+    {
+      "domain": "",
+      "version": 17
+    },
+    {
+      "domain": "com.microsoft.nchwc",
+      "version": 1
+    },
+    {
+      "domain": "ai.onnx.ml",
+      "version": 5
+    },
+    {
+      "domain": "ai.onnx.training",
+      "version": 1
+    },
+    {
+      "domain": "ai.onnx.preview",
+      "version": 1
+    },
+    {
+      "domain": "ai.onnx.preview.training",
+      "version": 1
+    },
+    {
+      "domain": "com.microsoft.experimental",
+      "version": 1
+    },
+    {
+      "domain": "com.microsoft",
+      "version": 1
+    },
+    {
+      "domain": "org.pytorch.aten",
+      "version": 1
+    }
+  ],
+  "node_types": {
+    "QuantizeLinear": 206,
+    "DequantizeLinear": 333,
+    "Conv": 64,
+    "Sigmoid": 57,
+    "Mul": 57,
+    "Split": 8,
+    "Add": 8,
+    "Concat": 17,
+    "MaxPool": 3,
+    "Resize": 2,
+    "Reshape": 8,
+    "Transpose": 1,
+    "Softmax": 1,
+    "Slice": 2,
+    "Sub": 2,
+    "Div": 1
+  },
+  "used_node_domains": [
+    ""
+  ],
+  "initializer_types": {
+    "INT64": 12,
+    "FLOAT": 317,
+    "UINT8": 185,
+    "INT8": 128,
+    "INT32": 126
+  },
+  "fixture_sha256": "a6f11efaa834706db23f275b6115058fa87fc7f14362681e6abe14e82749de3e",
+  "sessions": [
+    {
+      "threads": 1,
+      "session_init_ms": 67.038856,
+      "class_names": [
+        "micromobility",
+        "bus",
+        "car",
+        "push_cart",
+        "pet",
+        "motorcycle",
+        "movable_signage",
+        "person",
+        "truck",
+        "wheelchair",
+        "barricade",
+        "bench",
+        "bollard",
+        "chair",
+        "fire hydrant",
+        "service_terminal",
+        "pole",
+        "potted plant",
+        "control_cabinet",
+        "transit_stop",
+        "table",
+        "traffic light",
+        "traffic_sign",
+        "tree_trunk"
+      ],
+      "embedded_license": "AGPL-3.0 License (https://ultralytics.com/license)",
+      "providers": [
+        "CPUExecutionProvider"
+      ],
+      "fixtures": [
+        {
+          "name": "black",
+          "geometry": {
+            "width": 640,
+            "height": 480,
+            "scale": 1.0,
+            "left": 0,
+            "top": 80,
+            "resized_width": 640,
+            "resized_height": 480
+          },
+          "input_sha256": "84bf14456677ad9e36d38e6946b9c99ee036fb79e0941e0ff23435639dbf3881",
+          "prepare_ms": 7.223166,
+          "first_case_run_ms": 74.054185,
+          "warmup_runs_after_first": 2,
+          "run_ms": [
+            66.087383,
+            65.838067,
+            65.43182,
+            65.333587,
+            66.038682
+          ],
+          "median_ms": 65.838067,
+          "max_ms": 66.087383,
+          "postprocess_ms": 1.136709,
+          "max_class_score": 0.003633171319961548,
+          "confidence_threshold": 0.25,
+          "nms_iou_threshold": 0.7,
+          "detections": 0,
+          "count_at_035": 0,
+          "count_at_050": 0,
+          "top_detections": []
+        },
+        {
+          "name": "pad_gray",
+          "geometry": {
+            "width": 640,
+            "height": 480,
+            "scale": 1.0,
+            "left": 0,
+            "top": 80,
+            "resized_width": 640,
+            "resized_height": 480
+          },
+          "input_sha256": "d4e05bfc32af71b56bac53465531642c4a5824f39e042c89f34ffbc4884a7966",
+          "prepare_ms": 4.308172,
+          "first_case_run_ms": 65.202643,
+          "warmup_runs_after_first": 2,
+          "run_ms": [
+            65.330281,
+            65.350259,
+            65.324721,
+            65.290106,
+            65.275679
+          ],
+          "median_ms": 65.324721,
+          "max_ms": 65.350259,
+          "postprocess_ms": 0.729079,
+          "max_class_score": 0.02101755142211914,
+          "confidence_threshold": 0.25,
+          "nms_iou_threshold": 0.7,
+          "detections": 0,
+          "count_at_035": 0,
+          "count_at_050": 0,
+          "top_detections": []
+        },
+        {
+          "name": "white",
+          "geometry": {
+            "width": 640,
+            "height": 480,
+            "scale": 1.0,
+            "left": 0,
+            "top": 80,
+            "resized_width": 640,
+            "resized_height": 480
+          },
+          "input_sha256": "804bbc716e8426cb9b8dedfd9aa423370b3ea26226f2780de7649563ecaecd09",
+          "prepare_ms": 2.770475,
+          "first_case_run_ms": 65.810371,
+          "warmup_runs_after_first": 2,
+          "run_ms": [
+            65.136504,
+            65.441944,
+            65.192128,
+            65.437245,
+            66.654826
+          ],
+          "median_ms": 65.437245,
+          "max_ms": 66.654826,
+          "postprocess_ms": 0.677213,
+          "max_class_score": 0.008770257234573364,
+          "confidence_threshold": 0.25,
+          "nms_iou_threshold": 0.7,
+          "detections": 0,
+          "count_at_035": 0,
+          "count_at_050": 0,
+          "top_detections": []
+        },
+        {
+          "name": "portrait",
+          "geometry": {
+            "width": 820,
+            "height": 1024,
+            "scale": 0.625,
+            "left": 64,
+            "top": 0,
+            "resized_width": 512,
+            "resized_height": 640
+          },
+          "input_sha256": "fac5c57db99923e98eaa3d8d12d08b9da8acbcb4a01beebd432e7ecada5646a9",
+          "prepare_ms": 8.957859,
+          "first_case_run_ms": 65.358538,
+          "warmup_runs_after_first": 2,
+          "run_ms": [
+            65.203068,
+            65.369378,
+            65.352396,
+            65.598686,
+            65.244555
+          ],
+          "median_ms": 65.352396,
+          "max_ms": 65.598686,
+          "postprocess_ms": 0.925055,
+          "max_class_score": 0.29184895753860474,
+          "confidence_threshold": 0.25,
+          "nms_iou_threshold": 0.7,
+          "detections": 1,
+          "count_at_035": 0,
+          "count_at_050": 0,
+          "top_detections": [
+            {
+              "class_id": 7,
+              "class_name": "person",
+              "confidence": 0.29184895753860474,
+              "xyxy": [
+                291,
+                29,
+                697,
+                1010
+              ],
+              "anchor": 8172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "threads": 2,
+      "session_init_ms": 57.958094,
+      "class_names": [
+        "micromobility",
+        "bus",
+        "car",
+        "push_cart",
+        "pet",
+        "motorcycle",
+        "movable_signage",
+        "person",
+        "truck",
+        "wheelchair",
+        "barricade",
+        "bench",
+        "bollard",
+        "chair",
+        "fire hydrant",
+        "service_terminal",
+        "pole",
+        "potted plant",
+        "control_cabinet",
+        "transit_stop",
+        "table",
+        "traffic light",
+        "traffic_sign",
+        "tree_trunk"
+      ],
+      "embedded_license": "AGPL-3.0 License (https://ultralytics.com/license)",
+      "providers": [
+        "CPUExecutionProvider"
+      ],
+      "fixtures": [
+        {
+          "name": "black",
+          "geometry": {
+            "width": 640,
+            "height": 480,
+            "scale": 1.0,
+            "left": 0,
+            "top": 80,
+            "resized_width": 640,
+            "resized_height": 480
+          },
+          "input_sha256": "84bf14456677ad9e36d38e6946b9c99ee036fb79e0941e0ff23435639dbf3881",
+          "prepare_ms": 6.461704,
+          "first_case_run_ms": 41.155841,
+          "warmup_runs_after_first": 2,
+          "run_ms": [
+            37.752252,
+            37.452924,
+            37.433788,
+            37.948037,
+            37.907481
+          ],
+          "median_ms": 37.752252,
+          "max_ms": 37.948037,
+          "postprocess_ms": 0.711538,
+          "max_class_score": 0.003633171319961548,
+          "confidence_threshold": 0.25,
+          "nms_iou_threshold": 0.7,
+          "detections": 0,
+          "count_at_035": 0,
+          "count_at_050": 0,
+          "top_detections": []
+        },
+        {
+          "name": "pad_gray",
+          "geometry": {
+            "width": 640,
+            "height": 480,
+            "scale": 1.0,
+            "left": 0,
+            "top": 80,
+            "resized_width": 640,
+            "resized_height": 480
+          },
+          "input_sha256": "d4e05bfc32af71b56bac53465531642c4a5824f39e042c89f34ffbc4884a7966",
+          "prepare_ms": 2.437296,
+          "first_case_run_ms": 37.379527,
+          "warmup_runs_after_first": 2,
+          "run_ms": [
+            37.482098,
+            37.450689,
+            37.393676,
+            37.497096,
+            37.283858
+          ],
+          "median_ms": 37.450689,
+          "max_ms": 37.497096,
+          "postprocess_ms": 0.723911,
+          "max_class_score": 0.02101755142211914,
+          "confidence_threshold": 0.25,
+          "nms_iou_threshold": 0.7,
+          "detections": 0,
+          "count_at_035": 0,
+          "count_at_050": 0,
+          "top_detections": []
+        },
+        {
+          "name": "white",
+          "geometry": {
+            "width": 640,
+            "height": 480,
+            "scale": 1.0,
+            "left": 0,
+            "top": 80,
+            "resized_width": 640,
+            "resized_height": 480
+          },
+          "input_sha256": "804bbc716e8426cb9b8dedfd9aa423370b3ea26226f2780de7649563ecaecd09",
+          "prepare_ms": 3.369766,
+          "first_case_run_ms": 37.4619,
+          "warmup_runs_after_first": 2,
+          "run_ms": [
+            37.346315,
+            37.664158,
+            38.06768,
+            37.694705,
+            37.479594
+          ],
+          "median_ms": 37.664158,
+          "max_ms": 38.06768,
+          "postprocess_ms": 0.67507,
+          "max_class_score": 0.008770257234573364,
+          "confidence_threshold": 0.25,
+          "nms_iou_threshold": 0.7,
+          "detections": 0,
+          "count_at_035": 0,
+          "count_at_050": 0,
+          "top_detections": []
+        },
+        {
+          "name": "portrait",
+          "geometry": {
+            "width": 820,
+            "height": 1024,
+            "scale": 0.625,
+            "left": 64,
+            "top": 0,
+            "resized_width": 512,
+            "resized_height": 640
+          },
+          "input_sha256": "fac5c57db99923e98eaa3d8d12d08b9da8acbcb4a01beebd432e7ecada5646a9",
+          "prepare_ms": 8.15962,
+          "first_case_run_ms": 37.652195,
+          "warmup_runs_after_first": 2,
+          "run_ms": [
+            37.324875,
+            37.359009,
+            37.572246,
+            37.60105,
+            37.561887
+          ],
+          "median_ms": 37.561887,
+          "max_ms": 37.60105,
+          "postprocess_ms": 0.9382,
+          "max_class_score": 0.29184895753860474,
+          "confidence_threshold": 0.25,
+          "nms_iou_threshold": 0.7,
+          "detections": 1,
+          "count_at_035": 0,
+          "count_at_050": 0,
+          "top_detections": [
+            {
+              "class_id": 7,
+              "class_name": "person",
+              "confidence": 0.29184895753860474,
+              "xyxy": [
+                291,
+                29,
+                697,
+                1010
+              ],
+              "anchor": 8172
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
