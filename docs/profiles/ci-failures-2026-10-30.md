@@ -4,6 +4,8 @@
 
 ## 再次核对：最近红叉与当前状态
 
+v0.4.30 的 [候选 41101431137](https://github.com/cyanrbt/walkbuddy/actions/runs/41101431137) 与 [正式发布 41103784224](https://github.com/cyanrbt/walkbuddy/actions/runs/41103784224) 两套 Android 检查均首次十项全部成功，APK 作业首次成功；四套原始附件实际下载复核，摘要无 ANR 观察，实际 APK 已下载核对版本 42、固定签名和 GitHub 摘要。候选状态接口曾返回 queued / in_progress、steps 为空，而原始日志显示检查已经完成；此前排队判断已更正，不认定具体缓存或调度原因。公开未登录 API 限流与测试结果分别处理，没有重跑来改变状态；[振动设置记录](vibration-choice-2026-10-31.md)保留原始来源和验收范围。
+
 v0.4.29 的 [候选 41096792807](https://github.com/cyanrbt/walkbuddy/actions/runs/41096792807) 与 [正式发布 41098199220](https://github.com/cyanrbt/walkbuddy/actions/runs/41098199220) 两套 Android 检查均首次十项全部通过，标签 APK 作业首次成功。Release 实际 APK 已下载核对版本 41、固定签名和 GitHub 摘要；本版只修正动画来源/目标边界及跟踪，不称旧显示停顿已修复。候选 API 35 有外部系统服务 ANR 观察，标签两套摘要无 ANR 观察，原记录均保留；[完整来源与范围](pip-source-bounds-2026-10-31.md)区分参数、模拟器行为与真机效果。
 
 v0.4.28 候选同源码单次重跑 Android 16 后十项通过，Android 15 首次结果保留，初轮失败仍保留。随后 [正式发布 41093630773](https://github.com/cyanrbt/walkbuddy/actions/runs/41093630773) attempt 1 的 Android 15/16 与 APK 作业均首次通过，Release 实际 [v0.4.28 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.28/Walk-Buddy-v0.4.28-arm64-debug.apk)已下载核对版本 40、固定签名与 GitHub 摘要。两套原始标签附件已下载，API 36 有系统服务 `com.google.android.as` ANR 观察，不能归因于初轮显示停顿；[完整结果](diagnostics-2026-10-31.md)保留来源和边界。未把重跑通过称为根因修复。

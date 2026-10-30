@@ -1,0 +1,176 @@
+[
+  {
+    "api": 35,
+    "source_commit": "b9cbc05e249cc4654ad0088f3fff75a3d5732200",
+    "run_id": 41103784224,
+    "attempt": 1,
+    "artifact_id": 13001126825,
+    "archive_size_bytes": 11049480,
+    "archive_sha256": "e81921d75cb619171d41c26ca7db5e6037689a99919d7d942ace38641d691303",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.30 / 42\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：3；显示帧龄(ms)：464；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：274；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.30 / 42\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.30 / 42\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：50；显示帧龄(ms)：20；分析龄(ms)：15\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：0；复制(ms)：3；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.30 / 42\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：49；显示帧龄(ms)：19；分析龄(ms)：1501\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：19；读回排队(ms)：3；复制(ms)：4；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "scope": "Android emulator native vibration control, recorded output and Activity recreation with virtual Camera2; controlled reports; no physical motor or TalkBack acceptance"
+  },
+  {
+    "api": 36,
+    "source_commit": "b9cbc05e249cc4654ad0088f3fff75a3d5732200",
+    "run_id": 41103784224,
+    "attempt": 1,
+    "artifact_id": 13000427133,
+    "archive_size_bytes": 11023000,
+    "archive_sha256": "5c4214fcf514554123057548f2aa618fcf24616643c509d5c8264bfab20a608f",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.30 / 42\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：7；显示帧龄(ms)：107；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：76；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.30 / 42\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.30 / 42\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：58；显示帧龄(ms)：19；分析龄(ms)：15\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：8；复制(ms)：4；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.30 / 42\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：37；显示帧龄(ms)：23；分析龄(ms)：1502\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：23；读回排队(ms)：2；复制(ms)：19；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "scope": "Android emulator native vibration control, recorded output and Activity recreation with virtual Camera2; controlled reports; no physical motor or TalkBack acceptance"
+  }
+]
