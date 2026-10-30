@@ -36,6 +36,10 @@ final class PipProbe {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("PiP recovery probe is restricted to emulators");
             if(!PipSupport.available(runner.getTargetContext()))throw new IllegalStateException("System PiP is unavailable");
+            try(java.io.InputStream fixture=runner.getContext().getAssets().open("wake-input-inactive.txt")) {
+                report.append("INPUT_WINDOW_RULES_PASS cases=").append(InputWindowState.verifyWakeFixture(
+                    new String(fixture.readAllBytes(),java.nio.charset.StandardCharsets.UTF_8))).append('\n');
+            }
             shell(runner,"pm grant "+runner.getTargetContext().getPackageName()+" android.permission.CAMERA");
             home=runner.startActivitySync(new Intent(runner.getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             Activity launcher=home;
@@ -430,12 +434,34 @@ final class PipProbe {
         await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
             && host.getSystemService(PowerManager.class).isInteractive()
             && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake input window ready after event idle");
+        awaitSystemInputWindow(runner,host);
+        await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
+            && host.getSystemService(PowerManager.class).isInteractive()
+            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake state after input window readiness");
         AccessibilityNodeInfo root=runner.getUiAutomation().getRootInActiveWindow();
         try {
             if(root==null || !android.text.TextUtils.equals(host.getPackageName(),root.getPackageName()))
                 throw new AssertionError("Wake active accessibility window is not the target application");
         } finally {if(root!=null)root.recycle();}
-        android.util.Log.i("WalkBuddyInput","wake-ready after accessibility event idle; resumed/focus/unlocked/active-package checked");
+        android.util.Log.i("WalkBuddyInput","wake-ready after event idle and system input viewport/window; resumed/focus/unlocked/active-package checked");
+    }
+    private static void awaitSystemInputWindow(Instrumentation runner,Activity host) throws Exception {
+        String component=host.getComponentName().flattenToString();
+        int displayId=read(runner,()->host.getWindow().getDecorView().getDisplay().getDisplayId());
+        long start=android.os.SystemClock.uptimeMillis(),deadline=start+5000;
+        String snapshot="";
+        do {
+            snapshot=shellText(runner,"dumpsys -t 1 input");
+            if(InputWindowState.touchable(snapshot,component,displayId,android.os.Process.myUid())) {
+                powerEvidence(runner,"wake-input-ready-"+start+".txt",snapshot);
+                android.util.Log.i("WalkBuddyInput","system input ready component="+component+" display="+displayId
+                    +" waitedMs="+(android.os.SystemClock.uptimeMillis()-start));
+                return;
+            }
+            Thread.sleep(50);
+        } while(android.os.SystemClock.uptimeMillis()<deadline);
+        powerEvidence(runner,"wake-input-not-ready-"+start+".txt",snapshot);
+        throw new AssertionError("Timed out waiting for active input viewport and touchable target: "+component+" display="+displayId);
     }
     private static void screenIdleLifecycle(Instrumentation runner,PreviewActivity host,Activity launcher,StringBuilder report) throws Exception {
         String originalTimeout=shellText(runner,"settings get system screen_off_timeout").trim();
@@ -490,6 +516,7 @@ final class PipProbe {
         }
         runner.getUiAutomation().waitForIdle(500,5000);
         await(runner,()->(boolean)field(launcher,"visible") && launcher.hasWindowFocus(),"home restored after PiP automatic screen off");
+        awaitSystemInputWindow(runner,launcher);
         read(runner,()->{assertReleased(host);return true;});
         tap(runner,launcher,R.id.start);
         await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed") && host.hasWindowFocus()

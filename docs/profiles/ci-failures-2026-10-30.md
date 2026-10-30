@@ -8,6 +8,8 @@
 
 后续 [41043678006](https://github.com/cyanrbt/walkbuddy/actions/runs/41043678006)、[41044965636](https://github.com/cyanrbt/walkbuddy/actions/runs/41044965636) 及当前标签改进首个候选 [41048695368](https://github.com/cyanrbt/walkbuddy/actions/runs/41048695368) 的两套 Android 检查均首次成功；v0.4.21 发布流程和 APK 附件也已成功。历史失败保留，不用后续成功覆盖其原因未定的事实。向用户报告时分别给出“触发”“模拟器结果”“APK 发布及下载”，避免将任何 Actions 红叉统称为打包失败。
 
+随后标签尾部改进候选 [41050305115](https://github.com/cyanrbt/walkbuddy/actions/runs/41050305115) 的 API 36 再次失败，API 35 通过。本次新路由证据明确显示：点击时输入视口尚未活动，应用窗口仍不可触摸，292ms 后视口才恢复；并非 APK 编译失败。已据此补充系统输入就绪条件，保持原真实触摸、截止和失败门槛，详见[失败时间线与修正](input-target-ready-2026-10-30.md)。本轮尚未发布 v0.4.22，不能把此前绿勾当作后续结果。
+
 ## 已查明的失败
 
 | Actions | 日志中的具体失败 | 后续处理与当前边界 |

@@ -1,0 +1,17 @@
+Excerpt of API 36 failure artifact 12975140411, run 41050305115, source 1f7e512.
+The focus was already restored, but the input viewport and target were not touchable.
+Input Reader State:
+  Viewports:
+    Viewport INTERNAL: displayId=0, uniqueId=local:4619827259835644672, port=0, orientation=0, logicalFrame=[0, 0, 320, 640], physicalFrame=[0, 0, 320, 640], deviceSize=[320, 640], isActive=[0]
+Input Dispatcher State:
+  DispatchEnabled: true
+  DispatchFrozen: false
+  FocusedDisplayId: 0
+  FocusedApplications:
+    displayId=0, name='ActivityRecord{51073611 u0 com.cyanrbt.walkbuddy/.PreviewActivity t7}', dispatchingTimeout=60000ms
+  FocusedWindows:
+    displayId=0, name='2783773 com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity'
+  Display: 0
+    No DisplayInfo found!
+    Windows:
+      4: name=2783773 com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity, id=200, displayId=0, inputConfig=NOT_TOUCHABLE, alpha=1, frame=[0,0][320,640], globalScale=1, applicationInfo.name=ActivityRecord{51073611 u0 com.cyanrbt.walkbuddy/.PreviewActivity t7}, applicationInfo.token=0x72d628886630, touchableRegion=[0,0][320,640], ownerPid=2076, ownerUid=10216, dispatchingTimeout=60000ms, token=0x72d5f8839550, touchOcclusionMode=BLOCK_UNTRUSTED, canOccludePresentation
