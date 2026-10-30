@@ -2,6 +2,12 @@
 
 用户询问 GitHub 打包持续失败。本次直接查询最近 20 次 Actions、最近五个 Releases，并读取相关失败 job 日志。最近 v0.4.15、v0.4.16、v0.4.17、v0.4.18 的 `Release APK` 均首次成功，各自的 Release 确有 APK；近期红叉主要发生在 main 分支的 `Android UI checks` 模拟器运行步骤，之前的 `Build emulator test APKs` 已成功。构建成功与设备验收仍是不同范围。
 
+## 再次核对：最近红叉与当前状态
+
+再次查询最近 100 次运行，并读取最近失败 job `124018124877` 的原始日志：最近连续三个红叉 [41040368806](https://github.com/cyanrbt/walkbuddy/actions/runs/41040368806)、[41041267876](https://github.com/cyanrbt/walkbuddy/actions/runs/41041267876)、[41042398884](https://github.com/cyanrbt/walkbuddy/actions/runs/41042398884) 均为 Android 16 唤醒后恢复触摸检查失败，编译已通过。日志显示目标 `restart_preview` 的按下被系统以目标 UID 不匹配拒绝；不能据此确定注入瞬间的实际窗口，也不能把所有历史失败都归为同一原因。
+
+后续 [41043678006](https://github.com/cyanrbt/walkbuddy/actions/runs/41043678006)、[41044965636](https://github.com/cyanrbt/walkbuddy/actions/runs/41044965636) 及当前标签改进首个候选 [41048695368](https://github.com/cyanrbt/walkbuddy/actions/runs/41048695368) 的两套 Android 检查均首次成功；v0.4.21 发布流程和 APK 附件也已成功。历史失败保留，不用后续成功覆盖其原因未定的事实。向用户报告时分别给出“触发”“模拟器结果”“APK 发布及下载”，避免将任何 Actions 红叉统称为打包失败。
+
 ## 已查明的失败
 
 | Actions | 日志中的具体失败 | 后续处理与当前边界 |

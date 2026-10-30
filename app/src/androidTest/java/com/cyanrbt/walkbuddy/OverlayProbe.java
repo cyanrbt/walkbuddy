@@ -122,6 +122,7 @@ final class OverlayProbe {
                     String shown=label(overlay);
                     if(!shown.startsWith("未测距") || text.measureText(full)<=geometry.width-12*dp && !full.equals(shown))
                         throw new AssertionError("Unmeasured qualifier/name lost: "+font+" / "+width+" / "+shown);
+                    qualifiedLabel(shown,"未测距");
                     labelBounds(overlay,geometry,dp);cases++;
                     if("parking meter".equals(labels.category(i))) {
                         samples.put(sample(overlay,font,width,"unmeasured"));
@@ -135,6 +136,7 @@ final class OverlayProbe {
                 }
                 overlay.show(Collections.singletonList(new Detection("空间障碍",1,.2f,.3f,.8f,.9f,Detection.Risk.NEAR,.7f,null)),geometry);
                 if(!label(overlay).replace(" ","").startsWith("约0.7米"))throw new AssertionError("Measured qualifier lost: "+label(overlay));
+                qualifiedLabel(label(overlay),"约 0.7 米");
                 labelBounds(overlay,geometry,dp);cases++;
                 samples.put(sample(overlay,font,width,"measured"));
                 save(overlay,w,h,new File(output,"overlay-font"+Math.round(font*100)+"-measured-"+width+".png"));
@@ -144,6 +146,7 @@ final class OverlayProbe {
                     for(boolean measured:new boolean[]{false,true}) {
                         overlay.show(Collections.singletonList(new Detection("停车让行标志",1,bounds[0],bounds[1],bounds[2],bounds[3],
                             measured?Detection.Risk.NEAR:Detection.Risk.CAUTION,measured?.7f:Float.NaN,null)),boxed);
+                        qualifiedLabel(label(overlay),measured?"约 0.7 米":"未测距");
                         labelBounds(overlay,boxed,dp);cases++;
                     }
             }
@@ -164,6 +167,12 @@ final class OverlayProbe {
         }
         report.append("LABEL_LAYOUT_PASS cases=").append(cases).append("; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; ")
             .append("LABEL_CONTRAST_PASS cases=").append(contrastCases).append("; white/black backgrounds, minimum 4.5:1\n");
+    }
+    private static void qualifiedLabel(String shown,String qualifier) {
+        if(shown.equals(qualifier) || shown.equals(qualifier.replace(" ","")))return;
+        String prefix=qualifier+" · ";
+        if(!shown.startsWith(prefix) || shown.substring(prefix.length()).replace("…","").trim().isEmpty())
+            throw new AssertionError("Qualifier has a partial or empty object tail: "+shown);
     }
     private static JSONObject sample(DetectionOverlay overlay,float font,int width,String mode) throws Exception {
         Object entry=((Object[])entries(overlay))[0];

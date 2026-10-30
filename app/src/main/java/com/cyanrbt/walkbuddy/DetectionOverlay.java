@@ -96,9 +96,11 @@ public final class DetectionOverlay extends View {
     private String fitLabel(Detection detection,float width) {
         String qualifier=Float.isFinite(detection.meters)?String.format(Locale.CHINA,"约 %.1f 米",detection.meters)
             :detection.attention()?"未测距":null;
-        String full=qualifier==null?detection.label:qualifier+" · "+detection.label;
+        String prefix=qualifier==null?"":qualifier+" · ";
+        String full=prefix+detection.label;
         String fitted=TextUtils.ellipsize(full,textPaint,width,TextUtils.TruncateAt.END).toString();
-        if(qualifier!=null && !fitted.startsWith(qualifier)) {
+        boolean hasName=fitted.startsWith(prefix) && !fitted.substring(prefix.length()).replace("…","").trim().isEmpty();
+        if(qualifier!=null && !hasName) {
             if(textPaint.measureText(qualifier)<=width)return qualifier;
             String compact=qualifier.replace(" ","");
             return textPaint.measureText(compact)<=width?compact:"";
