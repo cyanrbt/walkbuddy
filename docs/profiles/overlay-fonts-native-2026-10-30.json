@@ -1,0 +1,734 @@
+[
+  {
+    "api": 35,
+    "source_commit": "a6d5f91bf720d0b48f268af9fa2382b4e2228c57",
+    "run_id": 41051697662,
+    "attempt": 1,
+    "artifact_id": 12975545551,
+    "archive_size_bytes": 8054159,
+    "archive_sha256": "e10c453346a02590d853640a40a730f9069bc33c1d3adaf850c70701b199337c",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "overlay_report": "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0\nLABEL_FONT_PASS scale=1.5 pixels=16.5\nLABEL_FONT_PASS scale=2.0 pixels=22.0\nLABEL_LAYOUT_PASS cases=1530; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; LABEL_CONTRAST_PASS cases=18; white/black backgrounds, minimum 4.5:1\n\n",
+    "minimum_contrast": 5.055131557554844,
+    "fonts": {
+      "scope": "Native overlay layout fixtures, not real object or depth recognition",
+      "layout_cases": 1530,
+      "contrast_cases": 18,
+      "samples": [
+        {
+          "font_scale": 1,
+          "width_dp": 96,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计…",
+          "text_pixels": 11,
+          "bubble_top": 2,
+          "bubble_bottom": 24.5986328125
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 96,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间…",
+          "text_pixels": 11,
+          "bubble_top": 2,
+          "bubble_bottom": 24.5986328125
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 160,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 11,
+          "bubble_top": 10.4013671875,
+          "bubble_bottom": 33
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 160,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 11,
+          "bubble_top": 10.4013671875,
+          "bubble_bottom": 33
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 320,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 11,
+          "bubble_top": 46.4013671875,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 320,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 11,
+          "bubble_top": 46.4013671875,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 96,
+          "mode": "unmeasured",
+          "label": "未测距",
+          "text_pixels": 16.5,
+          "bubble_top": 2,
+          "bubble_bottom": 31.89794921875
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 96,
+          "mode": "measured",
+          "label": "约 0.7 米",
+          "text_pixels": 16.5,
+          "bubble_top": 2,
+          "bubble_bottom": 31.89794921875
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 160,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 16.5,
+          "bubble_top": 3.10205078125,
+          "bubble_bottom": 33
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 160,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 16.5,
+          "bubble_top": 3.10205078125,
+          "bubble_bottom": 33
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 320,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 16.5,
+          "bubble_top": 39.10205078125,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 320,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 16.5,
+          "bubble_top": 39.10205078125,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 96,
+          "mode": "unmeasured",
+          "label": "未测距",
+          "text_pixels": 22,
+          "bubble_top": 2,
+          "bubble_bottom": 39.197265625
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 96,
+          "mode": "measured",
+          "label": "约0.7米",
+          "text_pixels": 22,
+          "bubble_top": 2,
+          "bubble_bottom": 39.197265625
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 160,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车…",
+          "text_pixels": 22,
+          "bubble_top": 2,
+          "bubble_bottom": 39.197265625
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 160,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空…",
+          "text_pixels": 22,
+          "bubble_top": 2,
+          "bubble_bottom": 39.197265625
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 320,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 22,
+          "bubble_top": 31.802734375,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 320,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 22,
+          "bubble_top": 31.802734375,
+          "bubble_bottom": 69
+        }
+      ],
+      "contrasts": [
+        {
+          "font_scale": 1,
+          "risk": "CAPTURED",
+          "camera_background": "white",
+          "contrast": 7.225262805615246
+        },
+        {
+          "font_scale": 1,
+          "risk": "CAPTURED",
+          "camera_background": "black",
+          "contrast": 9.048834670380254
+        },
+        {
+          "font_scale": 1,
+          "risk": "CAUTION",
+          "camera_background": "white",
+          "contrast": 9.50293317065077
+        },
+        {
+          "font_scale": 1,
+          "risk": "CAUTION",
+          "camera_background": "black",
+          "contrast": 11.901362408307442
+        },
+        {
+          "font_scale": 1,
+          "risk": "NEAR",
+          "camera_background": "white",
+          "contrast": 5.055131557554844
+        },
+        {
+          "font_scale": 1,
+          "risk": "NEAR",
+          "camera_background": "black",
+          "contrast": 6.330987665360152
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "CAPTURED",
+          "camera_background": "white",
+          "contrast": 7.225262805615246
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "CAPTURED",
+          "camera_background": "black",
+          "contrast": 9.048834670380254
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "CAUTION",
+          "camera_background": "white",
+          "contrast": 9.50293317065077
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "CAUTION",
+          "camera_background": "black",
+          "contrast": 11.901362408307442
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "NEAR",
+          "camera_background": "white",
+          "contrast": 5.055131557554844
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "NEAR",
+          "camera_background": "black",
+          "contrast": 6.330987665360152
+        },
+        {
+          "font_scale": 2,
+          "risk": "CAPTURED",
+          "camera_background": "white",
+          "contrast": 7.225262805615246
+        },
+        {
+          "font_scale": 2,
+          "risk": "CAPTURED",
+          "camera_background": "black",
+          "contrast": 9.048834670380254
+        },
+        {
+          "font_scale": 2,
+          "risk": "CAUTION",
+          "camera_background": "white",
+          "contrast": 9.50293317065077
+        },
+        {
+          "font_scale": 2,
+          "risk": "CAUTION",
+          "camera_background": "black",
+          "contrast": 11.901362408307442
+        },
+        {
+          "font_scale": 2,
+          "risk": "NEAR",
+          "camera_background": "white",
+          "contrast": 5.055131557554844
+        },
+        {
+          "font_scale": 2,
+          "risk": "NEAR",
+          "camera_background": "black",
+          "contrast": 6.330987665360152
+        }
+      ]
+    },
+    "wake_input_ready_snapshots": [
+      "cache/ui-probe/wake-input-ready-159813.txt",
+      "cache/ui-probe/wake-input-ready-160601.txt",
+      "cache/ui-probe/wake-input-ready-169506.txt",
+      "cache/ui-probe/wake-input-ready-200754.txt",
+      "cache/ui-probe/wake-input-ready-210441.txt",
+      "cache/ui-probe/wake-input-ready-201391.txt",
+      "cache/ui-probe/wake-input-ready-64169.txt"
+    ],
+    "input_ready_log": [
+      "10-30 11:59:36.599  2537  2590 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=39",
+      "10-30 12:01:12.277  4541  4554 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.MainActivity display=0 waitedMs=73",
+      "10-30 12:01:13.002  4541  4554 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=10",
+      "10-30 12:01:21.907  4541  4554 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=10",
+      "10-30 12:01:53.163  4959  4973 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.MainActivity display=0 waitedMs=18",
+      "10-30 12:01:53.791  4959  4973 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=10",
+      "10-30 12:02:02.842  4959  4973 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=10"
+    ]
+  },
+  {
+    "api": 36,
+    "source_commit": "a6d5f91bf720d0b48f268af9fa2382b4e2228c57",
+    "run_id": 41051697662,
+    "attempt": 1,
+    "artifact_id": 12975227299,
+    "archive_size_bytes": 7986174,
+    "archive_sha256": "129aa2b08ed1855540c83ef19a75c8539f7f6f9fe1c1911fe4a62e9815101c3b",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "overlay_report": "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0\nLABEL_FONT_PASS scale=1.5 pixels=16.5\nLABEL_FONT_PASS scale=2.0 pixels=22.0\nLABEL_LAYOUT_PASS cases=1530; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; LABEL_CONTRAST_PASS cases=18; white/black backgrounds, minimum 4.5:1\n\n",
+    "minimum_contrast": 5.0423221767484385,
+    "fonts": {
+      "scope": "Native overlay layout fixtures, not real object or depth recognition",
+      "layout_cases": 1530,
+      "contrast_cases": 18,
+      "samples": [
+        {
+          "font_scale": 1,
+          "width_dp": 96,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计…",
+          "text_pixels": 11,
+          "bubble_top": 2,
+          "bubble_bottom": 24.5986328125
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 96,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间…",
+          "text_pixels": 11,
+          "bubble_top": 2,
+          "bubble_bottom": 24.5986328125
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 160,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 11,
+          "bubble_top": 10.4013671875,
+          "bubble_bottom": 33
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 160,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 11,
+          "bubble_top": 10.4013671875,
+          "bubble_bottom": 33
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 320,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 11,
+          "bubble_top": 46.4013671875,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 1,
+          "width_dp": 320,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 11,
+          "bubble_top": 46.4013671875,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 96,
+          "mode": "unmeasured",
+          "label": "未测距",
+          "text_pixels": 16.5,
+          "bubble_top": 2,
+          "bubble_bottom": 31.89794921875
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 96,
+          "mode": "measured",
+          "label": "约 0.7 米",
+          "text_pixels": 16.5,
+          "bubble_top": 2,
+          "bubble_bottom": 31.89794921875
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 160,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 16.5,
+          "bubble_top": 3.10205078125,
+          "bubble_bottom": 33
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 160,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 16.5,
+          "bubble_top": 3.10205078125,
+          "bubble_bottom": 33
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 320,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 16.5,
+          "bubble_top": 39.10205078125,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 1.5,
+          "width_dp": 320,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 16.5,
+          "bubble_top": 39.10205078125,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 96,
+          "mode": "unmeasured",
+          "label": "未测距",
+          "text_pixels": 22,
+          "bubble_top": 2,
+          "bubble_bottom": 39.197265625
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 96,
+          "mode": "measured",
+          "label": "约0.7米",
+          "text_pixels": 22,
+          "bubble_top": 2,
+          "bubble_bottom": 39.197265625
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 160,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车…",
+          "text_pixels": 22,
+          "bubble_top": 2,
+          "bubble_bottom": 39.197265625
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 160,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空…",
+          "text_pixels": 22,
+          "bubble_top": 2,
+          "bubble_bottom": 39.197265625
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 320,
+          "mode": "unmeasured",
+          "label": "未测距 · 停车计时器",
+          "text_pixels": 22,
+          "bubble_top": 31.802734375,
+          "bubble_bottom": 69
+        },
+        {
+          "font_scale": 2,
+          "width_dp": 320,
+          "mode": "measured",
+          "label": "约 0.7 米 · 空间障碍",
+          "text_pixels": 22,
+          "bubble_top": 31.802734375,
+          "bubble_bottom": 69
+        }
+      ],
+      "contrasts": [
+        {
+          "font_scale": 1,
+          "risk": "CAPTURED",
+          "camera_background": "white",
+          "contrast": 7.206954450699108
+        },
+        {
+          "font_scale": 1,
+          "risk": "CAPTURED",
+          "camera_background": "black",
+          "contrast": 9.034638757043233
+        },
+        {
+          "font_scale": 1,
+          "risk": "CAUTION",
+          "camera_background": "white",
+          "contrast": 9.478853344364397
+        },
+        {
+          "font_scale": 1,
+          "risk": "CAUTION",
+          "camera_background": "black",
+          "contrast": 11.882691417456671
+        },
+        {
+          "font_scale": 1,
+          "risk": "NEAR",
+          "camera_background": "white",
+          "contrast": 5.0423221767484385
+        },
+        {
+          "font_scale": 1,
+          "risk": "NEAR",
+          "camera_background": "black",
+          "contrast": 6.321055540892304
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "CAPTURED",
+          "camera_background": "white",
+          "contrast": 7.206954450699108
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "CAPTURED",
+          "camera_background": "black",
+          "contrast": 9.034638757043233
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "CAUTION",
+          "camera_background": "white",
+          "contrast": 9.478853344364397
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "CAUTION",
+          "camera_background": "black",
+          "contrast": 11.882691417456671
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "NEAR",
+          "camera_background": "white",
+          "contrast": 5.0423221767484385
+        },
+        {
+          "font_scale": 1.5,
+          "risk": "NEAR",
+          "camera_background": "black",
+          "contrast": 6.321055540892304
+        },
+        {
+          "font_scale": 2,
+          "risk": "CAPTURED",
+          "camera_background": "white",
+          "contrast": 7.206954450699108
+        },
+        {
+          "font_scale": 2,
+          "risk": "CAPTURED",
+          "camera_background": "black",
+          "contrast": 9.034638757043233
+        },
+        {
+          "font_scale": 2,
+          "risk": "CAUTION",
+          "camera_background": "white",
+          "contrast": 9.478853344364397
+        },
+        {
+          "font_scale": 2,
+          "risk": "CAUTION",
+          "camera_background": "black",
+          "contrast": 11.882691417456671
+        },
+        {
+          "font_scale": 2,
+          "risk": "NEAR",
+          "camera_background": "white",
+          "contrast": 5.0423221767484385
+        },
+        {
+          "font_scale": 2,
+          "risk": "NEAR",
+          "camera_background": "black",
+          "contrast": 6.321055540892304
+        }
+      ]
+    },
+    "wake_input_ready_snapshots": [
+      "cache/ui-probe/wake-input-ready-174625.txt",
+      "cache/ui-probe/wake-input-ready-175297.txt",
+      "cache/ui-probe/wake-input-ready-184282.txt",
+      "cache/ui-probe/wake-input-ready-216166.txt",
+      "cache/ui-probe/wake-input-ready-216817.txt",
+      "cache/ui-probe/wake-input-ready-225702.txt",
+      "cache/ui-probe/wake-input-ready-66940.txt"
+    ],
+    "input_ready_log": [
+      "10-30 12:00:12.510  2152  2297 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=151",
+      "10-30 12:02:00.069  4909  4922 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.MainActivity display=0 waitedMs=25",
+      "10-30 12:02:00.731  4909  4922 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=14",
+      "10-30 12:02:09.728  4909  4922 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=27",
+      "10-30 12:02:41.613  5546  5573 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.MainActivity display=0 waitedMs=27",
+      "10-30 12:02:42.251  5546  5573 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=15",
+      "10-30 12:02:51.135  5546  5573 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=13"
+    ]
+  }
+]
