@@ -18,3 +18,5 @@ v0.4.20 的完整预览没有请求保持亮屏，用户只看画面而不触摸
 本地 `testDebugUnitTest lintDebug assembleDebug assembleDebugAndroidTest -PuniversalApk` 通过，146 项 JVM 测试无失败，Lint 0 错误 / 22 警告；产品表面与 v0.4.21 发布元数据检查通过。配置生效等待和电源快照补充后，最终原生测试包已重新编译成功；云端实际结果完成后补记。探针保存配置、完整预览、电源息屏及恢复设置前的 power 快照，避免失败后丢失现场。
 
 模拟器的真实自动息屏不能替代 Find X8 Ultra、分屏、系统弹窗、AR 或电池实测。
+
+首轮候选 `5514036` 的 [41040368806](https://github.com/cyanrbt/walkbuddy/actions/runs/41040368806) API 35 首次全部通过，原始附件已下载；两轮实际自动息屏均通过，系统最小时间 10000ms，完整预览无输入观察 11500ms 仍 Awake，小窗按配置自动进入 Asleep。API 36 在旧锁屏恢复输入步骤失败，未运行到新增用例，[原始范围与唤醒同步调整](wake-input-idle-2026-10-30.md)已记录。最终候选原生结果待补记，不能用单套成功替代两套验证。

@@ -61,6 +61,7 @@ final class PipProbe {
                     bringForward(runner,host);
                     await(runner,()->(boolean)field(host,"resumed") && host.getSystemService(PowerManager.class).isInteractive()
                         && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"recovery wake and unlock");
+                    awaitWakeInputReady(runner,host);
                     read(runner,()->{assertReleased(host);return true;});
                     tap(runner,host,R.id.restart_preview);
                     await(runner,()->live(host),"manual camera restart after recovery lock");
@@ -308,6 +309,7 @@ final class PipProbe {
             bringForward(runner,host);
             await(runner,()->(boolean)field(host,"resumed") && host.getSystemService(PowerManager.class).isInteractive()
                 && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake, unlock and return to preview");
+            awaitWakeInputReady(runner,host);
             checkpoint(runner,"wake_ready");
             read(runner,()->{assertReleased(host);return true;});
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
@@ -422,6 +424,20 @@ final class PipProbe {
     private static void bringForward(Instrumentation runner,PreviewActivity host) {
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
     }
+    private static void awaitWakeInputReady(Instrumentation runner,PreviewActivity host) throws Exception {
+        // Wake can resume/pause the Activity again while system windows are still changing.
+        // Wait for observed UI events to settle, then revalidate; do not retry an injected click.
+        runner.getUiAutomation().waitForIdle(500,5000);
+        await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
+            && host.getSystemService(PowerManager.class).isInteractive()
+            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"wake input window ready after event idle");
+        AccessibilityNodeInfo root=runner.getUiAutomation().getRootInActiveWindow();
+        try {
+            if(root==null || !host.getPackageName().contentEquals(root.getPackageName()))
+                throw new AssertionError("Wake active accessibility window is not the target application");
+        } finally {if(root!=null)root.recycle();}
+        android.util.Log.i("WalkBuddyInput","wake-ready after accessibility event idle; resumed/focus/unlocked/active-package checked");
+    }
     private static void screenIdleLifecycle(Instrumentation runner,PreviewActivity host,StringBuilder report) throws Exception {
         String originalTimeout=shellText(runner,"settings get system screen_off_timeout").trim();
         String originalStayOn=shellText(runner,"settings get global stay_on_while_plugged_in").trim();
@@ -477,6 +493,7 @@ final class PipProbe {
         await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
             && host.getSystemService(PowerManager.class).isInteractive()
             && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"return after automatic screen off");
+        awaitWakeInputReady(runner,host);
         read(runner,()->{assertReleased(host);return true;});
         tap(runner,host,R.id.restart_preview);
         await(runner,()->live(host) && keepsScreenOn(host),"manual restart restores full preview screen hold");
