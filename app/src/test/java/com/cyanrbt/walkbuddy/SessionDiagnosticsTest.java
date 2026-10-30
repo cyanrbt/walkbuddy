@@ -101,4 +101,17 @@ public class SessionDiagnosticsTest {
         SessionDiagnostics restored=new SessionDiagnostics();restored.restore(report(diagnostics));
         assertTrue(report(restored).contains("声音：开；振动：关"));
     }
+    @Test public void readbackTimingIsFrozenWithTheIncidentAndSurvivesRecreation() {
+        ReadbackTiming timer=new ReadbackTiming();timer.reset(1);timer.begin(1,100_000_000,20_000_000);
+        timer.brightness(1,105_000_000,21_000_000,130_000_000,24_000_000);
+        SessionDiagnostics diagnostics=new SessionDiagnostics();
+        diagnostics.preview(new SessionDiagnostics.Snapshot("GENERAL","构造读回故障",live(),400,false,false,false,true,
+            new SessionDiagnostics.Pipeline(false,false,false,-1,4,-1,-1,timer.snapshot(1,140_000_000,25_000_000))));
+        timer.finish(1,900_000_000,300_000_000);timer.reset(2);
+        String text=report(diagnostics);
+        assertTrue(text.contains("读回任务：执行中；墙钟(ms)：40；CPU(ms)：5"));
+        assertTrue(text.contains("任务内亮度读回墙钟(ms)：25；CPU(ms)：3"));
+        SessionDiagnostics restored=new SessionDiagnostics();restored.restore(text);
+        assertTrue(report(restored).contains("任务内亮度读回墙钟(ms)：25；CPU(ms)：3"));
+    }
 }

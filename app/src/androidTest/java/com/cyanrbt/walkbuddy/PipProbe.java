@@ -251,6 +251,7 @@ final class PipProbe {
             read(runner,()->{assertWatching(host);return true;});
             report.append("PASS Home releases camera; returned stopped preview does not poll; returning requires manual restart\n");
             checkpoint(runner,"home_restart_live");
+            if(profilePriority==null && profileThreads==null)BrightnessActivityProbe.run(runner,host,report);
 
             read(runner,()->{
                 host.findViewById(R.id.preview_recognition).performClick();
@@ -1005,7 +1006,7 @@ final class PipProbe {
     private static void assertReleased(PreviewActivity host) {
         if(keepsScreenOn(host))throw new AssertionError("Stopped preview retained screen hold");
         if(field(field(host,"haptics"),"requested")!=Detection.Risk.CAPTURED)throw new AssertionError("Stopped preview retained tactile feedback");
-        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback"})
+        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback","brightnessSampler"})
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
         if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
         if((boolean)field(host,"readingTexture"))throw new AssertionError("Stopped camera retained readback state");

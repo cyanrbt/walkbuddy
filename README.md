@@ -54,6 +54,8 @@
 
 ## 安装
 
+v0.4.37 开发中：亮度检查复用采样位图和像素数组，问题信息增加读回阶段的墙钟/CPU 记录。仍保留原画面时效、暗画面阈值与停止规则；[验证进展](docs/profiles/brightness-readback-2026-10-31.md)分别记录原生一致性、受控计时与设备范围。
+
 当前 [v0.4.36 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.36/Walk-Buddy-v0.4.36-arm64-debug.apk) 已通过[正式发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41143546103)。停止页集中呈现原因、恢复说明和复制入口，收起不可用设置；停止小窗显示两行提示，展开后保留完整原因和“提醒已停止”报告，相机仍需手动开启。[正式原图](docs/design/v0.4.36/README.md)已查看。239 项 JVM、Android 15/16 正式十项检查及实际 APK 0.4.36 / 48 的固定签名和文件摘要均已核验。[验证记录](docs/profiles/recovery-presentation-2026-10-31.md)保留首页缓存修正、CI 磁盘配置、原始失败和候选重验；自然帧停顿根因尚未完全定位，实体设备、TalkBack、AR 和耗电仍待验收。
 
 Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
