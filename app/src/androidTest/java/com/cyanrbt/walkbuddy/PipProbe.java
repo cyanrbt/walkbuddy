@@ -185,6 +185,7 @@ final class PipProbe {
             });
             screenshot(runner,"preview-controls-live.png");
             checkpoint(runner,"camera_live");
+            if(profilePriority==null && profileThreads==null)checkPipSourceBounds(runner,host,report);
             if(profilePriority==null && profileThreads==null)screenIdleLifecycle(runner,host,launcher,report);
 
             // Force expiry from the actual TextureView.draw -> SurfaceTextureUpdated path.
@@ -273,6 +274,7 @@ final class PipProbe {
             long first=read(runner,()->state(host).captureAt);
             await(runner,()->state(host).phase==SessionState.Phase.LIVE && state(host).captureAt>first+500
                 && state(host).displayAt>first+500 && basicAt(host)>first+500,"capture, display and actual analysis advance in PiP");
+            await(runner,()->publishedPipBoundsMatch(host),"source hint matches actual PiP camera pixels");
             read(runner,()->{
                 for(int id:new int[]{R.id.preview_header,R.id.preview_controls,R.id.preview_actions})
                     if(host.findViewById(id).getVisibility()!=View.GONE)throw new AssertionError("Full controls leaked into PiP");
@@ -298,7 +300,9 @@ final class PipProbe {
                 "full preview controls restored");
             long expandedAt=android.os.SystemClock.elapsedRealtime();
             await(runner,()->live(host) && state(host).recognition && basicAt(host)>expandedAt,"actual analysis after expansion");
+            await(runner,()->publishedPipBoundsMatch(host),"source hint follows expanded destination camera pixels");
             read(runner,()->{assertModelRetained(host,geometryTicket,geometryModel);return true;});
+            report.append("PIP_SOURCE_TRANSITION_PASS cases=2; actual PiP and expanded destination match the current texture Matrix\n");
             report.append("PASS expansion restores controls and keeps preview/model results LIVE\n");
             checkpoint(runner,"expanded_analysis_live");
 
@@ -429,6 +433,78 @@ final class PipProbe {
     private static void bringForward(Instrumentation runner,PreviewActivity host) {
         // Explicit return after Home; waking an already foreground preview uses natural resume.
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
+    }
+
+    /** Independent Android Matrix oracle; actual Activity rotation, no camera replacement. */
+    private static void checkPipSourceBounds(Instrumentation runner,PreviewActivity host,StringBuilder report) throws Exception {
+        int original=read(runner,host::getRequestedOrientation);
+        boolean landscape=read(runner,()->host.getResources().getConfiguration().orientation==android.content.res.Configuration.ORIENTATION_LANDSCAPE);
+        Object camera=read(runner,()->field(host,"camera")),texture=read(runner,()->field(host,"texture"));
+        long generation=read(runner,()->state(host).generation);
+        StringBuilder evidence=new StringBuilder();
+        AtomicBoolean barsExcluded=new AtomicBoolean();
+        try {
+            for(int step=0;step<3;step++) {
+                boolean wide=step==1?!landscape:landscape;
+                if(step>0)read(runner,()->{host.setRequestedOrientation(wide
+                    ?android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);return true;});
+                await(runner,()->{
+                    boolean actualWide=host.getResources().getConfiguration().orientation==android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+                    android.graphics.Rect expected=matrixSourceBounds(host);
+                    android.app.PictureInPictureParams params=(android.app.PictureInPictureParams)field(host,"submittedPipParams");
+                    return actualWide==wide && live(host) && expected!=null && params!=null
+                        && nearby(expected,params.getSourceRectHint());
+                },"current source hint after real orientation step="+step);
+                long readyAt=android.os.SystemClock.elapsedRealtime();
+                await(runner,()->live(host) && state(host).captureAt>readyAt+300 && state(host).displayAt>readyAt+300,
+                    "camera advances after source bounds step="+step);
+                int index=step;
+                read(runner,()->{
+                    if(state(host).generation!=generation || field(host,"camera")!=camera || field(host,"texture")!=texture)
+                        throw new AssertionError("Source tracking replaced the active camera or TextureView");
+                    TextureView view=(TextureView)texture;android.graphics.Rect legacy=new android.graphics.Rect();
+                    if(!view.getGlobalVisibleRect(legacy))throw new AssertionError("Camera is not visible");
+                    android.graphics.Rect expected=matrixSourceBounds(host);
+                    android.app.PictureInPictureParams params=(android.app.PictureInPictureParams)field(host,"submittedPipParams");
+                    android.graphics.Rect submitted=params.getSourceRectHint();
+                    if(!nearby(expected,submitted) || !legacy.contains(submitted))throw new AssertionError("Source hint escaped the camera pixels");
+                    if(legacy.width()-submitted.width()>2 || legacy.height()-submitted.height()>2)barsExcluded.set(true);
+                    if(params.isAutoEnterEnabled())throw new AssertionError("Geometry tracking enabled automatic PiP");
+                    double ratio=submitted.width()/(double)submitted.height();
+                    if(Math.abs(ratio-params.getAspectRatio().doubleValue())>2d/submitted.height())
+                        throw new AssertionError("Animation hint and PiP aspect ratio disagree");
+                    evidence.append("SOURCE_BOUNDS step=").append(index).append(" landscape=").append(wide)
+                        .append(" legacy=").append(legacy).append(" matrix=").append(expected).append(" submitted=").append(submitted)
+                        .append(" retained_camera=true\n");return true;
+                });
+                screenshot(runner,step==1?"pip-source-rotated.png":"pip-source-portrait.png");
+            }
+            if(!barsExcluded.get())throw new AssertionError("The camera fixtures never exercised letterbox exclusion");
+            SupportProbe.write(runner,"pip-source-bounds.txt",evidence.toString());
+            report.append(evidence).append("PIP_SOURCE_BOUNDS_PASS cases=3; initial, real orientation change, restored; independent texture Matrix within 1px, no camera restart, frames advance\n");
+        } finally {read(runner,()->{host.setRequestedOrientation(original);return true;});}
+    }
+
+    private static android.graphics.Rect matrixSourceBounds(PreviewActivity host) {
+        TextureView texture=(TextureView)field(host,"texture");
+        if(texture==null || texture.getWidth()==0 || texture.getHeight()==0)return null;
+        android.graphics.Rect visible=new android.graphics.Rect();android.graphics.Point origin=new android.graphics.Point();
+        if(!texture.getGlobalVisibleRect(visible,origin))return null;
+        android.graphics.RectF image=new android.graphics.RectF(0,0,texture.getWidth(),texture.getHeight());
+        texture.getTransform(new android.graphics.Matrix()).mapRect(image);
+        android.graphics.Rect expected=new android.graphics.Rect((int)Math.floor(image.left)+origin.x,(int)Math.floor(image.top)+origin.y,
+            (int)Math.ceil(image.right)+origin.x,(int)Math.ceil(image.bottom)+origin.y);
+        return expected.intersect(visible)?expected:null;
+    }
+
+    private static boolean nearby(android.graphics.Rect a,android.graphics.Rect b) {
+        return a!=null && b!=null && Math.abs(a.left-b.left)<=1 && Math.abs(a.top-b.top)<=1
+            && Math.abs(a.right-b.right)<=1 && Math.abs(a.bottom-b.bottom)<=1;
+    }
+
+    private static boolean publishedPipBoundsMatch(PreviewActivity host) {
+        android.app.PictureInPictureParams params=(android.app.PictureInPictureParams)field(host,"submittedPipParams");
+        return params!=null && nearby(matrixSourceBounds(host),params.getSourceRectHint());
     }
     private static void awaitWakeInputReady(Instrumentation runner,PreviewActivity host) throws Exception {
         awaitPreviewInputReady(runner,host,"wake");

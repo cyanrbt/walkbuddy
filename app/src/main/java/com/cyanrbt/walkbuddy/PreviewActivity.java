@@ -107,6 +107,9 @@ public final class PreviewActivity extends Activity {
     private final String pipOwner=UUID.randomUUID().toString();
     private int pipActionState=-1;
     private PictureInPictureParams submittedPipParams;
+    private Rect submittedPipBounds;
+    private int submittedPipRotation=-1;
+    private ViewTreeObserver.OnGlobalLayoutListener pipBoundsListener;
     private boolean initialStart;
     private RecoveryGuide.Reason recoveryReason=RecoveryGuide.Reason.HIDDEN;
     private boolean previewSeen;
@@ -272,18 +275,49 @@ public final class PreviewActivity extends Activity {
     }
 
     private PictureInPictureParams pipParams() {
+        return pipParams(pipSourceBounds());
+    }
+
+    private Rect pipSourceBounds() {
+        if(texture==null || previewGeometry==null || previewGeometry.viewWidth!=texture.getWidth()
+            || previewGeometry.viewHeight!=texture.getHeight())return null;
+        Rect visible=new Rect();Point origin=new Point();
+        if(!texture.getGlobalVisibleRect(visible,origin))return null;
+        int[] bounds=previewGeometry.visibleBounds(origin.x,origin.y,visible.left,visible.top,visible.right,visible.bottom);
+        return bounds==null?null:new Rect(bounds[0],bounds[1],bounds[2],bounds[3]);
+    }
+
+    private PictureInPictureParams pipParams(Rect sourceBounds) {
         int rotation = wm.getDefaultDisplay().getRotation() * 90;
         boolean portrait = Math.floorMod(sensorOrientation - rotation, 180) != 0;
         PictureInPictureParams.Builder builder = new PictureInPictureParams.Builder()
             .setAspectRatio(new Rational(portrait ? 3 : 4, portrait ? 4 : 3))
             .setActions(pipActions());
-        if (texture != null) {
-            Rect bounds = new Rect();
-            if (texture.getGlobalVisibleRect(bounds)) builder.setSourceRectHint(bounds);
-        }
+        if(sourceBounds!=null)builder.setSourceRectHint(sourceBounds);
         // Entry is explicit after the user has checked the viewfinder.
         if (Build.VERSION.SDK_INT >= 31) builder.setAutoEnterEnabled(false);
         return builder.build();
+    }
+
+    private void syncPipSourceBounds() {
+        if(destroyed || texture==null || !texture.isAttachedToWindow()
+            || state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE
+            || !PipSupport.supported(this))return;
+        Rect bounds=pipSourceBounds();
+        if(bounds==null)return;
+        int rotation=wm.getDefaultDisplay().getRotation();
+        if(bounds.equals(submittedPipBounds) && rotation==submittedPipRotation)return;
+        try {
+            PictureInPictureParams params=pipParams(bounds);
+            setPictureInPictureParams(params);submittedPipParams=params;
+            submittedPipBounds=new Rect(bounds);submittedPipRotation=rotation;
+        } catch(RuntimeException error){android.util.Log.w("WalkBuddyPip","Unable to update animation bounds",error);}
+    }
+
+    private void stopTrackingPipBounds() {
+        if(root!=null && pipBoundsListener!=null && root.getViewTreeObserver().isAlive())
+            root.getViewTreeObserver().removeOnGlobalLayoutListener(pipBoundsListener);
+        pipBoundsListener=null;
     }
 
     private RemoteAction stopAction() {
@@ -314,11 +348,10 @@ public final class PreviewActivity extends Activity {
         if(!isInPictureInPictureMode())return;
         int next=state.phase==SessionState.Phase.LIVE && state.recognition?1:0;
         if(pipActionState==next)return;
-        pipActionState=next;
         try {
-            PictureInPictureParams params=new PictureInPictureParams.Builder().setActions(pipActions()).build();
+            PictureInPictureParams params=pipParams();
             setPictureInPictureParams(params);
-            submittedPipParams=params;
+            submittedPipParams=params;pipActionState=next;
         }
         catch(RuntimeException error){android.util.Log.w("WalkBuddyPip","Unable to update menu actions",error);}
     }
@@ -328,8 +361,8 @@ public final class PreviewActivity extends Activity {
         if (!resumed || state.phase != SessionState.Phase.LIVE || !state.fresh(SystemClock.elapsedRealtime())) return;
         if (!PipSupport.available(this)) { showPipFallback(); return; }
         try {
-            setCompactUi(true);
             PictureInPictureParams params=pipParams();
+            setCompactUi(true);
             boolean entered=enterPictureInPictureMode(params);
             if(entered)submittedPipParams=params;
             tracePip("accepted="+entered);
@@ -386,12 +419,16 @@ public final class PreviewActivity extends Activity {
     }
 
     private void createWindow() {
+        stopTrackingPipBounds();submittedPipBounds=null;submittedPipRotation=-1;
         previewGeometry = null;
         displayedDepthGuide = null;
         root=(LinearLayout)getLayoutInflater().inflate(R.layout.activity_preview,
             (ViewGroup)findViewById(android.R.id.content), false);
         titleView=root.findViewById(R.id.preview_title);
         texture=root.findViewById(R.id.camera_preview);texture.setOpaque(false);
+        TextureView source=texture;
+        pipBoundsListener=()->{if(texture==source){transform();syncPipSourceBounds();}};
+        root.getViewTreeObserver().addOnGlobalLayoutListener(pipBoundsListener);
         cover=root.findViewById(R.id.preview_cover);
         detectionOverlay=root.findViewById(R.id.detection_overlay);
         announcer=new RiskAnnouncer(root);
@@ -456,6 +493,7 @@ public final class PreviewActivity extends Activity {
         if(previewGeometry!=null && previewGeometry.viewWidth==next.viewWidth && previewGeometry.viewHeight==next.viewHeight && Arrays.equals(previewGeometry.matrix,next.matrix))return;
         previewGeometry=next;
         Matrix matrix=new Matrix();matrix.setValues(next.matrix);texture.setTransform(matrix);
+        syncPipSourceBounds();
         // 变换后旧结果不再与当前画面对应；等待新显示帧重新采样。
         feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;silence();analysisEpoch++;
         if(state.recognition && analysisTicket!=null) {
@@ -936,6 +974,7 @@ public final class PreviewActivity extends Activity {
         }
     }
     private void closeCamera() {
+        stopTrackingPipBounds();
         if(pendingReadback!=null){main.removeCallbacks(pendingReadback);pendingReadback=null;}
         if(pendingCapture!=null){main.removeCallbacks(pendingCapture);pendingCapture=null;}
         if(depthCamera!=null){depthCamera.stop();depthCamera=null;}depthSnapshot=null;

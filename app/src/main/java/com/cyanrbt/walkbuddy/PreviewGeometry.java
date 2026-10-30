@@ -33,4 +33,13 @@ final class PreviewGeometry {
             c,d,viewHeight/2f-c*viewWidth/2f-d*viewHeight/2f,0,0,1};
     }
     float[] map(float x,float y){return new float[]{matrix[0]*x+matrix[1]*y+matrix[2],matrix[3]*x+matrix[4]*y+matrix[5]};}
+
+    /** Visible camera pixels in the root coordinate space, excluding fit-center bars. */
+    int[] visibleBounds(int originX,int originY,int clipLeft,int clipTop,int clipRight,int clipBottom) {
+        int l=Math.max(clipLeft,originX+(int)Math.floor(left));
+        int t=Math.max(clipTop,originY+(int)Math.floor(top));
+        int r=Math.min(clipRight,originX+(int)Math.ceil(left+width));
+        int b=Math.min(clipBottom,originY+(int)Math.ceil(top+height));
+        return l<r && t<b?new int[]{l,t,r,b}:null;
+    }
 }
