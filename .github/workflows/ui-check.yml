@@ -3,6 +3,11 @@ name: Android UI checks
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - docs/**
+      - experiments/**
+      - README.md
+      - .github/workflows/model-candidate-audit.yml
   workflow_call:
     inputs:
       scheduling_profile:
