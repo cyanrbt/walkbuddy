@@ -16,6 +16,10 @@ final class AlertPolicy {
     private List<Track> previous=Collections.emptyList();
     private long previousAt,lastAlert=-3000;
     Decision update(List<Detection> detections,long now) {
+        return update(detections,now,lastAlert);
+    }
+    /** Check the shared output cooldown before consuming a target's reminder. */
+    Decision update(List<Detection> detections,long now,long lastFeedbackAt) {
         boolean fresh=now>=previousAt && now-previousAt<=1200;
         boolean[] used=new boolean[previous.size()];List<Track> next=new ArrayList<>();List<Detection> visible=new ArrayList<>();Track target=null;
         for(Detection d:detections) {
@@ -38,7 +42,9 @@ final class AlertPolicy {
         if(target!=null) {
             boolean urgent=confirmed(target)==Detection.Risk.NEAR;
             boolean escalation=urgent && target.alertedRisk<2;
-            boolean alert=now-lastAlert>=(escalation?1000:3000) && (escalation || now-target.alertedAt>=(urgent?4000:8000));
+            boolean alert=now-lastAlert>=(escalation?1000:3000)
+                && now-lastFeedbackAt>=(urgent?1000:3000)
+                && (escalation || now-target.alertedAt>=(urgent?4000:8000));
             if(alert){target.alertedAt=now;target.alertedRisk=confirmed(target).ordinal();lastAlert=now;}
             String distance=Float.isFinite(target.detection.meters)?String.format(Locale.CHINA,"约 %.1f 米",target.detection.meters):"未测距";
             return new Decision(distance+" · "+(urgent?"请及时注意":Float.isFinite(target.detection.meters)?"前方可能受阻":"画面关注 · "+target.detection.label)+" · "+target.detection.position(),alert,visible);

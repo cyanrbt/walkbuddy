@@ -65,6 +65,7 @@ final class LayoutProbe {
                 TextView title=root.findViewById(R.id.preview_title);
                 title.setText(R.string.window_starting);measure(root,size[0],size[1]);textFits(root);
                 if(title.getLineCount()!=1)throw new AssertionError("Starting badge wrapped");
+                checkFeedbackCooldown(root);
                 checkFeedback(root);
                 ((TextView)root.findViewById(R.id.preview_title)).setText(R.string.window_live);
                 String name=size[0]+"x"+size[1]+"-font"+Math.round(font*100)+(night?"-night":"-day");
@@ -139,6 +140,7 @@ final class LayoutProbe {
                 if(root.findViewById(R.id.depth_steps).getVisibility()!=View.GONE)throw new AssertionError("Basic restore exposed depth steps");
                 report.append("PASS ").append(name).append(" camera=").append(camera.getWidth()).append('x').append(camera.getHeight()).append('\n');
             }
+        report.append("FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\n");
     }
 
     private static String confirmedMessage(Detection detection) {
@@ -221,6 +223,64 @@ final class LayoutProbe {
                 throw new AssertionError("Text ellipsized: "+text.getText());
         }
         if(view instanceof ViewGroup)for(int i=0;i<((ViewGroup)view).getChildCount();i++)textFits(((ViewGroup)view).getChildAt(i));
+    }
+
+    private static DepthSnapshot feedbackDepth(long at) {
+        return new DepthSnapshot(at,java.util.Collections.singletonList(new Detection("空间障碍",1,
+            .3f,.1f,.7f,.9f,Detection.Risk.NEAR,.7f,null)),"构造提醒检查",
+            DepthSnapshot.Stage.MEASURING,true,true);
+    }
+    private static void presentFeedback(View root,RiskAnnouncer announcer,DetectionFeedback feedback,long now,boolean notify) {
+        AlertPolicy.Decision visible=feedback.visible(now);
+        ((TextView)root.findViewById(R.id.preview_info)).setText(visible.message);
+        Detection.Risk worst=Detection.Risk.CAPTURED;
+        for(Detection detection:visible.detections)if(detection.risk.ordinal()>worst.ordinal())worst=detection.risk;
+        announcer.update(visible.message,worst,notify,now);
+    }
+    private static void checkFeedbackCooldown(View root) {
+        java.util.List<Detection> basic=java.util.Collections.singletonList(Detection.fromModel("人",.8f,
+            new float[]{.1f,.3f,.9f,.7f},320,320,0,0));
+        RiskAnnouncer announcer=new RiskAnnouncer(root);announcer.clear();
+        TextView banner=root.findViewById(R.id.recent_alert),details=root.findViewById(R.id.preview_info);
+        DetectionFeedback feedback=new DetectionFeedback();
+        if(feedback.basic(basic,100,100) || !feedback.basic(basic,600,600))throw new AssertionError("Basic confirmation changed");
+        presentFeedback(root,announcer,feedback,600,true);
+        if(feedback.depth(feedbackDepth(700),0,700) || feedback.depth(feedbackDepth(900),0,900))
+            throw new AssertionError("Shared cooldown was bypassed");
+        presentFeedback(root,announcer,feedback,900,false);
+        if(feedback.depth(feedbackDepth(1599),0,1599) || !feedback.depth(feedbackDepth(1600),0,1600))
+            throw new AssertionError("Deferred near reminder consumed before delivery");
+        presentFeedback(root,announcer,feedback,1600,true);
+        if(!details.getText().toString().contains("请及时注意") || banner.getVisibility()!=View.VISIBLE
+            || !banner.getText().toString().contains("近处注意"))throw new AssertionError("Near details/banner missing");
+
+        feedback=new DetectionFeedback();announcer.clear();
+        Detection caution=new Detection("空间障碍",1,.3f,.1f,.7f,.9f,Detection.Risk.CAUTION,1.5f,null);
+        for(long at:new long[]{100,400}) {
+            boolean notify=feedback.depth(new DepthSnapshot(at,java.util.Collections.singletonList(caution),"构造提醒检查",
+                DepthSnapshot.Stage.MEASURING,true,true),0,at);
+            if(notify!=(at==400))throw new AssertionError("Depth caution confirmation changed");
+            presentFeedback(root,announcer,feedback,at,notify);
+        }
+        for(long at:new long[]{500,700,1200,1700,2200,2700,3399})
+            if(feedback.basic(basic,at,at))throw new AssertionError("Caution cooldown was bypassed");
+        if(!feedback.basic(basic,3400,3400))throw new AssertionError("Deferred caution reminder consumed before delivery");
+        presentFeedback(root,announcer,feedback,3400,true);
+        if(!details.getText().toString().startsWith("未测距") || !banner.getContentDescription().toString().contains("未测距"))
+            throw new AssertionError("Reminder did not use current basic result");
+
+        feedback=new DetectionFeedback();announcer.clear();
+        feedback.basic(basic,100,100);feedback.basic(basic,600,600);
+        feedback.depth(feedbackDepth(700),0,700);feedback.depth(feedbackDepth(900),0,900);
+        presentFeedback(root,announcer,feedback,900,false);
+        feedback.depth(new DepthSnapshot(1000,java.util.Collections.emptyList(),"构造空结果",
+            DepthSnapshot.Stage.MEASURING,true,true),0,1000);
+        presentFeedback(root,announcer,feedback,1601,false);
+        if(banner.getVisibility()!=View.GONE || !feedback.visible(1601).detections.isEmpty())
+            throw new AssertionError("Expired reminder survived disappearance");
+        if(feedback.depth(feedbackDepth(1700),0,1700) || !feedback.depth(feedbackDepth(1900),0,1900))
+            throw new AssertionError("New target confirmation changed");
+        announcer.clear();
     }
 
     private static void checkFeedback(View root) {

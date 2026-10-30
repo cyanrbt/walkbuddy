@@ -12,19 +12,18 @@ final class DetectionFeedback {
     private long basicAt=-1,depthAt=-1,lastDepth=-1,lastAlert=-3000;
     boolean basic(List<Detection> detections,long capturedAt,long now) {
         if(now<capturedAt || now-capturedAt>1000)return false;
-        basic=basicPolicy.update(detections,now);basicAt=capturedAt;
+        basic=basicPolicy.update(detections,now,lastAlert);basicAt=capturedAt;
         return emit(basic,now);
     }
     boolean depth(DepthSnapshot snapshot,int rotation,long now) {
         if(snapshot==null || !snapshot.fresh(now)){depth=null;depthAt=-1;depthPolicy.clear();return false;}
         if(lastDepth==snapshot.sampledAt)return false;
         lastDepth=snapshot.sampledAt;
-        depth=depthPolicy.update(snapshot.rotated(rotation),now);depthAt=snapshot.sampledAt;
+        depth=depthPolicy.update(snapshot.rotated(rotation),now,lastAlert);depthAt=snapshot.sampledAt;
         return emit(depth,now);
     }
     private boolean emit(AlertPolicy.Decision decision,long now) {
-        boolean near=decision.detections.stream().anyMatch(d->d.risk==Detection.Risk.NEAR);
-        if(!decision.alert || now-lastAlert<(near?1000:3000))return false;
+        if(!decision.alert)return false;
         lastAlert=now;return true;
     }
     AlertPolicy.Decision visible(long now) {
