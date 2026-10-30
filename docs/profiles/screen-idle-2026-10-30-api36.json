@@ -1,0 +1,113 @@
+{
+  "scope": "Emulator native lifecycle/idle screen checks; no OEM, hardware power or root-cause claim",
+  "source_commit": "23e3ccac3922803bbfeb5823f3a47504a7199f79",
+  "run_id": 41043678006,
+  "attempt": 1,
+  "api": 36,
+  "artifact_id": 12970579227,
+  "archive_size_bytes": 7881167,
+  "archive_sha256": "7b217f333a12892a2c6ed8565f63570eeb35099ebf3ea5e38d4b9f9d674a0e26",
+  "summary": {
+    "status": "passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "success",
+    "mode": "ui",
+    "probes": [
+      {
+        "name": "pip_recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "runtime",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "preview",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "overlay",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "layout",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "home",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip-repeat",
+        "status": "passed",
+        "failures": []
+      }
+    ],
+    "observations": [],
+    "anrs": [],
+    "failure_time_focus": [],
+    "focused_external_anr_dialogs": []
+  },
+  "idle_reports": [
+    {
+      "file": "pip.txt",
+      "reports": [
+        "SCREEN_IDLE_FULL_PASS requestedMs=1000 effectiveMinimumMs=10000 observedWithoutInputMs=11500",
+        "SCREEN_IDLE_PIP_PASS automatic screen off releases camera and polling",
+        "PASS screen hold only for active full preview; real idle timeout keeps full preview awake, PiP sleeps, wake stays stopped, manual restart restores hold"
+      ]
+    },
+    {
+      "file": "pip-repeat.txt",
+      "reports": [
+        "SCREEN_IDLE_FULL_PASS requestedMs=1000 effectiveMinimumMs=10000 observedWithoutInputMs=11500",
+        "SCREEN_IDLE_PIP_PASS automatic screen off releases camera and polling",
+        "PASS screen hold only for active full preview; real idle timeout keeps full preview awake, PiP sleeps, wake stays stopped, manual restart restores hold"
+      ]
+    }
+  ],
+  "power_snapshots": {
+    "config": {
+      "mWakefulness": "Awake",
+      "mMinimumScreenOffTimeoutConfig": "10000",
+      "mScreenOffTimeoutSetting": "1000",
+      "mStayOnWhilePluggedInSetting": "0"
+    },
+    "full": {
+      "mWakefulness": "Awake",
+      "mMinimumScreenOffTimeoutConfig": "10000",
+      "mScreenOffTimeoutSetting": "1000",
+      "mStayOnWhilePluggedInSetting": "0"
+    },
+    "pip": {
+      "mWakefulness": "Asleep",
+      "mMinimumScreenOffTimeoutConfig": "10000",
+      "mScreenOffTimeoutSetting": "1000",
+      "mStayOnWhilePluggedInSetting": "0"
+    }
+  },
+  "wake_ready_records": [
+    "10-30 10:53:34.904  2222  2441 I WalkBuddyInput: wake-ready after accessibility event idle; resumed/focus/unlocked/active-package checked",
+    "10-30 10:55:21.893  4843  4856 I WalkBuddyInput: wake-ready after accessibility event idle; resumed/focus/unlocked/active-package checked",
+    "10-30 10:55:32.066  4843  4856 I WalkBuddyInput: wake-ready after accessibility event idle; resumed/focus/unlocked/active-package checked",
+    "10-30 10:56:03.823  5494  5507 I WalkBuddyInput: wake-ready after accessibility event idle; resumed/focus/unlocked/active-package checked",
+    "10-30 10:56:12.720  5494  5507 I WalkBuddyInput: wake-ready after accessibility event idle; resumed/focus/unlocked/active-package checked"
+  ]
+}

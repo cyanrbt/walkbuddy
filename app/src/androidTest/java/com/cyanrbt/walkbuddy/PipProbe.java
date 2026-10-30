@@ -793,7 +793,7 @@ final class PipProbe {
         // Capture before finish()/instrumentation teardown changes the focused window.
         try{screenshot(runner,prefix+".png");}catch(Exception ignored){/* Keep the original failure. */}
         try{powerEvidence(runner,prefix+"-routing.txt",shellText(runner,
-            "logcat -d -s InputDispatcher:V InputManager:V InputManager-JNI:V WindowManager:I '*:S'"));}
+            "logcat -d -s InputDispatcher:V InputManager:V InputManager-JNI:V WindowManager:I *:S"));}
         catch(Throwable ignored){/* Keep the original failure. */}
         for(String service:new String[]{"window windows","input","activity activities"}) {
             String suffix=service.split(" ",2)[0];

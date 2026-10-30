@@ -29,3 +29,5 @@
 直接读取 [Android 16 InputDispatcher 官方实现](https://android.googlesource.com/platform/frameworks/native/+/refs/tags/android-16.0.0_r1/services/inputflinger/dispatcher/InputDispatcher.cpp)后，确认拒绝目标注入时会通过 InputDispatcher 日志写出实际窗口/UID 或没有有效目标的原因。新增失败瞬间的 input-routing 快照，并在退出时保留同类日志，避免仅依赖异常后的焦点快照推断。源文件 tag 为 `android-16.0.0_r1`。
 
 默认探针脚本保留每项失败，随后继续执行其余 instrumentation 进程，最终只要任一失败或命令非零便返回失败；同文件同时含 PASS/FAIL 也失败。原有 finally 清理仍执行，后续结果不能自动视为与前项失败完全独立，但能够补足原先因首项退出而缺失的诊断。12 项工具测试通过，其中四项通过假的 adb 执行实际 shell 脚本，核对全成功、首项失败后继续、非零退出与冲突标记均保留正确门槛。
+
+后续 `23e3cca` 的 [41043678006](https://github.com/cyanrbt/walkbuddy/actions/runs/41043678006) 两套 API 首次全部成功，原始附件已实际下载，详见[最终候选核验](screen-idle-2026-10-30.md#最终候选结果)。本次没有失败瞬间，未取得新的拒绝窗口原因；事件等待与自然唤醒调整不能凭本轮通过被解释为全部输入根因已解决。另按 UiAutomationConnection 直接调用 Runtime.exec 的官方实现，去除失败采证 logcat 参数中的 shell 引号；最终测试包已重新编译，运行应用无变化。
