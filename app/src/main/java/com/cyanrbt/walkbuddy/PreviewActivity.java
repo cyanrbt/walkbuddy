@@ -602,13 +602,14 @@ public final class PreviewActivity extends Activity {
             fail(RecoveryGuide.Reason.LOCKED,"锁屏：摄像头已停止，请主动重新开启");return;
         }
         long now=SystemClock.elapsedRealtime();
-        if(state.phase!=SessionState.Phase.LIVE || !state.fresh(now)){fail(RecoveryGuide.Reason.MODEL,getString(message));return;}
+        if(state.phase!=SessionState.Phase.LIVE || !state.fresh(now)){fail("画面已过期：不可用，请重新开启");return;}
         android.util.Log.w("WalkBuddyAnalysis","Detection stopped; preview continues message="+getString(message));
         recognition.setChecked(false);
         state.recognition=false;state.analysisAt=0;cancelAnalysis();
         feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;silence();
         sound.setChecked(false);analysisFailure=message;
         render(now);
+        ((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
     }
     private void silence() {
         Vibrator vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);if(vibrator!=null)vibrator.cancel();

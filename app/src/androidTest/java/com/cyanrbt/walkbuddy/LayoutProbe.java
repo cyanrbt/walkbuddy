@@ -149,6 +149,8 @@ final class LayoutProbe {
     private static void checkDetectionFailure(View root,int width,int height,File output) throws Exception {
         TextView info=root.findViewById(R.id.preview_info),title=root.findViewById(R.id.preview_title);
         CharSequence previousInfo=info.getText(),previousTitle=title.getText();
+        ScrollView controls=root.findViewById(R.id.preview_controls);int previousScroll=controls.getScrollY();
+        controls.scrollTo(0,0);
         boolean depth=root.findViewById(R.id.depth_steps).getVisibility()==View.VISIBLE;
         int previousAlert=root.findViewById(R.id.recent_alert).getVisibility();
         root.findViewById(R.id.recent_alert).setVisibility(View.GONE);
@@ -166,6 +168,7 @@ final class LayoutProbe {
         PreviewChrome.compact(root,false,depth);PreviewChrome.detectionStopped(root,false,false);
         root.setPadding(0,24,0,24);info.setText(previousInfo);title.setText(previousTitle);
         root.findViewById(R.id.recent_alert).setVisibility(previousAlert);measure(root,width,height);
+        controls.scrollTo(0,previousScroll);
         if(warning.getVisibility()!=View.GONE)throw new AssertionError("Fault warning survived explicit clearing");
     }
     private static void warningInsideCamera(View root,View warning) {

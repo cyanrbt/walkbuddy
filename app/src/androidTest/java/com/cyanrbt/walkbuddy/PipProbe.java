@@ -449,7 +449,8 @@ final class PipProbe {
             if(!entered.await(3,java.util.concurrent.TimeUnit.SECONDS))throw new AssertionError("Injected native work did not start");
             read(runner,()->{
                 state(host).analysisAt=android.os.SystemClock.elapsedRealtime()-1501;
-                ((Runnable)field(host,"watchdog")).run();
+                Runnable watchdog=(Runnable)field(host,"watchdog");
+                ((Handler)field(host,"main")).removeCallbacks(watchdog);watchdog.run();
                 assertPreviewOnly(host,camera,texture);
                 if(retained.get().bitmap.isRecycled())throw new AssertionError("Cancelled active frame was recycled during native work");
                 return true;
@@ -460,8 +461,15 @@ final class PipProbe {
             await(runner,()->warningReady(host),"timeout warning laid out");
             read(runner,()->{assertWarningFits(host);return true;});
             screenshot(runner,"detection-timeout-preview.png");
+            int fullWidth=read(runner,()->((View)field(host,"root")).getWidth());
+            int fullHeight=read(runner,()->((View)field(host,"root")).getHeight());
             tap(runner,host,R.id.enter_pip);
             await(runner,host::isInPictureInPictureMode,"preview-only PiP after analysis timeout");
+            await(runner,()->((View)field(host,"root")).getWidth()<fullWidth
+                && ((View)field(host,"root")).getHeight()<fullHeight,"preview-only PiP window actually shrinks");
+            long pipAt=android.os.SystemClock.elapsedRealtime();
+            await(runner,()->live(host) && state(host).captureAt>pipAt+300 && state(host).displayAt>pipAt+300,
+                "preview-only PiP frames advance during blocked analysis");
             read(runner,()->{assertPreviewOnly(host,camera,texture);return true;});
             await(runner,()->warningReady(host),"PiP timeout warning laid out");
             read(runner,()->{assertWarningFits(host);return true;});
