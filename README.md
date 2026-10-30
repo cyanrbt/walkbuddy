@@ -1,6 +1,6 @@
 # WalkBuddy
 
-白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前开发版本 **0.4.28**（versionCode 40），发布验证进行中。
+白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前版本 **0.4.28**（versionCode 40），已发布固定签名安装包。
 
 它多留一个画面，并提供基础物体识别和实验性的空间障碍检测。空间检测按深度占用判断前方是否可能受阻，无需先认识物体名称。路还是要自己看。不要在马路、楼梯或骑行时靠它决定下一步。
 
@@ -51,7 +51,7 @@
 
 ## 安装
 
-当前 [v0.4.27 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.27/Walk-Buddy-v0.4.27-arm64-debug.apk) 已通过 [发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41083803493)，Android 15/16 与固定签名 APK 作业均首次成功。已实际下载核验版本、固定签名、文件摘要、模型/中文表、新触觉类及图例资源；[验证记录](docs/验证结果.md)含完整范围，[图例原图](docs/design/v0.4.27/README.md)展示普通/大字体与横屏布局检查。真实设备的振动、声音、TalkBack 与 AR 效果仍待验收。
+当前 [v0.4.28 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.28/Walk-Buddy-v0.4.28-arm64-debug.apk) 已通过 [发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41093630773)，标签 Android 15/16 与固定签名 APK 作业均首次成功。已实际下载核验版本、固定签名、文件摘要、模型/中文表及问题信息功能；[验证记录](docs/验证结果.md)保留候选首轮显示超期失败与单次重跑结果，不将其称为根因修复。[复制入口原图](docs/design/v0.4.28/README.md)展示普通/大字体布局检查；实体设备、厂商剪贴板、TalkBack 与 AR 效果仍待验收。
 
 Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
 
