@@ -45,12 +45,22 @@ public final class PreviewActivity extends Activity {
             || !preview.isInPictureInPictureMode() || !preview.state.recognition)return;
         preview.pauseDetection(R.string.info_detection_paused);
     }
+    static void setPipSound(String owner,long generation,long revision,long visit,boolean enabled) {
+        PreviewActivity preview=active.get();
+        if(preview==null || preview.destroyed || preview.isFinishing() || !preview.pipOwner.equals(owner)
+            || preview.state.generation!=generation || preview.soundRevision!=revision || preview.pipSoundVisit!=visit
+            || !preview.isInPictureInPictureMode() || preview.state.phase!=SessionState.Phase.LIVE || !preview.state.recognition
+            || preview.sound==null || !preview.sound.isEnabled() || preview.sound.isChecked()==enabled
+            || preview.state.expired(SystemClock.elapsedRealtime()))return;
+        preview.sound.setChecked(enabled);
+    }
     static final HomeState homeState=new HomeState();
     private final Object homeOwner=new Object();
     private final java.util.function.Supplier<String> homeNotice=this::detectionNoticeText;
     public static String report() { return homeState.report(); }
     private final Handler main = new Handler(Looper.getMainLooper());
     private final SessionState state = new SessionState();
+    private long soundRevision,pipSoundVisit,submittedSoundRevision=-1,submittedSoundVisit=-1;
     private final DetectionFeedback feedback = new DetectionFeedback();
     private final SessionDiagnostics diagnostics=new SessionDiagnostics();
     private static final String PROBLEM_INFO_STATE="walkbuddy.problem_info.v1";
@@ -337,9 +347,21 @@ public final class PreviewActivity extends Activity {
 
     private List<RemoteAction> pipActions() {
         List<RemoteAction> actions=new ArrayList<>();
-        // Keep stopping the camera available even on a system with only one action slot.
-        actions.add(stopAction());
-        if(state.phase==SessionState.Phase.LIVE && state.recognition && getMaxNumPictureInPictureActions()>1) {
+        for(PipMenu.Item item:PipMenu.items(getMaxNumPictureInPictureActions(),state.phase,state.recognition,sound!=null && sound.isChecked())) {
+            if(item==PipMenu.Item.STOP_PREVIEW){actions.add(stopAction());continue;}
+            if(item==PipMenu.Item.ENABLE_SOUND || item==PipMenu.Item.DISABLE_SOUND) {
+                boolean enabled=item==PipMenu.Item.ENABLE_SOUND;
+                Intent intent=new Intent(this,StopPreviewReceiver.class).setAction(StopPreviewReceiver.SET_SOUND)
+                    .setData(android.net.Uri.parse("walkbuddy://sound/"+pipOwner+"/"+state.generation+"/"+soundRevision+"/"+pipSoundVisit+"/"+enabled))
+                    .putExtra(StopPreviewReceiver.OWNER,pipOwner).putExtra(StopPreviewReceiver.GENERATION,state.generation)
+                    .putExtra(StopPreviewReceiver.SOUND_REVISION,soundRevision).putExtra(StopPreviewReceiver.PIP_VISIT,pipSoundVisit)
+                    .putExtra(StopPreviewReceiver.SOUND_ENABLED,enabled);
+                PendingIntent soundAction=PendingIntent.getBroadcast(this,2,intent,PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+                actions.add(new RemoteAction(Icon.createWithResource(this,enabled?R.drawable.ic_sound_on:R.drawable.ic_sound_off),
+                    getString(enabled?R.string.pip_sound_on:R.string.pip_sound_off),
+                    getString(enabled?R.string.pip_sound_on_description:R.string.pip_sound_off_description),soundAction));
+                continue;
+            }
             Intent intent=new Intent(this,StopPreviewReceiver.class).setAction(StopPreviewReceiver.STOP_DETECTION)
                 .setData(android.net.Uri.parse("walkbuddy://detection/"+pipOwner+"/"+state.generation))
                 .putExtra(StopPreviewReceiver.OWNER,pipOwner).putExtra(StopPreviewReceiver.GENERATION,state.generation);
@@ -354,11 +376,12 @@ public final class PreviewActivity extends Activity {
     private void syncPipActions() {
         if(!isInPictureInPictureMode())return;
         int next=state.phase==SessionState.Phase.LIVE && state.recognition?1:0;
-        if(pipActionState==next)return;
+        if(pipActionState==next && submittedSoundRevision==soundRevision && submittedSoundVisit==pipSoundVisit)return;
         try {
             PictureInPictureParams params=pipParams();
             setPictureInPictureParams(params);
             submittedPipParams=params;pipActionState=next;
+            submittedSoundRevision=soundRevision;submittedSoundVisit=pipSoundVisit;
         }
         catch(RuntimeException error){android.util.Log.w("WalkBuddyPip","Unable to update menu actions",error);}
     }
@@ -368,6 +391,7 @@ public final class PreviewActivity extends Activity {
         if (!resumed || state.phase != SessionState.Phase.LIVE || !state.fresh(SystemClock.elapsedRealtime())) return;
         if (!PipSupport.available(this)) { showPipFallback(); return; }
         try {
+            ++pipSoundVisit;
             PictureInPictureParams params=pipParams();
             setCompactUi(true);
             boolean entered=enterPictureInPictureMode(params);
@@ -401,6 +425,7 @@ public final class PreviewActivity extends Activity {
 
     @Override public void onPictureInPictureModeChanged(boolean inPip, Configuration config) {
         super.onPictureInPictureModeChanged(inPip, config);
+        if(!inPip)++pipSoundVisit;
         if (inPip && !getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).getBoolean(HomeJourney.PIP_SEEN,false)) {
             getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).edit()
                 .putBoolean(HomeJourney.PIP_SEEN, true).apply();
@@ -482,7 +507,11 @@ public final class PreviewActivity extends Activity {
         restartButton=root.findViewById(R.id.restart_preview);
         restartButton.setBackgroundTintList(null);
         restartButton.setOnClickListener(v->recoverPreview());
-        sound.setOnCheckedChangeListener((button, checked) -> { if(checked)ensureToneSession();else stopTone(); });
+        sound.setOnCheckedChangeListener((button, checked) -> {
+            ++soundRevision;
+            if(checked)ensureToneSession();else stopTone();
+            syncPipActions();
+        });
         texture.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h) { openCamera(s); }
             public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h) { transform(); }

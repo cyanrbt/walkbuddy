@@ -41,7 +41,11 @@
     <string name="preview_starting">正在打开\n还没有实时画面</string>
     <string name="preview_info_idle">实时画面还不可用</string>
     <string name="check_recognition">检测</string>
-    <string name="check_sound">声音</string>
+    <string name="check_sound">提示音</string>
+    <string name="pip_sound_on">打开提示音</string>
+    <string name="pip_sound_off">关闭提示音</string>
+    <string name="pip_sound_on_description">打开提示音，检测继续；振动和系统朗读各自控制</string>
+    <string name="pip_sound_off_description">关闭提示音，检测继续；振动和系统朗读各自控制</string>
     <string name="check_vibration">振动提醒</string>
     <string name="copy_problem_info">复制问题信息</string>
     <string name="problem_info_title">WalkBuddy 问题信息</string>

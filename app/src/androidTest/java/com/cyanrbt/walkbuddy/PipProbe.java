@@ -677,9 +677,10 @@ final class PipProbe {
         tap(runner,host,R.id.enter_pip);
         await(runner,()->host.isInPictureInPictureMode() && ((View)field(host,"root")).getWidth()<fullWidth
             && ((View)field(host,"root")).getHeight()<fullHeight,"detection control in settled PiP");
+        PipSoundProbe.run(runner,host,launcher,report);
         RemoteAction action=read(runner,()->{
             java.util.List<RemoteAction> actions=((android.app.PictureInPictureParams)field(host,"submittedPipParams")).getActions();
-            if(actions.size()!=2 || !actions.get(0).getTitle().toString().equals(host.getString(R.string.preview_stop)))
+            if(actions.size()!=Math.min(3,host.getMaxNumPictureInPictureActions()) || !actions.get(0).getTitle().toString().equals(host.getString(R.string.preview_stop)))
                 throw new AssertionError("Active PiP must retain stop and expose detection control");
             RemoteAction off=actions.get(1);
             if(!off.getTitle().toString().equals(host.getString(R.string.pip_stop_detection)) || !off.isEnabled()
@@ -732,7 +733,7 @@ final class PipProbe {
         });
         report.append("PASS actual PiP menu PendingIntent stops detection/sound/feedback while camera/texture advance; menu removes detection action; repeat is idempotent; owner/generation/fullscreen guards; expansion stays off; manual model restart keeps sound off\n");
     }
-    private static void sendAction(Instrumentation runner,RemoteAction action) throws Exception {
+    static void sendAction(Instrumentation runner,RemoteAction action) throws Exception {
         java.util.concurrent.CountDownLatch delivered=new java.util.concurrent.CountDownLatch(1);
         action.getActionIntent().send(runner.getTargetContext(),0,null,
             (pending,intent,code,data,extras)->delivered.countDown(),new Handler(android.os.Looper.getMainLooper()));
@@ -1028,7 +1029,7 @@ final class PipProbe {
         runner.runOnMainSync(()->{try{result.set(value.get());}catch(Throwable e){error.set(e);}});
         if(error.get()!=null)throw new AssertionError(error.get());return result.get();
     }
-    private static void screenshot(Instrumentation runner,String name) throws Exception {
+    static void screenshot(Instrumentation runner,String name) throws Exception {
         Bitmap bitmap=runner.getUiAutomation().takeScreenshot();if(bitmap==null)throw new AssertionError("Screenshot unavailable");
         File dir=new File(runner.getTargetContext().getCacheDir(),"ui-probe");if(!dir.isDirectory() && !dir.mkdirs())throw new IllegalStateException("Evidence directory unavailable");
         try(FileOutputStream stream=new FileOutputStream(new File(dir,name))){bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);}finally{bitmap.recycle();}
