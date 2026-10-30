@@ -9,6 +9,7 @@ collect_evidence() {
   adb -s "$serial" logcat -d -b crash > ui-evidence/crash.txt || true
   adb -s "$serial" logcat -d -s WalkBuddyAnalysis:I '*:S' > ui-evidence/analysis-timing.txt || true
   adb -s "$serial" logcat -d -s ActivityManager:I ActivityTaskManager:I PowerManagerService:I lmkd:I AndroidRuntime:E libc:F DEBUG:F '*:S' > ui-evidence/lifecycle.txt || true
+  adb -s "$serial" logcat -d -s InputDispatcher:V InputManager:V InputManager-JNI:V WindowManager:I '*:S' > ui-evidence/input-routing.txt || true
   adb -s "$serial" exec-out run-as com.cyanrbt.walkbuddy tar -cf - cache/ui-probe | tar -xf - -C ui-evidence || true
 }
 trap collect_evidence EXIT

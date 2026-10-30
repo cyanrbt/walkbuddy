@@ -21,3 +21,11 @@
 [Activity.onNewIntent 官方生命周期](https://developer.android.com/reference/android/app/Activity#onNewIntent(android.content.Intent))明确说明，给已恢复 Activity 送新 Intent 会先暂停，再恢复。因此原测试在系统自然返回后重复发启动 Intent，会制造额外生命周期转换；空闲事件流也不能证明尚未发出事件的启动请求已经完成。这是有证据的测试序列问题，仍不把它等同于所有历史 UID 失败的完整根因。
 
 后续验证将完整预览锁屏改为直接观察系统自然返回，不重复启动；小窗自然息屏后则等待首页恢复，通过真实首页按钮主动展开，再检查相机仍停止和手动重开。两种用户路径分别覆盖，原事件就绪、目标 UID 输入和严格失败检查保留。生产代码与首轮候选无差异；结果仍由后续完整原生流程确认。
+
+## 自然唤醒后仍需路由证据
+
+自然唤醒候选 `58e3900` 的 [41042398884](https://github.com/cyanrbt/walkbuddy/actions/runs/41042398884) API 36 job `124018124877` 仍在旧恢复触摸处报告相同 UID 异常，未运行新增息屏检查。因此删除重复 Intent 也不是充分解释，不能将同步调整称为平台根因修复。
+
+直接读取 [Android 16 InputDispatcher 官方实现](https://android.googlesource.com/platform/frameworks/native/+/refs/tags/android-16.0.0_r1/services/inputflinger/dispatcher/InputDispatcher.cpp)后，确认拒绝目标注入时会通过 InputDispatcher 日志写出实际窗口/UID 或没有有效目标的原因。新增失败瞬间的 input-routing 快照，并在退出时保留同类日志，避免仅依赖异常后的焦点快照推断。源文件 tag 为 `android-16.0.0_r1`。
+
+默认探针脚本保留每项失败，随后继续执行其余 instrumentation 进程，最终只要任一失败或命令非零便返回失败；同文件同时含 PASS/FAIL 也失败。原有 finally 清理仍执行，后续结果不能自动视为与前项失败完全独立，但能够补足原先因首项退出而缺失的诊断。12 项工具测试通过，其中四项通过假的 adb 执行实际 shell 脚本，核对全成功、首项失败后继续、非零退出与冲突标记均保留正确门槛。
