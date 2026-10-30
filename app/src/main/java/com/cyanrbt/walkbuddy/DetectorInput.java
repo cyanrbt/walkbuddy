@@ -3,6 +3,7 @@ package com.cyanrbt.walkbuddy;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import java.nio.ByteBuffer;
@@ -15,6 +16,8 @@ final class DetectorInput implements AutoCloseable {
     private final Canvas canvas=new Canvas(padded);
     private final Paint paint=new Paint(Paint.FILTER_BITMAP_FLAG);
     private final RectF destination=new RectF();
+    private final RectF orientedSource=new RectF();
+    private final Matrix inputTransform=new Matrix(),rotationTransform=new Matrix();
     private final int[] pixels=new int[SIZE*SIZE];
     private final byte[] rgb=new byte[SIZE*SIZE*3];
     private final ByteBuffer buffer=ByteBuffer.allocateDirect(SIZE*SIZE*3).order(ByteOrder.nativeOrder());
@@ -40,11 +43,17 @@ final class DetectorInput implements AutoCloseable {
             // Rotate directly into the reused model image; no intermediate camera bitmap.
             int saved=canvas.save();
             try {
-                canvas.translate(padX,padY);canvas.scale(scale,scale);
-                if(rotation==90)canvas.translate(0,source.getWidth());
-                else if(rotation==180)canvas.translate(source.getWidth(),source.getHeight());
-                else canvas.translate(source.getHeight(),0);
-                canvas.rotate(-rotation);
+                int orientedWidth=rotation%180==0?source.getWidth():source.getHeight();
+                int orientedHeight=rotation%180==0?source.getHeight():source.getWidth();
+                orientedSource.set(0,0,orientedWidth,orientedHeight);
+                // Use the same rounded destination rectangle as the former second draw.
+                // Scaling by the unrounded factor changes edge interpolation on odd sizes.
+                inputTransform.setRectToRect(orientedSource,destination,Matrix.ScaleToFit.FILL);
+                rotationTransform.setRotate(-rotation);
+                if(rotation==90)rotationTransform.postTranslate(0,source.getWidth());
+                else if(rotation==180)rotationTransform.postTranslate(source.getWidth(),source.getHeight());
+                else rotationTransform.postTranslate(source.getHeight(),0);
+                inputTransform.preConcat(rotationTransform);canvas.concat(inputTransform);
                 destination.set(0,0,source.getWidth(),source.getHeight());
                 canvas.drawBitmap(source,null,destination,paint);
             } finally {canvas.restoreToCount(saved);}

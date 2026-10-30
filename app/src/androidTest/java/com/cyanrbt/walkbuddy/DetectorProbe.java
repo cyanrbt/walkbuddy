@@ -86,7 +86,8 @@ final class DetectorProbe {
                     if(!actual.isDirect() || actual.position()!=0 || actual.remaining()!=320*320*3)
                         throw new AssertionError("Input buffer has invalid layout");
                     for(int i=0;i<expected.capacity();i++)if(expected.get(i)!=actual.get(i))
-                        throw new AssertionError("RGB parity failed for "+Arrays.toString(size)+" rotation="+rotation+" cycle="+cycle+" byte="+i);
+                        throw new AssertionError("RGB parity failed for "+Arrays.toString(size)+" rotation="+rotation+" cycle="+cycle+" byte="+i
+                            +" expected="+(expected.get(i)&255)+" actual="+(actual.get(i)&255));
                     float scale=Math.min(320f/size[0],320f/size[1]);
                     equal((rotation%180==0?size[0]:size[1])*scale,workspace.width);
                     equal((rotation%180==0?size[1]:size[0])*scale,workspace.height);
