@@ -1,0 +1,65 @@
+{
+  "images": [
+    {
+      "file": "menu-sound-off.png",
+      "archive_path": "cache/ui-probe/pip-sound-menu-off.png",
+      "sha256": "b172c3d61becb5d67d63d0c1226fe8792977cd327f149ff9ad6f3f70ca1477db",
+      "unaltered": true,
+      "source_commit": "4c3c9777cec41f14132b3e0955d90e6a9804492b",
+      "run_id": 41133558071,
+      "artifact_id": 13016055418,
+      "api": 35,
+      "scope": "Actual SystemUI over virtual Camera2"
+    },
+    {
+      "file": "menu-sound-on.png",
+      "archive_path": "cache/ui-probe/pip-sound-menu-on.png",
+      "sha256": "ff359f7f4d005c34f25f5d1bde88dd4f757a10c68ed58b58564dba86b3f1067d",
+      "unaltered": true,
+      "source_commit": "4c3c9777cec41f14132b3e0955d90e6a9804492b",
+      "run_id": 41133558071,
+      "artifact_id": 13016055418,
+      "api": 35,
+      "scope": "Actual SystemUI over virtual Camera2"
+    },
+    {
+      "file": "landscape-font150.png",
+      "archive_path": "cache/ui-probe/600x360-font150-day-basic.png",
+      "sha256": "3dec8ef455d42080b72c2690f252883f7fa6e9dfdc43d9c48a55ed52282f8f31",
+      "unaltered": true,
+      "source_commit": "4c3c9777cec41f14132b3e0955d90e6a9804492b",
+      "run_id": 41133558071,
+      "artifact_id": 13016055418,
+      "api": 35,
+      "scope": "Native static layout fixture; no camera opened"
+    },
+    {
+      "file": "landscape-font200.png",
+      "archive_path": "cache/ui-probe/600x360-font200-day-basic.png",
+      "sha256": "7fc38cfe1d935336657c91245222cb66facf26ec94e270f02bb71142a90734f9",
+      "unaltered": true,
+      "source_commit": "4c3c9777cec41f14132b3e0955d90e6a9804492b",
+      "run_id": 41133558071,
+      "artifact_id": 13016055418,
+      "api": 35,
+      "scope": "Native static layout fixture; no camera opened"
+    }
+  ],
+  "candidate_source_commit": "4c3c9777cec41f14132b3e0955d90e6a9804492b",
+  "candidate_workflow": {
+    "id": 41133558071,
+    "status": "completed",
+    "conclusion": "success",
+    "attempt": 1,
+    "source_commit": "4c3c9777cec41f14132b3e0955d90e6a9804492b",
+    "updated_at": "2026-10-30T21:53:22Z",
+    "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41133558071"
+  },
+  "candidate_api35_artifact_id": 13016055418,
+  "candidate_api35_archive_sha256": "c728dce3bf1b07659376cf9e6c0e05539b17418547adf9092de7f5790bb72346",
+  "before_landscape": "../../profiles/pip-sound-initial-api35-landscape.png",
+  "before_source_commit": "30aaa22bfa57f220cc2b6731cb1587f714ac0964",
+  "before_run_id": 41131327523,
+  "before_artifact_id": 13012938083,
+  "before_scope": "Initial failed static layout fixture; same 600x360 / 150 percent font / detection-off state"
+}
