@@ -1,0 +1,444 @@
+[
+  {
+    "api": 35,
+    "source_commit": "9a29432b240cebdf60a743b4f19b73f3dd110ce3",
+    "run_id": 41059529348,
+    "attempt": 1,
+    "artifact_id": 12977569330,
+    "archive_size_bytes": 8511945,
+    "archive_sha256": "3d6e38a76f1abe84ad36aea1715a4c12812e89940e704396556d300f144a40aa",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "overlay_report": "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0\nLABEL_FONT_PASS scale=1.5 pixels=16.5\nLABEL_FONT_PASS scale=2.0 pixels=22.0\nLABEL_LAYOUT_PASS cases=1530; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; LABEL_CONTRAST_PASS cases=18; white/black backgrounds, minimum 4.5:1\nLABEL_CROWD_PASS cases=36 overlap_pairs=0; bounds, qualifiers, near-risk priority, reordered input, cache reuse\nLABEL_LAYERING_PASS cases=3; native label pixels unchanged by later full-image mask\nRISK_PAINT_BASELINE cases=14 mismatches=10\n\n",
+    "risk": {
+      "scope": "Native constructed risk-layer baseline with normal labels; sampled points verified outside label bubbles, not real recognition or tracking",
+      "cases": 14,
+      "mismatches": 10,
+      "rows": [
+        {
+          "kind": "near-outline",
+          "order": "012",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffff636e",
+          "matches": true,
+          "image": "risk-near-outline-012.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "021",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffffc857",
+          "matches": false,
+          "image": "risk-near-outline-021.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "102",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffff636e",
+          "matches": true,
+          "image": "risk-near-outline-102.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "120",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffaeb7c5",
+          "matches": false,
+          "image": "risk-near-outline-120.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "201",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffffc857",
+          "matches": false,
+          "image": "risk-near-outline-201.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "210",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffaeb7c5",
+          "matches": false,
+          "image": "risk-near-outline-210.png"
+        },
+        {
+          "kind": "yellow-outline",
+          "order": "01",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffffc857",
+          "actual_argb": "ffffc857",
+          "matches": true,
+          "image": "risk-yellow-outline-01.png"
+        },
+        {
+          "kind": "yellow-outline",
+          "order": "10",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffffc857",
+          "actual_argb": "ffaeb7c5",
+          "matches": false,
+          "image": "risk-yellow-outline-10.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "012",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605748",
+          "actual_argb": "ff605748",
+          "matches": true,
+          "image": "risk-mask-fill-012.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "021",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605748",
+          "actual_argb": "ff605947",
+          "matches": false,
+          "image": "risk-mask-fill-021.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "102",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605748",
+          "actual_argb": "ff5f5649",
+          "matches": false,
+          "image": "risk-mask-fill-102.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "120",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605748",
+          "actual_argb": "ff5e584b",
+          "matches": false,
+          "image": "risk-mask-fill-120.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "201",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605748",
+          "actual_argb": "ff5f5a49",
+          "matches": false,
+          "image": "risk-mask-fill-201.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "210",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605748",
+          "actual_argb": "ff5e5a4b",
+          "matches": false,
+          "image": "risk-mask-fill-210.png"
+        }
+      ]
+    },
+    "independent_png_sample_check": true,
+    "permutation_images_equal_by_kind": {
+      "near-outline": false,
+      "yellow-outline": false,
+      "mask-fill": false
+    }
+  },
+  {
+    "api": 36,
+    "source_commit": "9a29432b240cebdf60a743b4f19b73f3dd110ce3",
+    "run_id": 41059529348,
+    "attempt": 1,
+    "artifact_id": 12978781308,
+    "archive_size_bytes": 8447809,
+    "archive_sha256": "1577166bfe73fe263dc0e1318e1ae1c2c9ac8bcfafeefb507cb5d2ed74b4ddf3",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "overlay_report": "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0\nLABEL_FONT_PASS scale=1.5 pixels=16.5\nLABEL_FONT_PASS scale=2.0 pixels=22.0\nLABEL_LAYOUT_PASS cases=1530; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; LABEL_CONTRAST_PASS cases=18; white/black backgrounds, minimum 4.5:1\nLABEL_CROWD_PASS cases=36 overlap_pairs=0; bounds, qualifiers, near-risk priority, reordered input, cache reuse\nLABEL_LAYERING_PASS cases=3; native label pixels unchanged by later full-image mask\nRISK_PAINT_BASELINE cases=14 mismatches=10\n\n",
+    "risk": {
+      "scope": "Native constructed risk-layer baseline with normal labels; sampled points verified outside label bubbles, not real recognition or tracking",
+      "cases": 14,
+      "mismatches": 10,
+      "rows": [
+        {
+          "kind": "near-outline",
+          "order": "012",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffff636e",
+          "matches": true,
+          "image": "risk-near-outline-012.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "021",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffffc857",
+          "matches": false,
+          "image": "risk-near-outline-021.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "102",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffff636e",
+          "matches": true,
+          "image": "risk-near-outline-102.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "120",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffaeb7c5",
+          "matches": false,
+          "image": "risk-near-outline-120.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "201",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffffc857",
+          "matches": false,
+          "image": "risk-near-outline-201.png"
+        },
+        {
+          "kind": "near-outline",
+          "order": "210",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffff636e",
+          "actual_argb": "ffaeb7c5",
+          "matches": false,
+          "image": "risk-near-outline-210.png"
+        },
+        {
+          "kind": "yellow-outline",
+          "order": "01",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffffc857",
+          "actual_argb": "ffffc857",
+          "matches": true,
+          "image": "risk-yellow-outline-01.png"
+        },
+        {
+          "kind": "yellow-outline",
+          "order": "10",
+          "x": 80,
+          "y": 175,
+          "expected_argb": "ffffc857",
+          "actual_argb": "ffaeb7c5",
+          "matches": false,
+          "image": "risk-yellow-outline-10.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "012",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605548",
+          "actual_argb": "ff605548",
+          "matches": true,
+          "image": "risk-mask-fill-012.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "021",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605548",
+          "actual_argb": "ff605748",
+          "matches": false,
+          "image": "risk-mask-fill-021.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "102",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605548",
+          "actual_argb": "ff5e554a",
+          "matches": false,
+          "image": "risk-mask-fill-102.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "120",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605548",
+          "actual_argb": "ff5c574c",
+          "matches": false,
+          "image": "risk-mask-fill-120.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "201",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605548",
+          "actual_argb": "ff5e5949",
+          "matches": false,
+          "image": "risk-mask-fill-201.png"
+        },
+        {
+          "kind": "mask-fill",
+          "order": "210",
+          "x": 160,
+          "y": 120,
+          "expected_argb": "ff605548",
+          "actual_argb": "ff5c584b",
+          "matches": false,
+          "image": "risk-mask-fill-210.png"
+        }
+      ]
+    },
+    "independent_png_sample_check": true,
+    "permutation_images_equal_by_kind": {
+      "near-outline": false,
+      "yellow-outline": false,
+      "mask-fill": false
+    }
+  }
+]
