@@ -12,6 +12,9 @@ import org.tensorflow.lite.Interpreter;
 /** 独立worker串行调用；固定许可核验模型，UINT8输入和4个输出逐项校验。 */
 final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalDetector.Result> {
     static final boolean AVAILABLE=true;
+    static final int DEFAULT_THREADS=2;
+    private final int threads;
+    private final boolean traceAll;
     final Interpreter interpreter;
     final List<String> labels;
     private DetectorInput input;
@@ -29,12 +32,20 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
         Result(String category,int[] indices,float[] scores,List<Detection> detections){this.category=category;this.classIndices=indices;this.scores=scores;this.detections=Collections.unmodifiableList(new ArrayList<>(detections));}
     }
     LocalDetector(Context context) throws IOException {
+        this(context,DEFAULT_THREADS,false);
+    }
+    LocalDetector(Context context,int threads) throws IOException {
+        this(context,threads,false);
+    }
+    LocalDetector(Context context,int threads,boolean traceAll) throws IOException {
+        if(threads!=1 && threads!=2)throw new IllegalArgumentException("Only 1/2 CPU threads are supported");
+        this.threads=threads;this.traceAll=traceAll;
         labels=new ArrayList<>();
         try(BufferedReader reader=new BufferedReader(new InputStreamReader(context.getAssets().open("labelmap.txt"),java.nio.charset.StandardCharsets.UTF_8))) {String line;while((line=reader.readLine())!=null)labels.add(line);}
         if(labels.size()!=90 || !"person".equals(labels.get(0)))throw new IOException("模型标签映射不匹配");
         try(AssetFileDescriptor fd=context.getAssets().openFd("efficientdet_lite0_v1.tflite");FileInputStream stream=new FileInputStream(fd.getFileDescriptor())) {
             ByteBuffer model=stream.getChannel().map(FileChannel.MapMode.READ_ONLY,fd.getStartOffset(),fd.getDeclaredLength());
-            interpreter=new Interpreter(model,new Interpreter.Options().setNumThreads(2));
+            interpreter=new Interpreter(model,new Interpreter.Options().setNumThreads(threads));
         }
         try {
             if(interpreter.getInputTensorCount()!=1 || interpreter.getOutputTensorCount()!=4)throw new IOException("模型张量数量不匹配");
@@ -55,8 +66,8 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
         interpreter.runForMultipleInputsOutputs(inputs,outputs);
         long cpuMs=(android.os.Debug.threadCpuTimeNanos()-cpuStarted)/1_000_000;
         long finished=android.os.SystemClock.elapsedRealtime();
-        if(firstInference || finished-started>=500)android.util.Log.i("WalkBuddyAnalysis","Inference prepareMs="+(prepared-started)
-            +" prepareWorkerCpuMs="+prepareCpuMs+" nativeMs="+(finished-prepared)+" workerCpuMs="+cpuMs+" first="+firstInference);
+        if(traceAll || firstInference || finished-started>=500)android.util.Log.i("WalkBuddyAnalysis","Inference prepareMs="+(prepared-started)
+            +" prepareWorkerCpuMs="+prepareCpuMs+" nativeMs="+(finished-prepared)+" workerCpuMs="+cpuMs+" first="+firstInference+" threads="+threads);
         firstInference=false;
         float total=count.get(0);
         if(!Float.isFinite(total) || total<0 || total>25)throw new IllegalStateException("模型检测数量无效");

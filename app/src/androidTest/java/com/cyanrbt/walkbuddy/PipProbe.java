@@ -117,21 +117,24 @@ final class PipProbe {
         runner.finish(code,result);
     }
 
-    static void run(Instrumentation runner,Integer profilePriority) {
+    static void run(Instrumentation runner,Integer profilePriority,Integer profileThreads) {
         Bundle result=new Bundle();Activity home=null;PreviewActivity preview=null;
         StringBuilder report=new StringBuilder();int code=Activity.RESULT_CANCELED;
         InferenceWorker<BitmapFrame,LocalDetector.Result> profiledWorker=null;
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("PiP probe is restricted to emulators");
-            if(profilePriority!=null) {
-                if(profilePriority!=1 && profilePriority!=10)throw new IllegalArgumentException("Unsupported profile priority");
+            if(profilePriority!=null || profileThreads!=null) {
+                int priority=profilePriority==null?1:profilePriority;
+                int threads=profileThreads==null?LocalDetector.DEFAULT_THREADS:profileThreads;
+                if(priority!=1 && priority!=10)throw new IllegalArgumentException("Unsupported profile priority");
+                if(threads!=1 && threads!=2)throw new IllegalArgumentException("Unsupported profile threads");
                 Field shared=PreviewActivity.class.getDeclaredField("sharedWorker");shared.setAccessible(true);
                 if(shared.get(null)!=null)throw new AssertionError("Profile needs a fresh instrumentation process");
                 profiledWorker=new InferenceWorker<>(android.os.SystemClock::elapsedRealtime,
-                    ()->PreviewActivity.createWorkerDetector(runner.getTargetContext(),profilePriority));
+                    ()->PreviewActivity.createWorkerDetector(runner.getTargetContext(),priority,threads,true));
                 shared.set(null,profiledWorker);
-                report.append("SCHEDULING_PROFILE priority=").append(profilePriority).append(" processors=")
+                report.append(profileThreads==null?"SCHEDULING_PROFILE priority=":"THREAD_PROFILE priority=").append(priority).append(" threads=").append(threads).append(" processors=")
                     .append(Runtime.getRuntime().availableProcessors()).append('\n');
             }
             if(!PipSupport.available(runner.getTargetContext()))throw new IllegalStateException("System PiP is unavailable");

@@ -1,0 +1,13 @@
+name: Inference thread profile
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  profile:
+    uses: ./.github/workflows/ui-check.yml
+    with:
+      thread_profile: true

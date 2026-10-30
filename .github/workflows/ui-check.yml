@@ -8,6 +8,9 @@ on:
       scheduling_profile:
         type: boolean
         default: false
+      thread_profile:
+        type: boolean
+        default: false
   workflow_dispatch:
 
 permissions:
@@ -54,7 +57,7 @@ jobs:
           arch: x86_64
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -camera-back emulated -camera-front none
-          script: bash scripts/${{ inputs.scheduling_profile && 'run_scheduling_profiles' || 'run_ui_probes' }}.sh
+          script: bash scripts/${{ inputs.thread_profile && 'run_thread_profiles' || inputs.scheduling_profile && 'run_scheduling_profiles' || 'run_ui_probes' }}.sh
       - name: Upload layout evidence
         if: always()
         uses: actions/upload-artifact@v4

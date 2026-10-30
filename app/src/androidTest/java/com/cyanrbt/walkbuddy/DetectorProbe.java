@@ -13,6 +13,47 @@ import java.util.*;
 /** Android pixel parity, actual bundled-model outputs, and scoped allocation observations. */
 final class DetectorProbe {
     private static volatile int sink;
+    static void compareThreads(Instrumentation runner) {
+        Bundle result=new Bundle();int code=Activity.RESULT_CANCELED;
+        Bitmap portrait=null,blank=null,white=null;
+        try {
+            if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
+                throw new IllegalStateException("Thread parity probe is restricted to emulators");
+            try(java.io.InputStream stream=runner.getContext().getAssets().open("portrait.jpg")){portrait=BitmapFactory.decodeStream(stream);}
+            if(portrait==null)throw new AssertionError("Portrait fixture did not decode");
+            blank=Bitmap.createBitmap(320,320,Bitmap.Config.ARGB_8888);
+            white=Bitmap.createBitmap(640,480,Bitmap.Config.ARGB_8888);white.eraseColor(Color.WHITE);
+            Bitmap[] sources={portrait,blank,white,portrait};
+            List<float[]> expected=new ArrayList<>();List<String> categories=new ArrayList<>();
+            try(LocalDetector detector=new LocalDetector(runner.getTargetContext(),2)) {
+                for(Bitmap source:sources) {
+                    LocalDetector.Result found=detector.detect(new BitmapFrame(source));
+                    expected.add(tensors(detector));categories.add(found.category);
+                }
+            }
+            try(LocalDetector detector=new LocalDetector(runner.getTargetContext(),1)) {
+                for(int i=0;i<sources.length;i++) {
+                    LocalDetector.Result found=detector.detect(new BitmapFrame(sources[i]));float[] actual=tensors(detector);
+                    for(int j=0;j<actual.length;j++)equal(expected.get(i)[j],actual[j]);
+                    if(!categories.get(i).equals(found.category))throw new AssertionError("Thread count changed confirmed category");
+                    if(sources[i].isRecycled())throw new AssertionError("Detector recycled input");
+                }
+            }
+            result.putString("stream","THREAD_PARITY_PASS cases=4; all 151 floats match threads=2/1 within 1e-6; portrait, blank, white, repeated portrait\n");
+            code=Activity.RESULT_OK;
+        }catch(Throwable error){result.putString("stream","THREAD_PARITY_FAIL: "+error);}
+        finally {for(Bitmap bitmap:new Bitmap[]{portrait,blank,white})if(bitmap!=null)bitmap.recycle();}
+        runner.finish(code,result);
+    }
+    private static float[] tensors(LocalDetector detector) throws Exception {
+        float[] result=new float[151];int at=0;
+        for(String name:new String[]{"boxes","classes","scores","count"}) {
+            FloatBuffer values=buffer(detector,name);
+            for(int i=0;i<values.capacity();i++)result[at++]=values.get(i);
+        }
+        if(at!=result.length)throw new AssertionError("Unexpected tensor size");
+        return result;
+    }
     static void run(Instrumentation runner) {
         Bundle result=new Bundle();StringBuilder report=new StringBuilder();
         try {
