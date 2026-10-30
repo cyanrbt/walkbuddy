@@ -25,6 +25,12 @@
 
 ## 当前可下载发布
 
+[v0.4.20 发布流程 41038083125](https://github.com/cyanrbt/walkbuddy/actions/runs/41038083125) attempt 1 成功，Android 15/16 与 APK 作业均首次通过。Release 实际存在 [Walk-Buddy-v0.4.20-arm64-debug.apk](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.20/Walk-Buddy-v0.4.20-arm64-debug.apk)，已下载核对固定签名、版本和资产摘要，详见[核验 JSON](apk-v0.4.20.json)。
+
+本版候选 [41036811932](https://github.com/cyanrbt/walkbuddy/actions/runs/41036811932) 的 API 35 首轮仍在锁屏恢复触摸处出现目标 UID 不匹配，API 36 首次通过；原提交仅重跑失败作业后 API 35 成功，两套附件已下载。异常后快照与截图没有系统 ANR 弹窗，焦点属于应用，不能套用前一轮的 Launcher 原因；[具体证据与边界](input-after-wake-2026-10-30-v0.4.20.md)保留。新发布首次通过不意味着旧输入根因已修复，实机仍待验收。
+
+## v0.4.19 发布
+
 [v0.4.19 发布流程 41033072437](https://github.com/cyanrbt/walkbuddy/actions/runs/41033072437) attempt 2 已成功，Release 实际存在 [Walk-Buddy-v0.4.19-arm64-debug.apk](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.19/Walk-Buddy-v0.4.19-arm64-debug.apk)。已下载核对 9,950,381 字节、GitHub 资产摘要、固定签名与版本 0.4.19 / 31，详见[核验 JSON](apk-v0.4.19.json)。此为模拟器及发布附件检查，实机仍待验收。
 
 ## 此前发布

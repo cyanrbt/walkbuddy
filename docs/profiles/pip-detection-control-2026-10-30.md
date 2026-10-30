@@ -15,7 +15,7 @@ v0.4.19 的系统小窗菜单只有「停止整个预览」，关闭检测需展
 
 原生探针从 Activity 已成功提交给系统的 PictureInPictureParams 取得 RemoteAction，核对标签、说明和操作顺序，发送真实 PendingIntent 并等待广播完成；检查检测/声音/反馈与 Ticket 取消、相机/纹理身份保留、心跳继续推进、提交的菜单删除关闭检测、重复动作、退休 owner/generation、完整页面重放及手动重开模型。Activity 没有公开的 PiP 参数查询方法，因此这不是从系统重新读取菜单；也不模拟点击系统菜单图标，不能替代 OEM 菜单与 TalkBack 实机验收。
 
-布局另对原 30 组窗口/字号/日夜配置检查手动关闭后的完整说明，既有 60 组故障/小窗提示呈现保留。原完整模型、相机、锁屏和两轮 PiP 检查继续执行。结果待实际运行后补记。
+布局另对原 30 组窗口/字号/日夜配置检查手动关闭后的完整说明，既有 60 组故障/小窗提示呈现保留。原完整模型、相机、锁屏和两轮 PiP 检查继续执行，实际结果见下节。
 
 本地 `testDebugUnitTest lintDebug assembleDebug assembleDebugAndroidTest -PuniversalApk` 成功，146 项 JVM 测试无失败，Lint 0 错误 / 22 警告；产品表面、v0.4.20 发布元数据和八项 CI 摘要测试通过。首轮编译发现探针误用不存在的 Activity PiP 参数 getter，已改为检查成功提交的参数，不使用平台隐藏接口；最终应用与测试 APK 均已编译。
 
@@ -29,3 +29,9 @@ v0.4.19 的系统小窗菜单只有「停止整个预览」，关闭检测需展
 | --- | --- | --- | --- |
 | 35（重跑） | 12968891150 / 7,788,863 | `962172fa003f142fcc9181b446681a875541de77500eb429746e84b040fc5e0a` | [api35.json](pip-detection-control-2026-10-30-api35.json) |
 | 36（首次） | 12968786754 / 7,759,048 | `5c4bf126022d203cca260e66c4c0cc3b13a72c374bbbee2498334d5a2f566450` | [api36.json](pip-detection-control-2026-10-30-api36.json) |
+
+## 发布附件
+
+新标签 `v0.4.20` 固定指向 `07564302f843216e343d7bf0b70442b3abdc6f16`，与原生候选的 app 文件相同。[发布流程 41038083125](https://github.com/cyanrbt/walkbuddy/actions/runs/41038083125) attempt 1 成功：API 35 job `124003799755`、API 36 job `124003799471`、APK job `124005917650` 均首次通过；这不改变前述候选首轮失败的原因边界。
+
+已实际下载 [发布 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.20/Walk-Buddy-v0.4.20-arm64-debug.apk)，独立核对摘要、固定签名、版本 0.4.20 / 32、ARM64、权限、模型、中文标签与菜单资源，见[附件核验](apk-v0.4.20.json)。原生截图与软件核验不替代实体设备菜单、TalkBack 或 AR 深度验收。
