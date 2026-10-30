@@ -8,12 +8,12 @@
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "e9fbc7d0ef3f07dd1c4bc209e057ce68b94fbf2974c8e8fc5f2da56ef89be70d",
-    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "88130270f4ad775ebca233f1341842f3ae2ccd53b5a4004cd4aa5e62da115917",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "3ac243a37e9564ce5b2dce6497be9b88e65b1e17ccd4e5eaacada3db011afcab",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java": "99fdf32bd8fc5f1fc3a681cc119ec183743ef477da558bb1f65fbe2f6c22bc52",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryPresentationProbe.java": "002e6d446f7a2f11a497ad6436e18064df5249f68da8b35612c790d7fa96c0f6",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryProbe.java": "f881792292cc3134a56d452e56d645be78947531ad607eaa43c9853c554c5bee",
     "app/src/main/java/com/cyanrbt/walkbuddy/AndroidTone.java": "1c7b783d317aca69e9ad4e0dd17d504e25f8d735ea105d1970ec28dcfcad7c45",
-    "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
+    "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "9020b9ef87f87f510e9fca8328d7caec0871a573892728736f9550286d4b5aff",
     "app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java": "1b34efd7f69932c739720779dc9a363f62328ca139b01b46c2d0c926f0aa0b57",
     "app/src/main/java/com/cyanrbt/walkbuddy/PipMenu.java": "b745902bcc4fd49223cdebff345bc7963d8c22b6a31b83ed97f721dde20ca1c0",
     "app/src/main/java/com/cyanrbt/walkbuddy/PipSupport.java": "9ffcf73b673cd8c81f23ab5a9970abd6fb9daf1b11888f78eeb0832dd1e55e1b",
@@ -30,7 +30,7 @@
     "app/src/main/res/drawable/ic_sound_on.xml": "5c74f669a40f252ce2d707b89341518b72bdf77ad740b868cc0da3b7a8e38033",
     "app/src/main/res/layout/activity_preview.xml": "a98ff60e648ea004ce85d14877df29bbeda8d952a327d7739b8a994c4f4614e6",
     "app/src/main/res/values/strings.xml": "742f09acf52b33b8e545940989fcb582f292b4fde258ad18871691256b4f1770",
-    "app/src/test/java/com/cyanrbt/walkbuddy/HomeStateTest.java": "ae4dff71194f8ea805023a4851710cda3ac770c6ceecd0e452fc7d0c3bca4b48",
+    "app/src/test/java/com/cyanrbt/walkbuddy/HomeStateTest.java": "4f4ca28878785778b70845ff293da890aa68f30e67a3ca71405f3aabd6f0b97b",
     "app/src/test/java/com/cyanrbt/walkbuddy/PipMenuTest.java": "68db6bf81a5a0afcde7dfce5f9f9379a6a2cc6ac3ee65191adb9b4c8b63b9847",
     "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048",
     "app/src/test/java/com/cyanrbt/walkbuddy/ProductSurfaceTest.java": "bedb92ef2c1e01b66839a10e411a904178fa6201ce31a9eb72aa4728a845e450"
@@ -40,7 +40,6 @@
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java": "99fdf32bd8fc5f1fc3a681cc119ec183743ef477da558bb1f65fbe2f6c22bc52",
     "app/src/main/java/com/cyanrbt/walkbuddy/AndroidTone.java": "1c7b783d317aca69e9ad4e0dd17d504e25f8d735ea105d1970ec28dcfcad7c45",
-    "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
     "app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java": "1b34efd7f69932c739720779dc9a363f62328ca139b01b46c2d0c926f0aa0b57",
     "app/src/main/java/com/cyanrbt/walkbuddy/PipMenu.java": "b745902bcc4fd49223cdebff345bc7963d8c22b6a31b83ed97f721dde20ca1c0",
     "app/src/main/java/com/cyanrbt/walkbuddy/PipSupport.java": "9ffcf73b673cd8c81f23ab5a9970abd6fb9daf1b11888f78eeb0832dd1e55e1b",
@@ -50,7 +49,6 @@
     "app/src/main/java/com/cyanrbt/walkbuddy/TonePlayer.java": "daf17a0288b0a906812c3880db12db3521004e6cb2d2bb7268730ffbf228dc72",
     "app/src/main/res/drawable/ic_sound_off.xml": "deec30ddb2d7a0f0bdfabd39024a8026fa3377a6408c6b775f6d46f175a8a908",
     "app/src/main/res/drawable/ic_sound_on.xml": "5c74f669a40f252ce2d707b89341518b72bdf77ad740b868cc0da3b7a8e38033",
-    "app/src/test/java/com/cyanrbt/walkbuddy/HomeStateTest.java": "ae4dff71194f8ea805023a4851710cda3ac770c6ceecd0e452fc7d0c3bca4b48",
     "app/src/test/java/com/cyanrbt/walkbuddy/PipMenuTest.java": "68db6bf81a5a0afcde7dfce5f9f9379a6a2cc6ac3ee65191adb9b4c8b63b9847",
     "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048",
     "app/src/test/java/com/cyanrbt/walkbuddy/ProductSurfaceTest.java": "bedb92ef2c1e01b66839a10e411a904178fa6201ce31a9eb72aa4728a845e450"
@@ -62,7 +60,11 @@
     },
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": {
       "v0.4.35": "3a88e689b55a582acbb573e3d003a96af74ae69eeb857309043f8a7b07ebaec2",
-      "current": "88130270f4ad775ebca233f1341842f3ae2ccd53b5a4004cd4aa5e62da115917"
+      "current": "3ac243a37e9564ce5b2dce6497be9b88e65b1e17ccd4e5eaacada3db011afcab"
+    },
+    "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": {
+      "v0.4.35": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
+      "current": "9020b9ef87f87f510e9fca8328d7caec0871a573892728736f9550286d4b5aff"
     },
     "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java": {
       "v0.4.35": "ca72281ddc5cfad11feea8833a68ccd7a61b7bbc8dbdcb08a80c48d827fd8e4e",
@@ -76,6 +78,10 @@
       "v0.4.35": "ce5a2ee6143837ce8cdc61f8c3c5727eb3e81d333555f247f32444f579128f30",
       "current": "742f09acf52b33b8e545940989fcb582f292b4fde258ad18871691256b4f1770"
     },
+    "app/src/test/java/com/cyanrbt/walkbuddy/HomeStateTest.java": {
+      "v0.4.35": "ae4dff71194f8ea805023a4851710cda3ac770c6ceecd0e452fc7d0c3bca4b48",
+      "current": "4f4ca28878785778b70845ff293da890aa68f30e67a3ca71405f3aabd6f0b97b"
+    },
     "app/src/main/java/com/cyanrbt/walkbuddy/PreviewContentLayout.java": {
       "v0.4.35": "1d5e2707d620b323c621583b6cd9962087603393e7932b0142c5e6c086080bbc",
       "current": "508fe4e30f3f625c0ac5aad2ca4cf75a05e32231fa8fbf7eea28ec49d1052f67"
@@ -84,12 +90,10 @@
   "preserved_home_events_source_sha256": {
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
-    "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
     "app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java": "1b34efd7f69932c739720779dc9a363f62328ca139b01b46c2d0c926f0aa0b57",
     "app/src/main/java/com/cyanrbt/walkbuddy/PipSupport.java": "9ffcf73b673cd8c81f23ab5a9970abd6fb9daf1b11888f78eeb0832dd1e55e1b",
     "app/src/main/java/com/cyanrbt/walkbuddy/PreviewChrome.java": "c9fb0356293ae2e37a87f07a6be4da3e7aa7952ef7704259dd8d23a08d2f9106",
     "app/src/main/java/com/cyanrbt/walkbuddy/PreviewStatus.java": "8cecbf49da9af250c117047d61abbb43c2dd35c979cd253430cad88af61f26e4",
-    "app/src/test/java/com/cyanrbt/walkbuddy/HomeStateTest.java": "ae4dff71194f8ea805023a4851710cda3ac770c6ceecd0e452fc7d0c3bca4b48",
     "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048"
   },
   "preserved_preview_policy_source_sha256": {
@@ -112,12 +116,13 @@
   ],
   "reference_url": "https://github.com/android/camera-samples/blob/2f10e46fc7a09f7208f8d6de72482ecf3e5fb85a/core-ui/src/main/java/com/android/camera/coreui/state/StateViews.kt",
   "jvm_results": {
-    "tests": 237,
+    "tests": 239,
     "failures": 0,
     "errors": 0,
     "skipped": 0
   },
   "lint_errors": 0,
   "lint_warnings": 22,
-  "local_app_and_test_build": "success"
+  "local_app_and_test_build": "success",
+  "home_report_fix": "Retain last published tuple across terminal failure; identical renders keep terminal object; next state change clears failure presentation; owner guards retained"
 }

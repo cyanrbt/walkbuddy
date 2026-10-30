@@ -446,7 +446,8 @@ final class PipProbe {
             read(runner,()->{
                 RecoveryPresentationProbe.full((View)field(idleHost,"root"),
                     RecoveryGuide.resolve((RecoveryGuide.Reason)field(idleHost,"recoveryReason"),true));
-                if(!stoppedReport.equals(PreviewActivity.report()))throw new AssertionError("Presentation change overwrote terminal home report");
+                if(!stoppedReport.equals(PreviewActivity.report()))throw new AssertionError("Presentation change overwrote terminal home report: before="
+                    +stoppedReport+" after="+PreviewActivity.report());
                 return true;
             });
             screenshot(runner,"preview-recovery-expanded.png");

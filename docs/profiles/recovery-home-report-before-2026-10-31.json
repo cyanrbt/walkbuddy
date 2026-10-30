@@ -1,0 +1,12 @@
+{
+  "scope": "Host JVM regression before HomeState cache fix; same published UNAVAILABLE tuple overwrites terminal failure report",
+  "tests": 9,
+  "failures": 1,
+  "errors": 0,
+  "failed_cases": [
+    {
+      "name": "identicalStoppedRendersKeepTerminalReportWithoutNotificationsOrAllocations",
+      "message": "java.lang.AssertionError: expected same:<画面过期；提醒已停止> was not:<画面过期\n识别关着>"
+    }
+  ]
+}

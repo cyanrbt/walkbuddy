@@ -11,7 +11,7 @@ final class HomeState {
     private Object owner;
     private SessionState.Phase phase;
     private String reason;
-    private boolean recognition;
+    private boolean recognition,failed;
     private int notice;
     private volatile String report=STOPPED;
 
@@ -19,7 +19,7 @@ final class HomeState {
     void subscribe(Runnable listener){listeners.add(listener);}
     void unsubscribe(Runnable listener){listeners.remove(listener);}
     void attach(Object next) {
-        owner=Objects.requireNonNull(next);phase=null;reason=null;report=STOPPED;
+        owner=Objects.requireNonNull(next);phase=null;reason=null;failed=false;report=STOPPED;
         changed();
     }
     void publish(Object source,SessionState.Phase nextPhase,String nextReason,boolean nextRecognition,
@@ -28,8 +28,9 @@ final class HomeState {
         boolean textChanged=!Objects.equals(reason,nextReason) || recognition!=nextRecognition || notice!=nextNotice;
         if(!textChanged && phase==nextPhase)return;
         phase=nextPhase;
-        if(textChanged) {
+        if(textChanged || failed) {
             reason=nextReason;recognition=nextRecognition;notice=nextNotice;
+            failed=false;
             report=reason+"\n"+(recognition?"识别开着":"识别关着")+(notice==0?"":"\n"+noticeText.get());
         }
         changed();
@@ -38,12 +39,13 @@ final class HomeState {
         if(source!=owner)return;
         String next=message+"；提醒已停止";
         if(next.equals(report))return;
-        report=next;reason=null;changed();
+        // Keep the last published tuple: a repeated render must retain this terminal report.
+        report=next;failed=true;changed();
     }
     void historyChanged(Object source){if(source==owner)changed();}
     void detach(Object source) {
         if(source!=owner)return;
-        owner=null;phase=null;reason=null;report=STOPPED;changed();
+        owner=null;phase=null;reason=null;failed=false;report=STOPPED;changed();
     }
     private void changed() {
         for(Runnable listener:listeners.toArray(new Runnable[0]))

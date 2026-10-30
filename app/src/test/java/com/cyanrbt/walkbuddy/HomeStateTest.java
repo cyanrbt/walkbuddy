@@ -64,4 +64,19 @@ public class HomeStateTest {
         home.publish(owner,SessionState.Phase.STARTING,"正在启动",false,0,null);
         assertEquals("正在启动\n识别关着",home.report());
     }
+    @Test public void identicalStoppedRendersKeepTerminalReportWithoutNotificationsOrAllocations() {
+        HomeState home=new HomeState();Object owner=new Object();home.attach(owner);
+        home.publish(owner,SessionState.Phase.UNAVAILABLE,"画面过期",false,0,null);home.failure(owner,"画面过期");
+        String terminal=home.report();AtomicInteger changes=new AtomicInteger();home.subscribe(changes::incrementAndGet);
+        for(int i=0;i<10_000;i++)home.publish(owner,SessionState.Phase.UNAVAILABLE,new String("画面过期"),false,0,
+            ()->{throw new AssertionError("Unchanged stopped state should not translate notices");});
+        assertSame(terminal,home.report());assertEquals("画面过期；提醒已停止",home.report());assertEquals(0,changes.get());
+    }
+    @Test public void nextPhaseClearsTerminalReportEvenWhenItsReasonIsUnchanged() {
+        HomeState home=new HomeState();Object owner=new Object();home.attach(owner);
+        home.publish(owner,SessionState.Phase.UNAVAILABLE,"同一文案",false,0,null);home.failure(owner,"同一文案");
+        AtomicInteger changes=new AtomicInteger();home.subscribe(changes::incrementAndGet);
+        home.publish(owner,SessionState.Phase.STARTING,"同一文案",false,0,null);
+        assertEquals("同一文案\n识别关着",home.report());assertEquals(1,changes.get());
+    }
 }
