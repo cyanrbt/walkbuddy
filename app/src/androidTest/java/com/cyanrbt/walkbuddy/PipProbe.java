@@ -40,18 +40,18 @@ final class PipProbe {
             Activity launcher=home;
             Instrumentation.ActivityMonitor monitor=runner.addMonitor(PreviewActivity.class.getName(),null,false);
             try {
-                read(runner,()->launcher.findViewById(R.id.start).performClick());
+                tap(runner,launcher,R.id.start);
                 preview=(PreviewActivity)runner.waitForMonitorWithTimeout(monitor,7000);
             } finally {runner.removeMonitor(monitor);}
             if(preview==null)throw new AssertionError("Recovery preview did not open");
             PreviewActivity host=preview;
             await(runner,()->live(host),"recovery Camera2 LIVE");
-            read(runner,()->host.findViewById(R.id.enter_pip).performClick());
+            tap(runner,host,R.id.enter_pip);
             await(runner,host::isInPictureInPictureMode,"recovery initial PiP");
             for(int cycle=0;cycle<4;cycle++) {
                 if(cycle==2) {
                     await(runner,()->(boolean)field(launcher,"visible"),"home before recovery lock sequence");
-                    read(runner,()->launcher.findViewById(R.id.start).performClick());
+                    tap(runner,launcher,R.id.start);
                     await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"expand before recovery lock");
                     shell(runner,"input keyevent KEYCODE_SLEEP");
                     await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE
@@ -60,9 +60,10 @@ final class PipProbe {
                     bringForward(runner,host);
                     await(runner,()->(boolean)field(host,"resumed") && host.getSystemService(PowerManager.class).isInteractive()
                         && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"recovery wake and unlock");
-                    read(runner,()->{assertReleased(host);return host.findViewById(R.id.restart_preview).performClick();});
+                    read(runner,()->{assertReleased(host);return true;});
+                    tap(runner,host,R.id.restart_preview);
                     await(runner,()->live(host),"manual camera restart after recovery lock");
-                    read(runner,()->host.findViewById(R.id.enter_pip).performClick());
+                    tap(runner,host,R.id.enter_pip);
                     await(runner,host::isInPictureInPictureMode,"PiP after recovery lock");
                     report.append("PASS recovery lock/wake precondition\n");
                 }
@@ -74,21 +75,23 @@ final class PipProbe {
                     watchdog.run();assertReleased(host);assertNotPolling(host);
                     return true;
                 });
-                read(runner,()->launcher.findViewById(R.id.start).performClick());
+                tap(runner,launcher,R.id.start);
                 await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"recovery expansion");
-                read(runner,()->{assertReleased(host);return host.findViewById(R.id.restart_preview).performClick();});
+                read(runner,()->{assertReleased(host);return true;});
+                tap(runner,host,R.id.restart_preview);
                 await(runner,()->live(host),"recovery manual restart");
                 int iteration=cycle;
                 read(runner,()->{
                     View button=host.findViewById(R.id.enter_pip);
-                    report.append("RECOVERY_CLICK cycle=").append(iteration).append(" resumed=").append(field(host,"resumed"))
+                    report.append("RECOVERY_BEFORE_INPUT cycle=").append(iteration).append(" resumed=").append(field(host,"resumed"))
                         .append(" phase=").append(state(host).phase).append(" fresh=").append(state(host).fresh(android.os.SystemClock.elapsedRealtime()))
                         .append(" focus=").append(host.hasWindowFocus()).append(" enabled=").append(button.isEnabled())
                         .append(" attached=").append(button.isAttachedToWindow()).append(" shown=").append(button.isShown())
                         .append(" listener=").append(button.hasOnClickListeners()).append(" current=").append(button==field(host,"pipButton"))
-                        .append(" clicked=").append(button.performClick()).append('\n');
+                        .append(" input=touch").append('\n');
                     return true;
                 });
+                tap(runner,host,R.id.enter_pip);
                 await(runner,host::isInPictureInPictureMode,"immediate PiP re-entry cycle="+cycle);
                 long started=android.os.SystemClock.elapsedRealtime();
                 await(runner,()->live(host) && state(host).captureAt>started+300 && state(host).displayAt>started+300,"recovery PiP frames advance");
@@ -387,6 +390,23 @@ final class PipProbe {
 
     private static void bringForward(Instrumentation runner,PreviewActivity host) {
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
+    }
+    private static void tap(Instrumentation runner,Activity host,int id) throws Exception {
+        // Real input respects focus and enabled state, unlike directly invoking performClick.
+        await(runner,()->{
+            View view=host.findViewById(id);android.graphics.Rect bounds=new android.graphics.Rect();
+            return host.hasWindowFocus() && view!=null && view.isShown() && view.isEnabled()
+                && view.isAttachedToWindow() && view.getGlobalVisibleRect(bounds) && !bounds.isEmpty();
+        },"touch target ready id="+id);
+        android.graphics.Rect bounds=read(runner,()->{
+            android.graphics.Rect rect=new android.graphics.Rect();host.findViewById(id).getGlobalVisibleRect(rect);return rect;
+        });
+        long at=android.os.SystemClock.uptimeMillis();
+        for(int action:new int[]{android.view.MotionEvent.ACTION_DOWN,android.view.MotionEvent.ACTION_UP}) {
+            android.view.MotionEvent event=android.view.MotionEvent.obtain(at,android.os.SystemClock.uptimeMillis(),action,bounds.exactCenterX(),bounds.exactCenterY(),0);
+            event.setSource(android.view.InputDevice.SOURCE_TOUCHSCREEN);
+            try{runner.sendPointerSync(event);}finally{event.recycle();}
+        }
     }
     private static void assertReleased(PreviewActivity host) {
         for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback"})
