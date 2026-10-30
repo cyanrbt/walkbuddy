@@ -159,6 +159,7 @@ final class LayoutProbe {
                 checkHapticLegend(root,size[0],size[1],new File(output,"haptics-"+name+".png"));
                 report.append("PASS ").append(name).append(" camera=").append(camera.getWidth()).append('x').append(camera.getHeight()).append('\n');
             }
+        RecoveryCoverBaseline.record(target,output,report);
         report.append("FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\n");
         report.append("HAPTIC_LEGEND_PASS configurations=30 resize_cycles=30; full cue text and descriptions, responsive columns/list\n");
         report.append("DIAGNOSTIC_LAYOUT_PASS configurations=30; recovery copy action text and scroll reachability\n");
