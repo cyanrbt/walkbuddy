@@ -18,6 +18,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -85,6 +86,7 @@ final class OverlayProbe {
             } finally {first.recycle();if(repeat!=null)repeat.recycle();}
         }
         checkLabels(runner,report);
+        checkCrowdedLabels(runner,report);
         // A narrow PiP image must not send a negative label width to ellipsize.
         overlay.layout(0,0,1,1);
         overlay.show(Collections.singletonList(new Detection("很长的标签",1,0,0,1,1)),
@@ -167,6 +169,59 @@ final class OverlayProbe {
         }
         report.append("LABEL_LAYOUT_PASS cases=").append(cases).append("; 80 Chinese classes, fonts 100/150/200%, widths 96/160/320dp, glyph/bubble bounds, letterbox corners, tiny views; ")
             .append("LABEL_CONTRAST_PASS cases=").append(contrastCases).append("; white/black backgrounds, minimum 4.5:1\n");
+    }
+    private static void checkCrowdedLabels(Instrumentation runner,StringBuilder report) throws Exception {
+        File output=new File(runner.getTargetContext().getCacheDir(),"ui-probe");
+        JSONArray scenes=new JSONArray();int cases=0,collisions=0;
+        for(float font:new float[]{1f,1.5f,2f})for(int width:new int[]{96,160,320})for(String scene:new String[]{"row","mixed","dense","corners"}) {
+            Configuration config=new Configuration(runner.getTargetContext().getResources().getConfiguration());
+            config.fontScale=font;config.densityDpi=160;
+            DetectionOverlay overlay=new DetectionOverlay(runner.getTargetContext().createConfigurationContext(config),null);
+            int height=width*3/4+(scene.equals("corners")?80:0);overlay.layout(0,0,width,height);
+            PreviewGeometry geometry=new PreviewGeometry(640,480,0,0,width,height);
+            List<Detection> data=crowd(scene);overlay.show(data,geometry);
+            JSONArray labels=new JSONArray();Object[] entries=(Object[])entries(overlay);
+            int pairs=0,visible=0;
+            for(int i=0;i<entries.length;i++) {
+                Object entry=entries[i];String text=(String)field(entry,"label");
+                float l=(float)field(entry,"labelX"),t=(float)field(entry,"labelTop");
+                float r=l+(float)field(entry,"labelWidth")+8,b=(float)field(entry,"labelBottom");
+                labels.put(new JSONObject().put("index",i).put("risk",data.get(i).risk.name()).put("text",text)
+                    .put("left",l).put("top",t).put("right",r).put("bottom",b));
+                if(text.isEmpty())continue;visible++;
+                for(int j=0;j<i;j++) {
+                    Object other=entries[j];if(((String)field(other,"label")).isEmpty())continue;
+                    float ol=(float)field(other,"labelX"),ot=(float)field(other,"labelTop");
+                    float or=ol+(float)field(other,"labelWidth")+8,ob=(float)field(other,"labelBottom");
+                    if(l<or && r>ol && t<ob && b>ot)pairs++;
+                }
+            }
+            String filename="crowd-font"+Math.round(font*100)+"-"+scene+"-"+width+".png";
+            save(overlay,width,height,new File(output,filename));
+            scenes.put(new JSONObject().put("scene",scene).put("font_scale",font).put("width_dp",width)
+                .put("height_dp",height).put("visible",visible).put("detections",data.size()).put("overlap_pairs",pairs)
+                .put("labels",labels).put("image",filename));cases++;collisions+=pairs;
+        }
+        JSONObject result=new JSONObject().put("scope","Native constructed crowded-label baseline; no real recognition")
+            .put("source_behavior","v0.4.22 independent label placement").put("cases",cases).put("overlap_pairs",collisions).put("scenes",scenes);
+        try(FileOutputStream stream=new FileOutputStream(new File(output,"overlay-crowd-baseline.json"))) {
+            stream.write(result.toString(2).getBytes(StandardCharsets.UTF_8));
+        }
+        report.append("LABEL_CROWD_BASELINE cases=").append(cases).append(" overlap_pairs=").append(collisions).append('\n');
+    }
+    private static List<Detection> crowd(String scene) {
+        List<Detection> data=new ArrayList<>();
+        int count=scene.equals("dense")?31:scene.equals("mixed")?8:4;
+        for(int i=0;i<count;i++) {
+            float l=.03f+i*.22f,t=.28f,r=Math.min(1,l+.3f),b=.9f;
+            if(scene.equals("dense") || scene.equals("mixed")){l=.12f;t=.3f;r=.88f;b=.85f;}
+            if(scene.equals("corners")){l=(i%2)*.75f;t=(i/2)*.75f;r=l+.25f;b=t+.25f;}
+            Detection.Risk risk=scene.equals("row") || scene.equals("corners")?Detection.Risk.CAUTION
+                :i==count-1?Detection.Risk.NEAR:i%3==1?Detection.Risk.CAUTION:Detection.Risk.CAPTURED;
+            data.add(new Detection(i==count-1?"空间障碍":"停车计时器",.6f+i*.01f,l,t,r,b,risk,
+                risk==Detection.Risk.NEAR?.7f:Float.NaN,null));
+        }
+        return data;
     }
     private static void qualifiedLabel(String shown,String qualifier) {
         if(shown.equals(qualifier) || shown.equals(qualifier.replace(" ","")))return;
