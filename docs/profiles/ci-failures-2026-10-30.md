@@ -35,6 +35,10 @@
 
 ## 当前可下载发布
 
+[v0.4.24 发布流程 41061317021](https://github.com/cyanrbt/walkbuddy/actions/runs/41061317021) attempt 1 成功，Android 15/16 与固定签名 APK 作业均首次通过，各 14 组风险颜色检查全部匹配。Release 实际存在 [v0.4.24 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.24/Walk-Buddy-v0.4.24-arm64-debug.apk)，已完整下载核对版本 0.4.24 / 36、固定签名及 GitHub 摘要；[附件 JSON](apk-v0.4.24.json)保存结果。本环境的浏览器地址下载超时后，改用官方资产 API 下载成功，构建本身没有失败或重跑。真实设备仍待验收。
+
+## v0.4.23 发布
+
 [v0.4.23 发布流程 41056676300](https://github.com/cyanrbt/walkbuddy/actions/runs/41056676300) attempt 1 成功，Android 15/16 和 APK 作业均首次通过。密集标签改进另有基线、候选两套 API 首次成功及已下载的矩形/截图对照，未重跑掩盖失败。[v0.4.23 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.23/Walk-Buddy-v0.4.23-arm64-debug.apk)已实际下载核对版本 0.4.23 / 35、固定签名和资产摘要；[附件 JSON](apk-v0.4.23.json)保留结果。历史输入故障的因果边界仍按原记录，真实设备仍待验收。
 
 ## v0.4.22 发布
