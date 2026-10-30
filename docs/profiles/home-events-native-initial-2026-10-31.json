@@ -1,0 +1,171 @@
+[
+  {
+    "api": 36,
+    "run_id": 41125243534,
+    "source_commit": "760cd18d25cf0cb8b1a7ee379a16ba3160962796",
+    "artifact_id": 13010407830,
+    "archive_size_bytes": 12447353,
+    "archive_sha256": "ef7b9a2b6b912fe562260c7295606ac3bf0dde540204b59ce41d7aa8656412d8",
+    "summary": {
+      "status": "checks_not_passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "failure",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "failed",
+          "failures": [
+            "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Preview-only warning is not visible; 实时画面"
+          ]
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "failure_screenshot": {
+      "path": "home-events-initial-api36.png",
+      "archive_path": "cache/ui-probe/pip-recovery-failure.png",
+      "sha256": "0a8bb5fe7fdca1c63a53955bfbdea11a94232f5b595ce7db332893742faef80e",
+      "unaltered": true
+    },
+    "scope": "Initial failed Android emulator checks with unchanged production UI policy; failures retained; no physical-device acceptance",
+    "failed_probe_raw": {
+      "pip_recovery": "INPUT_WINDOW_RULES_PASS cases=11\nRECOVERY_BEFORE_INPUT cycle=0 resumed=true phase=LIVE fresh=true focus=true enabled=true attached=true shown=true listener=true current=true input=touch\nPIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Preview-only warning is not visible; 实时画面\n识别关着\n"
+    }
+  },
+  {
+    "api": 35,
+    "run_id": 41125243534,
+    "source_commit": "760cd18d25cf0cb8b1a7ee379a16ba3160962796",
+    "artifact_id": 13010342950,
+    "archive_size_bytes": 12485035,
+    "archive_sha256": "fc520b804eaa87eddca054f50f128ad7ca37a94833ed0c4d14617ba5ce348cb2",
+    "summary": {
+      "status": "checks_not_passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "failure",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "failed",
+          "failures": [
+            "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Preview-only warning is not visible; 实时画面"
+          ]
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "failed",
+          "failures": [
+            "HOME_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Stable home kept querying permissions: 1"
+          ]
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "failure_screenshot": {
+      "path": "home-events-initial-api35.png",
+      "archive_path": "cache/ui-probe/pip-recovery-failure.png",
+      "sha256": "641cf9c4e8c947e1c5f3dfe02e59787ef060ea02eccc47ab885c01a69537c951",
+      "unaltered": true
+    },
+    "scope": "Initial failed Android emulator checks with unchanged production UI policy; failures retained; no physical-device acceptance",
+    "failed_probe_raw": {
+      "pip_recovery": "INPUT_WINDOW_RULES_PASS cases=11\nRECOVERY_BEFORE_INPUT cycle=0 resumed=true phase=LIVE fresh=true focus=true enabled=true attached=true shown=true listener=true current=true input=touch\nPASS immediate PiP recovery cycle=0\nRECOVERY_BEFORE_INPUT cycle=1 resumed=true phase=LIVE fresh=true focus=true enabled=true attached=true shown=true listener=true current=true input=touch\nPIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Preview-only warning is not visible; 实时画面\n识别关着\n",
+      "home": "PASS home-320x480-font100-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-320x480-font100-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-320x480-font150-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-320x480-font150-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-320x480-font200-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-320x480-font200-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-360x640-font100-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-360x640-font100-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-360x640-font150-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-360x640-font150-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-360x640-font200-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-360x640-font200-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-640x360-font100-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-640x360-font100-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-640x360-font150-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-640x360-font150-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-640x360-font200-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-640x360-font200-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-800x600-font100-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-800x600-font100-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-800x600-font150-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-800x600-font150-night states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-800x600-font200-day states=10; next step and compact status; full-size wordmark; primary fixed\nPASS home-800x600-font200-night states=10; next step and compact status; full-size wordmark; primary fixed\nHOME_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Stable home kept querying permissions: 1\n"
+    }
+  }
+]

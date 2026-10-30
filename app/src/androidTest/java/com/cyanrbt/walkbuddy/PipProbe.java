@@ -99,11 +99,27 @@ final class PipProbe {
                         .append(" input=touch").append('\n');
                     return true;
                 });
+                int[] fullSize=read(runner,()->{View root=(View)field(host,"root");return new int[]{root.getWidth(),root.getHeight()};});
                 tap(runner,host,R.id.enter_pip);
                 await(runner,host::isInPictureInPictureMode,"immediate PiP re-entry cycle="+cycle);
                 long started=android.os.SystemClock.elapsedRealtime();
                 await(runner,()->live(host) && state(host).captureAt>started+300 && state(host).displayAt>started+300,"recovery PiP frames advance");
+                read(runner,()->{View root=(View)field(host,"root"),warning=host.findViewById(R.id.detection_status);
+                    android.graphics.Rect rect=new android.graphics.Rect();boolean visible=warning.getGlobalVisibleRect(rect);
+                    report.append("PREVIEW_ONLY_RECOVERY_TRANSITION cycle=").append(iteration).append(" root=").append(root.getWidth()).append('x').append(root.getHeight())
+                        .append(" layoutRequested=").append(root.isLayoutRequested()).append(" warning=").append(warning.getWidth()).append('x').append(warning.getHeight())
+                        .append(" visible=").append(visible).append(" rect=").append(rect).append(" warningLayoutRequested=").append(warning.isLayoutRequested()).append('\n');return true;});
+                await(runner,()->{
+                    View root=(View)field(host,"root");
+                    return root.getWidth()>0 && root.getHeight()>0 && root.getWidth()<fullSize[0] && root.getHeight()<fullSize[1]
+                        && !root.isLayoutRequested() && warningReady(host);
+                },"recovery actual compact root and warning layout");
+                long settled=android.os.SystemClock.elapsedRealtime();
+                await(runner,()->live(host) && state(host).captureAt>settled+150 && state(host).displayAt>settled+150,"recovery fresh frames after actual shrink");
                 read(runner,()->{assertDefaultPreviewOnly(host,true);return true;});
+                read(runner,()->{View root=(View)field(host,"root");report.append("PREVIEW_ONLY_RECOVERY_GEOMETRY cycle=").append(iteration)
+                    .append(" full=").append(fullSize[0]).append('x').append(fullSize[1]).append(" compact=").append(root.getWidth()).append('x').append(root.getHeight())
+                    .append(" fresh_after_shrink=true\n");return true;});
                 report.append("PASS immediate PiP recovery cycle=").append(cycle).append('\n');
             }
             report.append("PREVIEW_ONLY_RECOVERY_PASS cycles=4; default detection-off notice survives real manual recovery and PiP re-entry\n");
@@ -903,7 +919,8 @@ final class PipProbe {
         android.widget.TextView warning=host.findViewById(R.id.detection_status);
         android.graphics.Rect visible=new android.graphics.Rect();
         if(!warning.isShown() || !warning.getGlobalVisibleRect(visible) || warning.getLayout()==null || visible.height()<warning.getHeight())
-            throw new AssertionError("Preview-only warning is not visible");
+            throw new AssertionError("Preview-only warning is not visible; "+touchState(host,R.id.detection_status)
+                +" warningSize="+warning.getWidth()+"x"+warning.getHeight()+" rootSize="+((View)field(host,"root")).getWidth()+"x"+((View)field(host,"root")).getHeight());
         for(int line=0;line<warning.getLineCount();line++)if(warning.getLayout().getEllipsisCount(line)>0)
             throw new AssertionError("Preview-only warning was truncated");
     }

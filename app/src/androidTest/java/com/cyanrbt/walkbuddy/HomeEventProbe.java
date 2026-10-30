@@ -19,6 +19,8 @@ final class HomeEventProbe {
         AppOpsManager ops=home.getSystemService(AppOpsManager.class);
         int original=ops.unsafeCheckOpRawNoThrow(AppOpsManager.OPSTR_PICTURE_IN_PICTURE,Process.myUid(),home.getPackageName());
         try(Spy spy=new Spy(runner,home)) {
+            read(runner,()->{report.append("HOME_EVENTS_INITIAL_STATE focus=").append(home.hasWindowFocus())
+                .append(" visible=").append(field(home,"visible")).append(" queued=").append(queued(home)).append('\n');return true;});
             requireWatcher(runner,home);quiet(runner,home,spy,1100);
             try {
                 shell(runner,"appops set "+home.getPackageName()+" PICTURE_IN_PICTURE ignore");
@@ -36,6 +38,7 @@ final class HomeEventProbe {
     static void retired(Instrumentation runner,MainActivity old,MainActivity current,
                         AppOpsManager.OnOpChangedListener retired,StringBuilder report)throws Exception {
         try(Spy oldSpy=new Spy(runner,old);Spy currentSpy=new Spy(runner,current)) {
+            requireWatcher(runner,current);
             read(runner,()->{
                 if((boolean)field(old,"visible") || field(old,"pipWatcher")!=null
                     || ((Collection<?>)field(PreviewActivity.homeState,"listeners")).contains(field(old,"stateChanged")))
@@ -70,9 +73,9 @@ final class HomeEventProbe {
             read(runner,()->{if(spy.calls!=calls+1)throw new AssertionError("20 updates were not coalesced to one access sample");return true;});
             // Exercise the actual compatibility branch when no AppOps watcher is attached.
             read(runner,()->{invoke(home,"unwatchPip");invoke(home,"requestRefresh");return true;});
-            runner.waitForIdleSync();int fallbackStart=read(runner,()->spy.calls);Thread.sleep(1100);
+            runner.waitForIdleSync();int fallbackStart=read(runner,()->spy.calls);
+            await(runner,()->spy.calls>=fallbackStart+2 && queued(home),"two actual visible/live fallback refreshes");
             read(runner,()->{
-                if(spy.calls<fallbackStart+2 || !queued(home))throw new AssertionError("Visible live fallback lost permission polling");
                 invoke(home,"watchPip");invoke(home,"requestRefresh");return true;
             });
             requireWatcher(runner,home);quiet(runner,home,spy,600);
@@ -86,12 +89,13 @@ final class HomeEventProbe {
             case AppOpsManager.MODE_FOREGROUND:return "foreground";default:throw new AssertionError("Unknown original AppOps mode "+value);}
     }
     private static void requireWatcher(Instrumentation runner,MainActivity home)throws Exception {
-        await(runner,()->(boolean)field(home,"visible") && field(home,"pipWatcher")!=null && !queued(home),"visible home with AppOps observer and drained refresh");
+        await(runner,()->(boolean)field(home,"visible") && home.hasWindowFocus() && field(home,"pipWatcher")!=null && !queued(home),"focused home with AppOps observer and drained refresh");
     }
     private static void quiet(Instrumentation runner,MainActivity home,Spy spy,long millis)throws Exception {
         runner.waitForIdleSync();await(runner,()->!queued(home),"home refresh drained");
         int before=read(runner,()->spy.calls);Thread.sleep(millis);
-        read(runner,()->{if(spy.calls!=before || queued(home))throw new AssertionError("Stable home kept querying permissions: "+(spy.calls-before));return true;});
+        read(runner,()->{if(spy.calls!=before || queued(home))throw new AssertionError("Stable home kept querying permissions: "+(spy.calls-before)
+            +" focus="+home.hasWindowFocus()+" visible="+field(home,"visible")+" watcher="+(field(home,"pipWatcher")!=null));return true;});
     }
     private static boolean queued(MainActivity home)throws Exception{return ((Handler)field(home,"handler")).hasCallbacks((Runnable)field(home,"refresh"));}
     private static void shell(Instrumentation runner,String command)throws Exception {

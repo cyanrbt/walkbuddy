@@ -20,10 +20,10 @@
   "lint_warnings": 22,
   "local_app_and_test_build": "success",
   "source_sha256": {
-    "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "a6ff03414b820fe8aade9a9ea56b6f446be5ea217ee28a9ac6396bb8c5ef9f87",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "c825124fb2ea5d546e3346e6cf6a3e901f19ae52ac561f68c6b7140c059941bb",
-    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "ce0744703d77cbc966e99a70469955d571797b04f4104828263d1284105ea300",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "7775789297e8bd4201923451f336bc323c33fbe4dd158a7dfdb4ce74bec0fe6f",
     "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
     "app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java": "1b34efd7f69932c739720779dc9a363f62328ca139b01b46c2d0c926f0aa0b57",
     "app/src/main/java/com/cyanrbt/walkbuddy/PipSupport.java": "9ffcf73b673cd8c81f23ab5a9970abd6fb9daf1b11888f78eeb0832dd1e55e1b",
@@ -61,5 +61,6 @@
     "No physical-device, real AR or TalkBack acceptance",
     "AppOps registration-unavailable branch preserves visible/live polling; native probe removes watcher to exercise this branch, not an OEM registration failure"
   ],
-  "native_appops_restore_assertion_rebuild": "success; production/JVM-tested sources unchanged"
+  "native_appops_restore_assertion_rebuild": "success; production/JVM-tested sources unchanged",
+  "native_settling_probe_rebuild": "success; production and JVM sources unchanged from 760cd18"
 }
