@@ -2,6 +2,16 @@
 
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
+## 最新核对：2026-10-31 04:34（北京时间）
+
+再次直接查询最近 50 次 Actions：最近 18 次运行的**当前终态**均为成功，其中最近 12 次均为 attempt 1 成功。18 次包含 v0.4.28 候选的失败后重跑，不能表述为连续 18 次首次通过。[本次状态与原始日志摘录](ci-status-2026-10-31-0434.json)保留查询范围、运行和作业 ID。
+
+- 最近发生过失败的首轮仍是 [41091065722 attempt 1](https://github.com/cyanrbt/walkbuddy/actions/runs/41091065722/attempts/1)：重读 API 36 job `124184760241`，`BUILD SUCCESSFUL in 51s` 后在 `recovery PiP frames advance` 超时。原附件的显示帧龄为 1352ms，超过 1200ms 截止；同源码重跑通过，停顿根因仍未确定，见[显示截止记录](pip-display-expiry-2026-10-31.md)。
+- 最近保留红叉的 [41073282182](https://github.com/cyanrbt/walkbuddy/actions/runs/41073282182)：重读 API 35 job `124122673655`，`BUILD SUCCESSFUL in 54s` 后在 `recovery manual restart` 超时。原始输入记录显示目标窗口暂停；后续增加展开后的系统输入就绪检查，见[输入证据与修正范围](input-after-pip-expand-2026-10-30.md)。历史上还包含已单独处理的布局和 RGB 回归、Launcher ANR 等，不能统一归因于模拟器。
+- 最新 [v0.4.33 正式发布 41120796047](https://github.com/cyanrbt/walkbuddy/actions/runs/41120796047) 的 Android 15、Android 16、APK 三个作业均已终态成功，均为 attempt 1。重读 APK 日志确认 `BUILD SUCCESSFUL in 58s` 和发布地址；Release 实际存在 9,975,340 字节的 [ARM64 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.33/Walk-Buddy-v0.4.33-arm64-debug.apk)，服务端 SHA-256 与此前[实际下载核验记录](apk-v0.4.33.json)一致。
+
+本次只核对状态与日志并更新记录，没有重跑历史任务、修改应用或生成重复标签。当前发布成功与历史故障根因未完全解决分别表述；模拟器与 APK 核验不替代实体设备验收。
+
 ## v0.4.33 后续发布核对
 
 [首轮候选 41117582608](https://github.com/cyanrbt/walkbuddy/actions/runs/41117582608)、[仅采证修订候选 41119141180](https://github.com/cyanrbt/walkbuddy/actions/runs/41119141180) 与[正式发布 41120796047](https://github.com/cyanrbt/walkbuddy/actions/runs/41120796047) 均 attempt 1 成功。首轮原图没有证明缩小后尺寸，修订等待实际窗口缩小和新帧后再截图，生产代码未改；两轮候选和标签附件均保留。修订 API 36 有外部系统服务 ANR 观察，无聚焦对话框或本应用 ANR 观察；标签两套摘要无 ANR 观察，不能据此称外部问题或旧显示停顿已修复。
@@ -16,7 +26,7 @@
 
 [候选 41109403901](https://github.com/cyanrbt/walkbuddy/actions/runs/41109403901) 和[正式发布 41110471304](https://github.com/cyanrbt/walkbuddy/actions/runs/41110471304) attempt 1 两套 Android 检查均首次十项通过，正式 APK 作业首次成功，实际 Release APK 已完整下载核验 0.4.31 / 43、固定签名与 GitHub 摘要。四套原始附件均下载匹配摘要并重放通过，无 ANR 观察；[音频验证记录](tone-threading-2026-10-31.md)保留来源及实体边界。正式流程状态查询曾滞后于日志/附件/实际发布，包括公开 API 返回旧状态；最终终态及三个作业成功已确认，没有重跑，也不认定具体缓存层或调度根因。历史显示停顿和旧红叉均保留，不据本版音频线程迁移推断根因修复。
 
-## 最新核对：2026-10-31 02:35（北京时间）
+## 2026-10-31 02:35 核对（北京时间）
 
 用户再次询问持续失败后，重新查询最近 40 次 Actions、最新 Release、最近保留红叉和最近失败首轮的作业步骤，并直接重读两个失败 job 的完整日志。最近连续五次运行均为 attempt 1 成功：v0.4.28 正式发布、v0.4.29 候选与正式发布、v0.4.30 候选与正式发布。
 

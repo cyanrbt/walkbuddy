@@ -1,0 +1,270 @@
+{
+  "checked_at_utc": "2026-10-30 20:34:33 UTC",
+  "scope": "Read-only audit of current Actions status and historical failed attempt logs; no rerun or new build; no physical-device acceptance",
+  "source": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/runs?per_page=50&exclude_pull_requests=true",
+  "runs_checked": 50,
+  "total_runs_reported": 139,
+  "consecutive_current_successful_runs": 18,
+  "consecutive_new_runs_successful_on_first_attempt": 12,
+  "newest_runs": [
+    {
+      "id": 41120796047,
+      "workflow": "Release APK",
+      "ref": "v0.4.33",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "61e435c4d7e622b48a4ee09a36bca53c2bb674da",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41120796047"
+    },
+    {
+      "id": 41119141180,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "b169d12b618d9064291117631f1ec52ec6ea6cc0",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41119141180"
+    },
+    {
+      "id": 41117582608,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "4c4e5a5fe09cff5c12a498efc86c26fe56af692d",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41117582608"
+    },
+    {
+      "id": 41114533950,
+      "workflow": "Release APK",
+      "ref": "v0.4.32",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "511241bb6bbb058830dee187b8ec8f1835dcb545",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41114533950"
+    },
+    {
+      "id": 41113481089,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "9e6862f1dda6d1f84822f0a39f70fb70b39a8d7a",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41113481089"
+    },
+    {
+      "id": 41110471304,
+      "workflow": "Release APK",
+      "ref": "v0.4.31",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "9f46371b9281eb882413e813c9b932e3d27f7cff",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41110471304"
+    },
+    {
+      "id": 41109403901,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "cb05d8a69ee73381e7318a944c0d86c6da93e0e2",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41109403901"
+    },
+    {
+      "id": 41103784224,
+      "workflow": "Release APK",
+      "ref": "v0.4.30",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "b9cbc05e249cc4654ad0088f3fff75a3d5732200",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41103784224"
+    },
+    {
+      "id": 41101431137,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "5880150b5fce5a976e5ce950bde4903e094d6faf",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41101431137"
+    },
+    {
+      "id": 41098199220,
+      "workflow": "Release APK",
+      "ref": "v0.4.29",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "42ac0130439ba28d6be5737645b8c2e1635ab60b",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41098199220"
+    },
+    {
+      "id": 41096792807,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "996c9f0d91bf3ae7e6625a09c1983e5db35ec4bd",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41096792807"
+    },
+    {
+      "id": 41093630773,
+      "workflow": "Release APK",
+      "ref": "v0.4.28",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "52c95a26ec6314295dc3a1bfe5b78363b544858d",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41093630773"
+    },
+    {
+      "id": 41091065722,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 2,
+      "commit": "f1b32c951e8217b495b4d38662818527e455b544",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41091065722"
+    },
+    {
+      "id": 41083803753,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "7cd5dfcfed9ad78d076f4c3cd9a34d281e920cc0",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41083803753"
+    },
+    {
+      "id": 41083803493,
+      "workflow": "Release APK",
+      "ref": "v0.4.27",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "7cd5dfcfed9ad78d076f4c3cd9a34d281e920cc0",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41083803493"
+    },
+    {
+      "id": 41081394886,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "67bbbaea8638d18367793daa68d764589b882456",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41081394886"
+    },
+    {
+      "id": 41076188374,
+      "workflow": "Release APK",
+      "ref": "v0.4.26",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "d9915300333ff75224c61ea23ac5ed28b4be5519",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41076188374"
+    },
+    {
+      "id": 41075111797,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "commit": "2ad8018622124bb3582d5f66c6567c1ac9660838",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41075111797"
+    },
+    {
+      "id": 41073282182,
+      "workflow": "Android UI checks",
+      "ref": "main",
+      "status": "completed",
+      "conclusion": "failure",
+      "attempt": 1,
+      "commit": "bec94bb4fa998283d387d895aba2f0730d6ba118",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41073282182"
+    }
+  ],
+  "reread_failed_jobs": [
+    {
+      "id": 124122673655,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41073282182/job/124122673655",
+      "evidence": [
+        "2026-10-30T14:39:03.5313012Z BUILD SUCCESSFUL in 54s",
+        "2026-10-30T14:40:49.3097839Z PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: recovery manual restart; interactive=true keyguard=false; 画面已过期：不可用，请重新开启"
+      ],
+      "interpretation": "Build passed; PiP manual-restart recovery timed out. Preserved input evidence shows target paused; subsequent input-readiness check scope is documented separately.",
+      "details": "input-after-pip-expand-2026-10-30.md"
+    },
+    {
+      "id": 124184760241,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41091065722/job/124184760241",
+      "evidence": [
+        "2026-10-30T16:35:21.0111410Z BUILD SUCCESSFUL in 51s",
+        "2026-10-30T16:37:26.3501132Z PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: recovery PiP frames advance; interactive=true keyguard=false; 画面已过期：不可用，请重新开启；提醒已停止; 画面已过期：不可用，请重新开启；提醒已停止"
+      ],
+      "interpretation": "Build passed; recovery waited for advancing PiP frames and timed out. Preserved evidence records display gap 1352 ms above unchanged 1200 ms deadline; same-source failed job rerun passed, root cause unresolved.",
+      "details": "pip-display-expiry-2026-10-31.md"
+    }
+  ],
+  "latest_release": {
+    "id": 429449775,
+    "tag": "v0.4.33",
+    "url": "https://github.com/cyanrbt/walkbuddy/releases/tag/v0.4.33",
+    "published_at": "2026-10-30T20:15:20Z",
+    "workflow_run_id": 41120796047,
+    "jobs": [
+      {
+        "id": 124286605832,
+        "name": "ui / layout (35)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124286606265,
+        "name": "ui / layout (36)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124288748912,
+        "name": "apk",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "assets": [
+      {
+        "id": 693297304,
+        "name": "Walk-Buddy-v0.4.33-arm64-debug.apk",
+        "size": 9975340,
+        "digest": "sha256:844f950e3c78eccfa6b813940d73fe01d6d6c18a0cffc89eab7fcce0bac52258",
+        "url": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.33/Walk-Buddy-v0.4.33-arm64-debug.apk"
+      }
+    ],
+    "apk_job_log_evidence": [
+      "2026-10-30T20:15:16.5164048Z BUILD SUCCESSFUL in 58s",
+      "2026-10-30T20:15:21.1864149Z https://github.com/cyanrbt/walkbuddy/releases/tag/v0.4.33"
+    ],
+    "prior_actual_download_verification": "apk-v0.4.33.json",
+    "asset_metadata_matches_prior_record": true
+  },
+  "limitations": [
+    "Latest run list reports the final result of each run, not the absence of failures in earlier attempts.",
+    "Recent successes do not establish resolution of the historical display stall or all system input issues.",
+    "This audit rereads server metadata/logs and checks the existing actual APK verification record; it does not repeat device or APK content testing."
+  ]
+}
