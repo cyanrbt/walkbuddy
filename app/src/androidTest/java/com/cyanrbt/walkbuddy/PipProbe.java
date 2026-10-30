@@ -433,11 +433,21 @@ final class PipProbe {
         android.graphics.Rect bounds=read(runner,()->{
             android.graphics.Rect rect=new android.graphics.Rect();host.findViewById(id).getGlobalVisibleRect(rect);return rect;
         });
+        android.util.Log.i("WalkBuddyInput","tap id="+host.getResources().getResourceEntryName(id)+" bounds="+bounds
+            +" focus="+host.hasWindowFocus()+" pip="+host.isInPictureInPictureMode());
         long at=android.os.SystemClock.uptimeMillis();
         for(int action:new int[]{android.view.MotionEvent.ACTION_DOWN,android.view.MotionEvent.ACTION_UP}) {
             android.view.MotionEvent event=android.view.MotionEvent.obtain(at,android.os.SystemClock.uptimeMillis(),action,bounds.exactCenterX(),bounds.exactCenterY(),0);
             event.setSource(android.view.InputDevice.SOURCE_TOUCHSCREEN);
-            try{runner.sendPointerSync(event);}finally{event.recycle();}
+            try{
+                runner.sendPointerSync(event);
+                if(action==android.view.MotionEvent.ACTION_DOWN)read(runner,()->{
+                    android.graphics.Rect observed=new android.graphics.Rect();View current=host.findViewById(id);
+                    if(current!=null)current.getGlobalVisibleRect(observed);
+                    android.util.Log.i("WalkBuddyInput","after-down id="+host.getResources().getResourceEntryName(id)+" bounds="+observed
+                        +" focus="+host.hasWindowFocus()+" pip="+host.isInPictureInPictureMode());return true;
+                });
+            }finally{event.recycle();}
         }
     }
     private static void assertReleased(PreviewActivity host) {

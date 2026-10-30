@@ -62,6 +62,9 @@ final class LayoutProbe {
                 placeholder.setText("取景区域（布局测试）");placeholder.setTextColor(Color.GRAY);placeholder.setGravity(Gravity.CENTER);
                 ((FrameLayout)root.findViewById(R.id.preview_frame)).addView(placeholder,1,
                     new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+                TextView title=root.findViewById(R.id.preview_title);
+                title.setText(R.string.window_starting);measure(root,size[0],size[1]);textFits(root);
+                if(title.getLineCount()!=1)throw new AssertionError("Starting badge wrapped");
                 checkFeedback(root);
                 ((TextView)root.findViewById(R.id.preview_title)).setText(R.string.window_live);
                 String name=size[0]+"x"+size[1]+"-font"+Math.round(font*100)+(night?"-night":"-day");

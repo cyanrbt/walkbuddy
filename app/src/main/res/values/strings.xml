@@ -35,6 +35,7 @@
     <string name="toast_granted">已允许。准备好了再点开启。</string>
     <string name="toast_denied">还没有允许，窗口不会打开。</string>
     <string name="window_live">实时</string>
+    <string name="window_starting">启动中</string>
     <string name="window_idle">已停下</string>
     <string name="preview_starting">正在打开\n还没有实时画面</string>
     <string name="preview_info_idle">实时画面还不可用</string>

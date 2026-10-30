@@ -208,6 +208,7 @@ public final class PreviewActivity extends Activity {
     }
 
     private void startPreview() {
+        tracePip("start-request");
         if (destroyed || !resumed || isInPictureInPictureMode()) return;
         KeyguardManager lock = getSystemService(KeyguardManager.class);
         if (lock.isKeyguardLocked() || !getSystemService(PowerManager.class).isInteractive()) return;
@@ -611,7 +612,7 @@ public final class PreviewActivity extends Activity {
         depthButton.setEnabled(live);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(R.string.info_recognition_off));}
-        if(titleView!=null) setTextIfChanged(titleView,getText(live?R.string.window_live:R.string.window_idle));
+        if(titleView!=null) setTextIfChanged(titleView,getText(live?R.string.window_live:state.phase==SessionState.Phase.STARTING?R.string.window_starting:R.string.window_idle));
         renderDepthGuide();
     }
     private void fail(String message) {
@@ -694,6 +695,7 @@ public final class PreviewActivity extends Activity {
         }catch(Exception|LinkageError error){pendingDepthInstall=false;useDepth=false;fail(RecoveryGuide.Reason.DEPTH,"增强服务暂不可用，请继续基础模式");refreshDepthAvailability();}
     }
     private void recoverPreview() {
+        tracePip("recover-request");
         if(!resumed || destroyed || isInPictureInPictureMode())return;
         RecoveryGuide.Prompt prompt=RecoveryGuide.resolve(recoveryReason,
             checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED);
