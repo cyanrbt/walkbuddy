@@ -19,4 +19,15 @@ JAVA_HOME=/path/to/jdk17 python3 docs/profiles/reproduce_depth_projection.py \
 
 [独立 JDK 重现 JSON](depth-projection-2026-10-31.json)已保存当前源码与前版源文件摘要、依赖 JAR 摘要、对照结果及静态数组构造范围。满 6144 个点有效时，被替换路径的可见数组创建表达式/便利 API 共 12,293 次，复用路径每轮为 0、每个工作区首次为 7；保留 float 内容 147,496 字节，不含对象头。该计数只覆盖坐标、内参和点数组，网格/轮廓/遍历及 ARCore 内部分配仍存在，JVM/ART 也可能消除分配；不能据此推算实际 GC、耗时或功耗改善。
 
-最终 0.4.32 / 44 完整 218 项 JVM 为 0 失败 / 错误 / 跳过；Lint 0 错误 / 22 警告，应用及原生测试包、发布元数据、产品表面和差异格式检查通过。[候选 41113481089](https://github.com/cyanrbt/walkbuddy/actions/runs/41113481089) attempt 1 已终态成功：Android 15 job `124261573723`、Android 16 job `124261573259` 首次十项全部通过。两套实际 ARCore Pose 的 96 组/589,824 网格位置及五类状态检查均通过；两套完整 ZIP 已下载匹配服务端大小/SHA-256、重放十项摘要及原始 PASS，摘要无 ANR 观察，[候选 JSON](depth-projection-native-candidate-2026-10-31.json)保留原始 marker。正式发布与实际 APK 待核验。实体 AR 跟踪/测距准确性、帧时、GC、温度和耗电仍待验收；本版不对历史小窗显示停顿下根因结论。
+最终 0.4.32 / 44 完整 218 项 JVM 为 0 失败 / 错误 / 跳过；Lint 0 错误 / 22 警告，应用及原生测试包、发布元数据、产品表面和差异格式检查通过。[候选 41113481089](https://github.com/cyanrbt/walkbuddy/actions/runs/41113481089) attempt 1 已终态成功：Android 15 job `124261573723`、Android 16 job `124261573259` 首次十项全部通过。两套实际 ARCore Pose 的 96 组/589,824 网格位置及五类状态检查均通过；两套完整 ZIP 已下载匹配服务端大小/SHA-256、重放十项摘要及原始 PASS，摘要无 ANR 观察，[候选 JSON](depth-projection-native-candidate-2026-10-31.json)保留原始 marker。正式发布结果见下一节。实体 AR 跟踪/测距准确性、帧时、GC、温度和耗电仍待验收；本版不对历史小窗显示停顿下根因结论。
+
+
+## 正式发布与实际 APK
+
+[正式发布 41114533950](https://github.com/cyanrbt/walkbuddy/actions/runs/41114533950) attempt 1 已终态成功：Android 15 job `124265180808`、Android 16 job `124265180257`、APK job `124268148086` 均首次成功。标签固定于 `511241bb6bbb058830dee187b8ec8f1835dcb545`，生产和测试源码与候选一致，旧标签未覆盖。两套完整原始日志各十项 PASS，96 组/589,824 网格位置及五类状态检查均通过；两套完整 ZIP 已下载匹配服务端大小/SHA-256、摘要重放通过，摘要无 ANR 观察，[发布 JSON](depth-projection-native-release-2026-10-31.json)保留原始 marker。实际 ARCore Pose 在模拟器 ART 上运行，未打开 AR Session。
+
+Release `429412352` 的 asset `693182585` 实际存在 [v0.4.32 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.32/Walk-Buddy-v0.4.32-arm64-debug.apk)。从 Release 下载地址完整下载、curl 退出 0；9,975,340 字节，SHA-256 `a74ed98ab43ef09b78f15f83cceaf7615c09730f5e9eea4a77a64b045dd0c6ff` 与 GitHub 一致。apksigner verify 通过，单签名/v2 有效，固定证书 SHA-256 `ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d`。
+
+包名 `com.cyanrbt.walkbuddy`、0.4.32 / 44、min 26 / target 36、仅 ARM64、仅 CAMERA/VIBRATE、原模型/中英文表/11sp 资源均核验通过。实际主包存在 DepthProjection，实现、集成与重现工具的源码摘要匹配标签；共享对照类、原生探针、对照程序及记录没有进入主包。五个提醒核心文件仍匹配 v0.4.31 重现记录，[APK JSON](apk-v0.4.32.json)保存结果。
+
+这组证据覆盖 JVM 与模拟器 ART 构造投影、原虚拟 Camera2/UI/音频流程和已下载 ARM64 APK 的结构/签名；不证明真实 AR 坐标变换、设备深度、跟踪、准确率、GC、帧时或耗电已验收，也不将历史显示停顿归因或修复结论套用于本版。

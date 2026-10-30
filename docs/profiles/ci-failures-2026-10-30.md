@@ -2,6 +2,10 @@
 
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
+## v0.4.32 后续发布核对
+
+[候选 41113481089](https://github.com/cyanrbt/walkbuddy/actions/runs/41113481089) 与[正式发布 41114533950](https://github.com/cyanrbt/walkbuddy/actions/runs/41114533950) attempt 1 两套 Android 首次十项通过，APK 作业首次成功，三个发布作业与整轮终态成功已确认。四套原始附件均下载核对摘要并重放通过，无 ANR 观察；实际 Release APK 已下载核验 0.4.32 / 44、固定签名、摘要、新投影实现及测试代码排除。[投影验证记录](depth-projection-2026-10-31.md)区分构造数据、真实 AR 和性能范围，未重跑或覆盖旧失败，不对历史显示停顿作新根因结论。
+
 ## v0.4.31 后续发布核对
 
 [候选 41109403901](https://github.com/cyanrbt/walkbuddy/actions/runs/41109403901) 和[正式发布 41110471304](https://github.com/cyanrbt/walkbuddy/actions/runs/41110471304) attempt 1 两套 Android 检查均首次十项通过，正式 APK 作业首次成功，实际 Release APK 已完整下载核验 0.4.31 / 43、固定签名与 GitHub 摘要。四套原始附件均下载匹配摘要并重放通过，无 ANR 观察；[音频验证记录](tone-threading-2026-10-31.md)保留来源及实体边界。正式流程状态查询曾滞后于日志/附件/实际发布，包括公开 API 返回旧状态；最终终态及三个作业成功已确认，没有重跑，也不认定具体缓存层或调度根因。历史显示停顿和旧红叉均保留，不据本版音频线程迁移推断根因修复。

@@ -1,0 +1,196 @@
+[
+  {
+    "api": 35,
+    "source_commit": "511241bb6bbb058830dee187b8ec8f1835dcb545",
+    "run_id": 41114533950,
+    "attempt": 1,
+    "artifact_id": 13005766877,
+    "archive_size_bytes": 11065251,
+    "archive_sha256": "5b1289e2e21a64b8b4cde166b65bcc5d022f2f92f1d042403002fe1fd9481479",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.32 / 44\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：58；显示帧龄(ms)：43；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "depth_report_markers": [
+      "DEPTH_PROJECTION_PARITY_PASS cases=96 grid_points=589824; raw float bits, obstacle/drop outputs, moving pose/intrinsics, sparse updates; constructed observations, not AR camera accuracy",
+      "DEPTH_PROJECTION_STATE_PASS cases=5; sample centers, incomplete transform reset, independent workspaces/grids, nonfinite boundary math, near obstacle/drop"
+    ],
+    "depth_projection_cases": 96,
+    "depth_grid_positions": 589824,
+    "depth_state_cases": 5,
+    "depth_scope": "Actual bundled ARCore Pose on ART with constructed points; no AR Session or device depth",
+    "tone_thread_samples": "BLOCKED\ncreate_blocked thread=WalkBuddy sound at_ms=184123\nclose thread=WalkBuddy sound at_ms=184488\nNATIVE\ncreate_begin thread=WalkBuddy sound at_ms=184587\ncreate_end thread=WalkBuddy sound at_ms=184593\nplay_begin thread=WalkBuddy sound at_ms=184607\nplay_end accepted=true thread=WalkBuddy sound at_ms=184609\nplay_begin thread=WalkBuddy sound at_ms=184809\nplay_end accepted=true thread=WalkBuddy sound at_ms=184810\nclose_begin thread=WalkBuddy sound at_ms=184810\nclose_end thread=WalkBuddy sound at_ms=184821\n",
+    "tone_activity_checks_per_pip_run": 3,
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.32 / 44\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.32 / 44\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：66；显示帧龄(ms)：35；分析龄(ms)：17\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：0；复制(ms)：4；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.32 / 44\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：51；显示帧龄(ms)：18；分析龄(ms)：1502\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：18；读回排队(ms)：0；复制(ms)：4；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "scope": "Android emulator actual ARCore Pose on constructed depth grids, frozen numeric/detection parity and state isolation; complete virtual Camera2/UI/audio checks; no AR Session, device depth accuracy or performance acceptance"
+  },
+  {
+    "api": 36,
+    "source_commit": "511241bb6bbb058830dee187b8ec8f1835dcb545",
+    "run_id": 41114533950,
+    "attempt": 1,
+    "artifact_id": 13004668438,
+    "archive_size_bytes": 11078169,
+    "archive_sha256": "fd88420508cf51121befd38dbde4754143c0dc8f6418a12c28721eac847a0266",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.32 / 44\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：82；显示帧龄(ms)：64；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "depth_report_markers": [
+      "DEPTH_PROJECTION_PARITY_PASS cases=96 grid_points=589824; raw float bits, obstacle/drop outputs, moving pose/intrinsics, sparse updates; constructed observations, not AR camera accuracy",
+      "DEPTH_PROJECTION_STATE_PASS cases=5; sample centers, incomplete transform reset, independent workspaces/grids, nonfinite boundary math, near obstacle/drop"
+    ],
+    "depth_projection_cases": 96,
+    "depth_grid_positions": 589824,
+    "depth_state_cases": 5,
+    "depth_scope": "Actual bundled ARCore Pose on ART with constructed points; no AR Session or device depth",
+    "tone_thread_samples": "BLOCKED\ncreate_blocked thread=WalkBuddy sound at_ms=200716\nclose thread=WalkBuddy sound at_ms=201133\nNATIVE\ncreate_begin thread=WalkBuddy sound at_ms=201236\ncreate_end thread=WalkBuddy sound at_ms=201241\nplay_begin thread=WalkBuddy sound at_ms=201246\nplay_end accepted=true thread=WalkBuddy sound at_ms=201249\nplay_begin thread=WalkBuddy sound at_ms=201449\nplay_end accepted=true thread=WalkBuddy sound at_ms=201450\nclose_begin thread=WalkBuddy sound at_ms=201451\nclose_end thread=WalkBuddy sound at_ms=201460\n",
+    "tone_activity_checks_per_pip_run": 3,
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.32 / 44\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.32 / 44\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：66；显示帧龄(ms)：3；分析龄(ms)：17\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：3；复制(ms)：17；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.32 / 44\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：66；显示帧龄(ms)：1；分析龄(ms)：1501\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：36；读回排队(ms)：19；复制(ms)：2；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "scope": "Android emulator actual ARCore Pose on constructed depth grids, frozen numeric/detection parity and state isolation; complete virtual Camera2/UI/audio checks; no AR Session, device depth accuracy or performance acceptance"
+  }
+]
