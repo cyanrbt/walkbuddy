@@ -39,3 +39,9 @@ JVM/静态原生布局、虚拟 Camera2 的系统 PiP 与实际 ARM64 安装包�
 [报告修订候选 41140406598](https://github.com/cyanrbt/walkbuddy/actions/runs/41140406598)两套编译和全部新恢复布局、两轮实际 PiP 恢复均成功。API 35 十项全部通过；API 36 九项通过，最后 support 在默认振动断言失败。两套完整 ZIP 已下载核对摘要并重放，[实际记录](recovery-native-cachefix-2026-10-31.json)明确 API 36 尚未完成振动持久化，不能把部分通过写成整轮通过；没有 ANR 观察。
 
 该首轮断言把 enabled/checked 合并为同一消息，没有采集各值，故不能认定究竟是哪一项不符。源码存在状态与呈现之间的先后：`CameraFrames.accept` 可晋升 LIVE，`captureFrame` 此时不调用 render，而后续纹理/看门狗再渲染控件；support 原先只等待 LIVE/fresh。现补充等待遮罩隐藏、振动控件呈现且启用，保留原默认已勾选/已启用断言；不写入默认偏好、不强制启用控件、不改变生产截止。原生包编译通过；将 before/after 的 phase、fresh、cover、shown、enabled、checked、preference 和等待时长保存为 `support-vibration-ready.txt`，失败消息也保留实际各值。后续成功不能补证本次未采集到的瞬时值。
+
+## 最终采证候选的首次结果
+
+[41141509019 attempt 1](https://github.com/cyanrbt/walkbuddy/actions/runs/41141509019/attempts/1) 的 API 35 十项成功，API 36 九项成功，旧 pip_recovery 失败。两套完整 ZIP 已下载核对摘要并重放，[首次记录](recovery-native-candidate-first-2026-10-31.json)保留全部状态。新增恢复/报告与振动支持检查通过；before/after 两套均为 checked=true、preference=true、enabled=true，不能据此回推上一轮瞬时失败。
+
+API 36 的自然采集/显示帧龄在 23:01:22.567 UTC 均为 1246ms，超过 1200ms 截止，相机按规则停止；下一次 enter_pip 触摸之前已经为 UNAVAILABLE、按钮隐藏/禁用。输入超时是停止后的结果，不是该采集/显示停顿的根因。该停顿精确根因仍未知，与既有显示截止问题分别保留；不修改保护截止、不自动重启相机。源码保持不变，仅重新验收失败的 API 36 作业，API 35 已成功部分保留；重验成功也不能写成首次成功或根因已修复。

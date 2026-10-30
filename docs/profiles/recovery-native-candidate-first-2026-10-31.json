@@ -1,0 +1,158 @@
+[
+  {
+    "api": 35,
+    "source_commit": "bac3c163bc7930df5fee68d9d881095d7e444ae9",
+    "run_id": 41141509019,
+    "attempt": 1,
+    "artifact_id": 13019820753,
+    "archive_size_bytes": 14031606,
+    "archive_sha256": "d84be2ff477a62a4b72ed60210c9d06a6832ed83ddbcaab06c24cdfc021cf342",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "recovery_raw": "INPUT_WINDOW_RULES_PASS cases=11\nRECOVERY_BEFORE_INPUT cycle=0 resumed=true phase=LIVE fresh=true focus=true enabled=true attached=true shown=true listener=true current=true input=touch\nPREVIEW_ONLY_RECOVERY_TRANSITION cycle=0 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false\nPREVIEW_ONLY_RECOVERY_GEOMETRY cycle=0 full=320x640 compact=116x154 fresh_after_shrink=true\nPASS immediate PiP recovery cycle=0\nRECOVERY_BEFORE_INPUT cycle=1 resumed=true phase=LIVE fresh=true focus=true enabled=true attached=true shown=true listener=true current=true input=touch\nPREVIEW_ONLY_RECOVERY_TRANSITION cycle=1 root=116x154 layoutRequested=false warning=116x51 visible=true rect=Rect(0, 103 - 116, 154) warningLayoutRequested=false\nPREVIEW_ONLY_RECOVERY_GEOMETRY cycle=1 full=320x640 compact=116x154 fresh_after_shrink=true\nPASS immediate PiP recovery cycle=1\nPASS recovery lock/wake precondition\nRECOVERY_BEFORE_INPUT cycle=2 resumed=true phase=LIVE fresh=true focus=true enabled=true attached=true shown=true listener=true current=true input=touch\nPREVIEW_ONLY_RECOVERY_TRANSITION cycle=2 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false\nPREVIEW_ONLY_RECOVERY_GEOMETRY cycle=2 full=320x640 compact=116x154 fresh_after_shrink=true\nPASS immediate PiP recovery cycle=2\nRECOVERY_BEFORE_INPUT cycle=3 resumed=true phase=LIVE fresh=true focus=true enabled=true attached=true shown=true listener=true current=true input=touch\nPREVIEW_ONLY_RECOVERY_TRANSITION cycle=3 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false\nPREVIEW_ONLY_RECOVERY_GEOMETRY cycle=3 full=320x640 compact=116x154 fresh_after_shrink=true\nPASS immediate PiP recovery cycle=3\nPREVIEW_ONLY_RECOVERY_PASS cycles=4; default detection-off notice survives real manual recovery and PiP re-entry\nPIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore\n\n",
+    "support_vibration_readiness": "before phase=LIVE fresh=true cover=8 shown=true enabled=true checked=true preference=true\nafter phase=LIVE fresh=true cover=8 shown=true enabled=true checked=true preference=true waitMs=120\n",
+    "timing_markers": [],
+    "scope": "Actual first attempt; API35 ten passed/API36 nine passed and natural capture/display 1246ms expiry. New recovery and support checks passed; no complete API36 acceptance; stall root cause unproven."
+  },
+  {
+    "api": 36,
+    "source_commit": "bac3c163bc7930df5fee68d9d881095d7e444ae9",
+    "run_id": 41141509019,
+    "attempt": 1,
+    "artifact_id": 13019431147,
+    "archive_size_bytes": 13945265,
+    "archive_sha256": "a2a4078019e28c3fbeec139ee1637e781a8eda50000de149672c2efd87246ac3",
+    "summary": {
+      "status": "checks_not_passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "failure",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "failed",
+          "failures": [
+            "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: touch target ready id=2130968590; interactive=true keyguard=false; 画面已过期：不可用，请重新开启；提醒已停止; target=enter_pip activity=PreviewActivity focus=true pip=false finishing=false destroyed=false attached=true shown=false enabled=false windowVisibility=0 visibleRect=true bounds=Rect(16, 552 - 304, 604) ancestor[0]=Button laidOut=true layoutRequested=true ancestor[1]=LinearLayout laidOut=true layoutRequested=false ancestor[2]=LinearLayout laidOut=true layoutRequested=false ancestor[3]=FrameLayout laidOut=true layoutRequested=false ancestor[4]=LinearLayout laidOut=true layoutRequested=false ancestor[5]=DecorView laidOut=true layoutRequested=false; 画面已过期：不可用，请重新开启；提醒已停止"
+          ]
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "recovery_raw": "INPUT_WINDOW_RULES_PASS cases=11\nRECOVERY_BEFORE_INPUT cycle=0 resumed=true phase=LIVE fresh=true focus=true enabled=true attached=true shown=true listener=true current=true input=touch\nPREVIEW_ONLY_RECOVERY_TRANSITION cycle=0 root=116x154 layoutRequested=false warning=116x51 visible=true rect=Rect(0, 103 - 116, 154) warningLayoutRequested=false\nPREVIEW_ONLY_RECOVERY_GEOMETRY cycle=0 full=320x640 compact=116x154 fresh_after_shrink=true\nPASS immediate PiP recovery cycle=0\nRECOVERY_BEFORE_INPUT cycle=1 resumed=true phase=UNAVAILABLE fresh=false focus=true enabled=false attached=true shown=false listener=true current=true input=touch\nPIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: touch target ready id=2130968590; interactive=true keyguard=false; 画面已过期：不可用，请重新开启；提醒已停止; target=enter_pip activity=PreviewActivity focus=true pip=false finishing=false destroyed=false attached=true shown=false enabled=false windowVisibility=0 visibleRect=true bounds=Rect(16, 552 - 304, 604) ancestor[0]=Button laidOut=true layoutRequested=true ancestor[1]=LinearLayout laidOut=true layoutRequested=false ancestor[2]=LinearLayout laidOut=true layoutRequested=false ancestor[3]=FrameLayout laidOut=true layoutRequested=false ancestor[4]=LinearLayout laidOut=true layoutRequested=false ancestor[5]=DecorView laidOut=true layoutRequested=false; 画面已过期：不可用，请重新开启；提醒已停止\n",
+    "support_vibration_readiness": "before phase=LIVE fresh=true cover=8 shown=true enabled=true checked=true preference=true\nafter phase=LIVE fresh=true cover=8 shown=true enabled=true checked=true preference=true waitMs=13\n",
+    "timing_markers": [
+      "10-30 23:01:22.567  2188  2188 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1246 displayGapMs=1246 analysisGapMs=-1 sampleAgeMs=-1 queueMs=456 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false"
+    ],
+    "scope": "Actual first attempt; API35 ten passed/API36 nine passed and natural capture/display 1246ms expiry. New recovery and support checks passed; no complete API36 acceptance; stall root cause unproven."
+  }
+]
