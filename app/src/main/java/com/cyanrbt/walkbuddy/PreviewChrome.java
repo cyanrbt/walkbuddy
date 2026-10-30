@@ -10,6 +10,9 @@ final class PreviewChrome {
         int text=compact?R.string.detection_stopped_compact:R.string.detection_stopped_preview_only;
         CharSequence label=root.getResources().getText(text);
         if(!android.text.TextUtils.equals(warning.getText(),label))warning.setText(label);
+        boolean depth=root.findViewById(R.id.depth_steps).getVisibility()==View.VISIBLE;
+        root.findViewById(R.id.pip_depth_status).setVisibility(compact && depth && !stopped?View.VISIBLE:View.GONE);
+        if(compact && stopped)root.findViewById(R.id.posture_hint).setVisibility(View.GONE);
     }
     static void compact(View root,boolean compact,boolean depth) {
         depth(root,depth);

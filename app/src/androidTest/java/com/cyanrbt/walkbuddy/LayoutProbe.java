@@ -34,7 +34,7 @@ final class LayoutProbe {
             AtomicReference<Throwable> failure=new AtomicReference<>();
             runner.runOnMainSync(()->{try{check(runner.getTargetContext(),report);}catch(Throwable error){failure.set(error);}});
             if(failure.get()!=null)throw new AssertionError(failure.get());
-            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=30 states=120; recovery-presentations="
+            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; recovery-presentations="
                 +(RecoveryGuide.Reason.values().length*60)+"; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore\n");
             runner.finish(Activity.RESULT_OK,result);
         } catch(Throwable error) {
@@ -161,10 +161,17 @@ final class LayoutProbe {
         if(warning.getAccessibilityLiveRegion()!=View.ACCESSIBILITY_LIVE_REGION_POLITE)
             throw new AssertionError("Detection fault is not announced");
         if(width==320 && root.getResources().getConfiguration().fontScale==2f)screenshot(root,output);
-        PreviewChrome.compact(root,true,false);PreviewChrome.detectionStopped(root,true,true);
+        root.findViewById(R.id.posture_hint).setVisibility(View.VISIBLE);
+        PreviewChrome.compact(root,true,true);PreviewChrome.detectionStopped(root,true,true);
         measure(root,96,128);textFits(warning);warningInsideCamera(root,warning);
+        if(root.findViewById(R.id.pip_depth_status).getVisibility()!=View.GONE
+            || root.findViewById(R.id.posture_hint).getVisibility()!=View.GONE)
+            throw new AssertionError("Optional status crowded the compact detection fault");
         if(!warning.getText().toString().contains("未检测") || !warning.getText().toString().contains("仅预览"))
             throw new AssertionError("Compact detection fault lost its meaning");
+        PreviewChrome.detectionStopped(root,false,true);
+        if(root.findViewById(R.id.pip_depth_status).getVisibility()!=View.VISIBLE)
+            throw new AssertionError("Compact depth status did not return after fault clearing");
         PreviewChrome.compact(root,false,depth);PreviewChrome.detectionStopped(root,false,false);
         root.setPadding(0,24,0,24);info.setText(previousInfo);title.setText(previousTitle);
         root.findViewById(R.id.recent_alert).setVisibility(previousAlert);measure(root,width,height);

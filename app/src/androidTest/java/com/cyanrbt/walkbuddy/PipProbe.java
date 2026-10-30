@@ -497,6 +497,9 @@ final class PipProbe {
             throw new AssertionError("Detection fault did not preserve only the healthy camera");
         if(host.findViewById(R.id.detection_status).getVisibility()!=View.VISIBLE)
             throw new AssertionError("Preview-only warning was not enabled");
+        if(host.isInPictureInPictureMode() && (host.findViewById(R.id.pip_depth_status).getVisibility()!=View.GONE
+            || host.findViewById(R.id.posture_hint).getVisibility()!=View.GONE))
+            throw new AssertionError("Optional status obscured the preview-only PiP");
         assertWatching(host);
     }
     private static boolean warningReady(PreviewActivity host) {

@@ -54,7 +54,7 @@ public final class PreviewActivity extends Activity {
     private DetectionOverlay detectionOverlay;
     private ArDepthCamera depthCamera;
     private DepthSnapshot depthSnapshot;
-    private boolean useDepth,pendingDepthInstall,installDetection,installSound;
+    private boolean useDepth,pendingDepthInstall,installDetection,installSound,compactUi;
     private Button depthButton;
     private TextView depthStatus;
     private TextView depthGuideHint;
@@ -78,7 +78,7 @@ public final class PreviewActivity extends Activity {
                 ? event.values[i] : 0.8f*gravity[i]+0.2f*event.values[i];
             gravityReady=true;
             boolean warn=posturePolicy.update(gravity[0],gravity[1],gravity[2],now);
-            postureHint.setVisibility(warn?View.VISIBLE:View.GONE);
+            postureHint.setVisibility(warn && !(compactUi && analysisFailure!=0)?View.VISIBLE:View.GONE);
         }
     };
     private TextView cover, info, titleView;
@@ -299,6 +299,7 @@ public final class PreviewActivity extends Activity {
     }
 
     private void setCompactUi(boolean compact) {
+        compactUi=compact;
         if (root == null) return;
         PreviewChrome.compact(root,compact,useDepth);
         PreviewChrome.detectionStopped(root,analysisFailure!=0 && state.phase==SessionState.Phase.LIVE,compact);
@@ -637,7 +638,7 @@ public final class PreviewActivity extends Activity {
         depthButton.setEnabled(live);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
         if(analysisFailure!=0)publicReport+="\n"+getString(analysisFailure);
-        PreviewChrome.detectionStopped(root,live && analysisFailure!=0,isInPictureInPictureMode());
+        PreviewChrome.detectionStopped(root,live && analysisFailure!=0,compactUi);
         if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(analysisFailure!=0?analysisFailure:R.string.info_recognition_off));}
         if(titleView!=null) setTextIfChanged(titleView,getText(live?(analysisFailure!=0?R.string.window_preview_only:R.string.window_live):state.phase==SessionState.Phase.STARTING?R.string.window_starting:R.string.window_idle));
         renderDepthGuide();
