@@ -88,6 +88,7 @@ final class OverlayProbe {
         checkLabels(runner,report);
         checkCrowdedLabels(runner,report);
         checkLabelLayering(runner,report);
+        checkRiskPaint(runner,report);
         // A narrow PiP image must not send a negative label width to ellipsize.
         overlay.layout(0,0,1,1);
         overlay.show(Collections.singletonList(new Detection("很长的标签",1,0,0,1,1)),
@@ -250,6 +251,64 @@ final class OverlayProbe {
             } finally {first.recycle();if(second!=null)second.recycle();}
         }
         report.append("LABEL_LAYERING_PASS cases=3; native label pixels unchanged by later full-image mask\n");
+    }
+    private static void checkRiskPaint(Instrumentation runner,StringBuilder report) throws Exception {
+        Configuration config=new Configuration(runner.getTargetContext().getResources().getConfiguration());
+        config.fontScale=1;config.densityDpi=160;
+        Context context=runner.getTargetContext().createConfigurationContext(config);
+        File output=new File(runner.getTargetContext().getCacheDir(),"ui-probe");
+        int background=Color.rgb(18,46,41),cases=0,mismatches=0;
+        int[] colors={Color.rgb(174,183,197),Color.rgb(255,200,87),Color.rgb(255,99,110)};
+        JSONArray rows=new JSONArray();
+        for(String kind:new String[]{"near-outline","yellow-outline","mask-fill"}) {
+            boolean fill=kind.equals("mask-fill");
+            int expected=kind.equals("near-outline")?colors[2]:colors[1];
+            if(fill) {
+                Bitmap reference=Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888);
+                try {
+                    Canvas canvas=new Canvas(reference);canvas.drawColor(background);
+                    for(int color:colors)canvas.drawColor((color&0xffffff)|0x24000000);
+                    expected=reference.getPixel(0,0);
+                } finally {reference.recycle();}
+            }
+            boolean[] occupied=new boolean[16*12];java.util.Arrays.fill(occupied,true);
+            ObstacleMask mask=fill?new ObstacleMask(16,12,occupied):null;
+            Detection[] targets=new Detection[3];
+            for(int i=0;i<3;i++)targets[i]=new Detection("空间障碍",.8f,
+                fill?0:80.5f/320,fill?0:60.5f/240,fill?1:240.5f/320,fill?1:180.5f/240,
+                Detection.Risk.values()[i],i==0?Float.NaN:i==1?1.4f:.7f,mask);
+            int[][] permutations=kind.equals("yellow-outline")?new int[][]{{0,1},{1,0}}
+                :new int[][]{{0,1,2},{0,2,1},{1,0,2},{1,2,0},{2,0,1},{2,1,0}};
+            for(int p=0;p<permutations.length;p++) {
+                DetectionOverlay overlay=new DetectionOverlay(context,null);overlay.layout(0,0,320,240);
+                List<Detection> data=new ArrayList<>();StringBuilder order=new StringBuilder();
+                for(int i:permutations[p]){data.add(targets[i]);order.append(i);}
+                overlay.show(data,new PreviewGeometry(640,480,0,0,320,240));
+                int x=fill?160:80,y=fill?120:175;
+                for(Object entry:(Object[])entries(overlay))if(!((String)field(entry,"label")).isEmpty()) {
+                    float l=(float)field(entry,"labelX"),t=(float)field(entry,"labelTop");
+                    if(x+.5f>=l && x+.5f<l+(float)field(entry,"labelWidth")+8 && y+.5f>=t && y+.5f<(float)field(entry,"labelBottom"))
+                        throw new AssertionError("Risk pixel fixture intersects a label: "+kind+" / "+order);
+                }
+                Bitmap image=Bitmap.createBitmap(320,240,Bitmap.Config.ARGB_8888);int actual;
+                try {
+                    Canvas canvas=new Canvas(image);canvas.drawColor(background);overlay.draw(canvas);actual=image.getPixel(x,y);
+                } finally {image.recycle();}
+                boolean matches=actual==expected;
+                if(p==0 && !matches)throw new AssertionError("Reference risk order does not produce expected pixel: "+kind+" / "+Integer.toHexString(actual)+" / "+Integer.toHexString(expected));
+                String filename="risk-"+kind+"-"+order+".png";save(overlay,320,240,new File(output,filename));
+                rows.put(new JSONObject().put("kind",kind).put("order",order.toString()).put("x",x).put("y",y)
+                    .put("expected_argb",String.format(java.util.Locale.ROOT,"%08x",expected))
+                    .put("actual_argb",String.format(java.util.Locale.ROOT,"%08x",actual)).put("matches",matches).put("image",filename));
+                cases++;if(!matches)mismatches++;
+            }
+        }
+        JSONObject result=new JSONObject().put("scope","Native constructed risk-layer baseline with normal labels; sampled points verified outside label bubbles, not real recognition or tracking")
+            .put("cases",cases).put("mismatches",mismatches).put("rows",rows);
+        try(FileOutputStream stream=new FileOutputStream(new File(output,"risk-paint-baseline.json"))) {
+            stream.write(result.toString(2).getBytes(StandardCharsets.UTF_8));
+        }
+        report.append("RISK_PAINT_BASELINE cases=").append(cases).append(" mismatches=").append(mismatches).append('\n');
     }
     private static List<Detection> crowd(String scene) {
         List<Detection> data=new ArrayList<>();
