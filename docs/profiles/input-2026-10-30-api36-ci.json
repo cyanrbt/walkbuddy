@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+  "build_result": "success",
+  "emulator_result": "success",
+  "mode": "ui",
+  "probes": [
+    {
+      "name": "pip_recovery",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "runtime",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "preview",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "overlay",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "layout",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "home",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "recovery",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "pip",
+      "status": "passed",
+      "failures": []
+    },
+    {
+      "name": "pip-repeat",
+      "status": "passed",
+      "failures": []
+    }
+  ],
+  "observations": [],
+  "anrs": [],
+  "failure_time_focus": [],
+  "focused_external_anr_dialogs": []
+}
