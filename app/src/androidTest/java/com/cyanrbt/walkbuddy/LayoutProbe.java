@@ -93,7 +93,9 @@ final class LayoutProbe {
                     screenshot(root,new File(output,name+"-current.png"));
                     if(mode==0 || mode==2)screenshot(root,new File(output,name+(mode==0?"-basic":"-warning")+".png"));
                     initialVisible(root,detection);initialVisible(root,sound);
-                    if(detection.getLineCount()!=1 || sound.getLineCount()!=1)throw new AssertionError("Toggle label wrapped: "+name);
+                    if(detection.getLineCount()!=1 || sound.getLineCount()!=1)throw new AssertionError("Toggle label wrapped: "+name
+                        +" soundWidth="+sound.getWidth()+" labelWidth="+android.text.Layout.getDesiredWidth(sound.getText(),sound.getPaint())
+                        +" compound="+(sound.getCompoundPaddingLeft()+sound.getCompoundPaddingRight()));
                     if(mode<=1)initialVisible(root,info);
                     else initialQualifierVisible(root,info,mode==2?"未测距":"约 1.7 米");
                     if(root.findViewById(R.id.depth_steps).getVisibility()!=(mode==3?View.VISIBLE:View.GONE)
@@ -118,6 +120,7 @@ final class LayoutProbe {
                 if(camera.getWidth()<=0 || camera.getHeight()<pane.getHeight()/2)
                     throw new AssertionError("Camera space collapsed: "+camera.getWidth()+"x"+camera.getHeight());
                 if(size[0]>=600 && camera.getWidth()>=pane.getWidth())throw new AssertionError("Wide preview did not use side panel");
+                if(size[0]>=600 && camera.getWidth()+1<pane.getWidth()*.4f)throw new AssertionError("Text adaptation consumed camera width");
                 fullyVisible(root,root.findViewById(R.id.preview_stop));
                 fullyVisible(root,root.findViewById(R.id.enter_pip));
                 ScrollView scroll=root.findViewById(R.id.preview_controls);

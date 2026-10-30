@@ -1,0 +1,204 @@
+[
+  {
+    "api": 35,
+    "run_id": 41131327523,
+    "source_commit": "30aaa22bfa57f220cc2b6731cb1587f714ac0964",
+    "artifact_id": 13012938083,
+    "archive_size_bytes": 7523506,
+    "archive_sha256": "aa8d6289c1b850de145dfc4be4d550186c9028fb7117bb64a6fa54f321a72669",
+    "summary": {
+      "status": "checks_not_passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "failure",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "failed",
+          "failures": [
+            "LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Toggle label wrapped: 600x360-font150-day"
+          ]
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "failed",
+          "failures": [
+            "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 打开提示音; 实时画面"
+          ]
+        },
+        {
+          "name": "pip-repeat",
+          "status": "failed",
+          "failures": [
+            "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 打开提示音; 实时画面"
+          ]
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [
+        "external_anr_observed"
+      ],
+      "anrs": [
+        {
+          "package": "com.google.android.as",
+          "event": "10-30 21:31:25.348   554  2547 E ActivityManager: ANR in com.google.android.as",
+          "reason": "No response to onStartJob"
+        }
+      ],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "scope": "Initial failed emulator checks: real landscape prompt-tone label wrap and unsettled SystemUI interaction; no final feature acceptance",
+    "failed_probe_raw": {
+      "layout": "HAPTIC_EFFECT_PASS presets=2 fallback_patterns=2 parcel_roundtrips=4; no physical motor\nPASS 320x480-font100-day camera=320x173\nPASS 320x480-font100-night camera=320x173\nPASS 320x480-font150-day camera=320x164\nPASS 320x480-font150-night camera=320x164\nPASS 320x480-font200-day camera=320x151\nPASS 320x480-font200-night camera=320x151\nPASS 360x640-font100-day camera=360x269\nPASS 360x640-font100-night camera=360x269\nPASS 360x640-font150-day camera=360x260\nPASS 360x640-font150-night camera=360x260\nPASS 360x640-font200-day camera=360x247\nPASS 360x640-font200-night camera=360x247\nPASS 600x360-font100-day camera=360x169\nPASS 600x360-font100-night camera=360x169\nLAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Toggle label wrapped: 600x360-font150-day\n",
+      "pip": "PIP_STAGE camera_live elapsedMs=132032\nPIP_STAGE texture_deadline_recovered elapsedMs=158044\nPIP_STAGE home_restart_live elapsedMs=159548\nPIP_STAGE recognition_on elapsedMs=159789\nPIP_STAGE recognition_results elapsedMs=160641\nPIP_STAGE recognition_off elapsedMs=162119\nPIP_STAGE recognition_reenabled elapsedMs=163696\nPIP_STAGE pip_entered elapsedMs=163752\nPIP_STAGE pip_analysis_live elapsedMs=164591\nPIP_STAGE expanded_analysis_live elapsedMs=165245\nPASS Camera2 capture and display are LIVE; default detection/sound off\nSOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nPIP_SOURCE_BOUNDS_PASS cases=3; initial, real orientation change, restored; independent texture Matrix within 1px, no camera restart, frames advance\nSCREEN_IDLE_FULL_PASS requestedMs=1000 effectiveMinimumMs=10000 observedWithoutInputMs=11500\nPREVIEW_ONLY_GEOMETRY_PASS full=320x640 compact=116x155 frames_advance=true default_detection=false sound=false\nSCREEN_IDLE_PIP_PASS automatic screen off releases camera and polling\nPREVIEW_ONLY_ACTIVITY_PASS cases=3; default full, first actual PiP, explicit restart; actual virtual camera, no automatic detection or sound\nPASS screen hold only for active full preview; real idle timeout keeps full preview awake, PiP sleeps, wake stays stopped, manual restart restores hold\nPASS deadline inside real TextureView.draw covers/stops immediately, defers layer detach, and supports manual restart\nPASS Home releases camera; returned stopped preview does not poll; returning requires manual restart\nPASS attached checkbox labels, checked and enabled states before/during actual detection\nHAPTIC_ACTIVITY_PASS cases=5; current near, Sound-off independence, downgrade, empty current, stop; recorded output, no physical motor\nHAPTIC_SETTINGS_ACTIVITY_PASS cases=3; mute cancels independently, muted alert silent, enable waits for new dispatch; constructed risks and recorded output\nTONE_BLOCKED_ACTIVITY_PASS camera_advances=true late_plays=0 closes=1\nTONE_FAILURE_ACTIVITY_PASS sound_off=true detection_camera_tactile_retained=true\nTONE_NATIVE_ACTIVITY_PASS creates=1 plays=2 accepted=2 closes=1 all_off_main=true unavailable=false; emulator API outcome only, no audibility claim\nPASS injected model load failure and blocked analysis keep camera/texture; detection/sound/feedback stop; native frame retained until return; late result ignored; preview-only warning persists in PiP/expansion\nPASS actual bundled-model results advance; off cancels Ticket/feedback; re-enable produces new results\nPASS actual system PiP, advancing capture/display/model results, full controls hidden\nPIP_SOURCE_TRANSITION_PASS cases=2; actual PiP and expanded destination match the current texture Matrix\nPASS expansion restores controls and keeps preview/model results LIVE\nPIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 打开提示音; 实时画面\n识别开着\n",
+      "pip-repeat": "PIP_STAGE camera_live elapsedMs=175114\nPIP_STAGE texture_deadline_recovered elapsedMs=201050\nPIP_STAGE home_restart_live elapsedMs=202738\nPIP_STAGE recognition_on elapsedMs=202744\nPIP_STAGE recognition_results elapsedMs=203497\nPIP_STAGE recognition_off elapsedMs=204444\nPIP_STAGE recognition_reenabled elapsedMs=206010\nPIP_STAGE pip_entered elapsedMs=206060\nPIP_STAGE pip_analysis_live elapsedMs=206847\nPIP_STAGE expanded_analysis_live elapsedMs=207479\nPASS Camera2 capture and display are LIVE; default detection/sound off\nSOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nPIP_SOURCE_BOUNDS_PASS cases=3; initial, real orientation change, restored; independent texture Matrix within 1px, no camera restart, frames advance\nSCREEN_IDLE_FULL_PASS requestedMs=1000 effectiveMinimumMs=10000 observedWithoutInputMs=11500\nPREVIEW_ONLY_GEOMETRY_PASS full=320x640 compact=116x155 frames_advance=true default_detection=false sound=false\nSCREEN_IDLE_PIP_PASS automatic screen off releases camera and polling\nPREVIEW_ONLY_ACTIVITY_PASS cases=3; default full, first actual PiP, explicit restart; actual virtual camera, no automatic detection or sound\nPASS screen hold only for active full preview; real idle timeout keeps full preview awake, PiP sleeps, wake stays stopped, manual restart restores hold\nPASS deadline inside real TextureView.draw covers/stops immediately, defers layer detach, and supports manual restart\nPASS Home releases camera; returned stopped preview does not poll; returning requires manual restart\nPASS attached checkbox labels, checked and enabled states before/during actual detection\nHAPTIC_ACTIVITY_PASS cases=5; current near, Sound-off independence, downgrade, empty current, stop; recorded output, no physical motor\nHAPTIC_SETTINGS_ACTIVITY_PASS cases=3; mute cancels independently, muted alert silent, enable waits for new dispatch; constructed risks and recorded output\nTONE_BLOCKED_ACTIVITY_PASS camera_advances=true late_plays=0 closes=1\nTONE_FAILURE_ACTIVITY_PASS sound_off=true detection_camera_tactile_retained=true\nTONE_NATIVE_ACTIVITY_PASS creates=1 plays=2 accepted=2 closes=1 all_off_main=true unavailable=false; emulator API outcome only, no audibility claim\nPASS injected model load failure and blocked analysis keep camera/texture; detection/sound/feedback stop; native frame retained until return; late result ignored; preview-only warning persists in PiP/expansion\nPASS actual bundled-model results advance; off cancels Ticket/feedback; re-enable produces new results\nPASS actual system PiP, advancing capture/display/model results, full controls hidden\nPIP_SOURCE_TRANSITION_PASS cases=2; actual PiP and expanded destination match the current texture Matrix\nPASS expansion restores controls and keeps preview/model results LIVE\nPIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 打开提示音; 实时画面\n识别开着\n"
+    },
+    "images": [
+      {
+        "path": "pip-sound-initial-api35-landscape.png",
+        "archive_path": "cache/ui-probe/600x360-font150-day-current.png",
+        "sha256": "998fac743d24bbc75af003f823a9527b02ff6aca3dad7e1d2ffc3623cc505b5d",
+        "unaltered": true
+      },
+      {
+        "path": "pip-sound-initial-api35-pip-failure.png",
+        "archive_path": "cache/ui-probe/pip-failure.png",
+        "sha256": "e4e2c6ec9da369e605267d87b9bed3ad82128c468a2f174dcddad926b43c1a0d",
+        "unaltered": true
+      }
+    ]
+  },
+  {
+    "api": 36,
+    "run_id": 41131327523,
+    "source_commit": "30aaa22bfa57f220cc2b6731cb1587f714ac0964",
+    "artifact_id": 13012898337,
+    "archive_size_bytes": 7571241,
+    "archive_sha256": "4234d9ba0f5e603c4dcd889de75e6d968523a26a3d1155bf3e4d8aa39243c7aa",
+    "summary": {
+      "status": "checks_not_passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "failure",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "failed",
+          "failures": [
+            "LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Toggle label wrapped: 600x360-font150-day"
+          ]
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "failed",
+          "failures": [
+            "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: SystemUI disables prompt tones; 实时画面"
+          ]
+        },
+        {
+          "name": "pip-repeat",
+          "status": "failed",
+          "failures": [
+            "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 打开提示音; 实时画面"
+          ]
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "scope": "Initial failed emulator checks: real landscape prompt-tone label wrap and unsettled SystemUI interaction; no final feature acceptance",
+    "failed_probe_raw": {
+      "layout": "HAPTIC_EFFECT_PASS presets=2 fallback_patterns=2 parcel_roundtrips=4; no physical motor\nPASS 320x480-font100-day camera=320x173\nPASS 320x480-font100-night camera=320x173\nPASS 320x480-font150-day camera=320x164\nPASS 320x480-font150-night camera=320x164\nPASS 320x480-font200-day camera=320x151\nPASS 320x480-font200-night camera=320x151\nPASS 360x640-font100-day camera=360x269\nPASS 360x640-font100-night camera=360x269\nPASS 360x640-font150-day camera=360x260\nPASS 360x640-font150-night camera=360x260\nPASS 360x640-font200-day camera=360x247\nPASS 360x640-font200-night camera=360x247\nPASS 600x360-font100-day camera=360x169\nPASS 600x360-font100-night camera=360x169\nLAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Toggle label wrapped: 600x360-font150-day\n",
+      "pip": "PIP_STAGE camera_live elapsedMs=117097\nPIP_STAGE texture_deadline_recovered elapsedMs=143566\nPIP_STAGE home_restart_live elapsedMs=144611\nPIP_STAGE recognition_on elapsedMs=144622\nPIP_STAGE recognition_results elapsedMs=145336\nPIP_STAGE recognition_off elapsedMs=146537\nPIP_STAGE recognition_reenabled elapsedMs=148433\nPIP_STAGE pip_entered elapsedMs=148518\nPIP_STAGE pip_analysis_live elapsedMs=149351\nPIP_STAGE expanded_analysis_live elapsedMs=150035\nPASS Camera2 capture and display are LIVE; default detection/sound off\nSOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nPIP_SOURCE_BOUNDS_PASS cases=3; initial, real orientation change, restored; independent texture Matrix within 1px, no camera restart, frames advance\nSCREEN_IDLE_FULL_PASS requestedMs=1000 effectiveMinimumMs=10000 observedWithoutInputMs=11500\nPREVIEW_ONLY_GEOMETRY_PASS full=320x640 compact=116x155 frames_advance=true default_detection=false sound=false\nSCREEN_IDLE_PIP_PASS automatic screen off releases camera and polling\nPREVIEW_ONLY_ACTIVITY_PASS cases=3; default full, first actual PiP, explicit restart; actual virtual camera, no automatic detection or sound\nPASS screen hold only for active full preview; real idle timeout keeps full preview awake, PiP sleeps, wake stays stopped, manual restart restores hold\nPASS deadline inside real TextureView.draw covers/stops immediately, defers layer detach, and supports manual restart\nPASS Home releases camera; returned stopped preview does not poll; returning requires manual restart\nPASS attached checkbox labels, checked and enabled states before/during actual detection\nHAPTIC_ACTIVITY_PASS cases=5; current near, Sound-off independence, downgrade, empty current, stop; recorded output, no physical motor\nHAPTIC_SETTINGS_ACTIVITY_PASS cases=3; mute cancels independently, muted alert silent, enable waits for new dispatch; constructed risks and recorded output\nTONE_BLOCKED_ACTIVITY_PASS camera_advances=true late_plays=0 closes=1\nTONE_FAILURE_ACTIVITY_PASS sound_off=true detection_camera_tactile_retained=true\nTONE_NATIVE_ACTIVITY_PASS creates=1 plays=2 accepted=2 closes=1 all_off_main=true unavailable=false; emulator API outcome only, no audibility claim\nPASS injected model load failure and blocked analysis keep camera/texture; detection/sound/feedback stop; native frame retained until return; late result ignored; preview-only warning persists in PiP/expansion\nPASS actual bundled-model results advance; off cancels Ticket/feedback; re-enable produces new results\nPASS actual system PiP, advancing capture/display/model results, full controls hidden\nPIP_SOURCE_TRANSITION_PASS cases=2; actual PiP and expanded destination match the current texture Matrix\nPASS expansion restores controls and keeps preview/model results LIVE\nPIP_PROBE_FAIL: java.lang.AssertionError: Timed out: SystemUI disables prompt tones; 实时画面\n识别开着\n",
+      "pip-repeat": "PIP_STAGE camera_live elapsedMs=160973\nPIP_STAGE texture_deadline_recovered elapsedMs=187118\nPIP_STAGE home_restart_live elapsedMs=188386\nPIP_STAGE recognition_on elapsedMs=188388\nPIP_STAGE recognition_results elapsedMs=189087\nPIP_STAGE recognition_off elapsedMs=190339\nPIP_STAGE recognition_reenabled elapsedMs=191822\nPIP_STAGE pip_entered elapsedMs=191905\nPIP_STAGE pip_analysis_live elapsedMs=192702\nPIP_STAGE expanded_analysis_live elapsedMs=193336\nPASS Camera2 capture and display are LIVE; default detection/sound off\nSOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nPIP_SOURCE_BOUNDS_PASS cases=3; initial, real orientation change, restored; independent texture Matrix within 1px, no camera restart, frames advance\nSCREEN_IDLE_FULL_PASS requestedMs=1000 effectiveMinimumMs=10000 observedWithoutInputMs=11500\nPREVIEW_ONLY_GEOMETRY_PASS full=320x640 compact=116x155 frames_advance=true default_detection=false sound=false\nSCREEN_IDLE_PIP_PASS automatic screen off releases camera and polling\nPREVIEW_ONLY_ACTIVITY_PASS cases=3; default full, first actual PiP, explicit restart; actual virtual camera, no automatic detection or sound\nPASS screen hold only for active full preview; real idle timeout keeps full preview awake, PiP sleeps, wake stays stopped, manual restart restores hold\nPASS deadline inside real TextureView.draw covers/stops immediately, defers layer detach, and supports manual restart\nPASS Home releases camera; returned stopped preview does not poll; returning requires manual restart\nPASS attached checkbox labels, checked and enabled states before/during actual detection\nHAPTIC_ACTIVITY_PASS cases=5; current near, Sound-off independence, downgrade, empty current, stop; recorded output, no physical motor\nHAPTIC_SETTINGS_ACTIVITY_PASS cases=3; mute cancels independently, muted alert silent, enable waits for new dispatch; constructed risks and recorded output\nTONE_BLOCKED_ACTIVITY_PASS camera_advances=true late_plays=0 closes=1\nTONE_FAILURE_ACTIVITY_PASS sound_off=true detection_camera_tactile_retained=true\nTONE_NATIVE_ACTIVITY_PASS creates=1 plays=2 accepted=2 closes=1 all_off_main=true unavailable=false; emulator API outcome only, no audibility claim\nPASS injected model load failure and blocked analysis keep camera/texture; detection/sound/feedback stop; native frame retained until return; late result ignored; preview-only warning persists in PiP/expansion\nPASS actual bundled-model results advance; off cancels Ticket/feedback; re-enable produces new results\nPASS actual system PiP, advancing capture/display/model results, full controls hidden\nPIP_SOURCE_TRANSITION_PASS cases=2; actual PiP and expanded destination match the current texture Matrix\nPASS expansion restores controls and keeps preview/model results LIVE\nPIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 打开提示音; 实时画面\n识别开着\n"
+    },
+    "images": [
+      {
+        "path": "pip-sound-initial-api36-pip-sound-menu-off.png",
+        "archive_path": "cache/ui-probe/pip-sound-menu-off.png",
+        "sha256": "77765464dcded71ed34e03d25bb2c5c2c64abf1975483367886bd56a77469e3f",
+        "unaltered": true
+      },
+      {
+        "path": "pip-sound-initial-api36-pip-sound-menu-on.png",
+        "archive_path": "cache/ui-probe/pip-sound-menu-on.png",
+        "sha256": "ab406a8dbadd4427e6c75be3450ae69742eda1c9bb955db0f6e17002c7a0b4e0",
+        "unaltered": true
+      }
+    ]
+  }
+]

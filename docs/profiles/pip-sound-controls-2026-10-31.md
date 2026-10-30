@@ -2,7 +2,7 @@
 
 基线为 v0.4.34。原系统小窗菜单只有停止相机、关闭检测两个动作，调整提示音需要展开完整预览。v0.4.35 在第三个系统自定义位置提供「打开提示音 / 关闭提示音」，显示对应图标和清楚的下一步动作说明。完整页标签改为「提示音」，默认仍关闭，振动和系统朗读各自控制。
 
-参考 Android 官方 [PiP 自定义控制](https://developer.android.com/develop/ui/views/picture-in-picture#add_controls) 与 [Platform Samples 的 PiP 控制更新](https://github.com/android/platform-samples/blob/177c3b92c387894648d0a2d42d238e265b05bbc3/samples/user-interface/picture-in-picture/src/main/java/com/example/android/pip/PiPMovieActivity.kt)；菜单容量从系统读取，停止相机优先、关闭检测其次，少于三个位置时保留原两个停止入口。系统菜单样式和容量仍以设备为准。
+参考 Android 官方 [PiP 自定义控制](https://developer.android.com/develop/ui/views/picture-in-picture#add_controls) 与 [Platform Samples 的 PiP 控制更新](https://github.com/android/platform-samples/blob/177c3b92c387894648d0a2d42d238e265b05bbc3/samples/user-interface/picture-in-picture/src/main/java/com/example/android/pip/PiPMovieActivity.kt)；菜单容量从系统读取，停止相机优先、关闭检测其次，位置不足时按原优先级保留停止入口。系统菜单样式和容量仍以设备为准。
 
 声音动作采用当前预览所有者、相机会话、声音选择代次和小窗访问代次，PendingIntent 的身份及不可变参数固定到该次选择。接收器只在当前小窗、检测运行且画面/分析未过期时执行明确的启用/关闭值，复用原声音开关与音频 worker。离开或再次进入小窗会使前次声音按钮失效；重复旧按钮不能影响更新后的选择。不会因此启动相机或开启检测。
 
@@ -16,3 +16,17 @@
 完整本地验证成功：237 项 JVM，0 失败 / 错误 / 跳过；Lint 0 错误 / 22 警告，通用应用和原生测试包构建通过。音频失败与按实际窗口缩小的补充原生断言另行重建，不改变 JVM 验证过的生产实现。
 
 当前等待 Android 15/16 候选和正式标签检查。原始附件、源码摘要及实际 APK 会按阶段记录，不以触发代替成功。
+
+## 首轮失败与修正
+
+[41131327523](https://github.com/cyanrbt/walkbuddy/actions/runs/41131327523) attempt 1 已失败，两套编译均成功；两套 `layout`、`pip`、`pip-repeat` 失败，其余七项通过。完整 ZIP 已下载匹配服务端大小与 SHA-256，摘要由原始文件重放一致。[初轮记录](pip-sound-native-initial-2026-10-31.json)保留两套失败文字与原图来源。
+
+布局是本次新增三字标签暴露的真实回归：`600×360 / 150%` 时设置侧栏仍固定为 240px，「提示音」换成两行，原一行断言失败。[原始横屏图](pip-sound-initial-api35-landscape.png)已查看。现按较长开关的实际文字宽度、复合内边距和行间距计算两格所需宽度，横屏侧栏按需扩大，并保留至少 40% 的取景宽度。原完整文字、初始可见、一行和相机空间断言保留，另增加横屏取景宽度下限；字号不缩小。
+
+系统菜单方面，API 35 两轮及 API 36 第二轮未观察到预期菜单节点；API 36 第一轮成功从真实菜单开启提示音，随后关闭触摸未得到关闭结果。[首轮菜单关闭状态](pip-sound-initial-api36-pip-sound-menu-off.png)、[开启状态](pip-sound-initial-api36-pip-sound-menu-on.png)已查看，确实显示三个系统按钮。失败时相机与检测仍运行，[API 35 失败原图](pip-sound-initial-api35-pip-failure.png)亦保留；首轮没有保存每轮触摸轨迹，不能据现有记录确定每次失效是坐标、缓存、窗口过渡或其它原因。
+
+修订测试改用系统 `AccessibilityWindowInfo` 的 PiP 屏幕边界，刷新目标节点并等待边界稳定 150ms；每次操作先关闭已有菜单，再单次真实触摸打开菜单、点击对应动作，保留原状态结果断言。加入每轮 OPEN/TOUCH 轨迹到原始流，避免重复探针覆盖关键步骤。没有将实际点击改成直接调用应用函数，也没有重试点击。菜单生产动作代码保持，新的完整原生结果仍待核对。
+
+API 35 另观察到 UTC 21:31:25.348 `com.google.android.as` 的 `No response to onStartJob` ANR，没有聚焦外部弹窗或本应用 ANR 观察；API 36 摘要无 ANR 观察。这不解释两套共同的文字换行，也不能据并存事件认定菜单触摸根因。首轮未重跑、未发 v0.4.35 标签。
+
+修订完整本地 237 项 JVM、Lint 0 错误 / 22 警告及应用/原生测试包构建通过。[源码与验证摘要](pip-sound-controls-2026-10-31.json)保留 24 个当前文件、十个未改首页文件、四个未改预览策略文件及除「提示音」改名外的原 106 条文字。原布局探针只增补断言和诊断，当前哈希单列，不拿旧整文件摘要冒充。

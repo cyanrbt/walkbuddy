@@ -110,6 +110,8 @@ final class PipSoundProbe {
             info.flags=flags;automation.setServiceInfo(info);
             if(creates.get()!=closes.get() || mainThread.get())throw new AssertionError("Controlled audio resource ownership mismatch");
             SupportProbe.write(runner,"pip-sound-controls.txt",trace+"audio_creates="+creates.get()+" audio_closes="+closes.get()+"\n");
+            report.append("PIP_SOUND_TRACE_BEGIN\n").append(trace).append("audio_creates=").append(creates.get())
+                .append(" audio_closes=").append(closes.get()).append("\nPIP_SOUND_TRACE_END\n");
         }
     }
 
@@ -126,18 +128,18 @@ final class PipSoundProbe {
     private static void tapMenuAction(Instrumentation runner,PreviewActivity host,boolean enabled,String screenshot,StringBuilder trace)throws Exception {
         String description=host.getString(enabled?R.string.pip_sound_off_description:R.string.pip_sound_on_description);
         String title=host.getString(enabled?R.string.pip_sound_off:R.string.pip_sound_on);
-        if(findAction(runner,description,title)==null) {
-            Rect pip=read(runner,()->{View root=(View)field(host,"root");int[] xy=new int[2];root.getLocationOnScreen(xy);return new Rect(xy[0],xy[1],xy[0]+root.getWidth(),xy[1]+root.getHeight());});
-            touch(runner,pip.centerX(),pip.centerY());
-        }
-        Rect target=null;long end=SystemClock.elapsedRealtime()+6000;
-        while(SystemClock.elapsedRealtime()<end && target==null){target=findAction(runner,description,title);if(target==null)Thread.sleep(25);}
+        closeMenu(runner,host);
+        Rect pip=stableBounds(()->pipBounds(runner,host),"actual PiP screen bounds");
+        trace.append("OPEN ").append(title).append(" pip_screen=").append(pip).append('\n');
+        touch(runner,pip.centerX(),pip.centerY());
+        Rect target=stableBounds(()->findAction(runner,description,title),"visible SystemUI "+title);
         if(target==null)throw new AssertionError("Timed out: visible SystemUI "+title);
         if(screenshot!=null)PipProbe.screenshot(runner,screenshot);
         Rect rect=target;trace.append("TOUCH ").append(title).append(" target=").append(rect).append('\n');
         touch(runner,rect.centerX(),rect.centerY());
     }
     private static Rect findAction(Instrumentation runner,String description,String title) {
+        if(Build.VERSION.SDK_INT>=33)runner.getUiAutomation().clearCache();
         for(AccessibilityWindowInfo window:runner.getUiAutomation().getWindows()) {
             AccessibilityNodeInfo root=window.getRoot();if(root==null)continue;
             try{Rect found=findNode(root,description,title);if(found!=null)return found;}finally{root.recycle();}
@@ -147,6 +149,9 @@ final class PipSoundProbe {
     private static Rect findNode(AccessibilityNodeInfo node,String description,String title) {
         if(node.isVisibleToUser() && node.isEnabled() && (description.contentEquals(node.getContentDescription()==null?"":node.getContentDescription())
             || title.contentEquals(node.getText()==null?"":node.getText()))) {
+            if(!node.refresh() || !node.isVisibleToUser() || !node.isEnabled()
+                || !(description.contentEquals(node.getContentDescription()==null?"":node.getContentDescription())
+                    || title.contentEquals(node.getText()==null?"":node.getText())))return null;
             Rect rect=new Rect();node.getBoundsInScreen(rect);if(!rect.isEmpty())return rect;
         }
         for(int i=0;i<node.getChildCount();i++) {
@@ -155,10 +160,39 @@ final class PipSoundProbe {
         }
         return null;
     }
-    private static void closeMenu(Instrumentation runner,PreviewActivity host) {
-        if(findAction(runner,host.getString(R.string.pip_sound_on_description),host.getString(R.string.pip_sound_on))==null)return;
+    private static void closeMenu(Instrumentation runner,PreviewActivity host)throws Exception {
+        if(!menuVisible(runner,host))return;
         long at=SystemClock.uptimeMillis();for(int action:new int[]{KeyEvent.ACTION_DOWN,KeyEvent.ACTION_UP})
             if(!runner.getUiAutomation().injectInputEvent(new KeyEvent(at,SystemClock.uptimeMillis(),action,KeyEvent.KEYCODE_BACK,0),true))throw new AssertionError("SystemUI menu close was rejected");
+        long end=SystemClock.elapsedRealtime()+6000;
+        while(SystemClock.elapsedRealtime()<end){if(!menuVisible(runner,host))return;Thread.sleep(25);}
+        throw new AssertionError("SystemUI menu did not close");
+    }
+    private static boolean menuVisible(Instrumentation runner,PreviewActivity host) {
+        return findAction(runner,host.getString(R.string.pip_sound_on_description),host.getString(R.string.pip_sound_on))!=null
+            || findAction(runner,host.getString(R.string.pip_sound_off_description),host.getString(R.string.pip_sound_off))!=null;
+    }
+    private static Rect pipBounds(Instrumentation runner,PreviewActivity host) {
+        if(Build.VERSION.SDK_INT>=33)runner.getUiAutomation().clearCache();
+        for(AccessibilityWindowInfo window:runner.getUiAutomation().getWindows()) {
+            if(!window.isInPictureInPictureMode())continue;
+            AccessibilityNodeInfo root=window.getRoot();if(root==null)continue;
+            try {
+                if(!host.getPackageName().contentEquals(root.getPackageName()==null?"":root.getPackageName()))continue;
+                Rect rect=new Rect();window.getBoundsInScreen(rect);if(!rect.isEmpty())return rect;
+            }finally{root.recycle();}
+        }
+        return null;
+    }
+    private static Rect stableBounds(Value<Rect> reader,String message)throws Exception {
+        long end=SystemClock.elapsedRealtime()+6000,stableAt=0;Rect previous=null;
+        while(SystemClock.elapsedRealtime()<end) {
+            Rect next=reader.get();long now=SystemClock.elapsedRealtime();
+            if(next!=null && next.equals(previous)){if(now-stableAt>=150)return next;}
+            else{previous=next;stableAt=now;}
+            Thread.sleep(25);
+        }
+        throw new AssertionError("Timed out: "+message+" last="+previous);
     }
     private static void touch(Instrumentation runner,int x,int y) {
         long at=SystemClock.uptimeMillis();for(int action:new int[]{MotionEvent.ACTION_DOWN,MotionEvent.ACTION_UP}) {

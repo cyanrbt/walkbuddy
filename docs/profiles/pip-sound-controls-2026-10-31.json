@@ -21,9 +21,9 @@
   "source_sha256": {
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
-    "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "c825124fb2ea5d546e3346e6cf6a3e901f19ae52ac561f68c6b7140c059941bb",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "dd90e56722d384eb1ba94727cd785cec07a5744438e499d616ff2155fd48dfba",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "3a88e689b55a582acbb573e3d003a96af74ae69eeb857309043f8a7b07ebaec2",
-    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java": "1da21dca8f35320e069ebeb9ca90526bbefe1f67a95f3d498474ce26d0641911",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java": "99fdf32bd8fc5f1fc3a681cc119ec183743ef477da558bb1f65fbe2f6c22bc52",
     "app/src/main/java/com/cyanrbt/walkbuddy/AndroidTone.java": "1c7b783d317aca69e9ad4e0dd17d504e25f8d735ea105d1970ec28dcfcad7c45",
     "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
     "app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java": "1b34efd7f69932c739720779dc9a363f62328ca139b01b46c2d0c926f0aa0b57",
@@ -41,12 +41,12 @@
     "app/src/test/java/com/cyanrbt/walkbuddy/HomeStateTest.java": "ae4dff71194f8ea805023a4851710cda3ac770c6ceecd0e452fc7d0c3bca4b48",
     "app/src/test/java/com/cyanrbt/walkbuddy/PipMenuTest.java": "68db6bf81a5a0afcde7dfce5f9f9379a6a2cc6ac3ee65191adb9b4c8b63b9847",
     "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048",
-    "app/src/test/java/com/cyanrbt/walkbuddy/ProductSurfaceTest.java": "bedb92ef2c1e01b66839a10e411a904178fa6201ce31a9eb72aa4728a845e450"
+    "app/src/test/java/com/cyanrbt/walkbuddy/ProductSurfaceTest.java": "bedb92ef2c1e01b66839a10e411a904178fa6201ce31a9eb72aa4728a845e450",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewContentLayout.java": "1d5e2707d620b323c621583b6cd9962087603393e7932b0142c5e6c086080bbc"
   },
   "preserved_home_events_source_sha256": {
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeEventProbe.java": "fa8862e7b67e85d4eba8d8331e1378aa4dd3d397f0ec4313314b8ec7490ce4d4",
     "app/src/androidTest/java/com/cyanrbt/walkbuddy/HomeProbe.java": "3b67bdd42643b25ff2f30f0e54a9652c001a4365899338b2311c3fa66c4f1ea8",
-    "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "c825124fb2ea5d546e3346e6cf6a3e901f19ae52ac561f68c6b7140c059941bb",
     "app/src/main/java/com/cyanrbt/walkbuddy/HomeState.java": "ceab9643c1623b6098eb25e15723d91e5dad2867e002ca8cdfb1350cd3f532db",
     "app/src/main/java/com/cyanrbt/walkbuddy/MainActivity.java": "1b34efd7f69932c739720779dc9a363f62328ca139b01b46c2d0c926f0aa0b57",
     "app/src/main/java/com/cyanrbt/walkbuddy/PipSupport.java": "9ffcf73b673cd8c81f23ab5a9970abd6fb9daf1b11888f78eeb0832dd1e55e1b",
@@ -60,7 +60,6 @@
     "app/src/main/java/com/cyanrbt/walkbuddy/PreviewStatus.java": "8cecbf49da9af250c117047d61abbb43c2dd35c979cd253430cad88af61f26e4",
     "app/src/main/java/com/cyanrbt/walkbuddy/PreviewChrome.java": "c9fb0356293ae2e37a87f07a6be4da3e7aa7952ef7704259dd8d23a08d2f9106",
     "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java": "563b714e6833cd577132e9dca13de959d5801335567d6ed50f6e3e82e4c83048",
-    "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "c825124fb2ea5d546e3346e6cf6a3e901f19ae52ac561f68c6b7140c059941bb",
     "app/src/main/res/layout/activity_preview.xml": "59c670b1e553f29a9af1574feb7f8e6cb39609d590020cfb3fd675a475459279"
   },
   "baseline_strings_sha256": "5331672686559709a4cdbdea188441ed08a1d2ceb8353c59b3652de6cdc6255b",
@@ -89,5 +88,9 @@
     "Controlled audio output in the new menu probe is not physical audibility or latency measurement; existing native AndroidTone probe is separate",
     "No device, TalkBack speech, real AR, power or road acceptance"
   ],
-  "final_native_actual_geometry_rebuild": "success; production/JVM-tested sources unchanged"
+  "final_native_actual_geometry_rebuild": "success; production/JVM-tested sources unchanged",
+  "existing_layout_probe_change": "Retains all original text/visibility assertions; adds >=40 percent landscape camera width and richer label-wrap diagnostics",
+  "responsive_panel_change": "Full checkbox label text and compound padding determine minimum equal-cell panel width; camera retains >=40 percent of landscape width",
+  "native_touch_revision": "System PiP screen bounds, fresh accessibility targets stable for 150ms, explicit menu close between operations; original single real pointer click and required state outcome retained",
+  "responsive_and_menu_touch_full_rebuild": "success; full JVM, Lint, universal app and native test build"
 }
