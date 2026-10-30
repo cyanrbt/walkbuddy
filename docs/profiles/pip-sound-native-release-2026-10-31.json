@@ -1,0 +1,394 @@
+[
+  {
+    "api": 36,
+    "source_commit": "ef096a5db035d61bcafc8bdb2f2f59e78cce3155",
+    "run_id": 41134864899,
+    "attempt": 1,
+    "artifact_id": 13017225918,
+    "archive_size_bytes": 12720503,
+    "archive_sha256": "050333a7d77c8ab8e842139cf115f78c1ad9f149ded76b0774cac16c15a87830",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.35 / 47\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：19；显示帧龄(ms)：16；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：145；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "default_preview_geometry_sample": "PREVIEW_ONLY_GEOMETRY_PASS full=320x640 compact=116x154 frames_advance=true default_detection=false sound=false\n",
+    "default_preview_layout_configurations": 30,
+    "default_preview_activity_cases_per_pip_run": 3,
+    "default_preview_recovery_cycles": 4,
+    "depth_report_markers": [
+      "DEPTH_PROJECTION_PARITY_PASS cases=96 grid_points=589824; raw float bits, obstacle/drop outputs, moving pose/intrinsics, sparse updates; constructed observations, not AR camera accuracy",
+      "DEPTH_PROJECTION_STATE_PASS cases=5; sample centers, incomplete transform reset, independent workspaces/grids, nonfinite boundary math, near obstacle/drop"
+    ],
+    "depth_projection_cases": 96,
+    "depth_grid_positions": 589824,
+    "depth_state_cases": 5,
+    "depth_scope": "Actual bundled ARCore Pose on ART with constructed points; no AR Session or device depth",
+    "tone_thread_samples": "BLOCKED\ncreate_blocked thread=WalkBuddy sound at_ms=253635\nclose thread=WalkBuddy sound at_ms=254046\nNATIVE\ncreate_begin thread=WalkBuddy sound at_ms=254122\ncreate_end thread=WalkBuddy sound at_ms=254164\nplay_begin thread=WalkBuddy sound at_ms=254164\nplay_end accepted=true thread=WalkBuddy sound at_ms=254167\nplay_begin thread=WalkBuddy sound at_ms=254368\nplay_end accepted=true thread=WalkBuddy sound at_ms=254369\nclose_begin thread=WalkBuddy sound at_ms=254369\nclose_end thread=WalkBuddy sound at_ms=254380\n",
+    "tone_activity_checks_per_pip_run": 3,
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.35 / 47\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.35 / 47\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：68；显示帧龄(ms)：2；分析龄(ms)：17\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：7；复制(ms)：2；结果交付(ms)：1\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.35 / 47\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：67；显示帧龄(ms)：3；分析龄(ms)：1502\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：34；读回排队(ms)：15；复制(ms)：3；结果交付(ms)：1\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "recovery_geometry": [
+      [
+        "0",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "1",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "2",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "3",
+        "320",
+        "640",
+        "116",
+        "154"
+      ]
+    ],
+    "recovery_transition_samples": [
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=0 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=1 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=2 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=3 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false"
+    ],
+    "sound_ui_steps_by_pip_run": {
+      "pip": [
+        "OPEN 打开提示音 pip_screen=Rect(188, 292 - 304, 446)",
+        "TOUCH 打开提示音 target=Rect(255, 413 - 303, 461)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 291 - 304, 445)",
+        "TOUCH 关闭提示音 target=Rect(255, 412 - 303, 460)",
+        "OPEN 打开提示音 pip_screen=Rect(188, 291 - 304, 445)",
+        "TOUCH 打开提示音 target=Rect(255, 412 - 303, 460)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 291 - 304, 445)",
+        "TOUCH 关闭提示音 target=Rect(255, 412 - 303, 460)",
+        "audio_creates=2 audio_closes=2"
+      ],
+      "pip-repeat": [
+        "OPEN 打开提示音 pip_screen=Rect(188, 276 - 304, 430)",
+        "TOUCH 打开提示音 target=Rect(255, 399 - 303, 447)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 275 - 304, 429)",
+        "TOUCH 关闭提示音 target=Rect(255, 398 - 303, 446)",
+        "OPEN 打开提示音 pip_screen=Rect(188, 275 - 304, 429)",
+        "TOUCH 打开提示音 target=Rect(255, 398 - 303, 446)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 275 - 304, 429)",
+        "TOUCH 关闭提示音 target=Rect(255, 398 - 303, 446)",
+        "audio_creates=2 audio_closes=2"
+      ]
+    },
+    "sound_controls_trace": "Actual SystemUI touch targets; controlled output, no physical audibility claim\nOPEN 打开提示音 pip_screen=Rect(188, 276 - 304, 430)\nTOUCH 打开提示音 target=Rect(255, 399 - 303, 447)\nOPEN 关闭提示音 pip_screen=Rect(188, 275 - 304, 429)\nTOUCH 关闭提示音 target=Rect(255, 398 - 303, 446)\nOPEN 打开提示音 pip_screen=Rect(188, 275 - 304, 429)\nTOUCH 打开提示音 target=Rect(255, 398 - 303, 446)\nOPEN 关闭提示音 pip_screen=Rect(188, 275 - 304, 429)\nTOUCH 关闭提示音 target=Rect(255, 398 - 303, 446)\nguarded_invalid_commands=6 real_ui_toggles=4 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true\naudio_creates=2 audio_closes=2\n",
+    "sound_native_markers": {
+      "pip": [
+        "PIP_SOUND_FAILURE_MENU_PASS sound_off=true next_action=enable stale_retry_ignored=true detection_camera_vibration_retained=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_SOUND_TRACE_BEGIN",
+        "PIP_SOUND_TRACE_END"
+      ],
+      "pip-repeat": [
+        "PIP_SOUND_FAILURE_MENU_PASS sound_off=true next_action=enable stale_retry_ignored=true detection_camera_vibration_retained=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_SOUND_TRACE_BEGIN",
+        "PIP_SOUND_TRACE_END"
+      ]
+    },
+    "home_idle_and_lifecycle_markers": [
+      "HOME_EVENTS_INITIAL_STATE focus=true visible=true queued=false",
+      "HOME_EVENTS_IDLE_PASS quietMs=1100 refreshes=0; actual AppOps deny/allow rendered without resume; original raw mode restored",
+      "HOME_EVENTS_LIFECYCLE_PASS retired subscriptions removed; stale off-main AppOps callback ignored; recreated home subscribed"
+    ],
+    "home_live_markers": {
+      "pip": [
+        "HOME_EVENTS_LIVE_PASS quietMs=1100 refreshes=0 advancingCapture=true advancingDisplay=true reportReused=true batch=20 accessSamples=1; watcher-unavailable polling fallback and reattachment pass"
+      ],
+      "pip-repeat": [
+        "HOME_EVENTS_LIVE_PASS quietMs=1100 refreshes=0 advancingCapture=true advancingDisplay=true reportReused=true batch=20 accessSamples=1; watcher-unavailable polling fallback and reattachment pass"
+      ]
+    },
+    "scope": "Android emulator real SystemUI touch prompt-tone toggles, stale choice/visit/fullscreen command rejection and controlled audio-failure menu; actual Camera2/model/vibration retained; old home/UI/depth/native-audio gates retained; no physical audibility, device or power acceptance",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "workflow_attempt": 1
+  },
+  {
+    "api": 35,
+    "source_commit": "ef096a5db035d61bcafc8bdb2f2f59e78cce3155",
+    "run_id": 41134864899,
+    "attempt": 1,
+    "artifact_id": 13015947207,
+    "archive_size_bytes": 12751012,
+    "archive_sha256": "7daab259b3e649aa9119ce0e82eb9f64b9c6527c49b286ed02310d3258d59e33",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [
+        "external_anr_observed"
+      ],
+      "anrs": [
+        {
+          "package": "com.google.android.as",
+          "event": "10-30 22:01:00.506   565  2484 E ActivityManager: ANR in com.google.android.as",
+          "reason": "No response to onStartJob"
+        }
+      ],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.35 / 47\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：185；显示帧龄(ms)：184；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "default_preview_geometry_sample": "PREVIEW_ONLY_GEOMETRY_PASS full=320x640 compact=116x155 frames_advance=true default_detection=false sound=false\n",
+    "default_preview_layout_configurations": 30,
+    "default_preview_activity_cases_per_pip_run": 3,
+    "default_preview_recovery_cycles": 4,
+    "depth_report_markers": [
+      "DEPTH_PROJECTION_PARITY_PASS cases=96 grid_points=589824; raw float bits, obstacle/drop outputs, moving pose/intrinsics, sparse updates; constructed observations, not AR camera accuracy",
+      "DEPTH_PROJECTION_STATE_PASS cases=5; sample centers, incomplete transform reset, independent workspaces/grids, nonfinite boundary math, near obstacle/drop"
+    ],
+    "depth_projection_cases": 96,
+    "depth_grid_positions": 589824,
+    "depth_state_cases": 5,
+    "depth_scope": "Actual bundled ARCore Pose on ART with constructed points; no AR Session or device depth",
+    "tone_thread_samples": "BLOCKED\ncreate_blocked thread=WalkBuddy sound at_ms=239126\nclose thread=WalkBuddy sound at_ms=239524\nNATIVE\ncreate_begin thread=WalkBuddy sound at_ms=239628\ncreate_end thread=WalkBuddy sound at_ms=239635\nplay_begin thread=WalkBuddy sound at_ms=239642\nplay_end accepted=true thread=WalkBuddy sound at_ms=239644\nplay_begin thread=WalkBuddy sound at_ms=239844\nplay_end accepted=true thread=WalkBuddy sound at_ms=239845\nclose_begin thread=WalkBuddy sound at_ms=239845\nclose_end thread=WalkBuddy sound at_ms=239856\n",
+    "tone_activity_checks_per_pip_run": 3,
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.35 / 47\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.35 / 47\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：49；显示帧龄(ms)：20；分析龄(ms)：16\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：4；复制(ms)：1；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.35 / 47\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：50；显示帧龄(ms)：19；分析龄(ms)：1501\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：19；读回排队(ms)：2；复制(ms)：4；结果交付(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "recovery_geometry": [
+      [
+        "0",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "1",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "2",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "3",
+        "320",
+        "640",
+        "116",
+        "154"
+      ]
+    ],
+    "recovery_transition_samples": [
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=0 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=1 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=2 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=3 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false"
+    ],
+    "sound_ui_steps_by_pip_run": {
+      "pip": [
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 打开提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 打开提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)",
+        "audio_creates=2 audio_closes=2"
+      ],
+      "pip-repeat": [
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 打开提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 打开提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)",
+        "audio_creates=2 audio_closes=2"
+      ]
+    },
+    "sound_controls_trace": "Actual SystemUI touch targets; controlled output, no physical audibility claim\nOPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)\nTOUCH 打开提示音 target=Rect(255, 576 - 303, 624)\nOPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)\nTOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)\nOPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)\nTOUCH 打开提示音 target=Rect(255, 576 - 303, 624)\nOPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)\nTOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)\nguarded_invalid_commands=6 real_ui_toggles=4 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true\naudio_creates=2 audio_closes=2\n",
+    "sound_native_markers": {
+      "pip": [
+        "PIP_SOUND_FAILURE_MENU_PASS sound_off=true next_action=enable stale_retry_ignored=true detection_camera_vibration_retained=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_SOUND_TRACE_BEGIN",
+        "PIP_SOUND_TRACE_END"
+      ],
+      "pip-repeat": [
+        "PIP_SOUND_FAILURE_MENU_PASS sound_off=true next_action=enable stale_retry_ignored=true detection_camera_vibration_retained=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_SOUND_TRACE_BEGIN",
+        "PIP_SOUND_TRACE_END"
+      ]
+    },
+    "home_idle_and_lifecycle_markers": [
+      "HOME_EVENTS_INITIAL_STATE focus=true visible=true queued=false",
+      "HOME_EVENTS_IDLE_PASS quietMs=1100 refreshes=0; actual AppOps deny/allow rendered without resume; original raw mode restored",
+      "HOME_EVENTS_LIFECYCLE_PASS retired subscriptions removed; stale off-main AppOps callback ignored; recreated home subscribed"
+    ],
+    "home_live_markers": {
+      "pip": [
+        "HOME_EVENTS_LIVE_PASS quietMs=1100 refreshes=0 advancingCapture=true advancingDisplay=true reportReused=true batch=20 accessSamples=1; watcher-unavailable polling fallback and reattachment pass"
+      ],
+      "pip-repeat": [
+        "HOME_EVENTS_LIVE_PASS quietMs=1100 refreshes=0 advancingCapture=true advancingDisplay=true reportReused=true batch=20 accessSamples=1; watcher-unavailable polling fallback and reattachment pass"
+      ]
+    },
+    "scope": "Android emulator real SystemUI touch prompt-tone toggles, stale choice/visit/fullscreen command rejection and controlled audio-failure menu; actual Camera2/model/vibration retained; old home/UI/depth/native-audio gates retained; no physical audibility, device or power acceptance",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "workflow_attempt": 1
+  }
+]

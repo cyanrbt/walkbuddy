@@ -2,11 +2,13 @@
 
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
-## v0.4.35 候选核对
+## v0.4.35 发布核对
 
 [首轮 41131327523](https://github.com/cyanrbt/walkbuddy/actions/runs/41131327523) attempt 1 两套编译成功后各有三项失败：大字体横屏「提示音」换行，以及两轮系统菜单触摸未完成。原图确认固定侧栏宽度不够，是本次真实布局回归；菜单首轮缺少逐步轨迹，不能认定每次触摸的精确原因。完整失败附件已下载核对摘要，API 35 另有外部系统服务 ANR，与两套共同的换行问题分开记录。
 
-按实际标签宽度适配侧栏、补充系统菜单屏幕边界与新鲜稳定目标之后，[修订 41133558071](https://github.com/cyanrbt/walkbuddy/actions/runs/41133558071) attempt 1 两套各十项完整成功，ZIP 均下载匹配摘要并重放，原样菜单及横屏图已查看。实际四次触摸、旧按钮拒绝与音频失败回退通过；首轮未重跑、尚待正式标签。证据与因果边界见[本轮记录](pip-sound-controls-2026-10-31.md)。
+按实际标签宽度适配侧栏、补充系统菜单屏幕边界与新鲜稳定目标之后，[修订 41133558071](https://github.com/cyanrbt/walkbuddy/actions/runs/41133558071) attempt 1 两套各十项完整成功，ZIP 均下载匹配摘要并重放，原样菜单及横屏图已查看。实际四次触摸、旧按钮拒绝与音频失败回退通过；首轮未重跑。证据与因果边界见[本轮记录](pip-sound-controls-2026-10-31.md)。
+
+[正式 v0.4.35 41134864899](https://github.com/cyanrbt/walkbuddy/actions/runs/41134864899) attempt 1 两套十项、APK 作业与整体终态均成功，原始附件和实际 [APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.35/Walk-Buddy-v0.4.35-arm64-debug.apk) 均已完整下载，核对版本 0.4.35 / 47、固定签名、服务端摘要和新实现。API 35 外部 `com.google.android.as` onStartJob ANR 单独保留，无本应用 ANR 或聚焦外部弹窗观察；正式流程未重跑，不以发布成功消除旧红叉或推断全部输入根因已解决。
 
 ## v0.4.34 发布核对
 
