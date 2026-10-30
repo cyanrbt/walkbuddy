@@ -37,3 +37,9 @@ v0.4.20 的完整预览没有请求保持亮屏，用户只看画面而不触摸
 | 36 | 12970579227 / 7,881,167 | `7b217f333a12892a2c6ed8565f63570eeb35099ebf3ea5e38d4b9f9d674a0e26` | [api36.json](screen-idle-2026-10-30-api36.json) |
 
 此前三轮输入失败与未充分解释之处全部保留。本次成功没有触发失败瞬时采集分支，不能证明旧 UID 异常根因已经消失。最后按 UiAutomation 的直接 Runtime.exec 参数规则移除日志过滤器中的 shell 引号，最终测试包重新编译成功；只影响失败采证，不改变运行应用或通过路径。正式标签仍需完整发布检查。
+
+## 发布附件
+
+新标签 `v0.4.21` 固定指向 `4c9ae2372bd56dd69c5e0146474cbdd902604a73`。[发布流程 41044965502](https://github.com/cyanrbt/walkbuddy/actions/runs/41044965502) attempt 1 成功：API 35 job `124026693289`、API 36 job `124026693652`、APK job `124029399213` 均首次通过；同提交 main 检查的两套 API 也首次成功。运行应用与前述原生候选相同。
+
+Release 已实际发布 [ARM64 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.21/Walk-Buddy-v0.4.21-arm64-debug.apk)，已下载并核对资产摘要、固定证书、0.4.21 / 33、仅 CAMERA/VIBRATE、模型和中文标签；APK 内 syncKeepScreenOn 与亮屏提示文字均存在，见[附件记录](apk-v0.4.21.json)。此为已发布软件包与模拟器行为核验，不替代实体设备功耗、AR、多窗口或 OEM 息屏策略验收。
