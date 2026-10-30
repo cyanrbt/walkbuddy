@@ -179,6 +179,7 @@ final class PipProbe {
             });
             screenshot(runner,"preview-controls-live.png");
             checkpoint(runner,"camera_live");
+            if(profilePriority==null && profileThreads==null)screenIdleLifecycle(runner,host,report);
 
             // Force expiry from the actual TextureView.draw -> SurfaceTextureUpdated path.
             AtomicBoolean expiredInDraw=new AtomicBoolean();
@@ -421,6 +422,80 @@ final class PipProbe {
     private static void bringForward(Instrumentation runner,PreviewActivity host) {
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
     }
+    private static void screenIdleLifecycle(Instrumentation runner,PreviewActivity host,StringBuilder report) throws Exception {
+        String originalTimeout=shellText(runner,"settings get system screen_off_timeout").trim();
+        String originalStayOn=shellText(runner,"settings get global stay_on_while_plugged_in").trim();
+        if(!originalTimeout.matches("null|[0-9]+") || !originalStayOn.matches("null|[0-9]+"))
+            throw new AssertionError("Cannot safely restore emulator screen settings");
+        long effective;
+        try {
+            shell(runner,"settings put global stay_on_while_plugged_in 0");
+            shell(runner,"settings put system screen_off_timeout 1000");
+            String power=shellText(runner,"dumpsys -t 3 power");
+            long appliedDeadline=android.os.SystemClock.elapsedRealtime()+5000;
+            while(!shortIdleSettingsApplied(power) && android.os.SystemClock.elapsedRealtime()<appliedDeadline) {
+                Thread.sleep(50);power=shellText(runner,"dumpsys -t 3 power");
+            }
+            java.util.regex.Matcher minimum=java.util.regex.Pattern.compile("(?m)^\\s*mMinimumScreenOffTimeoutConfig=(\\d+)\\s*$").matcher(power);
+            if(!minimum.find() || !shortIdleSettingsApplied(power))throw new AssertionError("Short idle timeout was not applied");
+            effective=Math.max(1000,Long.parseLong(minimum.group(1)));
+            if(effective>15000)throw new AssertionError("Unexpected emulator minimum screen timeout: "+effective);
+            powerEvidence(runner,"screen-idle-config.txt",power);
+            await(runner,()->host.hasWindowFocus() && keepsScreenOn(host),"full preview owns screen hold");
+            long until=android.os.SystemClock.elapsedRealtime()+effective+1500;
+            while(android.os.SystemClock.elapsedRealtime()<until) {
+                read(runner,()->{
+                    if(!live(host) || !keepsScreenOn(host) || !host.getSystemService(PowerManager.class).isInteractive())
+                        throw new AssertionError("Idle full preview lost live camera or allowed screen off");
+                    return true;
+                });
+                Thread.sleep(200);
+            }
+            report.append("SCREEN_IDLE_FULL_PASS requestedMs=1000 effectiveMinimumMs=").append(effective)
+                .append(" observedWithoutInputMs=").append(effective+1500).append('\n');
+            powerEvidence(runner,"screen-idle-full-power.txt",shellText(runner,"dumpsys -t 3 power"));
+            tap(runner,host,R.id.enter_pip);
+            await(runner,()->host.isInPictureInPictureMode() && !keepsScreenOn(host),"PiP releases screen hold");
+            long deadline=android.os.SystemClock.elapsedRealtime()+effective+8000;
+            while(read(runner,()->host.getSystemService(PowerManager.class).isInteractive())
+                && android.os.SystemClock.elapsedRealtime()<deadline)Thread.sleep(100);
+            if(read(runner,()->host.getSystemService(PowerManager.class).isInteractive()))
+                throw new AssertionError("PiP prevented configured automatic screen off");
+            await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE,"automatic screen off stops camera");
+            read(runner,()->{assertReleased(host);assertNotPolling(host);return true;});
+            powerEvidence(runner,"screen-idle-pip-power.txt",shellText(runner,"dumpsys -t 3 power"));
+            report.append("SCREEN_IDLE_PIP_PASS automatic screen off releases camera and polling\n");
+        } finally {
+            // Preserve the failing power state before restoring fixture settings or waking up.
+            try{powerEvidence(runner,"screen-idle-final-power.txt",shellText(runner,"dumpsys -t 3 power"));}
+            catch(Throwable ignored){/* Keep the original failure and always restore settings. */}
+            shell(runner,"settings "+("null".equals(originalTimeout)?"delete system screen_off_timeout":"put system screen_off_timeout "+originalTimeout));
+            shell(runner,"settings "+("null".equals(originalStayOn)?"delete global stay_on_while_plugged_in":"put global stay_on_while_plugged_in "+originalStayOn));
+            shell(runner,"input keyevent KEYCODE_WAKEUP");shell(runner,"wm dismiss-keyguard");
+        }
+        bringForward(runner,host);
+        await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
+            && host.getSystemService(PowerManager.class).isInteractive()
+            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),"return after automatic screen off");
+        read(runner,()->{assertReleased(host);return true;});
+        tap(runner,host,R.id.restart_preview);
+        await(runner,()->live(host) && keepsScreenOn(host),"manual restart restores full preview screen hold");
+        report.append("PASS screen hold only for active full preview; real idle timeout keeps full preview awake, PiP sleeps, wake stays stopped, manual restart restores hold\n");
+    }
+    private static boolean keepsScreenOn(Activity host) {
+        return (host.getWindow().getAttributes().flags&android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)!=0;
+    }
+    private static boolean shortIdleSettingsApplied(String power) {
+        return java.util.regex.Pattern.compile("(?m)^\\s*mScreenOffTimeoutSetting=1000\\s*$").matcher(power).find()
+            && java.util.regex.Pattern.compile("(?m)^\\s*mStayOnWhilePluggedInSetting=0\\s*$").matcher(power).find();
+    }
+    private static void powerEvidence(Instrumentation runner,String name,String text) throws Exception {
+        File directory=new File(runner.getTargetContext().getCacheDir(),"ui-probe");
+        if(!directory.isDirectory() && !directory.mkdirs())throw new AssertionError("Power evidence directory unavailable");
+        try(FileOutputStream output=new FileOutputStream(new File(directory,name))) {
+            output.write(text.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        }
+    }
     private static void pipDetectionControl(Instrumentation runner,PreviewActivity host,Activity launcher,StringBuilder report) throws Exception {
         Object camera=read(runner,()->field(host,"camera")),texture=read(runner,()->field(host,"texture"));
         InferenceWorker.Ticket ticket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
@@ -646,6 +721,7 @@ final class PipProbe {
         return detail.toString();
     }
     private static void assertReleased(PreviewActivity host) {
+        if(keepsScreenOn(host))throw new AssertionError("Stopped preview retained screen hold");
         for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback"})
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
         if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
@@ -719,6 +795,12 @@ final class PipProbe {
         try(ParcelFileDescriptor pipe=runner.getUiAutomation().executeShellCommand(command);FileInputStream input=new FileInputStream(pipe.getFileDescriptor())) {
             byte[] buffer=new byte[1024];while(input.read(buffer)!=-1){/* drain */}
         } catch(Exception error){throw new AssertionError(error);}
+    }
+    private static String shellText(Instrumentation runner,String command) {
+        try(ParcelFileDescriptor pipe=runner.getUiAutomation().executeShellCommand(command);
+            FileInputStream input=new FileInputStream(pipe.getFileDescriptor())) {
+            return new String(input.readAllBytes(),java.nio.charset.StandardCharsets.UTF_8);
+        }catch(Exception error){throw new AssertionError(error);}
     }
     private static SessionState state(PreviewActivity host){return (SessionState)field(host,"state");}
     private static long basicAt(PreviewActivity host){return (long)field(field(host,"feedback"),"basicAt");}

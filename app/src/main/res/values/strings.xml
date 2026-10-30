@@ -67,7 +67,7 @@
     <string name="settings_unavailable">无法打开设置，请在系统应用设置中查看。</string>
     <string name="enter_pip">以小窗观察</string>
     <string name="restart_preview">重新开启预览</string>
-    <string name="preview_hint">黄框：画面关注（未测距） · 红色：深度确认很近\n声音开关只控制提示音，系统朗读单独设置</string>
+    <string name="preview_hint">黄框：画面关注（未测距） · 红色：深度确认很近\n声音开关只控制提示音，系统朗读单独设置\n应用内取景保持亮屏，小窗按系统自动息屏</string>
     <string name="posture_hint">镜头可能偏向地面或天空，请调整持机姿势，确认画面能看到前方</string>
     <string name="depth_status_initial">正在检查增强能力</string>
     <string name="enable_depth">空间检测</string>

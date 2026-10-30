@@ -194,6 +194,7 @@ public final class PreviewActivity extends Activity {
 
     @Override protected void onPause() {
         resumed = false;
+        syncKeepScreenOn();
         tracePip("pause");
         // A PiP Activity is paused but still visible: keep its camera running.
         super.onPause();
@@ -209,6 +210,7 @@ public final class PreviewActivity extends Activity {
 
     @Override protected void onDestroy() {
         destroyed = true;
+        syncKeepScreenOn();
         if (active.get() == this) active.clear();
         cancelAnalysis(); state.stop(); feedback.clear(); if(announcer!=null)announcer.clear(); silence();
         main.removeCallbacksAndMessages(null); stopPosture(); closeCamera();
@@ -216,6 +218,20 @@ public final class PreviewActivity extends Activity {
         getSystemService(DisplayManager.class).unregisterDisplayListener(displayListener);
         publicReport = "已停止；请主动开启";
         super.onDestroy();
+    }
+
+    @Override public void onWindowFocusChanged(boolean focused) {
+        super.onWindowFocusChanged(focused);
+        syncKeepScreenOn();
+    }
+
+    private void syncKeepScreenOn() {
+        boolean keep=!destroyed && resumed && hasWindowFocus() && !compactUi && !isInPictureInPictureMode()
+            && (state.phase==SessionState.Phase.STARTING
+                || state.phase==SessionState.Phase.LIVE && state.fresh(SystemClock.elapsedRealtime()));
+        int flag=WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+        // Update only this flag, and only on a transition; frame callbacks must not repeat window IPC.
+        if(((getWindow().getAttributes().flags&flag)!=0)!=keep)getWindow().setFlags(keep?flag:0,flag);
     }
 
     private void startPreview() {
@@ -343,6 +359,7 @@ public final class PreviewActivity extends Activity {
 
     private void setCompactUi(boolean compact) {
         compactUi=compact;
+        syncKeepScreenOn();
         if (root == null) return;
         PreviewChrome.compact(root,compact,useDepth);
         PreviewChrome.detectionStopped(root,detectionNotice!=0 && state.phase==SessionState.Phase.LIVE,compact);
@@ -660,6 +677,7 @@ public final class PreviewActivity extends Activity {
         if(activeTone!=null){activeTone.stopTone();activeTone.release();activeTone=null;}
     }
     private void render(long now) {
+        syncKeepScreenOn();
         if(cover==null)return;
         boolean live=state.phase==SessionState.Phase.LIVE && state.fresh(now);
         if (live && !previewSeen) {
