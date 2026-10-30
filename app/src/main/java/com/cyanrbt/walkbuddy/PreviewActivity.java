@@ -526,7 +526,7 @@ public final class PreviewActivity extends Activity {
         requestAnalysisPreparation();
     }
     static LocalDetector createWorkerDetector(Context app,int priority) throws java.io.IOException {
-        return createWorkerDetector(app,priority,LocalDetector.DEFAULT_THREADS,false);
+        return createWorkerDetector(app,priority,LocalDetector.defaultThreads(),false);
     }
     static LocalDetector createWorkerDetector(Context app,int priority,int threads,boolean traceAll) throws java.io.IOException {
         android.os.Process.setThreadPriority(priority);

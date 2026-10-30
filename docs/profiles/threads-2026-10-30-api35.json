@@ -1,0 +1,159 @@
+{
+  "parityPassed": true,
+  "trials": [
+    {
+      "index": 1,
+      "threads": 2,
+      "passed": true,
+      "failure": null,
+      "profileHeaderMatches": true,
+      "timingThreadsMatch": true,
+      "initWall": {
+        "count": 2,
+        "medianMs": 205.0,
+        "maxMs": 320
+      },
+      "nativeWall": {
+        "count": 12,
+        "medianMs": 328.5,
+        "maxMs": 650
+      },
+      "prepareWall": {
+        "count": 12,
+        "medianMs": 1.0,
+        "maxMs": 40
+      },
+      "firstNativeWall": {
+        "count": 2,
+        "medianMs": 221.0,
+        "maxMs": 292
+      },
+      "steadyNativeWall": {
+        "count": 10,
+        "medianMs": 363.5,
+        "maxMs": 650
+      },
+      "workerCpu": {
+        "count": 12,
+        "medianMs": 74.5,
+        "maxMs": 86
+      }
+    },
+    {
+      "index": 2,
+      "threads": 1,
+      "passed": true,
+      "failure": null,
+      "profileHeaderMatches": true,
+      "timingThreadsMatch": true,
+      "initWall": {
+        "count": 2,
+        "medianMs": 228.5,
+        "maxMs": 374
+      },
+      "nativeWall": {
+        "count": 9,
+        "medianMs": 257,
+        "maxMs": 524
+      },
+      "prepareWall": {
+        "count": 9,
+        "medianMs": 3,
+        "maxMs": 65
+      },
+      "firstNativeWall": {
+        "count": 2,
+        "medianMs": 200.0,
+        "maxMs": 265
+      },
+      "steadyNativeWall": {
+        "count": 7,
+        "medianMs": 257,
+        "maxMs": 524
+      },
+      "workerCpu": {
+        "count": 9,
+        "medianMs": 72,
+        "maxMs": 79
+      }
+    },
+    {
+      "index": 3,
+      "threads": 1,
+      "passed": true,
+      "failure": null,
+      "profileHeaderMatches": true,
+      "timingThreadsMatch": true,
+      "initWall": {
+        "count": 2,
+        "medianMs": 89.0,
+        "maxMs": 99
+      },
+      "nativeWall": {
+        "count": 8,
+        "medianMs": 194.5,
+        "maxMs": 359
+      },
+      "prepareWall": {
+        "count": 8,
+        "medianMs": 2.0,
+        "maxMs": 59
+      },
+      "firstNativeWall": {
+        "count": 2,
+        "medianMs": 280.5,
+        "maxMs": 359
+      },
+      "steadyNativeWall": {
+        "count": 6,
+        "medianMs": 174.0,
+        "maxMs": 293
+      },
+      "workerCpu": {
+        "count": 8,
+        "medianMs": 72.5,
+        "maxMs": 80
+      }
+    },
+    {
+      "index": 4,
+      "threads": 2,
+      "passed": true,
+      "failure": null,
+      "profileHeaderMatches": true,
+      "timingThreadsMatch": true,
+      "initWall": {
+        "count": 2,
+        "medianMs": 138.0,
+        "maxMs": 223
+      },
+      "nativeWall": {
+        "count": 9,
+        "medianMs": 263,
+        "maxMs": 611
+      },
+      "prepareWall": {
+        "count": 9,
+        "medianMs": 1,
+        "maxMs": 163
+      },
+      "firstNativeWall": {
+        "count": 2,
+        "medianMs": 226.0,
+        "maxMs": 263
+      },
+      "steadyNativeWall": {
+        "count": 7,
+        "medianMs": 317,
+        "maxMs": 611
+      },
+      "workerCpu": {
+        "count": 9,
+        "medianMs": 76,
+        "maxMs": 81
+      }
+    }
+  ],
+  "scope": "Recorded initialization and inference wall time; worker CPU excludes helper threads; emulator only",
+  "passed": true
+}

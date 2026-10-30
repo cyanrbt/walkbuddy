@@ -13,12 +13,20 @@ import java.util.*;
 /** Android pixel parity, actual bundled-model outputs, and scoped allocation observations. */
 final class DetectorProbe {
     private static volatile int sink;
+    private static final String THREAD_PASS="THREAD_PARITY_PASS cases=4; all 151 floats match threads=2/1 within 1e-6; portrait, blank, white, repeated portrait\n";
     static void compareThreads(Instrumentation runner) {
         Bundle result=new Bundle();int code=Activity.RESULT_CANCELED;
-        Bitmap portrait=null,blank=null,white=null;
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("Thread parity probe is restricted to emulators");
+            threadOutputs(runner);
+            result.putString("stream",THREAD_PASS);code=Activity.RESULT_OK;
+        }catch(Throwable error){result.putString("stream","THREAD_PARITY_FAIL: "+error);}
+        runner.finish(code,result);
+    }
+    private static void threadOutputs(Instrumentation runner) throws Exception {
+        Bitmap portrait=null,blank=null,white=null;
+        try {
             try(java.io.InputStream stream=runner.getContext().getAssets().open("portrait.jpg")){portrait=BitmapFactory.decodeStream(stream);}
             if(portrait==null)throw new AssertionError("Portrait fixture did not decode");
             blank=Bitmap.createBitmap(320,320,Bitmap.Config.ARGB_8888);
@@ -39,11 +47,7 @@ final class DetectorProbe {
                     if(sources[i].isRecycled())throw new AssertionError("Detector recycled input");
                 }
             }
-            result.putString("stream","THREAD_PARITY_PASS cases=4; all 151 floats match threads=2/1 within 1e-6; portrait, blank, white, repeated portrait\n");
-            code=Activity.RESULT_OK;
-        }catch(Throwable error){result.putString("stream","THREAD_PARITY_FAIL: "+error);}
-        finally {for(Bitmap bitmap:new Bitmap[]{portrait,blank,white})if(bitmap!=null)bitmap.recycle();}
-        runner.finish(code,result);
+        } finally {for(Bitmap bitmap:new Bitmap[]{portrait,blank,white})if(bitmap!=null)bitmap.recycle();}
     }
     private static float[] tensors(LocalDetector detector) throws Exception {
         float[] result=new float[151];int at=0;
@@ -59,7 +63,7 @@ final class DetectorProbe {
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("Detector probe is restricted to emulators");
-            pixels(report);model(runner,report);
+            pixels(report);model(runner,report);threadOutputs(runner);report.append(THREAD_PASS);
             result.putString("stream",report+"RUNTIME_PROBE_PASS\n");runner.finish(Activity.RESULT_OK,result);
         } catch(Throwable error) {
             result.putString("stream",report+"RUNTIME_PROBE_FAIL: "+error);runner.finish(Activity.RESULT_CANCELED,result);

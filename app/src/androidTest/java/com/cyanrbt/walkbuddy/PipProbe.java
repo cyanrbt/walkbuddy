@@ -126,7 +126,7 @@ final class PipProbe {
                 throw new IllegalStateException("PiP probe is restricted to emulators");
             if(profilePriority!=null || profileThreads!=null) {
                 int priority=profilePriority==null?1:profilePriority;
-                int threads=profileThreads==null?LocalDetector.DEFAULT_THREADS:profileThreads;
+                int threads=profileThreads==null?LocalDetector.defaultThreads():profileThreads;
                 if(priority!=1 && priority!=10)throw new IllegalArgumentException("Unsupported profile priority");
                 if(threads!=1 && threads!=2)throw new IllegalArgumentException("Unsupported profile threads");
                 Field shared=PreviewActivity.class.getDeclaredField("sharedWorker");shared.setAccessible(true);

@@ -12,7 +12,7 @@ import org.tensorflow.lite.Interpreter;
 /** 独立worker串行调用；固定许可核验模型，UINT8输入和4个输出逐项校验。 */
 final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalDetector.Result> {
     static final boolean AVAILABLE=true;
-    static final int DEFAULT_THREADS=2;
+    static int defaultThreads(){return Runtime.getRuntime().availableProcessors()<=2?1:2;}
     private final int threads;
     private final boolean traceAll;
     final Interpreter interpreter;
@@ -32,7 +32,7 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
         Result(String category,int[] indices,float[] scores,List<Detection> detections){this.category=category;this.classIndices=indices;this.scores=scores;this.detections=Collections.unmodifiableList(new ArrayList<>(detections));}
     }
     LocalDetector(Context context) throws IOException {
-        this(context,DEFAULT_THREADS,false);
+        this(context,defaultThreads(),false);
     }
     LocalDetector(Context context,int threads) throws IOException {
         this(context,threads,false);
@@ -86,7 +86,7 @@ final class LocalDetector implements InferenceWorker.Detector<BitmapFrame,LocalD
         }
         return new Result(category,indices,values,detections);
     }
-    String tensorReport(){StringBuilder out=new StringBuilder();out.append("input ").append(interpreter.getInputTensor(0).name()).append(" ").append(interpreter.getInputTensor(0).dataType()).append(" ").append(Arrays.toString(interpreter.getInputTensor(0).shape()));for(int i=0;i<4;i++)out.append("\noutput ").append(i).append(" ").append(interpreter.getOutputTensor(i).name()).append(" ").append(interpreter.getOutputTensor(i).dataType()).append(" ").append(Arrays.toString(interpreter.getOutputTensor(i).shape()));return out.toString();}
+    String tensorReport(){StringBuilder out=new StringBuilder();out.append("threads ").append(threads).append("\ninput ").append(interpreter.getInputTensor(0).name()).append(" ").append(interpreter.getInputTensor(0).dataType()).append(" ").append(Arrays.toString(interpreter.getInputTensor(0).shape()));for(int i=0;i<4;i++)out.append("\noutput ").append(i).append(" ").append(interpreter.getOutputTensor(i).name()).append(" ").append(interpreter.getOutputTensor(i).dataType()).append(" ").append(Arrays.toString(interpreter.getOutputTensor(i).shape()));return out.toString();}
     private static String chinese(String name){switch(name){case"person":return"人";case"bicycle":return"自行车";case"car":return"汽车";case"motorcycle":return"摩托车";case"bus":return"公交车";case"truck":return"卡车";case"chair":return"椅子";case"bench":return"长凳";case"dining table":return"桌子";case"couch":return"沙发";case"potted plant":return"盆栽";case"dog":return"狗";case"cat":return"猫";case"suitcase":return"行李箱";case"backpack":return"背包";case"bottle":return"瓶子";case"bed":return"床";case"stop sign":return"停车标志";case"fire hydrant":return"消防栓";default:return name;}}
     private static FloatBuffer outputBuffer(int size){return ByteBuffer.allocateDirect(size*Float.BYTES).order(ByteOrder.nativeOrder()).asFloatBuffer();}
     @Override public void close(){if(closed)return;closed=true;try{interpreter.close();}finally{input.close();input=null;inputs=null;outputs.clear();}}
