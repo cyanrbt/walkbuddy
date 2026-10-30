@@ -192,5 +192,85 @@
       ]
     },
     "scope": "Android emulator real SystemUI touch prompt-tone toggles, stale choice/visit/fullscreen command rejection and controlled audio-failure menu; actual Camera2/model/vibration retained; old home/UI/depth/native-audio gates retained; no physical audibility, device or power acceptance"
+  },
+  {
+    "api": 36,
+    "source_commit": "3facad371bf8530dae570afd21a738faeca1bf70",
+    "run_id": 41139401074,
+    "attempt": 1,
+    "artifact_id": 13017588840,
+    "archive_size_bytes": 993,
+    "archive_sha256": "7256521a8dda96406928ce9201dbcd452359a89ddcc4d178d1cc1646a4f45f97",
+    "summary": {
+      "status": "checks_not_passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "failure",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "missing",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "missing",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "missing",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "missing",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "missing",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "missing",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "missing",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "missing",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "missing",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "missing",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "scope": "APK compilation passed; emulator failed to boot before the ten native probes; no application runtime acceptance",
+    "raw_log_markers": [
+      "BUILD SUCCESSFUL in 36s",
+      "FATAL | Not enough space to create userdata partition. Available: 7202.88 MB at /home/runner/.android/avd/test.avd, need 7372.80 MB.",
+      "Timeout waiting for emulator to boot.",
+      "error: could not connect to TCP port 5554: Connection refused"
+    ],
+    "cause": "Emulator userdata partition allocation exceeded available runner disk before any app probe"
   }
 ]
