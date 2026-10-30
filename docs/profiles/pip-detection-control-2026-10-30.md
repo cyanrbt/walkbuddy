@@ -18,3 +18,14 @@ v0.4.19 的系统小窗菜单只有「停止整个预览」，关闭检测需展
 布局另对原 30 组窗口/字号/日夜配置检查手动关闭后的完整说明，既有 60 组故障/小窗提示呈现保留。原完整模型、相机、锁屏和两轮 PiP 检查继续执行。结果待实际运行后补记。
 
 本地 `testDebugUnitTest lintDebug assembleDebug assembleDebugAndroidTest -PuniversalApk` 成功，146 项 JVM 测试无失败，Lint 0 错误 / 22 警告；产品表面、v0.4.20 发布元数据和八项 CI 摘要测试通过。首轮编译发现探针误用不存在的 Activity PiP 参数 getter，已改为检查成功提交的参数，不使用平台隐藏接口；最终应用与测试 APK 均已编译。
+
+## 原生结果
+
+源码 `b7628a0f612764b91ed07d5941deb06682205d13` 的 [41036811932](https://github.com/cyanrbt/walkbuddy/actions/runs/41036811932) attempt 2 最终成功。API 36 job `123999553366` 首次通过；API 35 首轮在最初的锁屏恢复输入处失败，[原始证据和原因边界](input-after-wake-2026-10-30-v0.4.20.md)保留，仅重跑原提交失败作业后 API 35 job `124001689872` 成功。没有改变注入方式、放宽截止或重试点击。
+
+两套附件均已实际下载并校验摘要，每套九项探针齐全，两轮 PiP 各包含一次新增控制用例，30 组手动关闭布局、60 组既有故障提示呈现与原模型回归通过。两套摘要均无 ANR 观察；后续通过不能证明首轮输入根因消失。已查看 [API 36 小窗与展开原图](../design/v0.4.20/README.md)。
+
+| API | artifact / 字节 | ZIP SHA-256 | 原始摘要 |
+| --- | --- | --- | --- |
+| 35（重跑） | 12968891150 / 7,788,863 | `962172fa003f142fcc9181b446681a875541de77500eb429746e84b040fc5e0a` | [api35.json](pip-detection-control-2026-10-30-api35.json) |
+| 36（首次） | 12968786754 / 7,759,048 | `5c4bf126022d203cca260e66c4c0cc3b13a72c374bbbee2498334d5a2f566450` | [api36.json](pip-detection-control-2026-10-30-api36.json) |

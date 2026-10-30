@@ -1,0 +1,72 @@
+{
+  "source_commit": "b7628a0f612764b91ed07d5941deb06682205d13",
+  "run_id": 41036811932,
+  "api": 36,
+  "attempt": 1,
+  "artifact_id": 12968786754,
+  "size_bytes": 7759048,
+  "archive_sha256": "5c4bf126022d203cca260e66c4c0cc3b13a72c374bbbee2498334d5a2f566450",
+  "summary": {
+    "status": "passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "success",
+    "mode": "ui",
+    "probes": [
+      {
+        "name": "pip_recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "runtime",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "preview",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "overlay",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "layout",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "home",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip-repeat",
+        "status": "passed",
+        "failures": []
+      }
+    ],
+    "observations": [],
+    "anrs": [],
+    "failure_time_focus": [],
+    "focused_external_anr_dialogs": []
+  },
+  "control_reports": [
+    "PASS actual PiP menu PendingIntent stops detection/sound/feedback while camera/texture advance; menu removes detection action; repeat is idempotent; owner/generation/fullscreen guards; expansion stays off; manual model restart keeps sound off",
+    "PASS actual PiP menu PendingIntent stops detection/sound/feedback while camera/texture advance; menu removes detection action; repeat is idempotent; owner/generation/fullscreen guards; expansion stays off; manual model restart keeps sound off"
+  ],
+  "layout": "PASS 320x480-font100-day camera=320x173\nPASS 320x480-font100-night camera=320x173\nPASS 320x480-font150-day camera=320x164\nPASS 320x480-font150-night camera=320x164\nPASS 320x480-font200-day camera=320x151\nPASS 320x480-font200-night camera=320x151\nPASS 360x640-font100-day camera=360x269\nPASS 360x640-font100-night camera=360x269\nPASS 360x640-font150-day camera=360x260\nPASS 360x640-font150-night camera=360x260\nPASS 360x640-font200-day camera=360x247\nPASS 360x640-font200-night camera=360x247\nPASS 600x360-font100-day camera=360x169\nPASS 600x360-font100-night camera=360x169\nPASS 600x360-font150-day camera=360x153\nPASS 600x360-font150-night camera=360x153\nPASS 600x360-font200-day camera=360x131\nPASS 600x360-font200-night camera=360x131\nPASS 640x360-font100-day camera=384x169\nPASS 640x360-font100-night camera=384x169\nPASS 640x360-font150-day camera=384x153\nPASS 640x360-font150-night camera=384x153\nPASS 640x360-font200-day camera=384x131\nPASS 640x360-font200-night camera=384x131\nPASS 800x600-font100-day camera=480x409\nPASS 800x600-font100-night camera=480x409\nPASS 800x600-font150-day camera=480x393\nPASS 800x600-font150-night camera=480x393\nPASS 800x600-font200-day camera=480x371\nPASS 800x600-font200-night camera=480x371\nLAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore\n\n"
+}
