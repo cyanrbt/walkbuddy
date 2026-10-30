@@ -294,6 +294,8 @@ final class PipProbe {
             report.append("PASS expansion restores controls and keeps preview/model results LIVE\n");
             checkpoint(runner,"expanded_analysis_live");
 
+            pipDetectionControl(runner,host,launcher,report);
+
             // Screen-off must stop even while the camera Activity was recently in PiP.
             shell(runner,"input keyevent KEYCODE_SLEEP");
             await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE
@@ -419,6 +421,76 @@ final class PipProbe {
     private static void bringForward(Instrumentation runner,PreviewActivity host) {
         read(runner,()->{host.startActivity(new Intent(host,PreviewActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));return true;});
     }
+    private static void pipDetectionControl(Instrumentation runner,PreviewActivity host,Activity launcher,StringBuilder report) throws Exception {
+        Object camera=read(runner,()->field(host,"camera")),texture=read(runner,()->field(host,"texture"));
+        InferenceWorker.Ticket ticket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
+        if(ticket==null || !read(runner,()->state(host).recognition))throw new AssertionError("PiP control needs active detection");
+        int fullWidth=read(runner,()->((View)field(host,"root")).getWidth());
+        int fullHeight=read(runner,()->((View)field(host,"root")).getHeight());
+        tap(runner,host,R.id.enter_pip);
+        await(runner,()->host.isInPictureInPictureMode() && ((View)field(host,"root")).getWidth()<fullWidth
+            && ((View)field(host,"root")).getHeight()<fullHeight,"detection control in settled PiP");
+        RemoteAction action=read(runner,()->{
+            java.util.List<RemoteAction> actions=((android.app.PictureInPictureParams)field(host,"submittedPipParams")).getActions();
+            if(actions.size()!=2 || !actions.get(0).getTitle().toString().equals(host.getString(R.string.preview_stop)))
+                throw new AssertionError("Active PiP must retain stop and expose detection control");
+            RemoteAction off=actions.get(1);
+            if(!off.getTitle().toString().equals(host.getString(R.string.pip_stop_detection)) || !off.isEnabled()
+                || !off.getContentDescription().toString().equals(host.getString(R.string.pip_stop_detection_description)))
+                throw new AssertionError("PiP detection control has incorrect label or semantics");
+            StopPreviewReceiver receiver=new StopPreviewReceiver();
+            receiver.onReceive(host,new Intent(StopPreviewReceiver.STOP_DETECTION)
+                .putExtra(StopPreviewReceiver.OWNER,"retired-owner").putExtra(StopPreviewReceiver.GENERATION,state(host).generation));
+            receiver.onReceive(host,new Intent(StopPreviewReceiver.STOP_DETECTION)
+                .putExtra(StopPreviewReceiver.OWNER,(String)field(host,"pipOwner"))
+                .putExtra(StopPreviewReceiver.GENERATION,state(host).generation-1));
+            receiver.onReceive(host,new Intent("unrecognized-action"));
+            if(!state(host).recognition || field(host,"analysisTicket")!=ticket || ticket.cancelled)
+                throw new AssertionError("Retired or unrecognized PiP action changed active detection");
+            ((CheckBox)host.findViewById(R.id.preview_sound)).setChecked(true);
+            setField(host,"pendingSpeak",true);
+            return off;
+        });
+        sendAction(runner,action);
+        await(runner,()->!state(host).recognition && (int)field(host,"detectionNotice")==R.string.info_detection_paused,
+            "PiP PendingIntent stops detection");
+        read(runner,()->{
+            assertPreviewOnly(host,camera,texture);
+            if(!ticket.cancelled || ((android.app.PictureInPictureParams)field(host,"submittedPipParams")).getActions().size()!=1)
+                throw new AssertionError("PiP off retained Ticket or obsolete menu action");
+            return true;
+        });
+        long stoppedAt=android.os.SystemClock.elapsedRealtime();
+        await(runner,()->live(host) && state(host).captureAt>stoppedAt+300 && state(host).displayAt>stoppedAt+300,
+            "PiP camera keeps advancing after manual detection off");
+        await(runner,()->warningReady(host),"manual PiP preview-only status laid out");
+        read(runner,()->{assertWarningFits(host);return true;});
+        screenshot(runner,"pip-detection-off.png");
+        sendAction(runner,action);
+        read(runner,()->{assertPreviewOnly(host,camera,texture);return true;});
+        tap(runner,launcher,R.id.start);
+        await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"expand after PiP detection off");
+        read(runner,()->{assertPreviewOnly(host,camera,texture);return true;});
+        screenshot(runner,"preview-after-pip-detection-off.png");
+        tap(runner,host,R.id.preview_recognition);
+        await(runner,()->live(host) && state(host).recognition && basicAt(host)>stoppedAt,"manual model restart after PiP detection off");
+        InferenceWorker.Ticket resumedTicket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
+        sendAction(runner,action);
+        read(runner,()->{
+            if(!state(host).recognition || field(host,"analysisTicket")!=resumedTicket || resumedTicket.cancelled
+                || ((CheckBox)host.findViewById(R.id.preview_sound)).isChecked()
+                || host.findViewById(R.id.detection_status).getVisibility()!=View.GONE)
+                throw new AssertionError("Replayed PiP action affected full preview or manual restart restored sound");
+            return true;
+        });
+        report.append("PASS actual PiP menu PendingIntent stops detection/sound/feedback while camera/texture advance; menu removes detection action; repeat is idempotent; owner/generation/fullscreen guards; expansion stays off; manual model restart keeps sound off\n");
+    }
+    private static void sendAction(Instrumentation runner,RemoteAction action) throws Exception {
+        java.util.concurrent.CountDownLatch delivered=new java.util.concurrent.CountDownLatch(1);
+        action.getActionIntent().send(runner.getTargetContext(),0,null,
+            (pending,intent,code,data,extras)->delivered.countDown(),new Handler(android.os.Looper.getMainLooper()));
+        if(!delivered.await(3,java.util.concurrent.TimeUnit.SECONDS))throw new AssertionError("PiP action delivery did not finish");
+    }
     private static void analysisRecovery(Instrumentation runner,PreviewActivity host,Activity launcher,StringBuilder report) throws Exception {
         @SuppressWarnings("unchecked") InferenceWorker<BitmapFrame,LocalDetector.Result> original=
             (InferenceWorker<BitmapFrame,LocalDetector.Result>)field(host,"worker");
@@ -428,7 +500,7 @@ final class PipProbe {
             ()->{throw new java.io.IOException("Injected model load failure");});
         try {
             read(runner,()->{setField(host,"worker",broken);host.findViewById(R.id.preview_recognition).performClick();return true;});
-            await(runner,()->(int)field(host,"analysisFailure")==R.string.info_detection_failed,"model failure becomes preview-only");
+            await(runner,()->(int)field(host,"detectionNotice")==R.string.info_detection_failed,"model failure becomes preview-only");
             read(runner,()->{assertPreviewOnly(host,camera,texture);return true;});
             await(runner,()->warningReady(host),"model failure warning laid out");
             read(runner,()->{assertWarningFits(host);return true;});

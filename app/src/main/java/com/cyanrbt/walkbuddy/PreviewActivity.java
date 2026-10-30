@@ -40,6 +40,13 @@ public final class PreviewActivity extends Activity {
         PreviewActivity preview = active.get();
         if (preview != null && !preview.destroyed) preview.stopPreview();
     }
+    static void stopPipDetection(String owner,long generation) {
+        PreviewActivity preview=active.get();
+        if(preview==null || preview.destroyed || preview.isFinishing()
+            || !preview.pipOwner.equals(owner) || preview.state.generation!=generation
+            || !preview.isInPictureInPictureMode() || !preview.state.recognition)return;
+        preview.pauseDetection(R.string.info_detection_paused);
+    }
     private static volatile String publicReport = "已停止；请主动开启";
     public static String report() { return publicReport; }
     private final Handler main = new Handler(Looper.getMainLooper());
@@ -78,7 +85,7 @@ public final class PreviewActivity extends Activity {
                 ? event.values[i] : 0.8f*gravity[i]+0.2f*event.values[i];
             gravityReady=true;
             boolean warn=posturePolicy.update(gravity[0],gravity[1],gravity[2],now);
-            postureHint.setVisibility(warn && !(compactUi && analysisFailure!=0)?View.VISIBLE:View.GONE);
+            postureHint.setVisibility(warn && !(compactUi && detectionNotice!=0)?View.VISIBLE:View.GONE);
         }
     };
     private TextView cover, info, titleView;
@@ -94,6 +101,9 @@ public final class PreviewActivity extends Activity {
         public void onDisplayChanged(int id){if(root!=null && id==wm.getDefaultDisplay().getDisplayId())transform();}
     };
     private boolean realtimeTimestamp, destroyed, disableRotateCrop, resumed;
+    private final String pipOwner=UUID.randomUUID().toString();
+    private int pipActionState=-1;
+    private PictureInPictureParams submittedPipParams;
     private boolean initialStart;
     private RecoveryGuide.Reason recoveryReason=RecoveryGuide.Reason.HIDDEN;
     private boolean previewSeen;
@@ -109,7 +119,7 @@ public final class PreviewActivity extends Activity {
     private InferenceWorker<BitmapFrame,LocalDetector.Result> worker;
     private InferenceWorker.Ticket analysisTicket;
     private boolean analysisReady,analysisHasResult;
-    private int analysisFailure;
+    private int detectionNotice;
     private final BroadcastReceiver events = new BroadcastReceiver() {
         public void onReceive(Context c, Intent intent) {
             if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())
@@ -238,7 +248,7 @@ public final class PreviewActivity extends Activity {
         boolean portrait = Math.floorMod(sensorOrientation - rotation, 180) != 0;
         PictureInPictureParams.Builder builder = new PictureInPictureParams.Builder()
             .setAspectRatio(new Rational(portrait ? 3 : 4, portrait ? 4 : 3))
-            .setActions(Collections.singletonList(stopAction()));
+            .setActions(pipActions());
         if (texture != null) {
             Rect bounds = new Rect();
             if (texture.getGlobalVisibleRect(bounds)) builder.setSourceRectHint(bounds);
@@ -250,10 +260,39 @@ public final class PreviewActivity extends Activity {
 
     private RemoteAction stopAction() {
         PendingIntent stop = PendingIntent.getBroadcast(this, 0,
-            new Intent(this, StopPreviewReceiver.class),
+            new Intent(this, StopPreviewReceiver.class).setAction(StopPreviewReceiver.STOP_PREVIEW),
             PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         return new RemoteAction(Icon.createWithResource(this, R.drawable.ic_stop),
             getString(R.string.preview_stop), getString(R.string.preview_stop), stop);
+    }
+
+    private List<RemoteAction> pipActions() {
+        List<RemoteAction> actions=new ArrayList<>();
+        // Keep stopping the camera available even on a system with only one action slot.
+        actions.add(stopAction());
+        if(state.phase==SessionState.Phase.LIVE && state.recognition && getMaxNumPictureInPictureActions()>1) {
+            Intent intent=new Intent(this,StopPreviewReceiver.class).setAction(StopPreviewReceiver.STOP_DETECTION)
+                .setData(android.net.Uri.parse("walkbuddy://detection/"+pipOwner+"/"+state.generation))
+                .putExtra(StopPreviewReceiver.OWNER,pipOwner).putExtra(StopPreviewReceiver.GENERATION,state.generation);
+            PendingIntent stop=PendingIntent.getBroadcast(this,1,intent,
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+            actions.add(new RemoteAction(Icon.createWithResource(this,R.drawable.ic_detection_off),
+                getString(R.string.pip_stop_detection),getString(R.string.pip_stop_detection_description),stop));
+        }
+        return actions;
+    }
+
+    private void syncPipActions() {
+        if(!isInPictureInPictureMode())return;
+        int next=state.phase==SessionState.Phase.LIVE && state.recognition?1:0;
+        if(pipActionState==next)return;
+        pipActionState=next;
+        try {
+            PictureInPictureParams params=new PictureInPictureParams.Builder().setActions(pipActions()).build();
+            setPictureInPictureParams(params);
+            submittedPipParams=params;
+        }
+        catch(RuntimeException error){android.util.Log.w("WalkBuddyPip","Unable to update menu actions",error);}
     }
 
     private void enterPip() {
@@ -262,7 +301,9 @@ public final class PreviewActivity extends Activity {
         if (!PipSupport.available(this)) { showPipFallback(); return; }
         try {
             setCompactUi(true);
-            boolean entered=enterPictureInPictureMode(pipParams());
+            PictureInPictureParams params=pipParams();
+            boolean entered=enterPictureInPictureMode(params);
+            if(entered)submittedPipParams=params;
             tracePip("accepted="+entered);
             if (!entered) {
                 setCompactUi(false); showPipFallback();
@@ -295,6 +336,8 @@ public final class PreviewActivity extends Activity {
         if (inPip) getSharedPreferences(HomeJourney.PREFERENCES, MODE_PRIVATE).edit()
             .putBoolean(HomeJourney.PIP_SEEN, true).apply();
         setCompactUi(inPip);
+        pipActionState=-1;
+        syncPipActions();
         tracePip("mode="+inPip);
     }
 
@@ -302,7 +345,7 @@ public final class PreviewActivity extends Activity {
         compactUi=compact;
         if (root == null) return;
         PreviewChrome.compact(root,compact,useDepth);
-        PreviewChrome.detectionStopped(root,analysisFailure!=0 && state.phase==SessionState.Phase.LIVE,compact);
+        PreviewChrome.detectionStopped(root,detectionNotice!=0 && state.phase==SessionState.Phase.LIVE,compact);
         root.requestApplyInsets();
         if (compact) getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         else getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
@@ -333,7 +376,7 @@ public final class PreviewActivity extends Activity {
         renderDepthGuide();
         recognition=root.findViewById(R.id.preview_recognition);
         recognition.setOnCheckedChangeListener((b,checked)-> {
-            analysisFailure=0;
+            detectionNotice=0;
             feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;analysisEpoch++;cancelAnalysis();
             if(checked && (!LocalDetector.AVAILABLE || state.phase!=SessionState.Phase.LIVE)) { b.setChecked(false);return; }
             state.recognition=checked;
@@ -604,11 +647,11 @@ public final class PreviewActivity extends Activity {
         }
         long now=SystemClock.elapsedRealtime();
         if(state.phase!=SessionState.Phase.LIVE || !state.fresh(now)){fail("画面已过期：不可用，请重新开启");return;}
-        android.util.Log.w("WalkBuddyAnalysis","Detection stopped; preview continues message="+getString(message));
+        android.util.Log.i("WalkBuddyAnalysis","Detection stopped; preview continues message="+getString(message));
         recognition.setChecked(false);
         state.recognition=false;state.analysisAt=0;cancelAnalysis();
         feedback.clear();detectionOverlay.clear();announcer.clear();pendingSpeak=false;silence();
-        sound.setChecked(false);analysisFailure=message;
+        sound.setChecked(false);detectionNotice=message;
         render(now);
         ((ScrollView)root.findViewById(R.id.preview_controls)).scrollTo(0,0);
     }
@@ -637,11 +680,12 @@ public final class PreviewActivity extends Activity {
         else PreviewRecovery.clear(root);
         depthButton.setEnabled(live);
         publicReport=state.reason+"\n"+(state.recognition?"识别开着":"识别关着");
-        if(analysisFailure!=0)publicReport+="\n"+getString(analysisFailure);
-        PreviewChrome.detectionStopped(root,live && analysisFailure!=0,compactUi);
-        if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(analysisFailure!=0?analysisFailure:R.string.info_recognition_off));}
-        if(titleView!=null) setTextIfChanged(titleView,getText(live?(analysisFailure!=0?R.string.window_preview_only:R.string.window_live):state.phase==SessionState.Phase.STARTING?R.string.window_starting:R.string.window_idle));
+        if(detectionNotice!=0)publicReport+="\n"+getString(detectionNotice);
+        PreviewChrome.detectionStopped(root,live && detectionNotice!=0,compactUi);
+        if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(detectionNotice!=0?detectionNotice:R.string.info_recognition_off));}
+        if(titleView!=null) setTextIfChanged(titleView,getText(live?(detectionNotice!=0?R.string.window_preview_only:R.string.window_live):state.phase==SessionState.Phase.STARTING?R.string.window_starting:R.string.window_idle));
         renderDepthGuide();
+        syncPipActions();
     }
     private void fail(String message) {
         fail(RecoveryGuide.Reason.GENERAL,message);
@@ -660,7 +704,7 @@ public final class PreviewActivity extends Activity {
                 +" workerBusy="+(worker!=null && worker.busy())+" pip="+isInPictureInPictureMode());
         }
         recoveryReason=reason;
-        analysisFailure=0;
+        detectionNotice=0;
         restoreDetection=restoreSound=false;
         cancelAnalysis();state.unavailable(message);feedback.clear();if(announcer!=null)announcer.clear();pendingSpeak=false;silence();
         if(detectionOverlay!=null)detectionOverlay.clear();

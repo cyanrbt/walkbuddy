@@ -34,7 +34,7 @@ final class LayoutProbe {
             AtomicReference<Throwable> failure=new AtomicReference<>();
             runner.runOnMainSync(()->{try{check(runner.getTargetContext(),report);}catch(Throwable error){failure.set(error);}});
             if(failure.get()!=null)throw new AssertionError(failure.get());
-            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; recovery-presentations="
+            result.putString("stream",report+"LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations="
                 +(RecoveryGuide.Reason.values().length*60)+"; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore\n");
             runner.finish(Activity.RESULT_OK,result);
         } catch(Throwable error) {
@@ -164,6 +164,9 @@ final class LayoutProbe {
         if(warning.getAccessibilityLiveRegion()!=View.ACCESSIBILITY_LIVE_REGION_POLITE)
             throw new AssertionError("Detection fault is not announced");
         if(width==320 && root.getResources().getConfiguration().fontScale==2f)screenshot(root,output);
+        info.setText(R.string.info_detection_paused);measure(root,width,height);textFits(root);
+        initialVisible(root,detection);initialVisible(root,sound);warningInsideCamera(root,warning);
+        info.setText(R.string.info_detection_timeout);
         root.findViewById(R.id.posture_hint).setVisibility(View.VISIBLE);
         PreviewChrome.compact(root,true,true);PreviewChrome.detectionStopped(root,true,true);
         measure(root,96,128);textFits(warning);warningInsideCamera(root,warning);

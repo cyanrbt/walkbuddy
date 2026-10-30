@@ -50,6 +50,9 @@
     <string name="detection_stopped_compact">未检测\n仅预览</string>
     <string name="info_detection_timeout">检测超时，提醒已停止；可重新勾选检测。</string>
     <string name="info_detection_failed">检测失败，提醒已停止；可重新勾选检测。</string>
+    <string name="info_detection_paused">已关闭检测与提醒，画面继续；展开后可重新勾选检测。</string>
+    <string name="pip_stop_detection">关闭检测</string>
+    <string name="pip_stop_detection_description">关闭检测、声音和振动，保留实时画面</string>
     <string name="info_stopped">观察与提醒已停止，请按页面提示恢复。</string>
     <string name="step_pip">系统画中画（可选）</string>
     <string name="step_pip_hint">跨应用看画面，无需悬浮窗授权</string>
