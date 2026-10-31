@@ -1,0 +1,246 @@
+{
+  "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9",
+  "reruns_requested_at_capture": 0,
+  "counts": {
+    "jobs": 9,
+    "first_pass": 7,
+    "failed": 2
+  },
+  "runs": [
+    {
+      "id": 41204399812,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41204399812",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 124546427770,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 124546427892,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        }
+      ]
+    },
+    {
+      "id": 41204399811,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41204399811",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 124546428073,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 124546428108,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        }
+      ]
+    },
+    {
+      "id": 41204399775,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41204399775",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 124546427736,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run Android UI and virtual camera checks"
+          ]
+        },
+        {
+          "id": 124546427993,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        }
+      ]
+    },
+    {
+      "id": 41204399703,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41204399703",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 124546427549,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run Android UI and virtual camera checks"
+          ]
+        },
+        {
+          "id": 124546427749,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 124546427774,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        }
+      ]
+    }
+  ],
+  "job_log_evidence": [
+    {
+      "id": 124546427770,
+      "build": [
+        "2026-10-31T13:12:13.3594962Z BUILD SUCCESSFUL in 46s"
+      ],
+      "current_copy": [
+        "2026-10-31T13:16:26.2202659Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:19:04.2559250Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "failed": [],
+      "traces": [
+        "2026-10-31T13:15:44.8462308Z | 1 | surface_reinstall_recovery | passed | complete | 2418 | 4 | 0 |",
+        "2026-10-31T13:15:44.8462990Z | 2 | recovery | not requested | complete | 2100 | 4 | 0 |",
+        "2026-10-31T13:15:44.8463739Z | 3 | recovery | not requested | complete | 2062 | 4 | 0 |"
+      ]
+    },
+    {
+      "id": 124546427892,
+      "build": [
+        "2026-10-31T13:12:14.4943497Z BUILD SUCCESSFUL in 53s"
+      ],
+      "current_copy": [
+        "2026-10-31T13:16:23.0108162Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:19:00.1312739Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "failed": [],
+      "traces": [
+        "2026-10-31T13:15:41.1038606Z | 1 | surface_reinstall_recovery | passed | complete | 2481 | 4 | 0 |",
+        "2026-10-31T13:15:41.1039115Z | 2 | recovery | not requested | complete | 2237 | 4 | 0 |",
+        "2026-10-31T13:15:41.1039580Z | 3 | recovery | not requested | complete | 2065 | 4 | 0 |"
+      ]
+    },
+    {
+      "id": 124546428073,
+      "build": [
+        "2026-10-31T13:12:21.1785884Z BUILD SUCCESSFUL in 53s"
+      ],
+      "current_copy": [
+        "2026-10-31T13:15:18.2496794Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:17:57.4566075Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "failed": [],
+      "traces": []
+    },
+    {
+      "id": 124546428108,
+      "build": [
+        "2026-10-31T13:12:12.1773459Z BUILD SUCCESSFUL in 50s"
+      ],
+      "current_copy": [
+        "2026-10-31T13:15:38.9913951Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:18:20.5108140Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "failed": [],
+      "traces": []
+    },
+    {
+      "id": 124546427736,
+      "build": [
+        "2026-10-31T13:12:06.6300903Z BUILD SUCCESSFUL in 47s"
+      ],
+      "current_copy": [
+        "2026-10-31T13:16:04.1943077Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:18:31.7861622Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "failed": [
+        "2026-10-31T13:18:24.3413586Z PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 关闭提示音 last=null; 实时画面"
+      ],
+      "traces": [
+        "2026-10-31T13:15:23.0750420Z | 1 | surface_reinstall_recovery | passed | complete | 2381 | 4 | 0 |",
+        "2026-10-31T13:15:23.0750987Z | 2 | recovery | not requested | complete | 2414 | 4 | 0 |",
+        "2026-10-31T13:15:23.0751486Z | 3 | recovery | not requested | complete | 2192 | 4 | 0 |"
+      ]
+    },
+    {
+      "id": 124546427993,
+      "build": [
+        "2026-10-31T13:11:53.7278292Z BUILD SUCCESSFUL in 37s"
+      ],
+      "current_copy": [
+        "2026-10-31T13:15:20.8972678Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:17:43.2400665Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "failed": [],
+      "traces": [
+        "2026-10-31T13:14:52.0570520Z | 1 | surface_reinstall_recovery | passed | complete | 2274 | 4 | 0 |",
+        "2026-10-31T13:14:52.0570763Z | 2 | recovery | not requested | complete | 2236 | 4 | 0 |",
+        "2026-10-31T13:14:52.0570988Z | 3 | recovery | not requested | complete | 2104 | 4 | 0 |"
+      ]
+    },
+    {
+      "id": 124546427549,
+      "build": [
+        "2026-10-31T13:12:13.3862742Z BUILD SUCCESSFUL in 50s"
+      ],
+      "current_copy": [
+        "2026-10-31T13:15:34.1094199Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:18:15.8301244Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "failed": [
+        "2026-10-31T13:14:43.4421432Z PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: recovery Camera2 LIVE; interactive=true keyguard=false; 画面已过期：不可用，请重新开启；提醒已停止; 画面已过期：不可用，请重新开启；提醒已停止"
+      ],
+      "traces": []
+    },
+    {
+      "id": 124546427749,
+      "build": [
+        "2026-10-31T13:12:12.7451581Z BUILD SUCCESSFUL in 49s"
+      ],
+      "current_copy": [
+        "2026-10-31T13:15:39.3473567Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:18:24.7748042Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "failed": [],
+      "traces": []
+    },
+    {
+      "id": 124546427774,
+      "build": [
+        "2026-10-31T13:12:15.5303624Z BUILD SUCCESSFUL in 50s"
+      ],
+      "current_copy": [],
+      "failed": [],
+      "traces": []
+    }
+  ],
+  "scope": "Original attempt 1 status/logs frozen before any rerun; seven first-pass successes, two UI probe failures after successful compilation. Eight API35/36 jobs passed new copy checks; API26 only surface scope. Failure root causes not determined."
+}

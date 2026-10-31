@@ -1,0 +1,760 @@
+{
+  "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9",
+  "reports": [
+    {
+      "api": 35,
+      "workflow_run": 41204399811,
+      "artifact_id": 13044510962,
+      "artifact_bytes": 19532541,
+      "artifact_sha256": "4823bd60da7ed857b8a5d2ac135bac9341621d687d772bf210641a1f9934bd56",
+      "ui_replay": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "actual_clipboard_cases": {
+        "copies": [
+          {
+            "mode": "preview",
+            "copied_text": "WalkBuddy 观察信息\n版本：0.4.42 / 54\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n复制时的当前观察\n分类：CURRENT\n提示：实时画面\n当前阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：35；显示帧龄(ms)：38；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：未取得；墙钟(ms)：未取得；CPU(ms)：未取得\n异步亮度检查：FINISHED；观测帧龄(ms)：222\n亮度排队(ms)：2；请求墙钟(ms)：4；调用与像素处理CPU(ms)：0；交付(ms)：0；结果码：0\n\n时序为复制时的回调与模型记录，非相机端到端延迟。\n",
+            "generation": 1,
+            "copy_started_ms": 285345,
+            "after_capture_at": 285571,
+            "after_display_at": 285616,
+            "after_analysis_at": 0,
+            "camera_retained": true,
+            "model_ticket_retained": true,
+            "vibration": true,
+            "incident_available": false
+          },
+          {
+            "mode": "detection",
+            "copied_text": "WalkBuddy 观察信息\n版本：0.4.42 / 54\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n复制时的当前观察\n分类：CURRENT\n提示：实时画面\n当前阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：48；显示帧龄(ms)：21；分析龄(ms)：208\n模型就绪：是；已有结果：是；工作线程忙：否\n取样龄(ms)：320；读回排队(ms)：4；复制(ms)：5；结果交付(ms)：0\n读回任务：已结束；墙钟(ms)：4；CPU(ms)：0\n异步亮度检查：FINISHED；观测帧龄(ms)：419\n亮度排队(ms)：2；请求墙钟(ms)：1；调用与像素处理CPU(ms)：0；交付(ms)：0；结果码：0\n\n时序为复制时的回调与模型记录，非相机端到端延迟。\n",
+            "generation": 1,
+            "copy_started_ms": 286570,
+            "after_capture_at": 286885,
+            "after_display_at": 286933,
+            "after_analysis_at": 286935,
+            "camera_retained": true,
+            "model_ticket_retained": true,
+            "vibration": true,
+            "incident_available": false
+          }
+        ],
+        "live_incident_copy": {
+          "origin": "injected_detection_error",
+          "copied_text": "WalkBuddy 问题信息\n版本：0.4.42 / 54\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：57；显示帧龄(ms)：6；分析龄(ms)：33\n模型就绪：是；已有结果：是；工作线程忙：否\n取样龄(ms)：152；读回排队(ms)：3；复制(ms)：3；结果交付(ms)：10\n读回任务：已结束；墙钟(ms)：2；CPU(ms)：0\n异步亮度检查：FINISHED；观测帧龄(ms)：787\n亮度排队(ms)：2；请求墙钟(ms)：1；调用与像素处理CPU(ms)：0；交付(ms)：0；结果码：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+          "camera_retained": true,
+          "current_recognition": false,
+          "saved_first_recognition": true,
+          "generation": 1
+        },
+        "saved_bundle_excludes_current_report": true,
+        "current_copies_create_incidents": false,
+        "scope": "Actual emulator Camera2/model, native copy Button touches and plain-text clipboard; actual save callback Bundle checked, not a new healthy-page recreation or physical acceptance"
+      },
+      "images": [
+        {
+          "path": "cache/ui-probe/320x480-font100-day-observation-copy-layout.png",
+          "bytes": 36872,
+          "sha256": "5015af54eec81f1d30952ae9d2ebc442339611c0050354921101b79e811cfb61",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-observation-copy-layout.png",
+          "bytes": 36872,
+          "sha256": "5015af54eec81f1d30952ae9d2ebc442339611c0050354921101b79e811cfb61",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-observation-copy-layout.png",
+          "bytes": 37119,
+          "sha256": "25f698dec0489825428edad24ad5c2a8d7bdedbb43c9f7e8cbe3447660078767",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-observation-copy-layout.png",
+          "bytes": 37119,
+          "sha256": "25f698dec0489825428edad24ad5c2a8d7bdedbb43c9f7e8cbe3447660078767",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-observation-copy-layout.png",
+          "bytes": 38015,
+          "sha256": "8db685bdd6c0361da06842ef9e8405a224c2f101471c2bf84e5e2c24484e1ae2",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-observation-copy-layout.png",
+          "bytes": 38015,
+          "sha256": "8db685bdd6c0361da06842ef9e8405a224c2f101471c2bf84e5e2c24484e1ae2",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-observation-copy-layout.png",
+          "bytes": 44396,
+          "sha256": "2efa7583a48b0d3aa466324c871a0199a8bb32c1e3b9c0ddaba409f38713cf83",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-observation-copy-layout.png",
+          "bytes": 44396,
+          "sha256": "2efa7583a48b0d3aa466324c871a0199a8bb32c1e3b9c0ddaba409f38713cf83",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-observation-copy-layout.png",
+          "bytes": 55941,
+          "sha256": "28e61b4dacbe19c21d8a0479940b80207d5bc8a23568f15edd042fa63d730504",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-observation-copy-layout.png",
+          "bytes": 55941,
+          "sha256": "28e61b4dacbe19c21d8a0479940b80207d5bc8a23568f15edd042fa63d730504",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-observation-copy-layout.png",
+          "bytes": 53920,
+          "sha256": "b5f4bd5a747d31a0ae783b6980e39d77ed0db89a2e95b9b10ed88d51678546e4",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-observation-copy-layout.png",
+          "bytes": 53920,
+          "sha256": "b5f4bd5a747d31a0ae783b6980e39d77ed0db89a2e95b9b10ed88d51678546e4",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-observation-copy-layout.png",
+          "bytes": 39390,
+          "sha256": "74b7e36efe900bf769940ab852d5f7f294c702bf37b6d289c21b465564b21ad1",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-observation-copy-layout.png",
+          "bytes": 39390,
+          "sha256": "74b7e36efe900bf769940ab852d5f7f294c702bf37b6d289c21b465564b21ad1",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-observation-copy-layout.png",
+          "bytes": 44670,
+          "sha256": "e5594cc3fdba52ae3342fef9b5585329422eebb5dc2662186d9d33ddbf44eb5d",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-observation-copy-layout.png",
+          "bytes": 44670,
+          "sha256": "e5594cc3fdba52ae3342fef9b5585329422eebb5dc2662186d9d33ddbf44eb5d",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-observation-copy-layout.png",
+          "bytes": 46597,
+          "sha256": "569ec2c93b4fd9d726984934735b24261776cbff291006df79fd6854526d4e78",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-observation-copy-layout.png",
+          "bytes": 46597,
+          "sha256": "569ec2c93b4fd9d726984934735b24261776cbff291006df79fd6854526d4e78",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-observation-copy-layout.png",
+          "bytes": 40543,
+          "sha256": "741a1687c8d4c8fdd0772798033602306781e5d9c2d4e540e58ec8f89cd29745",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-observation-copy-layout.png",
+          "bytes": 40543,
+          "sha256": "741a1687c8d4c8fdd0772798033602306781e5d9c2d4e540e58ec8f89cd29745",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-observation-copy-layout.png",
+          "bytes": 49884,
+          "sha256": "f049156382ac4429c6dd126c74daaf09d7726fdc5ea0849de276268f6f6bfd1e",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-observation-copy-layout.png",
+          "bytes": 49884,
+          "sha256": "f049156382ac4429c6dd126c74daaf09d7726fdc5ea0849de276268f6f6bfd1e",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-observation-copy-layout.png",
+          "bytes": 46810,
+          "sha256": "6a790240a56ea3e9e41ce2c270905063d8fb58150b7f37997ed4d92b6a6e2fc5",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-observation-copy-layout.png",
+          "bytes": 46810,
+          "sha256": "6a790240a56ea3e9e41ce2c270905063d8fb58150b7f37997ed4d92b6a6e2fc5",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-observation-copy-layout.png",
+          "bytes": 71069,
+          "sha256": "7c5c9835c337bf80c2d9f069a97f6a06ba71f9b9a6dd4e0d155ca297f752b6c6",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-observation-copy-layout.png",
+          "bytes": 71069,
+          "sha256": "7c5c9835c337bf80c2d9f069a97f6a06ba71f9b9a6dd4e0d155ca297f752b6c6",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-observation-copy-layout.png",
+          "bytes": 81665,
+          "sha256": "381f7db7a9ae520fe01515785a4d948bbf7117bc362290f28052566a51a8dcb7",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-observation-copy-layout.png",
+          "bytes": 81665,
+          "sha256": "381f7db7a9ae520fe01515785a4d948bbf7117bc362290f28052566a51a8dcb7",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-observation-copy-layout.png",
+          "bytes": 93020,
+          "sha256": "0915ca40e025fcb8104024534bcfaf03167007c3318efc83ec6eb8692847ed88",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-observation-copy-layout.png",
+          "bytes": 93020,
+          "sha256": "0915ca40e025fcb8104024534bcfaf03167007c3318efc83ec6eb8692847ed88",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/observation-copy-actual-detection.png",
+          "bytes": 47074,
+          "sha256": "0577ff70c9fc546a1cb5693d4d218ef09f9414f9374d876736e72a42aa4dfd6b",
+          "width": 320,
+          "height": 640,
+          "actual_camera": true
+        },
+        {
+          "path": "cache/ui-probe/observation-copy-actual-injected-detection-error.png",
+          "bytes": 41235,
+          "sha256": "243792cb6b13cdde654211693e5a527e51e40e0cdcf9e29abc0aab9d3f054520",
+          "width": 320,
+          "height": 640,
+          "actual_camera": true
+        },
+        {
+          "path": "cache/ui-probe/observation-copy-actual-preview.png",
+          "bytes": 47490,
+          "sha256": "090d837197fa141ea25adb398a8e2edceb8ca2a44a643fe8152841f9e6663227",
+          "width": 320,
+          "height": 640,
+          "actual_camera": true
+        }
+      ]
+    },
+    {
+      "api": 36,
+      "workflow_run": 41204399811,
+      "artifact_id": 13043567460,
+      "artifact_bytes": 19502516,
+      "artifact_sha256": "a1004a16e6761fa8a3994892ab018bc2b9931f4c5a396ebcb08eee41b10f7c14",
+      "ui_replay": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "actual_clipboard_cases": {
+        "copies": [
+          {
+            "mode": "preview",
+            "copied_text": "WalkBuddy 观察信息\n版本：0.4.42 / 54\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n复制时的当前观察\n分类：CURRENT\n提示：实时画面\n当前阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：48；显示帧龄(ms)：5；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：未取得；墙钟(ms)：未取得；CPU(ms)：未取得\n异步亮度检查：FINISHED；观测帧龄(ms)：674\n亮度排队(ms)：0；请求墙钟(ms)：2；调用与像素处理CPU(ms)：0；交付(ms)：2；结果码：0\n\n时序为复制时的回调与模型记录，非相机端到端延迟。\n",
+            "generation": 1,
+            "copy_started_ms": 310689,
+            "after_capture_at": 310897,
+            "after_display_at": 310893,
+            "after_analysis_at": 0,
+            "camera_retained": true,
+            "model_ticket_retained": true,
+            "vibration": true,
+            "incident_available": false
+          },
+          {
+            "mode": "detection",
+            "copied_text": "WalkBuddy 观察信息\n版本：0.4.42 / 54\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n复制时的当前观察\n分类：CURRENT\n提示：实时画面\n当前阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：68；显示帧龄(ms)：5；分析龄(ms)：263\n模型就绪：是；已有结果：是；工作线程忙：否\n取样龄(ms)：369；读回排队(ms)：4；复制(ms)：3；结果交付(ms)：0\n读回任务：已结束；墙钟(ms)：3；CPU(ms)：0\n异步亮度检查：FINISHED；观测帧龄(ms)：807\n亮度排队(ms)：0；请求墙钟(ms)：8；调用与像素处理CPU(ms)：0；交付(ms)：12；结果码：0\n\n时序为复制时的回调与模型记录，非相机端到端延迟。\n",
+            "generation": 1,
+            "copy_started_ms": 311869,
+            "after_capture_at": 312132,
+            "after_display_at": 312181,
+            "after_analysis_at": 312182,
+            "camera_retained": true,
+            "model_ticket_retained": true,
+            "vibration": true,
+            "incident_available": false
+          }
+        ],
+        "live_incident_copy": {
+          "origin": "injected_detection_error",
+          "copied_text": "WalkBuddy 问题信息\n版本：0.4.42 / 54\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：36；显示帧龄(ms)：8；分析龄(ms)：36\n模型就绪：是；已有结果：是；工作线程忙：否\n取样龄(ms)：172；读回排队(ms)：3；复制(ms)：5；结果交付(ms)：12\n读回任务：已结束；墙钟(ms)：5；CPU(ms)：0\n异步亮度检查：FINISHED；观测帧龄(ms)：102\n亮度排队(ms)：0；请求墙钟(ms)：1；调用与像素处理CPU(ms)：0；交付(ms)：1；结果码：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+          "camera_retained": true,
+          "current_recognition": false,
+          "saved_first_recognition": true,
+          "generation": 1
+        },
+        "saved_bundle_excludes_current_report": true,
+        "current_copies_create_incidents": false,
+        "scope": "Actual emulator Camera2/model, native copy Button touches and plain-text clipboard; actual save callback Bundle checked, not a new healthy-page recreation or physical acceptance"
+      },
+      "images": [
+        {
+          "path": "cache/ui-probe/320x480-font100-day-observation-copy-layout.png",
+          "bytes": 36916,
+          "sha256": "828ac2ad2f45e27d5c2d581ee7524cba896bb44ae4255ea169c09fe5bd4493c7",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-observation-copy-layout.png",
+          "bytes": 36916,
+          "sha256": "828ac2ad2f45e27d5c2d581ee7524cba896bb44ae4255ea169c09fe5bd4493c7",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-observation-copy-layout.png",
+          "bytes": 37164,
+          "sha256": "e83774d1ebda509eb02be83b4709a0498b3f2dfdfc03dc4080217c9455496e52",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-observation-copy-layout.png",
+          "bytes": 37164,
+          "sha256": "e83774d1ebda509eb02be83b4709a0498b3f2dfdfc03dc4080217c9455496e52",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-observation-copy-layout.png",
+          "bytes": 38027,
+          "sha256": "04fb71704aa09ff2846c1094ba70757769a572d3f0ab6a0b437331852f1c63e0",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-observation-copy-layout.png",
+          "bytes": 38027,
+          "sha256": "04fb71704aa09ff2846c1094ba70757769a572d3f0ab6a0b437331852f1c63e0",
+          "width": 320,
+          "height": 480,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-observation-copy-layout.png",
+          "bytes": 44460,
+          "sha256": "7457263446428935b90de529ffaaf01271b626a2e8e4aac2c5619482f7b79b26",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-observation-copy-layout.png",
+          "bytes": 44460,
+          "sha256": "7457263446428935b90de529ffaaf01271b626a2e8e4aac2c5619482f7b79b26",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-observation-copy-layout.png",
+          "bytes": 55991,
+          "sha256": "001ba86b8826eb372c44eac9dbfdc3b04c7b009461b5b64fa8968f82646e0327",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-observation-copy-layout.png",
+          "bytes": 55991,
+          "sha256": "001ba86b8826eb372c44eac9dbfdc3b04c7b009461b5b64fa8968f82646e0327",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-observation-copy-layout.png",
+          "bytes": 53949,
+          "sha256": "e354825d5dc94d39e55db8e1b5fe04c148bd129b8aebaa6836e27f948896c078",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-observation-copy-layout.png",
+          "bytes": 53949,
+          "sha256": "e354825d5dc94d39e55db8e1b5fe04c148bd129b8aebaa6836e27f948896c078",
+          "width": 360,
+          "height": 640,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-observation-copy-layout.png",
+          "bytes": 39434,
+          "sha256": "672de442f5bf940a119d19eef04deb07fb4d8d8894e07e48734eb82d3c98178b",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-observation-copy-layout.png",
+          "bytes": 39434,
+          "sha256": "672de442f5bf940a119d19eef04deb07fb4d8d8894e07e48734eb82d3c98178b",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-observation-copy-layout.png",
+          "bytes": 44721,
+          "sha256": "97832a033cab193b807d03d9c068f6842edfa9eead07112ce379ad118d1d003d",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-observation-copy-layout.png",
+          "bytes": 44721,
+          "sha256": "97832a033cab193b807d03d9c068f6842edfa9eead07112ce379ad118d1d003d",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-observation-copy-layout.png",
+          "bytes": 46689,
+          "sha256": "1e29ff08fefeba2eaddcae61f231f04c0daf0ca396b0a66c579d3459b648475a",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-observation-copy-layout.png",
+          "bytes": 46689,
+          "sha256": "1e29ff08fefeba2eaddcae61f231f04c0daf0ca396b0a66c579d3459b648475a",
+          "width": 600,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-observation-copy-layout.png",
+          "bytes": 40584,
+          "sha256": "a418e2bf5573e05730855f449e265cb87496f748d872bb556fcb1a3f2542dbfc",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-observation-copy-layout.png",
+          "bytes": 40584,
+          "sha256": "a418e2bf5573e05730855f449e265cb87496f748d872bb556fcb1a3f2542dbfc",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-observation-copy-layout.png",
+          "bytes": 49930,
+          "sha256": "de7fd3da348107a91c971fea10101bb3d62ad165dcff4e93e49f99fb46fa5fed",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-observation-copy-layout.png",
+          "bytes": 49930,
+          "sha256": "de7fd3da348107a91c971fea10101bb3d62ad165dcff4e93e49f99fb46fa5fed",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-observation-copy-layout.png",
+          "bytes": 46902,
+          "sha256": "6c79b8babb5dfae9d4924104299cfe19d1719ec3683c5357e96e55919cc33857",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-observation-copy-layout.png",
+          "bytes": 46902,
+          "sha256": "6c79b8babb5dfae9d4924104299cfe19d1719ec3683c5357e96e55919cc33857",
+          "width": 640,
+          "height": 360,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-observation-copy-layout.png",
+          "bytes": 71109,
+          "sha256": "a5efe6493b5166d4417b505c58f6eff12145167c3003b3e8b8fd4f9c2bd59a7e",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-observation-copy-layout.png",
+          "bytes": 71109,
+          "sha256": "a5efe6493b5166d4417b505c58f6eff12145167c3003b3e8b8fd4f9c2bd59a7e",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-observation-copy-layout.png",
+          "bytes": 81753,
+          "sha256": "385964a84a39db827617ff9f3b60ebdc4afb4872bfd25462e80e260aed2a9328",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-observation-copy-layout.png",
+          "bytes": 81753,
+          "sha256": "385964a84a39db827617ff9f3b60ebdc4afb4872bfd25462e80e260aed2a9328",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-observation-copy-layout.png",
+          "bytes": 93118,
+          "sha256": "eabee2c988a8649af590c13e20af259133e72e0bf8e72e5cc5361a2f0733d5a6",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-observation-copy-layout.png",
+          "bytes": 93118,
+          "sha256": "eabee2c988a8649af590c13e20af259133e72e0bf8e72e5cc5361a2f0733d5a6",
+          "width": 800,
+          "height": 600,
+          "actual_camera": false
+        },
+        {
+          "path": "cache/ui-probe/observation-copy-actual-detection.png",
+          "bytes": 47298,
+          "sha256": "99dd87d135d28d48893e94e034d2aa8bbde4d39089c0d9672b063c2aaf0decdd",
+          "width": 320,
+          "height": 640,
+          "actual_camera": true
+        },
+        {
+          "path": "cache/ui-probe/observation-copy-actual-injected-detection-error.png",
+          "bytes": 41455,
+          "sha256": "f7915357314b3c6833130d0aca8d785b214029a1eb6564510b81cf0257341d96",
+          "width": 320,
+          "height": 640,
+          "actual_camera": true
+        },
+        {
+          "path": "cache/ui-probe/observation-copy-actual-preview.png",
+          "bytes": 47618,
+          "sha256": "18cebe925f188a8c08f713aca3ea2382cff56ad5b811fa1b86e347ea41aac08e",
+          "width": 320,
+          "height": 640,
+          "actual_camera": true
+        }
+      ]
+    }
+  ],
+  "scope": "Full standard UI ZIP sizes/server SHA/CRC verified and ten reports each replayed. Current plain-text clipboard, retained actual Camera2/model, actual saved-callback Bundle and explicitly injected live detection error checked. Thirty constructed layout PNGs plus three actual-camera PNGs each verified by header/hash. Native Button touches, not physical hardware/TalkBack/AR/FPS/power or new healthy Activity recreation acceptance."
+}
