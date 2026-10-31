@@ -1,0 +1,25 @@
+{
+  "baseline_tag": "v0.4.37",
+  "baseline_tag_commit": "afa1e10cf7cd0d3d0345e72015030b779695f888",
+  "unchanged_production_paths": 103,
+  "production_tree": "8270b67f7c7581f53cdae088cf503c70f74de27c",
+  "version": "0.4.37",
+  "version_code": 49,
+  "ci_tools_tests": 26,
+  "ci_tools_failures": 0,
+  "workflows_actionlint": [
+    "ui-check.yml",
+    "preview-trace.yml",
+    "release.yml"
+  ],
+  "native_apks_build": "BUILD SUCCESSFUL",
+  "final_android_test_build": "BUILD SUCCESSFUL in 16s",
+  "test_observer_absent_in_application_dex": true,
+  "test_observer_present_in_test_dex": true,
+  "processor_version": "v59.1-1e9c61e98",
+  "processor_zip_sha256": "7deb8c2572c6ae7ec80cd719d388041079827b0c44a1659694d5d88faa4f501e",
+  "processor_binary_sha256": "2434129a3af4dc9e2034a476f7b76447b490975213e301769310d3bd0d5d6458",
+  "sql_smoke_test": "Official processor query succeeded on synthetic Chrome JSON; no Android scheduling claim",
+  "android_runtime_status": "pending CI; no local emulator",
+  "physical_device_status": "not performed"
+}

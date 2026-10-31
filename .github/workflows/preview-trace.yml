@@ -1,0 +1,22 @@
+name: Preview system trace
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/preview-trace.yml
+      - scripts/*preview_trace*
+      - scripts/run_preview_traces.sh
+      - scripts/fetch_trace_processor.sh
+      - scripts/tests/test_preview_traces.py
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/PreviewMainTrace.java
+
+permissions:
+  contents: read
+
+jobs:
+  trace:
+    uses: ./.github/workflows/ui-check.yml
+    with:
+      preview_trace: true

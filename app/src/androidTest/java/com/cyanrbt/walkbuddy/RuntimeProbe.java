@@ -5,7 +5,7 @@ public final class RuntimeProbe extends PreviewProbe {
     @Override public void onStart() {
         if(support){SupportProbe.run(this);return;}
         if(threadParity){DetectorProbe.compareThreads(this);return;}
-        if(pipRecovery){PipProbe.runRecovery(this);return;}
+        if(pipRecovery){PipProbe.runRecovery(this,previewTrace);return;}
         if(pip){PipProbe.run(this,profilePriority,profileThreads);return;}
         if(overlay){OverlayProbe.run(this);return;}
         if(layout){LayoutProbe.run(this);return;}

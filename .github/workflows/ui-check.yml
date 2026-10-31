@@ -16,6 +16,9 @@ on:
       thread_profile:
         type: boolean
         default: false
+      preview_trace:
+        type: boolean
+        default: false
   workflow_dispatch:
 
 permissions:
@@ -52,6 +55,11 @@ jobs:
         run: |
           bash scripts/fetch_test_fixture.sh
           ./gradlew assembleDebug assembleDebugAndroidTest -PuniversalApk --no-daemon --no-watch-fs
+      - name: Prepare pinned system trace analyzer
+        if: inputs.preview_trace
+        run: |
+          bash scripts/fetch_trace_processor.sh "${RUNNER_TEMP}/walkbuddy-perfetto"
+          echo "WALKBUDDY_TRACE_PROCESSOR=${RUNNER_TEMP}/walkbuddy-perfetto/trace_processor_shell" >> "$GITHUB_ENV"
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -68,7 +76,13 @@ jobs:
           disk-size: 2048M
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -camera-back emulated -camera-front none
-          script: bash scripts/${{ inputs.thread_profile && 'run_thread_profiles' || inputs.scheduling_profile && 'run_scheduling_profiles' || 'run_ui_probes' }}.sh
+          script: bash scripts/${{ inputs.preview_trace && 'run_preview_traces' || inputs.thread_profile && 'run_thread_profiles' || inputs.scheduling_profile && 'run_scheduling_profiles' || 'run_ui_probes' }}.sh
+      - name: Summarize preview trace evidence
+        if: always() && inputs.preview_trace
+        run: |
+          if test -f ui-evidence/preview-trace/summary.md; then
+            cat ui-evidence/preview-trace/summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Summarize build, probes and system evidence
         if: always()
         env:

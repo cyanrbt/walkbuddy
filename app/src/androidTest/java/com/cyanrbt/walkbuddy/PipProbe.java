@@ -31,11 +31,17 @@ import java.util.function.BooleanSupplier;
 final class PipProbe {
     /** Independent no-model reproduction: fault in PiP, expand, restart, immediately re-enter. */
     static void runRecovery(Instrumentation runner) {
+        runRecovery(runner,false);
+    }
+
+    static void runRecovery(Instrumentation runner,boolean trace) {
         Bundle result=new Bundle();Activity home=null;PreviewActivity preview=null;
         StringBuilder report=new StringBuilder();int code=Activity.RESULT_CANCELED;
+        PreviewMainTrace tracing=null;
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("PiP recovery probe is restricted to emulators");
+            if(trace)tracing=new PreviewMainTrace(runner);
             if(!PipSupport.available(runner.getTargetContext()))throw new IllegalStateException("System PiP is unavailable");
             try(java.io.InputStream fixture=runner.getContext().getAssets().open("wake-input-inactive.txt")) {
                 report.append("INPUT_WINDOW_RULES_PASS cases=").append(InputWindowState.verifyWakeFixture(
@@ -75,11 +81,14 @@ final class PipProbe {
                 }
                 await(runner,()->(boolean)field(launcher,"visible"),"home visible behind PiP");
                 read(runner,()->{
+                    if(trace)android.os.Trace.beginSection("wb_test:forced_expiry");
+                    try {
                     Handler handler=(Handler)field(host,"main");Runnable watchdog=(Runnable)field(host,"watchdog");
                     handler.removeCallbacks(watchdog);
                     state(host).captureAt=android.os.SystemClock.elapsedRealtime()-1201;
                     watchdog.run();assertReleased(host);assertNotPolling(host);
                     return true;
+                    } finally {if(trace)android.os.Trace.endSection();}
                 });
                 tap(runner,launcher,R.id.start);
                 await(runner,()->!host.isInPictureInPictureMode() && (boolean)field(host,"resumed"),"recovery expansion");
@@ -139,6 +148,7 @@ final class PipProbe {
             shell(runner,"input keyevent KEYCODE_WAKEUP");
             if(preview!=null){PreviewActivity host=preview;runner.runOnMainSync(host::finish);}
             if(home!=null){Activity host=home;runner.runOnMainSync(host::finish);}
+            if(tracing!=null)tracing.close();
         }
         runner.finish(code,result);
     }
