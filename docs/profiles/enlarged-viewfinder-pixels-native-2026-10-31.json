@@ -1,0 +1,2860 @@
+{
+  "source_commit": "01c75dadadf326e5968ae2a13d9032c98448a293",
+  "reports": [
+    {
+      "api": 36,
+      "workflow_run": 41194621240,
+      "artifact_id": 13040560918,
+      "artifact_bytes": 17657580,
+      "artifact_sha256": "97c3ec6407a973469b851c8bce2ded193bf6ce8c000d71fa421c087570e09230",
+      "ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "original_ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "constructed_fit_center_geometry": [
+        {
+          "configuration": "320x480-font100-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 173,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 300,
+          "normalImageArea": 22446.75,
+          "enlargedImageArea": 67500,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font100-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 173,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 300,
+          "normalImageArea": 22446.75,
+          "enlargedImageArea": 67500,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font150-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 164,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 298,
+          "normalImageArea": 20172,
+          "enlargedImageArea": 66603,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font150-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 164,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 298,
+          "normalImageArea": 20172,
+          "enlargedImageArea": 66603,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font200-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 151,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 286,
+          "normalImageArea": 17100.75,
+          "enlargedImageArea": 61347,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font200-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 151,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 286,
+          "normalImageArea": 17100.75,
+          "enlargedImageArea": 61347,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font100-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 269,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 460,
+          "normalImageArea": 54270.75,
+          "enlargedImageArea": 158700,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font100-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 269,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 460,
+          "normalImageArea": 54270.75,
+          "enlargedImageArea": 158700,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font150-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 260,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 458,
+          "normalImageArea": 50700,
+          "enlargedImageArea": 157323,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font150-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 260,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 458,
+          "normalImageArea": 50700,
+          "enlargedImageArea": 157323,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font200-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 247,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 446,
+          "normalImageArea": 45756.75,
+          "enlargedImageArea": 149187,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font200-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 247,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 446,
+          "normalImageArea": 45756.75,
+          "enlargedImageArea": 149187,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font100-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 169,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 180,
+          "normalImageArea": 38081.33247375488,
+          "enlargedImageArea": 43200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font100-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 169,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 180,
+          "normalImageArea": 38081.33247375488,
+          "enlargedImageArea": 43200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font150-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 352,
+          "normalFrameHeight": 153,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 178,
+          "normalImageArea": 31212,
+          "enlargedImageArea": 42245.33514404297,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font150-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 352,
+          "normalFrameHeight": 153,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 178,
+          "normalImageArea": 31212,
+          "enlargedImageArea": 42245.33514404297,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font200-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 328,
+          "normalFrameHeight": 131,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 166,
+          "normalImageArea": 22881.33399963379,
+          "enlargedImageArea": 36741.33248901367,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font200-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 328,
+          "normalFrameHeight": 131,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 166,
+          "normalImageArea": 22881.33399963379,
+          "enlargedImageArea": 36741.33248901367,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font100-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 384,
+          "normalFrameHeight": 169,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 180,
+          "normalImageArea": 38081.33247375488,
+          "enlargedImageArea": 43200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font100-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 384,
+          "normalFrameHeight": 169,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 180,
+          "normalImageArea": 38081.33247375488,
+          "enlargedImageArea": 43200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font150-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 384,
+          "normalFrameHeight": 153,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 178,
+          "normalImageArea": 31212,
+          "enlargedImageArea": 42245.33514404297,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font150-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 384,
+          "normalFrameHeight": 153,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 178,
+          "normalImageArea": 31212,
+          "enlargedImageArea": 42245.33514404297,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font200-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 368,
+          "normalFrameHeight": 131,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 166,
+          "normalImageArea": 22881.33399963379,
+          "enlargedImageArea": 36741.33248901367,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font200-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 368,
+          "normalFrameHeight": 131,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 166,
+          "normalImageArea": 22881.33399963379,
+          "enlargedImageArea": 36741.33248901367,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font100-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 409,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 420,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 235200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font100-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 409,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 420,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 235200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font150-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 393,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 418,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 232965.32482910156,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font150-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 393,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 418,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 232965.32482910156,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font200-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 371,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 406,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 219781.34985351562,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font200-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 371,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 406,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 219781.34985351562,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        }
+      ],
+      "actual_camera_fit_center_geometry": {
+        "normal": {
+          "frameWidth": 320,
+          "frameHeight": 269,
+          "imageWidth": 201.75,
+          "imageHeight": 269,
+          "imageArea": 54270.75
+        },
+        "enlarged": {
+          "frameWidth": 320,
+          "frameHeight": 460,
+          "imageWidth": 320,
+          "imageHeight": 426.66668701171875,
+          "imageArea": 136533.33984375
+        },
+        "scope": "Actual emulated Camera2 window and production display geometry; no device FPS/power claim"
+      },
+      "viewfinder_cases_per_pip_run": 4,
+      "actual_model_in_enlarged_view_passed": true,
+      "enlarged_viewfinder_images": [
+        {
+          "path": "cache/ui-probe/320x480-font100-day-viewfinder-depth.png",
+          "bytes": 15402,
+          "sha256": "0408ad84e4f99de89bb155810217befef86df4ff9e991de539e898926d96f520",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-day-viewfinder-preview.png",
+          "bytes": 15666,
+          "sha256": "f886963029c8770504ca9212c9fc655594beaf044096dedcd1792cb1da2c253e",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-viewfinder-depth.png",
+          "bytes": 15402,
+          "sha256": "0408ad84e4f99de89bb155810217befef86df4ff9e991de539e898926d96f520",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-viewfinder-preview.png",
+          "bytes": 15666,
+          "sha256": "f886963029c8770504ca9212c9fc655594beaf044096dedcd1792cb1da2c253e",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-viewfinder-depth.png",
+          "bytes": 21706,
+          "sha256": "fc1c6bc67de57afc0f43cc73027ab9a3ae5c5a0986406518f357b7385306f8a3",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-viewfinder-preview.png",
+          "bytes": 21919,
+          "sha256": "ec64dab0270b11f1c24a773059b426dc7a917160b23fd629f2fe83edf9204d60",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-viewfinder-depth.png",
+          "bytes": 21706,
+          "sha256": "fc1c6bc67de57afc0f43cc73027ab9a3ae5c5a0986406518f357b7385306f8a3",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-viewfinder-preview.png",
+          "bytes": 21919,
+          "sha256": "ec64dab0270b11f1c24a773059b426dc7a917160b23fd629f2fe83edf9204d60",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-viewfinder-depth.png",
+          "bytes": 25155,
+          "sha256": "193738d0093d5867dbe72f495472206d0fb622a23d2d782e7054fb0b4797191a",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-viewfinder-preview.png",
+          "bytes": 25676,
+          "sha256": "28fd4e6b5acd33f8be83f84e93812895413e529e68e03fcc6852dc8e91f2d142",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-viewfinder-depth.png",
+          "bytes": 25155,
+          "sha256": "193738d0093d5867dbe72f495472206d0fb622a23d2d782e7054fb0b4797191a",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-viewfinder-preview.png",
+          "bytes": 25676,
+          "sha256": "28fd4e6b5acd33f8be83f84e93812895413e529e68e03fcc6852dc8e91f2d142",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-viewfinder-depth.png",
+          "bytes": 16428,
+          "sha256": "658baba72556ecd27e1bd4827afecd10f8ed2f6696370b71616051361d078ff2",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-viewfinder-preview.png",
+          "bytes": 16716,
+          "sha256": "1933e8cc16e8f2f9d2dd13ed67a398450f1097a646f849aa700d46eaba770838",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-viewfinder-depth.png",
+          "bytes": 16428,
+          "sha256": "658baba72556ecd27e1bd4827afecd10f8ed2f6696370b71616051361d078ff2",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-viewfinder-preview.png",
+          "bytes": 16716,
+          "sha256": "1933e8cc16e8f2f9d2dd13ed67a398450f1097a646f849aa700d46eaba770838",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-viewfinder-depth.png",
+          "bytes": 22762,
+          "sha256": "c7aa8ca1a9ae3f92d786894c3b7bacc546a9c0f964221416b718b7f1d482879a",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-viewfinder-preview.png",
+          "bytes": 22987,
+          "sha256": "bd988ef80e42c0a2a40e020aa2181cf74ccc922d34d1d9d509e62329bd80c279",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-viewfinder-depth.png",
+          "bytes": 22762,
+          "sha256": "c7aa8ca1a9ae3f92d786894c3b7bacc546a9c0f964221416b718b7f1d482879a",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-viewfinder-preview.png",
+          "bytes": 22987,
+          "sha256": "bd988ef80e42c0a2a40e020aa2181cf74ccc922d34d1d9d509e62329bd80c279",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-viewfinder-depth.png",
+          "bytes": 26265,
+          "sha256": "5a5fe1cb538f33b24d32aa070e8caaa0c99170d881d5ad7fe2e58f76c5fa2cad",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-viewfinder-preview.png",
+          "bytes": 26801,
+          "sha256": "36902153b426a0a8ad06020c5f8b7677f56331a5a9244b76554f82e72e4319f0",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-viewfinder-depth.png",
+          "bytes": 26265,
+          "sha256": "5a5fe1cb538f33b24d32aa070e8caaa0c99170d881d5ad7fe2e58f76c5fa2cad",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-viewfinder-preview.png",
+          "bytes": 26801,
+          "sha256": "36902153b426a0a8ad06020c5f8b7677f56331a5a9244b76554f82e72e4319f0",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-viewfinder-depth.png",
+          "bytes": 15711,
+          "sha256": "3502222f62df4cdde9ce608feb484f4873c87cc53f3a6a25e46fea578985e1a5",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-viewfinder-preview.png",
+          "bytes": 15969,
+          "sha256": "4db1d281dc76d21a153c75abe22f1662e2bc975a1384cd4074f4c917b9f5403a",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-viewfinder-depth.png",
+          "bytes": 15711,
+          "sha256": "3502222f62df4cdde9ce608feb484f4873c87cc53f3a6a25e46fea578985e1a5",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-viewfinder-preview.png",
+          "bytes": 15969,
+          "sha256": "4db1d281dc76d21a153c75abe22f1662e2bc975a1384cd4074f4c917b9f5403a",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-viewfinder-depth.png",
+          "bytes": 22087,
+          "sha256": "7fe7db2ecf34593e65ccb4f0c9babca8d47a19bd47572bf822d2a198d533fbd2",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-viewfinder-preview.png",
+          "bytes": 22325,
+          "sha256": "43760c90c04b062ab84f53d2f40bc1a7473ce72a0a4eb4c369fd39d062f709a1",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-viewfinder-depth.png",
+          "bytes": 22087,
+          "sha256": "7fe7db2ecf34593e65ccb4f0c9babca8d47a19bd47572bf822d2a198d533fbd2",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-viewfinder-preview.png",
+          "bytes": 22325,
+          "sha256": "43760c90c04b062ab84f53d2f40bc1a7473ce72a0a4eb4c369fd39d062f709a1",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-viewfinder-depth.png",
+          "bytes": 25706,
+          "sha256": "c05e95ee7bd8418421ab9afe8e39eaec8c6275b9d03b54522a657f16c8fd7b2a",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-viewfinder-preview.png",
+          "bytes": 26277,
+          "sha256": "3c7427f8ddbf10e260194f4c6d779c06b35a24d3996e1d0afd2ed4f5815772e2",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-viewfinder-depth.png",
+          "bytes": 25706,
+          "sha256": "c05e95ee7bd8418421ab9afe8e39eaec8c6275b9d03b54522a657f16c8fd7b2a",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-viewfinder-preview.png",
+          "bytes": 26277,
+          "sha256": "3c7427f8ddbf10e260194f4c6d779c06b35a24d3996e1d0afd2ed4f5815772e2",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-viewfinder-depth.png",
+          "bytes": 15795,
+          "sha256": "6463d0e8152ba225c9b9b12044a04dbcad431bafe2db82c4690ffce48e2c8827",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-viewfinder-preview.png",
+          "bytes": 16054,
+          "sha256": "b9cc848607a5056766e9a08565abf3b860aba147dd442d58ba2d0bf1e41c627d",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-viewfinder-depth.png",
+          "bytes": 15795,
+          "sha256": "6463d0e8152ba225c9b9b12044a04dbcad431bafe2db82c4690ffce48e2c8827",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-viewfinder-preview.png",
+          "bytes": 16054,
+          "sha256": "b9cc848607a5056766e9a08565abf3b860aba147dd442d58ba2d0bf1e41c627d",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-viewfinder-depth.png",
+          "bytes": 22219,
+          "sha256": "33a4a9138f5c2b3f653c4245cf823c0bd2974c439fc4a89102a16067ac3ae894",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-viewfinder-preview.png",
+          "bytes": 22452,
+          "sha256": "d7d1a067f8b33311adae1cb20cb7a3586697618fd500ba907430130bb7d4bcb0",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-viewfinder-depth.png",
+          "bytes": 22219,
+          "sha256": "33a4a9138f5c2b3f653c4245cf823c0bd2974c439fc4a89102a16067ac3ae894",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-viewfinder-preview.png",
+          "bytes": 22452,
+          "sha256": "d7d1a067f8b33311adae1cb20cb7a3586697618fd500ba907430130bb7d4bcb0",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-viewfinder-depth.png",
+          "bytes": 25840,
+          "sha256": "4c8145527abffbbad6e05aa5e1750c6169371e8556ccd269580153486d3a095d",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-viewfinder-preview.png",
+          "bytes": 26396,
+          "sha256": "16aa696387c99be241f7db68f6c94c0131c1b0dd225a83d3aac07e0fb51f1ece",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-viewfinder-depth.png",
+          "bytes": 25840,
+          "sha256": "4c8145527abffbbad6e05aa5e1750c6169371e8556ccd269580153486d3a095d",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-viewfinder-preview.png",
+          "bytes": 26396,
+          "sha256": "16aa696387c99be241f7db68f6c94c0131c1b0dd225a83d3aac07e0fb51f1ece",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-viewfinder-depth.png",
+          "bytes": 18002,
+          "sha256": "79e83aac5d67896cd50328941ddeb9b6dc64e33c308fb13d691a19781ac3d7c6",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-viewfinder-preview.png",
+          "bytes": 18274,
+          "sha256": "d81ce3ed9b94826035c3ca361e5c99839a46c3d4f5eb6a16365cb9b4a9a5300b",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-viewfinder-depth.png",
+          "bytes": 18002,
+          "sha256": "79e83aac5d67896cd50328941ddeb9b6dc64e33c308fb13d691a19781ac3d7c6",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-viewfinder-preview.png",
+          "bytes": 18274,
+          "sha256": "d81ce3ed9b94826035c3ca361e5c99839a46c3d4f5eb6a16365cb9b4a9a5300b",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-viewfinder-depth.png",
+          "bytes": 24467,
+          "sha256": "638cbe10dbbd6e02a983b748a3994685bdd5464c85ac435e5a4ef81c3356877e",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-viewfinder-preview.png",
+          "bytes": 24771,
+          "sha256": "3e97bd6d0d907ad237f7471a9b64be006449e27f7773a2336cab0e17bdb1e7c4",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-viewfinder-depth.png",
+          "bytes": 24467,
+          "sha256": "638cbe10dbbd6e02a983b748a3994685bdd5464c85ac435e5a4ef81c3356877e",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-viewfinder-preview.png",
+          "bytes": 24771,
+          "sha256": "3e97bd6d0d907ad237f7471a9b64be006449e27f7773a2336cab0e17bdb1e7c4",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-viewfinder-depth.png",
+          "bytes": 28154,
+          "sha256": "1dd8d8281e21bbf6a459ec7281b084d3dede3e6ca1feeecafb5886280a6a136c",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-viewfinder-preview.png",
+          "bytes": 28845,
+          "sha256": "c3bd377350d6b228d9a4262313bbe761e80e51dc46d1b9672d0bb220d8d15a23",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-viewfinder-depth.png",
+          "bytes": 28154,
+          "sha256": "1dd8d8281e21bbf6a459ec7281b084d3dede3e6ca1feeecafb5886280a6a136c",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-viewfinder-preview.png",
+          "bytes": 28845,
+          "sha256": "c3bd377350d6b228d9a4262313bbe761e80e51dc46d1b9672d0bb220d8d15a23",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/viewfinder-actual-enlarged.png",
+          "bytes": 13104,
+          "sha256": "81a6a92dfc7ebe3092307db05e7f5f7b1d2404e3ab6940718e073361db07a2b1",
+          "width": 320,
+          "height": 640,
+          "actual_camera_window": true
+        },
+        {
+          "path": "cache/ui-probe/viewfinder-actual-controls.png",
+          "bytes": 30363,
+          "sha256": "a19c3475b3d4294e005a15d69511c5a2b69166d760e5c58675c1007f7ce9d4ba",
+          "width": 320,
+          "height": 640,
+          "actual_camera_window": true
+        }
+      ],
+      "first_image_readiness_cases_per_pip_run": 4,
+      "held_actual_image_evidence": "phase=STARTING captureAt=264244 displayAt=264077 cover=正在确认画面\n请对准亮处\nreleased_real_image=true live=true progress=true\n",
+      "constructed_waiting_layout_images": [
+        {
+          "path": "cache/ui-probe/320x480-font100-day-starting-camera.png",
+          "bytes": 33371,
+          "sha256": "b420cde90abe8c405e37d60d664a5cf7d9087ff2b3ed11219d366628a8bf3431",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-day-starting-image.png",
+          "bytes": 33938,
+          "sha256": "1700459dae1a6833afc308fa73290d9dd20bb399dd25c015d32f1f06e96e9e3d",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-starting-camera.png",
+          "bytes": 33371,
+          "sha256": "b420cde90abe8c405e37d60d664a5cf7d9087ff2b3ed11219d366628a8bf3431",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-starting-image.png",
+          "bytes": 33938,
+          "sha256": "1700459dae1a6833afc308fa73290d9dd20bb399dd25c015d32f1f06e96e9e3d",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-starting-camera.png",
+          "bytes": 33597,
+          "sha256": "2d19370e538920bf6fabee5d8027ced58c7734e75770874a93bb7a48542d01bf",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-starting-image.png",
+          "bytes": 34169,
+          "sha256": "16b655978eb23b396ca1dd2489cfaf5ef5157325203bbb4aed558012931a1c9f",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-starting-camera.png",
+          "bytes": 33597,
+          "sha256": "2d19370e538920bf6fabee5d8027ced58c7734e75770874a93bb7a48542d01bf",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-starting-image.png",
+          "bytes": 34169,
+          "sha256": "16b655978eb23b396ca1dd2489cfaf5ef5157325203bbb4aed558012931a1c9f",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-starting-camera.png",
+          "bytes": 36502,
+          "sha256": "65ad5c5b4f5baafec1be0b6fd8c058b91e3f4fe9a072be5b2ef1e469eb803f61",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-starting-image.png",
+          "bytes": 37262,
+          "sha256": "5ff6da0474dc919073ee832289433c5da25404e85d5805fb66c68b665b3f8420",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-starting-camera.png",
+          "bytes": 36502,
+          "sha256": "65ad5c5b4f5baafec1be0b6fd8c058b91e3f4fe9a072be5b2ef1e469eb803f61",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-starting-image.png",
+          "bytes": 37262,
+          "sha256": "5ff6da0474dc919073ee832289433c5da25404e85d5805fb66c68b665b3f8420",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-starting-camera.png",
+          "bytes": 37989,
+          "sha256": "87965faff22ce5cc3277b90fdfd2c9870fe9edcf453eb1577bc6a1ce4f76a1a2",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-starting-image.png",
+          "bytes": 38585,
+          "sha256": "9e1fa202f90fdfe2242d5c24c36058303254db1c928eb79bf12da0a9f5cdb33e",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-starting-camera.png",
+          "bytes": 37989,
+          "sha256": "87965faff22ce5cc3277b90fdfd2c9870fe9edcf453eb1577bc6a1ce4f76a1a2",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-starting-image.png",
+          "bytes": 38585,
+          "sha256": "9e1fa202f90fdfe2242d5c24c36058303254db1c928eb79bf12da0a9f5cdb33e",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-starting-camera.png",
+          "bytes": 40809,
+          "sha256": "f440c3cb7612badac06df0786286e46d0e78237d767f9496f949442139ab515c",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-starting-image.png",
+          "bytes": 41345,
+          "sha256": "4501baf94e57ff59c647f18ac98fcb906adb3458eae4275713871a5a45b7c3d2",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-starting-camera.png",
+          "bytes": 40809,
+          "sha256": "f440c3cb7612badac06df0786286e46d0e78237d767f9496f949442139ab515c",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-starting-image.png",
+          "bytes": 41345,
+          "sha256": "4501baf94e57ff59c647f18ac98fcb906adb3458eae4275713871a5a45b7c3d2",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-starting-camera.png",
+          "bytes": 45153,
+          "sha256": "7699b13518ea36ec377165b46e773a8ca635eef0e49a73cd80892a5bb2440e1b",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-starting-image.png",
+          "bytes": 45931,
+          "sha256": "c0bf2965671e01852c43f273a364f360776533db3e02da138d1b408b9045fa5f",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-starting-camera.png",
+          "bytes": 45153,
+          "sha256": "7699b13518ea36ec377165b46e773a8ca635eef0e49a73cd80892a5bb2440e1b",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-starting-image.png",
+          "bytes": 45931,
+          "sha256": "c0bf2965671e01852c43f273a364f360776533db3e02da138d1b408b9045fa5f",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-starting-camera.png",
+          "bytes": 30951,
+          "sha256": "0ac02a145d627aad58cbd027d91687444ed49023a87e8a1b216a8d14b746ba4c",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-starting-image.png",
+          "bytes": 31533,
+          "sha256": "12500c4263cc1a25e88d60c038def775f03c9fc5cc119e37a1d859fd59029e8c",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-starting-camera.png",
+          "bytes": 30951,
+          "sha256": "0ac02a145d627aad58cbd027d91687444ed49023a87e8a1b216a8d14b746ba4c",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-starting-image.png",
+          "bytes": 31533,
+          "sha256": "12500c4263cc1a25e88d60c038def775f03c9fc5cc119e37a1d859fd59029e8c",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-starting-camera.png",
+          "bytes": 35527,
+          "sha256": "e29e61851bc0f2fef03e61abc616a71e599f17b84dc8376883ebf97f639f106d",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-starting-image.png",
+          "bytes": 36147,
+          "sha256": "0302dffde41e00e46d8c3e9450b6d11e970591bfca3475ceef433c4864dcb3b2",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-starting-camera.png",
+          "bytes": 35527,
+          "sha256": "e29e61851bc0f2fef03e61abc616a71e599f17b84dc8376883ebf97f639f106d",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-starting-image.png",
+          "bytes": 36147,
+          "sha256": "0302dffde41e00e46d8c3e9450b6d11e970591bfca3475ceef433c4864dcb3b2",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-starting-camera.png",
+          "bytes": 38700,
+          "sha256": "4b26832e153de1194d62c727ed1ce7d11fecbe6acc3057274ec79476fdb3b5b0",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-starting-image.png",
+          "bytes": 39448,
+          "sha256": "c9ed3442b464f73ce85e6786c3a3fff015f3f148ed3bc14ebe3205050a4f4a5f",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-starting-camera.png",
+          "bytes": 38700,
+          "sha256": "4b26832e153de1194d62c727ed1ce7d11fecbe6acc3057274ec79476fdb3b5b0",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-starting-image.png",
+          "bytes": 39448,
+          "sha256": "c9ed3442b464f73ce85e6786c3a3fff015f3f148ed3bc14ebe3205050a4f4a5f",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-starting-camera.png",
+          "bytes": 31109,
+          "sha256": "771e0d73090b1c4d78589cb80a1f2f6a185aa431b26988a239efe86b9ec7d46c",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-starting-image.png",
+          "bytes": 31693,
+          "sha256": "531acc08857762d8f781e412164d732bef799c3691034d8915b0cd36afcd710b",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-starting-camera.png",
+          "bytes": 31109,
+          "sha256": "771e0d73090b1c4d78589cb80a1f2f6a185aa431b26988a239efe86b9ec7d46c",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-starting-image.png",
+          "bytes": 31693,
+          "sha256": "531acc08857762d8f781e412164d732bef799c3691034d8915b0cd36afcd710b",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-starting-camera.png",
+          "bytes": 35626,
+          "sha256": "6e39bb2ee01a0b727666da639c3f8d28b23c4820904eb3191ce35005b327a5ba",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-starting-image.png",
+          "bytes": 36283,
+          "sha256": "b4608ef7c8f92a42bcad4368786811ac04be55735b330710b458d1e2a318b529",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-starting-camera.png",
+          "bytes": 35626,
+          "sha256": "6e39bb2ee01a0b727666da639c3f8d28b23c4820904eb3191ce35005b327a5ba",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-starting-image.png",
+          "bytes": 36283,
+          "sha256": "b4608ef7c8f92a42bcad4368786811ac04be55735b330710b458d1e2a318b529",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-starting-camera.png",
+          "bytes": 38897,
+          "sha256": "8c792d5c00682a177b45eba1adc64c93e1e05eec35709c64fab9976a53b963a4",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-starting-image.png",
+          "bytes": 39647,
+          "sha256": "95d06c41ed2fa6e3f896840ede9ae457788ba7178cae8734bc62db1b18957af6",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-starting-camera.png",
+          "bytes": 38897,
+          "sha256": "8c792d5c00682a177b45eba1adc64c93e1e05eec35709c64fab9976a53b963a4",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-starting-image.png",
+          "bytes": 39647,
+          "sha256": "95d06c41ed2fa6e3f896840ede9ae457788ba7178cae8734bc62db1b18957af6",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-starting-camera.png",
+          "bytes": 66781,
+          "sha256": "f967a37abbf1a078451da3bd358dcd6508293ed08a8d1d1d2e7911aa0255b66f",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-starting-image.png",
+          "bytes": 67340,
+          "sha256": "3a92121f9709a7e81d1edfeae4461b06db0b2abbeadf6c547e178ffefd015dcc",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-starting-camera.png",
+          "bytes": 66781,
+          "sha256": "f967a37abbf1a078451da3bd358dcd6508293ed08a8d1d1d2e7911aa0255b66f",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-starting-image.png",
+          "bytes": 67340,
+          "sha256": "3a92121f9709a7e81d1edfeae4461b06db0b2abbeadf6c547e178ffefd015dcc",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-starting-camera.png",
+          "bytes": 60688,
+          "sha256": "1c8327aac125c06a9c7806ea1128e38fc698d8edd710f5bf22f250f20c3b0335",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-starting-image.png",
+          "bytes": 61327,
+          "sha256": "f34ef36f0c7e42cb2de76cea65289b8a1ce61f7aaa032b03326a97898e0d2a31",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-starting-camera.png",
+          "bytes": 60688,
+          "sha256": "1c8327aac125c06a9c7806ea1128e38fc698d8edd710f5bf22f250f20c3b0335",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-starting-image.png",
+          "bytes": 61327,
+          "sha256": "f34ef36f0c7e42cb2de76cea65289b8a1ce61f7aaa032b03326a97898e0d2a31",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-starting-camera.png",
+          "bytes": 64413,
+          "sha256": "900569dcde6bb5ee49fd9ad60ace74784cf921b53aff9b841ba5393fd6f8ce0a",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-starting-image.png",
+          "bytes": 65214,
+          "sha256": "75f5c80d41242759bc9511e4d0dfd55f358b8d47d8effb1c96160b34bb44ab73",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-starting-camera.png",
+          "bytes": 64413,
+          "sha256": "900569dcde6bb5ee49fd9ad60ace74784cf921b53aff9b841ba5393fd6f8ce0a",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-starting-image.png",
+          "bytes": 65214,
+          "sha256": "75f5c80d41242759bc9511e4d0dfd55f358b8d47d8effb1c96160b34bb44ab73",
+          "width": 800,
+          "height": 600
+        }
+      ],
+      "draw_submission_passed": true,
+      "retired_texture_passed": true,
+      "preview_only_no_model_task_passed": true,
+      "storage": {
+        "scope": "Disposable hosted runner after compilation; APKs, emulator, system images, SDK platform/build tools and keys retained",
+        "free_bytes_before": 90831486976,
+        "removed": [
+          "/usr/local/lib/android/sdk/ndk",
+          "/usr/local/lib/android/sdk/cmake",
+          "/home/runner/.gradle/caches",
+          "/home/runner/.gradle/wrapper/dists"
+        ],
+        "skipped": [],
+        "apk_sha256": {
+          "app/build/outputs/apk/debug/app-debug.apk": "b164e1ebb58096c546a051ad82054150318af843c8929c3e96410f8f0c22906b",
+          "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "75c59b01350a16698991a5a17360c8c70afce99d9ee5af00c2a5d78094af0361"
+        },
+        "status": "passed",
+        "free_bytes_after": 98530684928,
+        "compiled_apks_unchanged": true
+      }
+    },
+    {
+      "api": 35,
+      "workflow_run": 41194621240,
+      "artifact_id": 13039979948,
+      "artifact_bytes": 17692905,
+      "artifact_sha256": "e66815fe1e2d117180505cdef9f1c261d544d1657034a8c5caa003663ad97b0b",
+      "ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "original_ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "constructed_fit_center_geometry": [
+        {
+          "configuration": "320x480-font100-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 173,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 300,
+          "normalImageArea": 22446.75,
+          "enlargedImageArea": 67500,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font100-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 173,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 300,
+          "normalImageArea": 22446.75,
+          "enlargedImageArea": 67500,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font150-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 164,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 298,
+          "normalImageArea": 20172,
+          "enlargedImageArea": 66603,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font150-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 164,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 298,
+          "normalImageArea": 20172,
+          "enlargedImageArea": 66603,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font200-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 151,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 286,
+          "normalImageArea": 17100.75,
+          "enlargedImageArea": 61347,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "320x480-font200-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 320,
+          "normalFrameHeight": 151,
+          "enlargedFrameWidth": 320,
+          "enlargedFrameHeight": 286,
+          "normalImageArea": 17100.75,
+          "enlargedImageArea": 61347,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font100-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 269,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 460,
+          "normalImageArea": 54270.75,
+          "enlargedImageArea": 158700,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font100-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 269,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 460,
+          "normalImageArea": 54270.75,
+          "enlargedImageArea": 158700,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font150-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 260,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 458,
+          "normalImageArea": 50700,
+          "enlargedImageArea": 157323,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font150-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 260,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 458,
+          "normalImageArea": 50700,
+          "enlargedImageArea": 157323,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font200-day",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 247,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 446,
+          "normalImageArea": 45756.75,
+          "enlargedImageArea": 149187,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "360x640-font200-night",
+          "displayDegrees": 0,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 247,
+          "enlargedFrameWidth": 360,
+          "enlargedFrameHeight": 446,
+          "normalImageArea": 45756.75,
+          "enlargedImageArea": 149187,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font100-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 169,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 180,
+          "normalImageArea": 38081.33247375488,
+          "enlargedImageArea": 43200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font100-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 360,
+          "normalFrameHeight": 169,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 180,
+          "normalImageArea": 38081.33247375488,
+          "enlargedImageArea": 43200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font150-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 352,
+          "normalFrameHeight": 153,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 178,
+          "normalImageArea": 31212,
+          "enlargedImageArea": 42245.33514404297,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font150-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 352,
+          "normalFrameHeight": 153,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 178,
+          "normalImageArea": 31212,
+          "enlargedImageArea": 42245.33514404297,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font200-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 328,
+          "normalFrameHeight": 131,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 166,
+          "normalImageArea": 22881.33399963379,
+          "enlargedImageArea": 36741.33248901367,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "600x360-font200-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 328,
+          "normalFrameHeight": 131,
+          "enlargedFrameWidth": 600,
+          "enlargedFrameHeight": 166,
+          "normalImageArea": 22881.33399963379,
+          "enlargedImageArea": 36741.33248901367,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font100-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 384,
+          "normalFrameHeight": 169,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 180,
+          "normalImageArea": 38081.33247375488,
+          "enlargedImageArea": 43200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font100-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 384,
+          "normalFrameHeight": 169,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 180,
+          "normalImageArea": 38081.33247375488,
+          "enlargedImageArea": 43200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font150-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 384,
+          "normalFrameHeight": 153,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 178,
+          "normalImageArea": 31212,
+          "enlargedImageArea": 42245.33514404297,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font150-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 384,
+          "normalFrameHeight": 153,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 178,
+          "normalImageArea": 31212,
+          "enlargedImageArea": 42245.33514404297,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font200-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 368,
+          "normalFrameHeight": 131,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 166,
+          "normalImageArea": 22881.33399963379,
+          "enlargedImageArea": 36741.33248901367,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "640x360-font200-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 368,
+          "normalFrameHeight": 131,
+          "enlargedFrameWidth": 640,
+          "enlargedFrameHeight": 166,
+          "normalImageArea": 22881.33399963379,
+          "enlargedImageArea": 36741.33248901367,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font100-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 409,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 420,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 235200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font100-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 409,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 420,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 235200,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font150-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 393,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 418,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 232965.32482910156,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font150-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 393,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 418,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 232965.32482910156,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font200-day",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 371,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 406,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 219781.34985351562,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        },
+        {
+          "configuration": "800x600-font200-night",
+          "displayDegrees": 90,
+          "normalFrameWidth": 480,
+          "normalFrameHeight": 371,
+          "enlargedFrameWidth": 800,
+          "enlargedFrameHeight": 406,
+          "normalImageArea": 172800,
+          "enlargedImageArea": 219781.34985351562,
+          "scope": "Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement"
+        }
+      ],
+      "actual_camera_fit_center_geometry": {
+        "normal": {
+          "frameWidth": 320,
+          "frameHeight": 269,
+          "imageWidth": 201.75,
+          "imageHeight": 269,
+          "imageArea": 54270.75
+        },
+        "enlarged": {
+          "frameWidth": 320,
+          "frameHeight": 460,
+          "imageWidth": 320,
+          "imageHeight": 426.66668701171875,
+          "imageArea": 136533.33984375
+        },
+        "scope": "Actual emulated Camera2 window and production display geometry; no device FPS/power claim"
+      },
+      "viewfinder_cases_per_pip_run": 4,
+      "actual_model_in_enlarged_view_passed": true,
+      "enlarged_viewfinder_images": [
+        {
+          "path": "cache/ui-probe/320x480-font100-day-viewfinder-depth.png",
+          "bytes": 15367,
+          "sha256": "7e3160c8e147acbc3405298189e1c579383917c50979c5535de782a25a6a3069",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-day-viewfinder-preview.png",
+          "bytes": 15620,
+          "sha256": "d2e015673540f6dd15aa06409b3afc90ec1295add997b781b085aec04c33d3c9",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-viewfinder-depth.png",
+          "bytes": 15367,
+          "sha256": "7e3160c8e147acbc3405298189e1c579383917c50979c5535de782a25a6a3069",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-viewfinder-preview.png",
+          "bytes": 15620,
+          "sha256": "d2e015673540f6dd15aa06409b3afc90ec1295add997b781b085aec04c33d3c9",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-viewfinder-depth.png",
+          "bytes": 21660,
+          "sha256": "fd07f3fdb07ea0d8e5c57f398dc7a6bfc91ae25d0409366c96742210a71d2135",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-viewfinder-preview.png",
+          "bytes": 21910,
+          "sha256": "c66257fdd4a25a9c9b2bfd8b711c0d812525dcf22e9028389e7c64171f703896",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-viewfinder-depth.png",
+          "bytes": 21660,
+          "sha256": "fd07f3fdb07ea0d8e5c57f398dc7a6bfc91ae25d0409366c96742210a71d2135",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-viewfinder-preview.png",
+          "bytes": 21910,
+          "sha256": "c66257fdd4a25a9c9b2bfd8b711c0d812525dcf22e9028389e7c64171f703896",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-viewfinder-depth.png",
+          "bytes": 25150,
+          "sha256": "35c9513ad90b43ec635e94d9213b26d6cfdcd291e221a5e52410ebc91d8265fa",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-viewfinder-preview.png",
+          "bytes": 25680,
+          "sha256": "d58a2082fb96fb076d25102164ca6fd2ee8016455c0bc110deb2c1f81ff97c2a",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-viewfinder-depth.png",
+          "bytes": 25150,
+          "sha256": "35c9513ad90b43ec635e94d9213b26d6cfdcd291e221a5e52410ebc91d8265fa",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-viewfinder-preview.png",
+          "bytes": 25680,
+          "sha256": "d58a2082fb96fb076d25102164ca6fd2ee8016455c0bc110deb2c1f81ff97c2a",
+          "width": 320,
+          "height": 480,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-viewfinder-depth.png",
+          "bytes": 16383,
+          "sha256": "fda89c9bd3fcf0e230529cfb55ab09adfc9fe9704afba6c7df24d64ae629d7cd",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-viewfinder-preview.png",
+          "bytes": 16663,
+          "sha256": "2409dac4e4285a2aa98bcb65f3bf1fb3130e7cd6b3099da2d1f5d15767d4b8ba",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-viewfinder-depth.png",
+          "bytes": 16383,
+          "sha256": "fda89c9bd3fcf0e230529cfb55ab09adfc9fe9704afba6c7df24d64ae629d7cd",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-viewfinder-preview.png",
+          "bytes": 16663,
+          "sha256": "2409dac4e4285a2aa98bcb65f3bf1fb3130e7cd6b3099da2d1f5d15767d4b8ba",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-viewfinder-depth.png",
+          "bytes": 22718,
+          "sha256": "3ae9230455b77dfb1f7157ab2b5b40cafd8066c1fe44eca659ab10ad3600700e",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-viewfinder-preview.png",
+          "bytes": 22971,
+          "sha256": "26b88e5f8e9c86e4c66536987066be142b21527062ac4075fd6555791335d298",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-viewfinder-depth.png",
+          "bytes": 22718,
+          "sha256": "3ae9230455b77dfb1f7157ab2b5b40cafd8066c1fe44eca659ab10ad3600700e",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-viewfinder-preview.png",
+          "bytes": 22971,
+          "sha256": "26b88e5f8e9c86e4c66536987066be142b21527062ac4075fd6555791335d298",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-viewfinder-depth.png",
+          "bytes": 26248,
+          "sha256": "c2ca5d7947117aa550e120ac376479f6a2595c992c3ca34e6a6787ae45b39ba0",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-viewfinder-preview.png",
+          "bytes": 26795,
+          "sha256": "b93ac9ab551a158df4ed7547faa5b07f9f2bca41071aa5c0325f37a4b650eb53",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-viewfinder-depth.png",
+          "bytes": 26248,
+          "sha256": "c2ca5d7947117aa550e120ac376479f6a2595c992c3ca34e6a6787ae45b39ba0",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-viewfinder-preview.png",
+          "bytes": 26795,
+          "sha256": "b93ac9ab551a158df4ed7547faa5b07f9f2bca41071aa5c0325f37a4b650eb53",
+          "width": 360,
+          "height": 640,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-viewfinder-depth.png",
+          "bytes": 15669,
+          "sha256": "8212ad3d690aefbde79e9586311a963acb9b05dae469b74c6946e78bebf51e89",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-viewfinder-preview.png",
+          "bytes": 15923,
+          "sha256": "062d461e702257e03b8789c0d2ff2f702c058319f4bdd8b5d3d6091e36a676cb",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-viewfinder-depth.png",
+          "bytes": 15669,
+          "sha256": "8212ad3d690aefbde79e9586311a963acb9b05dae469b74c6946e78bebf51e89",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-viewfinder-preview.png",
+          "bytes": 15923,
+          "sha256": "062d461e702257e03b8789c0d2ff2f702c058319f4bdd8b5d3d6091e36a676cb",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-viewfinder-depth.png",
+          "bytes": 22046,
+          "sha256": "f9d16b7398d2f9ac027f679a20a688ba6eb87b7b232fd9b7e9ebbf3546026519",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-viewfinder-preview.png",
+          "bytes": 22312,
+          "sha256": "8e456b415b57cd081d71ecfda46e8923f63b30e5ab0bef90b76e506538195f5a",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-viewfinder-depth.png",
+          "bytes": 22046,
+          "sha256": "f9d16b7398d2f9ac027f679a20a688ba6eb87b7b232fd9b7e9ebbf3546026519",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-viewfinder-preview.png",
+          "bytes": 22312,
+          "sha256": "8e456b415b57cd081d71ecfda46e8923f63b30e5ab0bef90b76e506538195f5a",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-viewfinder-depth.png",
+          "bytes": 25698,
+          "sha256": "e3ab5449560947b827f6d394ce19160c00aca9a07672ec0f6fde28978b2a555b",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-viewfinder-preview.png",
+          "bytes": 26280,
+          "sha256": "50d02265edc8418ae4236c0f7f033bd7f699ccd08fc3a36a8e141a4db0e71f2e",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-viewfinder-depth.png",
+          "bytes": 25698,
+          "sha256": "e3ab5449560947b827f6d394ce19160c00aca9a07672ec0f6fde28978b2a555b",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-viewfinder-preview.png",
+          "bytes": 26280,
+          "sha256": "50d02265edc8418ae4236c0f7f033bd7f699ccd08fc3a36a8e141a4db0e71f2e",
+          "width": 600,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-viewfinder-depth.png",
+          "bytes": 15748,
+          "sha256": "b368111c13433209b91eec4040410b3addfe6cb1dded8816671a2c8a01ef5df1",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-viewfinder-preview.png",
+          "bytes": 16003,
+          "sha256": "29376b726b9d54d030c8361842e5a43b1defe7024e8a7865b0a580fb0e91afa0",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-viewfinder-depth.png",
+          "bytes": 15748,
+          "sha256": "b368111c13433209b91eec4040410b3addfe6cb1dded8816671a2c8a01ef5df1",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-viewfinder-preview.png",
+          "bytes": 16003,
+          "sha256": "29376b726b9d54d030c8361842e5a43b1defe7024e8a7865b0a580fb0e91afa0",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-viewfinder-depth.png",
+          "bytes": 22177,
+          "sha256": "4cdb76a76d2c21294ac0ac285bbad2121be5fdcfb532ed187e452785db2666dc",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-viewfinder-preview.png",
+          "bytes": 22443,
+          "sha256": "0cf55bdc5ef078c136bfa29fdcab8d94698256560b988f44625f6f913ce410a4",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-viewfinder-depth.png",
+          "bytes": 22177,
+          "sha256": "4cdb76a76d2c21294ac0ac285bbad2121be5fdcfb532ed187e452785db2666dc",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-viewfinder-preview.png",
+          "bytes": 22443,
+          "sha256": "0cf55bdc5ef078c136bfa29fdcab8d94698256560b988f44625f6f913ce410a4",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-viewfinder-depth.png",
+          "bytes": 25836,
+          "sha256": "f8d60309c2d1e4efa2e2083aa3216636473ebc76f4ddf09cf524e12e5f18b902",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-viewfinder-preview.png",
+          "bytes": 26395,
+          "sha256": "c4da26f8a6dc8ac5ba026cd4c8aaac11389c537df585c6cbfbae5014364ce970",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-viewfinder-depth.png",
+          "bytes": 25836,
+          "sha256": "f8d60309c2d1e4efa2e2083aa3216636473ebc76f4ddf09cf524e12e5f18b902",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-viewfinder-preview.png",
+          "bytes": 26395,
+          "sha256": "c4da26f8a6dc8ac5ba026cd4c8aaac11389c537df585c6cbfbae5014364ce970",
+          "width": 640,
+          "height": 360,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-viewfinder-depth.png",
+          "bytes": 17964,
+          "sha256": "13dab8c60d539e6264274877b065b7e7e7b4d78869dec305ba8242c3cb981fcd",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-viewfinder-preview.png",
+          "bytes": 18232,
+          "sha256": "eeb7b0904d30b9a26adeb5735afe93017a437b854b52a16b8348d7d79ab86900",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-viewfinder-depth.png",
+          "bytes": 17964,
+          "sha256": "13dab8c60d539e6264274877b065b7e7e7b4d78869dec305ba8242c3cb981fcd",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-viewfinder-preview.png",
+          "bytes": 18232,
+          "sha256": "eeb7b0904d30b9a26adeb5735afe93017a437b854b52a16b8348d7d79ab86900",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-viewfinder-depth.png",
+          "bytes": 24423,
+          "sha256": "4bf8b6a07f47a2814da3346c7f7b7633cd049634a27af775d13724de44ad206d",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-viewfinder-preview.png",
+          "bytes": 24744,
+          "sha256": "b92caa24cbb4d09f565e7f7e0763768d2465553fb6a5836bc8e72f0f88a07f20",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-viewfinder-depth.png",
+          "bytes": 24423,
+          "sha256": "4bf8b6a07f47a2814da3346c7f7b7633cd049634a27af775d13724de44ad206d",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-viewfinder-preview.png",
+          "bytes": 24744,
+          "sha256": "b92caa24cbb4d09f565e7f7e0763768d2465553fb6a5836bc8e72f0f88a07f20",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-viewfinder-depth.png",
+          "bytes": 28159,
+          "sha256": "e39458493bc31a2a6cf928602599ffa3f11cf314644ec2f5188e45d589429ca8",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-viewfinder-preview.png",
+          "bytes": 28852,
+          "sha256": "254fb8589e9d0e2c541a9baa8d62f98f974e51b40f8d3a357242ada95a9d0d8c",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-viewfinder-depth.png",
+          "bytes": 28159,
+          "sha256": "e39458493bc31a2a6cf928602599ffa3f11cf314644ec2f5188e45d589429ca8",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-viewfinder-preview.png",
+          "bytes": 28852,
+          "sha256": "254fb8589e9d0e2c541a9baa8d62f98f974e51b40f8d3a357242ada95a9d0d8c",
+          "width": 800,
+          "height": 600,
+          "actual_camera_window": false
+        },
+        {
+          "path": "cache/ui-probe/viewfinder-actual-enlarged.png",
+          "bytes": 13737,
+          "sha256": "7125cd9efd44c80b57bbc1a641c64b0bff7ef15cc0ef70e72126bf339480a8da",
+          "width": 320,
+          "height": 640,
+          "actual_camera_window": true
+        },
+        {
+          "path": "cache/ui-probe/viewfinder-actual-controls.png",
+          "bytes": 31028,
+          "sha256": "56a78e9fa86f312a39c19a55c6f21722abbe57b25d669413cf21e99b9c9f0f74",
+          "width": 320,
+          "height": 640,
+          "actual_camera_window": true
+        }
+      ],
+      "first_image_readiness_cases_per_pip_run": 4,
+      "held_actual_image_evidence": "phase=STARTING captureAt=213540 displayAt=213409 cover=正在确认画面\n请对准亮处\nreleased_real_image=true live=true progress=true\n",
+      "constructed_waiting_layout_images": [
+        {
+          "path": "cache/ui-probe/320x480-font100-day-starting-camera.png",
+          "bytes": 33314,
+          "sha256": "ae4c772c2cfb5b4589698e480c9e4b02c364741a929b94287f8bd1b50d36b286",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-day-starting-image.png",
+          "bytes": 33883,
+          "sha256": "09c3379b75813902c4c86a77b30ab7cc995e64d9e61111c523a1c15ab8bdc954",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-starting-camera.png",
+          "bytes": 33314,
+          "sha256": "ae4c772c2cfb5b4589698e480c9e4b02c364741a929b94287f8bd1b50d36b286",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-starting-image.png",
+          "bytes": 33883,
+          "sha256": "09c3379b75813902c4c86a77b30ab7cc995e64d9e61111c523a1c15ab8bdc954",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-starting-camera.png",
+          "bytes": 33525,
+          "sha256": "bee274b92a6b2ef3118a5aa49b673d40140c8c4a2f166990c05f42dabedc5f3d",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-starting-image.png",
+          "bytes": 34100,
+          "sha256": "453be901821672f0dc41dd02da74583948665b6623f0d091bfe6bf73fe434f07",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-starting-camera.png",
+          "bytes": 33525,
+          "sha256": "bee274b92a6b2ef3118a5aa49b673d40140c8c4a2f166990c05f42dabedc5f3d",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-starting-image.png",
+          "bytes": 34100,
+          "sha256": "453be901821672f0dc41dd02da74583948665b6623f0d091bfe6bf73fe434f07",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-starting-camera.png",
+          "bytes": 36471,
+          "sha256": "92fc459c722fd2c9650f64f15b122ac788c593be2c53b3952e3f25e0f85a3b4a",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-starting-image.png",
+          "bytes": 37232,
+          "sha256": "e6739b8543a081dc98d73bcf570e0ca9100a9fb56a9f67ab824999586474ad1f",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-starting-camera.png",
+          "bytes": 36471,
+          "sha256": "92fc459c722fd2c9650f64f15b122ac788c593be2c53b3952e3f25e0f85a3b4a",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-starting-image.png",
+          "bytes": 37232,
+          "sha256": "e6739b8543a081dc98d73bcf570e0ca9100a9fb56a9f67ab824999586474ad1f",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-starting-camera.png",
+          "bytes": 37927,
+          "sha256": "72818532d2e568e4bda4917d0bdcf5714669164786535ec2a02362afeaf78f4c",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-starting-image.png",
+          "bytes": 38523,
+          "sha256": "044163bc0143cf2fe47640b75d63fb0558df6659bf4635ffeb8318f5617a6d04",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-starting-camera.png",
+          "bytes": 37927,
+          "sha256": "72818532d2e568e4bda4917d0bdcf5714669164786535ec2a02362afeaf78f4c",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-starting-image.png",
+          "bytes": 38523,
+          "sha256": "044163bc0143cf2fe47640b75d63fb0558df6659bf4635ffeb8318f5617a6d04",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-starting-camera.png",
+          "bytes": 40753,
+          "sha256": "ec92f1b429f08a8910e38c86d571c7955351797c278b1b18bf83e7058da7d0dc",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-starting-image.png",
+          "bytes": 41286,
+          "sha256": "374cf4c2a3807cda4e3c101c88fa72494ebd683b399bd4b5b06873a7fc0245b8",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-starting-camera.png",
+          "bytes": 40753,
+          "sha256": "ec92f1b429f08a8910e38c86d571c7955351797c278b1b18bf83e7058da7d0dc",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-starting-image.png",
+          "bytes": 41286,
+          "sha256": "374cf4c2a3807cda4e3c101c88fa72494ebd683b399bd4b5b06873a7fc0245b8",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-starting-camera.png",
+          "bytes": 45106,
+          "sha256": "a68e2c83b7f4338b24556c8b0134053c37acf1cbae51e45ae329ab405c04dfb9",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-starting-image.png",
+          "bytes": 45887,
+          "sha256": "1d8dc4360b7c40236d6927fe701cff9599847f515beae97090666db6c7e8e64b",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-starting-camera.png",
+          "bytes": 45106,
+          "sha256": "a68e2c83b7f4338b24556c8b0134053c37acf1cbae51e45ae329ab405c04dfb9",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-starting-image.png",
+          "bytes": 45887,
+          "sha256": "1d8dc4360b7c40236d6927fe701cff9599847f515beae97090666db6c7e8e64b",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-starting-camera.png",
+          "bytes": 30908,
+          "sha256": "fc87ed810bfe5bcb04551ebcef7f63d24056bb65fe125e067319de8cc11c060e",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-starting-image.png",
+          "bytes": 31489,
+          "sha256": "851fd6697e51afd649cb989651a07933c05dbe581be6413db2712db909145bcc",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-starting-camera.png",
+          "bytes": 30908,
+          "sha256": "fc87ed810bfe5bcb04551ebcef7f63d24056bb65fe125e067319de8cc11c060e",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-starting-image.png",
+          "bytes": 31489,
+          "sha256": "851fd6697e51afd649cb989651a07933c05dbe581be6413db2712db909145bcc",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-starting-camera.png",
+          "bytes": 35500,
+          "sha256": "eafb65fc04e7d143e9914998a306283b0264a40ef4fdf4e6397df85cd4964979",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-starting-image.png",
+          "bytes": 36107,
+          "sha256": "00ee481e7bdde85880b8044e936117fd4f73133720d44fa07852e9e85702cfed",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-starting-camera.png",
+          "bytes": 35500,
+          "sha256": "eafb65fc04e7d143e9914998a306283b0264a40ef4fdf4e6397df85cd4964979",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-starting-image.png",
+          "bytes": 36107,
+          "sha256": "00ee481e7bdde85880b8044e936117fd4f73133720d44fa07852e9e85702cfed",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-starting-camera.png",
+          "bytes": 38644,
+          "sha256": "0cca7ef6c98c2c81164f54c22cdb1184a28f1bf72013b8ebb0ddbc43d07d55f6",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-starting-image.png",
+          "bytes": 39398,
+          "sha256": "7aa4fec9c53125deecdaaa624bb2a3b1215bc75b7e12c48409233b624dd3e076",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-starting-camera.png",
+          "bytes": 38644,
+          "sha256": "0cca7ef6c98c2c81164f54c22cdb1184a28f1bf72013b8ebb0ddbc43d07d55f6",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-starting-image.png",
+          "bytes": 39398,
+          "sha256": "7aa4fec9c53125deecdaaa624bb2a3b1215bc75b7e12c48409233b624dd3e076",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-starting-camera.png",
+          "bytes": 31058,
+          "sha256": "7eb409f851c5b883f241994cebce12a7cb09959eb721eb91d3f3a8d3db674f97",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-starting-image.png",
+          "bytes": 31642,
+          "sha256": "bd72286797c82173eb8967839d5eb84d74569274c2731728a9c043e2bb64d668",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-starting-camera.png",
+          "bytes": 31058,
+          "sha256": "7eb409f851c5b883f241994cebce12a7cb09959eb721eb91d3f3a8d3db674f97",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-starting-image.png",
+          "bytes": 31642,
+          "sha256": "bd72286797c82173eb8967839d5eb84d74569274c2731728a9c043e2bb64d668",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-starting-camera.png",
+          "bytes": 35589,
+          "sha256": "41ca6c6e01dcc231a9c0c6524054c7347a716d66c8f88af14df226dc3df8c41d",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-starting-image.png",
+          "bytes": 36226,
+          "sha256": "1667cd88f4b431a6fe62ebb381d2b16bcf5ee4fb9c8ffcec931d1697365d913c",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-starting-camera.png",
+          "bytes": 35589,
+          "sha256": "41ca6c6e01dcc231a9c0c6524054c7347a716d66c8f88af14df226dc3df8c41d",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-starting-image.png",
+          "bytes": 36226,
+          "sha256": "1667cd88f4b431a6fe62ebb381d2b16bcf5ee4fb9c8ffcec931d1697365d913c",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-starting-camera.png",
+          "bytes": 38836,
+          "sha256": "8ad5391a834f65e8426b6601484ab2bddddc5a28507a491811341bdddd242876",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-starting-image.png",
+          "bytes": 39591,
+          "sha256": "e97fb0404f228793547fbc4643660c08d9e741dc18d487debea0bed08f9dc156",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-starting-camera.png",
+          "bytes": 38836,
+          "sha256": "8ad5391a834f65e8426b6601484ab2bddddc5a28507a491811341bdddd242876",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-starting-image.png",
+          "bytes": 39591,
+          "sha256": "e97fb0404f228793547fbc4643660c08d9e741dc18d487debea0bed08f9dc156",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-starting-camera.png",
+          "bytes": 66698,
+          "sha256": "295e4821e1a97dc5f2dcdd3a3643437c083f0d8863e8c766b4df8ca1d11a379c",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-starting-image.png",
+          "bytes": 67287,
+          "sha256": "3f6262675670a57b967a40285f79dec26f66a586e53fc3c4f3898b5f3682741e",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-starting-camera.png",
+          "bytes": 66698,
+          "sha256": "295e4821e1a97dc5f2dcdd3a3643437c083f0d8863e8c766b4df8ca1d11a379c",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-starting-image.png",
+          "bytes": 67287,
+          "sha256": "3f6262675670a57b967a40285f79dec26f66a586e53fc3c4f3898b5f3682741e",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-starting-camera.png",
+          "bytes": 60650,
+          "sha256": "b4963c84547295ab0033413f8060b409673ef081e4b40fcd6008aaf3e9c8295d",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-starting-image.png",
+          "bytes": 61285,
+          "sha256": "55a6e23241c00a09962f410a28716360970d5651175bc9f7163f6c1bc7250770",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-starting-camera.png",
+          "bytes": 60650,
+          "sha256": "b4963c84547295ab0033413f8060b409673ef081e4b40fcd6008aaf3e9c8295d",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-starting-image.png",
+          "bytes": 61285,
+          "sha256": "55a6e23241c00a09962f410a28716360970d5651175bc9f7163f6c1bc7250770",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-starting-camera.png",
+          "bytes": 64361,
+          "sha256": "57c267b35ff721226744fd9f45da4f2ceb60a9c8b12ee8aef3aa71ea415dbbf9",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-starting-image.png",
+          "bytes": 65169,
+          "sha256": "f3c865a0e482e573b3559d5f307cc0fef7d597831a4cdf8590f372517c38d9d2",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-starting-camera.png",
+          "bytes": 64361,
+          "sha256": "57c267b35ff721226744fd9f45da4f2ceb60a9c8b12ee8aef3aa71ea415dbbf9",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-starting-image.png",
+          "bytes": 65169,
+          "sha256": "f3c865a0e482e573b3559d5f307cc0fef7d597831a4cdf8590f372517c38d9d2",
+          "width": 800,
+          "height": 600
+        }
+      ],
+      "draw_submission_passed": true,
+      "retired_texture_passed": true,
+      "preview_only_no_model_task_passed": true,
+      "storage": {
+        "scope": "Disposable hosted runner after compilation; APKs, emulator, system images, SDK platform/build tools and keys retained",
+        "free_bytes_before": 90831503360,
+        "removed": [
+          "/usr/local/lib/android/sdk/ndk",
+          "/usr/local/lib/android/sdk/cmake",
+          "/home/runner/.gradle/caches",
+          "/home/runner/.gradle/wrapper/dists"
+        ],
+        "skipped": [],
+        "apk_sha256": {
+          "app/build/outputs/apk/debug/app-debug.apk": "48a579bba76280ac1fcab39d644099dd195e475c19ae85f52f02055628e9a861",
+          "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "9ff5da9880fca941f921a0f9000b39c1ec1d70689a329e28be5fd05ba15a44a8"
+        },
+        "status": "passed",
+        "free_bytes_after": 98530701312,
+        "compiled_apks_unchanged": true
+      }
+    }
+  ],
+  "scope": "Both normal API35/36 full UI archives: server size/SHA/CRC, ten-probe report replay, real touch and real model checks; 30 native constructed fit-center area records and one actual Camera2 window geometry record per API; representative actual and constructed screenshots viewed. Not device FPS, power or AR acceptance."
+}

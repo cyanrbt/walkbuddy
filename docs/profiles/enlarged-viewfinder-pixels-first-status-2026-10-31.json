@@ -1,0 +1,92 @@
+{
+  "source_commit": "01c75dadadf326e5968ae2a13d9032c98448a293",
+  "runs": [
+    {
+      "id": 41194621316,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621316",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124518183601,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124518183765,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41194621314,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621314",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124518183842,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124518184049,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41194621257,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621257",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124518183411,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124518183564,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124518183627,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41194621240,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621240",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124518183307,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124518183520,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "scope": "Eight initial successes, one preserved CPU4 API35 failure. Failure only pip-repeat second SystemUI mute; new viewfinder, image-area and model checks passed. No ANR and no preview expiry at reported failure. Cause not established; one same-source rerun to assess recurrence, never a repair claim."
+}
