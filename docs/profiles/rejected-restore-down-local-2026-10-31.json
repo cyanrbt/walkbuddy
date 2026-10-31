@@ -1,0 +1,31 @@
+{
+  "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+  "local": {
+    "jvm_fixture_cases": 27,
+    "jvm_fixture_passed": true,
+    "tool_tests": 57,
+    "tool_test_failures": 0,
+    "tool_test_errors": 0,
+    "tool_test_seconds": 8.919,
+    "assemble_debug_and_android_test": true,
+    "final_build_seconds": 20,
+    "actionlint": true,
+    "production_app_src_main_and_gradle_identical_to": "v0.4.38",
+    "compiled_universal_debug_outputs": {
+      "app/build/outputs/apk/debug/app-debug.apk": {
+        "bytes": 26263242,
+        "sha256": "e1033aff395568ee975be70c019f0c3c43214a27eaccc9e2005b29c46d42ac04"
+      },
+      "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": {
+        "bytes": 388173,
+        "sha256": "a09ed5b0995816dc0939017a8242552d3d710dff7fe9c17b5a4dd128839b73ea"
+      }
+    }
+  },
+  "source_files": {
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "31d05d1288a2bf34a7352911b171ff3c4661b6371c4f6f636961e32b111e9b72",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/RejectedTouch.java": "18c81ee70be307e0a4fdc6a7a5b0c24d3721e027032a15b06990c4d33472c0bd",
+    "app/src/androidTest/assets/restore-down-paused.txt": "aafbae030003c8fa62de6b9216325b5898b8cc4ddd07ca36e9ca2d2159c9db79"
+  },
+  "scope": "JDK 17 historical-fixture rules and local APK compilation; not emulator acceptance, observed real rejected-DOWN recovery, or physical device validation."
+}

@@ -1,0 +1,3811 @@
+{
+  "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+  "reports": [
+    {
+      "api": 36,
+      "workflow_run": 41186158105,
+      "artifact_id": 13037515173,
+      "artifact_bytes": 14008034,
+      "artifact_sha256": "68ea2338162f5502fbf97de69b0bbe039acef6d79980fc57a56fe065d1d400c2",
+      "ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "original_ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "restore_fixture_passed": true,
+      "restore_guard_log_lines": [
+        "10-31 08:52:32.359  2067  2271 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:52:37.980  2067  2271 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:52:43.118  2067  2271 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:52:46.732  2067  2271 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:52:50.765  2067  2271 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:54:30.132  4916  4929 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:55:32.517  5661  5675 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true"
+      ],
+      "actual_rejected_down_lines": [],
+      "saved_rejection_files": [],
+      "draw_submission_passed": true,
+      "retired_texture_passed": true,
+      "preview_only_no_model_task_passed": true,
+      "storage": {
+        "scope": "Disposable hosted runner after compilation; APKs, emulator, system images, SDK platform/build tools and keys retained",
+        "free_bytes_before": 90832363520,
+        "removed": [
+          "/usr/local/lib/android/sdk/ndk",
+          "/usr/local/lib/android/sdk/cmake",
+          "/home/runner/.gradle/caches",
+          "/home/runner/.gradle/wrapper/dists"
+        ],
+        "skipped": [],
+        "apk_sha256": {
+          "app/build/outputs/apk/debug/app-debug.apk": "8f4989f79aa614aa234d59b5f1d594af18a92f66cb86f493914778250cc1dabe",
+          "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "24472db255c58bb8d5e666d4d2fcac6479148225a062390a9647b57f6241575f"
+        },
+        "status": "passed",
+        "free_bytes_after": 98531557376,
+        "compiled_apks_unchanged": true
+      },
+      "cpu": {
+        "runner-cpu.json": {
+          "requested_cores": 2,
+          "allowed_cpu_ids": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "cgroup_cpu_max": null,
+          "configured_cores": 2,
+          "scope": "Runner capacity and emulator topology; not device throughput",
+          "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee"
+        },
+        "emulator-cpu.json": {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      },
+      "actual_rejection_branch_exercised": false
+    },
+    {
+      "api": 35,
+      "workflow_run": 41186158105,
+      "artifact_id": 13037036599,
+      "artifact_bytes": 14040892,
+      "artifact_sha256": "5209e483a4179af4624aa5b151a8487ac99b625066c9abcd6fb90019d0c9c0f2",
+      "ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "original_ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "restore_fixture_passed": true,
+      "restore_guard_log_lines": [
+        "10-31 08:52:17.219  2401  2418 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:52:21.691  2401  2418 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:52:25.961  2401  2418 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:52:28.470  2401  2418 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:52:31.506  2401  2418 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:54:10.712  4576  4589 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true",
+        "10-31 08:55:13.766  5058  5073 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false attempt=1 restoreGuard=true"
+      ],
+      "actual_rejected_down_lines": [],
+      "saved_rejection_files": [],
+      "draw_submission_passed": true,
+      "retired_texture_passed": true,
+      "preview_only_no_model_task_passed": true,
+      "storage": {
+        "scope": "Disposable hosted runner after compilation; APKs, emulator, system images, SDK platform/build tools and keys retained",
+        "free_bytes_before": 90832351232,
+        "removed": [
+          "/usr/local/lib/android/sdk/ndk",
+          "/usr/local/lib/android/sdk/cmake",
+          "/home/runner/.gradle/caches",
+          "/home/runner/.gradle/wrapper/dists"
+        ],
+        "skipped": [],
+        "apk_sha256": {
+          "app/build/outputs/apk/debug/app-debug.apk": "9023418a5b921df874602a727d37ef5c53b00962526d696c7fe6eadeebacd516",
+          "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "427da15e682762b13c3322b00207c7c4ff26f0f2aeb5505b86f55a11f74d25f1"
+        },
+        "status": "passed",
+        "free_bytes_after": 98531545088,
+        "compiled_apks_unchanged": true
+      },
+      "cpu": {
+        "runner-cpu.json": {
+          "requested_cores": 2,
+          "allowed_cpu_ids": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "cgroup_cpu_max": null,
+          "configured_cores": 2,
+          "scope": "Runner capacity and emulator topology; not device throughput",
+          "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee"
+        },
+        "emulator-cpu.json": {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      },
+      "actual_rejection_branch_exercised": false
+    },
+    {
+      "api": 35,
+      "workflow_run": 41186158156,
+      "artifact_id": 13035949402,
+      "artifact_bytes": 44284289,
+      "artifact_sha256": "0d54409ab1054ae18603d086e16ce0b1a44423526fea144d39989948ee1c8800",
+      "ui": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "failed",
+            "failures": [
+              "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: touch target ready id=2130968655; interactive=true keyguard=false; 已停止；请主动开启; target=start activity=MainActivity focus=false pip=false finishing=false destroyed=false attached=true shown=true enabled=true windowVisibility=0 visibleRect=true bounds=Rect(20, 550 - 300, 602) ancestor[0]=Button laidOut=true layoutRequested=false ancestor[1]=LinearLayout laidOut=true layoutRequested=false ancestor[2]=LinearLayout laidOut=true layoutRequested=false ancestor[3]=LinearLayout laidOut=true layoutRequested=false ancestor[4]=FrameLayout laidOut=true layoutRequested=false ancestor[5]=LinearLayout laidOut=true layoutRequested=false ancestor[6]=DecorView laidOut=true layoutRequested=false; 已停止；请主动开启"
+            ]
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "failed",
+            "failures": [
+              "HOME_PROBE_FAIL: java.lang.AssertionError: Timed out: focused home with AppOps observer and drained refresh"
+            ]
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "failed",
+            "failures": [
+              "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: full preview owns screen hold; interactive=false keyguard=false; 锁屏：摄像头已停止，请主动重新开启；提醒已停止; 锁屏：摄像头已停止，请主动重新开启；提醒已停止"
+            ]
+          },
+          {
+            "name": "pip-repeat",
+            "status": "failed",
+            "failures": [
+              "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: full preview owns screen hold; interactive=false keyguard=false; 锁屏：摄像头已停止，请主动重新开启；提醒已停止; 锁屏：摄像头已停止，请主动重新开启；提醒已停止"
+            ]
+          },
+          {
+            "name": "support",
+            "status": "failed",
+            "failures": [
+              "SUPPORT_PROBE_FAIL: java.lang.AssertionError: Timed out: problem info copy input window ready after event idle; interactive=true keyguard=false; 测试后续离屏；提醒已停止"
+            ]
+          }
+        ],
+        "observations": [
+          "external_anr_dialog_has_focus",
+          "external_anr_observed"
+        ],
+        "anrs": [
+          {
+            "package": "com.google.android.apps.nexuslauncher",
+            "event": "10-31 08:52:12.062   555  2306 E ActivityManager: ANR in com.google.android.apps.nexuslauncher (com.google.android.apps.nexuslauncher/.NexusLauncherActivity)",
+            "reason": "Input dispatching timed out (Application does not have a focused window)."
+          }
+        ],
+        "failure_time_focus": [
+          {
+            "file": "cache/ui-probe/pip-failure-input.txt",
+            "focused_window": "displayId=0, name='c0d869f Application Not Responding: com.google.android.apps.nexuslauncher'"
+          },
+          {
+            "file": "cache/ui-probe/pip-recovery-failure-input.txt",
+            "focused_window": "displayId=0, name='c0d869f Application Not Responding: com.google.android.apps.nexuslauncher'"
+          }
+        ],
+        "focused_external_anr_dialogs": [
+          {
+            "package": "com.google.android.apps.nexuslauncher",
+            "file": "cache/ui-probe/pip-failure-input.txt",
+            "focused_window": "displayId=0, name='c0d869f Application Not Responding: com.google.android.apps.nexuslauncher'"
+          },
+          {
+            "package": "com.google.android.apps.nexuslauncher",
+            "file": "cache/ui-probe/pip-recovery-failure-input.txt",
+            "focused_window": "displayId=0, name='c0d869f Application Not Responding: com.google.android.apps.nexuslauncher'"
+          }
+        ]
+      },
+      "original_ui": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "failed",
+            "failures": [
+              "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: touch target ready id=2130968655; interactive=true keyguard=false; 已停止；请主动开启; target=start activity=MainActivity focus=false pip=false finishing=false destroyed=false attached=true shown=true enabled=true windowVisibility=0 visibleRect=true bounds=Rect(20, 550 - 300, 602) ancestor[0]=Button laidOut=true layoutRequested=false ancestor[1]=LinearLayout laidOut=true layoutRequested=false ancestor[2]=LinearLayout laidOut=true layoutRequested=false ancestor[3]=LinearLayout laidOut=true layoutRequested=false ancestor[4]=FrameLayout laidOut=true layoutRequested=false ancestor[5]=LinearLayout laidOut=true layoutRequested=false ancestor[6]=DecorView laidOut=true layoutRequested=false; 已停止；请主动开启"
+            ]
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "failed",
+            "failures": [
+              "HOME_PROBE_FAIL: java.lang.AssertionError: Timed out: focused home with AppOps observer and drained refresh"
+            ]
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "failed",
+            "failures": [
+              "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: full preview owns screen hold; interactive=false keyguard=false; 锁屏：摄像头已停止，请主动重新开启；提醒已停止; 锁屏：摄像头已停止，请主动重新开启；提醒已停止"
+            ]
+          },
+          {
+            "name": "pip-repeat",
+            "status": "failed",
+            "failures": [
+              "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: full preview owns screen hold; interactive=false keyguard=false; 锁屏：摄像头已停止，请主动重新开启；提醒已停止; 锁屏：摄像头已停止，请主动重新开启；提醒已停止"
+            ]
+          },
+          {
+            "name": "support",
+            "status": "failed",
+            "failures": [
+              "SUPPORT_PROBE_FAIL: java.lang.AssertionError: Timed out: problem info copy input window ready after event idle; interactive=true keyguard=false; 测试后续离屏；提醒已停止"
+            ]
+          }
+        ],
+        "observations": [
+          "external_anr_dialog_has_focus",
+          "external_anr_observed"
+        ],
+        "anrs": [
+          {
+            "package": "com.google.android.apps.nexuslauncher",
+            "event": "10-31 08:52:12.062   555  2306 E ActivityManager: ANR in com.google.android.apps.nexuslauncher (com.google.android.apps.nexuslauncher/.NexusLauncherActivity)",
+            "reason": "Input dispatching timed out (Application does not have a focused window)."
+          }
+        ],
+        "failure_time_focus": [
+          {
+            "file": "cache/ui-probe/pip-failure-input.txt",
+            "focused_window": "displayId=0, name='c0d869f Application Not Responding: com.google.android.apps.nexuslauncher'"
+          },
+          {
+            "file": "cache/ui-probe/pip-recovery-failure-input.txt",
+            "focused_window": "displayId=0, name='c0d869f Application Not Responding: com.google.android.apps.nexuslauncher'"
+          }
+        ],
+        "focused_external_anr_dialogs": [
+          {
+            "package": "com.google.android.apps.nexuslauncher",
+            "file": "cache/ui-probe/pip-failure-input.txt",
+            "focused_window": "displayId=0, name='c0d869f Application Not Responding: com.google.android.apps.nexuslauncher'"
+          },
+          {
+            "package": "com.google.android.apps.nexuslauncher",
+            "file": "cache/ui-probe/pip-recovery-failure-input.txt",
+            "focused_window": "displayId=0, name='c0d869f Application Not Responding: com.google.android.apps.nexuslauncher'"
+          }
+        ]
+      },
+      "restore_fixture_passed": true,
+      "restore_guard_log_lines": [],
+      "actual_rejected_down_lines": [],
+      "saved_rejection_files": [],
+      "draw_submission_passed": true,
+      "retired_texture_passed": false,
+      "preview_only_no_model_task_passed": false,
+      "storage": {
+        "scope": "Disposable hosted runner after compilation; APKs, emulator, system images, SDK platform/build tools and keys retained",
+        "free_bytes_before": 90801156096,
+        "removed": [
+          "/usr/local/lib/android/sdk/ndk",
+          "/usr/local/lib/android/sdk/cmake",
+          "/home/runner/.gradle/caches",
+          "/home/runner/.gradle/wrapper/dists"
+        ],
+        "skipped": [],
+        "apk_sha256": {
+          "app/build/outputs/apk/debug/app-debug.apk": "4753ff799a1f3dca8728e9f1864e698c35a822dfc49f2e81e7f405853662404b",
+          "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "e8fbdd63d2449d70fe32c6c739d51c3dc5a2f9497d2502c8f3f59406542006fe"
+        },
+        "status": "passed",
+        "free_bytes_after": 98500333568,
+        "compiled_apks_unchanged": true
+      },
+      "first_surface_parity": {
+        "scope": "Frozen synthetic producer; not camera, GPU improvement, or real-device acceptance",
+        "accepted": true,
+        "cases": [
+          {
+            "sensor": 0,
+            "display": 0,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "surfaceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "referenceRgb": 144063,
+            "surfaceRgb": 144063,
+            "requestCallNs": 318251,
+            "callbackLatencyNs": 749130,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 0,
+            "display": 0,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "surfaceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "referenceRgb": 144063,
+            "surfaceRgb": 144063,
+            "requestCallNs": 1849300,
+            "callbackLatencyNs": 1852124,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 0,
+            "display": 90,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "surfaceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "referenceRgb": 144063,
+            "surfaceRgb": 144063,
+            "requestCallNs": 23946,
+            "callbackLatencyNs": 1467915,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 0,
+            "display": 90,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "surfaceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "referenceRgb": 144063,
+            "surfaceRgb": 144063,
+            "requestCallNs": 34921,
+            "callbackLatencyNs": 3559824,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 0,
+            "display": 180,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "surfaceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "referenceRgb": 144063,
+            "surfaceRgb": 144063,
+            "requestCallNs": 35893,
+            "callbackLatencyNs": 1437600,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 0,
+            "display": 180,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "surfaceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "referenceRgb": 144063,
+            "surfaceRgb": 144063,
+            "requestCallNs": 26259,
+            "callbackLatencyNs": 2862231,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 0,
+            "display": 270,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "surfaceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "referenceRgb": 144063,
+            "surfaceRgb": 144063,
+            "requestCallNs": 24547,
+            "callbackLatencyNs": 4945437,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 0,
+            "display": 270,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "surfaceArgbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+            "referenceRgb": 144063,
+            "surfaceRgb": 144063,
+            "requestCallNs": 24126,
+            "callbackLatencyNs": 3044060,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 90,
+            "display": 0,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "b26edb7175a5265932f562f32bc4f4ef55a35fba097f87826582d2f9f00419cf",
+            "surfaceArgbSha256": "b26edb7175a5265932f562f32bc4f4ef55a35fba097f87826582d2f9f00419cf",
+            "referenceRgb": 140664,
+            "surfaceRgb": 140664,
+            "requestCallNs": 31757,
+            "callbackLatencyNs": 623344,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 90,
+            "display": 0,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "b26edb7175a5265932f562f32bc4f4ef55a35fba097f87826582d2f9f00419cf",
+            "surfaceArgbSha256": "b26edb7175a5265932f562f32bc4f4ef55a35fba097f87826582d2f9f00419cf",
+            "referenceRgb": 140664,
+            "surfaceRgb": 140664,
+            "requestCallNs": 24045,
+            "callbackLatencyNs": 1501274,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 90,
+            "display": 90,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "416d56c8b7ca7c3cce5b7ab6704b3a2d1a658947b103db59d9ddf096c760ef92",
+            "surfaceArgbSha256": "416d56c8b7ca7c3cce5b7ab6704b3a2d1a658947b103db59d9ddf096c760ef92",
+            "referenceRgb": 140592,
+            "surfaceRgb": 140592,
+            "requestCallNs": 25889,
+            "callbackLatencyNs": 740568,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 90,
+            "display": 90,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "416d56c8b7ca7c3cce5b7ab6704b3a2d1a658947b103db59d9ddf096c760ef92",
+            "surfaceArgbSha256": "416d56c8b7ca7c3cce5b7ab6704b3a2d1a658947b103db59d9ddf096c760ef92",
+            "referenceRgb": 140592,
+            "surfaceRgb": 140592,
+            "requestCallNs": 3001206,
+            "callbackLatencyNs": 3044871,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 90,
+            "display": 180,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "7dae426953c11d85a0f0eb725d014ce96a89751edcd89242281a3b6a86e64867",
+            "surfaceArgbSha256": "7dae426953c11d85a0f0eb725d014ce96a89751edcd89242281a3b6a86e64867",
+            "referenceRgb": 140622,
+            "surfaceRgb": 140622,
+            "requestCallNs": 506761,
+            "callbackLatencyNs": 1089354,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 90,
+            "display": 180,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "7dae426953c11d85a0f0eb725d014ce96a89751edcd89242281a3b6a86e64867",
+            "surfaceArgbSha256": "7dae426953c11d85a0f0eb725d014ce96a89751edcd89242281a3b6a86e64867",
+            "referenceRgb": 140622,
+            "surfaceRgb": 140622,
+            "requestCallNs": 76984,
+            "callbackLatencyNs": 1394676,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 90,
+            "display": 270,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "59d0aa8d401ce21c2a0f7711cce695c95c1e093c53bff7c38e04f76bae93482c",
+            "surfaceArgbSha256": "59d0aa8d401ce21c2a0f7711cce695c95c1e093c53bff7c38e04f76bae93482c",
+            "referenceRgb": 140223,
+            "surfaceRgb": 140223,
+            "requestCallNs": 21612,
+            "callbackLatencyNs": 779815,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 90,
+            "display": 270,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "59d0aa8d401ce21c2a0f7711cce695c95c1e093c53bff7c38e04f76bae93482c",
+            "surfaceArgbSha256": "59d0aa8d401ce21c2a0f7711cce695c95c1e093c53bff7c38e04f76bae93482c",
+            "referenceRgb": 140223,
+            "surfaceRgb": 140223,
+            "requestCallNs": 21772,
+            "callbackLatencyNs": 687659,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 180,
+            "display": 0,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "surfaceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "referenceRgb": 144609,
+            "surfaceRgb": 144609,
+            "requestCallNs": 24927,
+            "callbackLatencyNs": 3102646,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 180,
+            "display": 0,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "surfaceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "referenceRgb": 144609,
+            "surfaceRgb": 144609,
+            "requestCallNs": 34181,
+            "callbackLatencyNs": 863119,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 180,
+            "display": 90,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "surfaceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "referenceRgb": 144609,
+            "surfaceRgb": 144609,
+            "requestCallNs": 27311,
+            "callbackLatencyNs": 1926194,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 180,
+            "display": 90,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "surfaceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "referenceRgb": 144609,
+            "surfaceRgb": 144609,
+            "requestCallNs": 21983,
+            "callbackLatencyNs": 875698,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 180,
+            "display": 180,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "513b8c782c27bcdc9791c681077776b91272c6ae4520883408e1cd024b4cf858",
+            "surfaceArgbSha256": "513b8c782c27bcdc9791c681077776b91272c6ae4520883408e1cd024b4cf858",
+            "referenceRgb": 144030,
+            "surfaceRgb": 144030,
+            "requestCallNs": 22633,
+            "callbackLatencyNs": 1564818,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 180,
+            "display": 180,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "513b8c782c27bcdc9791c681077776b91272c6ae4520883408e1cd024b4cf858",
+            "surfaceArgbSha256": "513b8c782c27bcdc9791c681077776b91272c6ae4520883408e1cd024b4cf858",
+            "referenceRgb": 144030,
+            "surfaceRgb": 144030,
+            "requestCallNs": 23474,
+            "callbackLatencyNs": 731043,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 180,
+            "display": 270,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "surfaceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "referenceRgb": 144609,
+            "surfaceRgb": 144609,
+            "requestCallNs": 26479,
+            "callbackLatencyNs": 1219647,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 180,
+            "display": 270,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "surfaceArgbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+            "referenceRgb": 144609,
+            "surfaceRgb": 144609,
+            "requestCallNs": 2950672,
+            "callbackLatencyNs": 2995528,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 270,
+            "display": 0,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+            "surfaceArgbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+            "referenceRgb": 140664,
+            "surfaceRgb": 140664,
+            "requestCallNs": 27090,
+            "callbackLatencyNs": 1075844,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 270,
+            "display": 0,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+            "surfaceArgbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+            "referenceRgb": 140664,
+            "surfaceRgb": 140664,
+            "requestCallNs": 22794,
+            "callbackLatencyNs": 1303331,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 270,
+            "display": 90,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "7ef766e00488776617c33c89542bebc35f834362ba5c9a7202a4df5f2e35d3f9",
+            "surfaceArgbSha256": "7ef766e00488776617c33c89542bebc35f834362ba5c9a7202a4df5f2e35d3f9",
+            "referenceRgb": 140622,
+            "surfaceRgb": 140622,
+            "requestCallNs": 22033,
+            "callbackLatencyNs": 1814478,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 270,
+            "display": 90,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "7ef766e00488776617c33c89542bebc35f834362ba5c9a7202a4df5f2e35d3f9",
+            "surfaceArgbSha256": "7ef766e00488776617c33c89542bebc35f834362ba5c9a7202a4df5f2e35d3f9",
+            "referenceRgb": 140622,
+            "surfaceRgb": 140622,
+            "requestCallNs": 27480,
+            "callbackLatencyNs": 2639610,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 270,
+            "display": 180,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "87c2886a53390300c9479781c1d1f1f7613b865cbb0c422f6c5f5850de41c023",
+            "surfaceArgbSha256": "87c2886a53390300c9479781c1d1f1f7613b865cbb0c422f6c5f5850de41c023",
+            "referenceRgb": 140634,
+            "surfaceRgb": 140634,
+            "requestCallNs": 23415,
+            "callbackLatencyNs": 2231616,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 270,
+            "display": 180,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "87c2886a53390300c9479781c1d1f1f7613b865cbb0c422f6c5f5850de41c023",
+            "surfaceArgbSha256": "87c2886a53390300c9479781c1d1f1f7613b865cbb0c422f6c5f5850de41c023",
+            "referenceRgb": 140634,
+            "surfaceRgb": 140634,
+            "requestCallNs": 23605,
+            "callbackLatencyNs": 1368758,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 270,
+            "display": 270,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+            "surfaceArgbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+            "referenceRgb": 140664,
+            "surfaceRgb": 140664,
+            "requestCallNs": 26780,
+            "callbackLatencyNs": 1611668,
+            "requestedOffMain": true,
+            "accepted": true
+          },
+          {
+            "sensor": 270,
+            "display": 270,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+            "surfaceArgbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+            "referenceRgb": 140664,
+            "surfaceRgb": 140664,
+            "requestCallNs": 23445,
+            "callbackLatencyNs": 622552,
+            "requestedOffMain": true,
+            "accepted": true
+          }
+        ]
+      },
+      "first_surface_producers": {
+        "scope": "Frozen virtual Camera2 and synthetic EGL; no product lifecycle, actual AR, or device acceptance",
+        "camera": {
+          "accepted": true,
+          "pairs": [
+            {
+              "sensor": 90,
+              "display": 0,
+              "viewWidth": 300,
+              "viewHeight": 400,
+              "result": 0,
+              "referenceStable": true,
+              "referenceChangedPixels": 0,
+              "differentPixels": 0,
+              "firstDifference": -1,
+              "referenceArgbSha256": "bbb54284a24f2fec443864d7fb54eb197ef841be12992c5877a678981d2d38a9",
+              "surfaceArgbSha256": "bbb54284a24f2fec443864d7fb54eb197ef841be12992c5877a678981d2d38a9",
+              "referenceRgb": 117995,
+              "surfaceRgb": 117995,
+              "requestCallNs": 35282,
+              "callbackLatencyNs": 642862,
+              "requestedOffMain": true,
+              "accepted": true,
+              "sourceTimestampBefore": 58277445376,
+              "sourceTimestampAfter": 58277445376,
+              "sourceTimestampStable": true,
+              "asyncReaderVerified": true
+            },
+            {
+              "sensor": 90,
+              "display": 0,
+              "viewWidth": 280,
+              "viewHeight": 210,
+              "result": 0,
+              "referenceStable": true,
+              "referenceChangedPixels": 0,
+              "differentPixels": 0,
+              "firstDifference": -1,
+              "referenceArgbSha256": "bbb54284a24f2fec443864d7fb54eb197ef841be12992c5877a678981d2d38a9",
+              "surfaceArgbSha256": "bbb54284a24f2fec443864d7fb54eb197ef841be12992c5877a678981d2d38a9",
+              "referenceRgb": 117995,
+              "surfaceRgb": 117995,
+              "requestCallNs": 32428,
+              "callbackLatencyNs": 674420,
+              "requestedOffMain": true,
+              "accepted": true,
+              "sourceTimestampBefore": 58277445376,
+              "sourceTimestampAfter": 58277445376,
+              "sourceTimestampStable": true,
+              "asyncReaderVerified": true
+            }
+          ],
+          "sensor": 90,
+          "metadataFrames": 11,
+          "lastSensorTimestamp": 58277445376,
+          "rotateAndCropNone": true,
+          "stateEvents": [
+            {
+              "event": "OPENED",
+              "elapsedRealtimeNs": 57200102098,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": null
+            },
+            {
+              "event": "CONFIGURED",
+              "elapsedRealtimeNs": 57218141504,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": null
+            },
+            {
+              "event": "READY",
+              "elapsedRealtimeNs": 57218157087,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": true
+            },
+            {
+              "event": "START_AFTER_INITIAL_READY",
+              "elapsedRealtimeNs": 57218254441,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": true
+            },
+            {
+              "event": "REPEATING_SUBMITTED id=0",
+              "elapsedRealtimeNs": 57224892636,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": true
+            },
+            {
+              "event": "ACTIVE",
+              "elapsedRealtimeNs": 57224916952,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": false
+            },
+            {
+              "event": "CAPTURE count=1 frame=0",
+              "elapsedRealtimeNs": 57556331796,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": false
+            },
+            {
+              "event": "CAPTURE count=2 frame=1",
+              "elapsedRealtimeNs": 57575512833,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": false
+            },
+            {
+              "event": "CAPTURE count=3 frame=2",
+              "elapsedRealtimeNs": 57735897178,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": false
+            },
+            {
+              "event": "CAPTURE count=4 frame=3",
+              "elapsedRealtimeNs": 57736203302,
+              "onMain": true,
+              "stopping": false,
+              "lastReady": false
+            },
+            {
+              "event": "STOP_REPEATING",
+              "elapsedRealtimeNs": 57798991025,
+              "onMain": true,
+              "stopping": true,
+              "lastReady": false
+            },
+            {
+              "event": "STOP_RETURNED",
+              "elapsedRealtimeNs": 57806606738,
+              "onMain": true,
+              "stopping": true,
+              "lastReady": false
+            },
+            {
+              "event": "SEQUENCE_COMPLETED id=0 frame=10",
+              "elapsedRealtimeNs": 58339921459,
+              "onMain": true,
+              "stopping": true,
+              "lastReady": false
+            },
+            {
+              "event": "READY",
+              "elapsedRealtimeNs": 58340002369,
+              "onMain": true,
+              "stopping": true,
+              "lastReady": true
+            },
+            {
+              "event": "SEQUENCE_WAIT_PASSED",
+              "elapsedRealtimeNs": 58340061757,
+              "onMain": false,
+              "stopping": true,
+              "lastReady": true
+            },
+            {
+              "event": "ABORT_DRAIN",
+              "elapsedRealtimeNs": 58341166113,
+              "onMain": true,
+              "stopping": true,
+              "lastReady": true
+            },
+            {
+              "event": "ABORT_DRAIN_RETURNED",
+              "elapsedRealtimeNs": 58341209727,
+              "onMain": true,
+              "stopping": true,
+              "lastReady": true
+            },
+            {
+              "event": "READY",
+              "elapsedRealtimeNs": 58345009337,
+              "onMain": true,
+              "stopping": true,
+              "lastReady": true
+            },
+            {
+              "event": "IDLE_WAIT_PASSED",
+              "elapsedRealtimeNs": 58345040032,
+              "onMain": false,
+              "stopping": true,
+              "lastReady": true
+            },
+            {
+              "event": "FINISH captures=11",
+              "elapsedRealtimeNs": 58595871143,
+              "onMain": false,
+              "stopping": true,
+              "lastReady": true
+            },
+            {
+              "event": "SESSION_CLOSED",
+              "elapsedRealtimeNs": 58728810698,
+              "onMain": true,
+              "stopping": true,
+              "lastReady": true
+            }
+          ]
+        },
+        "egl": {
+          "accepted": true,
+          "pairs": [
+            {
+              "sensor": 90,
+              "display": 0,
+              "viewWidth": 300,
+              "viewHeight": 400,
+              "result": 0,
+              "referenceStable": true,
+              "referenceChangedPixels": 0,
+              "differentPixels": 0,
+              "firstDifference": -1,
+              "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+              "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+              "referenceRgb": 71946,
+              "surfaceRgb": 71946,
+              "requestCallNs": 26560,
+              "callbackLatencyNs": 1433644,
+              "requestedOffMain": true,
+              "accepted": true,
+              "sourceTimestampBefore": 58881109374,
+              "sourceTimestampAfter": 58881109374,
+              "sourceTimestampStable": true,
+              "asyncReaderVerified": true
+            },
+            {
+              "sensor": 90,
+              "display": 0,
+              "viewWidth": 280,
+              "viewHeight": 210,
+              "result": 0,
+              "referenceStable": true,
+              "referenceChangedPixels": 0,
+              "differentPixels": 0,
+              "firstDifference": -1,
+              "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+              "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+              "referenceRgb": 71946,
+              "surfaceRgb": 71946,
+              "requestCallNs": 57896,
+              "callbackLatencyNs": 745244,
+              "requestedOffMain": true,
+              "accepted": true,
+              "sourceTimestampBefore": 58881109374,
+              "sourceTimestampAfter": 58881109374,
+              "sourceTimestampStable": true,
+              "asyncReaderVerified": true
+            }
+          ]
+        },
+        "accepted": true
+      },
+      "capture": {
+        "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+        "serial": "emulator-5554",
+        "config_sha256": "3cb2b027e119a82f5e318240b058e393659003269cc7ce82244c7e61a53773f9",
+        "trials": [
+          {
+            "trial": 1,
+            "scenario": "surface_reinstall_recovery",
+            "config_sha256": "3cb2b027e119a82f5e318240b058e393659003269cc7ce82244c7e61a53773f9",
+            "flushed": true,
+            "probe_pass": false,
+            "errors": [
+              "Recovery instrumentation did not pass"
+            ],
+            "service_query_exit": 0,
+            "perfetto_pid": 2734,
+            "camera_permission_exit": 0,
+            "surface_prefix_exit": 0,
+            "surface_prefix_pass": true,
+            "reinstall": [
+              {
+                "apk": "app/build/outputs/apk/debug/app-debug.apk",
+                "exit": 0,
+                "passed": true
+              },
+              {
+                "apk": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+                "exit": 0,
+                "passed": true
+              }
+            ],
+            "instrumentation_exit": 0,
+            "trace_bytes": 63770340,
+            "trace_sha256": "46f6e5600254543ed95e7650b103b0b072b23d5a52fefcd43cd28b3dd75a5c3f",
+            "transfer_attempts": [
+              {
+                "attempt": 1,
+                "verified": true,
+                "exit": 0,
+                "bytes": 63770340,
+                "sha256": "46f6e5600254543ed95e7650b103b0b072b23d5a52fefcd43cd28b3dd75a5c3f"
+              }
+            ]
+          },
+          {
+            "trial": 2,
+            "scenario": "recovery",
+            "config_sha256": "3cb2b027e119a82f5e318240b058e393659003269cc7ce82244c7e61a53773f9",
+            "flushed": true,
+            "probe_pass": false,
+            "errors": [
+              "Recovery instrumentation did not pass"
+            ],
+            "service_query_exit": 0,
+            "perfetto_pid": 4203,
+            "instrumentation_exit": 0,
+            "trace_bytes": 22863269,
+            "trace_sha256": "097a5678d861edda6f84da824047d38f09ad1658011e00f74dbf6847a828a412",
+            "transfer_attempts": [
+              {
+                "attempt": 1,
+                "verified": true,
+                "exit": 0,
+                "bytes": 22863269,
+                "sha256": "097a5678d861edda6f84da824047d38f09ad1658011e00f74dbf6847a828a412"
+              }
+            ]
+          },
+          {
+            "trial": 3,
+            "scenario": "recovery",
+            "config_sha256": "3cb2b027e119a82f5e318240b058e393659003269cc7ce82244c7e61a53773f9",
+            "flushed": true,
+            "probe_pass": false,
+            "errors": [
+              "Recovery instrumentation did not pass"
+            ],
+            "service_query_exit": 0,
+            "perfetto_pid": 4393,
+            "instrumentation_exit": 0,
+            "trace_bytes": 3477769,
+            "trace_sha256": "455b64dd94cc9c486b087253d8a1e88bcc29a0a6354c791d72af927c7aa59a60",
+            "transfer_attempts": [
+              {
+                "attempt": 1,
+                "verified": true,
+                "exit": 0,
+                "bytes": 3477769,
+                "sha256": "455b64dd94cc9c486b087253d8a1e88bcc29a0a6354c791d72af927c7aa59a60"
+              }
+            ]
+          }
+        ],
+        "scope": "Traced emulator observations; observer overhead; no device/FPS/power claim",
+        "ro.build.fingerprint": "google/sdk_gphone64_x86_64/emu64xa:15/AE3A.240806.043/12960925:userdebug/dev-keys",
+        "ro.build.type": "userdebug",
+        "ro.build.version.sdk": "35"
+      },
+      "summary": {
+        "valid": false,
+        "processor": "Perfetto v59.1-1e9c61e98 (1e9c61e9844affd7dccd3d42d9ea9f3a3d10cf6d)\nTrace Processor RPC API version: 14",
+        "processor_sha256": "2434129a3af4dc9e2034a476f7b76447b490975213e301769310d3bd0d5d6458",
+        "trials": [
+          {
+            "trial": 1,
+            "valid": false,
+            "errors": [
+              "Recovery instrumentation did not pass",
+              "Traced recovery probe did not pass",
+              "Expected four forced expiry markers, got 0",
+              "Four forced expiry stop logs did not align with their trace markers"
+            ],
+            "metrics": {
+              "sched_rows": 819167
+            },
+            "stats": [
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "guess_trace_type_duration_ns",
+                "value": "1733302",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "parse_trace_duration_ns",
+                "value": "918323837",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "clock_sync_cache_miss",
+                "value": "67",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "android_log_num_skipped",
+                "value": "19478",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "android_log_num_total",
+                "value": "19479",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_setup_errors",
+                "value": "37",
+                "detail": "notice/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "interned_data_tokenizer_errors",
+                "value": "276814",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_data_sources_registered",
+                "value": "32",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_data_sources_seen",
+                "value": "3",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_flushes_requested",
+                "value": "3",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_flushes_succeeded",
+                "value": "2",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_producers_connected",
+                "value": "7",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_producers_seen",
+                "value": "7",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_total_buffers",
+                "value": "2",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_tracing_sessions",
+                "value": "1",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "compact_sched_switch_skipped",
+                "value": "2",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "compact_sched_waking_skipped",
+                "value": "2",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_buffer_size",
+                "value": "33554432",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_written",
+                "value": "53903360",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_read",
+                "value": "53837824",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_written",
+                "value": "1645",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_read",
+                "value": "1643",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_write_wrap_count",
+                "value": "1",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_patches_succeeded",
+                "value": "3842",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_readaheads_succeeded",
+                "value": "1429",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_readaheads_failed",
+                "value": "26",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_buffer_size",
+                "value": "4194304",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_written",
+                "value": "163840",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_read",
+                "value": "163840",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_written",
+                "value": "5",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_read",
+                "value": "5",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_patches_succeeded",
+                "value": "2",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_readaheads_succeeded",
+                "value": "1",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_readaheads_failed",
+                "value": "1",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_begin",
+                "value": "31",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_begin",
+                "value": "1544",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_begin",
+                "value": "43887386000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_begin",
+                "value": "43882458000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_begin",
+                "value": "64",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_begin",
+                "value": "3160",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_begin",
+                "value": "43887397000",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_begin",
+                "value": "43882510000",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_end",
+                "value": "1476142",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_end",
+                "value": "75045564000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_delta",
+                "value": "-31",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_delta",
+                "value": "-1544",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_delta",
+                "value": "1476142",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_end",
+                "value": "75042293000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_end",
+                "value": "1364861",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_end",
+                "value": "75045580000",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_delta",
+                "value": "-64",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_delta",
+                "value": "-3160",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_delta",
+                "value": "1364861",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_end",
+                "value": "75045336000",
+                "detail": "info/trace/1"
+              }
+            ],
+            "scenario": "surface_reinstall_recovery",
+            "surface_prefix_pass": true,
+            "reinstall": [
+              {
+                "apk": "app/build/outputs/apk/debug/app-debug.apk",
+                "exit": 0,
+                "passed": true
+              },
+              {
+                "apk": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+                "exit": 0,
+                "passed": true
+              }
+            ],
+            "main_dispatch_count": 236,
+            "forced_expiry_markers": 0,
+            "outside_observer_stops": [],
+            "stops": [],
+            "stop_counts": {},
+            "longest_dispatches": [
+              {
+                "ts": 63057955707,
+                "wall_ms": 1068.008021,
+                "main_cpu_ms": 31.009907,
+                "main_state_ms": {
+                  "R": 35.497152,
+                  "Running": 31.009907,
+                  "R+": 21.028179,
+                  "D": 30.565783,
+                  "S": 949.907
+                },
+                "render_cpu_overlap_ms": 588.859732,
+                "render_slices": [
+                  {
+                    "name": "DrawFrames 8431",
+                    "overlap_ms": 881.259881
+                  },
+                  {
+                    "name": "Drawing  0.00  0.00 320.00 640.00",
+                    "overlap_ms": 880.819247
+                  },
+                  {
+                    "name": "flush commands",
+                    "overlap_ms": 733.079059
+                  },
+                  {
+                    "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                    "overlap_ms": 714.310223
+                  },
+                  {
+                    "name": "AAHairlineOp",
+                    "overlap_ms": 218.976002
+                  }
+                ]
+              },
+              {
+                "ts": 62761311203,
+                "wall_ms": 294.618473,
+                "main_cpu_ms": 73.156301,
+                "main_state_ms": {
+                  "R": 115.826608,
+                  "Running": 73.156301,
+                  "R+": 34.313966,
+                  "D": 13.658224,
+                  "S": 57.663374
+                },
+                "render_cpu_overlap_ms": 16.955819,
+                "render_slices": [
+                  {
+                    "name": "eglGetDisplay",
+                    "overlap_ms": 69.826771
+                  },
+                  {
+                    "name": "open",
+                    "overlap_ms": 69.666343
+                  },
+                  {
+                    "name": "attempt_to_load_system_driver",
+                    "overlap_ms": 64.485638
+                  },
+                  {
+                    "name": "init_api",
+                    "overlap_ms": 44.558816
+                  }
+                ]
+              },
+              {
+                "ts": 64126556716,
+                "wall_ms": 94.238949,
+                "main_cpu_ms": 1.595813,
+                "main_state_ms": {
+                  "R": 2.34143,
+                  "Running": 1.595813,
+                  "R+": 0.376859,
+                  "S": 89.924847
+                },
+                "render_cpu_overlap_ms": 3.651923,
+                "render_slices": []
+              },
+              {
+                "ts": 64785531172,
+                "wall_ms": 35.778662,
+                "main_cpu_ms": 0.284552,
+                "main_state_ms": {
+                  "R": 8.328849,
+                  "Running": 0.284552,
+                  "R+": 5.510088,
+                  "S": 21.655173
+                },
+                "render_cpu_overlap_ms": 3.332767,
+                "render_slices": [
+                  {
+                    "name": "DrawFrames 8706",
+                    "overlap_ms": 27.295454
+                  },
+                  {
+                    "name": "Drawing  0.00 24.00 320.00 512.00",
+                    "overlap_ms": 27.104211
+                  },
+                  {
+                    "name": "eglSwapBuffersWithDamageKHR",
+                    "overlap_ms": 26.305848
+                  },
+                  {
+                    "name": "dequeueBuffer - VRI[MainActivity]#0(BLAST Consumer)0",
+                    "overlap_ms": 21.452854
+                  },
+                  {
+                    "name": "dequeueBuffer",
+                    "overlap_ms": 21.442748
+                  }
+                ]
+              },
+              {
+                "ts": 64713999195,
+                "wall_ms": 27.176182,
+                "main_cpu_ms": 0.284582,
+                "main_state_ms": {
+                  "R": 2.141372,
+                  "Running": 0.284582,
+                  "R+": 0.016084,
+                  "S": 24.734144
+                },
+                "render_cpu_overlap_ms": 2.900468,
+                "render_slices": [
+                  {
+                    "name": "DrawFrames 8676",
+                    "overlap_ms": 24.735887
+                  },
+                  {
+                    "name": "Drawing  0.00 24.00 320.00 512.00",
+                    "overlap_ms": 24.734525
+                  },
+                  {
+                    "name": "dispatchSetFrameTimelineInfo",
+                    "overlap_ms": 22.241141
+                  },
+                  {
+                    "name": "setFrameTimelineInfo(VRI[MainActivity]#0) frameNumber: 5 vsyncId: 8676",
+                    "overlap_ms": 22.24019
+                  }
+                ]
+              },
+              {
+                "ts": 74909762559,
+                "wall_ms": 23.54284,
+                "main_cpu_ms": 0.576122,
+                "main_state_ms": {
+                  "R": 1.882501,
+                  "Running": 0.576122,
+                  "R+": 0.331011,
+                  "S": 20.753206
+                },
+                "render_cpu_overlap_ms": 0.0,
+                "render_slices": []
+              }
+            ],
+            "scope": "Traced emulator observations with main-looper logging overhead; overlap is not causation",
+            "trace_sha256": "46f6e5600254543ed95e7650b103b0b072b23d5a52fefcd43cd28b3dd75a5c3f"
+          },
+          {
+            "trial": 2,
+            "valid": false,
+            "errors": [
+              "Recovery instrumentation did not pass",
+              "Traced recovery probe did not pass",
+              "Expected four forced expiry markers, got 0",
+              "Four forced expiry stop logs did not align with their trace markers"
+            ],
+            "metrics": {
+              "sched_rows": 307540
+            },
+            "stats": [
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "guess_trace_type_duration_ns",
+                "value": "571842",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "parse_trace_duration_ns",
+                "value": "84595862",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "clock_sync_cache_miss",
+                "value": "42",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "android_log_num_skipped",
+                "value": "4476",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "android_log_num_total",
+                "value": "4476",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_setup_errors",
+                "value": "37",
+                "detail": "notice/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "interned_data_tokenizer_errors",
+                "value": "57770",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_data_sources_registered",
+                "value": "32",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_data_sources_seen",
+                "value": "6",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_flushes_requested",
+                "value": "1",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_producers_connected",
+                "value": "7",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_producers_seen",
+                "value": "7",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_total_buffers",
+                "value": "2",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_tracing_sessions",
+                "value": "1",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "compact_sched_switch_skipped",
+                "value": "2",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_buffer_size",
+                "value": "33554432",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_written",
+                "value": "4653056",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_read",
+                "value": "4620288",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_written",
+                "value": "142",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_read",
+                "value": "141",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_patches_succeeded",
+                "value": "321",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_readaheads_succeeded",
+                "value": "116",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_readaheads_failed",
+                "value": "4",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_buffer_size",
+                "value": "4194304",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_written",
+                "value": "32768",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_read",
+                "value": "32768",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_written",
+                "value": "1",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_read",
+                "value": "1",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_begin",
+                "value": "93",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_begin",
+                "value": "5064",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_begin",
+                "value": "76702312000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_begin",
+                "value": "76697667000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_begin",
+                "value": "240",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_begin",
+                "value": "11864",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_begin",
+                "value": "76702323000",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_begin",
+                "value": "76697030000",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_end",
+                "value": "43",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_end",
+                "value": "1900",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_end",
+                "value": "576929",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_end",
+                "value": "89395293000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_delta",
+                "value": "-50",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_delta",
+                "value": "-3164",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_delta",
+                "value": "576929",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_end",
+                "value": "89393985000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_end",
+                "value": "29",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_end",
+                "value": "1412",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_end",
+                "value": "459880",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_end",
+                "value": "89395304000",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_delta",
+                "value": "-211",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_delta",
+                "value": "-10452",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_delta",
+                "value": "459880",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_end",
+                "value": "89394489000",
+                "detail": "info/trace/1"
+              }
+            ],
+            "scenario": "recovery",
+            "surface_prefix_pass": null,
+            "reinstall": [],
+            "main_dispatch_count": 243,
+            "forced_expiry_markers": 0,
+            "outside_observer_stops": [],
+            "stops": [],
+            "stop_counts": {},
+            "longest_dispatches": [
+              {
+                "ts": 78023744538,
+                "wall_ms": 1059.636692,
+                "main_cpu_ms": 27.182841,
+                "main_state_ms": {
+                  "R": 45.282433,
+                  "Running": 27.182841,
+                  "R+": 36.857887,
+                  "D": 1.276451,
+                  "S": 949.03708
+                },
+                "render_cpu_overlap_ms": 323.349521,
+                "render_slices": [
+                  {
+                    "name": "DrawFrames 9378",
+                    "overlap_ms": 897.512755
+                  },
+                  {
+                    "name": "Drawing  0.00  0.00 320.00 640.00",
+                    "overlap_ms": 897.101566
+                  },
+                  {
+                    "name": "flush commands",
+                    "overlap_ms": 762.731456
+                  },
+                  {
+                    "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                    "overlap_ms": 745.981481
+                  },
+                  {
+                    "name": "AAHairlineOp",
+                    "overlap_ms": 235.89655
+                  }
+                ]
+              },
+              {
+                "ts": 77723124107,
+                "wall_ms": 298.875145,
+                "main_cpu_ms": 75.773072,
+                "main_state_ms": {
+                  "R": 126.547923,
+                  "Running": 75.773072,
+                  "R+": 37.586778,
+                  "D": 0.512354,
+                  "S": 58.455018
+                },
+                "render_cpu_overlap_ms": 16.743455,
+                "render_slices": [
+                  {
+                    "name": "eglGetDisplay",
+                    "overlap_ms": 42.603309
+                  },
+                  {
+                    "name": "open",
+                    "overlap_ms": 42.515068
+                  },
+                  {
+                    "name": "attempt_to_load_system_driver",
+                    "overlap_ms": 41.316481
+                  },
+                  {
+                    "name": "init_api",
+                    "overlap_ms": 32.001361
+                  }
+                ]
+              }
+            ],
+            "scope": "Traced emulator observations with main-looper logging overhead; overlap is not causation",
+            "trace_sha256": "097a5678d861edda6f84da824047d38f09ad1658011e00f74dbf6847a828a412"
+          },
+          {
+            "trial": 3,
+            "valid": false,
+            "errors": [
+              "Recovery instrumentation did not pass",
+              "Traced recovery probe did not pass",
+              "Expected four forced expiry markers, got 0",
+              "Four forced expiry stop logs did not align with their trace markers"
+            ],
+            "metrics": {
+              "sched_rows": 47353
+            },
+            "stats": [
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "guess_trace_type_duration_ns",
+                "value": "113737",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "parse_trace_duration_ns",
+                "value": "28349423",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "clock_sync_cache_miss",
+                "value": "48",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "android_log_num_skipped",
+                "value": "319",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "android_log_num_total",
+                "value": "319",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_setup_errors",
+                "value": "37",
+                "detail": "notice/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "interned_data_tokenizer_errors",
+                "value": "18252",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_data_sources_registered",
+                "value": "32",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_data_sources_seen",
+                "value": "9",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_flushes_requested",
+                "value": "2",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_flushes_succeeded",
+                "value": "1",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_producers_connected",
+                "value": "7",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_producers_seen",
+                "value": "7",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_total_buffers",
+                "value": "2",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_tracing_sessions",
+                "value": "1",
+                "detail": "info/trace/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "compact_sched_switch_skipped",
+                "value": "2",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "compact_sched_waking_skipped",
+                "value": "5",
+                "detail": "info/analysis/"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_buffer_size",
+                "value": "33554432",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_written",
+                "value": "2785280",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_read",
+                "value": "2752512",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_written",
+                "value": "85",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_read",
+                "value": "84",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_patches_succeeded",
+                "value": "201",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_readaheads_succeeded",
+                "value": "74",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_readaheads_failed",
+                "value": "10",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_buffer_size",
+                "value": "4194304",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_written",
+                "value": "65536",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_bytes_read",
+                "value": "65536",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_written",
+                "value": "2",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "traced_buf_chunks_read",
+                "value": "2",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_begin",
+                "value": "1",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_begin",
+                "value": "40",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_begin",
+                "value": "90061784000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_begin",
+                "value": "90061685000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_begin",
+                "value": "8",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_begin",
+                "value": "404",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_begin",
+                "value": "90061794000",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_begin",
+                "value": "90061708000",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_end",
+                "value": "13",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_end",
+                "value": "612",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_end",
+                "value": "61380",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_end",
+                "value": "101712360000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_delta",
+                "value": "12",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_delta",
+                "value": "572",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_delta",
+                "value": "61380",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_end",
+                "value": "101711977000",
+                "detail": "info/trace/0"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_end",
+                "value": "93862",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_now_ts_end",
+                "value": "101712400000",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_entries_delta",
+                "value": "-8",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_bytes_delta",
+                "value": "-404",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_read_events_delta",
+                "value": "93862",
+                "detail": "info/trace/1"
+              },
+              {
+                "kind": "stat",
+                "ts": "0",
+                "dur": "0",
+                "utid": "0",
+                "tid": "0",
+                "thread": "",
+                "name": "ftrace_cpu_oldest_event_ts_end",
+                "value": "101712133000",
+                "detail": "info/trace/1"
+              }
+            ],
+            "scenario": "recovery",
+            "surface_prefix_pass": null,
+            "reinstall": [],
+            "main_dispatch_count": 242,
+            "forced_expiry_markers": 0,
+            "outside_observer_stops": [],
+            "stops": [],
+            "stop_counts": {},
+            "longest_dispatches": [
+              {
+                "ts": 90652070287,
+                "wall_ms": 749.158722,
+                "main_cpu_ms": 25.176358,
+                "main_state_ms": {
+                  "R": 1.839714,
+                  "Running": 25.176358,
+                  "R+": 4.76911,
+                  "S": 717.37354
+                },
+                "render_cpu_overlap_ms": 674.336675,
+                "render_slices": [
+                  {
+                    "name": "DrawFrames 10227",
+                    "overlap_ms": 687.668913
+                  },
+                  {
+                    "name": "Drawing  0.00  0.00 320.00 640.00",
+                    "overlap_ms": 686.441675
+                  },
+                  {
+                    "name": "flush commands",
+                    "overlap_ms": 595.321041
+                  },
+                  {
+                    "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                    "overlap_ms": 590.10289
+                  },
+                  {
+                    "name": "AAHairlineOp",
+                    "overlap_ms": 193.580156
+                  }
+                ]
+              },
+              {
+                "ts": 90499768381,
+                "wall_ms": 144.181365,
+                "main_cpu_ms": 70.566024,
+                "main_state_ms": {
+                  "R": 36.935879,
+                  "Running": 70.566024,
+                  "R+": 11.707819,
+                  "D": 1.983703,
+                  "S": 22.98794
+                },
+                "render_cpu_overlap_ms": 19.004826,
+                "render_slices": [
+                  {
+                    "name": "eglGetDisplay",
+                    "overlap_ms": 78.609994
+                  },
+                  {
+                    "name": "open",
+                    "overlap_ms": 78.502825
+                  },
+                  {
+                    "name": "attempt_to_load_system_driver",
+                    "overlap_ms": 71.836759
+                  },
+                  {
+                    "name": "init_api",
+                    "overlap_ms": 60.549056
+                  }
+                ]
+              }
+            ],
+            "scope": "Traced emulator observations with main-looper logging overhead; overlap is not causation",
+            "trace_sha256": "455b64dd94cc9c486b087253d8a1e88bcc29a0a6354c791d72af927c7aa59a60"
+          }
+        ]
+      },
+      "raw_sql_replays": [
+        {
+          "trial": 1,
+          "valid": false,
+          "raw_sql_replayed": true,
+          "trace_sha256": "46f6e5600254543ed95e7650b103b0b072b23d5a52fefcd43cd28b3dd75a5c3f",
+          "trace_bytes": 63770340,
+          "brightness_stages": {
+            "event_counts": {},
+            "raw_stage_events": [],
+            "samples": []
+          }
+        },
+        {
+          "trial": 2,
+          "valid": false,
+          "raw_sql_replayed": true,
+          "trace_sha256": "097a5678d861edda6f84da824047d38f09ad1658011e00f74dbf6847a828a412",
+          "trace_bytes": 22863269,
+          "brightness_stages": {
+            "event_counts": {},
+            "raw_stage_events": [],
+            "samples": []
+          }
+        },
+        {
+          "trial": 3,
+          "valid": false,
+          "raw_sql_replayed": true,
+          "trace_sha256": "455b64dd94cc9c486b087253d8a1e88bcc29a0a6354c791d72af927c7aa59a60",
+          "trace_bytes": 3477769,
+          "brightness_stages": {
+            "event_counts": {},
+            "raw_stage_events": [],
+            "samples": []
+          }
+        }
+      ],
+      "cpu": {
+        "runner-cpu.json": {
+          "requested_cores": 2,
+          "allowed_cpu_ids": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "cgroup_cpu_max": null,
+          "configured_cores": 2,
+          "scope": "Runner capacity and emulator topology; not device throughput",
+          "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee"
+        },
+        "emulator-cpu.json": {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      },
+      "failure_evidence": {
+        "cache/ui-probe/pip-recovery-failure.png": {
+          "bytes": 36274,
+          "sha256": "4699651529ad62bd992ae68cf359adb9160db8b8a631d116e401894ed21ee0cf"
+        },
+        "cache/ui-probe/pip-recovery-failure-input.txt": {
+          "bytes": 77911,
+          "sha256": "f28cc324df9fbe67466918e76ca6cf72f23743e53364d3784ffef45b21c3efb0"
+        },
+        "cache/ui-probe/pip-recovery-failure-window.txt": {
+          "bytes": 43893,
+          "sha256": "2c6765b1a9ebbb4aac52c279d2fd33578c29fd6186cb7d29aee0eca70429b586"
+        }
+      },
+      "focused_input_window": "displayId=0, name='c0d869f Application Not Responding: com.google.android.apps.nexuslauncher'",
+      "screenshot_visually_inspected": "Pixel Launcher is not responding dialog visibly covers the stopped MainActivity start button.",
+      "launcher_anr_line": [
+        "10-31 08:52:12.062   555  2306 E ActivityManager: ANR in com.google.android.apps.nexuslauncher (com.google.android.apps.nexuslauncher/.NexusLauncherActivity)"
+      ],
+      "first_app_process_line": "10-31 08:52:20.792   555   592 I ActivityManager: Start proc 2876:com.cyanrbt.walkbuddy/u0a209 for added application com.cyanrbt.walkbuddy",
+      "interpretation": "Launcher ANR was logged at 08:52:12.062 before the first observed app process at 08:52:20.792. The preserved standard recovery failure occurs before the start button gets focus. Other failures remain recorded; this evidence does not establish all later screen-off causes or repair the older natural frame-expiry incident."
+    }
+  ],
+  "scope": "Two standard emulator UI archives fully replayed; one preserved failed two-core trace archive, with all three raw traces decoded by pinned official Perfetto v59.1. Not physical device acceptance.",
+  "method": {
+    "archive_verification": "Exact GitHub size, server SHA256, full ZIP CRC",
+    "ui_replay": "scripts/report_ui_checks.py summarize; original status/probes/anrs/mode/build_result/emulator_result compared",
+    "trace_replay": "scripts/report_preview_traces.py analyze using official Perfetto v59.1, raw size/hash and config/source matched; all fields compared except parser runtime statistics",
+    "trace_processor_sha256": "2434129a3af4dc9e2034a476f7b76447b490975213e301769310d3bd0d5d6458"
+  }
+}

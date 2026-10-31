@@ -66,7 +66,7 @@ Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示普通�
 
 该 1134ms 样本进一步确认：回调等待窗口内，两核持续忙碌，RenderThread 约 724ms 处于可运行但未获 CPU 的状态；同进程复制区段约在请求返回 888ms 后才开始。现保留两核检查，增加受实际运行机容量限制的最多四核专项，并核验模拟器实际核数。57 项工具检查通过，四核两套专项及六条原始轨迹重放通过；两核普通 UI 一次恢复点击被系统暂停窗口拒收，单次同源码复验通过，首轮失败保留。当前四个流程终态成功，不能称九作业全部首次成功或历史停顿已修复。[时序图、原始调度数据与完整实验范围](docs/profiles/brightness-wait-2026-10-31.md)。
 
-恢复触摸新增测试侧保护：只在系统日志精确证明 DOWN 因暂停而没有任何接收目标、且应用仍未启动时，允许在原就绪预算内重新准备一次；已送达或含糊的输入不重试。原始日志的 27 项规则检查和本地编译通过，云端结果待取得。[资格保护、证据与验证范围](docs/profiles/rejected-restore-down-2026-10-31.md)。
+恢复触摸新增测试侧保护：只在系统日志精确证明 DOWN 因暂停而没有任何接收目标、且应用仍未启动时，允许在原就绪预算内重新准备一次；已送达或含糊的输入不重试。27 项规则检查、57 项工具检查及本地编译通过。云端首轮 8/9 作业成功，两套普通 UI 附件重放通过，各有七次真实恢复触摸启用保护，但未发生新拒收，不能称真实重试分支已验证。失败的两核 API 35 轨迹作业有 Pixel Launcher 无响应弹窗占据输入焦点，原始截图与三条失败轨迹均已核验并保留；仅该作业申请单次复验。[资格保护、证据与验证范围](docs/profiles/rejected-restore-down-2026-10-31.md)。
 
 此前的[输入焦点采证](docs/profiles/ci-input-focus-2026-10-31.md)、[运行机存储清理](docs/profiles/ci-storage-2026-10-31.md)、[相机夹具显式排空](docs/profiles/camera-explicit-drain-2026-10-31.md)及 [v0.4.37 系统轨迹](docs/profiles/preview-system-trace-2026-10-31.md)按各自来源保留。旧异步候选的[失败与撤回](docs/profiles/brightness-async-2026-10-31.md)属于发布前历史；当前应用以 v0.4.38 的安装包和[版本验证](docs/profiles/brightness-preview-budget-2026-10-31.md)为准。完整失败记录见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。
 

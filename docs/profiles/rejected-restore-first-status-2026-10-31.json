@@ -1,0 +1,151 @@
+{
+  "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+  "scope": "First-attempt terminal status; 8 successes and 1 preserved failure. Only failed API 35 two-core trace job 124493392413 requested once for a rerun after screenshot and focused-window confirmation of Pixel Launcher ANR.",
+  "runs": [
+    {
+      "id": 41186158161,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158161/attempts/1",
+      "jobs": [
+        {
+          "id": 124493392434,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124493392594,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41186158156,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158156/attempts/1",
+      "jobs": [
+        {
+          "id": 124493392413,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124493392614,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41186158158,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158158/attempts/1",
+      "jobs": [
+        {
+          "id": 124493392313,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124493392380,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124493392398,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41186158105,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158105/attempts/1",
+      "jobs": [
+        {
+          "id": 124493392147,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124493392326,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "verified_artifacts": {
+    "ui": {
+      "artifacts": [
+        {
+          "id": 13037515173,
+          "name": "android-ui-evidence-api-36",
+          "size_in_bytes": 14008034,
+          "url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13037515173",
+          "archive_download_url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13037515173/zip",
+          "expired": false,
+          "created_at": "2026-10-31T08:56:16Z",
+          "expires_at": "2027-01-29T08:49:30Z",
+          "updated_at": "2026-10-31T08:56:16Z",
+          "digest": "sha256:68ea2338162f5502fbf97de69b0bbe039acef6d79980fc57a56fe065d1d400c2",
+          "workflow_run": {
+            "id": 41186158105,
+            "repository_id": 1412858135,
+            "head_repository_id": 1412858135,
+            "head_branch": "main",
+            "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee"
+          }
+        },
+        {
+          "id": 13037036599,
+          "name": "android-ui-evidence-api-35",
+          "size_in_bytes": 14040892,
+          "url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13037036599",
+          "archive_download_url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13037036599/zip",
+          "expired": false,
+          "created_at": "2026-10-31T08:55:58Z",
+          "expires_at": "2027-01-29T08:49:30Z",
+          "updated_at": "2026-10-31T08:55:58Z",
+          "digest": "sha256:5209e483a4179af4624aa5b151a8487ac99b625066c9abcd6fb90019d0c9c0f2",
+          "workflow_run": {
+            "id": 41186158105,
+            "repository_id": 1412858135,
+            "head_repository_id": 1412858135,
+            "head_branch": "main",
+            "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee"
+          }
+        }
+      ]
+    },
+    "failed": {
+      "artifacts": [
+        {
+          "id": 13035949402,
+          "name": "android-ui-evidence-api-35",
+          "size_in_bytes": 44284289,
+          "url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13035949402",
+          "archive_download_url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13035949402/zip",
+          "expired": false,
+          "created_at": "2026-10-31T08:54:49Z",
+          "expires_at": "2027-01-29T08:49:30Z",
+          "updated_at": "2026-10-31T08:54:49Z",
+          "digest": "sha256:0d54409ab1054ae18603d086e16ce0b1a44423526fea144d39989948ee1c8800",
+          "workflow_run": {
+            "id": 41186158156,
+            "repository_id": 1412858135,
+            "head_repository_id": 1412858135,
+            "head_branch": "main",
+            "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee"
+          }
+        }
+      ]
+    }
+  }
+}
