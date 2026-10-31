@@ -1,0 +1,16 @@
+{
+  "tools_tests": 38,
+  "production_app_source_unchanged_from": "5d68ec98840c177e71f74d1e9186d09e7bf77852",
+  "changes": [
+    "Current primary-display input focus classification",
+    "INFO stage fallback after stopped-trace copy errors",
+    "Bounded reconnect before the second copy of the same file"
+  ],
+  "actual_replays": "Two experimental archives verified, five existing raw files replayed; one API36 trace missing; 22 complete requests from its two complete trials",
+  "new_native_run": "pending push",
+  "scope": "Experimental diagnostic follow-up only; not app release or confirmed historical root-cause fix",
+  "source_sha256": {
+    "scripts/report_ui_checks.py": "3684ec8324b6225a667ad7fdd7907b5926c2892b447570a983e17e534f3b1062",
+    "scripts/record_preview_trace.py": "9584eae7829c843a0ad7a0377c93065a003d929bd1ccf8834c2d4ae6de856e3a"
+  }
+}

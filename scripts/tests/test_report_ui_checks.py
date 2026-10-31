@@ -74,6 +74,51 @@ class UiCheckReportTest(unittest.TestCase):
         self.assertEqual("passed", report["status"])
         self.assertEqual(["external_anr_observed"], report["observations"])
 
+    def test_input_focus_identifies_actual_launcher_dialog_without_legacy_window_field(self):
+        # Frozen focus section from artifact 13027683975, API 35, run 41162976895.
+        self.write("pip_recovery.txt", "PIP_RECOVERY_PROBE_FAIL: touch target ready\n")
+        self.write("cache/ui-probe/pip-recovery-failure-input.txt",
+                   "  FocusedWindows:\n"
+                   "    displayId=0, name='b1d617b Application Not Responding: com.google.android.apps.nexuslauncher'\n"
+                   "  FocusRequests:\n"
+                   "    displayId=0, name='older window' result='OK'\n")
+        report = summarize(self.directory, "success", "failure")
+        self.assertEqual("checks_not_passed", report["status"])
+        self.assertEqual("failed", report["probes"][0]["status"])
+        self.assertIn("external_anr_dialog_has_focus", report["observations"])
+        self.assertEqual("com.google.android.apps.nexuslauncher", report["focused_external_anr_dialogs"][0]["package"])
+        self.assertTrue(report["focused_external_anr_dialogs"][0]["file"].endswith("-failure-input.txt"))
+
+    def test_no_focus_and_historical_or_listed_dialogs_cannot_become_current_focus(self):
+        self.write("cache/ui-probe/pip-failure-input.txt",
+                   "  FocusedWindows: <none>\n"
+                   "  FocusRequests:\n"
+                   "    displayId=0, name='abc Application Not Responding: old.package' result='OK'\n"
+                   "  Windows:\n"
+                   "    displayId=0, name='abc Application Not Responding: listed.package'\n")
+        report = summarize(self.directory, "success", "failure")
+        self.assertEqual([], report["failure_time_focus"])
+        self.assertEqual([], report["focused_external_anr_dialogs"])
+
+    def test_dialog_on_another_display_does_not_block_primary_display_checks(self):
+        self.write("cache/ui-probe/pip-failure-input.txt",
+                   "  FocusedWindows:\n"
+                   "    displayId=0, name='abc com.cyanrbt.walkbuddy/.MainActivity'\n"
+                   "    displayId=1, name='def Application Not Responding: other.package'\n"
+                   "  FocusRequests:\n")
+        report = summarize(self.directory, "success", "failure")
+        self.assertEqual(2, len(report["failure_time_focus"]))
+        self.assertEqual([], report["focused_external_anr_dialogs"])
+
+    def test_application_dialog_in_input_focus_is_not_classified_as_external(self):
+        self.write("cache/ui-probe/pip-failure-input.txt",
+                   "  FocusedWindows:\n"
+                   "    displayId=0, name='abc Application Not Responding: com.cyanrbt.walkbuddy'\n"
+                   "  FocusRequests:\n")
+        report = summarize(self.directory, "success", "failure")
+        self.assertEqual(1, len(report["failure_time_focus"]))
+        self.assertEqual([], report["focused_external_anr_dialogs"])
+
     def test_application_anr_is_never_attributed_to_an_external_package(self):
         self.anr("com.cyanrbt.walkbuddy")
         self.write("cache/ui-probe/pip-failure-window.txt",
