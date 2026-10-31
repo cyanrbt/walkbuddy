@@ -13,5 +13,9 @@ collect_evidence() {
   adb -s "$serial" exec-out run-as com.cyanrbt.walkbuddy tar -cf - cache/ui-probe | tar -xf - -C ui-evidence || true
 }
 trap collect_evidence EXIT
+if [[ -n "${WALKBUDDY_EMULATOR_CORES:-}" ]]; then
+  python3 scripts/record_ui_cpu.py guest --cores "$WALKBUDDY_EMULATOR_CORES" \
+    --serial "$serial" --report ui-evidence/emulator-cpu.json
+fi
 adb -s "$serial" install -r app/build/outputs/apk/debug/app-debug.apk
 adb -s "$serial" install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk

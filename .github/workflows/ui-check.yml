@@ -22,6 +22,9 @@ on:
       surface_copy_profile:
         type: boolean
         default: false
+      emulator_cores:
+        type: number
+        default: 2
   workflow_dispatch:
 
 permissions:
@@ -75,13 +78,21 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
+      - name: Record and bound emulator CPU capacity
+        id: cpu
+        env:
+          REQUESTED_CORES: ${{ inputs.emulator_cores || 2 }}
+        run: python3 scripts/record_ui_cpu.py host --cores "$REQUESTED_CORES" --report ui-evidence/runner-cpu.json
       - name: Run Android UI and virtual camera checks
         id: emulator
         uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2
+        env:
+          WALKBUDDY_EMULATOR_CORES: ${{ steps.cpu.outputs.cores }}
         with:
           api-level: ${{ matrix.api-level }}
           target: google_apis
           arch: x86_64
+          cores: ${{ steps.cpu.outputs.cores }}
           # The disposable test data fits in 2 GiB; image defaults can exceed runner free space.
           disk-size: 2048M
           disable-animations: true

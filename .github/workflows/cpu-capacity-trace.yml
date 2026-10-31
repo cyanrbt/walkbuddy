@@ -1,0 +1,21 @@
+name: CPU capacity trace
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/cpu-capacity-trace.yml
+      - .github/workflows/ui-check.yml
+      - scripts/record_ui_cpu.py
+      - scripts/ui_probe_setup.sh
+
+permissions:
+  contents: read
+
+jobs:
+  trace:
+    uses: ./.github/workflows/ui-check.yml
+    with:
+      preview_trace: true
+      emulator_cores: 4

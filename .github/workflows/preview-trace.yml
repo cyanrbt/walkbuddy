@@ -8,6 +8,8 @@ on:
       - .github/workflows/preview-trace.yml
       - .github/workflows/ui-check.yml
       - scripts/prepare_ui_storage.py
+      - scripts/record_ui_cpu.py
+      - scripts/ui_probe_setup.sh
       - scripts/*preview_trace*
       - scripts/run_preview_traces.sh
       - scripts/fetch_trace_processor.sh
