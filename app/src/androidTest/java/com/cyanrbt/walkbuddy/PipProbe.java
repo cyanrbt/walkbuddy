@@ -347,6 +347,8 @@ final class PipProbe {
             read(runner,()->{assertModelRetained(host,geometryTicket,geometryModel);return true;});
             report.append("PASS actual system PiP, advancing capture/display/model results, full controls hidden\n");
             checkpoint(runner,"pip_analysis_live");
+            PipStopProbe.Evidence stopEvidence=new PipStopProbe.Evidence();
+            RemoteAction firstVisitStop=PipStopProbe.capture(runner,host);
             await(runner,()->launcher.findViewById(R.id.stop).getVisibility()==View.VISIBLE
                 && ((android.widget.TextView)launcher.findViewById(R.id.start)).getText().toString().equals(launcher.getString(R.string.home_return_preview)),"home offers fixed return and stop actions");
             read(runner,()->{
@@ -368,8 +370,9 @@ final class PipProbe {
             report.append("PIP_SOURCE_TRANSITION_PASS cases=2; actual PiP and expanded destination match the current texture Matrix\n");
             report.append("PASS expansion restores controls and keeps preview/model results LIVE\n");
             checkpoint(runner,"expanded_analysis_live");
+            PipStopProbe.rejectFullscreen(runner,host,firstVisitStop,stopEvidence);
 
-            pipDetectionControl(runner,host,launcher,report);
+            RemoteAction previousObservationStop=pipDetectionControl(runner,host,launcher,report,firstVisitStop,stopEvidence);
 
             // Screen-off must stop even while the camera Activity was recently in PiP.
             shell(runner,"input keyevent KEYCODE_SLEEP");
@@ -408,13 +411,10 @@ final class PipProbe {
 
             read(runner,()->host.findViewById(R.id.enter_pip).performClick());
             await(runner,host::isInPictureInPictureMode,"second PiP entry");
-            read(runner,()->{
-                try {
-                    Method method=PreviewActivity.class.getDeclaredMethod("stopAction");method.setAccessible(true);
-                    ((RemoteAction)method.invoke(host)).getActionIntent().send();
-                } catch(Exception error) {throw new AssertionError(error);}
-                return true;
-            });
+            RemoteAction currentStop=PipStopProbe.capture(runner,host);
+            if(currentStop.getActionIntent().equals(previousObservationStop.getActionIntent()))throw new AssertionError("Restart reused the previous observation's stop PendingIntent");
+            PipStopProbe.reject(runner,host,previousObservationStop,"previous_observation",stopEvidence);
+            sendAction(runner,currentStop);
             await(runner,host::isDestroyed,"PiP stop action closes Activity");
             read(runner,()->{assertReleased(host);assertNotPolling(host);return true;});
             report.append("PASS PiP stop action releases resources and destroys Activity; early metadata waits=")
@@ -430,6 +430,7 @@ final class PipProbe {
             await(runner,()->live(fresh),"new preview from fixed home action");
             read(runner,()->fresh.findViewById(R.id.enter_pip).performClick());
             await(runner,fresh::isInPictureInPictureMode,"home-stop PiP entry");
+            PipStopProbe.reject(runner,fresh,currentStop,"previous_activity",stopEvidence);
             await(runner,()->launcher.findViewById(R.id.stop).getVisibility()==View.VISIBLE,"home stop available for new preview");
             read(runner,()->launcher.findViewById(R.id.stop).performClick());
             await(runner,fresh::isDestroyed,"home stop closes actual PiP camera");
@@ -498,6 +499,8 @@ final class PipProbe {
                 && state(idleHost).displayAt>recoveredAt+500,"restarted camera keeps advancing with watchdog");
             report.append("PASS watchdog expiry and stale delivery leave visible stopped PiP/home idle; expansion stays stopped; manual restart re-arms protection\n");
             report.append("RECOVERY_PRESENTATION_ACTIVITY_PASS compact=2_lines full=reason_and_instructions settings=hidden manual_restart=restored no_auto_camera=true stopped_polling=false home_report_preserved=true\n");
+            PipStopProbe.stopFailed(runner,idleHost,stopEvidence);
+            PipStopProbe.finished(runner,stopEvidence,report);
             report.append("PIP_PROBE_PASS\n");
             result.putString("stream",report.toString());code=Activity.RESULT_OK;
         } catch(Throwable error) {
@@ -734,7 +737,8 @@ final class PipProbe {
             output.write(text.getBytes(java.nio.charset.StandardCharsets.UTF_8));
         }
     }
-    private static void pipDetectionControl(Instrumentation runner,PreviewActivity host,Activity launcher,StringBuilder report) throws Exception {
+    private static RemoteAction pipDetectionControl(Instrumentation runner,PreviewActivity host,Activity launcher,StringBuilder report,
+        RemoteAction previousVisitStop,PipStopProbe.Evidence stopEvidence) throws Exception {
         Object camera=read(runner,()->field(host,"camera")),texture=read(runner,()->field(host,"texture"));
         InferenceWorker.Ticket ticket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
         if(ticket==null || !read(runner,()->state(host).recognition))throw new AssertionError("PiP control needs active detection");
@@ -743,6 +747,10 @@ final class PipProbe {
         tap(runner,host,R.id.enter_pip);
         await(runner,()->host.isInPictureInPictureMode() && ((View)field(host,"root")).getWidth()<fullWidth
             && ((View)field(host,"root")).getHeight()<fullHeight,"detection control in settled PiP");
+        PipStopProbe.reject(runner,host,previousVisitStop,"earlier_pip_visit",stopEvidence);
+        PipStopProbe.rejectLegacy(runner,host,stopEvidence);
+        PipStopProbe.rejectOtherOwner(runner,host,stopEvidence);
+        RemoteAction stop=PipStopProbe.capture(runner,host);
         PipSoundProbe.run(runner,host,launcher,report);
         RemoteAction action=read(runner,()->{
             java.util.List<RemoteAction> actions=((android.app.PictureInPictureParams)field(host,"submittedPipParams")).getActions();
@@ -798,6 +806,7 @@ final class PipProbe {
             return true;
         });
         report.append("PASS actual PiP menu PendingIntent stops detection/sound/feedback while camera/texture advance; menu removes detection action; repeat is idempotent; owner/generation/fullscreen guards; expansion stays off; manual model restart keeps sound off\n");
+        return stop;
     }
     static void sendAction(Instrumentation runner,RemoteAction action) throws Exception {
         java.util.concurrent.CountDownLatch delivered=new java.util.concurrent.CountDownLatch(1);

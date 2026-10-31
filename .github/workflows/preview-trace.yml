@@ -17,6 +17,7 @@ on:
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PreviewMainTrace.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipStopProbe.java
       - app/src/main/java/com/cyanrbt/walkbuddy/StopPreviewReceiver.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PreviewReadinessProbe.java
       - app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java

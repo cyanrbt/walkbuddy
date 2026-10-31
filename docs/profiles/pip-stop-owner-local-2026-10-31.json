@@ -1,0 +1,35 @@
+{
+  "baseline_commit": "50dc6b14d72bcb3c3f20b78e201ad63e063a37a0",
+  "candidate": "v0.4.41",
+  "versionCode": 53,
+  "jvm": {
+    "tests": 273,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "full_build": "BUILD SUCCESSFUL in 46s",
+  "isolated_owner_test_build_and_lint": "BUILD SUCCESSFUL in 31s",
+  "actionlint_workflows": [
+    "ui-check.yml",
+    "preview-trace.yml",
+    "cpu-capacity-trace.yml",
+    "surface-copy-profile.yml"
+  ],
+  "sources_sha256": {
+    ".github/workflows/cpu-capacity-trace.yml": "62b202398dc62e75ee348d78ff466ed227de9feb594aea879d72908c710a08ee",
+    ".github/workflows/preview-trace.yml": "a6793d53dd8d9de34bfa170bc63a9b9b93ff67dda321fa9221a2dfee9ae7ab10",
+    ".github/workflows/surface-copy-profile.yml": "2649911d7a7cb437cf1394c369463b9bd7760da0e0b10a80cb2a9da283401994",
+    "README.md": "82a2549af874ab7f3408e63216e29279d9d0df467df93433b55d8a55aa887232",
+    "app/build.gradle": "ee78d793126d7d98c1b8cafe207c11f4f1eaad59b460587821e5a3b4ce34a7aa",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": "8df1ce178b315a734ba9e4b6fddd9afa10dabace3c0cd2e3f615d9126f49bafc",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java": "6f24244f1763549c86644a111beb72df8eb9c543bdc78c8bb84b18bf83bfe7db",
+    "app/src/main/java/com/cyanrbt/walkbuddy/StopPreviewReceiver.java": "ddc751bf0ffdceb62c9330820c88305f4de062d9b9e0612f68e0c050a2509f93",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipStopProbe.java": "4a6f650ff6e107cfc59ed2c8ba1f27ad78aac1910c5361d396b9b30abdcb284b"
+  },
+  "apk_sha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "ddcab00725d8c29473e3e0ac512fd9cc040cf91fbd41a59bc3db6ce3534e61e5",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "a62aac2cc991539c3be49e31e9918b39098ce0831280bc0669666c00f158b286"
+  },
+  "scope": "Local JVM, Lint, compilation and source review. Eight native stop cases await cloud execution. No physical-device acceptance; no assertion of original natural stale-stop reproduction."
+}

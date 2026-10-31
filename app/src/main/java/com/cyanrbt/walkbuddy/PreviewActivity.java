@@ -38,6 +38,13 @@ public final class PreviewActivity extends Activity {
         PreviewActivity preview = active.get();
         if (preview != null && !preview.destroyed) preview.stopPreview();
     }
+    static void stopPipPreview(String owner,long visit) {
+        PreviewActivity preview=active.get();
+        if(preview==null || preview.destroyed || preview.isFinishing() || !preview.pipOwner.equals(owner)
+            || preview.pipSoundVisit!=visit || !preview.isInPictureInPictureMode())return;
+        // Stopping must also work after this observation fails; do not require LIVE or fresh frames.
+        preview.stopPreview();
+    }
     static void stopPipDetection(String owner,long generation) {
         PreviewActivity preview=active.get();
         if(preview==null || preview.destroyed || preview.isFinishing()
@@ -60,7 +67,7 @@ public final class PreviewActivity extends Activity {
     }
     private static void tracePipSound(PreviewActivity preview,String owner,long generation,long revision,long visit,
         boolean enabled,boolean before,String result) {
-        // One record per received command, never on frame callbacks. UUIDs identify this Activity, not a person.
+        // One record per received command, never on frame callbacks. UUIDs identify an observation, not a person.
         String current=preview==null?"none":"owner="+preview.pipOwner+" generation="+preview.state.generation
             +" revision="+preview.soundRevision+" visit="+preview.pipSoundVisit+" pip="+preview.isInPictureInPictureMode()
             +" phase="+preview.state.phase+" detection="+preview.state.recognition
@@ -134,7 +141,7 @@ public final class PreviewActivity extends Activity {
         public void onDisplayChanged(int id){if(root!=null && id==wm.getDefaultDisplay().getDisplayId())transform();}
     };
     private boolean realtimeTimestamp, destroyed, disableRotateCrop, resumed;
-    private final String pipOwner=UUID.randomUUID().toString();
+    private String pipOwner=UUID.randomUUID().toString();
     private int pipActionState=-1;
     private PictureInPictureParams submittedPipParams;
     private Rect submittedPipBounds;
@@ -295,6 +302,7 @@ public final class PreviewActivity extends Activity {
         if (state.phase == SessionState.Phase.STARTING || state.phase == SessionState.Phase.LIVE) return;
         if (texture != null) texture.setSurfaceTextureListener(null);
         state.start(SystemClock.elapsedRealtime());
+        pipOwner=UUID.randomUUID().toString();
         scheduleWatchdog();
         lastReadbackQueueMs=lastSampleCopyMs=lastResultDeliveryMs=-1;
         readbackTiming.reset(state.generation);
@@ -358,7 +366,9 @@ public final class PreviewActivity extends Activity {
 
     private RemoteAction stopAction() {
         PendingIntent stop = PendingIntent.getBroadcast(this, 0,
-            new Intent(this, StopPreviewReceiver.class).setAction(StopPreviewReceiver.STOP_PREVIEW),
+            new Intent(this, StopPreviewReceiver.class).setAction(StopPreviewReceiver.STOP_PREVIEW)
+                .setData(android.net.Uri.parse("walkbuddy://stop/"+pipOwner+"/"+pipSoundVisit))
+                .putExtra(StopPreviewReceiver.OWNER,pipOwner).putExtra(StopPreviewReceiver.PIP_VISIT,pipSoundVisit),
             PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         return new RemoteAction(Icon.createWithResource(this, R.drawable.ic_stop),
             getString(R.string.preview_stop), getString(R.string.preview_stop), stop);

@@ -13,7 +13,8 @@ public final class StopPreviewReceiver extends BroadcastReceiver {
     static final String SOUND_REVISION="sound_revision",PIP_VISIT="pip_visit",SOUND_ENABLED="sound_enabled";
     @Override public void onReceive(Context context, Intent intent) {
         if(intent==null)return;
-        if(STOP_PREVIEW.equals(intent.getAction()))PreviewActivity.stopActivePreview();
+        if(STOP_PREVIEW.equals(intent.getAction()))PreviewActivity.stopPipPreview(
+            intent.getStringExtra(OWNER),intent.getLongExtra(PIP_VISIT,-1));
         else if(STOP_DETECTION.equals(intent.getAction()))PreviewActivity.stopPipDetection(
             intent.getStringExtra(OWNER),intent.getLongExtra(GENERATION,-1));
         else if(SET_SOUND.equals(intent.getAction())) {
