@@ -86,6 +86,15 @@ class TraceReportTest(unittest.TestCase):
         result = report.summarize(complete_rows(), {**self.capture, 'flushed': False})
         self.assertFalse(result['valid'])
 
+    def test_recovery_success_cannot_hide_failed_or_missing_surface_setup(self):
+        capture = {**self.capture, 'scenario': 'surface_reinstall_recovery', 'surface_prefix_pass': True,
+                   'reinstall': [{'passed': True}, {'passed': True}]}
+        self.assertTrue(report.summarize(complete_rows(), capture)['valid'])
+        for changed in ({'surface_prefix_pass': False}, {'reinstall': []},
+                        {'reinstall': [{'passed': True}, {'passed': False}]}):
+            with self.subTest(changed=changed):
+                self.assertFalse(report.summarize(complete_rows(), {**capture, **changed})['valid'])
+
     def test_backlog_stop_outside_observed_trial_does_not_count(self):
         rows = complete_rows()+[row('log', 'WalkBuddyTiming', ts=9_000_000_000,
                                    detail='Preview stopped reason=GENERAL captureGapMs=2000 displayGapMs=2000')]
@@ -168,7 +177,118 @@ class FakeAdb:
         return SimpleNamespace(returncode=0, stdout='', stderr='')
 
 
+class SurfacePrefixAdb(FakeAdb):
+    output = ('SURFACE_COPY_PARITY_PASS cases=32 pixels=6144\n'
+              'SURFACE_PRODUCERS_PARITY_PASS camera_cases=2 egl_cases=2 pixels=768\n'
+              'PREVIEW_PROBE_PASS cases=32\n')
+
+    def __init__(self, prefix_output=None, prefix_exit=0, prefix_timeout=False, failed_install=None, **kwargs):
+        super().__init__(**kwargs)
+        self.prefix_output = self.output if prefix_output is None else prefix_output
+        self.prefix_exit = prefix_exit
+        self.prefix_timeout = prefix_timeout
+        self.failed_install = failed_install
+        self.installs = 0
+
+    def run(self, *args, **kwargs):
+        if 'surface_copy' in args:
+            self.calls.append(args)
+            if self.prefix_timeout:
+                raise subprocess.TimeoutExpired('adb surface prefix', 45, output=b'partial surface\n')
+            return SimpleNamespace(returncode=self.prefix_exit, stdout=self.prefix_output, stderr='')
+        if args[0] == 'install':
+            self.calls.append(args)
+            self.installs += 1
+            failed = self.installs == self.failed_install
+            return SimpleNamespace(returncode=1 if failed else 0,
+                                   stdout='Failure [INSTALL_FAILED_TEST_ONLY]' if failed else 'Performing Streamed Install\nSuccess\n', stderr='')
+        return super().run(*args, **kwargs)
+
+
 class TraceRecorderTest(unittest.TestCase):
+    def test_surface_producers_and_both_reinstalls_are_inside_the_same_trace_before_recovery(self):
+        with tempfile.TemporaryDirectory() as temp:
+            adb = SurfacePrefixAdb()
+            directory = Path(temp)
+            config = 'duration_ms: 240000\n'
+            result = recorder.capture(adb, directory, config, 1, surface_prefix=True)
+            self.assertEqual([], result['errors'])
+            self.assertTrue(result['surface_prefix_pass'])
+            self.assertTrue(result['probe_pass'])
+            self.assertEqual('surface_reinstall_recovery', result['scenario'])
+            calls = adb.calls
+            start = next(i for i, c in enumerate(calls) if '--background-wait' in c)
+            prefix = next(i for i, c in enumerate(calls) if 'surface_copy' in c)
+            installs = [i for i, c in enumerate(calls) if c[0] == 'install']
+            recovery = next(i for i, c in enumerate(calls) if 'pip_recovery' in c)
+            stop = next(i for i, c in enumerate(calls) if 'kill' in c)
+            self.assertEqual(sorted([start, prefix, *installs, recovery, stop]),
+                             [start, prefix, *installs, recovery, stop])
+            self.assertEqual(2, len(installs))
+            self.assertNotEqual(calls[installs[0]][-1], calls[installs[1]][-1])
+            self.assertTrue(all(i['passed'] for i in result['reinstall']))
+            self.assertEqual(config, (directory/'config.pbtxt').read_text())
+            self.assertEqual(hashlib.sha256(config.encode()).hexdigest(), result['config_sha256'])
+            self.assertEqual(adb.output, (directory/'surface-prefix.txt').read_text())
+
+    def test_surface_prefix_requires_all_markers_no_failure_and_successful_exit(self):
+        for output, exit_code in ((SurfacePrefixAdb.output, 1), ('PREVIEW_PROBE_PASS cases=32', 0),
+                                  (SurfacePrefixAdb.output+'PREVIEW_PROBE_FAIL: late error', 0)):
+            with self.subTest(output=output, exit_code=exit_code), tempfile.TemporaryDirectory() as temp:
+                adb = SurfacePrefixAdb(prefix_output=output, prefix_exit=exit_code)
+                result = recorder.capture(adb, Path(temp), '', 1, surface_prefix=True)
+                self.assertFalse(result['surface_prefix_pass'])
+                self.assertFalse(result['probe_pass'])
+                self.assertTrue(result['errors'])
+                self.assertTrue(result['flushed'])
+                self.assertTrue((Path(temp)/'trace.pftrace').is_file())
+                self.assertFalse(any('pip_recovery' in c or c[0] == 'install' for c in adb.calls))
+
+    def test_prefix_timeout_keeps_partial_output_and_stops_owned_trace_without_recovery(self):
+        with tempfile.TemporaryDirectory() as temp:
+            adb = SurfacePrefixAdb(prefix_timeout=True)
+            directory = Path(temp)
+            result = recorder.capture(adb, directory, '', 1, surface_prefix=True)
+            self.assertTrue(result['flushed'])
+            self.assertFalse(result['probe_pass'])
+            self.assertIn('surface-prefix:', (directory/'timeout.txt').read_text())
+            self.assertEqual('partial surface\n', (directory/'partial-surface-prefix.txt').read_text())
+            self.assertIn(('shell', 'am', 'force-stop', 'com.cyanrbt.walkbuddy'), adb.calls)
+            self.assertFalse(any('pip_recovery' in c for c in adb.calls))
+
+    def test_failed_reinstall_stops_before_recovery_and_retains_install_failure(self):
+        for failed in (1, 2):
+            with self.subTest(failed=failed), tempfile.TemporaryDirectory() as temp:
+                adb = SurfacePrefixAdb(failed_install=failed)
+                directory = Path(temp)
+                result = recorder.capture(adb, directory, '', 1, surface_prefix=True)
+                self.assertTrue(result['surface_prefix_pass'])
+                self.assertFalse(result['probe_pass'])
+                self.assertEqual(failed, len(result['reinstall']))
+                self.assertFalse(result['reinstall'][-1]['passed'])
+                self.assertTrue(result['flushed'])
+                self.assertIn('INSTALL_FAILED_TEST_ONLY', (directory/f"reinstall-{'app' if failed == 1 else 'tests'}.txt").read_text())
+                self.assertFalse(any('pip_recovery' in c for c in adb.calls))
+
+    def test_recovery_failure_after_successful_prefix_is_not_retried_or_relabelled(self):
+        with tempfile.TemporaryDirectory() as temp:
+            adb = SurfacePrefixAdb(fail_probe=True)
+            result = recorder.capture(adb, Path(temp), '', 1, surface_prefix=True)
+            self.assertTrue(result['surface_prefix_pass'])
+            self.assertFalse(result['probe_pass'])
+            self.assertTrue(result['errors'])
+            self.assertTrue(result['flushed'])
+            self.assertEqual(1, sum('pip_recovery' in c for c in adb.calls))
+
+    def test_only_first_of_three_trials_gets_surface_prefix(self):
+        fake = SimpleNamespace(run=lambda *args, **kw: SimpleNamespace(stdout='1\n'))
+        with tempfile.TemporaryDirectory() as temp, \
+                patch.object(recorder, 'Adb', return_value=fake), \
+                patch('sys.argv', ['record_preview_trace.py', temp, '--serial', 'emulator-fixture']), \
+                patch.object(recorder, 'capture', return_value={'errors': [], 'flushed': True, 'probe_pass': True}) as capture:
+            self.assertEqual(0, recorder.main())
+            self.assertEqual([True, False, False], [c.kwargs['surface_prefix'] for c in capture.call_args_list])
+
     def test_interrupted_copy_retries_same_trace_without_repeating_probe(self):
         with tempfile.TemporaryDirectory() as temp:
             adb = FakeAdb(fail_first_pull=True)

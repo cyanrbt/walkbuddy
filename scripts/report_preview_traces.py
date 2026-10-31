@@ -24,6 +24,12 @@ def summarize(rows, capture):
         errors.append('Trace process exit/flush was not confirmed')
     if not capture.get('probe_pass'):
         errors.append('Traced recovery probe did not pass')
+    if capture.get('scenario') == 'surface_reinstall_recovery':
+        if capture.get('surface_prefix_pass') is not True:
+            errors.append('Traced Surface prefix did not pass')
+        installs = capture.get('reinstall', [])
+        if len(installs) != 2 or any(i.get('passed') is not True for i in installs):
+            errors.append('Both intervening APK reinstalls did not pass')
     threads = [r for r in rows if r['kind'] == 'thread']
     main_ids = {int(r['utid']) for r in threads if r['name'] == 'main'}
     render_ids = {int(r['utid']) for r in threads if r['name'] == 'RenderThread'}
@@ -97,6 +103,9 @@ def summarize(rows, capture):
                               'render_cpu_overlap_ms': render_cpu/1e6,
                               'render_slices': [s for s in render_slices[:5] if s['overlap_ms'] > 0]})
     return {'valid': not errors, 'errors': errors, 'metrics': metrics, 'stats': stats,
+            'scenario': capture.get('scenario', 'recovery'),
+            'surface_prefix_pass': capture.get('surface_prefix_pass'),
+            'reinstall': capture.get('reinstall', []),
             'main_dispatch_count': len(dispatch), 'forced_expiry_markers': len(forced),
             'outside_observer_stops': outside,
             'stops': stops, 'stop_counts': dict(Counter(s['category'] for s in stops)),
@@ -143,12 +152,15 @@ def main():
               'processor_sha256': hashlib.sha256(Path(args.processor).read_bytes()).hexdigest(), 'trials': reports}
     (args.directory/'summary.json').write_text(json.dumps(result, indent=2)+'\n')
     lines = ['## Preview system trace', '', 'Diagnostic emulator observations with tracing overhead; not device acceptance.', '',
-             '| Trial | Evidence | Dispatches | Forced stops | Unforced stops over 1200ms |', '| --- | --- | ---: | ---: | ---: |']
+             '| Trial | Scenario | Surface prefix | Evidence | Dispatches | Forced stops | Unforced stops over 1200ms |',
+             '| --- | --- | --- | --- | ---: | ---: | ---: |']
     for report in reports:
         counts = report.get('stop_counts', {})
-        lines.append(f"| {report['trial']} | {'complete' if report['valid'] else 'INCOMPLETE / FAILED'} | "
+        prefix = 'passed' if report.get('surface_prefix_pass') is True else 'FAILED / not completed' if report.get('scenario') == 'surface_reinstall_recovery' else 'not requested'
+        lines.append(f"| {report['trial']} | {report.get('scenario', 'unknown')} | {prefix} | {'complete' if report['valid'] else 'INCOMPLETE / FAILED'} | "
                      f"{report.get('main_dispatch_count', 0)} | {counts.get('forced_expiry', 0)} | {counts.get('unforced_over_deadline', 0)} |")
     lines += ['', 'Raw traces, decoded events, parser statistics and probe results are retained in this artifact.',
+              'Trial 1 traces frozen Surface producers, both APK reinstalls, then recovery; trials 2 and 3 keep recovery alone. These are different scenarios, not paired performance samples.',
               'Successful trials do not establish the cause or resolution of earlier intermittent stalls.', '']
     for report in reports:
         for error in report['errors']:

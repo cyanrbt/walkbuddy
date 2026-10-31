@@ -82,11 +82,15 @@ def pull_trace(adb, remote, directory):
     raise RuntimeError('Both copies of the same stopped trace failed; see transfer.json and pull logs')
 
 
-def capture(adb, directory, config, index):
+def capture(adb, directory, config, index, surface_prefix=False):
     directory.mkdir(parents=True, exist_ok=True)
     remote = f'/data/misc/perfetto-traces/walkbuddy-preview-{index}.pftrace'
-    record = {'trial': index, 'flushed': False, 'probe_pass': False, 'errors': []}
+    record = {'trial': index, 'scenario': 'surface_reinstall_recovery' if surface_prefix else 'recovery',
+              'config_sha256': hashlib.sha256(config.encode()).hexdigest(),
+              'flushed': False, 'probe_pass': False, 'errors': []}
+    (directory/'config.pbtxt').write_text(config)
     pid = None
+    stage = 'surface-prefix' if surface_prefix else 'instrumentation'
     try:
         try:
             state = adb.run('shell', 'perfetto', '--query', timeout=10, check=False)
@@ -102,6 +106,34 @@ def capture(adb, directory, config, index):
             record['perfetto_pid'] = int(pid)
         if start.returncode or pid is None:
             raise RuntimeError(f'Perfetto did not confirm a PID: {start.returncode}: {start.stdout.strip()}; {start.stderr.strip()}')
+        if surface_prefix:
+            # Match the failed Surface workflow's order, including a separate
+            # instrumentation invocation. Start tracing before its producer work.
+            prefix = adb.run('shell', 'am', 'instrument', '-w', '-e', 'preview', 'true',
+                             '-e', 'surface_copy', 'true', COMPONENT, timeout=45, check=False)
+            (directory/'surface-prefix.txt').write_text(prefix.stdout + prefix.stderr)
+            record['surface_prefix_exit'] = prefix.returncode
+            record['surface_prefix_pass'] = prefix.returncode == 0 and all(marker in prefix.stdout for marker in (
+                'SURFACE_COPY_PARITY_PASS cases=32 pixels=6144',
+                'SURFACE_PRODUCERS_PARITY_PASS camera_cases=2 egl_cases=2 pixels=768',
+                'PREVIEW_PROBE_PASS cases=32')) and 'PREVIEW_PROBE_FAIL' not in prefix.stdout
+            if not record['surface_prefix_pass']:
+                raise RuntimeError('Surface prefix instrumentation did not pass; recovery was not started')
+            # run_surface_copy_profile.sh next sources run_ui_probes.sh, whose
+            # setup reinstalls both APKs. Retain that intervening process/window
+            # transition, rather than substituting a simpler warm-start scenario.
+            record['reinstall'] = []
+            for name, apk in (
+                    ('app', 'app/build/outputs/apk/debug/app-debug.apk'),
+                    ('tests', 'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk')):
+                stage = f'reinstall-{name}'
+                installed = adb.run('install', '-r', str(ROOT.parent/apk), timeout=30, check=False)
+                (directory/f'{stage}.txt').write_text(installed.stdout + installed.stderr)
+                passed = installed.returncode == 0 and re.search(r'(?m)^Success\r?$', installed.stdout) is not None
+                record['reinstall'].append({'apk': apk, 'exit': installed.returncode, 'passed': passed})
+                if not passed:
+                    raise RuntimeError(f'{stage} did not pass; recovery was not started')
+        stage = 'instrumentation'
         result = adb.run('shell', 'am', 'instrument', '-w', '-e', 'pip_recovery', 'true',
                          '-e', 'preview_trace', 'true', COMPONENT, timeout=110, check=False)
         (directory/'instrumentation.txt').write_text(result.stdout + result.stderr)
@@ -113,10 +145,10 @@ def capture(adb, directory, config, index):
     except (RuntimeError, subprocess.TimeoutExpired) as error:
         record['errors'].append(str(error))
         if isinstance(error, subprocess.TimeoutExpired):
-            (directory/'timeout.txt').write_text(str(error))
+            (directory/'timeout.txt').write_text(f'{stage}: {error}')
             output = error.stdout or b''
-            (directory/'partial-instrumentation.txt').write_text(output.decode(errors='replace') if isinstance(output, bytes) else output)
-            # The adb client timeout does not stop remote instrumentation.
+            (directory/f'partial-{stage}.txt').write_text(output.decode(errors='replace') if isinstance(output, bytes) else output)
+            # A client timeout does not confirm remote instrumentation stopped.
             try:
                 adb.run('shell', 'am', 'force-stop', 'com.cyanrbt.walkbuddy')
             except (RuntimeError, subprocess.TimeoutExpired) as cleanup:
@@ -159,8 +191,8 @@ def main():
     for name in ('ro.build.fingerprint', 'ro.build.type', 'ro.build.version.sdk'):
         metadata[name] = adb.run('shell', 'getprop', name).stdout.strip()
     for index in range(1, 4):
-        print(f'Recording preview recovery trial {index}/3', flush=True)
-        result = capture(adb, args.directory/f'trial-{index}', config, index)
+        print(f'Recording preview recovery trial {index}/3; surface prefix={index == 1}', flush=True)
+        result = capture(adb, args.directory/f'trial-{index}', config, index, surface_prefix=index == 1)
         metadata['trials'].append(result)
         print(json.dumps(result), flush=True)
         (args.directory/'capture.json').write_text(json.dumps(metadata, indent=2)+'\n')

@@ -1,5 +1,8 @@
 # Bounded, emulator-only diagnostic capture, not a production recording policy.
-duration_ms: 120000
+# First trial includes frozen-producer work (45s) and the original two APK
+# reinstalls (30s each) before recovery (110s). These are diagnostic command
+# bounds; this capture ceiling is unrelated to the application's deadlines.
+duration_ms: 240000
 write_into_file: true
 file_write_period_ms: 1000
 flush_period_ms: 10000
