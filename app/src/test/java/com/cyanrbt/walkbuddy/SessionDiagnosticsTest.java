@@ -114,28 +114,4 @@ public class SessionDiagnosticsTest {
         SessionDiagnostics restored=new SessionDiagnostics();restored.restore(text);
         assertTrue(report(restored).contains("任务内亮度读回墙钟(ms)：25；CPU(ms)：3"));
     }
-    @Test public void asynchronousCopyIncidentKeepsItsOwnTimingAndFirstCauseAfterRestore() {
-        BrightnessTiming.Sample copy=new BrightnessTiming.Sample(BrightnessTiming.Stage.COPYING,1000,7,993,-1,-1,-1);
-        SessionDiagnostics diagnostics=new SessionDiagnostics();
-        diagnostics.preview(new SessionDiagnostics.Snapshot("GENERAL","亮度请求超时",live(),400,false,false,false,true,
-            new SessionDiagnostics.Pipeline(false,false,false,-1,3,-1,-1,ReadbackTiming.UNKNOWN,copy)));
-        diagnostics.preview(snapshot("HIDDEN",live()));
-        assertSame(copy,diagnostics.preview().pipeline.brightness);
-        String text=report(diagnostics);
-        assertTrue(text.contains("异步亮度检查：COPYING；观测帧龄(ms)：1000"));
-        assertTrue(text.contains("亮度排队(ms)：7；请求墙钟(ms)：993"));
-        assertTrue(text.contains("调用与像素处理CPU(ms)：未取得；交付(ms)：未取得；结果码：未取得"));
-        assertFalse(text.contains("任务内亮度读回墙钟"));assertFalse(text.contains("分类：HIDDEN"));
-        SessionDiagnostics restored=new SessionDiagnostics();restored.restore(text);
-        assertTrue(report(restored).contains("异步亮度检查：COPYING"));assertTrue(report(restored).length()<4096);
-    }
-    @Test public void completedCopyReportsZeroTimingAndFailureStatusWithoutInventingAnActiveTask() {
-        SessionDiagnostics diagnostics=new SessionDiagnostics();
-        diagnostics.preview(new SessionDiagnostics.Snapshot("GENERAL","复制失败",live(),400,false,false,false,true,
-            new SessionDiagnostics.Pipeline(false,false,false,-1,0,-1,-1,ReadbackTiming.UNKNOWN,
-                new BrightnessTiming.Sample(BrightnessTiming.Stage.FINISHED,0,0,0,0,0,3))));
-        String text=report(diagnostics);
-        assertTrue(text.contains("读回任务：未取得"));assertTrue(text.contains("异步亮度检查：FINISHED"));
-        assertTrue(text.contains("调用与像素处理CPU(ms)：0；交付(ms)：0；结果码：3"));
-    }
 }

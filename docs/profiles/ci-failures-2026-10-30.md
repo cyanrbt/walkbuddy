@@ -1,5 +1,9 @@
 # 2026-10-30 Actions 失败原因核对
 
+## 本次工作中新增的候选失败
+
+前述查询之后，新异步亮度候选的普通 UI 和像素专项首次成功，但[系统轨迹 41160797255](https://github.com/cyanrbt/walkbuddy/actions/runs/41160797255) 的 API 35 第二轮实际恢复失败：进入小窗前已提示读回失败并停机，触摸准备随后超时。编译成功不是整轮通过；该次失败与早期 Perfetto 缓冲/flush/传输问题不同。七份原始 ZIP 和六条 trace 均实际下载复核，应用候选已撤回主分支且未发布 v0.4.38，完整范围见[本次失败记录](brightness-async-2026-10-31.md)。当前稳定下载仍为 v0.4.37。
+
 ## v0.4.37 后再次核对
 
 用户询问“GitHub 打包一直在失败”后，重新查询最近 30 次 Actions、最新 Release 和最近三个红叉的作业步骤，直接重读四份原始 job 日志。查询时最近六次运行均 attempt 1 终态成功，最新两个为 [Surface 专项 41158068308](https://github.com/cyanrbt/walkbuddy/actions/runs/41158068308)及[普通 UI 41158068207](https://github.com/cyanrbt/walkbuddy/actions/runs/41158068207)。[机器可读状态](ci-status-2026-10-31-v37.json)保留来源，不把此历史快照称为永久状态。

@@ -1016,7 +1016,7 @@ final class PipProbe {
     private static void assertReleased(PreviewActivity host) {
         if(keepsScreenOn(host))throw new AssertionError("Stopped preview retained screen hold");
         if(field(field(host,"haptics"),"requested")!=Detection.Risk.CAPTURED)throw new AssertionError("Stopped preview retained tactile feedback");
-        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback","brightnessReadback"})
+        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback","brightnessSampler"})
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
         if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
         if((boolean)field(host,"readingTexture"))throw new AssertionError("Stopped camera retained readback state");

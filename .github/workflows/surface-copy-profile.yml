@@ -9,8 +9,6 @@ on:
       - scripts/run_surface_copy_profile.sh
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/SurfaceCopyProbe.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/SurfaceProducerProbe.java
-      - app/src/androidTest/java/com/cyanrbt/walkbuddy/BrightnessReadbackProbe.java
-      - app/src/main/java/com/cyanrbt/walkbuddy/Brightness*.java
 
 permissions:
   contents: read

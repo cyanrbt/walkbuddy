@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.TextureView;
 
-/** Frozen v0.4.37 synchronous reference, retained only in the test APK. */
+/** Main-thread workspace for the same 16x12 displayed-image check used before. */
 class BrightnessSampler implements AutoCloseable {
     private Bitmap bitmap;
     private final int[] pixels=new int[16*12];

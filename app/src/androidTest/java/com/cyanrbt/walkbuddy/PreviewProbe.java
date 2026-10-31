@@ -87,7 +87,6 @@ public class PreviewProbe extends Instrumentation {
      .append(" baselineBytes=").append(original.getAllocationByteCount()).append(" limitedBytes=").append(input.getAllocationByteCount())
      .append(" legacyLimitedAllocatedBytes=").append(limitedBytes[0]).append(" naturalAllocatedBytes=").append(naturalBytes).append("; worker-rotated input RGB identical\n");
     brightnessSamples.put(BrightnessProbe.compare(this,ref.get(),brightness,sensor,display,w,h));
-    if(cases==0)report.append(BrightnessReadbackProbe.run(this,ref.get()));
     if(surfaceCopy)surfaceCopies.put(SurfaceCopyProbe.compare(this,ref.get(),sensor,display,w,h));
     image.recycle();input.recycle();original.recycle();frame.close();cases++;
    }finally{surface.release();}
@@ -107,7 +106,7 @@ public class PreviewProbe extends Instrumentation {
    if(!producers.getBoolean("accepted"))throw new AssertionError("Frozen Camera2/EGL Surface comparison failed; see surface-copy-producers.json");
    report.append("SURFACE_PRODUCERS_PARITY_PASS camera_cases=2 egl_cases=2 pixels=768; frozen independent producers, exact ARGB and stable timestamps\n");
   }
-  report.append("BRIGHTNESS_TEXTURE_PARITY_PASS cases=32 pixels=6144; legacy reference only: exact ARGB and total, one bitmap and array across changes, close recycled; frozen v0.4.36/reference v0.4.37 sampler\n");
+  report.append("BRIGHTNESS_TEXTURE_PARITY_PASS cases=32 pixels=6144; exact ARGB and total, one bitmap and array across changes, close recycled; frozen v0.4.36 reference\n");
   report.append("READBACK_OBSERVATION baselineUs=").append(baselineNs/1000).append(" naturalUs=").append(sampledNs/1000).append(" cases=32; alternating order, full baseline includes rotation, natural readback rotates later on worker; not camera end-to-end timing\n");
   report.append("ROTATION_BUFFER_PASS cases=32; all RGB input bytes identical to v0.4.16; one readback bitmap, worker rotation storage reused for display 90/180/270\n");
   report.append("PREVIEW_PROBE_PASS cases=").append(cases).append("; direction marker + circle in displayed and sampled bitmap\n");result.putString("stream",report.toString());finish(Activity.RESULT_OK,result);

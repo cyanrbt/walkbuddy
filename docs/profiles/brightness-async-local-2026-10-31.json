@@ -16,5 +16,7 @@
   "production_change": "One process-wide in-flight PixelCopy request; worker call and pixel sum; deadline includes earliest-due waiting; deferred recycle after callback",
   "tools_tests": 31,
   "product_surface": "passed after replacing obsolete per-frame formatting assertion with HomeState delegation; nine functional HomeState tests passed",
-  "dex_scope": "Production async classes in app; legacy reference and instrumentation observers only in test APK"
+  "dex_scope": "Production async classes in app; legacy reference and instrumentation observers only in test APK",
+  "source_commit": "a1109083bc8fb4ddfa6f492d4740f8f1cad33f2a",
+  "outcome": "Candidate local validation only; later rejected after actual traced recovery failure; not current main validation"
 }

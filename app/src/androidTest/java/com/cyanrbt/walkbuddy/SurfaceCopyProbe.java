@@ -68,13 +68,13 @@ final class SurfaceCopyProbe {
         }
     }
 
-    static int[] reference(TextureView view) {
+    private static int[] reference(TextureView view) {
         Bitmap bitmap=view.getBitmap(16,12);
         if(bitmap==null)throw new AssertionError("Frozen TextureView reference unavailable");
         try{int[] pixels=new int[192];bitmap.getPixels(pixels,0,16,0,0,16,12);return pixels;}
         finally{bitmap.recycle();}
     }
-    static int total(int[] pixels){int sum=0;for(int c:pixels)sum+=((c>>16)&255)+((c>>8)&255)+(c&255);return sum;}
+    private static int total(int[] pixels){int sum=0;for(int c:pixels)sum+=((c>>16)&255)+((c>>8)&255)+(c&255);return sum;}
     private static String digest(int[] pixels) throws Exception {
         ByteBuffer buffer=ByteBuffer.allocate(pixels.length*4);for(int c:pixels)buffer.putInt(c);
         StringBuilder out=new StringBuilder();

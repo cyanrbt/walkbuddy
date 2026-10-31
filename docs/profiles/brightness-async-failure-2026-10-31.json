@@ -1,0 +1,1203 @@
+{
+  "source_commit": "a1109083bc8fb4ddfa6f492d4740f8f1cad33f2a",
+  "workflow_run": 41160797255,
+  "attempt": 1,
+  "job_id": 124417671998,
+  "artifact_id": 13027665275,
+  "trace_sha256": "91c65d08e5547c79a829568c648c7509d7f08d6cd8c93af534f55413784a4eed",
+  "pid": 3732,
+  "instrumentation": "INPUT_WINDOW_RULES_PASS cases=11\nPIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: touch target ready id=2130968590; interactive=true keyguard=false; 读取画面失败，请主动重新开启；提醒已停止; target=enter_pip activity=PreviewActivity focus=true pip=false finishing=false destroyed=false attached=true shown=false enabled=false windowVisibility=0 visibleRect=true bounds=Rect(16, 552 - 304, 604) ancestor[0]=Button laidOut=true layoutRequested=true ancestor[1]=LinearLayout laidOut=true layoutRequested=false ancestor[2]=LinearLayout laidOut=true layoutRequested=false ancestor[3]=FrameLayout laidOut=true layoutRequested=false ancestor[4]=LinearLayout laidOut=true layoutRequested=false ancestor[5]=DecorView laidOut=true layoutRequested=false; 读取画面失败，请主动重新开启；提醒已停止\n",
+  "summary": {
+    "trial": 2,
+    "valid": false,
+    "errors": [
+      "Recovery instrumentation did not pass",
+      "Traced recovery probe did not pass",
+      "Expected four forced expiry markers, got 0",
+      "Four forced expiry stop logs did not align with their trace markers"
+    ],
+    "metrics": {
+      "sched_rows": 409691
+    },
+    "stats": [
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "guess_trace_type_duration_ns",
+        "value": "1195256",
+        "detail": "info/analysis/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "parse_trace_duration_ns",
+        "value": "203820112",
+        "detail": "info/analysis/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "clock_sync_cache_miss",
+        "value": "56",
+        "detail": "info/analysis/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "android_log_num_skipped",
+        "value": "10999",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "android_log_num_total",
+        "value": "11003",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_setup_errors",
+        "value": "37",
+        "detail": "notice/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "interned_data_tokenizer_errors",
+        "value": "117402",
+        "detail": "info/analysis/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_data_sources_registered",
+        "value": "32",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_data_sources_seen",
+        "value": "6",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_flushes_requested",
+        "value": "2",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_flushes_succeeded",
+        "value": "1",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_producers_connected",
+        "value": "7",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_producers_seen",
+        "value": "7",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_total_buffers",
+        "value": "2",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_tracing_sessions",
+        "value": "1",
+        "detail": "info/trace/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "compact_sched_switch_skipped",
+        "value": "2",
+        "detail": "info/analysis/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "compact_sched_waking_skipped",
+        "value": "3",
+        "detail": "info/analysis/"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_buffer_size",
+        "value": "33554432",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_bytes_written",
+        "value": "28901376",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_bytes_read",
+        "value": "28868608",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_chunks_written",
+        "value": "882",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_chunks_read",
+        "value": "881",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_patches_succeeded",
+        "value": "2034",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_readaheads_succeeded",
+        "value": "761",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_readaheads_failed",
+        "value": "18",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_buffer_size",
+        "value": "4194304",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_bytes_written",
+        "value": "98304",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_bytes_read",
+        "value": "98304",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_chunks_written",
+        "value": "3",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_chunks_read",
+        "value": "3",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_patches_succeeded",
+        "value": "1",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_readaheads_succeeded",
+        "value": "1",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "traced_buf_readaheads_failed",
+        "value": "6",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_entries_begin",
+        "value": "534",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_bytes_begin",
+        "value": "24952",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_now_ts_begin",
+        "value": "91988390000",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_oldest_event_ts_begin",
+        "value": "91973492000",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_entries_begin",
+        "value": "331",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_bytes_begin",
+        "value": "15612",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_now_ts_begin",
+        "value": "91988406000",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_oldest_event_ts_begin",
+        "value": "91971897000",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_entries_end",
+        "value": "446",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_bytes_end",
+        "value": "20992",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_read_events_end",
+        "value": "875250",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_now_ts_end",
+        "value": "112595411000",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_entries_delta",
+        "value": "-88",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_bytes_delta",
+        "value": "-3960",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_read_events_delta",
+        "value": "875250",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_oldest_event_ts_end",
+        "value": "112589266000",
+        "detail": "info/trace/0"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_entries_end",
+        "value": "16",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_bytes_end",
+        "value": "696",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_read_events_end",
+        "value": "632778",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_now_ts_end",
+        "value": "112595426000",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_entries_delta",
+        "value": "-315",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_bytes_delta",
+        "value": "-14916",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_read_events_delta",
+        "value": "632778",
+        "detail": "info/trace/1"
+      },
+      {
+        "kind": "stat",
+        "ts": "0",
+        "dur": "0",
+        "utid": "0",
+        "tid": "0",
+        "thread": "",
+        "name": "ftrace_cpu_oldest_event_ts_end",
+        "value": "112593628000",
+        "detail": "info/trace/1"
+      }
+    ],
+    "main_dispatch_count": 333,
+    "forced_expiry_markers": 0,
+    "outside_observer_stops": [],
+    "stops": [
+      {
+        "ts": 102760930006,
+        "category": "other_stop",
+        "fields": {
+          "reason": "GENERAL",
+          "phase": "LIVE",
+          "recognition": "false",
+          "captureGapMs": "411",
+          "displayGapMs": "409",
+          "analysisGapMs": "-1",
+          "sampleAgeMs": "-1",
+          "queueMs": "473",
+          "copyMs": "-1",
+          "deliveryMs": "-1",
+          "workerBusy": "false",
+          "pip": "false"
+        },
+        "message": "Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=411 displayGapMs=409 analysisGapMs=-1 sampleAgeMs=-1 queueMs=473 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false"
+      }
+    ],
+    "stop_counts": {
+      "other_stop": 1
+    },
+    "longest_dispatches": [
+      {
+        "ts": 98310970982,
+        "wall_ms": 1529.435178,
+        "main_cpu_ms": 57.887929,
+        "main_state_ms": {
+          "R": 126.752727,
+          "Running": 57.887929,
+          "R+": 88.777264,
+          "D": 57.755897,
+          "S": 1198.261361
+        },
+        "render_cpu_overlap_ms": 612.738254,
+        "render_slices": [
+          {
+            "name": "DrawFrames 20320",
+            "overlap_ms": 1090.994996
+          },
+          {
+            "name": "Drawing  0.00  0.00 320.00 640.00",
+            "overlap_ms": 1089.125886
+          },
+          {
+            "name": "flush commands",
+            "overlap_ms": 958.020255
+          },
+          {
+            "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+            "overlap_ms": 938.775226
+          },
+          {
+            "name": "AAHairlineOp",
+            "overlap_ms": 283.255261
+          }
+        ]
+      },
+      {
+        "ts": 97731786124,
+        "wall_ms": 566.178107,
+        "main_cpu_ms": 107.226431,
+        "main_state_ms": {
+          "R": 205.458375,
+          "Running": 107.226431,
+          "R+": 81.193953,
+          "D": 9.901511,
+          "S": 162.397837
+        },
+        "render_cpu_overlap_ms": 32.507738,
+        "render_slices": [
+          {
+            "name": "eglGetDisplay",
+            "overlap_ms": 218.258286
+          },
+          {
+            "name": "open",
+            "overlap_ms": 218.063514
+          },
+          {
+            "name": "attempt_to_load_system_driver",
+            "overlap_ms": 201.353804
+          },
+          {
+            "name": "init_api",
+            "overlap_ms": 182.294735
+          }
+        ]
+      },
+      {
+        "ts": 101753360660,
+        "wall_ms": 483.299515,
+        "main_cpu_ms": 7.404309,
+        "main_state_ms": {
+          "R": 14.842796,
+          "Running": 7.404309,
+          "R+": 0.106877,
+          "S": 460.945533
+        },
+        "render_cpu_overlap_ms": 84.615356,
+        "render_slices": [
+          {
+            "name": "DrawFrames 22021",
+            "overlap_ms": 304.580994
+          },
+          {
+            "name": "Drawing  0.00 95.00 320.00 364.00",
+            "overlap_ms": 304.578406
+          },
+          {
+            "name": "DrawFrames 22050",
+            "overlap_ms": 178.697639
+          },
+          {
+            "name": "syncFrameState",
+            "overlap_ms": 176.55285
+          },
+          {
+            "name": "flush commands",
+            "overlap_ms": 169.500035
+          }
+        ]
+      },
+      {
+        "ts": 100880191464,
+        "wall_ms": 464.699648,
+        "main_cpu_ms": 53.686103,
+        "main_state_ms": {
+          "R": 57.006882,
+          "Running": 53.686103,
+          "R+": 49.746551,
+          "D": 37.671012,
+          "S": 266.5891
+        },
+        "render_cpu_overlap_ms": 105.275961,
+        "render_slices": [
+          {
+            "name": "DrawFrames 21475",
+            "overlap_ms": 170.048897
+          },
+          {
+            "name": "Drawing  0.00  0.00 320.00 640.00",
+            "overlap_ms": 169.501508
+          },
+          {
+            "name": "eglSwapBuffersWithDamageKHR",
+            "overlap_ms": 137.364565
+          },
+          {
+            "name": "rcCreateSyncKHR encode",
+            "overlap_ms": 135.258039
+          },
+          {
+            "name": "flush commands",
+            "overlap_ms": 28.418594
+          }
+        ]
+      },
+      {
+        "ts": 102351379603,
+        "wall_ms": 408.508919,
+        "main_cpu_ms": 0.35706,
+        "main_state_ms": {
+          "R": 3.667115,
+          "Running": 0.35706,
+          "S": 404.484744
+        },
+        "render_cpu_overlap_ms": 82.082109,
+        "render_slices": [
+          {
+            "name": "copySurfaceInto",
+            "overlap_ms": 193.248861
+          },
+          {
+            "name": "DrawFrames 22072",
+            "overlap_ms": 109.500662
+          },
+          {
+            "name": "Drawing 16.00 552.00 304.00 604.00",
+            "overlap_ms": 109.49821
+          },
+          {
+            "name": "eglSwapBuffersWithDamageKHR",
+            "overlap_ms": 109.223026
+          },
+          {
+            "name": "DrawFrames 22272",
+            "overlap_ms": 105.707117
+          }
+        ]
+      },
+      {
+        "ts": 100301177428,
+        "wall_ms": 244.158013,
+        "main_cpu_ms": 1.234645,
+        "main_state_ms": {
+          "R": 6.055364,
+          "Running": 1.234645,
+          "S": 236.868004
+        },
+        "render_cpu_overlap_ms": 86.981301,
+        "render_slices": [
+          {
+            "name": "DrawFrames 21251",
+            "overlap_ms": 237.675823
+          },
+          {
+            "name": "Drawing 20.00 550.00 300.00 602.00",
+            "overlap_ms": 237.673352
+          },
+          {
+            "name": "eglSwapBuffersWithDamageKHR",
+            "overlap_ms": 201.377538
+          },
+          {
+            "name": "rcCreateSyncKHR encode",
+            "overlap_ms": 199.389155
+          },
+          {
+            "name": "flush commands",
+            "overlap_ms": 36.160637
+          }
+        ]
+      },
+      {
+        "ts": 100658775283,
+        "wall_ms": 220.42087,
+        "main_cpu_ms": 80.821902,
+        "main_state_ms": {
+          "R": 56.930348,
+          "Running": 80.821902,
+          "R+": 33.103099,
+          "D": 0.585645,
+          "S": 48.979876
+        },
+        "render_cpu_overlap_ms": 1.161067,
+        "render_slices": []
+      },
+      {
+        "ts": 102760472566,
+        "wall_ms": 141.599878,
+        "main_cpu_ms": 4.633393,
+        "main_state_ms": {
+          "R": 4.384322,
+          "Running": 4.633393,
+          "R+": 3.196986,
+          "S": 129.385177
+        },
+        "render_cpu_overlap_ms": 0.621718,
+        "render_slices": [
+          {
+            "name": "DrawFrames 22272",
+            "overlap_ms": 3.698339
+          }
+        ]
+      },
+      {
+        "ts": 99940797159,
+        "wall_ms": 99.867825,
+        "main_cpu_ms": 0.631239,
+        "main_state_ms": {
+          "R": 0.00785,
+          "Running": 0.631239,
+          "S": 99.228736
+        },
+        "render_cpu_overlap_ms": 34.787661,
+        "render_slices": [
+          {
+            "name": "DrawFrames 20993",
+            "overlap_ms": 99.650573
+          },
+          {
+            "name": "Drawing 20.00 300.00 300.00 602.00",
+            "overlap_ms": 99.648477
+          },
+          {
+            "name": "eglSwapBuffersWithDamageKHR",
+            "overlap_ms": 88.244872
+          },
+          {
+            "name": "rcCreateSyncKHR encode",
+            "overlap_ms": 85.285347
+          },
+          {
+            "name": "flush commands",
+            "overlap_ms": 11.335028
+          }
+        ]
+      },
+      {
+        "ts": 102257670095,
+        "wall_ms": 85.314018,
+        "main_cpu_ms": 0.768378,
+        "main_state_ms": {
+          "R": 0.60296,
+          "Running": 0.768378,
+          "R+": 3.377151,
+          "S": 80.565529
+        },
+        "render_cpu_overlap_ms": 28.540626,
+        "render_slices": [
+          {
+            "name": "DrawFrames 22050",
+            "overlap_ms": 84.458084
+          },
+          {
+            "name": "Drawing  0.00  0.00 320.00 640.00",
+            "overlap_ms": 84.45604
+          },
+          {
+            "name": "eglSwapBuffersWithDamageKHR",
+            "overlap_ms": 82.960022
+          },
+          {
+            "name": "rcCreateSyncKHR encode",
+            "overlap_ms": 82.568119
+          },
+          {
+            "name": "DrawFrames 22072",
+            "overlap_ms": 0.845062
+          }
+        ]
+      },
+      {
+        "ts": 100040788486,
+        "wall_ms": 69.398007,
+        "main_cpu_ms": 0.895924,
+        "main_state_ms": {
+          "R": 5.22732,
+          "Running": 0.895924,
+          "R+": 4.808031,
+          "S": 58.466732
+        },
+        "render_cpu_overlap_ms": 5.546672,
+        "render_slices": [
+          {
+            "name": "DrawFrames 21016",
+            "overlap_ms": 63.990304
+          },
+          {
+            "name": "Drawing  0.00 24.00 320.00 512.00",
+            "overlap_ms": 62.536925
+          },
+          {
+            "name": "eglSwapBuffersWithDamageKHR",
+            "overlap_ms": 56.752769
+          },
+          {
+            "name": "dequeueBuffer - VRI[MainActivity]#0(BLAST Consumer)0",
+            "overlap_ms": 50.531647
+          },
+          {
+            "name": "dequeueBuffer",
+            "overlap_ms": 50.510865
+          }
+        ]
+      },
+      {
+        "ts": 102957528445,
+        "wall_ms": 39.126437,
+        "main_cpu_ms": 2.17524,
+        "main_state_ms": {
+          "R": 25.722343,
+          "Running": 2.17524,
+          "R+": 0.418509,
+          "S": 10.810345
+        },
+        "render_cpu_overlap_ms": 4.747865,
+        "render_slices": []
+      },
+      {
+        "ts": 100545433901,
+        "wall_ms": 38.33248,
+        "main_cpu_ms": 2.038565,
+        "main_state_ms": {
+          "R": 3.501046,
+          "Running": 2.038565,
+          "R+": 3.163842,
+          "D": 0.271057,
+          "S": 29.35797
+        },
+        "render_cpu_overlap_ms": 0.784746,
+        "render_slices": []
+      },
+      {
+        "ts": 101360248661,
+        "wall_ms": 38.131113,
+        "main_cpu_ms": 3.828699,
+        "main_state_ms": {
+          "R": 9.706198,
+          "Running": 3.828699,
+          "R+": 10.238542,
+          "S": 14.357674
+        },
+        "render_cpu_overlap_ms": 7.415872,
+        "render_slices": [
+          {
+            "name": "DrawFrames 21696",
+            "overlap_ms": 24.928847
+          },
+          {
+            "name": "Drawing 16.00 33.00 304.00 604.00",
+            "overlap_ms": 24.109949
+          },
+          {
+            "name": "DrawFrames 21696",
+            "overlap_ms": 9.295199
+          },
+          {
+            "name": "Drawing  0.00  0.00 320.00 640.00",
+            "overlap_ms": 8.997406
+          },
+          {
+            "name": "eglSwapBuffersWithDamageKHR",
+            "overlap_ms": 7.273595
+          }
+        ]
+      },
+      {
+        "ts": 100613889803,
+        "wall_ms": 27.757279,
+        "main_cpu_ms": 2.329881,
+        "main_state_ms": {
+          "Running": 2.329881,
+          "R+": 25.427398
+        },
+        "render_cpu_overlap_ms": 3.985335,
+        "render_slices": []
+      },
+      {
+        "ts": 102921840908,
+        "wall_ms": 24.716173,
+        "main_cpu_ms": 1.054234,
+        "main_state_ms": {
+          "R": 0.317509,
+          "Running": 1.054234,
+          "R+": 0.198007,
+          "S": 23.146423
+        },
+        "render_cpu_overlap_ms": 4.900005,
+        "render_slices": [
+          {
+            "name": "DrawFrames 22295",
+            "overlap_ms": 23.048039
+          },
+          {
+            "name": "Drawing  0.00  0.00 320.00 640.00",
+            "overlap_ms": 20.643072
+          }
+        ]
+      },
+      {
+        "ts": 101428158085,
+        "wall_ms": 22.316277,
+        "main_cpu_ms": 2.753868,
+        "main_state_ms": {
+          "R": 5.990935,
+          "Running": 2.753868,
+          "R+": 4.247713,
+          "S": 9.323761
+        },
+        "render_cpu_overlap_ms": 5.833647,
+        "render_slices": []
+      },
+      {
+        "ts": 102237378717,
+        "wall_ms": 20.157136,
+        "main_cpu_ms": 1.312188,
+        "main_state_ms": {
+          "R": 8.577047,
+          "Running": 1.312188,
+          "R+": 3.894175,
+          "S": 6.373726
+        },
+        "render_cpu_overlap_ms": 4.725576,
+        "render_slices": [
+          {
+            "name": "DrawFrames 22050",
+            "overlap_ms": 20.157136
+          },
+          {
+            "name": "Drawing  0.00  0.00 320.00 640.00",
+            "overlap_ms": 20.157136
+          },
+          {
+            "name": "eglSwapBuffersWithDamageKHR",
+            "overlap_ms": 9.9851
+          },
+          {
+            "name": "rcCreateSyncKHR encode",
+            "overlap_ms": 9.433284
+          }
+        ]
+      }
+    ],
+    "scope": "Traced emulator observations with main-looper logging overhead; overlap is not causation",
+    "trace_sha256": "91c65d08e5547c79a829568c648c7509d7f08d6cd8c93af534f55413784a4eed"
+  },
+  "additional_query": "WITH target AS (\n SELECT t.utid,t.tid,t.name,t.upid FROM thread t JOIN process p USING(upid)\n WHERE p.pid=3732 AND p.name='com.cyanrbt.walkbuddy'\n), rows AS (\n SELECT 'thread' kind,0 ts,0 dur,t.utid,t.tid,t.name,'' detail FROM target t\n UNION ALL\n SELECT 'slice',s.ts,s.dur,t.utid,t.tid,t.name,s.name FROM slice s JOIN thread_track tt ON tt.id=s.track_id JOIN target t USING(utid)\n WHERE s.name LIKE '%copy%' OR s.name LIKE '%readback%' OR s.name LIKE '%Pixel%' OR (s.name='wb_main:dispatch' AND s.ts>101000000000)\n UNION ALL\n SELECT 'log',l.ts,0,t.utid,t.tid,t.name,l.msg FROM android_logs l JOIN target t USING(utid) WHERE l.tag='WalkBuddyTiming'\n)\nSELECT * FROM rows ORDER BY ts;\n",
+  "selected_rows": [
+    {
+      "kind": "slice",
+      "ts": "101753360660",
+      "dur": "483299515",
+      "utid": "2509",
+      "tid": "3732",
+      "name": "anrbt.walkbuddy",
+      "detail": "wb_main:dispatch"
+    },
+    {
+      "kind": "slice",
+      "ts": "102351379603",
+      "dur": "408508919",
+      "utid": "2509",
+      "tid": "3732",
+      "name": "anrbt.walkbuddy",
+      "detail": "wb_main:dispatch"
+    },
+    {
+      "kind": "slice",
+      "ts": "102460882802",
+      "dur": "193248861",
+      "utid": "2624",
+      "tid": "3847",
+      "name": "RenderThread",
+      "detail": "copySurfaceInto"
+    },
+    {
+      "kind": "slice",
+      "ts": "102760472566",
+      "dur": "141599878",
+      "utid": "2509",
+      "tid": "3732",
+      "name": "anrbt.walkbuddy",
+      "detail": "wb_main:dispatch"
+    },
+    {
+      "kind": "log",
+      "ts": "102760930006",
+      "dur": "0",
+      "utid": "2509",
+      "tid": "3732",
+      "name": "anrbt.walkbuddy",
+      "detail": "Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=411 displayGapMs=409 analysisGapMs=-1 sampleAgeMs=-1 queueMs=473 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false"
+    }
+  ],
+  "scope": "Actual failed traced emulator run. RenderThread overlap is not root cause or proof of device behavior. Request timing cannot be fully partitioned without per-stage markers."
+}
