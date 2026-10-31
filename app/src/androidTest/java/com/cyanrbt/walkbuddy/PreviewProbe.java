@@ -14,11 +14,21 @@ import java.util.concurrent.atomic.AtomicReference;
 public class PreviewProbe extends Instrumentation {
  protected boolean preview, pip, pipRecovery, overlay, layout, recovery, home, threadParity, support, previewTrace;
  protected Integer profilePriority,profileThreads;
- @Override public void onCreate(Bundle args){super.onCreate(args);support=enabled(args,"support");pip=enabled(args,"pip");pipRecovery=enabled(args,"pip_recovery");overlay=enabled(args,"overlay");layout=enabled(args,"layout");recovery=enabled(args,"recovery");home=enabled(args,"home");preview=enabled(args,"preview");threadParity=enabled(args,"thread_parity");previewTrace=enabled(args,"preview_trace");if(previewTrace && !pipRecovery)throw new IllegalArgumentException("Preview tracing requires the recovery probe");if(args!=null && args.containsKey("profile_priority")){profilePriority=Integer.valueOf(args.getString("profile_priority"));if(profilePriority!=1 && profilePriority!=10)throw new IllegalArgumentException("Only priorities 1/10 are profiled");}if(args!=null && args.containsKey("profile_threads")){profileThreads=Integer.valueOf(args.getString("profile_threads"));if(profileThreads!=1 && profileThreads!=2)throw new IllegalArgumentException("Only 1/2 CPU threads are profiled");}start();}
+ protected boolean surfaceCopy;
+ @Override public void onCreate(Bundle args){
+  super.onCreate(args);support=enabled(args,"support");pip=enabled(args,"pip");pipRecovery=enabled(args,"pip_recovery");
+  overlay=enabled(args,"overlay");layout=enabled(args,"layout");recovery=enabled(args,"recovery");home=enabled(args,"home");
+  preview=enabled(args,"preview");threadParity=enabled(args,"thread_parity");previewTrace=enabled(args,"preview_trace");surfaceCopy=enabled(args,"surface_copy");
+  if(previewTrace && !pipRecovery)throw new IllegalArgumentException("Preview tracing requires the recovery probe");
+  if(surfaceCopy && !preview)throw new IllegalArgumentException("Surface copy comparison requires the preview probe");
+  if(args!=null && args.containsKey("profile_priority")){profilePriority=Integer.valueOf(args.getString("profile_priority"));if(profilePriority!=1 && profilePriority!=10)throw new IllegalArgumentException("Only priorities 1/10 are profiled");}
+  if(args!=null && args.containsKey("profile_threads")){profileThreads=Integer.valueOf(args.getString("profile_threads"));if(profileThreads!=1 && profileThreads!=2)throw new IllegalArgumentException("Only 1/2 CPU threads are profiled");}
+  start();
+ }
  private static boolean enabled(Bundle args,String name){return args!=null && "true".equals(args.getString(name));}
  @Override public void onStart(){Bundle result=new Bundle();Activity activity=null;StringBuilder report=new StringBuilder();try{
   activity=startActivitySync(new Intent(getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-  final Activity host=activity;int cases=0;long baselineNs=0,sampledNs=0;org.json.JSONArray brightnessSamples=new org.json.JSONArray();BrightnessSampler brightness=new BrightnessSampler();
+  final Activity host=activity;int cases=0;long baselineNs=0,sampledNs=0;org.json.JSONArray brightnessSamples=new org.json.JSONArray(),surfaceCopies=new org.json.JSONArray();BrightnessSampler brightness=new BrightnessSampler();
   File evidence=new File(getTargetContext().getCacheDir(),"ui-probe");if(!evidence.isDirectory() && !evidence.mkdirs())throw new AssertionError("Evidence directory unavailable");
   for(int sensor:new int[]{0,90,180,270})for(int display:new int[]{0,90,180,270})for(int[] size:new int[][]{{300,400},{280,210}}){
    int w=size[0],h=size[1],bw=sensor%180==0?640:480,bh=sensor%180==0?480:640;
@@ -77,12 +87,21 @@ public class PreviewProbe extends Instrumentation {
      .append(" baselineBytes=").append(original.getAllocationByteCount()).append(" limitedBytes=").append(input.getAllocationByteCount())
      .append(" legacyLimitedAllocatedBytes=").append(limitedBytes[0]).append(" naturalAllocatedBytes=").append(naturalBytes).append("; worker-rotated input RGB identical\n");
     brightnessSamples.put(BrightnessProbe.compare(this,ref.get(),brightness,sensor,display,w,h));
+    if(surfaceCopy)surfaceCopies.put(SurfaceCopyProbe.compare(this,ref.get(),sensor,display,w,h));
     image.recycle();input.recycle();original.recycle();frame.close();cases++;
    }finally{surface.release();}
   }
   BrightnessProbe.finish(brightness);
   try(FileOutputStream stream=new FileOutputStream(new File(evidence,"brightness-parity.json"))){stream.write(brightnessSamples.toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));}
   report.append(BrightnessProbe.synthetic(this,evidence));
+  if(surfaceCopy){
+   boolean accepted=true;for(int i=0;i<surfaceCopies.length();i++)accepted&=surfaceCopies.getJSONObject(i).getBoolean("accepted");
+   try(FileOutputStream stream=new FileOutputStream(new File(evidence,"surface-copy-parity.json"))){stream.write(new org.json.JSONObject()
+    .put("scope","Frozen synthetic producer; not camera, GPU improvement, or real-device acceptance")
+    .put("accepted",accepted).put("cases",surfaceCopies).toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+   if(!accepted)throw new AssertionError("Experimental Surface copy changed frozen reference pixels; see surface-copy-parity.json");
+   report.append("SURFACE_COPY_PARITY_PASS cases=32 pixels=6144; frozen producer, off-main request, exact ARGB and totals\n");
+  }
   report.append("BRIGHTNESS_TEXTURE_PARITY_PASS cases=32 pixels=6144; exact ARGB and total, one bitmap and array across changes, close recycled; frozen v0.4.36 reference\n");
   report.append("READBACK_OBSERVATION baselineUs=").append(baselineNs/1000).append(" naturalUs=").append(sampledNs/1000).append(" cases=32; alternating order, full baseline includes rotation, natural readback rotates later on worker; not camera end-to-end timing\n");
   report.append("ROTATION_BUFFER_PASS cases=32; all RGB input bytes identical to v0.4.16; one readback bitmap, worker rotation storage reused for display 90/180/270\n");

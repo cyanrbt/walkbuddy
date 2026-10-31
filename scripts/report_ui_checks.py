@@ -91,7 +91,7 @@ def main():
     parser.add_argument("directory", type=Path)
     parser.add_argument("--build-result", required=True, choices=["success", "failure", "skipped", "cancelled"])
     parser.add_argument("--emulator-result", required=True, choices=["success", "failure", "skipped", "cancelled"])
-    parser.add_argument("--mode", choices=["ui", "thread", "scheduling"], default="ui")
+    parser.add_argument("--mode", choices=["ui", "thread", "scheduling", "surface"], default="ui")
     args = parser.parse_args()
     report = summarize(args.directory, args.build_result, args.emulator_result, args.mode)
     args.directory.mkdir(parents=True, exist_ok=True)

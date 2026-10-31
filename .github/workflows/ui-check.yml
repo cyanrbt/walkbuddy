@@ -19,6 +19,9 @@ on:
       preview_trace:
         type: boolean
         default: false
+      surface_copy_profile:
+        type: boolean
+        default: false
   workflow_dispatch:
 
 permissions:
@@ -31,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [35, 36]
+        api-level: ${{ fromJSON(inputs.surface_copy_profile && '[26,35,36]' || '[35,36]') }}
     steps:
       - uses: actions/checkout@v4
       - name: Test CI report interpretation
@@ -76,7 +79,7 @@ jobs:
           disk-size: 2048M
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -camera-back emulated -camera-front none
-          script: bash scripts/${{ inputs.preview_trace && 'run_preview_traces' || inputs.thread_profile && 'run_thread_profiles' || inputs.scheduling_profile && 'run_scheduling_profiles' || 'run_ui_probes' }}.sh
+          script: bash scripts/${{ inputs.surface_copy_profile && 'run_surface_copy_profile' || inputs.preview_trace && 'run_preview_traces' || inputs.thread_profile && 'run_thread_profiles' || inputs.scheduling_profile && 'run_scheduling_profiles' || 'run_ui_probes' }}.sh
       - name: Summarize preview trace evidence
         if: always() && inputs.preview_trace
         run: |
@@ -88,7 +91,7 @@ jobs:
         env:
           BUILD_RESULT: ${{ steps.build.outcome }}
           EMULATOR_RESULT: ${{ steps.emulator.outcome }}
-          PROBE_MODE: ${{ inputs.thread_profile && 'thread' || inputs.scheduling_profile && 'scheduling' || 'ui' }}
+          PROBE_MODE: ${{ inputs.surface_copy_profile && matrix.api-level == 26 && 'surface' || inputs.thread_profile && 'thread' || inputs.scheduling_profile && 'scheduling' || 'ui' }}
         run: |
           python3 scripts/report_ui_checks.py ui-evidence \
             --build-result "${BUILD_RESULT:-skipped}" \

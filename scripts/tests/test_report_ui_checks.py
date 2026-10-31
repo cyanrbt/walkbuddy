@@ -90,9 +90,10 @@ class UiCheckReportTest(unittest.TestCase):
         self.assertEqual("checks_not_passed", summarize(self.directory, "success", "skipped")["status"])
 
     def test_profiling_modes_do_not_claim_standard_probes_were_run(self):
-        report = summarize(self.directory, "success", "success", mode="thread")
-        self.assertEqual([], report["probes"])
-        self.assertEqual("passed", report["status"])
+        for mode in ("thread", "scheduling", "surface"):
+            report = summarize(self.directory, "success", "success", mode=mode)
+            self.assertEqual([], report["probes"])
+            self.assertEqual("passed", report["status"])
 
 
 if __name__ == "__main__":

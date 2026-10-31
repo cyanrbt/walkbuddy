@@ -1,0 +1,19 @@
+name: Surface copy experiment
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/surface-copy-profile.yml
+      - scripts/run_surface_copy_profile.sh
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/SurfaceCopyProbe.java
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    uses: ./.github/workflows/ui-check.yml
+    with:
+      surface_copy_profile: true
