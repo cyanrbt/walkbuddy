@@ -58,7 +58,7 @@
 
 Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。最新诊断补充 InputDispatcher 当前焦点、同一停止文件的连接恢复和 INFO 后备记录，[验证与边界](docs/profiles/ci-input-focus-2026-10-31.md)保留首轮失败与复验结果。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
 
-最新系统轨迹红叉发生在编译成功后：托管运行机空间不足，模拟器未启动。新增编译后的限定缓存清理和存储记录，43 项工具测试通过，实际云端启动仍待复验；实验分支另有 Android 8 Camera2 停止等待失败，尚未发布。[本次核对](docs/profiles/ci-storage-2026-10-31.md)与正式 APK 状态分开记录。
+最新系统轨迹红叉发生在编译成功后：托管运行机空间不足，模拟器未启动。新增编译后的限定缓存清理和存储记录，43 项工具测试通过；修订后的[普通检查](https://github.com/cyanrbt/walkbuddy/actions/runs/41167440416)与[系统轨迹](https://github.com/cyanrbt/walkbuddy/actions/runs/41167440427)均首次成功，四份原始附件和六条轨迹已核验重放。实验分支另有 Android 8 Camera2 停止等待失败，尚未发布。[本次核对](docs/profiles/ci-storage-2026-10-31.md)与正式 APK 状态分开记录。
 
 异步亮度读取候选在系统轨迹下出现新的请求截止失败，已撤回主分支产品改动，保留在独立实验分支；未发布 v0.4.38，也未放宽原有保护。[失败证据与当前状态](docs/profiles/brightness-async-2026-10-31.md)保留，当前安装包仍为 v0.4.37。
 
