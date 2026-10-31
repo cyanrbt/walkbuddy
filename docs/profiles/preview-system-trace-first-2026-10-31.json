@@ -1,0 +1,611 @@
+{
+  "source_commit": "0ccb9ae40c49daf3ff65775e82c163eb3934a729",
+  "run_id": 41150469510,
+  "run_attempt": 1,
+  "run_conclusion": "failure",
+  "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41150469510",
+  "cause": "Central ring buffer overwrote early records; full-trial evidence incomplete",
+  "production_source_changed": false,
+  "reports": [
+    {
+      "api": 35,
+      "artifact_id": 13023151386,
+      "artifact_bytes": 48562373,
+      "artifact_sha256": "6a7ef1afc752971b8dd9db83b692deb856bd7d7452bdd743fc5c04b5dc91d603",
+      "standard_ui": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "capture": {
+            "trial": 1,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 2200,
+            "instrumentation_exit": 0,
+            "trace_bytes": 33577138,
+            "trace_sha256": "1557e50cb2a44a3db7446e31f5b5169c81d3913da68e37906dc228af170955be"
+          },
+          "original_summary_valid": false,
+          "forced_markers": 2,
+          "main_dispatch_count": 1947,
+          "overwrite_statistics": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_bytes_overwritten",
+              "value": "29032448",
+              "detail": "info/trace"
+            },
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_chunks_overwritten",
+              "value": "886",
+              "detail": "info/trace"
+            }
+          ],
+          "revised_summary_valid": false,
+          "revised_errors": [
+            "Expected four forced expiry markers, got 2",
+            "Trace parser reports data loss or errors",
+            "Four forced expiry stop logs did not align with their trace markers"
+          ],
+          "unscoped_stops": [
+            {
+              "ts": 53679761117,
+              "message": "Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=43 analysisGapMs=-1 sampleAgeMs=-1 queueMs=6 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true"
+            },
+            {
+              "ts": 60724407708,
+              "message": "Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=11 analysisGapMs=-1 sampleAgeMs=-1 queueMs=10 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true"
+            }
+          ]
+        },
+        {
+          "trial": 2,
+          "capture": {
+            "trial": 2,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 3639,
+            "instrumentation_exit": 0,
+            "trace_bytes": 33552965,
+            "trace_sha256": "c176c01627e5b7cc9747802c86e71df998f6bb131ba6c2c3dc1adc67bdd6c351"
+          },
+          "original_summary_valid": false,
+          "forced_markers": 3,
+          "main_dispatch_count": 1863,
+          "overwrite_statistics": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_bytes_overwritten",
+              "value": "18841600",
+              "detail": "info/trace"
+            },
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_chunks_overwritten",
+              "value": "575",
+              "detail": "info/trace"
+            }
+          ],
+          "revised_summary_valid": false,
+          "revised_errors": [
+            "Expected four forced expiry markers, got 3",
+            "Trace parser reports data loss or errors",
+            "Four forced expiry stop logs did not align with their trace markers"
+          ],
+          "unscoped_stops": [
+            {
+              "ts": 87612976457,
+              "message": "Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=18 analysisGapMs=-1 sampleAgeMs=-1 queueMs=101 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true"
+            }
+          ]
+        },
+        {
+          "trial": 3,
+          "capture": {
+            "trial": 3,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 4306,
+            "instrumentation_exit": 0,
+            "trace_bytes": 33571642,
+            "trace_sha256": "a2a590874afa557fa9847dda15dc0dd7985ec39f140bc7d49d47f65fc40a97c6"
+          },
+          "original_summary_valid": false,
+          "forced_markers": 2,
+          "main_dispatch_count": 1926,
+          "overwrite_statistics": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_bytes_overwritten",
+              "value": "15007744",
+              "detail": "info/trace"
+            },
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_chunks_overwritten",
+              "value": "458",
+              "detail": "info/trace"
+            }
+          ],
+          "revised_summary_valid": false,
+          "revised_errors": [
+            "Expected four forced expiry markers, got 2",
+            "Trace parser reports data loss or errors",
+            "Four forced expiry stop logs did not align with their trace markers"
+          ],
+          "unscoped_stops": [
+            {
+              "ts": 110533878554,
+              "message": "Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=26 analysisGapMs=-1 sampleAgeMs=-1 queueMs=151 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true"
+            },
+            {
+              "ts": 113341923219,
+              "message": "Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=28 analysisGapMs=-1 sampleAgeMs=-1 queueMs=5 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "api": 36,
+      "artifact_id": 13022559311,
+      "artifact_bytes": 49055805,
+      "artifact_sha256": "61c15553a673d2fb608a76b4d254b975969f023e7ebf86bc00b2f2ccb556775b",
+      "standard_ui": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "capture": {
+            "trial": 1,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 2218,
+            "instrumentation_exit": 0,
+            "trace_bytes": 33584656,
+            "trace_sha256": "da214e50a08a585c17840fbb52bed788bd5806a9c19e5db322ecc691b249e4e4"
+          },
+          "original_summary_valid": false,
+          "forced_markers": 3,
+          "main_dispatch_count": 1863,
+          "overwrite_statistics": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_bytes_overwritten",
+              "value": "20512768",
+              "detail": "info/trace"
+            },
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_chunks_overwritten",
+              "value": "626",
+              "detail": "info/trace"
+            }
+          ],
+          "revised_summary_valid": false,
+          "revised_errors": [
+            "Expected four forced expiry markers, got 3",
+            "Trace parser reports data loss or errors",
+            "Four forced expiry stop logs did not align with their trace markers"
+          ],
+          "unscoped_stops": [
+            {
+              "ts": 45887649829,
+              "message": "Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1202 displayGapMs=12 analysisGapMs=-1 sampleAgeMs=-1 queueMs=206 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true"
+            }
+          ]
+        },
+        {
+          "trial": 2,
+          "capture": {
+            "trial": 2,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 3668,
+            "instrumentation_exit": 0,
+            "trace_bytes": 33590903,
+            "trace_sha256": "e15c05d3850c62526bb31a160d858f4ca7c4fda7f6c298b513adc509afc37ca3"
+          },
+          "original_summary_valid": false,
+          "forced_markers": 3,
+          "main_dispatch_count": 2013,
+          "overwrite_statistics": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_bytes_overwritten",
+              "value": "15499264",
+              "detail": "info/trace"
+            },
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_chunks_overwritten",
+              "value": "473",
+              "detail": "info/trace"
+            }
+          ],
+          "revised_summary_valid": false,
+          "revised_errors": [
+            "Expected four forced expiry markers, got 3",
+            "Trace parser reports data loss or errors",
+            "Four forced expiry stop logs did not align with their trace markers"
+          ],
+          "unscoped_stops": [
+            {
+              "ts": 70434018505,
+              "message": "Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=45 analysisGapMs=-1 sampleAgeMs=-1 queueMs=397 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true"
+            }
+          ]
+        },
+        {
+          "trial": 3,
+          "capture": {
+            "trial": 3,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 4486,
+            "instrumentation_exit": 0,
+            "trace_bytes": 33559000,
+            "trace_sha256": "575087bc1cd90c2cdb5613edfa347fb512eff9ce1fd6ae925f7706fb0d4718e4"
+          },
+          "original_summary_valid": true,
+          "forced_markers": 4,
+          "main_dispatch_count": 2148,
+          "overwrite_statistics": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_bytes_overwritten",
+              "value": "9601024",
+              "detail": "info/trace"
+            },
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "traced_buf_chunks_overwritten",
+              "value": "293",
+              "detail": "info/trace"
+            }
+          ],
+          "revised_summary_valid": false,
+          "revised_errors": [
+            "Trace parser reports data loss or errors"
+          ],
+          "unscoped_stops": []
+        }
+      ]
+    }
+  ],
+  "normal_run": {
+    "id": 41150469412,
+    "attempt": 1,
+    "conclusion": "success",
+    "reports": [
+      {
+        "api": 35,
+        "artifact_id": 13023395659,
+        "artifact_sha256": "f559685cb54fa21d8c38bff2424f4c404abedb4b19d83fe2b1ee1645a64886eb",
+        "artifact_bytes": 14038356,
+        "ui": {
+          "status": "passed",
+          "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+          "build_result": "success",
+          "emulator_result": "success",
+          "mode": "ui",
+          "probes": [
+            {
+              "name": "pip_recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "runtime",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "preview",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "overlay",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "layout",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "home",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip-repeat",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "support",
+              "status": "passed",
+              "failures": []
+            }
+          ],
+          "observations": [],
+          "anrs": [],
+          "failure_time_focus": [],
+          "focused_external_anr_dialogs": []
+        }
+      },
+      {
+        "api": 36,
+        "artifact_id": 13022564321,
+        "artifact_sha256": "f9a182101f485c75f0b89eca6432b08147614fe6f4f3715776adf47f12c7cfc1",
+        "artifact_bytes": 14008418,
+        "ui": {
+          "status": "passed",
+          "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+          "build_result": "success",
+          "emulator_result": "success",
+          "mode": "ui",
+          "probes": [
+            {
+              "name": "pip_recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "runtime",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "preview",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "overlay",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "layout",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "home",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip-repeat",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "support",
+              "status": "passed",
+              "failures": []
+            }
+          ],
+          "observations": [],
+          "anrs": [],
+          "failure_time_focus": [],
+          "focused_external_anr_dialogs": []
+        }
+      }
+    ]
+  }
+}

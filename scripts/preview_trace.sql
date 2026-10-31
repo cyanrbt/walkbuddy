@@ -28,7 +28,7 @@ WITH app_threads AS (
   SELECT 'log', ts, 0, utid, 0, '', tag, prio, msg FROM android_logs
     WHERE tag IN ('WalkBuddyTiming', 'WalkBuddyPip', 'WalkBuddyCamera')
   UNION ALL
-  SELECT 'stat', 0, 0, 0, 0, '', name, value, severity || '/' || source
+  SELECT 'stat', 0, 0, 0, 0, '', name, value, severity || '/' || source || '/' || coalesce(cast(idx AS TEXT), '')
     FROM stats WHERE value != 0
 )
 SELECT * FROM rows ORDER BY ts, kind;

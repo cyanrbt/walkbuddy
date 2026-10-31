@@ -1,5 +1,8 @@
 # Bounded, emulator-only diagnostic capture, not a production recording policy.
 duration_ms: 120000
+write_into_file: true
+file_write_period_ms: 1000
+max_file_size_bytes: 134217728
 buffers { size_kb: 32768 fill_policy: RING_BUFFER }
 buffers { size_kb: 4096 fill_policy: RING_BUFFER }
 data_sources {

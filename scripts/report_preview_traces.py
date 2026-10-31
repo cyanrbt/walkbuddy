@@ -47,19 +47,22 @@ def summarize(rows, capture):
         errors.append('Incomplete main dispatch slice')
     if len(forced) != 4:
         errors.append(f'Expected four forced expiry markers, got {len(forced)}')
-    loss = [r for r in stats if r['detail'].split('/')[0] in ('data_loss', 'error') and int(r['value']) > 0]
+    overwrite_stats = {'traced_buf_bytes_overwritten', 'traced_buf_chunks_overwritten', 'traced_buf_chunks_discarded'}
+    loss = [r for r in stats if (r['detail'].split('/')[0] in ('data_loss', 'error')
+                                or r['name'] in overwrite_stats) and int(r['value']) > 0]
     if loss:
         errors.append('Trace parser reports data loss or errors')
     bounds = [(int(r['ts']), int(r['ts'])+int(r['dur'])) for r in dispatch if int(r['dur']) >= 0]
     start = min((r[0] for r in bounds), default=0)
     end = max((r[1] for r in bounds), default=0)
-    stops = []
+    stops, outside = [], []
     for row in rows:
         if row['kind'] != 'log' or 'Preview stopped reason=' not in row['detail']:
             continue
         message, at = row['detail'], int(row['ts'])
         if not start <= at <= end:
-            continue  # Keep backlog logs in events.csv, outside this observed trial.
+            outside.append({'ts': at, 'message': message})
+            continue  # Preserve unscoped logs; do not classify them as natural or forced.
         fields = dict(re.findall(r'(\w+)=([^\s]+)', message))
         controlled = any(int(s['ts']) <= at <= int(s['ts'])+int(s['dur']) for s in forced)
         gaps = [int(fields.get(k, -1)) for k in ('captureGapMs', 'displayGapMs')]
@@ -94,6 +97,7 @@ def summarize(rows, capture):
                               'render_slices': [s for s in render_slices[:5] if s['overlap_ms'] > 0]})
     return {'valid': not errors, 'errors': errors, 'metrics': metrics, 'stats': stats,
             'main_dispatch_count': len(dispatch), 'forced_expiry_markers': len(forced),
+            'outside_observer_stops': outside,
             'stops': stops, 'stop_counts': dict(Counter(s['category'] for s in stops)),
             'longest_dispatches': long_dispatch,
             'scope': 'Traced emulator observations with main-looper logging overhead; overlap is not causation'}

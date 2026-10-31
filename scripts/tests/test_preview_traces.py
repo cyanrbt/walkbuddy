@@ -89,7 +89,13 @@ class TraceReportTest(unittest.TestCase):
     def test_backlog_stop_outside_observed_trial_does_not_count(self):
         rows = complete_rows()+[row('log', 'WalkBuddyTiming', ts=9_000_000_000,
                                    detail='Preview stopped reason=GENERAL captureGapMs=2000 displayGapMs=2000')]
-        self.assertEqual({'forced_expiry': 4}, report.summarize(rows, self.capture)['stop_counts'])
+        result = report.summarize(rows, self.capture)
+        self.assertEqual({'forced_expiry': 4}, result['stop_counts'])
+        self.assertEqual(1, len(result['outside_observer_stops']))
+
+    def test_info_severity_ring_overwrite_still_fails_full_trial_evidence(self):
+        rows = complete_rows()+[row('stat', 'traced_buf_bytes_overwritten', value=20512768, detail='info/trace')]
+        self.assertFalse(report.summarize(rows, self.capture)['valid'])
 
     def test_data_loss_is_a_failure_even_with_four_passing_forced_stops(self):
         rows = complete_rows()+[row('stat', 'ftrace_cpu_overrun', value=1, detail='data_loss/trace')]
