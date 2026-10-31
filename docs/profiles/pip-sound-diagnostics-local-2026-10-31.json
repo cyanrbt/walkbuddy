@@ -1,0 +1,34 @@
+{
+  "scope": "Local JVM, Lint, dual APK compilation and tool checks; no Android runtime or physical acceptance yet. Diagnostic instrumentation only; no product behavior/guard/deadline change claimed.",
+  "baseline_commit": "4b367fa85afd57a3859b5a868fbc96fff453c146",
+  "published_tag": "v0.4.40",
+  "jvm": {
+    "tests": 273,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "full_build": "BUILD SUCCESSFUL in 43s",
+  "fixture_build": "BUILD SUCCESSFUL in 18s",
+  "ci_tools_tests": 57,
+  "actionlint_workflows": [
+    "ui-check.yml",
+    "preview-trace.yml",
+    "cpu-capacity-trace.yml",
+    "surface-copy-profile.yml"
+  ],
+  "modified_sources_sha256": {
+    ".github/workflows/cpu-capacity-trace.yml": "1ed3a5bd48ff2745b77cfbbe3f07ada76fb548ed650a20b17d9875151fd32c01",
+    ".github/workflows/preview-trace.yml": "a16e84abfe61766ae883da0a4f023ede2f077cae32439887233e454fafd14025",
+    ".github/workflows/surface-copy-profile.yml": "95e2dfc665427e3d4ac4c022f2b3a3e2f90be4c46e26d648a1fadf3b4a9163e4",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java": "a5107e9dc5de98cd8aae9341a6f087660720e248194cb2a4fb53b3cb3663aa61",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java": "8d6a2f838eff187a9189eb3e7f650805048b916ba4f2f48c30087933fa0a7394",
+    "app/src/main/java/com/cyanrbt/walkbuddy/StopPreviewReceiver.java": "d6b03cd16ec1f007bfc8a97d35124c0c04a06d43d18969d065636d9d979a4e7f",
+    "scripts/ui_probe_setup.sh": "67b79bb649fb0c9f8f6d6132c27e37fd09834efadc47fd4701e79c05a6170b06"
+  },
+  "apk_sha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "c6cccdbab59cf4dfece88a33efa3189856596a19746a34c68a7479a1357b7b0b",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "33a50612987c78b8a6ed3b9ebf82c15e00a5bf4a4f971a5a202775b475383959"
+  },
+  "final_lint": "BUILD SUCCESSFUL in 24s"
+}

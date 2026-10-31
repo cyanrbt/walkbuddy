@@ -47,12 +47,28 @@ public final class PreviewActivity extends Activity {
     }
     static void setPipSound(String owner,long generation,long revision,long visit,boolean enabled) {
         PreviewActivity preview=active.get();
-        if(preview==null || preview.destroyed || preview.isFinishing() || !preview.pipOwner.equals(owner)
-            || preview.state.generation!=generation || preview.soundRevision!=revision || preview.pipSoundVisit!=visit
-            || !preview.isInPictureInPictureMode() || preview.state.phase!=SessionState.Phase.LIVE || !preview.state.recognition
-            || preview.sound==null || !preview.sound.isEnabled() || preview.sound.isChecked()==enabled
-            || preview.state.expired(SystemClock.elapsedRealtime()))return;
+        String rejected=preview==null?"no_preview":preview.destroyed?"destroyed":preview.isFinishing()?"finishing"
+            :!preview.pipOwner.equals(owner)?"owner":preview.state.generation!=generation?"generation"
+            :preview.soundRevision!=revision?"revision":preview.pipSoundVisit!=visit?"visit"
+            :!preview.isInPictureInPictureMode()?"fullscreen":preview.state.phase!=SessionState.Phase.LIVE?"phase"
+            :!preview.state.recognition?"detection_off":preview.sound==null?"no_control":!preview.sound.isEnabled()?"disabled"
+            :preview.sound.isChecked()==enabled?"already_selected":preview.state.expired(SystemClock.elapsedRealtime())?"expired":null;
+        boolean before=preview!=null && preview.sound!=null && preview.sound.isChecked();
+        if(rejected!=null){tracePipSound(preview,owner,generation,revision,visit,enabled,before,"rejected_"+rejected);return;}
         preview.sound.setChecked(enabled);
+        tracePipSound(preview,owner,generation,revision,visit,enabled,before,"applied");
+    }
+    private static void tracePipSound(PreviewActivity preview,String owner,long generation,long revision,long visit,
+        boolean enabled,boolean before,String result) {
+        // One record per received command, never on frame callbacks. UUIDs identify this Activity, not a person.
+        String current=preview==null?"none":"owner="+preview.pipOwner+" generation="+preview.state.generation
+            +" revision="+preview.soundRevision+" visit="+preview.pipSoundVisit+" pip="+preview.isInPictureInPictureMode()
+            +" phase="+preview.state.phase+" detection="+preview.state.recognition
+            +" enabled="+(preview.sound!=null && preview.sound.isEnabled())
+            +" checked="+(preview.sound!=null && preview.sound.isChecked());
+        android.util.Log.i("WalkBuddyPipSound","command elapsedMs="+SystemClock.elapsedRealtime()+" owner="+owner
+            +" generation="+generation+" revision="+revision+" visit="+visit+" requested="+enabled
+            +" before="+before+" result="+result+" current={"+current+"}");
     }
     static final HomeState homeState=new HomeState();
     private final Object homeOwner=new Object();

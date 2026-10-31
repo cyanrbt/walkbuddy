@@ -10,6 +10,8 @@ on:
       - scripts/record_ui_cpu.py
       - scripts/ui_probe_setup.sh
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipSoundProbe.java
+      - app/src/main/java/com/cyanrbt/walkbuddy/StopPreviewReceiver.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/RejectedTouch.java
       - app/src/androidTest/assets/restore-down-paused.txt
       - scripts/run_surface_copy_profile.sh

@@ -16,8 +16,14 @@ public final class StopPreviewReceiver extends BroadcastReceiver {
         if(STOP_PREVIEW.equals(intent.getAction()))PreviewActivity.stopActivePreview();
         else if(STOP_DETECTION.equals(intent.getAction()))PreviewActivity.stopPipDetection(
             intent.getStringExtra(OWNER),intent.getLongExtra(GENERATION,-1));
-        else if(SET_SOUND.equals(intent.getAction()) && intent.hasExtra(SOUND_ENABLED))PreviewActivity.setPipSound(
-            intent.getStringExtra(OWNER),intent.getLongExtra(GENERATION,-1),intent.getLongExtra(SOUND_REVISION,-1),
-            intent.getLongExtra(PIP_VISIT,-1),intent.getBooleanExtra(SOUND_ENABLED,false));
+        else if(SET_SOUND.equals(intent.getAction())) {
+            if(!intent.hasExtra(SOUND_ENABLED)) {
+                android.util.Log.i("WalkBuddyPipSound","command elapsedMs="+android.os.SystemClock.elapsedRealtime()
+                    +" result=rejected_missing_enabled");
+                return;
+            }
+            PreviewActivity.setPipSound(intent.getStringExtra(OWNER),intent.getLongExtra(GENERATION,-1),
+                intent.getLongExtra(SOUND_REVISION,-1),intent.getLongExtra(PIP_VISIT,-1),intent.getBooleanExtra(SOUND_ENABLED,false));
+        }
     }
 }
