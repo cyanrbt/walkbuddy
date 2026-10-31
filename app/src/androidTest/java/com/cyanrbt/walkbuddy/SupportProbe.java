@@ -83,12 +83,15 @@ final class SupportProbe {
                     replacement.findViewById(R.id.restart_preview).performClick();return true;
                 });
                 await(runner,()->state(replacement).phase==SessionState.Phase.LIVE && state(replacement).fresh(SystemClock.elapsedRealtime()),"explicit camera restart");
+                await(runner,()->replacement.findViewById(R.id.copy_problem_info).getVisibility()==View.VISIBLE
+                    && ((android.widget.TextView)replacement.findViewById(R.id.copy_problem_info)).getText().toString().equals(replacement.getString(R.string.copy_observation_info)),"current copy role after explicit restart");
                 read(runner,()->{
-                    if(diagnostics(replacement).available() || replacement.findViewById(R.id.copy_problem_info).getVisibility()!=View.GONE)
+                    if(diagnostics(replacement).available())
                         throw new AssertionError("New observation retained old evidence");return true;
                 });
             } finally {runner.removeMonitor(monitor);}
             PreviewActivity current=activity;
+            StringBuilder observationEvidence=new StringBuilder();ObservationInfoProbe.run(runner,current,observationEvidence);
             android.content.SharedPreferences preferences=current.getSharedPreferences(PreviewActivity.REMINDERS_PREFERENCES,0);
             hadVibration=preferences.contains(PreviewActivity.VIBRATION_PREFERENCE);
             oldVibration=preferences.getBoolean(PreviewActivity.VIBRATION_PREFERENCE,true);touchedVibration=true;
@@ -145,7 +148,7 @@ final class SupportProbe {
             } finally {runner.removeMonitor(retainedMonitor);}
             String vibrationEvidence="VIBRATION_PERSISTENCE_PASS cases=3; CheckBox mute keeps camera, actual Activity recreation and new manual observation preserve mute, explicit enable persists independently\n";
             write(runner,"vibration-preference.txt",vibrationEvidence);
-            result.putString("stream",vibrationEvidence+"SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2\n");
+            result.putString("stream",observationEvidence+vibrationEvidence+"SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2\n");
             code=Activity.RESULT_OK;
         } catch(Throwable error) {result.putString("stream","SUPPORT_PROBE_FAIL: "+error);}
         finally {

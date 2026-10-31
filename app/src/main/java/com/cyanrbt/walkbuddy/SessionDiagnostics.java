@@ -53,16 +53,27 @@ final class SessionDiagnostics {
     String report(String version,int code,String manufacturer,String model,String android,int api) {
         if(!available())return "";
         if(restored!=null)return restored;
-        StringBuilder text=new StringBuilder(HEADER).append("版本：").append(line(version,32)).append(" / ").append(code)
-            .append("\n设备：").append(line(manufacturer,96)).append(" / ").append(line(model,96))
-            .append("\nAndroid：").append(line(android,32)).append(" / API ").append(api).append('\n');
+        StringBuilder text=header(HEADER,version,code,manufacturer,model,android,api);
         if(detection!=null)append(text,"本次检测首次暂停",detection);
         if(preview!=null)append(text,"本次预览首次停止",preview);
         return text.append("\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n").toString();
     }
+    static String currentReport(Snapshot current,String version,int code,String manufacturer,String model,String android,int api) {
+        StringBuilder text=header("WalkBuddy 观察信息\n",version,code,manufacturer,model,android,api);
+        append(text,"复制时的当前观察",current,"当前阶段");
+        return text.append("\n时序为复制时的回调与模型记录，非相机端到端延迟。\n").toString();
+    }
+    private static StringBuilder header(String title,String version,int code,String manufacturer,String model,String android,int api) {
+        return new StringBuilder(title).append("版本：").append(line(version,32)).append(" / ").append(code)
+            .append("\n设备：").append(line(manufacturer,96)).append(" / ").append(line(model,96))
+            .append("\nAndroid：").append(line(android,32)).append(" / API ").append(api).append('\n');
+    }
     private static void append(StringBuilder text,String title,Snapshot s) {
+        append(text,title,s,"触发阶段");
+    }
+    private static void append(StringBuilder text,String title,Snapshot s,String phaseLabel) {
         text.append('\n').append(title).append('\n').append("分类：").append(s.category).append("\n提示：").append(s.message)
-            .append("\n触发阶段：").append(s.phase).append(" / ").append(s.depth?"空间增强":"基础模式")
+            .append('\n').append(phaseLabel).append('：').append(s.phase).append(" / ").append(s.depth?"空间增强":"基础模式")
             .append("\n画中画：").append(yes(s.pip)).append("；检测：").append(setting(s.recognition)).append("；声音：").append(setting(s.sound)).append("；振动：").append(setting(s.vibration))
             .append("\n采集帧龄(ms)：").append(metric(s.captureAge)).append("；显示帧龄(ms)：").append(metric(s.displayAge))
             .append("；分析龄(ms)：").append(metric(s.analysisAge))

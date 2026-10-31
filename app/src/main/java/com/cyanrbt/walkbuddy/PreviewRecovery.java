@@ -6,7 +6,14 @@ import android.widget.TextView;
 /** Keeps the opaque camera cover in place and puts the next step before settings. */
 final class PreviewRecovery {
     static void problemInfo(View root,boolean available) {
-        root.findViewById(R.id.copy_problem_info).setVisibility(available?View.VISIBLE:View.GONE);
+        problemInfo(root,available,false);
+    }
+    static void problemInfo(View root,boolean available,boolean live) {
+        TextView button=root.findViewById(R.id.copy_problem_info);
+        button.setVisibility(available || live?View.VISIBLE:View.GONE);
+        button.setEnabled(available || live);
+        CharSequence label=root.getResources().getText(available || !live?R.string.copy_problem_info:R.string.copy_observation_info);
+        if(!android.text.TextUtils.equals(button.getText(),label))button.setText(label);
     }
     static void clear(View root) {
         root.findViewById(R.id.preview_live_settings).setVisibility(View.VISIBLE);

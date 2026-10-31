@@ -1,0 +1,39 @@
+{
+  "baseline_commit": "a47ed3d12c3467dcc46313d0d6eadd66efc427ec",
+  "candidate": "v0.4.42",
+  "versionCode": 54,
+  "jvm": {
+    "tests": 277,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "full_build": "BUILD SUCCESSFUL in 47s",
+  "actionlint_workflows": [
+    "ui-check.yml",
+    "preview-trace.yml",
+    "cpu-capacity-trace.yml",
+    "surface-copy-profile.yml"
+  ],
+  "sources_sha256": {
+    ".github/workflows/cpu-capacity-trace.yml": "16cadd1cb9a00af27c8ed56337a5279b61e80fdf5e45b99e7dc9a5dc66e9048c",
+    ".github/workflows/preview-trace.yml": "bcc8539bd10e6537d42b1f4f5b812a473bc5e5ae34ef789b84cab51aa991f038",
+    ".github/workflows/surface-copy-profile.yml": "9e1e7c516e8e1e3722f84aeb2625175bced4a1abfce48238a6c31598d0fb9004",
+    "README.md": "e73e453147e5b062ae4da42390ecb6c8a6d9d9756468ce379fbe59635a5bb4d0",
+    "app/build.gradle": "8c184770ad15039b1a9e67cb080c38ea352d086df773b7be69b2fe391f97d332",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java": "ca682519b1514f81cc745a4979fa431778c917399a34b870b19d057c514cfdb4",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/SupportProbe.java": "29107bfaae602db0c604c5032d392093be9377d5f083c8cf1722fe8f9d0b335d",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java": "590ce48690e6c31cb1b617583f42ac352152aee83c2ed660151badeac9f0c2ca",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewRecovery.java": "91b0812a287f8cd8a60a41ff35aca3059fcef2ec0d0c3233afe7514602dfd1e1",
+    "app/src/main/java/com/cyanrbt/walkbuddy/SessionDiagnostics.java": "3e3623dc301659fd555472ce05170aa438aa27c489a6c9c34a686f1189787000",
+    "app/src/main/res/layout/activity_preview.xml": "0d9cc8067cf763ebeb8375a369d82fc1ef893b8629ea8a1670f1619cee820e75",
+    "app/src/main/res/values/strings.xml": "832a11aba4d96934a31f1b0c96c0ac1de8a8cfda0cbdc4ff442eabfc34274002",
+    "app/src/test/java/com/cyanrbt/walkbuddy/SessionDiagnosticsTest.java": "da57e279644f1375e3d6aa7415739133a7141b4205504859241a2fa28d36100e",
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/ObservationInfoProbe.java": "e2e6649f667f2caba0720585f8b3c8971de8972fe39840f7a73aa37bed82e270"
+  },
+  "apk_sha256": {
+    "app/build/outputs/apk/debug/app-debug.apk": "236ce3f782ecc4359a2c411e3a364c5376295cdbcb48966f1b1e35427e7b511e",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "ff4ba50accaa2eb3dd0d3ff55afdb68cc5bbfb1207769782da1e0be6c3e2ee68"
+  },
+  "scope": "Local JVM, Lint and dual APK compilation; new native copy/clipboard/model/layout checks still await actual Android execution. No physical acceptance or old menu/latency root-cause claim."
+}

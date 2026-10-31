@@ -52,6 +52,9 @@
     <string name="pip_sound_off_description">关闭提示音，检测继续；振动和系统朗读各自控制</string>
     <string name="check_vibration">振动提醒</string>
     <string name="copy_problem_info">复制问题信息</string>
+    <string name="copy_observation_info">复制观察信息</string>
+    <string name="observation_info_title">WalkBuddy 观察信息</string>
+    <string name="observation_info_copied">观察信息已复制，可粘贴反馈</string>
     <string name="problem_info_title">WalkBuddy 问题信息</string>
     <string name="problem_info_copied">问题信息已复制，可粘贴反馈</string>
     <string name="problem_info_copy_failed">暂时无法复制，请稍后重试</string>

@@ -15,6 +15,37 @@ public class SessionDiagnosticsTest {
     private String report(SessionDiagnostics diagnostics) {
         return diagnostics.report("0.4.28",40,"测试厂商","测试设备","15",35);
     }
+    @Test public void currentObservationCopyDoesNotCreateRestorableIncidentEvidence() {
+        SessionDiagnostics diagnostics=new SessionDiagnostics();
+        String current=SessionDiagnostics.currentReport(snapshot("CURRENT",live()),"0.4.42",54,"测试厂商","测试设备","15",35);
+        assertTrue(current.startsWith("WalkBuddy 观察信息\n版本：0.4.42 / 54"));
+        assertTrue(current.contains("复制时的当前观察"));assertTrue(current.contains("当前阶段：LIVE"));
+        assertFalse(current.contains("本次预览首次停止"));assertFalse(diagnostics.available());assertEquals("",report(diagnostics));
+        diagnostics.restore(current);assertFalse(diagnostics.available());assertEquals("",report(diagnostics));
+    }
+    @Test public void copyingCurrentStateCannotReplaceAnExistingFrozenFirstCause() {
+        SessionDiagnostics diagnostics=new SessionDiagnostics();SessionDiagnostics.Snapshot first=snapshot("DARK",live());
+        diagnostics.preview(first);String saved=report(diagnostics);
+        String current=SessionDiagnostics.currentReport(snapshot("CURRENT",live()),"new",54,"厂商","设备","16",36);
+        assertTrue(current.contains("分类：CURRENT"));assertEquals(saved,report(diagnostics));assertSame(first,diagnostics.preview());
+        diagnostics.restore(current);assertEquals(saved,report(diagnostics));
+    }
+    @Test public void observationSnapshotRetainsChoicesAndTimingAfterTheSessionChanges() {
+        SessionState state=live();SessionDiagnostics.Snapshot snapshot=snapshot("CURRENT",state);
+        String copied=SessionDiagnostics.currentReport(snapshot,"test",54,"厂商","设备","15",35);
+        state.stop();state.start(5000);state.recognition=false;
+        assertEquals(copied,SessionDiagnostics.currentReport(snapshot,"test",54,"厂商","设备","15",35));
+        assertTrue(copied.contains("检测：开；声音：开；振动：开"));assertTrue(copied.contains("采集帧龄(ms)：200"));
+        assertTrue(copied.contains("复制(ms)：6"));assertTrue(copied.contains("当前阶段：LIVE / 空间增强"));
+    }
+    @Test public void observationCopyBoundsMetadataAndDoesNotInventMissingMeasurements() {
+        SessionState state=new SessionState();
+        SessionDiagnostics.Snapshot current=new SessionDiagnostics.Snapshot("CURRENT","当前观察",state,400,false,false,false,false,
+            new SessionDiagnostics.Pipeline(false,false,false,-1,0,-1,0));
+        String text=SessionDiagnostics.currentReport(current,"v\nnext",54,"x".repeat(10000),"model\r\nnext",null,35);
+        assertTrue(text.length()<1800);assertTrue(text.contains("版本：v next"));assertTrue(text.contains("采集帧龄(ms)：未取得"));
+        assertTrue(text.contains("读回排队(ms)：0"));assertTrue(text.contains("结果交付(ms)：0"));assertFalse(text.contains("：-1"));
+    }
     @Test public void incidentSurvivesTheSessionAndResourceReset() {
         SessionState state=live();SessionDiagnostics diagnostics=new SessionDiagnostics();
         diagnostics.preview(snapshot("GENERAL",state));state.unavailable("后续停止");

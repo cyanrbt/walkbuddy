@@ -503,7 +503,7 @@ public final class PreviewActivity extends Activity {
         depthGuideHint=root.findViewById(R.id.depth_guide_hint);
         depthButton=root.findViewById(R.id.enable_depth);
         depthButton.setOnClickListener(v->chooseDepth());
-        root.findViewById(R.id.copy_problem_info).setOnClickListener(v->copyProblemInfo());
+        root.findViewById(R.id.copy_problem_info).setOnClickListener(v->copyInformation());
         root.findViewById(R.id.viewfinder_toggle).setOnClickListener(v->{
             long now=SystemClock.elapsedRealtime();
             if(!compactUi && !destroyed && checkHealth(now) && state.phase==SessionState.Phase.LIVE && state.fresh(now)) {
@@ -900,7 +900,7 @@ public final class PreviewActivity extends Activity {
         pipButton.setEnabled(live);
         boolean restart=state.phase==SessionState.Phase.UNAVAILABLE || state.phase==SessionState.Phase.STOPPED;
         PreviewChrome.showRestart(root,restart);
-        PreviewRecovery.problemInfo(root,diagnostics.available());
+        PreviewRecovery.problemInfo(root,diagnostics.available(),state.phase==SessionState.Phase.LIVE);
         depthButton.setEnabled(live);
         homeState.publish(homeOwner,state.phase,state.reason,state.recognition,detectionNotice,homeNotice);
         renderViewfinderChrome(live);
@@ -981,14 +981,17 @@ public final class PreviewActivity extends Activity {
         return diagnostics.report(BuildConfig.VERSION_NAME,BuildConfig.VERSION_CODE,
             Build.MANUFACTURER,Build.MODEL,Build.VERSION.RELEASE,Build.VERSION.SDK_INT);
     }
-    private void copyProblemInfo() {
-        String report=problemInfoText();
+    private void copyInformation() {
+        boolean problem=diagnostics.available();
+        String report=problem?problemInfoText():state.phase==SessionState.Phase.LIVE
+            ?SessionDiagnostics.currentReport(diagnosticSnapshot("CURRENT",state.reason,SystemClock.elapsedRealtime()),
+                BuildConfig.VERSION_NAME,BuildConfig.VERSION_CODE,Build.MANUFACTURER,Build.MODEL,Build.VERSION.RELEASE,Build.VERSION.SDK_INT):"";
         if(report.isEmpty())return;
         try {
             ClipboardManager clipboard=(ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
             if(clipboard==null)throw new IllegalStateException("Clipboard unavailable");
-            clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.problem_info_title),report));
-            if(Build.VERSION.SDK_INT<33)Toast.makeText(this,R.string.problem_info_copied,Toast.LENGTH_SHORT).show();
+            clipboard.setPrimaryClip(ClipData.newPlainText(getString(problem?R.string.problem_info_title:R.string.observation_info_title),report));
+            if(Build.VERSION.SDK_INT<33)Toast.makeText(this,problem?R.string.problem_info_copied:R.string.observation_info_copied,Toast.LENGTH_SHORT).show();
         } catch(RuntimeException error){Toast.makeText(this,R.string.problem_info_copy_failed,Toast.LENGTH_SHORT).show();}
     }
     private void startPosture() {

@@ -88,6 +88,7 @@ final class LayoutProbe {
                 for(int mode=0;mode<4;mode++) {
                     detection.setChecked(mode!=0);sound.setChecked(false);sound.setEnabled(mode!=0);
                     PreviewChrome.title(title,PreviewStatus.heading(SessionState.Phase.LIVE,true,mode!=0));
+                    PreviewRecovery.problemInfo(root,false,true);
                     PreviewChrome.detectionStatus(root,true,mode!=0,false,false);
                     info.setText(mode==0?context.getString(R.string.info_recognition_off):mode==1
                         ?context.getString(R.string.info_recognition_preparing):mode==2?basic:measured);
@@ -120,6 +121,7 @@ final class LayoutProbe {
                         }
                     }
                 }
+                checkObservationCopy(root,size[0],size[1],new File(output,name+"-observation-copy-layout.png"));
                 checkDetectionFailure(root,size[0],size[1],new File(output,name+"-detection-stopped.png"));
                 checkDefaultPreviewOnly(root,size[0],size[1],output,name);
                 measure(root,size[0],size[1]);
@@ -164,6 +166,7 @@ final class LayoutProbe {
                 root.findViewById(R.id.enable_depth).setEnabled(true);
                 root.findViewById(R.id.enter_pip).setEnabled(true);
                 ((TextView)root.findViewById(R.id.depth_guide_hint)).setText(R.string.guide_hint_default);
+                PreviewRecovery.problemInfo(root,false,true);
                 measure(root,size[0],size[1]);
                 checkHapticLegend(root,size[0],size[1],new File(output,"haptics-"+name+".png"));
                 ViewfinderLayoutProbe.check(root,size[0],size[1],output,name);
@@ -172,6 +175,7 @@ final class LayoutProbe {
         report.append("FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\n");
         report.append("HAPTIC_LEGEND_PASS configurations=30 resize_cycles=30; full cue text and descriptions, responsive columns/list\n");
         report.append("DIAGNOSTIC_LAYOUT_PASS configurations=30; recovery copy action text and scroll reachability\n");
+        report.append("OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true\n");
         report.append("RECOVERY_PRESENTATION_LAYOUT_PASS configurations=30 full=660 compact=1320 restored=660; native full text, opaque cover, hidden settings, accessible reason, fixed actions, scroll and original preview style\n");
         report.append("VIBRATION_SETTING_LAYOUT_PASS configurations=30; enabled/muted legend, native checkbox, full text and scroll reach\n");
         report.append("PREVIEW_ONLY_LAYOUT_PASS configurations=30 compact=96x128; default full heading, persistent compact notice, no clipping, unchanged repeated text, detection-on and expansion clear notice\n");
@@ -272,7 +276,8 @@ final class LayoutProbe {
         controls.scrollTo(0,0);
         boolean depth=root.findViewById(R.id.depth_steps).getVisibility()==View.VISIBLE;
         int previousAlert=root.findViewById(R.id.recent_alert).getVisibility();
-        boolean previousProblemInfo=root.findViewById(R.id.copy_problem_info).getVisibility()==View.VISIBLE;
+        TextView copy=root.findViewById(R.id.copy_problem_info);int previousCopyVisibility=copy.getVisibility();
+        boolean previousCopyEnabled=copy.isEnabled();CharSequence previousCopyLabel=copy.getText();
         root.findViewById(R.id.recent_alert).setVisibility(View.GONE);
         info.setText(R.string.info_detection_timeout);title.setText(R.string.window_preview_only);
         PreviewRecovery.problemInfo(root,true);
@@ -299,10 +304,25 @@ final class LayoutProbe {
         PreviewChrome.compact(root,false,depth);PreviewChrome.detectionStopped(root,false,false);
         root.setPadding(0,24,0,24);info.setText(previousInfo);title.setText(previousTitle);
         root.findViewById(R.id.recent_alert).setVisibility(previousAlert);measure(root,width,height);
-        PreviewRecovery.problemInfo(root,previousProblemInfo);
+        copy.setVisibility(previousCopyVisibility);copy.setEnabled(previousCopyEnabled);copy.setText(previousCopyLabel);
         controls.scrollTo(0,previousScroll);
         detection.setChecked(previousDetection);sound.setChecked(previousSound);sound.setEnabled(previousSoundEnabled);
         if(warning.getVisibility()!=View.GONE)throw new AssertionError("Fault warning survived explicit clearing");
+    }
+    private static void checkObservationCopy(View root,int width,int height,File screenshot) throws Exception {
+        ScrollView panel=root.findViewById(R.id.preview_controls);TextView copy=root.findViewById(R.id.copy_problem_info);
+        PreviewRecovery.problemInfo(root,false,true);measure(root,width,height);panel.requestChildFocus(copy,copy);
+        Rect visible=new Rect();
+        if(!copy.getLocalVisibleRect(visible) || visible.height()!=copy.getHeight() || copy.getHeight()<48 || !copy.isEnabled()
+            || !copy.getText().toString().equals(root.getResources().getString(R.string.copy_observation_info)))
+            throw new AssertionError("Current observation copy action unreachable");
+        textFits(copy);screenshot(root,screenshot);
+        PreviewRecovery.problemInfo(root,true,true);measure(root,width,height);textFits(copy);
+        if(!copy.getText().toString().equals(root.getResources().getString(R.string.copy_problem_info)))
+            throw new AssertionError("Saved incident lost its distinct copy label");
+        PreviewRecovery.problemInfo(root,false,false);
+        if(copy.getVisibility()!=View.GONE || copy.isEnabled())throw new AssertionError("Waiting state exposed copy without a current frame or incident");
+        PreviewRecovery.problemInfo(root,false,true);panel.scrollTo(0,0);measure(root,width,height);
     }
     private static void warningInsideCamera(View root,View warning) {
         View camera=root.findViewById(R.id.preview_frame);
