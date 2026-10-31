@@ -2,6 +2,14 @@
 
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
+## 预览系统诊断工具核对（应用仍为 v0.4.37）
+
+源码 `355e004fef713c514f3990b6d9ef071b80df6f77` 的[专项系统轨迹 41154316569](https://github.com/cyanrbt/walkbuddy/actions/runs/41154316569)和[常规 UI 41154316656](https://github.com/cyanrbt/walkbuddy/actions/runs/41154316656)均 attempt 1 终态成功。四个完整附件下载核对长度、SHA-256 和 ZIP CRC；六条实际原始轨迹经固定版官方 SQL 引擎本地重读，原有十项报告重放一致。31 项工具测试通过；[完整结果与原始来源](preview-system-trace-2026-10-31.md)区分工具、模拟器和实体范围。
+
+此前新专项流程的三个红叉均保留：[41150469510](https://github.com/cyanrbt/walkbuddy/actions/runs/41150469510) 是中央环形缓冲覆盖早期事件；[41151682335](https://github.com/cyanrbt/walkbuddy/actions/runs/41151682335) 是流式模式未设置数据源提交周期；[41152965922](https://github.com/cyanrbt/walkbuddy/actions/runs/41152965922) 是 API 35 一次轨迹传输失败，以及 API 36 CPU 1 丢失 5,350 个内核事件。相应同源码常规 UI 均通过，各轮编译与受采证恢复探针也通过；专项完整性失败仍令整轮失败，没有删检查、删除旧记录或重跑来消除红叉。修订包含周期写盘/提交、内核缓冲与读取周期，以及同一个停止文件的有界传输和摘要校验，保留每次传输结果，不重跑探针更换样本。
+
+生产源码与发布依赖均与 v0.4.37 相同，现有正式 APK 发布成功状态不变；未生成重复应用版本。新六条轨迹本轮未见未标记的超时停止，不能据此称历史 1246ms 停顿根因已解决。没有新的实体设备验收。
+
 ## v0.4.37 正式发布核对
 
 亮度/读回改进的[基线 41145407736](https://github.com/cyanrbt/walkbuddy/actions/runs/41145407736)、[候选 41146872248](https://github.com/cyanrbt/walkbuddy/actions/runs/41146872248)和[正式发布 41147755325](https://github.com/cyanrbt/walkbuddy/actions/runs/41147755325)均已取得终态成功，原始附件分别核对摘要并重放。正式 APK 已实际下载核验版本、固定签名、摘要、模型和新实现，具体 attempt 与来源见[本轮记录](brightness-readback-2026-10-31.md)。四轮受控位图计时不代表真实 GPU/相机性能，新增墙钟/CPU 记录不证明之前自然停顿根因修复，历史失败继续保留。

@@ -1,0 +1,3789 @@
+{
+  "source_commit": "355e004fef713c514f3990b6d9ef071b80df6f77",
+  "trace_run": {
+    "id": 41154316569,
+    "attempt": 1,
+    "conclusion": "success",
+    "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41154316569"
+  },
+  "normal_run": {
+    "id": 41154316656,
+    "attempt": 1,
+    "conclusion": "success",
+    "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41154316656",
+    "reports": [
+      {
+        "api": 35,
+        "artifact_id": 13024107568,
+        "artifact_sha256": "45074c94000a956b1411c36a1bda67983a8f899d3cbaa29529018ff5494f86bc",
+        "artifact_bytes": 14019928,
+        "ui": {
+          "status": "passed",
+          "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+          "build_result": "success",
+          "emulator_result": "success",
+          "mode": "ui",
+          "probes": [
+            {
+              "name": "pip_recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "runtime",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "preview",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "overlay",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "layout",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "home",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip-repeat",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "support",
+              "status": "passed",
+              "failures": []
+            }
+          ],
+          "observations": [],
+          "anrs": [],
+          "failure_time_focus": [],
+          "focused_external_anr_dialogs": []
+        }
+      },
+      {
+        "api": 36,
+        "artifact_id": 13024722552,
+        "artifact_sha256": "69152f40a8abc89e3a32663090ea4da9f934d8c8711ec21fcf8259c1173d827e",
+        "artifact_bytes": 14003589,
+        "ui": {
+          "status": "passed",
+          "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+          "build_result": "success",
+          "emulator_result": "success",
+          "mode": "ui",
+          "probes": [
+            {
+              "name": "pip_recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "runtime",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "preview",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "overlay",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "layout",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "home",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip-repeat",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "support",
+              "status": "passed",
+              "failures": []
+            }
+          ],
+          "observations": [],
+          "anrs": [],
+          "failure_time_focus": [],
+          "focused_external_anr_dialogs": []
+        }
+      }
+    ]
+  },
+  "ci_tools_tests": 31,
+  "raw_sql_replays": 6,
+  "physical_device_validation": "not performed",
+  "scope": "Traced x86_64 emulator diagnostics with observer and recording overhead; no device/FPS/power or historical root-cause claim",
+  "reports": [
+    {
+      "api": 35,
+      "artifact_id": 13025066321,
+      "artifact_bytes": 69359504,
+      "artifact_sha256": "08144f977e040f8df1a340e8aafc2923169abda6e5c532806f16f3860f2fc874",
+      "capture_context": {
+        "source_commit": "355e004fef713c514f3990b6d9ef071b80df6f77",
+        "serial": "emulator-5554",
+        "config_sha256": "115bac7e097d2fa3ea65720df86a9bb34786ab28fbf073a5cd099e9297e2db9f",
+        "scope": "Traced emulator observations; observer overhead; no device/FPS/power claim",
+        "ro.build.fingerprint": "google/sdk_gphone64_x86_64/emu64xa:15/AE3A.240806.043/12960925:userdebug/dev-keys",
+        "ro.build.type": "userdebug",
+        "ro.build.version.sdk": "35"
+      },
+      "processor": "Perfetto v59.1-1e9c61e98 (1e9c61e9844affd7dccd3d42d9ea9f3a3d10cf6d)\nTrace Processor RPC API version: 14",
+      "processor_sha256": "2434129a3af4dc9e2034a476f7b76447b490975213e301769310d3bd0d5d6458",
+      "standard_ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "capture": {
+            "trial": 1,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "service_query_exit": 0,
+            "perfetto_pid": 2038,
+            "instrumentation_exit": 0,
+            "trace_bytes": 62222023,
+            "trace_sha256": "d53a24f662d96237e9fec63fd275b6a9a739dd12f9e38af59fb3f55f8e310828",
+            "transfer_attempts": [
+              {
+                "attempt": 1,
+                "verified": true,
+                "exit": 0,
+                "bytes": 62222023,
+                "sha256": "d53a24f662d96237e9fec63fd275b6a9a739dd12f9e38af59fb3f55f8e310828"
+              }
+            ]
+          },
+          "local_sql_replay": true,
+          "main_dispatch_count": 2803,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "forced_expiry_markers": 4,
+          "error_loss_overwrite_stats": [],
+          "notice_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "ftrace_setup_errors",
+              "value": "37",
+              "detail": "notice/trace/"
+            }
+          ],
+          "longest_dispatches": [
+            {
+              "ts": 43850093501,
+              "wall_ms": 1477.300441,
+              "main_cpu_ms": 37.192447,
+              "main_state_ms": {
+                "R": 74.971493,
+                "Running": 37.192447,
+                "D": 57.889775,
+                "R+": 51.742264,
+                "S": 1255.504462
+              },
+              "render_cpu_overlap_ms": 552.602444,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 3031",
+                  "overlap_ms": 1183.611105
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 1182.28066
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 974.759422
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 953.435044
+                },
+                {
+                  "name": "AAHairlineOp",
+                  "overlap_ms": 320.234149
+                }
+              ]
+            },
+            {
+              "ts": 46356279208,
+              "wall_ms": 876.588041,
+              "main_cpu_ms": 47.961258,
+              "main_state_ms": {
+                "R": 91.582495,
+                "Running": 47.961258,
+                "D": 23.809202,
+                "R+": 43.496886,
+                "S": 669.7382
+              },
+              "render_cpu_overlap_ms": 74.179415,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 4072",
+                  "overlap_ms": 205.270775
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 202.707859
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 182.16553
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 181.537547
+                }
+              ]
+            },
+            {
+              "ts": 43207562771,
+              "wall_ms": 639.850794,
+              "main_cpu_ms": 86.968713,
+              "main_state_ms": {
+                "R": 191.473723,
+                "Running": 86.968713,
+                "D": 0.220075,
+                "R+": 127.838987,
+                "S": 233.349296
+              },
+              "render_cpu_overlap_ms": 18.595282,
+              "render_slices": [
+                {
+                  "name": "eglGetDisplay",
+                  "overlap_ms": 371.819538
+                },
+                {
+                  "name": "open",
+                  "overlap_ms": 371.735852
+                },
+                {
+                  "name": "attempt_to_load_system_driver",
+                  "overlap_ms": 366.764165
+                },
+                {
+                  "name": "init_api",
+                  "overlap_ms": 273.850085
+                },
+                {
+                  "name": "load_system_driver",
+                  "overlap_ms": 58.212187
+                }
+              ]
+            },
+            {
+              "ts": 47696197075,
+              "wall_ms": 515.746908,
+              "main_cpu_ms": 3.472927,
+              "main_state_ms": {
+                "R": 7.135406,
+                "Running": 3.472927,
+                "R+": 6.063926,
+                "S": 499.074649
+              },
+              "render_cpu_overlap_ms": 79.373653,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 4777",
+                  "overlap_ms": 432.847925
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 432.846332
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 322.262748
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 266.242025
+                },
+                {
+                  "name": "TextureOp",
+                  "overlap_ms": 266.179688
+                }
+              ]
+            },
+            {
+              "ts": 61245763109,
+              "wall_ms": 485.856454,
+              "main_cpu_ms": 3.84143,
+              "main_state_ms": {
+                "R": 88.276729,
+                "Running": 3.84143,
+                "R+": 87.54282,
+                "S": 306.195475
+              },
+              "render_cpu_overlap_ms": 0.870967,
+              "render_slices": []
+            },
+            {
+              "ts": 46037859317,
+              "wall_ms": 317.907574,
+              "main_cpu_ms": 56.227289,
+              "main_state_ms": {
+                "R": 42.873146,
+                "Running": 56.227289,
+                "D": 48.555205,
+                "R+": 59.632308,
+                "S": 110.619626
+              },
+              "render_cpu_overlap_ms": 0.705977,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 4027",
+                  "overlap_ms": 15.33867
+                },
+                {
+                  "name": "Drawing 20.00 550.00 300.00 602.00",
+                  "overlap_ms": 15.337357
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 15.288937
+                }
+              ]
+            },
+            {
+              "ts": 53615748891,
+              "wall_ms": 294.638598,
+              "main_cpu_ms": 0.225892,
+              "main_state_ms": {
+                "R": 5.783422,
+                "Running": 0.225892,
+                "S": 288.629284
+              },
+              "render_cpu_overlap_ms": 75.288439,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 7716",
+                  "overlap_ms": 194.477461
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 193.480399
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 174.77408
+                },
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 94.211604
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 93.080041
+                }
+              ]
+            },
+            {
+              "ts": 65589557536,
+              "wall_ms": 268.366192,
+              "main_cpu_ms": 0.773607,
+              "main_state_ms": {
+                "R": 9.953784,
+                "Running": 0.773607,
+                "S": 257.638801
+              },
+              "render_cpu_overlap_ms": 33.503624,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 12409",
+                  "overlap_ms": 177.267908
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 177.265544
+                },
+                {
+                  "name": "DrawFrames 12416",
+                  "overlap_ms": 91.084347
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 89.539138
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 88.307617
+                }
+              ]
+            },
+            {
+              "ts": 56298064210,
+              "wall_ms": 258.784736,
+              "main_cpu_ms": 1.947327,
+              "main_state_ms": {
+                "R": 5.224025,
+                "Running": 1.947327,
+                "R+": 4.133521,
+                "S": 247.479863
+              },
+              "render_cpu_overlap_ms": 0.015178,
+              "render_slices": []
+            },
+            {
+              "ts": 63308386507,
+              "wall_ms": 253.788104,
+              "main_cpu_ms": 1.141523,
+              "main_state_ms": {
+                "R": 6.09872,
+                "Running": 1.141523,
+                "R+": 0.156422,
+                "S": 246.391439
+              },
+              "render_cpu_overlap_ms": 2.327698,
+              "render_slices": []
+            },
+            {
+              "ts": 69733108774,
+              "wall_ms": 231.356336,
+              "main_cpu_ms": 1.500131,
+              "main_state_ms": {
+                "R": 0.808221,
+                "Running": 1.500131,
+                "R+": 1.700166,
+                "S": 227.347818
+              },
+              "render_cpu_overlap_ms": 0.495945,
+              "render_slices": []
+            },
+            {
+              "ts": 49609561771,
+              "wall_ms": 226.876233,
+              "main_cpu_ms": 3.866641,
+              "main_state_ms": {
+                "R": 29.136751,
+                "Running": 3.866641,
+                "R+": 1.062244,
+                "S": 192.810597
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 57535929719,
+              "wall_ms": 214.866529,
+              "main_cpu_ms": 1.305969,
+              "main_state_ms": {
+                "R": 48.351896,
+                "Running": 1.305969,
+                "R+": 0.314908,
+                "S": 164.893756
+              },
+              "render_cpu_overlap_ms": 5.472632,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 9026",
+                  "overlap_ms": 115.51574
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 96.41765
+                },
+                {
+                  "name": "DrawFrames 9005",
+                  "overlap_ms": 68.91145
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 68.909256
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 68.8314
+                }
+              ]
+            },
+            {
+              "ts": 45679623461,
+              "wall_ms": 210.201324,
+              "main_cpu_ms": 1.135002,
+              "main_state_ms": {
+                "R": 1.287828,
+                "Running": 1.135002,
+                "R+": 5.987363,
+                "S": 201.791131
+              },
+              "render_cpu_overlap_ms": 45.514295,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 3907",
+                  "overlap_ms": 209.644019
+                },
+                {
+                  "name": "Drawing  0.00 24.00 320.00 602.00",
+                  "overlap_ms": 209.642816
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 185.836753
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 184.477303
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 22.176049
+                }
+              ]
+            },
+            {
+              "ts": 60780276128,
+              "wall_ms": 204.439282,
+              "main_cpu_ms": 0.306652,
+              "main_state_ms": {
+                "R": 0.003798,
+                "Running": 0.306652,
+                "S": 204.128832
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 57343180180,
+              "wall_ms": 192.580243,
+              "main_cpu_ms": 1.440391,
+              "main_state_ms": {
+                "R": 87.841826,
+                "Running": 1.440391,
+                "R+": 0.109915,
+                "S": 103.188111
+              },
+              "render_cpu_overlap_ms": 6.100691,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 9005",
+                  "overlap_ms": 134.29467
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 86.288265
+                },
+                {
+                  "name": "DrawFrames 9005",
+                  "overlap_ms": 57.310411
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 43.461566
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 42.562667
+                }
+              ]
+            },
+            {
+              "ts": 62600506290,
+              "wall_ms": 179.603135,
+              "main_cpu_ms": 1.245014,
+              "main_state_ms": {
+                "R": 3.264567,
+                "Running": 1.245014,
+                "R+": 2.798628,
+                "S": 172.294926
+              },
+              "render_cpu_overlap_ms": 27.195029,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 11287",
+                  "overlap_ms": 172.025773
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 168.622867
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 89.329048
+                },
+                {
+                  "name": "rcDestroySyncKHR encode",
+                  "overlap_ms": 77.889404
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 3.37311
+                }
+              ]
+            },
+            {
+              "ts": 69526760622,
+              "wall_ms": 178.392728,
+              "main_cpu_ms": 1.750731,
+              "main_state_ms": {
+                "R": 83.6301,
+                "Running": 1.750731,
+                "R+": 2.339509,
+                "S": 90.672388
+              },
+              "render_cpu_overlap_ms": 33.965071,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 13650",
+                  "overlap_ms": 94.541174
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 94.53902
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 94.473457
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 88.868284
+                },
+                {
+                  "name": "DrawFrames 13657",
+                  "overlap_ms": 83.83304
+                }
+              ]
+            },
+            {
+              "ts": 51376486119,
+              "wall_ms": 178.163746,
+              "main_cpu_ms": 2.640398,
+              "main_state_ms": {
+                "R": 25.015804,
+                "Running": 2.640398,
+                "D": 7.546304,
+                "R+": 2.095244,
+                "S": 140.865996
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 65868886283,
+              "wall_ms": 170.605038,
+              "main_cpu_ms": 0.145792,
+              "main_state_ms": {
+                "R": 1.650101,
+                "Running": 0.145792,
+                "S": 168.809145
+              },
+              "render_cpu_overlap_ms": 37.344664,
+              "render_slices": [
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 93.608308
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 83.626644
+                },
+                {
+                  "name": "DrawFrames 12416",
+                  "overlap_ms": 75.254016
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 604.00",
+                  "overlap_ms": 75.252593
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 73.678263
+                }
+              ]
+            }
+          ],
+          "service_before_sha256": "1c21e700ffd5e3feeed9e25d53d66c48209ca7e0e0e388f069a5d801d38e82c8",
+          "outside_observer_stops": []
+        },
+        {
+          "trial": 2,
+          "capture": {
+            "trial": 2,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "service_query_exit": 0,
+            "perfetto_pid": 3635,
+            "instrumentation_exit": 0,
+            "trace_bytes": 53824367,
+            "trace_sha256": "9f40f74bd7396689b07cedb5d4a52cf0ae8018331a22e0b432d51d11c2bde986",
+            "transfer_attempts": [
+              {
+                "attempt": 1,
+                "verified": true,
+                "exit": 0,
+                "bytes": 53824367,
+                "sha256": "9f40f74bd7396689b07cedb5d4a52cf0ae8018331a22e0b432d51d11c2bde986"
+              }
+            ]
+          },
+          "local_sql_replay": true,
+          "main_dispatch_count": 2481,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "forced_expiry_markers": 4,
+          "error_loss_overwrite_stats": [],
+          "notice_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "ftrace_setup_errors",
+              "value": "37",
+              "detail": "notice/trace/"
+            }
+          ],
+          "longest_dispatches": [
+            {
+              "ts": 80482121369,
+              "wall_ms": 1404.982832,
+              "main_cpu_ms": 37.277812,
+              "main_state_ms": {
+                "R": 99.129469,
+                "Running": 37.277812,
+                "R+": 34.637274,
+                "S": 1166.694713,
+                "D": 67.243564
+              },
+              "render_cpu_overlap_ms": 430.720733,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 18372",
+                  "overlap_ms": 1111.626384
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 1110.330142
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 921.678197
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 902.72125
+                },
+                {
+                  "name": "AAHairlineOp",
+                  "overlap_ms": 285.803635
+                }
+              ]
+            },
+            {
+              "ts": 83443053402,
+              "wall_ms": 653.064938,
+              "main_cpu_ms": 2.419942,
+              "main_state_ms": {
+                "R": 0.58359,
+                "Running": 2.419942,
+                "R+": 8.116199,
+                "S": 641.945207
+              },
+              "render_cpu_overlap_ms": 167.314839,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 19886",
+                  "overlap_ms": 573.647072
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 573.645299
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 458.461244
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 375.608464
+                },
+                {
+                  "name": "TextureOp",
+                  "overlap_ms": 375.551418
+                }
+              ]
+            },
+            {
+              "ts": 82532337509,
+              "wall_ms": 573.238184,
+              "main_cpu_ms": 25.63229,
+              "main_state_ms": {
+                "R": 38.132008,
+                "Running": 25.63229,
+                "R+": 38.179383,
+                "S": 288.328093,
+                "D": 182.96641
+              },
+              "render_cpu_overlap_ms": 70.056356,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 19319",
+                  "overlap_ms": 228.48486
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 227.439406
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 205.47856
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 203.868032
+                }
+              ]
+            },
+            {
+              "ts": 79963071385,
+              "wall_ms": 517.107125,
+              "main_cpu_ms": 92.740571,
+              "main_state_ms": {
+                "R": 158.741168,
+                "Running": 92.740571,
+                "R+": 95.019447,
+                "S": 135.614908,
+                "D": 34.991031
+              },
+              "render_cpu_overlap_ms": 22.756246,
+              "render_slices": [
+                {
+                  "name": "eglGetDisplay",
+                  "overlap_ms": 271.985072
+                },
+                {
+                  "name": "open",
+                  "overlap_ms": 271.874946
+                },
+                {
+                  "name": "attempt_to_load_system_driver",
+                  "overlap_ms": 249.091261
+                },
+                {
+                  "name": "init_api",
+                  "overlap_ms": 208.318708
+                },
+                {
+                  "name": "binder transaction",
+                  "overlap_ms": 22.724824
+                }
+              ]
+            },
+            {
+              "ts": 89748793085,
+              "wall_ms": 451.683948,
+              "main_cpu_ms": 0.922202,
+              "main_state_ms": {
+                "R": 5.998494,
+                "Running": 0.922202,
+                "S": 444.763252
+              },
+              "render_cpu_overlap_ms": 162.491947,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 22814",
+                  "overlap_ms": 269.936726
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 268.148947
+                },
+                {
+                  "name": "DrawFrames 22800",
+                  "overlap_ms": 181.736011
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 176.537983
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 171.878701
+                }
+              ]
+            },
+            {
+              "ts": 99142834795,
+              "wall_ms": 333.890245,
+              "main_cpu_ms": 1.577797,
+              "main_state_ms": {
+                "R": 7.102433,
+                "Running": 1.577797,
+                "S": 325.210015
+              },
+              "render_cpu_overlap_ms": 91.358296,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 26894",
+                  "overlap_ms": 173.423593
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 170.767614
+                },
+                {
+                  "name": "DrawFrames 26887",
+                  "overlap_ms": 160.450622
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 160.448979
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 104.829761
+                }
+              ]
+            },
+            {
+              "ts": 99476902051,
+              "wall_ms": 232.751933,
+              "main_cpu_ms": 0.303717,
+              "main_state_ms": {
+                "R": 0.061846,
+                "Running": 0.303717,
+                "S": 232.38637
+              },
+              "render_cpu_overlap_ms": 80.133768,
+              "render_slices": [
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 140.012839
+                },
+                {
+                  "name": "DrawFrames 26894",
+                  "overlap_ms": 91.381308
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 91.379724
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 89.309006
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 83.798684
+                }
+              ]
+            },
+            {
+              "ts": 96376813166,
+              "wall_ms": 225.301007,
+              "main_cpu_ms": 1.031506,
+              "main_state_ms": {
+                "R": 1.055723,
+                "Running": 1.031506,
+                "R+": 3.745146,
+                "S": 219.468632
+              },
+              "render_cpu_overlap_ms": 4.366708,
+              "render_slices": []
+            },
+            {
+              "ts": 82112076774,
+              "wall_ms": 205.525321,
+              "main_cpu_ms": 0.50752,
+              "main_state_ms": {
+                "R": 0.709575,
+                "Running": 0.50752,
+                "R+": 0.531261,
+                "S": 203.776965
+              },
+              "render_cpu_overlap_ms": 85.094694,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 19123",
+                  "overlap_ms": 204.628366
+                },
+                {
+                  "name": "Drawing  0.00 24.00 320.00 602.00",
+                  "overlap_ms": 204.626653
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 192.033142
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 191.516366
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 12.38315
+                }
+              ]
+            },
+            {
+              "ts": 93540323598,
+              "wall_ms": 203.574697,
+              "main_cpu_ms": 0.301123,
+              "main_state_ms": {
+                "R": 12.168697,
+                "Running": 0.301123,
+                "R+": 0.025157,
+                "S": 191.07972
+              },
+              "render_cpu_overlap_ms": 64.123005,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 24760",
+                  "overlap_ms": 97.340899
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 93.957019
+                },
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 92.637904
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 86.109562
+                },
+                {
+                  "name": "glBufferDataSyncAEMU encode",
+                  "overlap_ms": 85.961034
+                }
+              ]
+            },
+            {
+              "ts": 92515698772,
+              "wall_ms": 195.530807,
+              "main_cpu_ms": 5.558481,
+              "main_state_ms": {
+                "R": 13.426995,
+                "Running": 5.558481,
+                "R+": 55.318356,
+                "S": 114.411985,
+                "D": 6.81499
+              },
+              "render_cpu_overlap_ms": 6.279193,
+              "render_slices": []
+            },
+            {
+              "ts": 100764511796,
+              "wall_ms": 183.42326,
+              "main_cpu_ms": 2.182085,
+              "main_state_ms": {
+                "R": 1.185967,
+                "Running": 2.182085,
+                "R+": 2.740318,
+                "S": 177.31489
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 92236899307,
+              "wall_ms": 182.088426,
+              "main_cpu_ms": 3.680135,
+              "main_state_ms": {
+                "R": 2.67372,
+                "Running": 3.680135,
+                "R+": 2.090864,
+                "S": 173.643707
+              },
+              "render_cpu_overlap_ms": 2.395453,
+              "render_slices": []
+            },
+            {
+              "ts": 96604376860,
+              "wall_ms": 180.429558,
+              "main_cpu_ms": 2.195802,
+              "main_state_ms": {
+                "R": 1.957954,
+                "Running": 2.195802,
+                "R+": 2.25429,
+                "S": 174.021512
+              },
+              "render_cpu_overlap_ms": 52.506808,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 25777",
+                  "overlap_ms": 162.971881
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 162.685842
+                },
+                {
+                  "name": "rcDestroySyncKHR encode",
+                  "overlap_ms": 86.731097
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 75.082686
+                }
+              ]
+            },
+            {
+              "ts": 95870063262,
+              "wall_ms": 179.217359,
+              "main_cpu_ms": 0.173254,
+              "main_state_ms": {
+                "R": 0.008806,
+                "Running": 0.173254,
+                "S": 179.035299
+              },
+              "render_cpu_overlap_ms": 63.833931,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 25728",
+                  "overlap_ms": 176.350965
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 176.349312
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 172.257699
+                },
+                {
+                  "name": "glBufferDataSyncAEMU encode",
+                  "overlap_ms": 119.711552
+                },
+                {
+                  "name": "glBufferDataSyncAEMU encode",
+                  "overlap_ms": 51.404365
+                }
+              ]
+            },
+            {
+              "ts": 84568310247,
+              "wall_ms": 174.748687,
+              "main_cpu_ms": 3.173347,
+              "main_state_ms": {
+                "R": 3.101026,
+                "Running": 3.173347,
+                "R+": 5.417247,
+                "S": 163.057067
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 96061900542,
+              "wall_ms": 173.089288,
+              "main_cpu_ms": 0.354652,
+              "main_state_ms": {
+                "R": 0.175177,
+                "Running": 0.354652,
+                "R+": 5.903526,
+                "S": 166.655933
+              },
+              "render_cpu_overlap_ms": 44.846189,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 25737",
+                  "overlap_ms": 172.820527
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 172.252295
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 59.022489
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 56.701504
+                },
+                {
+                  "name": "rcDestroySyncKHR encode",
+                  "overlap_ms": 53.036759
+                }
+              ]
+            },
+            {
+              "ts": 94469873586,
+              "wall_ms": 170.655999,
+              "main_cpu_ms": 2.138034,
+              "main_state_ms": {
+                "R": 2.10274,
+                "Running": 2.138034,
+                "R+": 1.982483,
+                "S": 164.432742
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 82360280969,
+              "wall_ms": 169.993316,
+              "main_cpu_ms": 51.780905,
+              "main_state_ms": {
+                "R": 47.260994,
+                "Running": 51.780905,
+                "R+": 28.342473,
+                "S": 41.329007,
+                "D": 1.279937
+              },
+              "render_cpu_overlap_ms": 4.520364,
+              "render_slices": []
+            },
+            {
+              "ts": 97806169822,
+              "wall_ms": 157.659044,
+              "main_cpu_ms": 2.097855,
+              "main_state_ms": {
+                "R": 1.836532,
+                "Running": 2.097855,
+                "R+": 0.820654,
+                "S": 152.904003
+              },
+              "render_cpu_overlap_ms": 0.01095,
+              "render_slices": []
+            }
+          ],
+          "service_before_sha256": "1c21e700ffd5e3feeed9e25d53d66c48209ca7e0e0e388f069a5d801d38e82c8",
+          "outside_observer_stops": []
+        },
+        {
+          "trial": 3,
+          "capture": {
+            "trial": 3,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "service_query_exit": 0,
+            "perfetto_pid": 4268,
+            "instrumentation_exit": 0,
+            "trace_bytes": 44986859,
+            "trace_sha256": "e9f579096d1dae19bf6459c3a73bbe27250113ec6bf59c06a408492352785d83",
+            "transfer_attempts": [
+              {
+                "attempt": 1,
+                "verified": true,
+                "exit": 0,
+                "bytes": 44986859,
+                "sha256": "e9f579096d1dae19bf6459c3a73bbe27250113ec6bf59c06a408492352785d83"
+              }
+            ]
+          },
+          "local_sql_replay": true,
+          "main_dispatch_count": 2274,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "forced_expiry_markers": 4,
+          "error_loss_overwrite_stats": [],
+          "notice_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "ftrace_setup_errors",
+              "value": "37",
+              "detail": "notice/trace/"
+            }
+          ],
+          "longest_dispatches": [
+            {
+              "ts": 104479789940,
+              "wall_ms": 1136.535414,
+              "main_cpu_ms": 31.15883,
+              "main_state_ms": {
+                "R": 30.411554,
+                "Running": 31.15883,
+                "R+": 29.469536,
+                "D": 1.414346,
+                "S": 1044.081148
+              },
+              "render_cpu_overlap_ms": 564.052421,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 29362",
+                  "overlap_ms": 986.709771
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 986.024461
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 861.609184
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 851.047828
+                },
+                {
+                  "name": "AAHairlineOp",
+                  "overlap_ms": 285.076944
+                }
+              ]
+            },
+            {
+              "ts": 117918792486,
+              "wall_ms": 393.509831,
+              "main_cpu_ms": 2.132535,
+              "main_state_ms": {
+                "R": 26.766653,
+                "Running": 2.132535,
+                "R+": 14.013053,
+                "S": 350.59759
+              },
+              "render_cpu_overlap_ms": 57.777513,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 37521",
+                  "overlap_ms": 202.035183
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 202.032598
+                },
+                {
+                  "name": "DrawFrames 37528",
+                  "overlap_ms": 191.457676
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 183.910931
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 102.989279
+                }
+              ]
+            },
+            {
+              "ts": 113778534289,
+              "wall_ms": 352.175374,
+              "main_cpu_ms": 4.723106,
+              "main_state_ms": {
+                "R": 49.695624,
+                "Running": 4.723106,
+                "R+": 7.104008,
+                "S": 290.652636
+              },
+              "render_cpu_overlap_ms": 0.976442,
+              "render_slices": []
+            },
+            {
+              "ts": 106617757815,
+              "wall_ms": 318.784116,
+              "main_cpu_ms": 2.526828,
+              "main_state_ms": {
+                "R": 7.881681,
+                "Running": 2.526828,
+                "R+": 15.207545,
+                "S": 293.168062
+              },
+              "render_cpu_overlap_ms": 65.720934,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 30565",
+                  "overlap_ms": 305.978952
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 260.788508
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 197.171562
+                },
+                {
+                  "name": "glBufferDataSyncAEMU encode",
+                  "overlap_ms": 99.346904
+                },
+                {
+                  "name": "glBufferDataSyncAEMU encode",
+                  "overlap_ms": 97.294548
+                }
+              ]
+            },
+            {
+              "ts": 106938072540,
+              "wall_ms": 277.660756,
+              "main_cpu_ms": 3.833611,
+              "main_state_ms": {
+                "R": 16.828351,
+                "Running": 3.833611,
+                "R+": 88.826494,
+                "S": 168.1723
+              },
+              "render_cpu_overlap_ms": 42.503907,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 30579",
+                  "overlap_ms": 186.348168
+                },
+                {
+                  "name": "Drawing  0.00 33.00 320.00 604.00",
+                  "overlap_ms": 181.866567
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 103.601264
+                },
+                {
+                  "name": "glBufferDataSyncAEMU encode",
+                  "overlap_ms": 88.572347
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 77.833647
+                }
+              ]
+            },
+            {
+              "ts": 106126343914,
+              "wall_ms": 258.255507,
+              "main_cpu_ms": 26.13332,
+              "main_state_ms": {
+                "R": 19.098106,
+                "Running": 26.13332,
+                "R+": 8.368295,
+                "S": 204.655786
+              },
+              "render_cpu_overlap_ms": 100.515813,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 30245",
+                  "overlap_ms": 166.263669
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 165.781649
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 140.488769
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 139.505362
+                }
+              ]
+            },
+            {
+              "ts": 111785184109,
+              "wall_ms": 254.962588,
+              "main_cpu_ms": 0.339045,
+              "main_state_ms": {
+                "R": 0.280564,
+                "Running": 0.339045,
+                "R+": 0.470398,
+                "S": 253.872581
+              },
+              "render_cpu_overlap_ms": 64.390749,
+              "render_slices": [
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 169.088773
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 85.979856
+                },
+                {
+                  "name": "DrawFrames 34054",
+                  "overlap_ms": 84.797676
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 604.00",
+                  "overlap_ms": 84.796073
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 84.709432
+                }
+              ]
+            },
+            {
+              "ts": 115137833673,
+              "wall_ms": 246.354063,
+              "main_cpu_ms": 1.225432,
+              "main_state_ms": {
+                "R": 5.055482,
+                "Running": 1.225432,
+                "R+": 0.055654,
+                "S": 240.017495
+              },
+              "render_cpu_overlap_ms": 38.172752,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 36481",
+                  "overlap_ms": 241.407434
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 604.00",
+                  "overlap_ms": 241.405951
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 172.266152
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 110.059982
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 69.053127
+                }
+              ]
+            },
+            {
+              "ts": 104234026469,
+              "wall_ms": 237.812821,
+              "main_cpu_ms": 93.586524,
+              "main_state_ms": {
+                "R": 62.742399,
+                "Running": 93.586524,
+                "R+": 45.025035,
+                "D": 0.675872,
+                "S": 35.782991
+              },
+              "render_cpu_overlap_ms": 26.225445,
+              "render_slices": [
+                {
+                  "name": "eglGetDisplay",
+                  "overlap_ms": 156.080126
+                },
+                {
+                  "name": "open",
+                  "overlap_ms": 155.833095
+                },
+                {
+                  "name": "attempt_to_load_system_driver",
+                  "overlap_ms": 136.82384
+                },
+                {
+                  "name": "init_api",
+                  "overlap_ms": 116.6981
+                }
+              ]
+            },
+            {
+              "ts": 119384735545,
+              "wall_ms": 197.748295,
+              "main_cpu_ms": 2.060408,
+              "main_state_ms": {
+                "R": 1.34861,
+                "Running": 2.060408,
+                "R+": 6.75702,
+                "S": 187.582257
+              },
+              "render_cpu_overlap_ms": 0.715446,
+              "render_slices": []
+            },
+            {
+              "ts": 107245866477,
+              "wall_ms": 185.606267,
+              "main_cpu_ms": 0.45474,
+              "main_state_ms": {
+                "R": 0.063539,
+                "Running": 0.45474,
+                "S": 185.087988
+              },
+              "render_cpu_overlap_ms": 23.531705,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 30741",
+                  "overlap_ms": 173.077793
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 172.493322
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 158.386603
+                },
+                {
+                  "name": "glBufferDataSyncAEMU encode",
+                  "overlap_ms": 87.262284
+                },
+                {
+                  "name": "glBufferDataSyncAEMU encode",
+                  "overlap_ms": 60.860894
+                }
+              ]
+            },
+            {
+              "ts": 122755787928,
+              "wall_ms": 185.486287,
+              "main_cpu_ms": 2.864249,
+              "main_state_ms": {
+                "R": 2.865463,
+                "Running": 2.864249,
+                "R+": 5.184644,
+                "S": 174.571931
+              },
+              "render_cpu_overlap_ms": 0.15537,
+              "render_slices": []
+            },
+            {
+              "ts": 118312591717,
+              "wall_ms": 181.214014,
+              "main_cpu_ms": 0.216586,
+              "main_state_ms": {
+                "R": 0.238986,
+                "Running": 0.216586,
+                "S": 180.758442
+              },
+              "render_cpu_overlap_ms": 68.671742,
+              "render_slices": [
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 96.387108
+                },
+                {
+                  "name": "DrawFrames 37528",
+                  "overlap_ms": 84.441967
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 84.440214
+                },
+                {
+                  "name": "rcDestroySyncKHR encode",
+                  "overlap_ms": 82.551005
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 79.298871
+                }
+              ]
+            },
+            {
+              "ts": 120767817032,
+              "wall_ms": 162.152498,
+              "main_cpu_ms": 0.901983,
+              "main_state_ms": {
+                "R": 71.49709,
+                "Running": 0.901983,
+                "S": 89.753425
+              },
+              "render_cpu_overlap_ms": 121.258877,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 38595",
+                  "overlap_ms": 91.284746
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 604.00",
+                  "overlap_ms": 91.283383
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 86.140073
+                },
+                {
+                  "name": "glBufferDataSyncAEMU encode",
+                  "overlap_ms": 85.137079
+                },
+                {
+                  "name": "DrawFrames 38602",
+                  "overlap_ms": 70.859527
+                }
+              ]
+            },
+            {
+              "ts": 109252827154,
+              "wall_ms": 161.769555,
+              "main_cpu_ms": 0.324164,
+              "main_state_ms": {
+                "R": 0.011361,
+                "Running": 0.324164,
+                "S": 161.43403
+              },
+              "render_cpu_overlap_ms": 63.993614,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 32318",
+                  "overlap_ms": 86.774943
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 86.623261
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 85.805204
+                },
+                {
+                  "name": "DrawFrames 32261",
+                  "overlap_ms": 74.985344
+                },
+                {
+                  "name": "Drawing 16.00 552.00 304.00 604.00",
+                  "overlap_ms": 74.984091
+                }
+              ]
+            },
+            {
+              "ts": 111527318249,
+              "wall_ms": 159.407534,
+              "main_cpu_ms": 1.630915,
+              "main_state_ms": {
+                "R": 7.646653,
+                "Running": 1.630915,
+                "R+": 0.774607,
+                "S": 149.355359
+              },
+              "render_cpu_overlap_ms": 75.539109,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 33991",
+                  "overlap_ms": 158.631795
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 158.629932
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 83.171974
+                },
+                {
+                  "name": "rcCreateSyncKHR encode",
+                  "overlap_ms": 82.230146
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 75.331591
+                }
+              ]
+            },
+            {
+              "ts": 107705180778,
+              "wall_ms": 153.413601,
+              "main_cpu_ms": 3.823128,
+              "main_state_ms": {
+                "R": 3.929166,
+                "Running": 3.823128,
+                "R+": 3.716031,
+                "S": 141.945276
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 120930133537,
+              "wall_ms": 148.77504,
+              "main_cpu_ms": 0.29049,
+              "main_state_ms": {
+                "R": 4.232506,
+                "Running": 0.29049,
+                "S": 144.252044
+              },
+              "render_cpu_overlap_ms": 23.669171,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 38602",
+                  "overlap_ms": 76.27271
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 76.270918
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 69.512324
+                },
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 68.048581
+                },
+                {
+                  "name": "rcDestroySyncKHR encode",
+                  "overlap_ms": 63.050166
+                }
+              ]
+            },
+            {
+              "ts": 115926172515,
+              "wall_ms": 144.966457,
+              "main_cpu_ms": 3.875227,
+              "main_state_ms": {
+                "R": 3.634432,
+                "Running": 3.875227,
+                "R+": 12.20537,
+                "S": 125.251428
+              },
+              "render_cpu_overlap_ms": 25.029586,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 36620",
+                  "overlap_ms": 102.027492
+                },
+                {
+                  "name": "allocateBuffers",
+                  "overlap_ms": 92.67804
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 91.138865
+                },
+                {
+                  "name": "rcMakeCurrent encode",
+                  "overlap_ms": 91.067182
+                },
+                {
+                  "name": "allocateHelper",
+                  "overlap_ms": 89.230533
+                }
+              ]
+            },
+            {
+              "ts": 116116742999,
+              "wall_ms": 141.700101,
+              "main_cpu_ms": 3.231889,
+              "main_state_ms": {
+                "R": 3.234546,
+                "Running": 3.231889,
+                "R+": 8.210923,
+                "S": 127.022743
+              },
+              "render_cpu_overlap_ms": 0.683185,
+              "render_slices": []
+            }
+          ],
+          "service_before_sha256": "b5325065e7cc05aaa3ebf3189b8b08e9bbbdb895d775e82008f831cdedb6859e",
+          "outside_observer_stops": []
+        }
+      ]
+    },
+    {
+      "api": 36,
+      "artifact_id": 13024920965,
+      "artifact_bytes": 63944546,
+      "artifact_sha256": "687b4cde329163296e2691d056fdfcac29478ee1c3f5a4c31e7c02742cbe4b6c",
+      "capture_context": {
+        "source_commit": "355e004fef713c514f3990b6d9ef071b80df6f77",
+        "serial": "emulator-5554",
+        "config_sha256": "115bac7e097d2fa3ea65720df86a9bb34786ab28fbf073a5cd099e9297e2db9f",
+        "scope": "Traced emulator observations; observer overhead; no device/FPS/power claim",
+        "ro.build.fingerprint": "google/sdk_gphone64_x86_64/emu64xa:16/BE2A.250530.026.F3/13894323:userdebug/dev-keys",
+        "ro.build.type": "userdebug",
+        "ro.build.version.sdk": "36"
+      },
+      "processor": "Perfetto v59.1-1e9c61e98 (1e9c61e9844affd7dccd3d42d9ea9f3a3d10cf6d)\nTrace Processor RPC API version: 14",
+      "processor_sha256": "2434129a3af4dc9e2034a476f7b76447b490975213e301769310d3bd0d5d6458",
+      "standard_ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "capture": {
+            "trial": 1,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "service_query_exit": 0,
+            "perfetto_pid": 2018,
+            "instrumentation_exit": 0,
+            "trace_bytes": 51243562,
+            "trace_sha256": "9e24becca39407b4dd42db8d3540d409f9de01a2668b336bf995b5e34f6a46f1",
+            "transfer_attempts": [
+              {
+                "attempt": 1,
+                "verified": true,
+                "exit": 0,
+                "bytes": 51243562,
+                "sha256": "9e24becca39407b4dd42db8d3540d409f9de01a2668b336bf995b5e34f6a46f1"
+              }
+            ]
+          },
+          "local_sql_replay": true,
+          "main_dispatch_count": 2902,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "forced_expiry_markers": 4,
+          "error_loss_overwrite_stats": [],
+          "notice_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "ftrace_setup_errors",
+              "value": "38",
+              "detail": "notice/trace/"
+            }
+          ],
+          "longest_dispatches": [
+            {
+              "ts": 53484327767,
+              "wall_ms": 1286.830742,
+              "main_cpu_ms": 34.787076,
+              "main_state_ms": {
+                "R": 40.49143,
+                "Running": 34.787076,
+                "D": 48.027292,
+                "R+": 29.349944,
+                "S": 1134.175
+              },
+              "render_cpu_overlap_ms": 605.434574,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 5317",
+                  "overlap_ms": 1124.187496
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 1123.920998
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 942.924571
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 914.397416
+                },
+                {
+                  "name": "AAHairlineOp",
+                  "overlap_ms": 292.534706
+                }
+              ]
+            },
+            {
+              "ts": 64671887048,
+              "wall_ms": 914.008568,
+              "main_cpu_ms": 12.209437,
+              "main_state_ms": {
+                "R": 139.457653,
+                "Running": 12.209437,
+                "R+": 121.413522,
+                "S": 640.927956
+              },
+              "render_cpu_overlap_ms": 3.545075,
+              "render_slices": []
+            },
+            {
+              "ts": 69452826149,
+              "wall_ms": 689.622939,
+              "main_cpu_ms": 3.940705,
+              "main_state_ms": {
+                "R": 90.224439,
+                "Running": 3.940705,
+                "R+": 46.118924,
+                "S": 549.338871
+              },
+              "render_cpu_overlap_ms": 0.261097,
+              "render_slices": []
+            },
+            {
+              "ts": 56300889419,
+              "wall_ms": 639.295129,
+              "main_cpu_ms": 46.151097,
+              "main_state_ms": {
+                "R": 77.710828,
+                "Running": 46.151097,
+                "D": 26.279196,
+                "R+": 61.281148,
+                "S": 427.87286
+              },
+              "render_cpu_overlap_ms": 38.290115,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 5765",
+                  "overlap_ms": 233.964801
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 223.405591
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 180.082051
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 40.627219
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 32.924107
+                }
+              ]
+            },
+            {
+              "ts": 55733495755,
+              "wall_ms": 566.896176,
+              "main_cpu_ms": 75.834249,
+              "main_state_ms": {
+                "R": 88.754661,
+                "Running": 75.834249,
+                "D": 0.854042,
+                "R+": 72.865852,
+                "S": 328.587372
+              },
+              "render_cpu_overlap_ms": 2.887168,
+              "render_slices": []
+            },
+            {
+              "ts": 57686990377,
+              "wall_ms": 436.534015,
+              "main_cpu_ms": 5.085338,
+              "main_state_ms": {
+                "R": 36.270521,
+                "Running": 5.085338,
+                "R+": 4.464219,
+                "S": 390.713937
+              },
+              "render_cpu_overlap_ms": 71.391106,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 5985",
+                  "overlap_ms": 348.740758
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 348.739245
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 239.665034
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 176.112715
+                },
+                {
+                  "name": "TextureOp",
+                  "overlap_ms": 176.072851
+                }
+              ]
+            },
+            {
+              "ts": 58663111798,
+              "wall_ms": 435.949537,
+              "main_cpu_ms": 9.776064,
+              "main_state_ms": {
+                "R": 120.003879,
+                "Running": 9.776064,
+                "R+": 37.771559,
+                "S": 268.398035
+              },
+              "render_cpu_overlap_ms": 35.989282,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 6098",
+                  "overlap_ms": 264.871995
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 240.294842
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 24.552538
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 24.112427
+                },
+                {
+                  "name": "queueBuffer",
+                  "overlap_ms": 22.578746
+                }
+              ]
+            },
+            {
+              "ts": 65852166191,
+              "wall_ms": 397.802295,
+              "main_cpu_ms": 0.333332,
+              "main_state_ms": {
+                "R": 0.028783,
+                "Running": 0.333332,
+                "S": 397.44018
+              },
+              "render_cpu_overlap_ms": 86.086907,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 8178",
+                  "overlap_ms": 202.016555
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 202.014782
+                },
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 195.515977
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 138.55336
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 63.349832
+                }
+              ]
+            },
+            {
+              "ts": 59335835250,
+              "wall_ms": 374.548641,
+              "main_cpu_ms": 4.21319,
+              "main_state_ms": {
+                "R": 7.426347,
+                "Running": 4.21319,
+                "R+": 30.780285,
+                "S": 332.128819
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 71688744363,
+              "wall_ms": 340.65068,
+              "main_cpu_ms": 0.35846,
+              "main_state_ms": {
+                "R": 0.056975,
+                "Running": 0.35846,
+                "R+": 0.039283,
+                "S": 340.195962
+              },
+              "render_cpu_overlap_ms": 75.695652,
+              "render_slices": [
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 251.998127
+                },
+                {
+                  "name": "DrawFrames 10246",
+                  "overlap_ms": 88.285318
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 88.283685
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 79.176955
+                }
+              ]
+            },
+            {
+              "ts": 78486994948,
+              "wall_ms": 340.445611,
+              "main_cpu_ms": 0.242202,
+              "main_state_ms": {
+                "R": 0.26305,
+                "Running": 0.242202,
+                "R+": 0.169998,
+                "S": 339.770361
+              },
+              "render_cpu_overlap_ms": 49.414087,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 12460",
+                  "overlap_ms": 248.803333
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 248.801489
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 170.498679
+                },
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 91.035676
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 78.179441
+                }
+              ]
+            },
+            {
+              "ts": 53142978528,
+              "wall_ms": 340.068881,
+              "main_cpu_ms": 91.725675,
+              "main_state_ms": {
+                "R": 94.061001,
+                "Running": 91.725675,
+                "D": 1.950804,
+                "R+": 72.284615,
+                "S": 80.046786
+              },
+              "render_cpu_overlap_ms": 36.06155,
+              "render_slices": [
+                {
+                  "name": "earlyPreloadGlContext",
+                  "overlap_ms": 273.582704
+                },
+                {
+                  "name": "Creating EGLContext",
+                  "overlap_ms": 266.038228
+                },
+                {
+                  "name": "eglGetDisplay",
+                  "overlap_ms": 210.054389
+                },
+                {
+                  "name": "open",
+                  "overlap_ms": 209.979478
+                },
+                {
+                  "name": "attempt_to_load_system_driver",
+                  "overlap_ms": 202.697944
+                }
+              ]
+            },
+            {
+              "ts": 74444337202,
+              "wall_ms": 268.6857,
+              "main_cpu_ms": 0.324836,
+              "main_state_ms": {
+                "R": 0.059558,
+                "Running": 0.324836,
+                "S": 268.301306
+              },
+              "render_cpu_overlap_ms": 40.369938,
+              "render_slices": [
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 148.081077
+                },
+                {
+                  "name": "DrawFrames 11145",
+                  "overlap_ms": 120.323922
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 120.322239
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 69.709921
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 50.486573
+                }
+              ]
+            },
+            {
+              "ts": 55278821620,
+              "wall_ms": 261.370773,
+              "main_cpu_ms": 2.71808,
+              "main_state_ms": {
+                "R": 8.323367,
+                "Running": 2.71808,
+                "R+": 0.033473,
+                "S": 250.295853
+              },
+              "render_cpu_overlap_ms": 106.409788,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 5686",
+                  "overlap_ms": 256.408798
+                },
+                {
+                  "name": "Drawing  0.00 24.00 320.00 602.00",
+                  "overlap_ms": 256.406905
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 206.596991
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 49.692294
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 49.652992
+                }
+              ]
+            },
+            {
+              "ts": 57261883219,
+              "wall_ms": 210.883278,
+              "main_cpu_ms": 0.995527,
+              "main_state_ms": {
+                "R": 4.928526,
+                "Running": 0.995527,
+                "R+": 148.477914,
+                "S": 56.481311
+              },
+              "render_cpu_overlap_ms": 0.063457,
+              "render_slices": []
+            },
+            {
+              "ts": 80124817513,
+              "wall_ms": 208.995155,
+              "main_cpu_ms": 1.950546,
+              "main_state_ms": {
+                "R": 13.148187,
+                "Running": 1.950546,
+                "R+": 0.084319,
+                "S": 193.812103
+              },
+              "render_cpu_overlap_ms": 1.251938,
+              "render_slices": []
+            },
+            {
+              "ts": 77738070856,
+              "wall_ms": 208.087182,
+              "main_cpu_ms": 16.029194,
+              "main_state_ms": {
+                "R": 30.777382,
+                "Running": 16.029194,
+                "D": 4.29896,
+                "R+": 26.383668,
+                "S": 130.597978
+              },
+              "render_cpu_overlap_ms": 0.195466,
+              "render_slices": []
+            },
+            {
+              "ts": 77948492113,
+              "wall_ms": 200.11644,
+              "main_cpu_ms": 13.573639,
+              "main_state_ms": {
+                "R": 35.6288,
+                "Running": 13.573639,
+                "D": 6.4966,
+                "R+": 13.852419,
+                "S": 130.564982
+              },
+              "render_cpu_overlap_ms": 3.631063,
+              "render_slices": []
+            },
+            {
+              "ts": 58412499217,
+              "wall_ms": 198.008817,
+              "main_cpu_ms": 6.904495,
+              "main_state_ms": {
+                "R": 47.006336,
+                "Running": 6.904495,
+                "R+": 28.675982,
+                "S": 115.422004
+              },
+              "render_cpu_overlap_ms": 14.185721,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 6059",
+                  "overlap_ms": 115.547819
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 112.926178
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 2.532304
+                }
+              ]
+            },
+            {
+              "ts": 67900713290,
+              "wall_ms": 186.858485,
+              "main_cpu_ms": 0.500033,
+              "main_state_ms": {
+                "R": 0.018385,
+                "Running": 0.500033,
+                "R+": 5.274821,
+                "S": 181.065246
+              },
+              "render_cpu_overlap_ms": 1.53271,
+              "render_slices": []
+            }
+          ],
+          "service_before_sha256": "984becdd41c63557058c5b2dcb42d39d6ccf40783d0c88d09afd436654c57aee",
+          "outside_observer_stops": []
+        },
+        {
+          "trial": 2,
+          "capture": {
+            "trial": 2,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "service_query_exit": 0,
+            "perfetto_pid": 3266,
+            "instrumentation_exit": 0,
+            "trace_bytes": 48644342,
+            "trace_sha256": "e8797241ae79f0a7512d826e6e0f0626bb913e95f9a602658b9f5a4955c15a28",
+            "transfer_attempts": [
+              {
+                "attempt": 1,
+                "verified": true,
+                "exit": 0,
+                "bytes": 48644342,
+                "sha256": "e8797241ae79f0a7512d826e6e0f0626bb913e95f9a602658b9f5a4955c15a28"
+              }
+            ]
+          },
+          "local_sql_replay": true,
+          "main_dispatch_count": 2530,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "forced_expiry_markers": 4,
+          "error_loss_overwrite_stats": [],
+          "notice_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "ftrace_setup_errors",
+              "value": "38",
+              "detail": "notice/trace/"
+            }
+          ],
+          "longest_dispatches": [
+            {
+              "ts": 87032649916,
+              "wall_ms": 1404.491186,
+              "main_cpu_ms": 29.933278,
+              "main_state_ms": {
+                "R": 114.310738,
+                "Running": 29.933278,
+                "D": 46.090038,
+                "R+": 57.963926,
+                "S": 1156.193206
+              },
+              "render_cpu_overlap_ms": 322.702914,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 14137",
+                  "overlap_ms": 1159.41718
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 1158.698129
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 976.032648
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 953.955198
+                },
+                {
+                  "name": "AAHairlineOp",
+                  "overlap_ms": 293.212039
+                }
+              ]
+            },
+            {
+              "ts": 89534450617,
+              "wall_ms": 736.72574,
+              "main_cpu_ms": 42.922195,
+              "main_state_ms": {
+                "R": 140.822808,
+                "Running": 42.922195,
+                "D": 23.948125,
+                "R+": 46.267227,
+                "S": 482.765385
+              },
+              "render_cpu_overlap_ms": 83.643574,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 14492",
+                  "overlap_ms": 228.195408
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 226.539378
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 196.104274
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 22.169292
+                }
+              ]
+            },
+            {
+              "ts": 86609538759,
+              "wall_ms": 416.405476,
+              "main_cpu_ms": 84.304984,
+              "main_state_ms": {
+                "R": 89.797666,
+                "Running": 84.304984,
+                "D": 6.091218,
+                "R+": 62.160133,
+                "S": 174.051475
+              },
+              "render_cpu_overlap_ms": 39.114283,
+              "render_slices": [
+                {
+                  "name": "earlyPreloadGlContext",
+                  "overlap_ms": 205.983957
+                },
+                {
+                  "name": "Creating EGLContext",
+                  "overlap_ms": 153.026073
+                },
+                {
+                  "name": "eglGetDisplay",
+                  "overlap_ms": 110.767921
+                },
+                {
+                  "name": "open",
+                  "overlap_ms": 110.700265
+                },
+                {
+                  "name": "attempt_to_load_system_driver",
+                  "overlap_ms": 108.799618
+                }
+              ]
+            },
+            {
+              "ts": 90554026625,
+              "wall_ms": 377.952084,
+              "main_cpu_ms": 1.96595,
+              "main_state_ms": {
+                "R": 2.550167,
+                "Running": 1.96595,
+                "R+": 3.418671,
+                "S": 370.017296
+              },
+              "render_cpu_overlap_ms": 23.043441,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 14632",
+                  "overlap_ms": 246.686216
+                },
+                {
+                  "name": "Drawing 16.00 33.00 304.00 604.00",
+                  "overlap_ms": 246.591448
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 146.705862
+                },
+                {
+                  "name": "DrawFrames 14624",
+                  "overlap_ms": 122.191795
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 122.188969
+                }
+              ]
+            },
+            {
+              "ts": 99006652397,
+              "wall_ms": 365.052457,
+              "main_cpu_ms": 4.831565,
+              "main_state_ms": {
+                "R": 47.975229,
+                "Running": 4.831565,
+                "R+": 119.984503,
+                "S": 192.26116
+              },
+              "render_cpu_overlap_ms": 1.374064,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 18017",
+                  "overlap_ms": 4.134775
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 4.132199
+                }
+              ]
+            },
+            {
+              "ts": 89172648478,
+              "wall_ms": 361.038805,
+              "main_cpu_ms": 40.963945,
+              "main_state_ms": {
+                "R": 110.942714,
+                "Running": 40.963945,
+                "D": 2.531408,
+                "R+": 76.553319,
+                "S": 130.047419
+              },
+              "render_cpu_overlap_ms": 1.635732,
+              "render_slices": []
+            },
+            {
+              "ts": 96145543115,
+              "wall_ms": 339.423081,
+              "main_cpu_ms": 0.270867,
+              "main_state_ms": {
+                "R": 0.012213,
+                "Running": 0.270867,
+                "R+": 0.054932,
+                "S": 339.085069
+              },
+              "render_cpu_overlap_ms": 90.7256,
+              "render_slices": [
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 233.801988
+                },
+                {
+                  "name": "DrawFrames 16872",
+                  "overlap_ms": 105.060627
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 604.00",
+                  "overlap_ms": 105.058893
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 97.000349
+                }
+              ]
+            },
+            {
+              "ts": 107647231657,
+              "wall_ms": 330.038137,
+              "main_cpu_ms": 2.188115,
+              "main_state_ms": {
+                "R": 7.368787,
+                "Running": 2.188115,
+                "R+": 3.95031,
+                "S": 316.530925
+              },
+              "render_cpu_overlap_ms": 2.023045,
+              "render_slices": []
+            },
+            {
+              "ts": 104168806834,
+              "wall_ms": 287.531419,
+              "main_cpu_ms": 2.86157,
+              "main_state_ms": {
+                "R": 20.839369,
+                "Running": 2.86157,
+                "R+": 5.744195,
+                "S": 258.086285
+              },
+              "render_cpu_overlap_ms": 0.862308,
+              "render_slices": []
+            },
+            {
+              "ts": 100029071122,
+              "wall_ms": 284.587224,
+              "main_cpu_ms": 9.19054,
+              "main_state_ms": {
+                "R": 6.740854,
+                "Running": 9.19054,
+                "D": 0.271644,
+                "R+": 4.470069,
+                "S": 263.914117
+              },
+              "render_cpu_overlap_ms": 0.660452,
+              "render_slices": []
+            },
+            {
+              "ts": 106008653239,
+              "wall_ms": 260.202543,
+              "main_cpu_ms": 0.360232,
+              "main_state_ms": {
+                "R": 0.054502,
+                "Running": 0.360232,
+                "R+": 1.558929,
+                "S": 258.22888
+              },
+              "render_cpu_overlap_ms": 65.236014,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 20364",
+                  "overlap_ms": 254.225481
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 246.761937
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 188.945989
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 57.41502
+                }
+              ]
+            },
+            {
+              "ts": 100582877382,
+              "wall_ms": 245.997311,
+              "main_cpu_ms": 1.60814,
+              "main_state_ms": {
+                "R": 21.278761,
+                "Running": 1.60814,
+                "R+": 0.406739,
+                "S": 222.703671
+              },
+              "render_cpu_overlap_ms": 58.73872,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 18576",
+                  "overlap_ms": 172.02556
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 163.732769
+                },
+                {
+                  "name": "DrawFrames 18555",
+                  "overlap_ms": 73.957784
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 73.956021
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 61.978394
+                }
+              ]
+            },
+            {
+              "ts": 102894243000,
+              "wall_ms": 243.705224,
+              "main_cpu_ms": 0.371022,
+              "main_state_ms": {
+                "R": 2.404817,
+                "Running": 0.371022,
+                "S": 240.929385
+              },
+              "render_cpu_overlap_ms": 78.044759,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 19343",
+                  "overlap_ms": 239.543052
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 239.541588
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 152.909304
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 86.535554
+                }
+              ]
+            },
+            {
+              "ts": 88906091689,
+              "wall_ms": 232.691045,
+              "main_cpu_ms": 1.264379,
+              "main_state_ms": {
+                "R": 7.748135,
+                "Running": 1.264379,
+                "R+": 9.991612,
+                "S": 213.686919
+              },
+              "render_cpu_overlap_ms": 3.301287,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 14375",
+                  "overlap_ms": 16.284262
+                }
+              ]
+            },
+            {
+              "ts": 91440811054,
+              "wall_ms": 222.924473,
+              "main_cpu_ms": 3.278949,
+              "main_state_ms": {
+                "R": 10.438178,
+                "Running": 3.278949,
+                "R+": 1.738331,
+                "S": 207.469015
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 105795197742,
+              "wall_ms": 213.030563,
+              "main_cpu_ms": 1.683802,
+              "main_state_ms": {
+                "R": 9.006933,
+                "Running": 1.683802,
+                "R+": 4.392745,
+                "S": 197.947083
+              },
+              "render_cpu_overlap_ms": 54.716463,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 20364",
+                  "overlap_ms": 207.993977
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 199.219617
+                }
+              ]
+            },
+            {
+              "ts": 101401258451,
+              "wall_ms": 200.971562,
+              "main_cpu_ms": 3.734295,
+              "main_state_ms": {
+                "R": 3.39243,
+                "Running": 3.734295,
+                "R+": 6.103659,
+                "S": 187.741178
+              },
+              "render_cpu_overlap_ms": 0.02189,
+              "render_slices": []
+            },
+            {
+              "ts": 88703808677,
+              "wall_ms": 199.236318,
+              "main_cpu_ms": 1.197915,
+              "main_state_ms": {
+                "R": 10.880259,
+                "Running": 1.197915,
+                "R+": 0.115946,
+                "S": 187.042198
+              },
+              "render_cpu_overlap_ms": 58.382254,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 14360",
+                  "overlap_ms": 197.315845
+                },
+                {
+                  "name": "Drawing  0.00 24.00 320.00 602.00",
+                  "overlap_ms": 196.073808
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 166.893686
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 29.010896
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 28.98092
+                }
+              ]
+            },
+            {
+              "ts": 100829243331,
+              "wall_ms": 179.396853,
+              "main_cpu_ms": 0.394135,
+              "main_state_ms": {
+                "R": 3.186876,
+                "Running": 0.394135,
+                "R+": 0.314166,
+                "S": 175.501676
+              },
+              "render_cpu_overlap_ms": 45.771225,
+              "render_slices": [
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 172.210155
+                },
+                {
+                  "name": "DrawFrames 18576",
+                  "overlap_ms": 3.436912
+                }
+              ]
+            },
+            {
+              "ts": 93256358026,
+              "wall_ms": 161.091881,
+              "main_cpu_ms": 0.269381,
+              "main_state_ms": {
+                "R": 0.021532,
+                "Running": 0.269381,
+                "S": 160.800968
+              },
+              "render_cpu_overlap_ms": 41.777917,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 15683",
+                  "overlap_ms": 84.626619
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 84.625317
+                },
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 76.258156
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 74.377918
+                }
+              ]
+            }
+          ],
+          "service_before_sha256": "efb686c31cb4e8be8875b93df2afb53f6c88a19f2f847d42c7bd5d200313ff03",
+          "outside_observer_stops": []
+        },
+        {
+          "trial": 3,
+          "capture": {
+            "trial": 3,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "service_query_exit": 0,
+            "perfetto_pid": 4182,
+            "instrumentation_exit": 0,
+            "trace_bytes": 43393882,
+            "trace_sha256": "d37708fa55a523b2ca335dabe4fb7f950b20bc697abf758c9e846a6b6f35eb27",
+            "transfer_attempts": [
+              {
+                "attempt": 1,
+                "verified": true,
+                "exit": 0,
+                "bytes": 43393882,
+                "sha256": "d37708fa55a523b2ca335dabe4fb7f950b20bc697abf758c9e846a6b6f35eb27"
+              }
+            ]
+          },
+          "local_sql_replay": true,
+          "main_dispatch_count": 2276,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "forced_expiry_markers": 4,
+          "error_loss_overwrite_stats": [],
+          "notice_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "ftrace_setup_errors",
+              "value": "38",
+              "detail": "notice/trace/"
+            }
+          ],
+          "longest_dispatches": [
+            {
+              "ts": 113465110625,
+              "wall_ms": 1400.445715,
+              "main_cpu_ms": 33.695622,
+              "main_state_ms": {
+                "R": 133.020327,
+                "Running": 33.695622,
+                "D": 46.019382,
+                "R+": 59.89609,
+                "S": 1127.814294
+              },
+              "render_cpu_overlap_ms": 410.535268,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 21913",
+                  "overlap_ms": 1125.380398
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 1124.403275
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 930.820815
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 905.812076
+                },
+                {
+                  "name": "AAHairlineOp",
+                  "overlap_ms": 289.986242
+                }
+              ]
+            },
+            {
+              "ts": 115899834257,
+              "wall_ms": 554.552226,
+              "main_cpu_ms": 26.380958,
+              "main_state_ms": {
+                "R": 66.959628,
+                "Running": 26.380958,
+                "D": 28.041187,
+                "R+": 18.528383,
+                "S": 414.64207
+              },
+              "render_cpu_overlap_ms": 100.187856,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 22223",
+                  "overlap_ms": 219.029777
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 216.915241
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 197.23294
+                }
+              ]
+            },
+            {
+              "ts": 119012201684,
+              "wall_ms": 485.150453,
+              "main_cpu_ms": 1.239682,
+              "main_state_ms": {
+                "R": 0.006323,
+                "Running": 1.239682,
+                "R+": 1.781875,
+                "S": 482.122573
+              },
+              "render_cpu_overlap_ms": 163.581025,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 23306",
+                  "overlap_ms": 333.896336
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 333.781571
+                },
+                {
+                  "name": "DrawFrames 23299",
+                  "overlap_ms": 151.241424
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 151.240111
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 87.757781
+                }
+              ]
+            },
+            {
+              "ts": 113070199758,
+              "wall_ms": 394.012772,
+              "main_cpu_ms": 90.985132,
+              "main_state_ms": {
+                "R": 163.148308,
+                "Running": 90.985132,
+                "D": 9.572331,
+                "R+": 78.396311,
+                "S": 51.91069
+              },
+              "render_cpu_overlap_ms": 36.411826,
+              "render_slices": [
+                {
+                  "name": "earlyPreloadGlContext",
+                  "overlap_ms": 95.2553
+                },
+                {
+                  "name": "Creating EGLContext",
+                  "overlap_ms": 90.098508
+                },
+                {
+                  "name": "eglGetDisplay",
+                  "overlap_ms": 72.637811
+                },
+                {
+                  "name": "open",
+                  "overlap_ms": 69.853466
+                },
+                {
+                  "name": "attempt_to_load_system_driver",
+                  "overlap_ms": 68.016168
+                }
+              ]
+            },
+            {
+              "ts": 115300829605,
+              "wall_ms": 361.195988,
+              "main_cpu_ms": 1.409019,
+              "main_state_ms": {
+                "R": 5.430491,
+                "Running": 1.409019,
+                "R+": 5.844744,
+                "S": 348.511734
+              },
+              "render_cpu_overlap_ms": 3.709404,
+              "render_slices": []
+            },
+            {
+              "ts": 116952007040,
+              "wall_ms": 294.558499,
+              "main_cpu_ms": 1.562335,
+              "main_state_ms": {
+                "R": 13.793164,
+                "Running": 1.562335,
+                "S": 279.203
+              },
+              "render_cpu_overlap_ms": 42.637337,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 22368",
+                  "overlap_ms": 269.777755
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 604.00",
+                  "overlap_ms": 269.775892
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 172.396572
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 97.333153
+                },
+                {
+                  "name": "DrawFrames 22384",
+                  "overlap_ms": 24.769283
+                }
+              ]
+            },
+            {
+              "ts": 124911713282,
+              "wall_ms": 241.343602,
+              "main_cpu_ms": 0.309729,
+              "main_state_ms": {
+                "R": 26.954172,
+                "Running": 0.309729,
+                "S": 214.079701
+              },
+              "render_cpu_overlap_ms": 46.586462,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 25892",
+                  "overlap_ms": 171.562981
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 144.511758
+                },
+                {
+                  "name": "DrawFrames 25842",
+                  "overlap_ms": 69.76912
+                },
+                {
+                  "name": "Drawing 16.00 552.00 304.00 604.00",
+                  "overlap_ms": 69.767778
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 69.715991
+                }
+              ]
+            },
+            {
+              "ts": 122080442982,
+              "wall_ms": 235.736811,
+              "main_cpu_ms": 0.339795,
+              "main_state_ms": {
+                "R": 2.516315,
+                "Running": 0.339795,
+                "S": 232.880701
+              },
+              "render_cpu_overlap_ms": 41.675738,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 24405",
+                  "overlap_ms": 231.474218
+                },
+                {
+                  "name": "Drawing 16.00 552.00 304.00 604.00",
+                  "overlap_ms": 231.472755
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 156.609992
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 74.771042
+                },
+                {
+                  "name": "DrawFrames 24436",
+                  "overlap_ms": 4.251332
+                }
+              ]
+            },
+            {
+              "ts": 126748155081,
+              "wall_ms": 227.997277,
+              "main_cpu_ms": 1.169201,
+              "main_state_ms": {
+                "R": 0.685278,
+                "Running": 1.169201,
+                "S": 226.142798
+              },
+              "render_cpu_overlap_ms": 88.509824,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 26607",
+                  "overlap_ms": 156.500645
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 156.223428
+                },
+                {
+                  "name": "DrawFrames 26598",
+                  "overlap_ms": 71.484459
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 71.483197
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 67.221202
+                }
+              ]
+            },
+            {
+              "ts": 129429544417,
+              "wall_ms": 202.604659,
+              "main_cpu_ms": 1.256424,
+              "main_state_ms": {
+                "R": 18.510081,
+                "Running": 1.256424,
+                "S": 182.838154
+              },
+              "render_cpu_overlap_ms": 21.186186,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 27519",
+                  "overlap_ms": 177.3694
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 158.771365
+                },
+                {
+                  "name": "DrawFrames 27512",
+                  "overlap_ms": 25.222525
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 25.220941
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 18.573901
+                }
+              ]
+            },
+            {
+              "ts": 115691001905,
+              "wall_ms": 202.09456,
+              "main_cpu_ms": 41.377991,
+              "main_state_ms": {
+                "R": 43.013124,
+                "Running": 41.377991,
+                "D": 1.920401,
+                "R+": 31.206815,
+                "S": 84.576229
+              },
+              "render_cpu_overlap_ms": 0.269153,
+              "render_slices": []
+            },
+            {
+              "ts": 115104643589,
+              "wall_ms": 196.059951,
+              "main_cpu_ms": 1.057093,
+              "main_state_ms": {
+                "R": 0.271346,
+                "Running": 1.057093,
+                "R+": 3.067613,
+                "S": 191.663899
+              },
+              "render_cpu_overlap_ms": 89.893749,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 22113",
+                  "overlap_ms": 195.202612
+                },
+                {
+                  "name": "Drawing  0.00 24.00 320.00 602.00",
+                  "overlap_ms": 195.201209
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 163.849516
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 31.305306
+                },
+                {
+                  "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                  "overlap_ms": 31.275591
+                }
+              ]
+            },
+            {
+              "ts": 123962411220,
+              "wall_ms": 179.267539,
+              "main_cpu_ms": 4.235183,
+              "main_state_ms": {
+                "R": 6.765123,
+                "Running": 4.235183,
+                "R+": 13.674324,
+                "S": 154.592909
+              },
+              "render_cpu_overlap_ms": 0.749678,
+              "render_slices": []
+            },
+            {
+              "ts": 121892517881,
+              "wall_ms": 176.390832,
+              "main_cpu_ms": 0.192289,
+              "main_state_ms": {
+                "R": 4.070705,
+                "Running": 0.192289,
+                "S": 172.127838
+              },
+              "render_cpu_overlap_ms": 17.624833,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 24398",
+                  "overlap_ms": 112.047906
+                },
+                {
+                  "name": "Drawing  0.00  0.00 320.00 640.00",
+                  "overlap_ms": 112.046603
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 111.984548
+                },
+                {
+                  "name": "dequeueBuffer - VRI[PreviewActivity]#1(BLAST Consumer)1",
+                  "overlap_ms": 111.200886
+                },
+                {
+                  "name": "dequeueBuffer",
+                  "overlap_ms": 111.184965
+                }
+              ]
+            },
+            {
+              "ts": 126976517830,
+              "wall_ms": 170.533868,
+              "main_cpu_ms": 0.215623,
+              "main_state_ms": {
+                "R": 0.028524,
+                "Running": 0.215623,
+                "S": 170.289721
+              },
+              "render_cpu_overlap_ms": 53.620926,
+              "render_slices": [
+                {
+                  "name": "copyLayerInto",
+                  "overlap_ms": 156.070423
+                },
+                {
+                  "name": "DrawFrames 26607",
+                  "overlap_ms": 14.294981
+                }
+              ]
+            },
+            {
+              "ts": 117649492298,
+              "wall_ms": 165.998857,
+              "main_cpu_ms": 3.008044,
+              "main_state_ms": {
+                "R": 14.374818,
+                "Running": 3.008044,
+                "R+": 3.151407,
+                "S": 145.464588
+              },
+              "render_cpu_overlap_ms": 2.268131,
+              "render_slices": []
+            },
+            {
+              "ts": 121728907547,
+              "wall_ms": 163.259419,
+              "main_cpu_ms": 1.15793,
+              "main_state_ms": {
+                "R": 3.556135,
+                "Running": 1.15793,
+                "R+": 3.883787,
+                "S": 154.661567
+              },
+              "render_cpu_overlap_ms": 24.196879,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 24368",
+                  "overlap_ms": 157.221294
+                },
+                {
+                  "name": "Drawing  0.00 95.00 320.00 364.00",
+                  "overlap_ms": 157.220081
+                },
+                {
+                  "name": "eglSwapBuffersWithDamageKHR",
+                  "overlap_ms": 79.529071
+                },
+                {
+                  "name": "flush commands",
+                  "overlap_ms": 77.598247
+                },
+                {
+                  "name": "DrawFrames 24398",
+                  "overlap_ms": 6.025112
+                }
+              ]
+            },
+            {
+              "ts": 125439056445,
+              "wall_ms": 161.886727,
+              "main_cpu_ms": 2.199673,
+              "main_state_ms": {
+                "R": 0.732687,
+                "Running": 2.199673,
+                "R+": 2.197841,
+                "S": 156.756526
+              },
+              "render_cpu_overlap_ms": 0.0,
+              "render_slices": []
+            },
+            {
+              "ts": 127161823739,
+              "wall_ms": 161.377614,
+              "main_cpu_ms": 0.276115,
+              "main_state_ms": {
+                "R": 0.018925,
+                "Running": 0.276115,
+                "S": 161.082574
+              },
+              "render_cpu_overlap_ms": 46.149977,
+              "render_slices": [
+                {
+                  "name": "DrawFrames 26631",
+                  "overlap_ms": 161.157564
+                },
+                {
+                  "name": "syncFrameState",
+                  "overlap_ms": 160.964854
+                }
+              ]
+            },
+            {
+              "ts": 120356399930,
+              "wall_ms": 157.045573,
+              "main_cpu_ms": 1.765006,
+              "main_state_ms": {
+                "R": 3.510179,
+                "Running": 1.765006,
+                "R+": 1.050439,
+                "S": 150.719949
+              },
+              "render_cpu_overlap_ms": 0.008767,
+              "render_slices": []
+            }
+          ],
+          "service_before_sha256": "efb686c31cb4e8be8875b93df2afb53f6c88a19f2f847d42c7bd5d200313ff03",
+          "outside_observer_stops": []
+        }
+      ]
+    }
+  ],
+  "readback_observation": {
+    "api": 35,
+    "trial": 1,
+    "log": {
+      "kind": "log",
+      "ts": "53910340381",
+      "dur": "0",
+      "utid": "1586",
+      "tid": "0",
+      "thread": "",
+      "name": "WalkBuddyTiming",
+      "value": "5",
+      "detail": "Readback taskWallMs=294 taskCpuMs=0 brightnessWallMs=294 brightnessCpuMs=0"
+    },
+    "matching_dispatch": {
+      "ts": 53615748891,
+      "wall_ms": 294.638598,
+      "main_cpu_ms": 0.225892,
+      "main_state_ms": {
+        "R": 5.783422,
+        "Running": 0.225892,
+        "S": 288.629284
+      },
+      "render_cpu_overlap_ms": 75.288439,
+      "render_slices": [
+        {
+          "name": "DrawFrames 7716",
+          "overlap_ms": 194.477461
+        },
+        {
+          "name": "Drawing  0.00  0.00 320.00 640.00",
+          "overlap_ms": 193.480399
+        },
+        {
+          "name": "flush commands",
+          "overlap_ms": 174.77408
+        },
+        {
+          "name": "copyLayerInto",
+          "overlap_ms": 94.211604
+        },
+        {
+          "name": "rcCreateSyncKHR encode",
+          "overlap_ms": 93.080041
+        }
+      ]
+    },
+    "overlaps_forced_expiry": false,
+    "contains_stop_log": false,
+    "interpretation": "Single traced emulator message mostly sleeping; overlapping render work is not proof of the historical stall cause; integer CPU ms rounded down"
+  },
+  "unchanged_production": {
+    "baseline_tag": "v0.4.37",
+    "tag_commit": "afa1e10cf7cd0d3d0345e72015030b779695f888",
+    "main_tree": "8270b67f7c7581f53cdae088cf503c70f74de27c",
+    "build_gradle_sha256": "ece40e31d09d86c25461fd297ce2d47e59663c4fb16537f189095f089f0c7e7b",
+    "release_workflow_sha256": "64c8d363096db0a23fac2a6621d17a6691f78c570ea9323433be1bc01a5c0cdd",
+    "version": "0.4.37",
+    "version_code": 49
+  },
+  "terminal_verification": {
+    "verified_at_utc": "2026-10-31 01:30:05 UTC",
+    "runs": [
+      {
+        "id": 41154316569,
+        "name": "Preview system trace",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "source": "355e004fef713c514f3990b6d9ef071b80df6f77",
+        "created": "2026-10-31T01:13:55Z",
+        "terminal_updated_at": "2026-10-31T01:21:46Z",
+        "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41154316569"
+      },
+      {
+        "id": 41154316656,
+        "name": "Android UI checks",
+        "status": "completed",
+        "conclusion": "success",
+        "attempt": 1,
+        "source": "355e004fef713c514f3990b6d9ef071b80df6f77",
+        "created": "2026-10-31T01:13:55Z",
+        "terminal_updated_at": "2026-10-31T01:20:58Z",
+        "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41154316656"
+      }
+    ]
+  },
+  "job_ids": {
+    "trace_api35": 124397644506,
+    "trace_api36": 124397644296,
+    "normal_api35": 124397644352,
+    "normal_api36": 124397644622
+  }
+}
