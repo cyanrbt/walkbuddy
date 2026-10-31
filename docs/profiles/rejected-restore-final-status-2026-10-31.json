@@ -1,0 +1,183 @@
+{
+  "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+  "scope": "Final GitHub terminal results and successful single-rerun job log. The rerun archive is not downloaded or locally raw-replayed in this record.",
+  "runs": [
+    {
+      "id": 41186158161,
+      "name": "CPU capacity trace",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158161"
+    },
+    {
+      "id": 41186158156,
+      "name": "Preview system trace",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 2,
+      "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158156"
+    },
+    {
+      "id": 41186158158,
+      "name": "Surface copy experiment",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158158"
+    },
+    {
+      "id": 41186158105,
+      "name": "Android UI checks",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158105"
+    }
+  ],
+  "first_attempt_record": "rejected-restore-first-status-2026-10-31.json",
+  "first_failure_native_replay": "rejected-restore-native-2026-10-31.json",
+  "single_rerun": {
+    "original_failed_job_id": 124493392413,
+    "requested_count": 1,
+    "executed_job_id": 124497524769,
+    "run_id": 41186158156,
+    "run_attempt": 2,
+    "jobs": [
+      {
+        "id": 124497524769,
+        "name": "trace / layout (35)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T09:10:21Z",
+        "completed_at": "2026-10-31T09:17:19Z",
+        "html_url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158156/job/124497524769"
+      },
+      {
+        "id": 124497525779,
+        "name": "trace / layout (36)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T08:49:33Z",
+        "completed_at": "2026-10-31T08:57:54Z",
+        "html_url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158156/job/124497525779"
+      }
+    ],
+    "note": "API36 attempt-2 job entry carries its original 08:49:33–08:57:54 times. It is a carried-over successful result, not a second API36 execution.",
+    "job_log_evidence": [
+      "Ran 57 tests in 5.263s",
+      "OK",
+      "BUILD SUCCESSFUL in 44s",
+      "| Trial | Scenario | Surface prefix | Evidence | Dispatches | Forced stops | Unforced stops over 1200ms |",
+      "| --- | --- | --- | --- | ---: | ---: | ---: |",
+      "| 1 | surface_reinstall_recovery | passed | complete | 2308 | 4 | 0 |",
+      "| 2 | recovery | not requested | complete | 2221 | 4 | 0 |",
+      "| 3 | recovery | not requested | complete | 2068 | 4 | 0 |",
+      "REJECTED_RESTORE_TOUCH_RULES_PASS cases=27",
+      "PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore",
+      "RUNTIME_PROBE_PASS",
+      "PREVIEW_PROBE_PASS cases=32; direction marker + circle in displayed and sampled bitmap",
+      "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0",
+      "LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore",
+      "HOME_PROBE_PASS configurations=24 action-states=240 expanded=240; brand reflow, first step, current status, fixed controls, full text, contrast, idle refresh stopped, real Activity recreation",
+      "RECOVERY_PROBE_PASS: denied permission, settings intent, grant and real Activity recreation; no camera auto-start or stopped watchdog polling",
+      "PIP_PROBE_PASS",
+      "PIP_PROBE_PASS",
+      "SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2",
+      "OK",
+      "| 阶段 | 结果 |",
+      "| --- | --- |",
+      "| 模拟器测试 APK 编译 | 通过 |",
+      "| 模拟器运行 | 通过 |",
+      "| 探针 | 记录 |",
+      "| --- | --- |",
+      "| pip_recovery | 通过 |",
+      "| runtime | 通过 |",
+      "| preview | 通过 |",
+      "| overlay | 通过 |",
+      "| layout | 通过 |",
+      "| home | 通过 |",
+      "| recovery | 通过 |",
+      "| pip | 通过 |",
+      "| pip-repeat | 通过 |",
+      "| support | 通过 |"
+    ],
+    "artifacts": [
+      {
+        "id": 13037807072,
+        "name": "android-ui-evidence-api-35",
+        "size_in_bytes": 66824719,
+        "url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13037807072",
+        "archive_download_url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13037807072/zip",
+        "expired": false,
+        "created_at": "2026-10-31T09:17:16Z",
+        "expires_at": "2027-01-29T09:10:17Z",
+        "updated_at": "2026-10-31T09:17:16Z",
+        "digest": "sha256:2d3deafe00d9e2f68cffb28292f2590b7ca4a06db6f3cb173441bcf120daa054",
+        "workflow_run": {
+          "id": 41186158156,
+          "repository_id": 1412858135,
+          "head_repository_id": 1412858135,
+          "head_branch": "main",
+          "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee"
+        }
+      },
+      {
+        "id": 13037261021,
+        "name": "android-ui-evidence-api-36",
+        "size_in_bytes": 72376532,
+        "url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13037261021",
+        "archive_download_url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13037261021/zip",
+        "expired": false,
+        "created_at": "2026-10-31T08:57:51Z",
+        "expires_at": "2027-01-29T08:49:30Z",
+        "updated_at": "2026-10-31T08:57:51Z",
+        "digest": "sha256:2d74874f1b6cbd0b7672339148ba120968ddb47f63ba001d30cf3282a6acd3f9",
+        "workflow_run": {
+          "id": 41186158156,
+          "repository_id": 1412858135,
+          "head_repository_id": 1412858135,
+          "head_branch": "main",
+          "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee"
+        }
+      },
+      {
+        "id": 13035949402,
+        "name": "android-ui-evidence-api-35",
+        "size_in_bytes": 44284289,
+        "url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13035949402",
+        "archive_download_url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13035949402/zip",
+        "expired": false,
+        "created_at": "2026-10-31T08:54:49Z",
+        "expires_at": "2027-01-29T08:49:30Z",
+        "updated_at": "2026-10-31T08:54:49Z",
+        "digest": "sha256:0d54409ab1054ae18603d086e16ce0b1a44423526fea144d39989948ee1c8800",
+        "workflow_run": {
+          "id": 41186158156,
+          "repository_id": 1412858135,
+          "head_repository_id": 1412858135,
+          "head_branch": "main",
+          "head_sha": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee"
+        }
+      }
+    ],
+    "actual_rejection_branch_exercised": "Not established by this rerun log; the two locally replayed standard UI archives contain no new rejected-DOWN event.",
+    "interpretation": "8 of 9 jobs passed at attempt 1. One API35 two-core trace job failed with a focused external Launcher ANR dialog, then passed on exactly one rerun. The original failure and old natural frame-expiry incident are not erased or declared repaired."
+  },
+  "stable_production": {
+    "tag": "v0.4.38",
+    "source": "a4bbb537e6053674fd565c13fff992e959b936e7",
+    "release_run": 41172338591,
+    "release_attempt": 1,
+    "release_conclusion": "success",
+    "asset_id": 694469873,
+    "asset_bytes": 9996881,
+    "asset_sha256": "110c6c2d027347805484d6a41a57c4200888517918a3af40aa785891659a654d",
+    "download": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.38/Walk-Buddy-v0.4.38-arm64-debug.apk",
+    "device_acceptance": false
+  }
+}
