@@ -117,19 +117,35 @@ class TraceReportTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'SHA-256'):
                 report.analyze(directory, '/does-not-exist')
 
+    def test_missing_trace_preserves_the_recorded_adb_cause_in_the_summary(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            (directory/'capture.json').write_text(json.dumps({'errors': ['adb pull: remote file unavailable']}))
+            with self.assertRaisesRegex(ValueError, 'remote file unavailable'):
+                report.analyze(directory, '/does-not-exist')
+
 
 class FakeAdb:
-    def __init__(self, fail_probe=False, timeout_probe=False):
+    def __init__(self, fail_probe=False, timeout_probe=False, failed_start=False, fail_first_pull=False, corrupt_pull=False):
         self.calls = []
         self.alive = True
         self.stopping_checks = None
         self.fail_probe = fail_probe
         self.timeout_probe = timeout_probe
+        self.failed_start = failed_start
+        self.fail_first_pull = fail_first_pull
+        self.corrupt_pull = corrupt_pull
+        self.pulls = 0
 
     def run(self, *args, **kwargs):
         self.calls.append(args)
         if 'perfetto' in args:
-            return SimpleNamespace(returncode=0, stdout='123\n', stderr='started\n')
+            return SimpleNamespace(returncode=1 if self.failed_start else 0, stdout='123\n',
+                                   stderr='data source startup failed' if self.failed_start else 'started\n')
+        if 'stat' in args:
+            return SimpleNamespace(returncode=0, stdout=str(len(b'flushed trace'))+'\n', stderr='')
+        if 'sha256sum' in args:
+            return SimpleNamespace(returncode=0, stdout=hashlib.sha256(b'flushed trace').hexdigest()+'  trace\n', stderr='')
         if 'instrument' in args:
             if self.timeout_probe:
                 raise subprocess.TimeoutExpired('adb instrument', 110, output=b'partial probe\n')
@@ -144,11 +160,41 @@ class FakeAdb:
             return SimpleNamespace(returncode=0 if self.alive else 1)
         if 'pull' in args:
             assert not self.alive, 'Trace was pulled before process exit'
-            Path(args[-1]).write_bytes(b'flushed trace')
+            self.pulls += 1
+            if self.fail_first_pull and self.pulls == 1:
+                Path(args[-1]).write_bytes(b'partial')
+                return SimpleNamespace(returncode=1, stdout='sync transfer interrupted', stderr='60%')
+            Path(args[-1]).write_bytes(b'flushed trAce' if self.corrupt_pull else b'flushed trace')
         return SimpleNamespace(returncode=0, stdout='', stderr='')
 
 
 class TraceRecorderTest(unittest.TestCase):
+    def test_interrupted_copy_retries_same_trace_without_repeating_probe(self):
+        with tempfile.TemporaryDirectory() as temp:
+            adb = FakeAdb(fail_first_pull=True)
+            result = recorder.capture(adb, Path(temp), '', 1)
+            self.assertEqual([], result['errors'])
+            self.assertEqual([False, True], [a['verified'] for a in result['transfer_attempts']])
+            self.assertEqual(1, sum('instrument' in call for call in adb.calls))
+            self.assertEqual(b'flushed trace', (Path(temp)/'trace.pftrace').read_bytes())
+            self.assertIn('sync transfer interrupted', (Path(temp)/'pull-1.txt').read_text())
+
+    def test_success_exit_with_same_length_wrong_hash_never_accepts_a_trace(self):
+        with tempfile.TemporaryDirectory() as temp:
+            result = recorder.capture(FakeAdb(corrupt_pull=True), Path(temp), '', 1)
+            self.assertTrue(result['errors'])
+            self.assertFalse((Path(temp)/'trace.pftrace').exists())
+            self.assertEqual(2, len(json.loads((Path(temp)/'transfer.json').read_text())['attempts']))
+
+    def test_failed_start_preserves_stderr_and_cleans_up_its_owned_pid(self):
+        with tempfile.TemporaryDirectory() as temp:
+            adb = FakeAdb(failed_start=True)
+            result = recorder.capture(adb, Path(temp), '', 1)
+            self.assertFalse(result['probe_pass'])
+            self.assertTrue(result['flushed'])
+            self.assertFalse(any('instrument' in call for call in adb.calls))
+            self.assertTrue(any('data source startup failed' in error for error in result['errors']))
+
     def test_failing_probe_still_stops_flushes_pulls_and_retains_failure(self):
         with tempfile.TemporaryDirectory() as temp:
             adb = FakeAdb(fail_probe=True)

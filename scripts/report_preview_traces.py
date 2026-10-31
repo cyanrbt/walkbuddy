@@ -108,7 +108,7 @@ def analyze(directory, processor):
     capture = json.loads((directory/'capture.json').read_text())
     trace = directory/'trace.pftrace'
     if not trace.is_file() or not trace.stat().st_size:
-        raise ValueError('Missing or empty trace')
+        raise ValueError('Missing or empty trace; recorder errors: '+json.dumps(capture.get('errors', [])))
     if hashlib.sha256(trace.read_bytes()).hexdigest() != capture.get('trace_sha256'):
         raise ValueError('Trace SHA-256 differs from captured bytes')
     decoded = subprocess.run([processor, 'query', '--format', 'csv', '--no-progress',

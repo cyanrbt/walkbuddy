@@ -1,0 +1,483 @@
+{
+  "source_commit": "6eb8342c68f53b0f3c29e19e8d74865667d852a1",
+  "run_id": 41152965922,
+  "run_attempt": 1,
+  "conclusion": "failure",
+  "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41152965922",
+  "raw_sql_replays": 5,
+  "valid_traces": 4,
+  "missing_trace": {
+    "api": 35,
+    "trial": 1,
+    "probe_pass": true,
+    "recording_process_exit_confirmed": true,
+    "cause": "adb pull returned 1 around 60%; stdout not retained by initial recorder, precise interruption cause unknown"
+  },
+  "kernel_loss": {
+    "api": 36,
+    "trial": 1,
+    "cpu": 1,
+    "overrun_delta": 5350
+  },
+  "normal_run": {
+    "id": 41152966054,
+    "attempt": 1,
+    "conclusion": "success",
+    "reports": [
+      {
+        "api": 35,
+        "artifact_id": 13024345919,
+        "artifact_sha256": "37df9015c2bbbde58ee385cd3407a15573d753747a949855b25b60a0f19a57d3",
+        "artifact_bytes": 14040321,
+        "ui": {
+          "status": "passed",
+          "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+          "build_result": "success",
+          "emulator_result": "success",
+          "mode": "ui",
+          "probes": [
+            {
+              "name": "pip_recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "runtime",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "preview",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "overlay",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "layout",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "home",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip-repeat",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "support",
+              "status": "passed",
+              "failures": []
+            }
+          ],
+          "observations": [],
+          "anrs": [],
+          "failure_time_focus": [],
+          "focused_external_anr_dialogs": []
+        }
+      },
+      {
+        "api": 36,
+        "artifact_id": 13023684126,
+        "artifact_sha256": "cb91526a72d204ae79aaa751dfb6dd76a33477d449e7342c0f1b999be0b80621",
+        "artifact_bytes": 14005589,
+        "ui": {
+          "status": "passed",
+          "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+          "build_result": "success",
+          "emulator_result": "success",
+          "mode": "ui",
+          "probes": [
+            {
+              "name": "pip_recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "runtime",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "preview",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "overlay",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "layout",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "home",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip-repeat",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "support",
+              "status": "passed",
+              "failures": []
+            }
+          ],
+          "observations": [],
+          "anrs": [],
+          "failure_time_focus": [],
+          "focused_external_anr_dialogs": []
+        }
+      }
+    ]
+  },
+  "reports": [
+    {
+      "api": 35,
+      "artifact_id": 13024340607,
+      "artifact_bytes": 49282516,
+      "artifact_sha256": "610a8ddd34d1dcd794d34d7e51e5ab67d4a05e71f6dd6f13740014004c845f3c",
+      "standard_ui": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "capture": {
+            "trial": 1,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [
+              "adb ('pull', '/data/misc/perfetto-traces/walkbuddy-preview-1.pftrace', 'ui-evidence/preview-trace/trial-1/trace.pftrace'): 1: [ 60%] /data/misc/perfetto-traces/walkbuddy-preview-1.pftrace"
+            ],
+            "perfetto_pid": 2183,
+            "instrumentation_exit": 0
+          },
+          "valid": false,
+          "main_dispatch_count": null,
+          "forced_markers": null,
+          "stop_counts": null,
+          "errors": [
+            "Missing or empty trace"
+          ],
+          "error_and_loss_stats": []
+        },
+        {
+          "trial": 2,
+          "capture": {
+            "trial": 2,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 3627,
+            "instrumentation_exit": 0,
+            "trace_bytes": 54311316,
+            "trace_sha256": "c337c8634afc11a7caa35d84ed1f4e3e917ca61b2000a4557039d9deee337674"
+          },
+          "valid": true,
+          "main_dispatch_count": 2375,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "errors": [],
+          "error_and_loss_stats": []
+        },
+        {
+          "trial": 3,
+          "capture": {
+            "trial": 3,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 4237,
+            "instrumentation_exit": 0,
+            "trace_bytes": 49295862,
+            "trace_sha256": "65cf912d22d104f64edcca3e713bec503d98b5679a6646fba2c14d9663895fa7"
+          },
+          "valid": true,
+          "main_dispatch_count": 2543,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "errors": [],
+          "error_and_loss_stats": []
+        }
+      ]
+    },
+    {
+      "api": 36,
+      "artifact_id": 13024165979,
+      "artifact_bytes": 64181465,
+      "artifact_sha256": "5fa2522dea5e158eaf054425db9ba9e992f1eb09af82a6cebd65f18ba29440f2",
+      "standard_ui": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "capture": {
+            "trial": 1,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 2187,
+            "instrumentation_exit": 0,
+            "trace_bytes": 52132948,
+            "trace_sha256": "7b72999658f7c92834be26bc56e9362796b058d225fee2bc1f3f2fb15fae772b"
+          },
+          "valid": false,
+          "main_dispatch_count": 2731,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "errors": [
+            "Trace data loss/errors: ftrace_cpu_has_data_loss=1 (data_loss/trace/1)"
+          ],
+          "error_and_loss_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "ftrace_cpu_overrun_end",
+              "value": "5350",
+              "detail": "info/trace/1"
+            },
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "ftrace_cpu_overrun_delta",
+              "value": "5350",
+              "detail": "info/trace/1"
+            },
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "ftrace_cpu_has_data_loss",
+              "value": "1",
+              "detail": "data_loss/trace/1"
+            }
+          ]
+        },
+        {
+          "trial": 2,
+          "capture": {
+            "trial": 2,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 3471,
+            "instrumentation_exit": 0,
+            "trace_bytes": 50043119,
+            "trace_sha256": "71d9d8ac843aa7146d2e9e558113f5ce9fb40697ef5e323a12f809a55cf0034d"
+          },
+          "valid": true,
+          "main_dispatch_count": 2383,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "errors": [],
+          "error_and_loss_stats": []
+        },
+        {
+          "trial": 3,
+          "capture": {
+            "trial": 3,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 4380,
+            "instrumentation_exit": 0,
+            "trace_bytes": 42434325,
+            "trace_sha256": "0a47e35fabea004a8eff38f8bafb4c526c537bc35bfefd6b8a739657b490effc"
+          },
+          "valid": true,
+          "main_dispatch_count": 2193,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "errors": [],
+          "error_and_loss_stats": []
+        }
+      ]
+    }
+  ]
+}

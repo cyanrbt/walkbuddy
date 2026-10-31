@@ -8,8 +8,9 @@
 
 - 新的 `Preview system trace` 工作流复用 Android 15/16 的既有虚拟 Camera2 环境。每套独立运行三轮 `pip_recovery`，再关闭采证并运行原有十项检查。三轮按时间顺序观测，不作为 A/B 性能实验。
 - Perfetto 最长 120 秒，32 MiB 调度/图形缓冲和 4 MiB 日志/进程缓冲，每秒写盘、每 10 秒请求数据源提交，单文件上限 128 MiB。采集调度、线程状态、gfx/view/camera/binder、应用三个日志标签；没有图像或音频采集。定期提交和写盘也有额外开销。
+- 内核 ftrace 请求每 CPU 至少 8 MiB，读取周期 100ms；其它并发 ftrace 会话可能影响实际参数，所以每轮保留 `perfetto --query` 的服务状态。此内核缓冲与上述中央缓冲分别设置，均只在临时模拟器诊断中使用。
 - 仅测试 APK 在显式 `preview_trace=true` 参数下安装主 Looper 消息观察器，以 `wb_main:dispatch` 标记消息；四次主动修改 `captureAt` 的测试区段使用 `wb_test:forced_expiry`。原生主程序不包含此观察器。日志和区段按 Perfetto 统一时钟关联；LOCKED/HIDDEN 单独计入生命周期事件。
-- 先验证 `ro.kernel.qemu=1`，不使用 adb root 或全局 kill。保存 Perfetto 返回的 PID，发送 SIGINT 后等其退出再下载，避免把信号已发送当成写盘完成；失败仍保留原始轨迹、日志和探针结果。远端 instrumentation 超时后明确停止该测试应用，保留部分输出。
+- 先验证 `ro.kernel.qemu=1`，不使用 adb root 或全局 kill。保存 Perfetto 返回的 PID，发送 SIGINT 后等其退出再下载，避免把信号已发送当成写盘完成；失败仍保留原始轨迹、日志和探针结果。停止后读取远端文件大小和 SHA-256，仅在复制同一个文件时允许最多两次传输，各次标准输出、错误、字节数与摘要均保留，匹配后才将临时文件改为正式轨迹名。不会重跑探针来更换采样。远端 instrumentation 超时后明确停止该测试应用，保留部分输出。
 - 主机解析器固定为 [Perfetto v59.1](https://github.com/google/perfetto/releases/tag/v59.1)，官方 linux-amd64.zip SHA-256 为 `7deb8c2572c6ae7ec80cd719d388041079827b0c44a1659694d5d88faa4f501e`，提取前核验。SQL 输出不截行；采集摘要核验 trace SHA-256，缺调度、主线程/渲染线程、四个主动过期区段、对应停止日志或存在解析丢失/错误时明确失败。
 - 长消息摘要分别列主线程 CPU、线程状态和重叠的渲染 CPU/区段；时间重叠不证明因果。主消息观察器和系统采集本身有额外开销，结果不扩大为无采证环境、真机帧率或耗电结论。
 
@@ -32,3 +33,14 @@
 提交 `67a1c9b1fe2f49f79d49de11909bd389172856de` 的[常规 41151682381](https://github.com/cyanrbt/walkbuddy/actions/runs/41151682381) attempt 1 两套各十项通过。[系统轨迹 41151682335](https://github.com/cyanrbt/walkbuddy/actions/runs/41151682335) attempt 1 仍失败：四个完整附件均已下载核对摘要、字节数及 ZIP CRC，十项原始记录重放一致；六次受采证恢复均通过，所有四区段和停止日志都能对应，没有非零覆盖/丢弃统计，但六条均报告 `config_write_into_file_no_flush=1 (error/trace/)`。原始六条 trace 已用固定版本的官方原生 SQL 引擎重读，消息、停止分类、CPU/线程状态与 CI 解码一致。此配置错误存在，仍不能称为采证通过；[完整来源](preview-system-trace-stream-2026-10-31.json)保留。
 
 增加 `flush_period_ms:10000`，与每秒文件写入区分，保证数据源周期提交而非仅定期读取中央缓冲；字段与开销说明见[官方 TraceConfig](https://perfetto.dev/docs/reference/trace-config-proto)。失败摘要改为直接列统计名、值和类型，便于在 Actions 页面判断原因；原覆盖、缺失、错误门槛均保留，27 项工具测试通过。没有修改应用、相机截止或签名，也未重跑旧失败来改变记录；新结果待实际运行后补充。
+
+## 内核丢失与文件传输失败
+
+提交 `6eb8342c68f53b0f3c29e19e8d74865667d852a1` 的[常规 41152966054](https://github.com/cyanrbt/walkbuddy/actions/runs/41152966054) attempt 1 两套各十项通过；[轨迹 41152965922](https://github.com/cyanrbt/walkbuddy/actions/runs/41152965922) attempt 1 两套失败，六次受采证探针本身均通过。四份完整附件已下载核对摘要、长度及 ZIP CRC，十项记录重放一致；五条实际存在的轨迹均以官方原生 SQL 引擎重读，结果与 CI 一致，四条无错误。不能把四条成功写成整轮通过。
+
+- API 35 第一次：录制进程退出已确认，`adb pull` 在约 60% 返回 1，正式轨迹文件缺失。原记录只保留了进度错误而未保存完整标准输出，无法确定这次传输中断的精确原因。其它两次完整。
+- API 36 第一次：四个主动过期均对应，周期提交配置错误已消失，但 `ftrace_cpu_overrun_delta=5350`、`ftrace_cpu_has_data_loss=1`，均为 CPU 1。其它两次完整。该统计证明内核轨迹事件丢失，不证明之前的应用停顿由同一原因造成。
+
+修订请求更大的每 CPU 内核缓冲并缩短读取周期，依据[官方缓冲说明](https://perfetto.dev/docs/concepts/buffers)与[FtraceConfig](https://perfetto.dev/docs/reference/trace-config-proto)，不删除事件或放宽丢失门槛。远端停止文件的只读传输增加有界重试和端到端摘要校验；两次均失败或摘要不符仍失败。补充缺文件时底层原因、逐轮录制/传输结果和启动失败后已知 PID 清理；31 项工具测试通过，涵盖重传不重跑探针及同长度错误摘要拒绝。[原始结果与边界](preview-system-trace-flushed-2026-10-31.json)完整保留；修订后的实际结果待取得。
+
+固定解析器的[检查实现](https://github.com/google/perfetto/blob/v59.1/src/trace_processor/importers/proto/proto_trace_reader.cc)确认：显式提交周期可以避免第二轮的配置错误。第三轮的触发记录稍后才可查询，现只确认流程已创建；未确定延迟发生在推送触发还是状态查询阶段，不重推提交来猜测处理。

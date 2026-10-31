@@ -11,6 +11,10 @@ data_sources {
     name: "linux.ftrace"
     target_buffer: 0
     ftrace_config {
+      # Emulator event bursts lost kernel records with the implicit buffer size.
+      buffer_size_kb: 8192
+      buffer_size_lower_bound: true
+      drain_period_ms: 100
       ftrace_events: "sched/sched_switch"
       ftrace_events: "sched/sched_waking"
       ftrace_events: "sched/sched_wakeup"
