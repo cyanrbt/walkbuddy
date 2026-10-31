@@ -1,0 +1,105 @@
+{
+  "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+  "runs": [
+    {
+      "id": 41190336151,
+      "name": "Surface copy experiment",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336151"
+    },
+    {
+      "id": 41190336119,
+      "name": "Preview system trace",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336119"
+    },
+    {
+      "id": 41190336117,
+      "name": "CPU capacity trace",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 2,
+      "source": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336117"
+    },
+    {
+      "id": 41190336070,
+      "name": "Android UI checks",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336070"
+    }
+  ],
+  "first_attempt_record": "preview-readiness-final-first-status-2026-10-31.json",
+  "first_failed_archive": "preview-readiness-final-launcher-2026-10-31.json",
+  "normal_ui_full_native_replay": "preview-readiness-final-native-2026-10-31.json",
+  "single_rerun": {
+    "original_job_id": 124505658112,
+    "requested_count": 1,
+    "executed_job_id": 124507922186,
+    "jobs": [
+      {
+        "id": 124507922186,
+        "name": "trace / layout (35)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T10:02:38Z",
+        "completed_at": "2026-10-31T10:10:00Z"
+      },
+      {
+        "id": 124507922990,
+        "name": "trace / layout (36)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T09:50:50Z",
+        "completed_at": "2026-10-31T09:58:59Z"
+      }
+    ],
+    "note": "API36 copied entry retains the original 09:50:50–09:58:59 execution. Only API35 executed again.",
+    "job_log_evidence": [
+      "| Trial | Scenario | Surface prefix | Evidence | Dispatches | Forced stops | Unforced stops over 1200ms |",
+      "| --- | --- | --- | --- | ---: | ---: | ---: |",
+      "| 1 | surface_reinstall_recovery | passed | complete | 2338 | 4 | 0 |",
+      "| 2 | recovery | not requested | complete | 2087 | 4 | 0 |",
+      "| 3 | recovery | not requested | complete | 2128 | 4 | 0 |",
+      "PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore",
+      "RUNTIME_PROBE_PASS",
+      "PREVIEW_PROBE_PASS cases=32; direction marker + circle in displayed and sampled bitmap",
+      "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0",
+      "LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore",
+      "HOME_PROBE_PASS configurations=24 action-states=240 expanded=240; brand reflow, first step, current status, fixed controls, full text, contrast, idle refresh stopped, real Activity recreation",
+      "RECOVERY_PROBE_PASS: denied permission, settings intent, grant and real Activity recreation; no camera auto-start or stopped watchdog polling",
+      "PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+      "PIP_PROBE_PASS",
+      "PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+      "PIP_PROBE_PASS",
+      "SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2",
+      "| 阶段 | 结果 |",
+      "| --- | --- |",
+      "| 模拟器测试 APK 编译 | 通过 |",
+      "| 模拟器运行 | 通过 |",
+      "| 探针 | 记录 |",
+      "| --- | --- |",
+      "| pip_recovery | 通过 |",
+      "| runtime | 通过 |",
+      "| preview | 通过 |",
+      "| overlay | 通过 |",
+      "| layout | 通过 |",
+      "| home | 通过 |",
+      "| recovery | 通过 |",
+      "| pip | 通过 |",
+      "| pip-repeat | 通过 |",
+      "| support | 通过 |"
+    ],
+    "scope": "Rerun terminal states and original job log only; rerun ZIP/raw traces not locally downloaded or SQL-replayed."
+  },
+  "interpretation": "Final candidate workflows succeeded; eight jobs first-pass, one focused external Launcher ANR failure then exactly one successful rerun. Both earlier candidates and their real layout/baseline failures remain linked separately. Not physical acceptance or a root-cause repair claim for older natural frame expiry."
+}

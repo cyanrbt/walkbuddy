@@ -1,0 +1,98 @@
+{
+  "tag": "v0.4.39",
+  "source_commit": "0736a8ccd47fac559cf28a6ef1de49ca9156e94e",
+  "validated_candidate": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+  "run": {
+    "id": 41191378780,
+    "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41191378780",
+    "status": "completed",
+    "conclusion": "success",
+    "attempt": 1
+  },
+  "jobs": [
+    {
+      "id": 124508689036,
+      "name": "ui / layout (36)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124508689144,
+      "name": "ui / layout (35)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124510138292,
+      "name": "apk",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "job_log_evidence": [
+    {
+      "id": 124508689036,
+      "lines": [
+        "BUILD SUCCESSFUL in 49s",
+        "PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore",
+        "RUNTIME_PROBE_PASS",
+        "PREVIEW_PROBE_PASS cases=32; direction marker + circle in displayed and sampled bitmap",
+        "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0",
+        "LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore",
+        "HOME_PROBE_PASS configurations=24 action-states=240 expanded=240; brand reflow, first step, current status, fixed controls, full text, contrast, idle refresh stopped, real Activity recreation",
+        "RECOVERY_PROBE_PASS: denied permission, settings intent, grant and real Activity recreation; no camera auto-start or stopped watchdog polling",
+        "PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "PIP_PROBE_PASS",
+        "PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "PIP_PROBE_PASS",
+        "SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2"
+      ]
+    },
+    {
+      "id": 124508689144,
+      "lines": [
+        "BUILD SUCCESSFUL in 36s",
+        "PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore",
+        "RUNTIME_PROBE_PASS",
+        "PREVIEW_PROBE_PASS cases=32; direction marker + circle in displayed and sampled bitmap",
+        "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0",
+        "LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore",
+        "HOME_PROBE_PASS configurations=24 action-states=240 expanded=240; brand reflow, first step, current status, fixed controls, full text, contrast, idle refresh stopped, real Activity recreation",
+        "RECOVERY_PROBE_PASS: denied permission, settings intent, grant and real Activity recreation; no camera auto-start or stopped watchdog polling",
+        "PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "PIP_PROBE_PASS",
+        "PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "PIP_PROBE_PASS",
+        "SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2"
+      ]
+    },
+    {
+      "id": 124510138292,
+      "lines": [
+        "Signing certificate SHA-256: ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d",
+        "> Task :app:testDebugUnitTest",
+        "> Task :app:lintDebug",
+        "BUILD SUCCESSFUL in 47s",
+        "Verified APK signing certificate SHA-256: ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d"
+      ]
+    }
+  ],
+  "release": {
+    "id": 429860243,
+    "tag": "v0.4.39",
+    "draft": false,
+    "published_at": "2026-10-31T10:14:35Z",
+    "asset": {
+      "id": 695041214,
+      "name": "Walk-Buddy-v0.4.39-arm64-debug.apk",
+      "size": 9997425,
+      "digest": "sha256:d7d3c8ba108186f8ee780617aa49a5b55e41d6f3700d34908ef0ae73228330ba",
+      "url": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.39/Walk-Buddy-v0.4.39-arm64-debug.apk"
+    }
+  },
+  "downloaded_apk_record": "apk-v0.4.39.json",
+  "candidate_full_ui_archives": "preview-readiness-final-native-2026-10-31.json",
+  "candidate_final_ci": "preview-readiness-final-status-2026-10-31.json",
+  "scope": "Formal run/UI/APK jobs all success at attempt 1; original job logs inspected. Candidate full UI archives replayed; formal UI archives not downloaded/replayed. Actual published ARM64 APK downloaded and independently verified for version/package/server size/hash, signature, ABI, model/labels and absence of test classes. No physical install, TalkBack/AR or throughput/power acceptance.",
+  "tag_push_transport": "First git push timed out; remote tag GET confirmed 404. Second push created the new tag. This is transport retry, not an Actions rerun."
+}

@@ -1,8 +1,7 @@
 # WalkBuddy
 
-白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前版本 **0.4.38**（versionCode 50），已发布固定签名安装包。
+白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前版本 **0.4.39**（versionCode 51），已发布固定签名安装包。
 
-候选 **0.4.39**（versionCode 51）调整首帧就绪：有效画面校验完成前保留启动遮罩，小窗、检测和首页首次进度在校验后启用。本地 270 项 JVM、Lint 和双 APK 编译通过。修订后的两套普通 UI、三套像素与两套两核轨迹成功；两份 UI 附件完整核验、重放并检查 60 张等待排版图，横屏大字号裁切及旧恢复样式基准均已修订。四核 Android 15 的外部 Launcher 弹窗失败单独保留并单次复验，正式发布结果待确认。[改动与验证进展](docs/profiles/preview-readiness-2026-10-31.md)。
 
 它多留一个画面，并提供基础物体识别和实验性的空间障碍检测。空间检测按深度占用判断前方是否可能受阻，无需先认识物体名称。路还是要自己看。不要在马路、楼梯或骑行时靠它决定下一步。
 
@@ -56,21 +55,13 @@
 
 ## 安装
 
-当前 [v0.4.38 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.38/Walk-Buddy-v0.4.38-arm64-debug.apk) 已通过[正式发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41172338591)：Android 15/16 与 APK 三个作业均首次成功。实际安装包已完整下载，核对 0.4.38 / 50、原固定签名、ARM64、模型和文件摘要；两份正式 UI 附件也已核验并重放。[安装包记录](docs/profiles/apk-v0.4.38.json)与[正式原生结果](docs/profiles/brightness-v038-release-native-2026-10-31.json)保留。合入前的 259 项 JVM、三套像素、两套系统轨迹检查和六条原始轨迹重放通过；开发专项另有画面过期与输入/电源前提失败样本，按来源保留，不能用正式成功覆盖它们。
+当前 [v0.4.39 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.39/Walk-Buddy-v0.4.39-arm64-debug.apk) 已通过[正式发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41191378780)：Android 15/16 与 ARM64 APK 三个作业均首次成功。实际安装包已完整下载，核对 0.4.39 / 51、原固定签名、ARM64、模型及文件摘要；发布包不含测试探针。[安装包记录](docs/profiles/apk-v0.4.39.json)与[正式构建记录](docs/profiles/preview-readiness-release-2026-10-31.json)保留。
 
-本轮在实际画面更新时，将 16×12 亮度复制与求和投递专用线程；默认仅预览不再额外排队主线程模型读回任务。整个进程最多一个未结束复制，旧 View 回调和停止后的结果不能影响新观察，缓冲待实际复制结束再释放。问题信息单独保存亮度等待、复制和交付阶段。超过 1000ms 的旧观测不启动新请求；新的异步等待从最早到期帧起最多 1200ms，采集/显示与模型的原有截止保持，错误或超时仍需主动重新开启。[本轮策略、原始失败与完整验收](docs/profiles/brightness-preview-budget-2026-10-31.md)分别记录，不宣称历史停顿根因解决或实体帧率、耗电改善。真实设备、TalkBack、AR 与道路仍待验收。
+本版在首次有效画面校验完成后才显示实时取景、启用小窗和检测，并记录首页首次预览进度。等待时区分「正在连接相机」和「正在确认画面」；横屏大字号提示保持完整。过暗、复制失败或超时仍需主动重新开启，启动五秒及原有画面截止保持。[本次设计与完整验证](docs/profiles/preview-readiness-2026-10-31.md)分别记录 270 项本地 JVM、原生首帧检查、两套完整 UI 附件和每套 60 张等待排版图。实体设备、TalkBack 与 AR 仍待验收，不宣称实体帧率或耗电改善。
 
-Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示普通模拟器检查，`Surface copy experiment` 和 `Preview system trace` 为开发专项。正式标签仍须通过两套 Android 检查后才能生成 APK；专项的红叉不等同于 APK 编译失败，正式发布成功也不等同于全部专项故障已解决。
+候选的首轮文案裁切、随后遗漏更新的恢复样式基准均已修订，失败记录保留。最终候选九作业中八个首次成功，四核 Android 15 曾被 Pixel Launcher 无响应弹窗阻挡，保留原失败后单次复验成功；不能称全部首次通过。此前模拟器中的自然画面过期仍为未解决问题，新就绪顺序不等同于其根因修复。[当前候选终态](docs/profiles/preview-readiness-final-status-2026-10-31.json)、[v0.4.38 历史验证](docs/profiles/brightness-preview-budget-2026-10-31.md)及[调度时序证据](docs/profiles/brightness-wait-2026-10-31.md)按来源保留。
 
-目前仍保留一次采集/显示龄 1436/1420ms 的画面过期，根因待定位。另一次首页失焦已用原图、当前输入焦点与同设备时间线确认：Pixel Launcher 的无响应弹窗覆盖首页，且其 ANR 早于应用测试进程启动；这不解释前一次画面停顿或后续关屏。[本轮原始证据与范围](docs/profiles/surface-startup-trace-2026-10-31.md)。
-
-为定位专项后的画面停顿，第一轮系统轨迹增加原有 Surface 专项及随后两次 APK 重新安装，再执行恢复；后两轮保留原恢复场景。首轮采证遗漏的相机授权准备已补齐，51 项工具测试通过；修订后的普通 UI 与系统轨迹均首次成功，四份附件和六条原始轨迹已实际核验重放。仍有一次首请求耗时 1134ms 的近截止样本，不能据成功称旧停顿已修复。这次只完善采证，不改变应用时效或已发布版本。[场景、失败保留和完整验证](docs/profiles/surface-startup-trace-2026-10-31.md)。
-
-该 1134ms 样本进一步确认：回调等待窗口内，两核持续忙碌，RenderThread 约 724ms 处于可运行但未获 CPU 的状态；同进程复制区段约在请求返回 888ms 后才开始。现保留两核检查，增加受实际运行机容量限制的最多四核专项，并核验模拟器实际核数。57 项工具检查通过，四核两套专项及六条原始轨迹重放通过；两核普通 UI 一次恢复点击被系统暂停窗口拒收，单次同源码复验通过，首轮失败保留。当前四个流程终态成功，不能称九作业全部首次成功或历史停顿已修复。[时序图、原始调度数据与完整实验范围](docs/profiles/brightness-wait-2026-10-31.md)。
-
-恢复触摸新增测试侧保护：只在系统日志精确证明 DOWN 因暂停而没有任何接收目标、且应用仍未启动时，允许在原就绪预算内重新准备一次；已送达或含糊的输入不重试。27 项规则检查、57 项工具检查及本地编译通过。云端首轮 8/9 作业成功，两套普通 UI 附件重放通过，各有七次真实恢复触摸启用保护，但未发生新拒收，不能称真实重试分支已验证。失败的两核 API 35 轨迹作业有 Pixel Launcher 无响应弹窗占据输入焦点，原始截图与三条失败轨迹均已核验并保留；仅该作业单次复验后成功，四个流程现均为成功，不能称九作业全部首次通过。[资格保护、证据与验证范围](docs/profiles/rejected-restore-down-2026-10-31.md)。
-
-此前的[输入焦点采证](docs/profiles/ci-input-focus-2026-10-31.md)、[运行机存储清理](docs/profiles/ci-storage-2026-10-31.md)、[相机夹具显式排空](docs/profiles/camera-explicit-drain-2026-10-31.md)及 [v0.4.37 系统轨迹](docs/profiles/preview-system-trace-2026-10-31.md)按各自来源保留。旧异步候选的[失败与撤回](docs/profiles/brightness-async-2026-10-31.md)属于发布前历史；当前应用以 v0.4.38 的安装包和[版本验证](docs/profiles/brightness-preview-budget-2026-10-31.md)为准。完整失败记录见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。
+Actions 中 `Release APK` 是标签发布，`Android UI checks` 是普通模拟器检查，`Surface copy experiment`、`Preview system trace` 和 `CPU capacity trace` 是开发专项。正式标签须通过两套 Android 检查后才能生成 APK；专项的红叉不等同于 APK 编译失败，正式发布成功也不代表所有历史专项故障已解决。更多原始记录见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。
 
 推送 `v` 开头的标签后，GitHub Actions 会构建 **arm64** 调试包，并挂到 [Releases](https://github.com/cyanrbt/walkbuddy/releases)。文件名是 `Walk-Buddy-<标签>-arm64-debug.apk`，只含 arm64-v8a，最低 Android 8。同一页上的 Source code 压缩包是源码，不是可安装的应用。
 

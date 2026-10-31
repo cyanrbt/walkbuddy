@@ -3101,5 +3101,32 @@
   "first_app_process_line": "10-31 09:53:40.121   581   619 I ActivityManager: Start proc 3077:com.cyanrbt.walkbuddy/u0a209 for added application com.cyanrbt.walkbuddy",
   "scope": "Full archive length/server SHA/CRC and original raw-trace hashes verified. Cloud trace reports retained; no local SQL replay. Screenshot requires visual inspection before attributing the failure.",
   "screenshot_visually_inspected": "Pixel Launcher is not responding dialog visibly covers stopped MainActivity.",
-  "interpretation": "Current InputDispatcher window focus belongs to the external Launcher ANR dialog. Standard recovery failed before start gained focus, without entering preview or the new first-image gate. Later screen-off failures remain recorded and are not all causally attributed to this ANR. One original failed job rerun is authorized; no app deadline/ANR dismissal changed."
+  "interpretation": "Current InputDispatcher window focus belongs to the external Launcher ANR dialog. Standard recovery failed before start gained focus, without entering preview or the new first-image gate. Later screen-off failures remain recorded and are not all causally attributed to this ANR. One original failed job rerun is authorized; no app deadline/ANR dismissal changed.",
+  "cpu": {
+    "runner-cpu.json": {
+      "requested_cores": 4,
+      "allowed_cpu_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cgroup_cpu_max": null,
+      "configured_cores": 4,
+      "scope": "Runner capacity and emulator topology; not device throughput",
+      "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2"
+    },
+    "emulator-cpu.json": {
+      "expected_cores": 4,
+      "online": "0-3",
+      "online_cpu_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "valid": true,
+      "scope": "Disposable emulator topology only"
+    }
+  }
 }
