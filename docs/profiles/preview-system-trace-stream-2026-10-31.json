@@ -1,0 +1,520 @@
+{
+  "source_commit": "67a1c9b1fe2f49f79d49de11909bd389172856de",
+  "run_id": 41151682335,
+  "run_attempt": 1,
+  "conclusion": "failure",
+  "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41151682335",
+  "cause": "All six traces report config_write_into_file_no_flush; overwrite counts absent/zero, four forced markers/logs align",
+  "raw_sql_replays": 6,
+  "normal_run": {
+    "id": 41151682381,
+    "attempt": 1,
+    "conclusion": "success",
+    "reports": [
+      {
+        "api": 35,
+        "artifact_id": 13023238240,
+        "artifact_sha256": "e65060aa4fd2ef800fc0054e4244c8aa324106997451709b5986ce6273c9364d",
+        "artifact_bytes": 14034777,
+        "ui": {
+          "status": "passed",
+          "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+          "build_result": "success",
+          "emulator_result": "success",
+          "mode": "ui",
+          "probes": [
+            {
+              "name": "pip_recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "runtime",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "preview",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "overlay",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "layout",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "home",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip-repeat",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "support",
+              "status": "passed",
+              "failures": []
+            }
+          ],
+          "observations": [],
+          "anrs": [],
+          "failure_time_focus": [],
+          "focused_external_anr_dialogs": []
+        }
+      },
+      {
+        "api": 36,
+        "artifact_id": 13022734244,
+        "artifact_sha256": "69aef5a63e506ca8bcdf1cc8dd3ec9fe546acea0ea133f257315f07d75da3dc7",
+        "artifact_bytes": 14013217,
+        "ui": {
+          "status": "passed",
+          "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+          "build_result": "success",
+          "emulator_result": "success",
+          "mode": "ui",
+          "probes": [
+            {
+              "name": "pip_recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "runtime",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "preview",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "overlay",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "layout",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "home",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "recovery",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "pip-repeat",
+              "status": "passed",
+              "failures": []
+            },
+            {
+              "name": "support",
+              "status": "passed",
+              "failures": []
+            }
+          ],
+          "observations": [],
+          "anrs": [],
+          "failure_time_focus": [],
+          "focused_external_anr_dialogs": []
+        }
+      }
+    ]
+  },
+  "reports": [
+    {
+      "api": 35,
+      "artifact_id": 13023607802,
+      "artifact_bytes": 64976799,
+      "artifact_sha256": "3bb0a887698a6b108641da24dac9895793b1a73f319fe1008a296baa33666633",
+      "standard_ui": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "capture": {
+            "trial": 1,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 2483,
+            "instrumentation_exit": 0,
+            "trace_bytes": 55012050,
+            "trace_sha256": "f676d8646f801ff30b00e45e2dad728ee50c8acc3fb15cb582fae650495774ea"
+          },
+          "valid": false,
+          "main_dispatch_count": 3012,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "error_and_loss_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "config_write_into_file_no_flush",
+              "value": "1",
+              "detail": "error/trace/"
+            }
+          ],
+          "local_replay_errors": [
+            "Trace data loss/errors: config_write_into_file_no_flush=1 (error/trace/)"
+          ]
+        },
+        {
+          "trial": 2,
+          "capture": {
+            "trial": 2,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 3703,
+            "instrumentation_exit": 0,
+            "trace_bytes": 47072564,
+            "trace_sha256": "3ad7a24e91363a62419a8806c1d6e640af25ac9bca973e28099c4bafc29ce271"
+          },
+          "valid": false,
+          "main_dispatch_count": 2481,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "error_and_loss_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "config_write_into_file_no_flush",
+              "value": "1",
+              "detail": "error/trace/"
+            }
+          ],
+          "local_replay_errors": [
+            "Trace data loss/errors: config_write_into_file_no_flush=1 (error/trace/)"
+          ]
+        },
+        {
+          "trial": 3,
+          "capture": {
+            "trial": 3,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 4302,
+            "instrumentation_exit": 0,
+            "trace_bytes": 44747213,
+            "trace_sha256": "38ed1447b4ae8aff5daa83bf47419bc6937e35fe50c3fe6a25c59341b774d0ea"
+          },
+          "valid": false,
+          "main_dispatch_count": 2489,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "error_and_loss_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "config_write_into_file_no_flush",
+              "value": "1",
+              "detail": "error/trace/"
+            }
+          ],
+          "local_replay_errors": [
+            "Trace data loss/errors: config_write_into_file_no_flush=1 (error/trace/)"
+          ]
+        }
+      ]
+    },
+    {
+      "api": 36,
+      "artifact_id": 13022664630,
+      "artifact_bytes": 65817343,
+      "artifact_sha256": "fe5622236b44d7535a29f600d2cf851be5903f6a8c109996c65f9abf3d5a36ab",
+      "standard_ui": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "trials": [
+        {
+          "trial": 1,
+          "capture": {
+            "trial": 1,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 2079,
+            "instrumentation_exit": 0,
+            "trace_bytes": 53134419,
+            "trace_sha256": "838dd0d57b495b12fffada47b48b13572718176a9f61a5b611c17316703670b8"
+          },
+          "valid": false,
+          "main_dispatch_count": 3120,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "error_and_loss_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "config_write_into_file_no_flush",
+              "value": "1",
+              "detail": "error/trace/"
+            }
+          ],
+          "local_replay_errors": [
+            "Trace data loss/errors: config_write_into_file_no_flush=1 (error/trace/)"
+          ]
+        },
+        {
+          "trial": 2,
+          "capture": {
+            "trial": 2,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 3423,
+            "instrumentation_exit": 0,
+            "trace_bytes": 48250725,
+            "trace_sha256": "a0e3713d9a765c33da0e11acaebabfd8e8fa7e6c43f559670c1643d9cb5c5a0d"
+          },
+          "valid": false,
+          "main_dispatch_count": 2863,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "error_and_loss_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "config_write_into_file_no_flush",
+              "value": "1",
+              "detail": "error/trace/"
+            }
+          ],
+          "local_replay_errors": [
+            "Trace data loss/errors: config_write_into_file_no_flush=1 (error/trace/)"
+          ]
+        },
+        {
+          "trial": 3,
+          "capture": {
+            "trial": 3,
+            "flushed": true,
+            "probe_pass": true,
+            "errors": [],
+            "perfetto_pid": 4216,
+            "instrumentation_exit": 0,
+            "trace_bytes": 46842928,
+            "trace_sha256": "fd0d3581ca44a19260c50bf7d4236fb5ae6c850befb5f0fa635e771a5905d1c7"
+          },
+          "valid": false,
+          "main_dispatch_count": 2730,
+          "forced_markers": 4,
+          "stop_counts": {
+            "forced_expiry": 4,
+            "lifecycle": 1,
+            "other_stop": 1
+          },
+          "error_and_loss_stats": [
+            {
+              "kind": "stat",
+              "ts": "0",
+              "dur": "0",
+              "utid": "0",
+              "tid": "0",
+              "thread": "",
+              "name": "config_write_into_file_no_flush",
+              "value": "1",
+              "detail": "error/trace/"
+            }
+          ],
+          "local_replay_errors": [
+            "Trace data loss/errors: config_write_into_file_no_flush=1 (error/trace/)"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -51,7 +51,8 @@ def summarize(rows, capture):
     loss = [r for r in stats if (r['detail'].split('/')[0] in ('data_loss', 'error')
                                 or r['name'] in overwrite_stats) and int(r['value']) > 0]
     if loss:
-        errors.append('Trace parser reports data loss or errors')
+        errors.append('Trace data loss/errors: '+', '.join(
+            f"{r['name']}={r['value']} ({r['detail']})" for r in loss))
     bounds = [(int(r['ts']), int(r['ts'])+int(r['dur'])) for r in dispatch if int(r['dur']) >= 0]
     start = min((r[0] for r in bounds), default=0)
     end = max((r[1] for r in bounds), default=0)

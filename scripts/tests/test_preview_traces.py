@@ -95,7 +95,9 @@ class TraceReportTest(unittest.TestCase):
 
     def test_info_severity_ring_overwrite_still_fails_full_trial_evidence(self):
         rows = complete_rows()+[row('stat', 'traced_buf_bytes_overwritten', value=20512768, detail='info/trace')]
-        self.assertFalse(report.summarize(rows, self.capture)['valid'])
+        result = report.summarize(rows, self.capture)
+        self.assertFalse(result['valid'])
+        self.assertTrue(any('traced_buf_bytes_overwritten=20512768' in error for error in result['errors']))
 
     def test_data_loss_is_a_failure_even_with_four_passing_forced_stops(self):
         rows = complete_rows()+[row('stat', 'ftrace_cpu_overrun', value=1, detail='data_loss/trace')]
