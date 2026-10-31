@@ -1,0 +1,186 @@
+{
+  "source_commit": "c55eccda2b87152debebd91c68e14507b9d52a49",
+  "reruns_requested_at_capture": 0,
+  "runs": [
+    {
+      "id": 41199483406,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41199483406",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 124532262469,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124532262640,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41199483116,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41199483116",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 124532261720,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124532261818,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41199483112,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41199483112",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 124532261453,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124532261661,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124532261680,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41199483102,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41199483102",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 124532261583,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124532261797,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "job_log_evidence": [
+    {
+      "id": 124532262469,
+      "stop": 2,
+      "sound": 2,
+      "failed": [],
+      "traces": []
+    },
+    {
+      "id": 124532262640,
+      "stop": 2,
+      "sound": 2,
+      "failed": [],
+      "traces": []
+    },
+    {
+      "id": 124532261720,
+      "stop": 2,
+      "sound": 2,
+      "failed": [],
+      "traces": [
+        "2026-10-31T12:08:57.6701071Z | 1 | surface_reinstall_recovery | passed | complete | 2320 | 4 | 0 |",
+        "2026-10-31T12:08:57.6701910Z | 2 | recovery | not requested | complete | 2163 | 4 | 0 |",
+        "2026-10-31T12:08:57.6702899Z | 3 | recovery | not requested | complete | 2038 | 4 | 0 |"
+      ]
+    },
+    {
+      "id": 124532261818,
+      "stop": 2,
+      "sound": 2,
+      "failed": [],
+      "traces": [
+        "2026-10-31T12:09:25.4907382Z | 1 | surface_reinstall_recovery | passed | complete | 2533 | 4 | 0 |",
+        "2026-10-31T12:09:25.4907850Z | 2 | recovery | not requested | complete | 2376 | 4 | 0 |",
+        "2026-10-31T12:09:25.4908267Z | 3 | recovery | not requested | complete | 2104 | 4 | 0 |"
+      ]
+    },
+    {
+      "id": 124532261453,
+      "stop": 0,
+      "sound": 0,
+      "failed": [],
+      "traces": []
+    },
+    {
+      "id": 124532261661,
+      "stop": 2,
+      "sound": 2,
+      "failed": [],
+      "traces": []
+    },
+    {
+      "id": 124532261680,
+      "stop": 2,
+      "sound": 2,
+      "failed": [],
+      "traces": []
+    },
+    {
+      "id": 124532261583,
+      "stop": 1,
+      "sound": 1,
+      "failed": [
+        "2026-10-31T12:12:12.5795231Z PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 关闭提示音 last=null; 实时画面"
+      ],
+      "traces": [
+        "2026-10-31T12:09:09.1322667Z | 1 | surface_reinstall_recovery | passed | complete | 2648 | 4 | 0 |",
+        "2026-10-31T12:09:09.1327915Z | 2 | recovery | not requested | complete | 2302 | 4 | 0 |",
+        "2026-10-31T12:09:09.1342093Z | 3 | recovery | not requested | complete | 2125 | 4 | 0 |"
+      ]
+    },
+    {
+      "id": 124532261797,
+      "stop": 2,
+      "sound": 2,
+      "failed": [],
+      "traces": [
+        "2026-10-31T12:08:44.2051213Z | 1 | surface_reinstall_recovery | passed | complete | 2445 | 4 | 0 |",
+        "2026-10-31T12:08:44.2051629Z | 2 | recovery | not requested | complete | 2253 | 4 | 0 |",
+        "2026-10-31T12:08:44.2052012Z | 3 | recovery | not requested | complete | 2363 | 4 | 0 |"
+      ]
+    }
+  ],
+  "normal_ui_native_replay": "pip-stop-owner-native-2026-10-31.json",
+  "full_failure_evidence": "pip-stop-owner-menu-failure-2026-10-31.json",
+  "interpretation": "Eight first-pass jobs, one API35/two-core trace job failed while opening fourth SystemUI sound menu in pip-repeat. Its first full eight stop cases passed; second reached only five stop cases before the sound-menu failure. Two standard UI ZIPs fully verified/replayed, 32 stop cases passed. Failure archive full size/SHA/CRC and raw trace SHA verified, no local SQL replay. Native frozen state shows no fourth control touch or new mute command. Cause of moved PiP/menu nonappearance still unresolved; not the earlier missing-confirmation mute timeout and not a proven external system cause."
+}

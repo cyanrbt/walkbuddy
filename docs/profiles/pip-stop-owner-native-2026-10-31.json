@@ -1,0 +1,1482 @@
+{
+  "source_commit": "c55eccda2b87152debebd91c68e14507b9d52a49",
+  "reports": [
+    {
+      "api": 36,
+      "workflow_run": 41199483406,
+      "artifact_id": 13042076708,
+      "artifact_bytes": 17786991,
+      "artifact_sha256": "0b995295c757cd151034a4a90fef80cf9cb49e9e0f32053498dd35051bc29cc7",
+      "ui_replay": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "stop_ownership_records": [
+        {
+          "file": "cache/ui-probe/pip-stop-4890-200863.json",
+          "bytes": 9111,
+          "sha256": "e1bced20e77b27e9f2c0fd2ccbdb22f8f895885eff887ef829924d723f2f36da",
+          "scope": "Actual emulator PiP and RemoteAction PendingIntent delivery; deliberate failure, not natural timeout reproduction",
+          "cases": [
+            {
+              "case": "expanded_old_menu",
+              "before": {
+                "elapsed_ms": 201488,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 201454,
+                "display_at": 201483,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                  "visit": 7,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/78e120f1-9c67-40ea-abec-2098537771fe/7"
+                }
+              },
+              "after": {
+                "elapsed_ms": 201768,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 201734,
+                "display_at": 201766,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "fullscreen_current_identity",
+              "before": {
+                "elapsed_ms": 201770,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 201734,
+                "display_at": 201766,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                  "visit": 8,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/78e120f1-9c67-40ea-abec-2098537771fe/8"
+                }
+              },
+              "after": {
+                "elapsed_ms": 202034,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 202001,
+                "display_at": 202033,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "earlier_pip_visit",
+              "before": {
+                "elapsed_ms": 202237,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 202206,
+                "display_at": 202237,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                  "visit": 7,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/78e120f1-9c67-40ea-abec-2098537771fe/7"
+                }
+              },
+              "after": {
+                "elapsed_ms": 202511,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 202460,
+                "display_at": 202500,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "legacy_without_owner_or_visit",
+              "before": {
+                "elapsed_ms": 202512,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 202460,
+                "display_at": 202500,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": null,
+                  "visit": -1,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": null
+                }
+              },
+              "after": {
+                "elapsed_ms": 202771,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 202733,
+                "display_at": 202766,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "other_owner_current_visit",
+              "before": {
+                "elapsed_ms": 202773,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 202733,
+                "display_at": 202766,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "retired-owner",
+                  "visit": 9,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/retired-owner/9"
+                }
+              },
+              "after": {
+                "elapsed_ms": 203036,
+                "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 203001,
+                "display_at": 203033,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "previous_observation",
+              "before": {
+                "elapsed_ms": 219999,
+                "owner": "6bc5d89a-3d2b-43d3-94d8-8a4921c43f5d",
+                "visit": 13,
+                "generation": 24,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 219998,
+                "display_at": 219906,
+                "recognition": false,
+                "camera": true,
+                "analysis": false,
+                "delivered_command": {
+                  "owner": "78e120f1-9c67-40ea-abec-2098537771fe",
+                  "visit": 9,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/78e120f1-9c67-40ea-abec-2098537771fe/9"
+                }
+              },
+              "after": {
+                "elapsed_ms": 220350,
+                "owner": "6bc5d89a-3d2b-43d3-94d8-8a4921c43f5d",
+                "visit": 13,
+                "generation": 24,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 220317,
+                "display_at": 220350,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              }
+            },
+            {
+              "case": "previous_activity",
+              "before": {
+                "elapsed_ms": 221344,
+                "owner": "4ef1fb51-e8ac-4cc0-96ba-b66c40392668",
+                "visit": 1,
+                "generation": 1,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 221321,
+                "display_at": 221326,
+                "recognition": false,
+                "camera": true,
+                "analysis": false,
+                "delivered_command": {
+                  "owner": "6bc5d89a-3d2b-43d3-94d8-8a4921c43f5d",
+                  "visit": 13,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/6bc5d89a-3d2b-43d3-94d8-8a4921c43f5d/13"
+                }
+              },
+              "after": {
+                "elapsed_ms": 221720,
+                "owner": "4ef1fb51-e8ac-4cc0-96ba-b66c40392668",
+                "visit": 1,
+                "generation": 1,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 221684,
+                "display_at": 221716,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              }
+            },
+            {
+              "case": "current_action_stops_failed_observation",
+              "before": {
+                "elapsed_ms": 228298,
+                "owner": "905b868c-369a-4113-a971-f54154059852",
+                "visit": 3,
+                "generation": 3,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 228235,
+                "display_at": 228273,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              },
+              "after": {
+                "elapsed_ms": 228586,
+                "owner": "905b868c-369a-4113-a971-f54154059852",
+                "visit": 3,
+                "generation": 7,
+                "phase": "STOPPED",
+                "pip": true,
+                "finishing": true,
+                "destroyed": true,
+                "capture_at": 0,
+                "display_at": 0,
+                "recognition": false,
+                "camera": false,
+                "analysis": false,
+                "failed_before_stop": {
+                  "elapsed_ms": 228502,
+                  "owner": "905b868c-369a-4113-a971-f54154059852",
+                  "visit": 3,
+                  "generation": 4,
+                  "phase": "UNAVAILABLE",
+                  "pip": true,
+                  "finishing": false,
+                  "destroyed": false,
+                  "capture_at": 0,
+                  "display_at": 0,
+                  "recognition": false,
+                  "camera": false,
+                  "analysis": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "file": "cache/ui-probe/pip-stop-5717-272752.json",
+          "bytes": 9111,
+          "sha256": "f2eec7e023e95c0902f968a46d34dadf4f90e3198304d8ee921e7d5089af4953",
+          "scope": "Actual emulator PiP and RemoteAction PendingIntent delivery; deliberate failure, not natural timeout reproduction",
+          "cases": [
+            {
+              "case": "expanded_old_menu",
+              "before": {
+                "elapsed_ms": 273394,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 273352,
+                "display_at": 273383,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                  "visit": 7,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/ce9bbc1a-5c4f-45bb-907b-16dec5a494f5/7"
+                }
+              },
+              "after": {
+                "elapsed_ms": 273668,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 273617,
+                "display_at": 273650,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "fullscreen_current_identity",
+              "before": {
+                "elapsed_ms": 273670,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 273617,
+                "display_at": 273650,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                  "visit": 8,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/ce9bbc1a-5c4f-45bb-907b-16dec5a494f5/8"
+                }
+              },
+              "after": {
+                "elapsed_ms": 273927,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 273881,
+                "display_at": 273916,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "earlier_pip_visit",
+              "before": {
+                "elapsed_ms": 274103,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 274064,
+                "display_at": 274082,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                  "visit": 7,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/ce9bbc1a-5c4f-45bb-907b-16dec5a494f5/7"
+                }
+              },
+              "after": {
+                "elapsed_ms": 274400,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 274353,
+                "display_at": 274400,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "legacy_without_owner_or_visit",
+              "before": {
+                "elapsed_ms": 274401,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 274353,
+                "display_at": 274400,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": null,
+                  "visit": -1,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": null
+                }
+              },
+              "after": {
+                "elapsed_ms": 274669,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 274634,
+                "display_at": 274666,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "other_owner_current_visit",
+              "before": {
+                "elapsed_ms": 274671,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 274634,
+                "display_at": 274666,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "retired-owner",
+                  "visit": 9,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/retired-owner/9"
+                }
+              },
+              "after": {
+                "elapsed_ms": 274934,
+                "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 274900,
+                "display_at": 274933,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "previous_observation",
+              "before": {
+                "elapsed_ms": 291735,
+                "owner": "502cddea-1487-41fb-9d1b-330072212133",
+                "visit": 13,
+                "generation": 24,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 291726,
+                "display_at": 291728,
+                "recognition": false,
+                "camera": true,
+                "analysis": false,
+                "delivered_command": {
+                  "owner": "ce9bbc1a-5c4f-45bb-907b-16dec5a494f5",
+                  "visit": 9,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/ce9bbc1a-5c4f-45bb-907b-16dec5a494f5/9"
+                }
+              },
+              "after": {
+                "elapsed_ms": 292144,
+                "owner": "502cddea-1487-41fb-9d1b-330072212133",
+                "visit": 13,
+                "generation": 24,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 292118,
+                "display_at": 292116,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              }
+            },
+            {
+              "case": "previous_activity",
+              "before": {
+                "elapsed_ms": 293228,
+                "owner": "a8670655-e102-4cb5-954a-6c90818f27d2",
+                "visit": 1,
+                "generation": 1,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 293226,
+                "display_at": 293106,
+                "recognition": false,
+                "camera": true,
+                "analysis": false,
+                "delivered_command": {
+                  "owner": "502cddea-1487-41fb-9d1b-330072212133",
+                  "visit": 13,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/502cddea-1487-41fb-9d1b-330072212133/13"
+                }
+              },
+              "after": {
+                "elapsed_ms": 293649,
+                "owner": "a8670655-e102-4cb5-954a-6c90818f27d2",
+                "visit": 1,
+                "generation": 1,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 293600,
+                "display_at": 293633,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              }
+            },
+            {
+              "case": "current_action_stops_failed_observation",
+              "before": {
+                "elapsed_ms": 300079,
+                "owner": "54fac511-bbef-45d4-8562-23787ddfd814",
+                "visit": 3,
+                "generation": 3,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 300032,
+                "display_at": 300054,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              },
+              "after": {
+                "elapsed_ms": 300344,
+                "owner": "54fac511-bbef-45d4-8562-23787ddfd814",
+                "visit": 3,
+                "generation": 7,
+                "phase": "STOPPED",
+                "pip": true,
+                "finishing": true,
+                "destroyed": true,
+                "capture_at": 0,
+                "display_at": 0,
+                "recognition": false,
+                "camera": false,
+                "analysis": false,
+                "failed_before_stop": {
+                  "elapsed_ms": 300278,
+                  "owner": "54fac511-bbef-45d4-8562-23787ddfd814",
+                  "visit": 3,
+                  "generation": 4,
+                  "phase": "UNAVAILABLE",
+                  "pip": true,
+                  "finishing": false,
+                  "destroyed": false,
+                  "capture_at": 0,
+                  "display_at": 0,
+                  "recognition": false,
+                  "camera": false,
+                  "analysis": false
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "controlled_failure_screenshot": {
+        "path": "cache/ui-probe/pip-stop-controlled-failure.png",
+        "sha256": "a97fa817865c3ea4fee9b393a1a7ce4bf6ac11b419c063a485f200553715ef2f",
+        "bytes": 38824,
+        "width": 320,
+        "height": 640
+      },
+      "sound_diagnostics_retained": true
+    },
+    {
+      "api": 35,
+      "workflow_run": 41199483406,
+      "artifact_id": 13042072962,
+      "artifact_bytes": 17825191,
+      "artifact_sha256": "87756d7be06ff7f519f66ec9dd7c7467d47d835d628240eb9a6088205ac27cf0",
+      "ui_replay": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "stop_ownership_records": [
+        {
+          "file": "cache/ui-probe/pip-stop-4601-194912.json",
+          "bytes": 9111,
+          "sha256": "16d53b2c7bb1e4375f8c890fb7b39e26a34e5ba39e67b541165b91a7d2008918",
+          "scope": "Actual emulator PiP and RemoteAction PendingIntent delivery; deliberate failure, not natural timeout reproduction",
+          "cases": [
+            {
+              "case": "expanded_old_menu",
+              "before": {
+                "elapsed_ms": 195565,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 195510,
+                "display_at": 195543,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                  "visit": 7,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/0fd81090-7f48-451e-8518-4a20b8a7323c/7"
+                }
+              },
+              "after": {
+                "elapsed_ms": 195814,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 195777,
+                "display_at": 195809,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "fullscreen_current_identity",
+              "before": {
+                "elapsed_ms": 195816,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 195777,
+                "display_at": 195809,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                  "visit": 8,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/0fd81090-7f48-451e-8518-4a20b8a7323c/8"
+                }
+              },
+              "after": {
+                "elapsed_ms": 196088,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 196038,
+                "display_at": 196076,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "earlier_pip_visit",
+              "before": {
+                "elapsed_ms": 196319,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 196275,
+                "display_at": 196314,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                  "visit": 7,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/0fd81090-7f48-451e-8518-4a20b8a7323c/7"
+                }
+              },
+              "after": {
+                "elapsed_ms": 196561,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 196527,
+                "display_at": 196559,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "legacy_without_owner_or_visit",
+              "before": {
+                "elapsed_ms": 196563,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 196527,
+                "display_at": 196559,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": null,
+                  "visit": -1,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": null
+                }
+              },
+              "after": {
+                "elapsed_ms": 196828,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 196793,
+                "display_at": 196826,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "other_owner_current_visit",
+              "before": {
+                "elapsed_ms": 196830,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 196793,
+                "display_at": 196826,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "retired-owner",
+                  "visit": 9,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/retired-owner/9"
+                }
+              },
+              "after": {
+                "elapsed_ms": 197094,
+                "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 197061,
+                "display_at": 197093,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "previous_observation",
+              "before": {
+                "elapsed_ms": 214330,
+                "owner": "1a1f4c06-6de0-40bc-899e-ccfdadc12b14",
+                "visit": 13,
+                "generation": 24,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 214296,
+                "display_at": 214292,
+                "recognition": false,
+                "camera": true,
+                "analysis": false,
+                "delivered_command": {
+                  "owner": "0fd81090-7f48-451e-8518-4a20b8a7323c",
+                  "visit": 9,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/0fd81090-7f48-451e-8518-4a20b8a7323c/9"
+                }
+              },
+              "after": {
+                "elapsed_ms": 214652,
+                "owner": "1a1f4c06-6de0-40bc-899e-ccfdadc12b14",
+                "visit": 13,
+                "generation": 24,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 214608,
+                "display_at": 214646,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              }
+            },
+            {
+              "case": "previous_activity",
+              "before": {
+                "elapsed_ms": 215843,
+                "owner": "24bde07a-c345-43a5-8e71-6a382d995ff5",
+                "visit": 1,
+                "generation": 1,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 215696,
+                "display_at": 215716,
+                "recognition": false,
+                "camera": true,
+                "analysis": false,
+                "delivered_command": {
+                  "owner": "1a1f4c06-6de0-40bc-899e-ccfdadc12b14",
+                  "visit": 13,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/1a1f4c06-6de0-40bc-899e-ccfdadc12b14/13"
+                }
+              },
+              "after": {
+                "elapsed_ms": 216327,
+                "owner": "24bde07a-c345-43a5-8e71-6a382d995ff5",
+                "visit": 1,
+                "generation": 1,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 216297,
+                "display_at": 216326,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              }
+            },
+            {
+              "case": "current_action_stops_failed_observation",
+              "before": {
+                "elapsed_ms": 223122,
+                "owner": "dee96bc4-4dfb-4514-821e-d5f9669620d7",
+                "visit": 3,
+                "generation": 3,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 223082,
+                "display_at": 223087,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              },
+              "after": {
+                "elapsed_ms": 223430,
+                "owner": "dee96bc4-4dfb-4514-821e-d5f9669620d7",
+                "visit": 3,
+                "generation": 7,
+                "phase": "STOPPED",
+                "pip": true,
+                "finishing": true,
+                "destroyed": true,
+                "capture_at": 0,
+                "display_at": 0,
+                "recognition": false,
+                "camera": false,
+                "analysis": false,
+                "failed_before_stop": {
+                  "elapsed_ms": 223316,
+                  "owner": "dee96bc4-4dfb-4514-821e-d5f9669620d7",
+                  "visit": 3,
+                  "generation": 4,
+                  "phase": "UNAVAILABLE",
+                  "pip": true,
+                  "finishing": false,
+                  "destroyed": false,
+                  "capture_at": 0,
+                  "display_at": 0,
+                  "recognition": false,
+                  "camera": false,
+                  "analysis": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "file": "cache/ui-probe/pip-stop-5185-268518.json",
+          "bytes": 9111,
+          "sha256": "368a90b7f4df495b4826100c65295d72ef3a55c5aee7bf325acc96c6f3a87148",
+          "scope": "Actual emulator PiP and RemoteAction PendingIntent delivery; deliberate failure, not natural timeout reproduction",
+          "cases": [
+            {
+              "case": "expanded_old_menu",
+              "before": {
+                "elapsed_ms": 269165,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 269143,
+                "display_at": 269143,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                  "visit": 7,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/768a9940-2ba4-4bad-bb64-d538b9adb3a2/7"
+                }
+              },
+              "after": {
+                "elapsed_ms": 269443,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 269410,
+                "display_at": 269443,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "fullscreen_current_identity",
+              "before": {
+                "elapsed_ms": 269446,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 269410,
+                "display_at": 269443,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                  "visit": 8,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/768a9940-2ba4-4bad-bb64-d538b9adb3a2/8"
+                }
+              },
+              "after": {
+                "elapsed_ms": 269710,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 8,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": false,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 269677,
+                "display_at": 269709,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "earlier_pip_visit",
+              "before": {
+                "elapsed_ms": 269945,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 269913,
+                "display_at": 269943,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                  "visit": 7,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/768a9940-2ba4-4bad-bb64-d538b9adb3a2/7"
+                }
+              },
+              "after": {
+                "elapsed_ms": 270210,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 270177,
+                "display_at": 270209,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "legacy_without_owner_or_visit",
+              "before": {
+                "elapsed_ms": 270212,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 270177,
+                "display_at": 270209,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": null,
+                  "visit": -1,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": null
+                }
+              },
+              "after": {
+                "elapsed_ms": 270477,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 270443,
+                "display_at": 270476,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "other_owner_current_visit",
+              "before": {
+                "elapsed_ms": 270480,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 270443,
+                "display_at": 270476,
+                "recognition": true,
+                "camera": true,
+                "analysis": true,
+                "delivered_command": {
+                  "owner": "retired-owner",
+                  "visit": 9,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/retired-owner/9"
+                }
+              },
+              "after": {
+                "elapsed_ms": 270749,
+                "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                "visit": 9,
+                "generation": 21,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 270710,
+                "display_at": 270743,
+                "recognition": true,
+                "camera": true,
+                "analysis": true
+              }
+            },
+            {
+              "case": "previous_observation",
+              "before": {
+                "elapsed_ms": 287372,
+                "owner": "b9561c62-e94b-4ff1-b1ad-c0397e47e2a5",
+                "visit": 13,
+                "generation": 24,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 287354,
+                "display_at": 287357,
+                "recognition": false,
+                "camera": true,
+                "analysis": false,
+                "delivered_command": {
+                  "owner": "768a9940-2ba4-4bad-bb64-d538b9adb3a2",
+                  "visit": 9,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/768a9940-2ba4-4bad-bb64-d538b9adb3a2/9"
+                }
+              },
+              "after": {
+                "elapsed_ms": 287779,
+                "owner": "b9561c62-e94b-4ff1-b1ad-c0397e47e2a5",
+                "visit": 13,
+                "generation": 24,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 287735,
+                "display_at": 287776,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              }
+            },
+            {
+              "case": "previous_activity",
+              "before": {
+                "elapsed_ms": 289041,
+                "owner": "5c345874-7d14-4720-b57b-2712cc6932cf",
+                "visit": 1,
+                "generation": 1,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 289039,
+                "display_at": 288925,
+                "recognition": false,
+                "camera": true,
+                "analysis": false,
+                "delivered_command": {
+                  "owner": "b9561c62-e94b-4ff1-b1ad-c0397e47e2a5",
+                  "visit": 13,
+                  "action": "com.cyanrbt.walkbuddy.STOP_PREVIEW",
+                  "data": "walkbuddy://stop/b9561c62-e94b-4ff1-b1ad-c0397e47e2a5/13"
+                }
+              },
+              "after": {
+                "elapsed_ms": 289349,
+                "owner": "5c345874-7d14-4720-b57b-2712cc6932cf",
+                "visit": 1,
+                "generation": 1,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 289307,
+                "display_at": 289343,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              }
+            },
+            {
+              "case": "current_action_stops_failed_observation",
+              "before": {
+                "elapsed_ms": 295675,
+                "owner": "96c6ecfa-4154-4970-a3ed-8873f8059a89",
+                "visit": 3,
+                "generation": 3,
+                "phase": "LIVE",
+                "pip": true,
+                "finishing": false,
+                "destroyed": false,
+                "capture_at": 295640,
+                "display_at": 295660,
+                "recognition": false,
+                "camera": true,
+                "analysis": false
+              },
+              "after": {
+                "elapsed_ms": 295943,
+                "owner": "96c6ecfa-4154-4970-a3ed-8873f8059a89",
+                "visit": 3,
+                "generation": 7,
+                "phase": "STOPPED",
+                "pip": true,
+                "finishing": true,
+                "destroyed": true,
+                "capture_at": 0,
+                "display_at": 0,
+                "recognition": false,
+                "camera": false,
+                "analysis": false,
+                "failed_before_stop": {
+                  "elapsed_ms": 295852,
+                  "owner": "96c6ecfa-4154-4970-a3ed-8873f8059a89",
+                  "visit": 3,
+                  "generation": 4,
+                  "phase": "UNAVAILABLE",
+                  "pip": true,
+                  "finishing": false,
+                  "destroyed": false,
+                  "capture_at": 0,
+                  "display_at": 0,
+                  "recognition": false,
+                  "camera": false,
+                  "analysis": false
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "controlled_failure_screenshot": {
+        "path": "cache/ui-probe/pip-stop-controlled-failure.png",
+        "sha256": "12bc475933deb35796e0bd7d082960ec3867ad61318a3e03916996a56c61b682",
+        "bytes": 40305,
+        "width": 320,
+        "height": 640
+      },
+      "sound_diagnostics_retained": true
+    }
+  ],
+  "scope": "Two full standard UI ZIPs size/server SHA/CRC checked and ten reports each replayed. Four actual emulator Camera2/PiP runs with eight delivered stop cases each, original delivered owner/visit/data, advancing frames, and deliberately failed current-stop closure. Not natural stale-stop reproduction, a SystemUI stop-button touch claim, physical device, TalkBack, real AR, FPS or power acceptance."
+}
