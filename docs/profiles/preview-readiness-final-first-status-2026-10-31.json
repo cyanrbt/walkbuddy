@@ -1,0 +1,88 @@
+{
+  "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+  "runs": [
+    {
+      "id": 41190336151,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336151",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124505657988,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124505658087,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124505658103,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41190336119,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336119",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124505658033,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124505658134,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41190336117,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336117",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124505657873,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124505658112,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    {
+      "id": 41190336070,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336070",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124505657663,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124505657872,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "note": "Eight first-attempt successes, one failed four-core API35 trace job. Before requesting any rerun, full failed artifact size/server SHA/CRC and all three original raw hashes verified; screenshot viewed and current InputDispatcher focus confirmed Pixel Launcher ANR."
+}

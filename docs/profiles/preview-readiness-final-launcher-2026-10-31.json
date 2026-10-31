@@ -1,0 +1,3105 @@
+{
+  "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+  "run": 41190336117,
+  "job": 124505658112,
+  "artifact_id": 13038697595,
+  "bytes": 48129189,
+  "sha256": "14b20e156d5792c344a54e06bf83bc40d619140055e4d27ee9bdf5c5a418d2b9",
+  "full_zip_crc": "passed",
+  "ui_report": {
+    "status": "checks_not_passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "failure",
+    "mode": "ui",
+    "probes": [
+      {
+        "name": "pip_recovery",
+        "status": "failed",
+        "failures": [
+          "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: touch target ready id=2130968655; interactive=true keyguard=false; 已停止；请主动开启; target=start activity=MainActivity focus=false pip=false finishing=false destroyed=false attached=true shown=true enabled=true windowVisibility=0 visibleRect=true bounds=Rect(20, 550 - 300, 602) ancestor[0]=Button laidOut=true layoutRequested=false ancestor[1]=LinearLayout laidOut=true layoutRequested=false ancestor[2]=LinearLayout laidOut=true layoutRequested=false ancestor[3]=LinearLayout laidOut=true layoutRequested=false ancestor[4]=FrameLayout laidOut=true layoutRequested=false ancestor[5]=LinearLayout laidOut=true layoutRequested=false ancestor[6]=DecorView laidOut=true layoutRequested=false; 已停止；请主动开启"
+        ]
+      },
+      {
+        "name": "runtime",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "preview",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "overlay",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "layout",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "home",
+        "status": "failed",
+        "failures": [
+          "HOME_PROBE_FAIL: java.lang.AssertionError: Timed out: focused home with AppOps observer and drained refresh"
+        ]
+      },
+      {
+        "name": "recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip",
+        "status": "failed",
+        "failures": [
+          "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: full preview owns screen hold; interactive=false keyguard=false; 锁屏：摄像头已停止，请主动重新开启；提醒已停止; 锁屏：摄像头已停止，请主动重新开启；提醒已停止"
+        ]
+      },
+      {
+        "name": "pip-repeat",
+        "status": "failed",
+        "failures": [
+          "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: full preview owns screen hold; interactive=false keyguard=false; 锁屏：摄像头已停止，请主动重新开启；提醒已停止; 锁屏：摄像头已停止，请主动重新开启；提醒已停止"
+        ]
+      },
+      {
+        "name": "support",
+        "status": "failed",
+        "failures": [
+          "SUPPORT_PROBE_FAIL: java.lang.AssertionError: Timed out: problem info copy input window ready after event idle; interactive=true keyguard=false; 测试后续离屏；提醒已停止"
+        ]
+      }
+    ],
+    "observations": [
+      "external_anr_dialog_has_focus",
+      "external_anr_observed"
+    ],
+    "anrs": [
+      {
+        "package": "com.google.android.apps.nexuslauncher",
+        "event": "10-31 09:53:32.611   581  2497 E ActivityManager: ANR in com.google.android.apps.nexuslauncher (com.google.android.apps.nexuslauncher/.NexusLauncherActivity)",
+        "reason": "Input dispatching timed out (Application does not have a focused window)."
+      }
+    ],
+    "failure_time_focus": [
+      {
+        "file": "cache/ui-probe/pip-failure-input.txt",
+        "focused_window": "displayId=0, name='4f15498 Application Not Responding: com.google.android.apps.nexuslauncher'"
+      },
+      {
+        "file": "cache/ui-probe/pip-recovery-failure-input.txt",
+        "focused_window": "displayId=0, name='4f15498 Application Not Responding: com.google.android.apps.nexuslauncher'"
+      }
+    ],
+    "focused_external_anr_dialogs": [
+      {
+        "package": "com.google.android.apps.nexuslauncher",
+        "file": "cache/ui-probe/pip-failure-input.txt",
+        "focused_window": "displayId=0, name='4f15498 Application Not Responding: com.google.android.apps.nexuslauncher'"
+      },
+      {
+        "package": "com.google.android.apps.nexuslauncher",
+        "file": "cache/ui-probe/pip-recovery-failure-input.txt",
+        "focused_window": "displayId=0, name='4f15498 Application Not Responding: com.google.android.apps.nexuslauncher'"
+      }
+    ]
+  },
+  "capture": {
+    "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+    "serial": "emulator-5554",
+    "config_sha256": "3cb2b027e119a82f5e318240b058e393659003269cc7ce82244c7e61a53773f9",
+    "trials": [
+      {
+        "trial": 1,
+        "scenario": "surface_reinstall_recovery",
+        "config_sha256": "3cb2b027e119a82f5e318240b058e393659003269cc7ce82244c7e61a53773f9",
+        "flushed": true,
+        "probe_pass": false,
+        "errors": [
+          "Recovery instrumentation did not pass"
+        ],
+        "service_query_exit": 0,
+        "perfetto_pid": 2877,
+        "camera_permission_exit": 0,
+        "surface_prefix_exit": 0,
+        "surface_prefix_pass": true,
+        "reinstall": [
+          {
+            "apk": "app/build/outputs/apk/debug/app-debug.apk",
+            "exit": 0,
+            "passed": true
+          },
+          {
+            "apk": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+            "exit": 0,
+            "passed": true
+          }
+        ],
+        "instrumentation_exit": 0,
+        "trace_bytes": 68055529,
+        "trace_sha256": "22ee7e7e49bc2ccc9e8d6070362a876e90761a3471a90c19e8aad4a4b4ac8c01",
+        "transfer_attempts": [
+          {
+            "attempt": 1,
+            "verified": true,
+            "exit": 0,
+            "bytes": 68055529,
+            "sha256": "22ee7e7e49bc2ccc9e8d6070362a876e90761a3471a90c19e8aad4a4b4ac8c01"
+          }
+        ]
+      },
+      {
+        "trial": 2,
+        "scenario": "recovery",
+        "config_sha256": "3cb2b027e119a82f5e318240b058e393659003269cc7ce82244c7e61a53773f9",
+        "flushed": true,
+        "probe_pass": false,
+        "errors": [
+          "Recovery instrumentation did not pass"
+        ],
+        "service_query_exit": 0,
+        "perfetto_pid": 4224,
+        "instrumentation_exit": 0,
+        "trace_bytes": 16617924,
+        "trace_sha256": "df4dc6132655493484d3ad0224cc864f7bcfd7cb55e9e7ffe01bfec21c054261",
+        "transfer_attempts": [
+          {
+            "attempt": 1,
+            "verified": true,
+            "exit": 0,
+            "bytes": 16617924,
+            "sha256": "df4dc6132655493484d3ad0224cc864f7bcfd7cb55e9e7ffe01bfec21c054261"
+          }
+        ]
+      },
+      {
+        "trial": 3,
+        "scenario": "recovery",
+        "config_sha256": "3cb2b027e119a82f5e318240b058e393659003269cc7ce82244c7e61a53773f9",
+        "flushed": true,
+        "probe_pass": false,
+        "errors": [
+          "Recovery instrumentation did not pass"
+        ],
+        "service_query_exit": 0,
+        "perfetto_pid": 4371,
+        "instrumentation_exit": 0,
+        "trace_bytes": 7090203,
+        "trace_sha256": "1826212ad8e4ed5fcfc3dd8965f6ba6b2478fcc44a2d755ab807deb1412cb106",
+        "transfer_attempts": [
+          {
+            "attempt": 1,
+            "verified": true,
+            "exit": 0,
+            "bytes": 7090203,
+            "sha256": "1826212ad8e4ed5fcfc3dd8965f6ba6b2478fcc44a2d755ab807deb1412cb106"
+          }
+        ]
+      }
+    ],
+    "scope": "Traced emulator observations; observer overhead; no device/FPS/power claim",
+    "ro.build.fingerprint": "google/sdk_gphone64_x86_64/emu64xa:15/AE3A.240806.043/12960925:userdebug/dev-keys",
+    "ro.build.type": "userdebug",
+    "ro.build.version.sdk": "35"
+  },
+  "cloud_trace_summary": {
+    "valid": false,
+    "processor": "Perfetto v59.1-1e9c61e98 (1e9c61e9844affd7dccd3d42d9ea9f3a3d10cf6d)\nTrace Processor RPC API version: 14",
+    "processor_sha256": "2434129a3af4dc9e2034a476f7b76447b490975213e301769310d3bd0d5d6458",
+    "trials": [
+      {
+        "trial": 1,
+        "valid": false,
+        "errors": [
+          "Recovery instrumentation did not pass",
+          "Traced recovery probe did not pass",
+          "Expected four forced expiry markers, got 0",
+          "Four forced expiry stop logs did not align with their trace markers"
+        ],
+        "metrics": {
+          "sched_rows": 902676
+        },
+        "stats": [
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "guess_trace_type_duration_ns",
+            "value": "1939090",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "parse_trace_duration_ns",
+            "value": "892635994",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "clock_sync_cache_miss",
+            "value": "79",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "android_log_num_skipped",
+            "value": "18516",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "android_log_num_total",
+            "value": "18517",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_setup_errors",
+            "value": "37",
+            "detail": "notice/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "interned_data_tokenizer_errors",
+            "value": "245398",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_data_sources_registered",
+            "value": "32",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_data_sources_seen",
+            "value": "3",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_flushes_requested",
+            "value": "4",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_flushes_succeeded",
+            "value": "3",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_producers_connected",
+            "value": "7",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_producers_seen",
+            "value": "7",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_total_buffers",
+            "value": "2",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_tracing_sessions",
+            "value": "1",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "compact_sched_switch_skipped",
+            "value": "4",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "compact_sched_waking_skipped",
+            "value": "1",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_buffer_size",
+            "value": "33554432",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_written",
+            "value": "61112320",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_read",
+            "value": "61079552",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_written",
+            "value": "1865",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_read",
+            "value": "1864",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_write_wrap_count",
+            "value": "1",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_patches_succeeded",
+            "value": "4326",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_readaheads_succeeded",
+            "value": "1622",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_readaheads_failed",
+            "value": "33",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_buffer_size",
+            "value": "4194304",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_written",
+            "value": "196608",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_read",
+            "value": "196608",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_written",
+            "value": "6",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_read",
+            "value": "6",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "67",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "3036",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "47109779000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "47108165000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "45",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "2096",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "47109800000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "47106855000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "76",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "4020",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "47109815000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "47106863000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "42",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "2064",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "47109828000",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "47108604000",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_end",
+            "value": "58",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_end",
+            "value": "3164",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "924565",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "83701368000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "-9",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "128",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "924565",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "83691173000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_end",
+            "value": "239",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_end",
+            "value": "12412",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "694515",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "83701408000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "194",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "10316",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "694515",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "83690329000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_end",
+            "value": "303",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_end",
+            "value": "13840",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "906643",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "83701443000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "227",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "9820",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "906643",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "83689985000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_end",
+            "value": "80",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_end",
+            "value": "3412",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "556806",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "83701476000",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "38",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "1348",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "556806",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "83697198000",
+            "detail": "info/trace/3"
+          }
+        ],
+        "scenario": "surface_reinstall_recovery",
+        "surface_prefix_pass": true,
+        "reinstall": [
+          {
+            "apk": "app/build/outputs/apk/debug/app-debug.apk",
+            "exit": 0,
+            "passed": true
+          },
+          {
+            "apk": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+            "exit": 0,
+            "passed": true
+          }
+        ],
+        "main_dispatch_count": 233,
+        "forced_expiry_markers": 0,
+        "outside_observer_stops": [],
+        "stops": [],
+        "stop_counts": {},
+        "longest_dispatches": [
+          {
+            "ts": 70179525165,
+            "wall_ms": 1895.984789,
+            "main_cpu_ms": 61.193185,
+            "main_state_ms": {
+              "R": 62.753675,
+              "Running": 61.193185,
+              "D": 277.733459,
+              "R+": 23.830329,
+              "S": 1470.474141
+            },
+            "render_cpu_overlap_ms": 1296.417315,
+            "render_slices": [
+              {
+                "name": "DrawFrames 7818",
+                "overlap_ms": 1437.82717
+              },
+              {
+                "name": "Drawing  0.00  0.00 320.00 640.00",
+                "overlap_ms": 1436.542859
+              },
+              {
+                "name": "flush commands",
+                "overlap_ms": 1231.217181
+              },
+              {
+                "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                "overlap_ms": 1193.297442
+              },
+              {
+                "name": "AAHairlineOp",
+                "overlap_ms": 399.438317
+              }
+            ]
+          },
+          {
+            "ts": 69849712050,
+            "wall_ms": 327.243411,
+            "main_cpu_ms": 149.027931,
+            "main_state_ms": {
+              "R": 94.420322,
+              "Running": 149.027931,
+              "D": 12.121265,
+              "R+": 41.092164,
+              "S": 30.581729
+            },
+            "render_cpu_overlap_ms": 36.837182,
+            "render_slices": [
+              {
+                "name": "eglGetDisplay",
+                "overlap_ms": 54.407173
+              },
+              {
+                "name": "open",
+                "overlap_ms": 53.989855
+              },
+              {
+                "name": "attempt_to_load_system_driver",
+                "overlap_ms": 47.698167
+              },
+              {
+                "name": "init_api",
+                "overlap_ms": 30.598676
+              }
+            ]
+          },
+          {
+            "ts": 72156802013,
+            "wall_ms": 95.084232,
+            "main_cpu_ms": 0.343221,
+            "main_state_ms": {
+              "R": 1.864572,
+              "Running": 0.343221,
+              "R+": 3.820116,
+              "S": 89.056323
+            },
+            "render_cpu_overlap_ms": 2.475963,
+            "render_slices": [
+              {
+                "name": "DrawFrames 8039",
+                "overlap_ms": 93.033672
+              },
+              {
+                "name": "Drawing  0.00 24.00 320.00 512.00",
+                "overlap_ms": 93.031708
+              },
+              {
+                "name": "eglSwapBuffersWithDamageKHR",
+                "overlap_ms": 92.952521
+              },
+              {
+                "name": "queueBuffer",
+                "overlap_ms": 91.471478
+              },
+              {
+                "name": "queueBuffer",
+                "overlap_ms": 91.444056
+              }
+            ]
+          },
+          {
+            "ts": 83459352170,
+            "wall_ms": 23.196188,
+            "main_cpu_ms": 1.26444,
+            "main_state_ms": {
+              "R": 1.619248,
+              "Running": 1.26444,
+              "R+": 0.205132,
+              "S": 20.107368
+            },
+            "render_cpu_overlap_ms": 0.0,
+            "render_slices": []
+          },
+          {
+            "ts": 72088673893,
+            "wall_ms": 20.347284,
+            "main_cpu_ms": 0.430744,
+            "main_state_ms": {
+              "R": 12.08581,
+              "Running": 0.430744,
+              "R+": 1.490971,
+              "S": 6.339759
+            },
+            "render_cpu_overlap_ms": 4.184349,
+            "render_slices": []
+          }
+        ],
+        "scope": "Traced emulator observations with main-looper logging overhead; overlap is not causation",
+        "trace_sha256": "22ee7e7e49bc2ccc9e8d6070362a876e90761a3471a90c19e8aad4a4b4ac8c01"
+      },
+      {
+        "trial": 2,
+        "valid": false,
+        "errors": [
+          "Recovery instrumentation did not pass",
+          "Traced recovery probe did not pass",
+          "Expected four forced expiry markers, got 0",
+          "Four forced expiry stop logs did not align with their trace markers"
+        ],
+        "metrics": {
+          "sched_rows": 247699
+        },
+        "stats": [
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "guess_trace_type_duration_ns",
+            "value": "489894",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "parse_trace_duration_ns",
+            "value": "73116199",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "clock_sync_cache_miss",
+            "value": "54",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "android_log_num_skipped",
+            "value": "1826",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "android_log_num_total",
+            "value": "1826",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_setup_errors",
+            "value": "37",
+            "detail": "notice/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "interned_data_tokenizer_errors",
+            "value": "44794",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_data_sources_registered",
+            "value": "32",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_data_sources_seen",
+            "value": "6",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_flushes_requested",
+            "value": "2",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_flushes_succeeded",
+            "value": "1",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_producers_connected",
+            "value": "7",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_producers_seen",
+            "value": "7",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_total_buffers",
+            "value": "2",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_tracing_sessions",
+            "value": "1",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "compact_sched_switch_skipped",
+            "value": "4",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "compact_sched_waking_skipped",
+            "value": "1",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_buffer_size",
+            "value": "33554432",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_written",
+            "value": "16154624",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_read",
+            "value": "16121856",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_written",
+            "value": "493",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_read",
+            "value": "492",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_patches_succeeded",
+            "value": "1108",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_readaheads_succeeded",
+            "value": "402",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_readaheads_failed",
+            "value": "14",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_buffer_size",
+            "value": "4194304",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_written",
+            "value": "98304",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_read",
+            "value": "98304",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_written",
+            "value": "3",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_read",
+            "value": "3",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_patches_succeeded",
+            "value": "2",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_readaheads_succeeded",
+            "value": "1",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_readaheads_failed",
+            "value": "3",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "71",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "3892",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "86774187000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "86771879000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "40",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "1872",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "86774208000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "86771867000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "25",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "1300",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "86774222000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "86773362000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "40",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "1960",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "86774236000",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "86771924000",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "195504",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "101197985000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "-71",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "-3892",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "195504",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "101188623000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_end",
+            "value": "222",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_end",
+            "value": "9624",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "169159",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "101198001000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "182",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "7752",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "169159",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "101197317000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "222994",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "101198208000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "-25",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "-1300",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "222994",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "101194492000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "196299",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "101198225000",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "-40",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "-1960",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "196299",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "101193891000",
+            "detail": "info/trace/3"
+          }
+        ],
+        "scenario": "recovery",
+        "surface_prefix_pass": null,
+        "reinstall": [],
+        "main_dispatch_count": 241,
+        "forced_expiry_markers": 0,
+        "outside_observer_stops": [],
+        "stops": [],
+        "stop_counts": {},
+        "longest_dispatches": [
+          {
+            "ts": 88662577483,
+            "wall_ms": 1930.994651,
+            "main_cpu_ms": 62.903552,
+            "main_state_ms": {
+              "R": 47.601292,
+              "Running": 62.903552,
+              "R+": 17.601105,
+              "D": 152.324788,
+              "S": 1650.563914
+            },
+            "render_cpu_overlap_ms": 1343.628649,
+            "render_slices": [
+              {
+                "name": "DrawFrames 8552",
+                "overlap_ms": 1588.980683
+              },
+              {
+                "name": "Drawing  0.00  0.00 320.00 640.00",
+                "overlap_ms": 1588.242586
+              },
+              {
+                "name": "flush commands",
+                "overlap_ms": 1360.197084
+              },
+              {
+                "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                "overlap_ms": 1340.077758
+              },
+              {
+                "name": "AAHairlineOp",
+                "overlap_ms": 357.126508
+              }
+            ]
+          },
+          {
+            "ts": 88171125028,
+            "wall_ms": 489.60559,
+            "main_cpu_ms": 231.066764,
+            "main_state_ms": {
+              "R": 131.121334,
+              "Running": 231.066764,
+              "R+": 49.066538,
+              "D": 13.050642,
+              "S": 65.300312
+            },
+            "render_cpu_overlap_ms": 65.083238,
+            "render_slices": [
+              {
+                "name": "eglGetDisplay",
+                "overlap_ms": 245.095148
+              },
+              {
+                "name": "open",
+                "overlap_ms": 243.751411
+              },
+              {
+                "name": "attempt_to_load_system_driver",
+                "overlap_ms": 224.47295
+              },
+              {
+                "name": "init_api",
+                "overlap_ms": 171.512661
+              },
+              {
+                "name": "load_system_driver",
+                "overlap_ms": 43.912003
+              }
+            ]
+          }
+        ],
+        "scope": "Traced emulator observations with main-looper logging overhead; overlap is not causation",
+        "trace_sha256": "df4dc6132655493484d3ad0224cc864f7bcfd7cb55e9e7ffe01bfec21c054261"
+      },
+      {
+        "trial": 3,
+        "valid": false,
+        "errors": [
+          "Recovery instrumentation did not pass",
+          "Traced recovery probe did not pass",
+          "Expected four forced expiry markers, got 0",
+          "Four forced expiry stop logs did not align with their trace markers"
+        ],
+        "metrics": {
+          "sched_rows": 100754
+        },
+        "stats": [
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "guess_trace_type_duration_ns",
+            "value": "243084",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "parse_trace_duration_ns",
+            "value": "42422310",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "clock_sync_cache_miss",
+            "value": "42",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "android_log_num_skipped",
+            "value": "1262",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "android_log_num_total",
+            "value": "1262",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_setup_errors",
+            "value": "37",
+            "detail": "notice/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "interned_data_tokenizer_errors",
+            "value": "30162",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_data_sources_registered",
+            "value": "32",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_data_sources_seen",
+            "value": "9",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_flushes_requested",
+            "value": "1",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_producers_connected",
+            "value": "7",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_producers_seen",
+            "value": "7",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_total_buffers",
+            "value": "2",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_tracing_sessions",
+            "value": "1",
+            "detail": "info/trace/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "compact_sched_switch_skipped",
+            "value": "4",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "compact_sched_waking_skipped",
+            "value": "3",
+            "detail": "info/analysis/"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_buffer_size",
+            "value": "33554432",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_written",
+            "value": "4882432",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_bytes_read",
+            "value": "4849664",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_written",
+            "value": "149",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_chunks_read",
+            "value": "148",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_patches_succeeded",
+            "value": "356",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_readaheads_succeeded",
+            "value": "135",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_readaheads_failed",
+            "value": "8",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "traced_buf_buffer_size",
+            "value": "4194304",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "9",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "468",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "102096194000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "102095416000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "6",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "324",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "102096211000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "102095958000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "7",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "392",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "102096223000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "102096052000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_begin",
+            "value": "2",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_begin",
+            "value": "80",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_begin",
+            "value": "102096235000",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_begin",
+            "value": "102095930000",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_end",
+            "value": "9",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_end",
+            "value": "376",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "94670",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "114125593000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "-92",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "94670",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "114123048000",
+            "detail": "info/trace/0"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_end",
+            "value": "49",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_end",
+            "value": "2524",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "85312",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "114125615000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "43",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "2200",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "85312",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "114124178000",
+            "detail": "info/trace/1"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_end",
+            "value": "3",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_end",
+            "value": "132",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "76492",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "114125629000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "-4",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "-260",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "76492",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "114122118000",
+            "detail": "info/trace/2"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_end",
+            "value": "7",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_end",
+            "value": "388",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_end",
+            "value": "70107",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_now_ts_end",
+            "value": "114125640000",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_entries_delta",
+            "value": "5",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_bytes_delta",
+            "value": "308",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_read_events_delta",
+            "value": "70107",
+            "detail": "info/trace/3"
+          },
+          {
+            "kind": "stat",
+            "ts": "0",
+            "dur": "0",
+            "utid": "0",
+            "tid": "0",
+            "thread": "",
+            "name": "ftrace_cpu_oldest_event_ts_end",
+            "value": "114121856000",
+            "detail": "info/trace/3"
+          }
+        ],
+        "scenario": "recovery",
+        "surface_prefix_pass": null,
+        "reinstall": [],
+        "main_dispatch_count": 243,
+        "forced_expiry_markers": 0,
+        "outside_observer_stops": [],
+        "stops": [],
+        "stop_counts": {},
+        "longest_dispatches": [
+          {
+            "ts": 102805778497,
+            "wall_ms": 954.859062,
+            "main_cpu_ms": 49.42084,
+            "main_state_ms": {
+              "R": 1.149307,
+              "Running": 49.42084,
+              "R+": 0.517467,
+              "S": 903.771448
+            },
+            "render_cpu_overlap_ms": 891.034015,
+            "render_slices": [
+              {
+                "name": "DrawFrames 9499",
+                "overlap_ms": 868.713924
+              },
+              {
+                "name": "Drawing  0.00  0.00 320.00 640.00",
+                "overlap_ms": 867.904565
+              },
+              {
+                "name": "flush commands",
+                "overlap_ms": 750.581982
+              },
+              {
+                "name": "auto skgpu::ganesh::OpsTask::onExecute(GrOpFlushState *)::(anonymous class)::operator()() const",
+                "overlap_ms": 740.660244
+              },
+              {
+                "name": "AAHairlineOp",
+                "overlap_ms": 212.529098
+              }
+            ]
+          },
+          {
+            "ts": 102634495269,
+            "wall_ms": 157.466634,
+            "main_cpu_ms": 115.780175,
+            "main_state_ms": {
+              "R": 23.011649,
+              "Running": 115.780175,
+              "R+": 13.305049,
+              "S": 5.369761
+            },
+            "render_cpu_overlap_ms": 39.516556,
+            "render_slices": [
+              {
+                "name": "eglGetDisplay",
+                "overlap_ms": 66.900661
+              },
+              {
+                "name": "open",
+                "overlap_ms": 66.477791
+              },
+              {
+                "name": "attempt_to_load_system_driver",
+                "overlap_ms": 64.509821
+              },
+              {
+                "name": "init_api",
+                "overlap_ms": 50.021714
+              }
+            ]
+          }
+        ],
+        "scope": "Traced emulator observations with main-looper logging overhead; overlap is not causation",
+        "trace_sha256": "1826212ad8e4ed5fcfc3dd8965f6ba6b2478fcc44a2d755ab807deb1412cb106"
+      }
+    ]
+  },
+  "raw_hashes": [
+    {
+      "trial": 1,
+      "bytes": 68055529,
+      "sha256": "22ee7e7e49bc2ccc9e8d6070362a876e90761a3471a90c19e8aad4a4b4ac8c01",
+      "raw_hash_verified": true,
+      "local_sql_replayed": false
+    },
+    {
+      "trial": 2,
+      "bytes": 16617924,
+      "sha256": "df4dc6132655493484d3ad0224cc864f7bcfd7cb55e9e7ffe01bfec21c054261",
+      "raw_hash_verified": true,
+      "local_sql_replayed": false
+    },
+    {
+      "trial": 3,
+      "bytes": 7090203,
+      "sha256": "1826212ad8e4ed5fcfc3dd8965f6ba6b2478fcc44a2d755ab807deb1412cb106",
+      "raw_hash_verified": true,
+      "local_sql_replayed": false
+    }
+  ],
+  "file_hashes": {
+    "cache/ui-probe/pip-recovery-failure.png": {
+      "bytes": 35756,
+      "sha256": "2c6ebaef198d67b04efce08d394482fb913ef4b2d85be19a27fdba72522058a9"
+    },
+    "cache/ui-probe/pip-recovery-failure-input.txt": {
+      "bytes": 77859,
+      "sha256": "8345c74f9952beff9b97e1f56d1f2a4459b1b6f2e6229a8c58bc5ec999d9fd9a"
+    },
+    "cache/ui-probe/pip-recovery-failure-window.txt": {
+      "bytes": 41259,
+      "sha256": "2561733f6d6b22cef1d33c23001c4761f7bf96b6cb348ea345084753230fe6de"
+    }
+  },
+  "current_focus_lines": [
+    "displayId=0, name='ActivityRecord{fd8be3f u0 com.cyanrbt.walkbuddy/.MainActivity t12}', dispatchingTimeout=60000ms",
+    "displayId=0, name='4f15498 Application Not Responding: com.google.android.apps.nexuslauncher'",
+    "displayId=0, name='4f15498 Application Not Responding: com.google.android.apps.nexuslauncher' result='OK'",
+    "displayId=0, name='ActivityRecord{48db910 u0 com.google.android.apps.nexuslauncher/.NexusLauncherActivity t7}', dispatchingTimeout=5000ms",
+    "displayId=0, name='f1562fe com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity' result='NOT_VISIBLE'"
+  ],
+  "anr_lines": [
+    "10-31 09:53:32.611   581  2497 E ActivityManager: ANR in com.google.android.apps.nexuslauncher (com.google.android.apps.nexuslauncher/.NexusLauncherActivity)"
+  ],
+  "first_app_process_line": "10-31 09:53:40.121   581   619 I ActivityManager: Start proc 3077:com.cyanrbt.walkbuddy/u0a209 for added application com.cyanrbt.walkbuddy",
+  "scope": "Full archive length/server SHA/CRC and original raw-trace hashes verified. Cloud trace reports retained; no local SQL replay. Screenshot requires visual inspection before attributing the failure.",
+  "screenshot_visually_inspected": "Pixel Launcher is not responding dialog visibly covers stopped MainActivity.",
+  "interpretation": "Current InputDispatcher window focus belongs to the external Launcher ANR dialog. Standard recovery failed before start gained focus, without entering preview or the new first-image gate. Later screen-off failures remain recorded and are not all causally attributed to this ANR. One original failed job rerun is authorized; no app deadline/ANR dismissal changed."
+}

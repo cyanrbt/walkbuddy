@@ -1,0 +1,1162 @@
+{
+  "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+  "reports": [
+    {
+      "api": 35,
+      "workflow_run": 41190336070,
+      "artifact_id": 13038662742,
+      "artifact_bytes": 16487474,
+      "artifact_sha256": "12c704170a0a12a12b7700d7885176f69d1bdf15df8976bfd75581b2912777db",
+      "ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "original_ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "first_image_readiness_cases_per_pip_run": 4,
+      "held_actual_image_evidence": "phase=STARTING captureAt=204975 displayAt=204910 cover=正在确认画面\n请对准亮处\nreleased_real_image=true live=true progress=true\n",
+      "constructed_waiting_layout_images": [
+        {
+          "path": "cache/ui-probe/320x480-font100-day-starting-camera.png",
+          "bytes": 33629,
+          "sha256": "d6587d7a576b643fd028fa500c8fb13905258f0a25099c049630822b259c7cc4",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-day-starting-image.png",
+          "bytes": 34194,
+          "sha256": "7e53f0673318eb6ae10ffc3fdf63cfd81838b6b5f0f3968736f9d0fc3057ae14",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-starting-camera.png",
+          "bytes": 33629,
+          "sha256": "d6587d7a576b643fd028fa500c8fb13905258f0a25099c049630822b259c7cc4",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-starting-image.png",
+          "bytes": 34194,
+          "sha256": "7e53f0673318eb6ae10ffc3fdf63cfd81838b6b5f0f3968736f9d0fc3057ae14",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-starting-camera.png",
+          "bytes": 33849,
+          "sha256": "1c50430508ea6ae351d9f0542d04d7264a172130484b8ffa175eb4958475d0b9",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-starting-image.png",
+          "bytes": 34420,
+          "sha256": "6ae968955d57ac7b097d793041632702fc744e19a13d207ebcde313e9791d136",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-starting-camera.png",
+          "bytes": 33849,
+          "sha256": "1c50430508ea6ae351d9f0542d04d7264a172130484b8ffa175eb4958475d0b9",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-starting-image.png",
+          "bytes": 34420,
+          "sha256": "6ae968955d57ac7b097d793041632702fc744e19a13d207ebcde313e9791d136",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-starting-camera.png",
+          "bytes": 36770,
+          "sha256": "8655c0e86235dd0bc870b8f105aa4cbd359ae7119f51576423cefb5052228f6b",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-starting-image.png",
+          "bytes": 37504,
+          "sha256": "c5ba904c9a43b01085f34f7cdbe2b73fb97a0ff8bc01acf62e003aff1e266884",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-starting-camera.png",
+          "bytes": 36770,
+          "sha256": "8655c0e86235dd0bc870b8f105aa4cbd359ae7119f51576423cefb5052228f6b",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-starting-image.png",
+          "bytes": 37504,
+          "sha256": "c5ba904c9a43b01085f34f7cdbe2b73fb97a0ff8bc01acf62e003aff1e266884",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-starting-camera.png",
+          "bytes": 38258,
+          "sha256": "3c1cad75299f66d67f9dd3647ae5dcd62d71903d95e68aa6a4490c1c560f8bbb",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-starting-image.png",
+          "bytes": 38858,
+          "sha256": "f4c71937d98465aa18d301ab4dc4f97497335caad1edaa4695c613c64083de81",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-starting-camera.png",
+          "bytes": 38258,
+          "sha256": "3c1cad75299f66d67f9dd3647ae5dcd62d71903d95e68aa6a4490c1c560f8bbb",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-starting-image.png",
+          "bytes": 38858,
+          "sha256": "f4c71937d98465aa18d301ab4dc4f97497335caad1edaa4695c613c64083de81",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-starting-camera.png",
+          "bytes": 41061,
+          "sha256": "6b869f57d4c164d09408238302679e70bcdbab66a3ab4456da6a75c08e72f6d7",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-starting-image.png",
+          "bytes": 41628,
+          "sha256": "61b8aaa3f740ad1ece581a4db8dac60c684f4d45bcd92b0f0f808d312859c61a",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-starting-camera.png",
+          "bytes": 41061,
+          "sha256": "6b869f57d4c164d09408238302679e70bcdbab66a3ab4456da6a75c08e72f6d7",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-starting-image.png",
+          "bytes": 41628,
+          "sha256": "61b8aaa3f740ad1ece581a4db8dac60c684f4d45bcd92b0f0f808d312859c61a",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-starting-camera.png",
+          "bytes": 45423,
+          "sha256": "2fa3690af758907f6d15b9ac6d477de188151a83ed6217978e05e48e6aa702ae",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-starting-image.png",
+          "bytes": 46235,
+          "sha256": "bb6eae009256cf20006a98e8868f97c0915e05f783610f86f944222aa359c1a3",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-starting-camera.png",
+          "bytes": 45423,
+          "sha256": "2fa3690af758907f6d15b9ac6d477de188151a83ed6217978e05e48e6aa702ae",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-starting-image.png",
+          "bytes": 46235,
+          "sha256": "bb6eae009256cf20006a98e8868f97c0915e05f783610f86f944222aa359c1a3",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-starting-camera.png",
+          "bytes": 31238,
+          "sha256": "8a60db5928dc82beabc5c9e9409fffebf4ce02f3b1476f936398fb4920934b36",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-starting-image.png",
+          "bytes": 31811,
+          "sha256": "31fb15820ef34e84ef609db2304d3b292fb5bf6075c735f1f6eec1428166de07",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-starting-camera.png",
+          "bytes": 31238,
+          "sha256": "8a60db5928dc82beabc5c9e9409fffebf4ce02f3b1476f936398fb4920934b36",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-starting-image.png",
+          "bytes": 31811,
+          "sha256": "31fb15820ef34e84ef609db2304d3b292fb5bf6075c735f1f6eec1428166de07",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-starting-camera.png",
+          "bytes": 35798,
+          "sha256": "75f38ee846a5ae7ae3a2cd62d9041c730836e28bd9b0c12c01a4eeaeb5828bae",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-starting-image.png",
+          "bytes": 36466,
+          "sha256": "323df7f6300b0496fba7a024571b68d6ff8a667e3e5731dce2d3da17b882049d",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-starting-camera.png",
+          "bytes": 35798,
+          "sha256": "75f38ee846a5ae7ae3a2cd62d9041c730836e28bd9b0c12c01a4eeaeb5828bae",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-starting-image.png",
+          "bytes": 36466,
+          "sha256": "323df7f6300b0496fba7a024571b68d6ff8a667e3e5731dce2d3da17b882049d",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-starting-camera.png",
+          "bytes": 38961,
+          "sha256": "514e6dc676e1e3ca153e9e3fbb04384212de293f69b835e0126df23b88453fbd",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-starting-image.png",
+          "bytes": 39724,
+          "sha256": "8b3b584b63cfdedc7f63d17e973203347ad19e4963818ff4127f974d0979ff9c",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-starting-camera.png",
+          "bytes": 38961,
+          "sha256": "514e6dc676e1e3ca153e9e3fbb04384212de293f69b835e0126df23b88453fbd",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-starting-image.png",
+          "bytes": 39724,
+          "sha256": "8b3b584b63cfdedc7f63d17e973203347ad19e4963818ff4127f974d0979ff9c",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-starting-camera.png",
+          "bytes": 31382,
+          "sha256": "cfb4e649c259e5dbb1e8276e54344fe3a351fa3e0d16a6dda5f5a8bf0fb1b38e",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-starting-image.png",
+          "bytes": 31960,
+          "sha256": "6f751b2be0f1695f59979c8eb2cfec22b948c5605fc55c7a079fad683232784e",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-starting-camera.png",
+          "bytes": 31382,
+          "sha256": "cfb4e649c259e5dbb1e8276e54344fe3a351fa3e0d16a6dda5f5a8bf0fb1b38e",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-starting-image.png",
+          "bytes": 31960,
+          "sha256": "6f751b2be0f1695f59979c8eb2cfec22b948c5605fc55c7a079fad683232784e",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-starting-camera.png",
+          "bytes": 35878,
+          "sha256": "8662a5782769b49b85e1e4055588972d6f2b122366504135ccddd5373dbe0ada",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-starting-image.png",
+          "bytes": 36593,
+          "sha256": "5fcb9591445e99c0296092336729b1c6b63484d887d8d41e51365b8e4c835a0e",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-starting-camera.png",
+          "bytes": 35878,
+          "sha256": "8662a5782769b49b85e1e4055588972d6f2b122366504135ccddd5373dbe0ada",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-starting-image.png",
+          "bytes": 36593,
+          "sha256": "5fcb9591445e99c0296092336729b1c6b63484d887d8d41e51365b8e4c835a0e",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-starting-camera.png",
+          "bytes": 39164,
+          "sha256": "00133fc9c4a4dc2bac53851eff5720906624f113551694983cf52bcac5c0239d",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-starting-image.png",
+          "bytes": 39911,
+          "sha256": "f2d2f19aefb22b85fcf4ad225004d5b72185871d4614c4f23c8f6aa1746d6b38",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-starting-camera.png",
+          "bytes": 39164,
+          "sha256": "00133fc9c4a4dc2bac53851eff5720906624f113551694983cf52bcac5c0239d",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-starting-image.png",
+          "bytes": 39911,
+          "sha256": "f2d2f19aefb22b85fcf4ad225004d5b72185871d4614c4f23c8f6aa1746d6b38",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-starting-camera.png",
+          "bytes": 67022,
+          "sha256": "287096d27c8e8ded769e1793b1b8e927ca8f9f35457a5901418a32dd082bbdcb",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-starting-image.png",
+          "bytes": 67594,
+          "sha256": "c8f44344611c2ae13306be34bef678cf40e0f08765a38faabb94233f68104831",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-starting-camera.png",
+          "bytes": 67022,
+          "sha256": "287096d27c8e8ded769e1793b1b8e927ca8f9f35457a5901418a32dd082bbdcb",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-starting-image.png",
+          "bytes": 67594,
+          "sha256": "c8f44344611c2ae13306be34bef678cf40e0f08765a38faabb94233f68104831",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-starting-camera.png",
+          "bytes": 60961,
+          "sha256": "57d5247117f67419452f9f5f6fbcc129503fa533b85280be0823ecbd3a5ac2a9",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-starting-image.png",
+          "bytes": 61569,
+          "sha256": "d0ffa812a3ad6216e0d8f14fcda88bc78b64bfa014e1e7c578c6f919e2a47aa9",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-starting-camera.png",
+          "bytes": 60961,
+          "sha256": "57d5247117f67419452f9f5f6fbcc129503fa533b85280be0823ecbd3a5ac2a9",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-starting-image.png",
+          "bytes": 61569,
+          "sha256": "d0ffa812a3ad6216e0d8f14fcda88bc78b64bfa014e1e7c578c6f919e2a47aa9",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-starting-camera.png",
+          "bytes": 64665,
+          "sha256": "c1fb3f3ac74641d8a1b422ad0a9af0e422f9fb829860b60e8330606e3f4490bd",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-starting-image.png",
+          "bytes": 65473,
+          "sha256": "6453153538f8601f4118550da448df512cc58784065535a5e48bf0eaab290024",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-starting-camera.png",
+          "bytes": 64665,
+          "sha256": "c1fb3f3ac74641d8a1b422ad0a9af0e422f9fb829860b60e8330606e3f4490bd",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-starting-image.png",
+          "bytes": 65473,
+          "sha256": "6453153538f8601f4118550da448df512cc58784065535a5e48bf0eaab290024",
+          "width": 800,
+          "height": 600
+        }
+      ],
+      "draw_submission_passed": true,
+      "retired_texture_passed": true,
+      "preview_only_no_model_task_passed": true,
+      "storage": {
+        "scope": "Disposable hosted runner after compilation; APKs, emulator, system images, SDK platform/build tools and keys retained",
+        "free_bytes_before": 90831929344,
+        "removed": [
+          "/usr/local/lib/android/sdk/ndk",
+          "/usr/local/lib/android/sdk/cmake",
+          "/home/runner/.gradle/caches",
+          "/home/runner/.gradle/wrapper/dists"
+        ],
+        "skipped": [],
+        "apk_sha256": {
+          "app/build/outputs/apk/debug/app-debug.apk": "b9152b3c04f13ad1eb6095db979a0bf25a36aff657bf9a7b477e603ede092fa1",
+          "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "0f8e03ae5c0f28365086b450702be1494dd46c22ef5b3bd6956a0cb89e6e043a"
+        },
+        "status": "passed",
+        "free_bytes_after": 98531127296,
+        "compiled_apks_unchanged": true
+      }
+    },
+    {
+      "api": 36,
+      "workflow_run": 41190336070,
+      "artifact_id": 13038254161,
+      "artifact_bytes": 16492778,
+      "artifact_sha256": "919bca8f5d079a2b8cb33e03822519f7dfae0d85802fa25a3ed43bb25251e176",
+      "ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "original_ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "first_image_readiness_cases_per_pip_run": 4,
+      "held_actual_image_evidence": "phase=STARTING captureAt=250470 displayAt=250303 cover=正在确认画面\n请对准亮处\nreleased_real_image=true live=true progress=true\n",
+      "constructed_waiting_layout_images": [
+        {
+          "path": "cache/ui-probe/320x480-font100-day-starting-camera.png",
+          "bytes": 33668,
+          "sha256": "f9cf8cefbd2aef407464d7441bb6e134322efd621660c8c680cf83405849ed33",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-day-starting-image.png",
+          "bytes": 34234,
+          "sha256": "2a24ffc85f920af7ad1b5e8a63a5c7e7df73fd2a8b4314d674b3f4b31ed11944",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-starting-camera.png",
+          "bytes": 33668,
+          "sha256": "f9cf8cefbd2aef407464d7441bb6e134322efd621660c8c680cf83405849ed33",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font100-night-starting-image.png",
+          "bytes": 34234,
+          "sha256": "2a24ffc85f920af7ad1b5e8a63a5c7e7df73fd2a8b4314d674b3f4b31ed11944",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-starting-camera.png",
+          "bytes": 33881,
+          "sha256": "12a518f3e55b3d076115fc3fefe26625361a37d7ffe4c6d02f239313e4422ac8",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-day-starting-image.png",
+          "bytes": 34450,
+          "sha256": "4afa6c852e1a430671d222d4490d2f7a1f6774f60ee7b7b1a2158d7f55df006f",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-starting-camera.png",
+          "bytes": 33881,
+          "sha256": "12a518f3e55b3d076115fc3fefe26625361a37d7ffe4c6d02f239313e4422ac8",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font150-night-starting-image.png",
+          "bytes": 34450,
+          "sha256": "4afa6c852e1a430671d222d4490d2f7a1f6774f60ee7b7b1a2158d7f55df006f",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-starting-camera.png",
+          "bytes": 36806,
+          "sha256": "ff0703cd900f7c93ca06457361fa6c5ad2a6fcc779c0544ee77068100667c57c",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-day-starting-image.png",
+          "bytes": 37528,
+          "sha256": "571729d7709a7ada801101f492dd4e6f3a7609bae8f2262267bb0bb348176a0f",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-starting-camera.png",
+          "bytes": 36806,
+          "sha256": "ff0703cd900f7c93ca06457361fa6c5ad2a6fcc779c0544ee77068100667c57c",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/320x480-font200-night-starting-image.png",
+          "bytes": 37528,
+          "sha256": "571729d7709a7ada801101f492dd4e6f3a7609bae8f2262267bb0bb348176a0f",
+          "width": 320,
+          "height": 480
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-starting-camera.png",
+          "bytes": 38300,
+          "sha256": "7fc10df73b501904c05832eabc0d26f800150fb40be0ff94e5d502162b9a8c1e",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-day-starting-image.png",
+          "bytes": 38901,
+          "sha256": "2c22b988d2e069f931272de3393e3127cf6e7aa761fcc0c25e0ce5ee91d6929a",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-starting-camera.png",
+          "bytes": 38300,
+          "sha256": "7fc10df73b501904c05832eabc0d26f800150fb40be0ff94e5d502162b9a8c1e",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font100-night-starting-image.png",
+          "bytes": 38901,
+          "sha256": "2c22b988d2e069f931272de3393e3127cf6e7aa761fcc0c25e0ce5ee91d6929a",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-starting-camera.png",
+          "bytes": 41079,
+          "sha256": "76749a2198c100cd240cc46d34aadcde4d98e8c5f546cc6680361ff2c2d1114b",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-day-starting-image.png",
+          "bytes": 41654,
+          "sha256": "70cf4f4b5e0cbc25cec4672a24970b1a03a300a20ae6a1a360615f6312935312",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-starting-camera.png",
+          "bytes": 41079,
+          "sha256": "76749a2198c100cd240cc46d34aadcde4d98e8c5f546cc6680361ff2c2d1114b",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font150-night-starting-image.png",
+          "bytes": 41654,
+          "sha256": "70cf4f4b5e0cbc25cec4672a24970b1a03a300a20ae6a1a360615f6312935312",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-starting-camera.png",
+          "bytes": 45467,
+          "sha256": "d5a9c4ad6f7058a843d2cdaf1caf0a6bf789bb6075f0ffeb63b2d57eb9227939",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-day-starting-image.png",
+          "bytes": 46294,
+          "sha256": "d4677f389754afa90ea46e86eb2b3df8182346767d128df1f5d72e3c5a45de84",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-starting-camera.png",
+          "bytes": 45467,
+          "sha256": "d5a9c4ad6f7058a843d2cdaf1caf0a6bf789bb6075f0ffeb63b2d57eb9227939",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/360x640-font200-night-starting-image.png",
+          "bytes": 46294,
+          "sha256": "d4677f389754afa90ea46e86eb2b3df8182346767d128df1f5d72e3c5a45de84",
+          "width": 360,
+          "height": 640
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-starting-camera.png",
+          "bytes": 31256,
+          "sha256": "a346bff734365feb9947b1e5664ee9d81e4c329a849cfb814c5bd3aaa925da8c",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-day-starting-image.png",
+          "bytes": 31836,
+          "sha256": "02417302a2fc0a969d9b495348c40191f280a6f2c240c3de141eca7023ee0dff",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-starting-camera.png",
+          "bytes": 31256,
+          "sha256": "a346bff734365feb9947b1e5664ee9d81e4c329a849cfb814c5bd3aaa925da8c",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font100-night-starting-image.png",
+          "bytes": 31836,
+          "sha256": "02417302a2fc0a969d9b495348c40191f280a6f2c240c3de141eca7023ee0dff",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-starting-camera.png",
+          "bytes": 35812,
+          "sha256": "186499193308548da1d48da011471d2e077d4aac01f1430b0505c826a1a2aacd",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-day-starting-image.png",
+          "bytes": 36485,
+          "sha256": "a35fbfb95800682cc78b7a848ff8a6b7245cf81cf84016e79b12b2a4d360ea6e",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-starting-camera.png",
+          "bytes": 35812,
+          "sha256": "186499193308548da1d48da011471d2e077d4aac01f1430b0505c826a1a2aacd",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font150-night-starting-image.png",
+          "bytes": 36485,
+          "sha256": "a35fbfb95800682cc78b7a848ff8a6b7245cf81cf84016e79b12b2a4d360ea6e",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-starting-camera.png",
+          "bytes": 38996,
+          "sha256": "fd781dfd39fc387bfd8fbc937a47c6190746fb38a74ff0e78f0e2fb092a1c6fa",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-day-starting-image.png",
+          "bytes": 39748,
+          "sha256": "ecdae40b5e6888c7a25ba98e217ea5521741ac58cb7ea7ce39e7e5b2ba3361fb",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-starting-camera.png",
+          "bytes": 38996,
+          "sha256": "fd781dfd39fc387bfd8fbc937a47c6190746fb38a74ff0e78f0e2fb092a1c6fa",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/600x360-font200-night-starting-image.png",
+          "bytes": 39748,
+          "sha256": "ecdae40b5e6888c7a25ba98e217ea5521741ac58cb7ea7ce39e7e5b2ba3361fb",
+          "width": 600,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-starting-camera.png",
+          "bytes": 31407,
+          "sha256": "a06026e6cd566ac1656fd45b5eeff8eb1f827c783f0474279d8fb2e6805d2053",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-day-starting-image.png",
+          "bytes": 31987,
+          "sha256": "23d2288d03d68e37166dbabd4c99c988617b9b2619762390b4896ae3e1d518ad",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-starting-camera.png",
+          "bytes": 31407,
+          "sha256": "a06026e6cd566ac1656fd45b5eeff8eb1f827c783f0474279d8fb2e6805d2053",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font100-night-starting-image.png",
+          "bytes": 31987,
+          "sha256": "23d2288d03d68e37166dbabd4c99c988617b9b2619762390b4896ae3e1d518ad",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-starting-camera.png",
+          "bytes": 35886,
+          "sha256": "045a4a828e32c94b1ba651d307a3014de12548c360feb12bcff8e90602ef7f01",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-day-starting-image.png",
+          "bytes": 36611,
+          "sha256": "2bdef54e6a031024f8b656b67100f4950852bc144a006342cc49f1be3a4716a8",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-starting-camera.png",
+          "bytes": 35886,
+          "sha256": "045a4a828e32c94b1ba651d307a3014de12548c360feb12bcff8e90602ef7f01",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font150-night-starting-image.png",
+          "bytes": 36611,
+          "sha256": "2bdef54e6a031024f8b656b67100f4950852bc144a006342cc49f1be3a4716a8",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-starting-camera.png",
+          "bytes": 39198,
+          "sha256": "9f33adfcd3863c13422f5d7d5230d0f8ac6aca636cb2b83a582c4d5b9022b055",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-day-starting-image.png",
+          "bytes": 39935,
+          "sha256": "4d0d2e21c9324e3cf1961376c02313425a702ca4294484069b8a7a1964caeb50",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-starting-camera.png",
+          "bytes": 39198,
+          "sha256": "9f33adfcd3863c13422f5d7d5230d0f8ac6aca636cb2b83a582c4d5b9022b055",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/640x360-font200-night-starting-image.png",
+          "bytes": 39935,
+          "sha256": "4d0d2e21c9324e3cf1961376c02313425a702ca4294484069b8a7a1964caeb50",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-starting-camera.png",
+          "bytes": 67071,
+          "sha256": "b0743d7aa288ca789d29295bdcc33ef0dc0e50bf076ccf8978d760c8b70238dc",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-day-starting-image.png",
+          "bytes": 67628,
+          "sha256": "e24a43d750ccd0849a8e805107ea2aa5f732223887bf282037ef587747877c3e",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-starting-camera.png",
+          "bytes": 67071,
+          "sha256": "b0743d7aa288ca789d29295bdcc33ef0dc0e50bf076ccf8978d760c8b70238dc",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font100-night-starting-image.png",
+          "bytes": 67628,
+          "sha256": "e24a43d750ccd0849a8e805107ea2aa5f732223887bf282037ef587747877c3e",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-starting-camera.png",
+          "bytes": 60979,
+          "sha256": "d4718718d0f0f3446c52b8dee1ba05c3cc1def9ebbd2f035039e803e506f0e58",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-day-starting-image.png",
+          "bytes": 61590,
+          "sha256": "4baf12aad0c620640a604a0220e60688e0fc7606d61217baa94b685ff067efd6",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-starting-camera.png",
+          "bytes": 60979,
+          "sha256": "d4718718d0f0f3446c52b8dee1ba05c3cc1def9ebbd2f035039e803e506f0e58",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font150-night-starting-image.png",
+          "bytes": 61590,
+          "sha256": "4baf12aad0c620640a604a0220e60688e0fc7606d61217baa94b685ff067efd6",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-starting-camera.png",
+          "bytes": 64698,
+          "sha256": "f5d3d2d7b25270ced7cd4bf3ad72d783e20506c51c0f3cd75667d1c9ef8cab8d",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-day-starting-image.png",
+          "bytes": 65501,
+          "sha256": "b6920c376ee6e398e2127a3ceae72e730413d355f047d2d73023805074615c2d",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-starting-camera.png",
+          "bytes": 64698,
+          "sha256": "f5d3d2d7b25270ced7cd4bf3ad72d783e20506c51c0f3cd75667d1c9ef8cab8d",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "path": "cache/ui-probe/800x600-font200-night-starting-image.png",
+          "bytes": 65501,
+          "sha256": "b6920c376ee6e398e2127a3ceae72e730413d355f047d2d73023805074615c2d",
+          "width": 800,
+          "height": 600
+        }
+      ],
+      "draw_submission_passed": true,
+      "retired_texture_passed": true,
+      "preview_only_no_model_task_passed": true,
+      "storage": {
+        "scope": "Disposable hosted runner after compilation; APKs, emulator, system images, SDK platform/build tools and keys retained",
+        "free_bytes_before": 90832011264,
+        "removed": [
+          "/usr/local/lib/android/sdk/ndk",
+          "/usr/local/lib/android/sdk/cmake",
+          "/home/runner/.gradle/caches",
+          "/home/runner/.gradle/wrapper/dists"
+        ],
+        "skipped": [],
+        "apk_sha256": {
+          "app/build/outputs/apk/debug/app-debug.apk": "df1962947c587b0ee2c8beae5bc2a072f8dd09ac19ff059e84077da2aa252361",
+          "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "1e9c03a767c42b608c743971a737c458c08bb470a09c8e51bbff9aa9864b3262"
+        },
+        "status": "passed",
+        "free_bytes_after": 98531209216,
+        "compiled_apks_unchanged": true
+      }
+    }
+  ],
+  "scope": "Two standard UI archives, exact GitHub length/server SHA and complete ZIP CRC verified; native report replayed; new held-real-image/dark/error/recovery markers checked twice per archive; all 60 constructed prompt PNGs per API verified; representative API35 large-font landscape images actually viewed. Not a physical device acceptance."
+}

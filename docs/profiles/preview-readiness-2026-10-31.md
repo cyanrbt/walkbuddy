@@ -32,3 +32,13 @@ v0.4.38 的采集和显示回调更新后即可将观察标记为 LIVE，首个 
 随后源码 `cef8575` 的检查又被旧的恢复样式断言拦截：应用等待遮罩已是 16dp，测试仍固定要求正常预览恢复到原先 28dp，因此 layout 和两次 PiP 检查失败。新增首帧四项检查仍通过。这里是遗漏更新测试设计基准，不能归为模拟器异常，也不能把未走完的大字号布局写成通过。[该候选终态和日志](preview-readiness-padding-status-2026-10-31.json)单独保留，没有重跑原候选。
 
 现将正常预览恢复检查明确更新为 16sp / 四边 16dp，继续严格检查字号、全部边距、设置区域和无障碍说明恢复；完整恢复仍为 16sp / 16dp，紧凑恢复仍为 12sp / 8dp。应用源码未变，Lint 和双 APK 编译再次通过（44 秒），[本地摘要](preview-readiness-padding-local-2026-10-31.json)保留。完整原生检查需由新源码执行。
+
+## 源码 d8ed9e0 的原生结果
+
+修订源码 `d8ed9e0a6c28f13c96ff85caa7771046fe3729c2` 的九个作业首轮八个成功：[普通 UI](https://github.com/cyanrbt/walkbuddy/actions/runs/41190336070)、[三套像素专项](https://github.com/cyanrbt/walkbuddy/actions/runs/41190336151)、[两核轨迹](https://github.com/cyanrbt/walkbuddy/actions/runs/41190336119)均成功，[四核轨迹](https://github.com/cyanrbt/walkbuddy/actions/runs/41190336117)仅 Android 16 成功。原始首轮终态见[记录](preview-readiness-final-first-status-2026-10-31.json)。
+
+普通 UI 两份附件均已下载，核对 GitHub 服务端大小和哈希、全部 ZIP CRC，再重放十项报告。两套各有两次四项首帧原生检查通过；每套完整保留 60 张构造等待排版图，图像签名、尺寸和哈希已核对，实际查看 Android 15 的 600×360 / 两倍字号 / 日间两张提示图，文字完整。[完整原生与布局证据](preview-readiness-final-native-2026-10-31.json)保留。构造图用于检查文字排版；真实 Activity 的遮罩、禁用控件、进度和故障恢复以暂扣真实 PixelCopy 的原生断言为准。
+
+四核 Android 15 作业 `124505658112` 在首页 `start` 尚未获得焦点时失败，未进入本版新增的首帧就绪路径。48,129,189 字节的失败附件已完整验证服务端 SHA256 和 ZIP CRC，三条原始轨迹的实际大小、哈希也逐条核对；保留云端的无效报告，没有本地 SQL 重放。截图实际显示 Pixel Launcher 无响应弹窗覆盖首页，当前 InputDispatcher 焦点也属于该弹窗。ANR 记录 09:53:32.611，早于首个应用进程 09:53:40.121。该证据解释保存的首页失焦，不能把后续全部关屏问题或此前自然画面过期都归因于它。[失败完整证据](preview-readiness-final-launcher-2026-10-31.json)保留，确认后仅申请该作业一次复验。
+
+正式发布要求的两套普通 UI 已通过，三套像素和两核轨迹也通过；将按仓库既定门槛触发 v0.4.39 正式流程，同时继续四核作业的单次复验。标签触发不等于实际构建、上传完成；安装包、签名及下载状态须在发布后核对。实体设备、TalkBack 和 AR 仍待验收。
