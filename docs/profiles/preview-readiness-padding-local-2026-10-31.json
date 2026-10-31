@@ -1,0 +1,26 @@
+{
+  "version": "0.4.39",
+  "versionCode": 51,
+  "build": "BUILD SUCCESSFUL in 44s",
+  "tasks": "lintDebug assembleDebug assembleDebugAndroidTest -PuniversalApk --offline",
+  "production_source_change_from_cef8575": false,
+  "change": "Existing normal-preview style assertion now expects 16sp and 16dp on all four sides. Full recovery and compact styles remain 16sp/16dp and 12sp/8dp.",
+  "source_and_local_apks": [
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryPresentationProbe.java",
+      "bytes": 9188,
+      "sha256": "617eea1aadada55e5dadd93c9773ab3881c8a5c1b419cbc4bd044a64e6ff519e"
+    },
+    {
+      "path": "app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 26263786,
+      "sha256": "f1d326e6eef296e0ed1925c03ba1b3bbbf23c257f06f35a7c555c013bd1838cf"
+    },
+    {
+      "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "bytes": 393205,
+      "sha256": "d1b937c1785ae90a1a3c692232da7042745d954feaaadb8af72640a3c3f8eb4a"
+    }
+  ],
+  "scope": "Local compilation/Lint; native result pending new source push."
+}

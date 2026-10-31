@@ -19,6 +19,7 @@ on:
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/DrawBrightnessProbe.java
       - app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryPresentationProbe.java
       - app/src/main/res/layout/activity_preview.xml
       - app/src/main/res/values/strings.xml
       - app/src/main/java/com/cyanrbt/walkbuddy/SessionState.java

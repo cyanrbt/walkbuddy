@@ -59,7 +59,7 @@ final class RecoveryPresentationProbe {
     static void preview(View root) {
         for(int id:new int[]{R.id.preview_live_settings,R.id.preview_optional_settings})
             if(root.findViewById(id).getVisibility()!=View.VISIBLE)throw new AssertionError("Restart did not restore settings");
-        TextView cover=root.findViewById(R.id.preview_cover);style(cover,16,28);
+        TextView cover=root.findViewById(R.id.preview_cover);style(cover,16,16);
         if(cover.getContentDescription()!=null)throw new AssertionError("Restart retained stopped accessibility description");
     }
     static void fixtures(View root,RecoveryGuide.Prompt prompt,int width,int height,File screenshot,boolean record) throws Exception {

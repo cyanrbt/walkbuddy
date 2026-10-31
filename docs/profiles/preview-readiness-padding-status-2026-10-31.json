@@ -1,0 +1,180 @@
+{
+  "source_commit": "cef85752f6403df777cf0a0dbc0815be6d40445e",
+  "reruns_requested": 0,
+  "runs": [
+    {
+      "id": 41189689663,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41189689663",
+      "jobs": [
+        {
+          "id": 124503722177,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124503722347,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    {
+      "id": 41189689641,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41189689641",
+      "jobs": [
+        {
+          "id": 124503722308,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124503722318,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124503722343,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    {
+      "id": 41189689635,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41189689635",
+      "jobs": [
+        {
+          "id": 124503722238,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124503722364,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    {
+      "id": 41189689593,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41189689593",
+      "jobs": [
+        {
+          "id": 124503722029,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124503722242,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "job": 124503722177,
+      "lines": [
+        "2026-10-31T09:44:53.9840215Z | 1 | surface_reinstall_recovery | passed | complete | 2190 | 4 | 0 |",
+        "2026-10-31T09:44:53.9840503Z | 2 | recovery | not requested | complete | 2119 | 4 | 0 |",
+        "2026-10-31T09:44:53.9840729Z | 3 | recovery | not requested | complete | 2153 | 4 | 0 |",
+        "2026-10-31T09:45:18.2247340Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp",
+        "2026-10-31T09:46:23.6858825Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:46:23.6884465Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面",
+        "2026-10-31T09:47:23.2029508Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:47:23.2058211Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面"
+      ]
+    },
+    {
+      "job": 124503722308,
+      "lines": [
+        "2026-10-31T09:44:26.7613067Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp",
+        "2026-10-31T09:45:34.4921859Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:45:34.4948579Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面",
+        "2026-10-31T09:46:34.3815806Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:46:34.3835861Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面"
+      ]
+    },
+    {
+      "job": 124503722242,
+      "lines": [
+        "2026-10-31T09:44:34.1933411Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp",
+        "2026-10-31T09:45:46.7474675Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:45:46.7504680Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面",
+        "2026-10-31T09:46:46.2527985Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:46:46.2553795Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面"
+      ]
+    },
+    {
+      "job": 124503722029,
+      "lines": [
+        "2026-10-31T09:45:15.9208415Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp",
+        "2026-10-31T09:46:38.4621294Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:46:38.4680794Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面",
+        "2026-10-31T09:47:44.5089109Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:47:44.5153755Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面"
+      ]
+    },
+    {
+      "job": 124503722343,
+      "lines": [
+        "2026-10-31T09:45:43.6922432Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp",
+        "2026-10-31T09:47:01.6750538Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:47:01.6807259Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面",
+        "2026-10-31T09:48:07.5449717Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:48:07.5506111Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面"
+      ]
+    },
+    {
+      "job": 124503722347,
+      "lines": [
+        "2026-10-31T09:46:18.4795390Z | 1 | surface_reinstall_recovery | passed | complete | 2764 | 4 | 0 |",
+        "2026-10-31T09:46:18.4796298Z | 2 | recovery | not requested | complete | 2361 | 4 | 0 |",
+        "2026-10-31T09:46:18.4797322Z | 3 | recovery | not requested | complete | 2401 | 4 | 0 |",
+        "2026-10-31T09:46:52.7212561Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp",
+        "2026-10-31T09:48:07.6034901Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:48:07.6075033Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面",
+        "2026-10-31T09:49:13.1115797Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:49:13.1170145Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面"
+      ]
+    },
+    {
+      "job": 124503722238,
+      "lines": [
+        "2026-10-31T09:45:46.3218898Z | 1 | surface_reinstall_recovery | passed | complete | 2449 | 4 | 0 |",
+        "2026-10-31T09:45:46.3219484Z | 2 | recovery | not requested | complete | 2216 | 4 | 0 |",
+        "2026-10-31T09:45:46.3219992Z | 3 | recovery | not requested | complete | 2083 | 4 | 0 |",
+        "2026-10-31T09:46:20.4395592Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp",
+        "2026-10-31T09:47:37.0101859Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:47:37.0153267Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面",
+        "2026-10-31T09:48:44.0225442Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:48:44.0272987Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面"
+      ]
+    },
+    {
+      "job": 124503722364,
+      "lines": [
+        "2026-10-31T09:45:56.5736574Z | 1 | surface_reinstall_recovery | passed | complete | 2336 | 4 | 0 |",
+        "2026-10-31T09:45:56.5737150Z | 2 | recovery | not requested | complete | 2364 | 4 | 0 |",
+        "2026-10-31T09:45:56.5737976Z | 3 | recovery | not requested | complete | 2119 | 4 | 0 |",
+        "2026-10-31T09:46:28.6414575Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp",
+        "2026-10-31T09:47:42.6009547Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:47:42.6152763Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面",
+        "2026-10-31T09:48:47.5800105Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:48:47.5903568Z PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面"
+      ]
+    }
+  ],
+  "scope": "Terminal states and job-log evidence only; no archive download/raw replay for this candidate.",
+  "interpretation": "Production startup padding is now 16dp, but RecoveryPresentationProbe.preview still expected the previous 28dp. The old baseline failed in layout and both PiP checks; controlled first-image probes passed. Layout stopped before the large-font landscape cases, so this candidate does not establish that all 60 prompt layouts fit. Update the explicit preview baseline to the new 16dp design while preserving font, four-sided padding, settings and accessibility-restoration checks; app production source unchanged."
+}
