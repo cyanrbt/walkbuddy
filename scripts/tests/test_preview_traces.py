@@ -186,6 +186,50 @@ class TraceRecorderTest(unittest.TestCase):
             self.assertFalse((Path(temp)/'trace.pftrace').exists())
             self.assertEqual(2, len(json.loads((Path(temp)/'transfer.json').read_text())['attempts']))
 
+    def test_offline_transport_reconnects_before_copying_the_same_stopped_trace(self):
+        class OfflineAdb(FakeAdb):
+            offline = False
+            def run(self, *args, **kwargs):
+                if 'wait-for-device' in args:
+                    self.calls.append(args);self.offline = False
+                    return SimpleNamespace(returncode=0, stdout='', stderr='')
+                if 'pull' in args and self.offline:
+                    self.calls.append(args)
+                    return SimpleNamespace(returncode=1, stdout='', stderr='device offline')
+                result = super().run(*args, **kwargs)
+                if 'pull' in args and result.returncode:
+                    self.offline = True
+                return result
+        with tempfile.TemporaryDirectory() as temp:
+            adb = OfflineAdb(fail_first_pull=True)
+            directory = Path(temp)
+            result = recorder.capture(adb, directory, '', 1)
+            self.assertEqual([], result['errors'])
+            self.assertEqual([False, True], [a['verified'] for a in result['transfer_attempts']])
+            self.assertEqual(0, result['transfer_attempts'][1]['reconnect_exit'])
+            self.assertEqual(1, sum('instrument' in call for call in adb.calls))
+            sources = [call[1] for call in adb.calls if call[0] == 'pull']
+            self.assertEqual(2, len(sources));self.assertEqual(sources[0], sources[1])
+            self.assertEqual(b'flushed trace', (directory/'trace.pftrace').read_bytes())
+
+    def test_reconnection_timeout_keeps_the_copy_failed_and_does_not_repeat_the_probe(self):
+        class UnavailableAdb(FakeAdb):
+            def run(self, *args, **kwargs):
+                if 'wait-for-device' in args:
+                    self.calls.append(args)
+                    raise subprocess.TimeoutExpired('adb wait-for-device', 10)
+                return super().run(*args, **kwargs)
+        with tempfile.TemporaryDirectory() as temp:
+            adb = UnavailableAdb(fail_first_pull=True)
+            directory = Path(temp)
+            result = recorder.capture(adb, directory, '', 1)
+            self.assertTrue(result['errors'])
+            self.assertFalse((directory/'trace.pftrace').exists())
+            self.assertEqual(1, sum('instrument' in call for call in adb.calls))
+            self.assertEqual(1, sum(call[0] == 'pull' for call in adb.calls))
+            attempts = json.loads((directory/'transfer.json').read_text())['attempts']
+            self.assertEqual(2, len(attempts));self.assertFalse(attempts[1]['verified'])
+
     def test_failed_start_preserves_stderr_and_cleans_up_its_owned_pid(self):
         with tempfile.TemporaryDirectory() as temp:
             adb = FakeAdb(failed_start=True)
@@ -204,6 +248,22 @@ class TraceRecorderTest(unittest.TestCase):
             self.assertTrue(result['errors'])
             self.assertEqual(3, sum('test' in call for call in adb.calls))
             self.assertEqual(hashlib.sha256(b'flushed trace').hexdigest(), result['trace_sha256'])
+
+    def test_copy_failure_retains_info_stage_logs_without_accepting_the_trace(self):
+        class StageLogAdb(FakeAdb):
+            def run(self, *args, **kwargs):
+                if args and args[0] == 'logcat':
+                    # Android logcat's WARN filter drops the INFO stage events.
+                    info = 'BrightnessStage event=CALLBACK id=1 status=0\n'
+                    output = info if 'WalkBuddyTiming:I' in args else ''
+                    return SimpleNamespace(returncode=0, stdout=output, stderr='')
+                return super().run(*args, **kwargs)
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            result = recorder.capture(StageLogAdb(corrupt_pull=True), directory, '', 1)
+            self.assertTrue(result['errors'])
+            self.assertFalse((directory/'trace.pftrace').exists())
+            self.assertIn('BrightnessStage event=CALLBACK', (directory/'logcat.txt').read_text())
 
     def test_timeout_stops_remote_instrumentation_and_preserves_partial_output(self):
         with tempfile.TemporaryDirectory() as temp:

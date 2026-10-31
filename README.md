@@ -56,7 +56,7 @@
 
 当前 [v0.4.37 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.37/Walk-Buddy-v0.4.37-arm64-debug.apk) 已通过[正式发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41147755325)。亮度检查复用 16×12 位图和像素缓冲，复制前清空、停止后释放；问题信息增加读回墙钟/CPU，首个事件和页面重建保留记录。243 项 JVM、Android 15/16 正式十项及实际 APK 0.4.37 / 49 的固定签名、模型和文件摘要均已核验。[验证记录](docs/profiles/brightness-readback-2026-10-31.md)区分原生像素对照、受控位图计时、实际相机故障恢复和设备范围；不宣称历史停顿根因解决、实体帧率或耗电改善。真实设备、TalkBack、AR 与道路仍待验收。
 
-Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
+Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。最新诊断补充 InputDispatcher 当前焦点、同一停止文件的连接恢复和 INFO 后备记录，[验证与边界](docs/profiles/ci-input-focus-2026-10-31.md)保留首轮失败与复验结果。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
 
 异步亮度读取候选在系统轨迹下出现新的请求截止失败，已撤回主分支产品改动，保留在独立实验分支；未发布 v0.4.38，也未放宽原有保护。[失败证据与当前状态](docs/profiles/brightness-async-2026-10-31.md)保留，当前安装包仍为 v0.4.37。
 

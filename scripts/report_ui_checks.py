@@ -13,6 +13,20 @@ def read(path: Path) -> str:
     return path.read_text(errors="replace") if path.is_file() else ""
 
 
+def input_focused_windows(text):
+    """Only current InputDispatcher focus, not historical requests or listed windows."""
+    for section in re.finditer(r"(?m)^([ \t]*)FocusedWindows:[ \t]*$", text):
+        depth = len(section.group(1))
+        for line in text[section.end():].splitlines():
+            if not line.strip():
+                continue
+            if len(line) - len(line.lstrip()) <= depth:
+                break
+            focused = re.fullmatch(r"\s*displayId=(\d+), name='([^']+)'\s*", line)
+            if focused:
+                yield int(focused.group(1)), line.strip()
+
+
 def summarize(directory: Path, build_result: str, emulator_result: str, mode="ui") -> dict:
     probes = []
     if mode == "ui":
@@ -32,16 +46,21 @@ def summarize(directory: Path, build_result: str, emulator_result: str, mode="ui
             anrs.append({"package": match.group(1), "event": line.strip(), "reason": reason})
     focus = []
     blocking = []
+    def record_focus(path, focused, primary=True):
+        focus.append({"file": str(path.relative_to(directory)), "focused_window": focused})
+        match = re.search(r"Application Not Responding: ([\w.]+)", focused)
+        if primary and match and match.group(1) != PACKAGE:
+            blocking.append({"package": match.group(1), "file": str(path.relative_to(directory)),
+                             "focused_window": focused})
     for path in sorted((directory / "cache/ui-probe").glob("*-failure-window.txt")):
         for line in read(path).splitlines():
             if "mCurrentFocus=" not in line:
                 continue
-            focused = line.strip()
-            focus.append({"file": str(path.relative_to(directory)), "focused_window": focused})
-            match = re.search(r"Application Not Responding: ([\w.]+)", focused)
-            if match and match.group(1) != PACKAGE:
-                blocking.append({"package": match.group(1), "file": str(path.relative_to(directory)),
-                                 "focused_window": focused})
+            record_focus(path, line.strip())
+    for path in sorted((directory / "cache/ui-probe").glob("*-failure-input.txt")):
+        for display, focused in input_focused_windows(read(path)):
+            # Native CI activities and injected input target the emulator's primary display.
+            record_focus(path, focused, primary=display == 0)
     if build_result != "success":
         status = "build_not_passed"
     elif emulator_result != "success":
@@ -78,7 +97,7 @@ def markdown(report: dict) -> str:
         result.extend(["结果与附件不完整，不能将其记录为检查已通过。", ""])
     if report["focused_external_anr_dialogs"]:
         owners = ", ".join(sorted({item["package"] for item in report["focused_external_anr_dialogs"]}))
-        result.extend([f"失败时的窗口快照显示，外部 ANR 弹窗占有输入焦点：`{owners}`。", ""])
+        result.extend([f"失败时的窗口或输入快照显示，外部 ANR 弹窗占有输入焦点：`{owners}`。", ""])
     if report["anrs"]:
         owners = ", ".join(sorted({item["package"] for item in report["anrs"]}))
         result.extend([f"系统日志记录了 ANR：`{owners}`。仅有同时出现的 ANR 记录，不能证明它导致了探针失败。", ""])

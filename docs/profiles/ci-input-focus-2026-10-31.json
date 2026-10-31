@@ -1,0 +1,31 @@
+{
+  "tools_tests": 38,
+  "scope": "CI evidence classification and read-only transfer resilience; production app code and APK unchanged",
+  "report_source_sha256": "3684ec8324b6225a667ad7fdd7907b5926c2892b447570a983e17e534f3b1062",
+  "recorder_source_sha256": "9584eae7829c843a0ad7a0377c93065a003d929bd1ccf8834c2d4ae6de856e3a",
+  "actual_input_focus_source": {
+    "run": 41162976895,
+    "artifact_id": 13027683975,
+    "api": 35,
+    "focused_display": 0,
+    "focused_package": "com.google.android.apps.nexuslauncher"
+  },
+  "actual_transfer_source": {
+    "run": 41162976895,
+    "artifact_id": 13027709255,
+    "api": 36,
+    "trial": 1,
+    "first_exit": 1,
+    "second_exit": 1,
+    "second_error": "device offline"
+  },
+  "verified_replays": {
+    "rollback_archives": 7,
+    "rollback_raw_traces": 6,
+    "experimental_archives": 2,
+    "experimental_existing_raw_traces": 5,
+    "experimental_complete_stage_requests": 22
+  },
+  "new_reconnection_wait_actual_offline_success": "not yet observed; fault-injection tools regression passed",
+  "no_probe_rerun_or_replacement_in_copy_retry": true
+}

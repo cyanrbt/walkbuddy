@@ -127,5 +127,22 @@
   "candidate_source_commit": "a1109083bc8fb4ddfa6f492d4740f8f1cad33f2a",
   "release_unchanged": "v0.4.37",
   "v0.4.38_tag_created": false,
-  "scope": "Local compilation/JVM/lint/source and DEX checks; rollback cloud revalidation pending; no physical device or AR result"
+  "scope": "Local and emulator rollback validation; first wake failure remains in separate record; no physical device or AR acceptance",
+  "cloud_validation": {
+    "source_commit": "066e2245529c8a69edbd3045347b0cfb118a3ea0",
+    "ui_run": 41162050197,
+    "ui_attempt": 2,
+    "ui_result": "success",
+    "first_failed_api35_job": 124421526328,
+    "retry_api35_job": 124424046134,
+    "api36_original_success_retained": true,
+    "trace_run": 41162050199,
+    "trace_attempt": 1,
+    "trace_result": "success",
+    "surface_run": 41162050269,
+    "surface_attempt": 1,
+    "surface_result": "success",
+    "archives_verified": 7,
+    "raw_sql_traces_replayed": 6
+  }
 }

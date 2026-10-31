@@ -54,6 +54,14 @@ def pull_trace(adb, remote, directory):
         part.unlink(missing_ok=True)
         attempt = {'attempt': index, 'verified': False}
         try:
+            if index > 1:
+                # A transport can briefly go offline after the first copy fails.
+                # Reconnect to the same emulator and copy the same stopped file.
+                ready = adb.run('wait-for-device', timeout=10, check=False)
+                (directory/f'reconnect-{index}.txt').write_text(ready.stdout+ready.stderr)
+                attempt['reconnect_exit'] = ready.returncode
+                if ready.returncode:
+                    raise RuntimeError(f'Emulator transport did not reconnect: {ready.stdout.strip()}; {ready.stderr.strip()}')
             result = adb.run('pull', remote, str(part), timeout=40, check=False)
             (directory/f'pull-{index}.txt').write_text(result.stdout+result.stderr)
             attempt['exit'] = result.returncode
@@ -125,7 +133,7 @@ def capture(adb, directory, config, index):
             except (OSError, ValueError, RuntimeError, subprocess.TimeoutExpired) as error:
                 record['errors'].append(str(error))
         try:
-            logs = adb.run('logcat', '-d', '-s', 'WalkBuddyTiming:W', 'WalkBuddyPip:I',
+            logs = adb.run('logcat', '-d', '-s', 'WalkBuddyTiming:I', 'WalkBuddyPip:I',
                            'WalkBuddyCamera:W', '*:S')
             (directory/'logcat.txt').write_text(logs.stdout)
         except (RuntimeError, subprocess.TimeoutExpired) as error:
