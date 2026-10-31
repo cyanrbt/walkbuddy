@@ -8,6 +8,10 @@
 
 ## 实际观察
 
+![同一窗口内线程调度状态与原生复制区段](brightness-wait-2026-10-31.svg)
+
+图中只有绿色是实际占用 CPU，橙色为可运行但未被调度，灰色为休眠；紫色单独标记观察到的原生区段，不是 GPU 利用率。[逐纳秒核对摘要](brightness-wait-summary-2026-10-31.json)确认三个线程的状态覆盖与窗口长度一致，`Running` 总和与实际 `sched` CPU 时间一致。
+
 | 线程 | 实际 CPU | Runnable（含抢占） | Sleeping |
 | --- | ---: | ---: | ---: |
 | 主线程 | 1.988ms | 7.926ms | 1005.099ms |
@@ -40,3 +44,5 @@ trace_processor_shell query --format csv --no-progress -f docs/profiles/brightne
 ```
 
 [线程与区段原始查询结果](brightness-wait-stages-2026-10-31.csv)、[逐核结果](brightness-wait-cpus-2026-10-31.csv)保留，不将同一线程的嵌套区段累加为互斥工作时间。查询只适用于本页明确标识的原始样本。
+
+`python3 docs/profiles/plot-brightness-wait-2026-10-31.py` 可从两份 CSV 重建摘要与 SVG，本轮使用 Matplotlib 3.11.0。绘图脚本先断言状态/CPU 时间覆盖、双核完整窗口和唯一相关复制区段，再生成图表；原始轨迹、APK 和临时 PNG 不提交仓库。

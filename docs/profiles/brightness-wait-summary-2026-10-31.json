@@ -1,0 +1,432 @@
+{
+  "source_commit": "1b5217706b5a0fd0d7ee755ed7cb6d0cd7eaeff3",
+  "run": 41178081292,
+  "job": 124469681763,
+  "artifact": 13034166185,
+  "trace_sha256": "c05660c8b13006979e83f1839f6091f4d552fe8d0daa12435c2187ed3b514cb3",
+  "pid": 3638,
+  "request": 1,
+  "due_to_delivery_ms": 1134,
+  "return_trace_ns": 80448212066,
+  "callback_trace_ns": 81463225382,
+  "window_ns": 1015013316,
+  "threads": [
+    {
+      "tid": 3638,
+      "label": "Main",
+      "states_ns": {
+        "S": 1005099380,
+        "R": 7106214,
+        "Running": 1987924,
+        "R+": 819798
+      },
+      "cpu_ns": 1987924
+    },
+    {
+      "tid": 3683,
+      "label": "RenderThread",
+      "states_ns": {
+        "R+": 641520935,
+        "Running": 291230533,
+        "R": 82237061,
+        "S": 24787
+      },
+      "cpu_ns": 291230533
+    },
+    {
+      "tid": 3770,
+      "label": "Brightness worker",
+      "states_ns": {
+        "Running": 132447,
+        "R+": 304077,
+        "S": 1007716777,
+        "R": 6860015
+      },
+      "cpu_ns": 132447
+    }
+  ],
+  "cores": [
+    {
+      "cpu": "0",
+      "observed_ns": "1015013316",
+      "idle_ns": "0",
+      "unattributed_ns": "0",
+      "slices": "4493"
+    },
+    {
+      "cpu": "1",
+      "observed_ns": "1015013316",
+      "idle_ns": "0",
+      "unattributed_ns": "0",
+      "slices": "4328"
+    }
+  ],
+  "observed_copy": {
+    "ts": 81336474750,
+    "dur": 119829423,
+    "starts_after_return_ns": 888262684,
+    "association": "Same process, one in-flight request, adjacent timing; no native request-ID flow"
+  },
+  "cpu_by_process": [
+    {
+      "pid": 3638,
+      "name": "com.cyanrbt.walkbuddy",
+      "cpu_ns": 490727608
+    },
+    {
+      "pid": 374,
+      "name": "/vendor/bin/hw/android.hardware.camera.provider@2.7-service-google",
+      "cpu_ns": 346224261
+    },
+    {
+      "pid": 433,
+      "name": "/system/bin/surfaceflinger",
+      "cpu_ns": 262381506
+    },
+    {
+      "pid": 406,
+      "name": "/vendor/bin/hw/android.hardware.graphics.composer3-service.ranchu",
+      "cpu_ns": 260612700
+    },
+    {
+      "pid": 912,
+      "name": "com.android.systemui",
+      "cpu_ns": 112618477
+    },
+    {
+      "pid": 3398,
+      "name": "com.google.android.apps.messaging",
+      "cpu_ns": 106464921
+    },
+    {
+      "pid": 563,
+      "name": "system_server",
+      "cpu_ns": 92852123
+    },
+    {
+      "pid": 380,
+      "name": "/vendor/bin/hw/android.hardware.graphics.allocator@3.0-service.ranchu",
+      "cpu_ns": 45763108
+    },
+    {
+      "pid": 2535,
+      "name": "com.google.android.gms.unstable",
+      "cpu_ns": 43193211
+    },
+    {
+      "pid": 1238,
+      "name": "com.google.android.gms.persistent",
+      "cpu_ns": 33797210
+    },
+    {
+      "pid": 1381,
+      "name": "com.google.android.apps.wellbeing",
+      "cpu_ns": 30762404
+    },
+    {
+      "pid": 81,
+      "name": "kworker/1:8H",
+      "cpu_ns": 18999243
+    },
+    {
+      "pid": 1581,
+      "name": "com.google.android.googlequicksearchbox:search",
+      "cpu_ns": 14924050
+    },
+    {
+      "pid": 38,
+      "name": "kworker/1:1",
+      "cpu_ns": 14166747
+    },
+    {
+      "pid": 384,
+      "name": "/vendor/bin/hw/android.hardware.sensors-service.multihal",
+      "cpu_ns": 11412561
+    },
+    {
+      "pid": 153,
+      "name": "/system/bin/servicemanager",
+      "cpu_ns": 11209412
+    },
+    {
+      "pid": 475,
+      "name": "/system/bin/traced_probes",
+      "cpu_ns": 9703014
+    },
+    {
+      "pid": 490,
+      "name": "/system/bin/logcat",
+      "cpu_ns": 8970684
+    },
+    {
+      "pid": 1418,
+      "name": "com.google.android.gms",
+      "cpu_ns": 8711250
+    },
+    {
+      "pid": 1170,
+      "name": "com.google.android.apps.nexuslauncher",
+      "cpu_ns": 7706096
+    },
+    {
+      "pid": 176,
+      "name": "/system/bin/keystore2",
+      "cpu_ns": 7299340
+    },
+    {
+      "pid": 2370,
+      "name": "com.android.managedprovisioning",
+      "cpu_ns": 7139003
+    },
+    {
+      "pid": 493,
+      "name": "/system/bin/cameraserver",
+      "cpu_ns": 6640891
+    },
+    {
+      "pid": 372,
+      "name": "/vendor/bin/hw/android.hardware.audio.service",
+      "cpu_ns": 5778835
+    },
+    {
+      "pid": 3321,
+      "name": "com.google.android.ext.services",
+      "cpu_ns": 5321375
+    },
+    {
+      "pid": 3414,
+      "name": "com.google.android.apps.safetyhub",
+      "cpu_ns": 5137507
+    },
+    {
+      "pid": 2862,
+      "name": "com.google.android.rkpdapp",
+      "cpu_ns": 4204855
+    },
+    {
+      "pid": 3018,
+      "name": "com.google.android.configupdater",
+      "cpu_ns": 3723148
+    },
+    {
+      "pid": 43,
+      "name": "kswapd0",
+      "cpu_ns": 3689886
+    },
+    {
+      "pid": 150,
+      "name": "/system/bin/logd",
+      "cpu_ns": 3564407
+    },
+    {
+      "pid": 429,
+      "name": "/system/bin/audioserver",
+      "cpu_ns": 3457424
+    },
+    {
+      "pid": 207,
+      "name": "jbd2/dm-46-8",
+      "cpu_ns": 3257950
+    },
+    {
+      "pid": 1442,
+      "name": "com.google.android.providers.media.module",
+      "cpu_ns": 3140637
+    },
+    {
+      "pid": 152,
+      "name": "/system/bin/lmkd",
+      "cpu_ns": 2958332
+    },
+    {
+      "pid": 26,
+      "name": "ksoftirqd/1",
+      "cpu_ns": 2894816
+    },
+    {
+      "pid": 362,
+      "name": "/apex/com.android.os.statsd/bin/statsd",
+      "cpu_ns": 2602078
+    },
+    {
+      "pid": 497,
+      "name": "/system/bin/installd",
+      "cpu_ns": 2574265
+    },
+    {
+      "pid": 58,
+      "name": "kworker/0:1H",
+      "cpu_ns": 2456613
+    },
+    {
+      "pid": 500,
+      "name": "/system/bin/mediaserver",
+      "cpu_ns": 2379622
+    },
+    {
+      "pid": 498,
+      "name": "media.extractor",
+      "cpu_ns": 2333420
+    },
+    {
+      "pid": 2908,
+      "name": "kworker/0:14",
+      "cpu_ns": 1972850
+    },
+    {
+      "pid": 477,
+      "name": "/system/bin/traced",
+      "cpu_ns": 1958952
+    },
+    {
+      "pid": 363,
+      "name": "/system/bin/netd",
+      "cpu_ns": 1915393
+    },
+    {
+      "pid": 277,
+      "name": "kworker/u4:3",
+      "cpu_ns": 1884603
+    },
+    {
+      "pid": 1095,
+      "name": "com.android.phone",
+      "cpu_ns": 1466301
+    },
+    {
+      "pid": 1758,
+      "name": "android.process.media",
+      "cpu_ns": 1445695
+    },
+    {
+      "pid": 203,
+      "name": "kworker/u5:1",
+      "cpu_ns": 1054555
+    },
+    {
+      "pid": 1071,
+      "name": "com.google.android.bluetooth",
+      "cpu_ns": 980027
+    },
+    {
+      "pid": 57,
+      "name": "kworker/u4:2",
+      "cpu_ns": 887435
+    },
+    {
+      "pid": 180,
+      "name": "/vendor/bin/hw/android.hardware.security.keymint-service",
+      "cpu_ns": 844157
+    },
+    {
+      "pid": 16,
+      "name": "rcu_preempt",
+      "cpu_ns": 739625
+    },
+    {
+      "pid": 354,
+      "name": "/vendor/bin/dhcpclient",
+      "cpu_ns": 663134
+    },
+    {
+      "pid": 1,
+      "name": "/system/bin/init",
+      "cpu_ns": 492839
+    },
+    {
+      "pid": 210,
+      "name": "kworker/u5:2",
+      "cpu_ns": 393119
+    },
+    {
+      "pid": 376,
+      "name": "/system/bin/ip6tables-restore",
+      "cpu_ns": 203599
+    },
+    {
+      "pid": 468,
+      "name": "/system/bin/drmserver",
+      "cpu_ns": 186356
+    },
+    {
+      "pid": 375,
+      "name": "/system/bin/iptables-restore",
+      "cpu_ns": 151351
+    },
+    {
+      "pid": 499,
+      "name": "media.metrics",
+      "cpu_ns": 143678
+    },
+    {
+      "pid": 143,
+      "name": "/system/bin/prng_seeder",
+      "cpu_ns": 126626
+    },
+    {
+      "pid": 15,
+      "name": "ksoftirqd/0",
+      "cpu_ns": 116075
+    },
+    {
+      "pid": 1342,
+      "name": "com.google.android.inputmethod.latin",
+      "cpu_ns": 114954
+    },
+    {
+      "pid": 416,
+      "name": "/vendor/bin/hw/android.hardware.power-service.example",
+      "cpu_ns": 94346
+    },
+    {
+      "pid": 157,
+      "name": "psimon",
+      "cpu_ns": 79566
+    },
+    {
+      "pid": 3172,
+      "name": "com.google.android.settings.intelligence",
+      "cpu_ns": 76852
+    },
+    {
+      "pid": 442,
+      "name": "/apex/com.android.adbd/bin/adbd",
+      "cpu_ns": 73528
+    },
+    {
+      "pid": 3540,
+      "name": "app_process",
+      "cpu_ns": 56264
+    },
+    {
+      "pid": 876,
+      "name": "/vendor/bin/hw/android.hardware.biometrics.fingerprint-service.ranchu",
+      "cpu_ns": 45046
+    },
+    {
+      "pid": 3352,
+      "name": "com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0",
+      "cpu_ns": 27862
+    },
+    {
+      "pid": 3339,
+      "name": "com.google.android.webview:webview_service",
+      "cpu_ns": 27371
+    },
+    {
+      "pid": 1452,
+      "name": "com.google.android.as",
+      "cpu_ns": 25207
+    },
+    {
+      "pid": 154,
+      "name": "/system/system_ext/bin/hwservicemanager",
+      "cpu_ns": 24276
+    }
+  ],
+  "query_inputs": {
+    "brightness-wait-stages-2026-10-31.csv": "42088019ff4a57245c9fb9cf189a63712f15078b5fc263c3fae73774e73554c5",
+    "brightness-wait-cpus-2026-10-31.csv": "7e33358bf1d1abf323a2107f3723fc951ff69c51bccf1cd9fc735c5fdedd32cc"
+  },
+  "scope": "One traced two-core emulator sample; CPU contention observed; not the earlier expiry or device acceptance"
+}
