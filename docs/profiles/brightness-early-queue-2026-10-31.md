@@ -18,4 +18,12 @@ TextureView 监听器同时绑定实际 View 所有者。旧 View 的可用、�
 
 实际相机探针继续验收复用、受控异常释放、冻结时序和手动重开，并检查默认仅预览未生成模型读回任务。旧 `ReadbackTiming` 的「未取得」在该路径表示没有执行模型任务，不把它写成耗时为零。
 
-本地 JVM、Lint、应用及原生测试包结果见[记录](brightness-early-queue-local-2026-10-31.json)。当前候选云端仍待验证；无实体设备、真实 AR、TalkBack、音频可听性、帧率、温升或耗电的新结果。后续发布仍需正式标签与实际固定签名 APK 独立核验。
+本地 JVM、Lint、应用及原生测试包结果见[记录](brightness-early-queue-local-2026-10-31.json)。无实体设备、真实 AR、TalkBack、音频可听性、帧率、温升或耗电的新结果。后续发布仍需正式标签与实际固定签名 APK 独立核验。
+
+## 首轮云端结果与未通过门槛
+
+候选 `03c1ec4` 的[阶段采证 41165858460](https://github.com/cyanrbt/walkbuddy/actions/runs/41165858460)两套 API 首次终态成功；[像素专项 41165858560](https://github.com/cyanrbt/walkbuddy/actions/runs/41165858560)的 API 35、36 首次成功，但 API 26 首次及单次失败作业复验均失败。两轮编译、32 组冻结像素、新 draw 提交和 EGL 对照通过，Camera2 则均在重复序列完成后的 idle 等待超时。缺少回调时序证据，不能认定只是漏接已经发生的回调，也不能用部分通过替代该门槛；不再盲目重跑，未发布 v0.4.38。
+
+[两次原始失败记录](brightness-early-queue-api26-failures-2026-10-31.json)保存原始错误、像素与新 draw 状态、ZIP 摘要和作业来源，两个失败 ZIP 均保留。此次阶段成功只核对终态，尚未重放该候选的六条轨迹。
+
+与更早提交候选分开的 `d52090a` [基线 41164584945](https://github.com/cyanrbt/walkbuddy/actions/runs/41164584945)两份 ZIP 已实际核对完整字节、服务端 SHA-256 与 CRC，Android 15/16 各十项摘要重放相同，全部六条原始轨迹也经固定版官方 SQL 引擎本地重放相同。[基线原始结果](brightness-queue-baseline-native-2026-10-31.json)保留来源和每条摘要；基线通过不代表当前候选已通过全部门槛，也不构成实体 A/B 性能结论。
