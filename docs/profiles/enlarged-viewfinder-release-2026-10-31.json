@@ -1,0 +1,434 @@
+{
+  "tag": "v0.4.40",
+  "source_commit": "52315cb112a4ec127dc76ad359e992eb7abf0b52",
+  "validated_candidate_commit": "01c75dadadf326e5968ae2a13d9032c98448a293",
+  "run": {
+    "id": 41196091510,
+    "status": "completed",
+    "conclusion": "success",
+    "attempt": 1,
+    "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41196091510",
+    "created_at": "2026-10-31T11:15:23Z",
+    "updated_at": "2026-10-31T11:24:12Z"
+  },
+  "jobs": [
+    {
+      "id": 124522433630,
+      "name": "ui / layout (36)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41196091510,
+      "logs_url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41196091510/job/124522433630",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Prepare pinned system trace analyzer",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 9
+        },
+        {
+          "name": "Free hosted runner storage after compilation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Record and bound emulator CPU capacity",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Summarize preview trace evidence",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 14
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ],
+      "markers": {
+        "VIEWFINDER_LAYOUT_PASS": 1,
+        "VIEWFINDER_ACTIVITY_PASS": 2,
+        "VIEWFINDER_DETECTION_PASS": 2,
+        "PIP_SOUND_CONTROLS_PASS": 2,
+        "PIP_PROBE_PASS": 2,
+        "BUILD SUCCESSFUL": 1
+      },
+      "log_evidence": [
+        "BUILD SUCCESSFUL in 49s",
+        "VIEWFINDER_LAYOUT_PASS configurations=30 larger_viewport=true larger_camera_pixels=true essential_actions=true detection_and_depth_cues=true choices_retained=true recovery_visible=true restored=true",
+        "VIEWFINDER_ACTIVITY_PASS cases=4 native_touch=true camera_retained=true advancing_frames=true pip_choice_restored=true recovery_expands=true",
+        "VIEWFINDER_DETECTION_PASS real_model=true choices_retained=true results_advance=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "VIEWFINDER_ACTIVITY_PASS cases=4 native_touch=true camera_retained=true advancing_frames=true pip_choice_restored=true recovery_expands=true",
+        "VIEWFINDER_DETECTION_PASS real_model=true choices_retained=true results_advance=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+      ]
+    },
+    {
+      "id": 124522433845,
+      "name": "ui / layout (35)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41196091510,
+      "logs_url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41196091510/job/124522433845",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Prepare pinned system trace analyzer",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 9
+        },
+        {
+          "name": "Free hosted runner storage after compilation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Record and bound emulator CPU capacity",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Summarize preview trace evidence",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 14
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ],
+      "markers": {
+        "VIEWFINDER_LAYOUT_PASS": 1,
+        "VIEWFINDER_ACTIVITY_PASS": 2,
+        "VIEWFINDER_DETECTION_PASS": 2,
+        "PIP_SOUND_CONTROLS_PASS": 2,
+        "PIP_PROBE_PASS": 2,
+        "BUILD SUCCESSFUL": 1
+      },
+      "log_evidence": [
+        "BUILD SUCCESSFUL in 38s",
+        "VIEWFINDER_LAYOUT_PASS configurations=30 larger_viewport=true larger_camera_pixels=true essential_actions=true detection_and_depth_cues=true choices_retained=true recovery_visible=true restored=true",
+        "VIEWFINDER_ACTIVITY_PASS cases=4 native_touch=true camera_retained=true advancing_frames=true pip_choice_restored=true recovery_expands=true",
+        "VIEWFINDER_DETECTION_PASS real_model=true choices_retained=true results_advance=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "VIEWFINDER_ACTIVITY_PASS cases=4 native_touch=true camera_retained=true advancing_frames=true pip_choice_restored=true recovery_expands=true",
+        "VIEWFINDER_DETECTION_PASS real_model=true choices_retained=true results_advance=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+      ]
+    },
+    {
+      "id": 124523904428,
+      "name": "apk",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41196091510,
+      "logs_url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41196091510/job/124523904428",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Check release tag and notes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Restore fixed signing key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Install Android SDK 36",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Check model",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Test and build arm64 debug APK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Verify APK signature matches restored key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Collect APK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Publish GitHub Release",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ],
+      "markers": {
+        "VIEWFINDER_LAYOUT_PASS": 0,
+        "VIEWFINDER_ACTIVITY_PASS": 0,
+        "VIEWFINDER_DETECTION_PASS": 0,
+        "PIP_SOUND_CONTROLS_PASS": 0,
+        "PIP_PROBE_PASS": 0,
+        "BUILD SUCCESSFUL": 1
+      },
+      "log_evidence": [
+        "BUILD SUCCESSFUL in 1m 7s"
+      ]
+    }
+  ],
+  "release": {
+    "id": 429891798,
+    "url": "https://github.com/cyanrbt/walkbuddy/releases/tag/v0.4.40",
+    "tag_name": "v0.4.40",
+    "draft": false,
+    "published_at": "2026-10-31T11:24:08Z",
+    "assets": [
+      {
+        "id": 695192446,
+        "name": "Walk-Buddy-v0.4.40-arm64-debug.apk",
+        "size": 10000447,
+        "digest": "sha256:24733b8e29a8be70c62e732c548f49822f29411ef9ea941a21927a537a7953af",
+        "browser_download_url": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.40/Walk-Buddy-v0.4.40-arm64-debug.apk",
+        "state": "uploaded"
+      }
+    ]
+  },
+  "local_jvm_tests": 273,
+  "apk_validation": "apk-v0.4.40.json",
+  "candidate_native_replay": "enlarged-viewfinder-pixels-native-2026-10-31.json",
+  "candidate_final_status": "enlarged-viewfinder-final-status-2026-10-31.json",
+  "verification_scope": "Formal first-attempt terminal results and all three original job logs checked. Candidate API35/36 full UI ZIPs verified and reports replayed locally with geometry records and selected screenshots inspected. Formal UI ZIPs not downloaded/replayed. Actual published ARM64 APK independently downloaded and checked; details in apk-v0.4.40.json.",
+  "unresolved": "One candidate CPU4/API35 pip-repeat second SystemUI mute timeout remains unexplained. Exactly one same-source rerun succeeded; this is not a root-cause fix. No physical installation, TalkBack, real AR, road, FPS or power acceptance."
+}

@@ -2,6 +2,16 @@
 
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”“最新”“未发布”等措辞均对应各段记录时的状态；当前结果先看最上方核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
+## v0.4.40 发布后再次核对（2026-10-31）
+
+再次直接查询最近 30 次 Actions，当前终态为 22 次成功、8 次失败，最前面的 14 次当前均成功；这个计数包含两次同源码单作业复验后的成功，不能称连续首次成功。[本次机器可读快照](ci-status-2026-10-31-v40.json)保留查询范围，并直接重读三份相关原始日志。
+
+连续八个红叉来自两轮开发候选，每次推送各触发四个流程：`4837876` 在横屏两倍字号下等待文案纵向裁切；修订后的 `cef8575` 遗漏更新测试中的原 28dp 恢复样式基准。这是实际布局问题和测试维护遗漏，不是八次独立 APK 编译故障，也不能统一归因于模拟器。重读普通 API 35 原日志分别有 `BUILD SUCCESSFUL in 49s` 和 `BUILD SUCCESSFUL in 37s`，随后才是布局断言失败。两项已修订，新候选与正式标签通过；[原始失败与修订验证](preview-readiness-2026-10-31.md)保留。
+
+较新的四核 API 35 作业 `124518183842` 先 `BUILD SUCCESSFUL in 55s`，后在 `pip-repeat` 的 `Timed out: second SystemUI mute` 失败。完整失败附件保留，单次同源码复验通过，但原因仍未定位；现有日志不足以区分触摸未交付、旧动作拒绝或其他原因，不能称系统问题或已修复。[完整失败](enlarged-viewfinder-sound-first-2026-10-31.json)和[最终候选状态](enlarged-viewfinder-final-status-2026-10-31.json)分别记录。
+
+[v0.4.39 正式发布](https://github.com/cyanrbt/walkbuddy/actions/runs/41191378780)和最新 [v0.4.40 正式发布](https://github.com/cyanrbt/walkbuddy/actions/runs/41196091510)均为 attempt 1，Android 15、16 与 APK 三个作业全部成功。最新 Release 的 10,000,447 字节 [APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.40/Walk-Buddy-v0.4.40-arm64-debug.apk)已实际下载核对版本 0.4.40 / 52、包名、固定签名和服务端摘要；[正式日志记录](enlarged-viewfinder-release-2026-10-31.json)与[安装包核验](apk-v0.4.40.json)保留。历史红叉不删除，正式成功也不等同所有历史问题已解决；无实体设备验收。
+
 ## CPU 容量实验与一次输入复验（应用仍为 v0.4.38）
 
 源码 `3cc077c` 保留默认两核检查，增加按实际运行机容量限制的最多四核专项。57 项工具检查通过；[四核专项 41180528007](https://github.com/cyanrbt/walkbuddy/actions/runs/41180528007)、[两核轨迹 41180528013](https://github.com/cyanrbt/walkbuddy/actions/runs/41180528013)和[三套像素 41180528061](https://github.com/cyanrbt/walkbuddy/actions/runs/41180528061)均首次成功。九套核数逐一核对，四核专项实际四核，其余七作业实际两核。四核两份完整附件与六条原始轨迹已实际核验重放；另外两核成功作业仅核对终态与原始日志，不冒充本轮完整 ZIP 重放。

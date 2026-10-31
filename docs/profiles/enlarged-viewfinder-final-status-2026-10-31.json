@@ -1,0 +1,110 @@
+{
+  "source_commit": "01c75dadadf326e5968ae2a13d9032c98448a293",
+  "runs": [
+    {
+      "id": 41194621316,
+      "name": "Preview system trace",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source": "01c75dadadf326e5968ae2a13d9032c98448a293",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621316"
+    },
+    {
+      "id": 41194621314,
+      "name": "CPU capacity trace",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 2,
+      "source": "01c75dadadf326e5968ae2a13d9032c98448a293",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621314"
+    },
+    {
+      "id": 41194621257,
+      "name": "Surface copy experiment",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source": "01c75dadadf326e5968ae2a13d9032c98448a293",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621257"
+    },
+    {
+      "id": 41194621240,
+      "name": "Android UI checks",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source": "01c75dadadf326e5968ae2a13d9032c98448a293",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621240"
+    }
+  ],
+  "first_attempt": "enlarged-viewfinder-pixels-first-status-2026-10-31.json",
+  "first_failure": "enlarged-viewfinder-sound-first-2026-10-31.json",
+  "full_normal_native_replay": "enlarged-viewfinder-pixels-native-2026-10-31.json",
+  "single_rerun": {
+    "original_job": 124518183842,
+    "requested_count": 1,
+    "executed_job": 124521831772,
+    "jobs": [
+      {
+        "id": 124521831772,
+        "name": "trace / layout (35)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T11:12:24Z",
+        "completed_at": "2026-10-31T11:20:27Z"
+      },
+      {
+        "id": 124521832952,
+        "name": "trace / layout (36)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T10:54:13Z",
+        "completed_at": "2026-10-31T11:01:07Z"
+      }
+    ],
+    "note": "Only API35 re-executed. API36 entry retains its first 10:54:13–11:01:07 execution time.",
+    "log_evidence": [
+      "| Trial | Scenario | Surface prefix | Evidence | Dispatches | Forced stops | Unforced stops over 1200ms |",
+      "| --- | --- | --- | --- | ---: | ---: | ---: |",
+      "| 1 | surface_reinstall_recovery | passed | complete | 2254 | 4 | 0 |",
+      "| 2 | recovery | not requested | complete | 2249 | 4 | 0 |",
+      "| 3 | recovery | not requested | complete | 2046 | 4 | 0 |",
+      "PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore",
+      "RUNTIME_PROBE_PASS",
+      "PREVIEW_PROBE_PASS cases=32; direction marker + circle in displayed and sampled bitmap",
+      "OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0",
+      "VIEWFINDER_LAYOUT_PASS configurations=30 larger_viewport=true larger_camera_pixels=true essential_actions=true detection_and_depth_cues=true choices_retained=true recovery_visible=true restored=true",
+      "LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore",
+      "HOME_PROBE_PASS configurations=24 action-states=240 expanded=240; brand reflow, first step, current status, fixed controls, full text, contrast, idle refresh stopped, real Activity recreation",
+      "RECOVERY_PROBE_PASS: denied permission, settings intent, grant and real Activity recreation; no camera auto-start or stopped watchdog polling",
+      "VIEWFINDER_ACTIVITY_PASS cases=4 native_touch=true camera_retained=true advancing_frames=true pip_choice_restored=true recovery_expands=true",
+      "VIEWFINDER_DETECTION_PASS real_model=true choices_retained=true results_advance=true",
+      "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+      "PIP_PROBE_PASS",
+      "VIEWFINDER_ACTIVITY_PASS cases=4 native_touch=true camera_retained=true advancing_frames=true pip_choice_restored=true recovery_expands=true",
+      "VIEWFINDER_DETECTION_PASS real_model=true choices_retained=true results_advance=true",
+      "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+      "PIP_PROBE_PASS",
+      "SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2",
+      "| 阶段 | 结果 |",
+      "| --- | --- |",
+      "| 模拟器测试 APK 编译 | 通过 |",
+      "| 模拟器运行 | 通过 |",
+      "| 探针 | 记录 |",
+      "| --- | --- |",
+      "| pip_recovery | 通过 |",
+      "| runtime | 通过 |",
+      "| preview | 通过 |",
+      "| overlay | 通过 |",
+      "| layout | 通过 |",
+      "| home | 通过 |",
+      "| recovery | 通过 |",
+      "| pip | 通过 |",
+      "| pip-repeat | 通过 |",
+      "| support | 通过 |"
+    ],
+    "scope": "Terminal results and original job log only; retry archive/raw traces not locally downloaded or SQL-replayed."
+  },
+  "interpretation": "Final workflows successful: eight first-pass jobs, one unexplained pip-repeat second-SystemUI-mute timeout followed by exactly one successful rerun. New viewfinder and image-area checks passed in the first failed job too. Rerun success does not explain or repair the mute failure; no physical audibility, device AR/FPS/power acceptance."
+}

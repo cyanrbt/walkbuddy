@@ -1,0 +1,418 @@
+{
+  "checked_at_utc": "2026-10-31 11:30:26 UTC",
+  "query": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/runs?per_page=30",
+  "counts": {
+    "success": 22,
+    "failure": 8
+  },
+  "leading_successful_current_conclusions": 14,
+  "note": "Snapshot of current conclusions, including successful reruns. Not a first-attempt or permanent success count.",
+  "runs": [
+    {
+      "id": 41196091510,
+      "name": "Release APK",
+      "source_commit": "52315cb112a4ec127dc76ad359e992eb7abf0b52",
+      "branch": "v0.4.40",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41196091510",
+      "created_at": "2026-10-31T11:15:23Z"
+    },
+    {
+      "id": 41194621316,
+      "name": "Preview system trace",
+      "source_commit": "01c75dadadf326e5968ae2a13d9032c98448a293",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621316",
+      "created_at": "2026-10-31T10:54:10Z"
+    },
+    {
+      "id": 41194621314,
+      "name": "CPU capacity trace",
+      "source_commit": "01c75dadadf326e5968ae2a13d9032c98448a293",
+      "branch": "main",
+      "event": "push",
+      "attempt": 2,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621314",
+      "created_at": "2026-10-31T10:54:10Z"
+    },
+    {
+      "id": 41194621257,
+      "name": "Surface copy experiment",
+      "source_commit": "01c75dadadf326e5968ae2a13d9032c98448a293",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621257",
+      "created_at": "2026-10-31T10:54:10Z"
+    },
+    {
+      "id": 41194621240,
+      "name": "Android UI checks",
+      "source_commit": "01c75dadadf326e5968ae2a13d9032c98448a293",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621240",
+      "created_at": "2026-10-31T10:54:10Z"
+    },
+    {
+      "id": 41193356040,
+      "name": "Surface copy experiment",
+      "source_commit": "fbf73d374ce4d0be0b20845414139c7ee9c0df1b",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41193356040",
+      "created_at": "2026-10-31T10:35:10Z"
+    },
+    {
+      "id": 41193355992,
+      "name": "CPU capacity trace",
+      "source_commit": "fbf73d374ce4d0be0b20845414139c7ee9c0df1b",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41193355992",
+      "created_at": "2026-10-31T10:35:10Z"
+    },
+    {
+      "id": 41193355973,
+      "name": "Preview system trace",
+      "source_commit": "fbf73d374ce4d0be0b20845414139c7ee9c0df1b",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41193355973",
+      "created_at": "2026-10-31T10:35:10Z"
+    },
+    {
+      "id": 41193355965,
+      "name": "Android UI checks",
+      "source_commit": "fbf73d374ce4d0be0b20845414139c7ee9c0df1b",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41193355965",
+      "created_at": "2026-10-31T10:35:10Z"
+    },
+    {
+      "id": 41191378780,
+      "name": "Release APK",
+      "source_commit": "0736a8ccd47fac559cf28a6ef1de49ca9156e94e",
+      "branch": "v0.4.39",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41191378780",
+      "created_at": "2026-10-31T10:06:19Z"
+    },
+    {
+      "id": 41190336151,
+      "name": "Surface copy experiment",
+      "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336151",
+      "created_at": "2026-10-31T09:50:47Z"
+    },
+    {
+      "id": 41190336119,
+      "name": "Preview system trace",
+      "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336119",
+      "created_at": "2026-10-31T09:50:47Z"
+    },
+    {
+      "id": 41190336117,
+      "name": "CPU capacity trace",
+      "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+      "branch": "main",
+      "event": "push",
+      "attempt": 2,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336117",
+      "created_at": "2026-10-31T09:50:47Z"
+    },
+    {
+      "id": 41190336070,
+      "name": "Android UI checks",
+      "source_commit": "d8ed9e0a6c28f13c96ff85caa7771046fe3729c2",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41190336070",
+      "created_at": "2026-10-31T09:50:47Z"
+    },
+    {
+      "id": 41189689663,
+      "name": "Preview system trace",
+      "source_commit": "cef85752f6403df777cf0a0dbc0815be6d40445e",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41189689663",
+      "created_at": "2026-10-31T09:41:05Z"
+    },
+    {
+      "id": 41189689641,
+      "name": "Surface copy experiment",
+      "source_commit": "cef85752f6403df777cf0a0dbc0815be6d40445e",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41189689641",
+      "created_at": "2026-10-31T09:41:05Z"
+    },
+    {
+      "id": 41189689635,
+      "name": "CPU capacity trace",
+      "source_commit": "cef85752f6403df777cf0a0dbc0815be6d40445e",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41189689635",
+      "created_at": "2026-10-31T09:41:05Z"
+    },
+    {
+      "id": 41189689593,
+      "name": "Android UI checks",
+      "source_commit": "cef85752f6403df777cf0a0dbc0815be6d40445e",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41189689593",
+      "created_at": "2026-10-31T09:41:05Z"
+    },
+    {
+      "id": 41188960741,
+      "name": "Surface copy experiment",
+      "source_commit": "48378766fb6a951a57b4c6c9f910c2cdc84a642c",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41188960741",
+      "created_at": "2026-10-31T09:30:26Z"
+    },
+    {
+      "id": 41188960725,
+      "name": "Android UI checks",
+      "source_commit": "48378766fb6a951a57b4c6c9f910c2cdc84a642c",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41188960725",
+      "created_at": "2026-10-31T09:30:26Z"
+    },
+    {
+      "id": 41188960680,
+      "name": "CPU capacity trace",
+      "source_commit": "48378766fb6a951a57b4c6c9f910c2cdc84a642c",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41188960680",
+      "created_at": "2026-10-31T09:30:26Z"
+    },
+    {
+      "id": 41188960647,
+      "name": "Preview system trace",
+      "source_commit": "48378766fb6a951a57b4c6c9f910c2cdc84a642c",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41188960647",
+      "created_at": "2026-10-31T09:30:26Z"
+    },
+    {
+      "id": 41186158161,
+      "name": "CPU capacity trace",
+      "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158161",
+      "created_at": "2026-10-31T08:49:30Z"
+    },
+    {
+      "id": 41186158158,
+      "name": "Surface copy experiment",
+      "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158158",
+      "created_at": "2026-10-31T08:49:30Z"
+    },
+    {
+      "id": 41186158156,
+      "name": "Preview system trace",
+      "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+      "branch": "main",
+      "event": "push",
+      "attempt": 2,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158156",
+      "created_at": "2026-10-31T08:49:30Z"
+    },
+    {
+      "id": 41186158105,
+      "name": "Android UI checks",
+      "source_commit": "90169c3b248d92e42d5d4d6049fcb7cf2d5acfee",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41186158105",
+      "created_at": "2026-10-31T08:49:30Z"
+    },
+    {
+      "id": 41180528061,
+      "name": "Surface copy experiment",
+      "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180528061",
+      "created_at": "2026-10-31T07:25:11Z"
+    },
+    {
+      "id": 41180528013,
+      "name": "Preview system trace",
+      "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180528013",
+      "created_at": "2026-10-31T07:25:11Z"
+    },
+    {
+      "id": 41180528007,
+      "name": "CPU capacity trace",
+      "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "branch": "main",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180528007",
+      "created_at": "2026-10-31T07:25:11Z"
+    },
+    {
+      "id": 41180527990,
+      "name": "Android UI checks",
+      "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "branch": "main",
+      "event": "push",
+      "attempt": 2,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180527990",
+      "created_at": "2026-10-31T07:25:11Z"
+    }
+  ],
+  "directly_reread_original_logs": [
+    {
+      "job_id": 124501591167,
+      "run_id": 41188960725,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41188960725/job/124501591167",
+      "lines": [
+        "BUILD SUCCESSFUL in 49s",
+        "LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机"
+      ]
+    },
+    {
+      "job_id": 124503722242,
+      "run_id": 41189689593,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41189689593/job/124503722242",
+      "lines": [
+        "BUILD SUCCESSFUL in 37s",
+        "LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp",
+        "PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面",
+        "PIP_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Recovery font/padding did not restore: 16sp 28dp; 实时画面"
+      ]
+    },
+    {
+      "job_id": 124518183842,
+      "run_id": 41194621314,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41194621314/job/124518183842",
+      "lines": [
+        "BUILD SUCCESSFUL in 55s",
+        "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: second SystemUI mute; 实时画面"
+      ]
+    }
+  ],
+  "diagnosis": {
+    "consecutive_red_runs": "Two earlier candidate commits each triggered four workflows: first large-font waiting text vertically clipped, then stale expected recovery padding after 28dp to 16dp change. These eight failed workflow records remain; subsequent candidate and formal releases succeeded.",
+    "unresolved_mute": "One newer CPU4/API35 pip-repeat second-SystemUI-mute timeout. Original ZIP preserved and verified; one same-source rerun passed, cause remains unknown.",
+    "release": "v0.4.39 and v0.4.40 formal UI and APK jobs all first-attempt successful; actual v0.4.40 APK independently downloaded and validated.",
+    "boundaries": "Do not attribute every failure to emulator instability; do not equate rerun success with repair. JVM/build/emulator/APK validation does not imply physical acceptance."
+  },
+  "references": [
+    "preview-readiness-first-status-2026-10-31.json",
+    "preview-readiness-padding-status-2026-10-31.json",
+    "preview-readiness-2026-10-31.md",
+    "enlarged-viewfinder-sound-first-2026-10-31.json",
+    "enlarged-viewfinder-final-status-2026-10-31.json",
+    "enlarged-viewfinder-release-2026-10-31.json",
+    "apk-v0.4.40.json"
+  ]
+}
