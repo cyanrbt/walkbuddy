@@ -26,7 +26,7 @@
 
 ## 首轮云端结果与授权准备补齐
 
-源码 `346e13e` 的 [普通 UI 41176914889](https://github.com/cyanrbt/walkbuddy/actions/runs/41176914889) 首轮 Android 15/16 均成功；[系统轨迹 41176914849](https://github.com/cyanrbt/walkbuddy/actions/runs/41176914849) 两套均失败，不能称整体通过。两套首轮 Surface 的合成 32 组与 EGL 比较通过，虚拟 Camera2 均报 `SecurityException: cannot open camera without camera permission`，没有采集帧。前序失败后未开始恢复；后两条原恢复及随后的全部普通 UI 检查均通过。四份原始附件已完整核对服务端长度、SHA-256 与全部 ZIP CRC；六条原始轨迹重放另行记录。
+源码 `346e13e` 的 [普通 UI 41176914889](https://github.com/cyanrbt/walkbuddy/actions/runs/41176914889) 首轮 Android 15/16 均成功；[系统轨迹 41176914849](https://github.com/cyanrbt/walkbuddy/actions/runs/41176914849) 两套均失败，不能称整体通过。两套首轮 Surface 的合成 32 组与 EGL 比较通过，虚拟 Camera2 均报 `SecurityException: cannot open camera without camera permission`，没有采集帧。前序失败后未开始恢复；后两条原恢复及随后的全部普通 UI 检查均通过。四份原始附件已完整核对服务端长度、SHA-256 与全部 ZIP CRC，40 项普通检查报告重放一致；六条原始轨迹均用固定版官方 SQL 引擎实际重读，与各自原摘要一致，包括两条失败结果。首轮缺少恢复观察器与四个受控停止标记的失败如实保留，不改写为轨迹成功；另四条原恢复轨迹通过。[原报告、两套权限错误与六条重放](surface-startup-first-2026-10-31.json)保留。
 
 这是新增采证脚本遗漏了原 Surface 脚本 `pm grant ... CAMERA` 的准备操作，不是应用权限流程回归，也不能据此分析原 1.4 秒停顿。现补齐同一个授权步骤，并保存其原始输出和退出码；失败时不启动任一探针，仍保存停止后的同一条轨迹。回归检查明确验证授权先于相机专项，以及授权失败不得进入专项或恢复。修订后本地 51 项工具测试通过，8.701 秒。采证 240 秒上限也覆盖新增授权命令 10 秒；应用时效保持。
 
