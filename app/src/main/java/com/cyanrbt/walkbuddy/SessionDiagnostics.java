@@ -6,13 +6,18 @@ final class SessionDiagnostics {
         final boolean ready,result,busy;
         final long sampleAge,queueMs,copyMs,deliveryMs;
         final ReadbackTiming.Sample readback;
+        final BrightnessTiming.Sample brightness;
         Pipeline(boolean ready,boolean result,boolean busy,long sampleAge,long queueMs,long copyMs,long deliveryMs) {
             this(ready,result,busy,sampleAge,queueMs,copyMs,deliveryMs,ReadbackTiming.UNKNOWN);
         }
         Pipeline(boolean ready,boolean result,boolean busy,long sampleAge,long queueMs,long copyMs,long deliveryMs,ReadbackTiming.Sample readback) {
+            this(ready,result,busy,sampleAge,queueMs,copyMs,deliveryMs,readback,BrightnessTiming.UNKNOWN);
+        }
+        Pipeline(boolean ready,boolean result,boolean busy,long sampleAge,long queueMs,long copyMs,long deliveryMs,ReadbackTiming.Sample readback,BrightnessTiming.Sample brightness) {
             this.ready=ready;this.result=result;this.busy=busy;this.sampleAge=sampleAge;
             this.queueMs=queueMs;this.copyMs=copyMs;this.deliveryMs=deliveryMs;
             this.readback=readback;
+            this.brightness=brightness;
         }
     }
     static final class Snapshot {
@@ -66,9 +71,15 @@ final class SessionDiagnostics {
             .append("\n取样龄(ms)：").append(metric(s.pipeline.sampleAge)).append("；读回排队(ms)：").append(metric(s.pipeline.queueMs))
             .append("；复制(ms)：").append(metric(s.pipeline.copyMs)).append("；结果交付(ms)：").append(metric(s.pipeline.deliveryMs))
             .append("\n读回任务：").append(s.pipeline.readback.wallMs<0?"未取得":s.pipeline.readback.running?"执行中":"已结束")
-            .append("；墙钟(ms)：").append(metric(s.pipeline.readback.wallMs)).append("；CPU(ms)：").append(metric(s.pipeline.readback.cpuMs))
-            .append("\n任务内亮度读回墙钟(ms)：").append(metric(s.pipeline.readback.brightnessMs))
-            .append("；CPU(ms)：").append(metric(s.pipeline.readback.brightnessCpuMs)).append('\n');
+            .append("；墙钟(ms)：").append(metric(s.pipeline.readback.wallMs)).append("；CPU(ms)：").append(metric(s.pipeline.readback.cpuMs));
+        BrightnessTiming.Sample b=s.pipeline.brightness;
+        if(b.stage==BrightnessTiming.Stage.UNKNOWN)text.append("\n任务内亮度读回墙钟(ms)：").append(metric(s.pipeline.readback.brightnessMs))
+            .append("；CPU(ms)：").append(metric(s.pipeline.readback.brightnessCpuMs));
+        else text.append("\n异步亮度检查：").append(b.stage).append("；观测帧龄(ms)：").append(metric(b.frameAgeMs))
+            .append("\n亮度排队(ms)：").append(metric(b.queueMs)).append("；请求墙钟(ms)：").append(metric(b.wallMs))
+            .append("；调用与像素处理CPU(ms)：").append(metric(b.cpuMs)).append("；交付(ms)：").append(metric(b.deliveryMs))
+            .append("；结果码：").append(b.status<0?"未取得":Integer.toString(b.status));
+        text.append('\n');
     }
     static long age(long now,long at){return at>0 && now>=at?now-at:-1;}
     private static String metric(long value){return value<0?"未取得":Long.toString(value);}

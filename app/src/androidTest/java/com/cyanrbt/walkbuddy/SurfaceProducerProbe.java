@@ -134,9 +134,11 @@ final class SurfaceProducerProbe {
                 SurfaceCopyProbe.onMain(runner,()->{BitmapWarmup.read(view);return null;});
                 long before=SurfaceCopyProbe.onMain(runner,()->view.getSurfaceTexture().getTimestamp());
                 JSONObject result=SurfaceCopyProbe.compare(runner,view,sensor,0,size[0],size[1]);
+                BrightnessReadbackProbe.verifyActualCopy(runner,view);
                 long after=SurfaceCopyProbe.onMain(runner,()->view.getSurfaceTexture().getTimestamp());
                 boolean stable=before>0 && before==after;
-                result.put("sourceTimestampBefore",before).put("sourceTimestampAfter",after).put("sourceTimestampStable",stable);
+                result.put("sourceTimestampBefore",before).put("sourceTimestampAfter",after).put("sourceTimestampStable",stable)
+                    .put("asyncReaderVerified",true);
                 accepted&=result.getBoolean("accepted") && stable;pairs.put(result);
             }
             return new JSONObject().put("accepted",accepted).put("pairs",pairs);

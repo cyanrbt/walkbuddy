@@ -1,5 +1,14 @@
 # 2026-10-30 Actions 失败原因核对
 
+## v0.4.37 后再次核对
+
+用户询问“GitHub 打包一直在失败”后，重新查询最近 30 次 Actions、最新 Release 和最近三个红叉的作业步骤，直接重读四份原始 job 日志。查询时最近六次运行均 attempt 1 终态成功，最新两个为 [Surface 专项 41158068308](https://github.com/cyanrbt/walkbuddy/actions/runs/41158068308)及[普通 UI 41158068207](https://github.com/cyanrbt/walkbuddy/actions/runs/41158068207)。[机器可读状态](ci-status-2026-10-31-v37.json)保留来源，不把此历史快照称为永久状态。
+
+最近三个红叉来自 `Preview system trace`：41150469510 的环形缓冲覆盖早期记录；41151682335 的流式配置未定期 flush；41152965922 的 API 35 第一次文件传输失败、API 36 第一次内核事件丢失。直接重读日志确认编译均 `BUILD SUCCESSFUL`，失败属于轨迹完整性；具体原始轨迹与边界见[专门记录](preview-system-trace-2026-10-31.md)。这些是实际失败，包括实现配置错误，不能全部归因于模拟器不稳定。
+
+修订后 [41154316569](https://github.com/cyanrbt/walkbuddy/actions/runs/41154316569) 已首次成功，旧红叉保留。最新 [v0.4.37 发布 41147755325](https://github.com/cyanrbt/walkbuddy/actions/runs/41147755325) 的 Android 15、16 与 APK 三个作业均成功，Release 再次确认存在 9,980,497 字节的 [APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.37/Walk-Buddy-v0.4.37-arm64-debug.apk)，摘要与此前实际下载核验相同。未因此另发重复版本或覆盖历史标签；原来偶发 1246ms 停顿根因仍未确定，后续优化需独立验收。
+
+
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
 ## 预览系统诊断工具核对（应用仍为 v0.4.37）

@@ -29,3 +29,9 @@
 每个生产者分别在两种视口大小比较全部 192 像素，同时核对 TextureView 时间戳未变；共四组、768 个额外像素。Camera2 先关闭会话和设备再销毁消费端；EGL 在所属线程释放后再关闭 Surface。API 26/35/36 的专项均执行这些对照；普通/发布流程的默认 API 范围与十项检查不变。该修订已本地编译，实际云端结果待取得，不等同于真实 AR 或产品取消/恢复验收。
 
 即使生产者试验通过，仍需异步请求的单请求上限、过期/取消/停止/恢复及低亮度边界验证，才能接入产品。请求与回调计时为受控观察，不是帧率、耗电、真实 AR 或实体设备结果。
+
+## Camera2 / EGL 云端结果
+
+源码 `3c2f0d6627f7614a4f50f249aa5d25ddbe2dc054` 的[专项 41158068308](https://github.com/cyanrbt/walkbuddy/actions/runs/41158068308)和[常规 41158068207](https://github.com/cyanrbt/walkbuddy/actions/runs/41158068207)均首次终态成功。五份完整 ZIP 的 GitHub 字节数、SHA-256、ZIP CRC、来源提交均已核对；原始报告重放一致，API 35/36 各流程十项完整通过，API 26 仍只报告专项。
+
+三个 API 各 32 组合成对照及虚拟 Camera2/EGL 各两组全部通过；ARGB、RGB 总和、前后参考与生产者时间戳严格一致，调用不在主线程。Camera2 至少三次 metadata 后停止 repeating，EGL 单帧冻结。[逐组结果与完整来源](surface-copy-native-producers-2026-10-31.json)保留；本轮仍是独立夹具原型，没有替代产品生命周期或真实 AR/设备验收。

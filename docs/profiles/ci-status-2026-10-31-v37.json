@@ -1,0 +1,409 @@
+{
+  "scope": "Actions status observed during user question on 2026-10-31; historical errors retained; no physical device acceptance",
+  "runs": [
+    {
+      "id": 41158068308,
+      "name": "Surface copy experiment",
+      "head_sha": "3c2f0d6627f7614a4f50f249aa5d25ddbe2dc054",
+      "branch": "main",
+      "created_at": "2026-10-31T02:01:34Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41158068207,
+      "name": "Android UI checks",
+      "head_sha": "3c2f0d6627f7614a4f50f249aa5d25ddbe2dc054",
+      "branch": "main",
+      "created_at": "2026-10-31T02:01:34Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41156695455,
+      "name": "Surface copy experiment",
+      "head_sha": "c74a4f277b3a5d96fd3cbf43c2cb2f2936cf17e5",
+      "branch": "main",
+      "created_at": "2026-10-31T01:43:14Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41156695394,
+      "name": "Android UI checks",
+      "head_sha": "c74a4f277b3a5d96fd3cbf43c2cb2f2936cf17e5",
+      "branch": "main",
+      "created_at": "2026-10-31T01:43:14Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41154316656,
+      "name": "Android UI checks",
+      "head_sha": "355e004fef713c514f3990b6d9ef071b80df6f77",
+      "branch": "main",
+      "created_at": "2026-10-31T01:13:55Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41154316569,
+      "name": "Preview system trace",
+      "head_sha": "355e004fef713c514f3990b6d9ef071b80df6f77",
+      "branch": "main",
+      "created_at": "2026-10-31T01:13:55Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41152966054,
+      "name": "Android UI checks",
+      "head_sha": "6eb8342c68f53b0f3c29e19e8d74865667d852a1",
+      "branch": "main",
+      "created_at": "2026-10-31T00:58:05Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41152965922,
+      "name": "Preview system trace",
+      "head_sha": "6eb8342c68f53b0f3c29e19e8d74865667d852a1",
+      "branch": "main",
+      "created_at": "2026-10-31T00:58:05Z",
+      "conclusion": "failure",
+      "run_attempt": 1
+    },
+    {
+      "id": 41151682381,
+      "name": "Android UI checks",
+      "head_sha": "67a1c9b1fe2f49f79d49de11909bd389172856de",
+      "branch": "main",
+      "created_at": "2026-10-31T00:43:13Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41151682335,
+      "name": "Preview system trace",
+      "head_sha": "67a1c9b1fe2f49f79d49de11909bd389172856de",
+      "branch": "main",
+      "created_at": "2026-10-31T00:43:13Z",
+      "conclusion": "failure",
+      "run_attempt": 1
+    },
+    {
+      "id": 41150469510,
+      "name": "Preview system trace",
+      "head_sha": "0ccb9ae40c49daf3ff65775e82c163eb3934a729",
+      "branch": "main",
+      "created_at": "2026-10-31T00:29:49Z",
+      "conclusion": "failure",
+      "run_attempt": 1
+    },
+    {
+      "id": 41150469412,
+      "name": "Android UI checks",
+      "head_sha": "0ccb9ae40c49daf3ff65775e82c163eb3934a729",
+      "branch": "main",
+      "created_at": "2026-10-31T00:29:48Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41147755325,
+      "name": "Release APK",
+      "head_sha": "afa1e10cf7cd0d3d0345e72015030b779695f888",
+      "branch": "v0.4.37",
+      "created_at": "2026-10-31T00:00:38Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41146872248,
+      "name": "Android UI checks",
+      "head_sha": "2261f42d93e91d67e8ba179ae733317061f86213",
+      "branch": "main",
+      "created_at": "2026-10-30T23:51:02Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41145407736,
+      "name": "Android UI checks",
+      "head_sha": "03955425ac5c08052be62e9aa387e6972a5433f4",
+      "branch": "main",
+      "created_at": "2026-10-30T23:35:41Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41143546146,
+      "name": "Android UI checks",
+      "head_sha": "10a6c99c3b1d1b6e7735850137a9650b000f259f",
+      "branch": "main",
+      "created_at": "2026-10-30T23:17:17Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41143546103,
+      "name": "Release APK",
+      "head_sha": "10a6c99c3b1d1b6e7735850137a9650b000f259f",
+      "branch": "v0.4.36",
+      "created_at": "2026-10-30T23:17:17Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41141509019,
+      "name": "Android UI checks",
+      "head_sha": "bac3c163bc7930df5fee68d9d881095d7e444ae9",
+      "branch": "main",
+      "created_at": "2026-10-30T22:58:00Z",
+      "conclusion": "success",
+      "run_attempt": 2
+    },
+    {
+      "id": 41140888196,
+      "name": "Android UI checks",
+      "head_sha": "6eede02cec1288bd636e8539c69a2d2587f92b13",
+      "branch": "main",
+      "created_at": "2026-10-30T22:51:55Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41140406598,
+      "name": "Android UI checks",
+      "head_sha": "07850b6d3f5a241d88c4e9186d56352ead1ce152",
+      "branch": "main",
+      "created_at": "2026-10-30T22:47:24Z",
+      "conclusion": "failure",
+      "run_attempt": 1
+    },
+    {
+      "id": 41139401074,
+      "name": "Android UI checks",
+      "head_sha": "3facad371bf8530dae570afd21a738faeca1bf70",
+      "branch": "main",
+      "created_at": "2026-10-30T22:37:57Z",
+      "conclusion": "failure",
+      "run_attempt": 1
+    },
+    {
+      "id": 41137921559,
+      "name": "Android UI checks",
+      "head_sha": "14f10ee17530db253ad12163d1185e1092154774",
+      "branch": "main",
+      "created_at": "2026-10-30T22:24:31Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41134864899,
+      "name": "Release APK",
+      "head_sha": "ef096a5db035d61bcafc8bdb2f2f59e78cce3155",
+      "branch": "v0.4.35",
+      "created_at": "2026-10-30T21:58:14Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41133558071,
+      "name": "Android UI checks",
+      "head_sha": "4c3c9777cec41f14132b3e0955d90e6a9804492b",
+      "branch": "main",
+      "created_at": "2026-10-30T21:47:03Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41131327523,
+      "name": "Android UI checks",
+      "head_sha": "30aaa22bfa57f220cc2b6731cb1587f714ac0964",
+      "branch": "main",
+      "created_at": "2026-10-30T21:28:40Z",
+      "conclusion": "failure",
+      "run_attempt": 1
+    },
+    {
+      "id": 41127878227,
+      "name": "Release APK",
+      "head_sha": "df15f7558e33c9538721c4e07ab37074a0bd00c3",
+      "branch": "v0.4.34",
+      "created_at": "2026-10-30T21:01:59Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41126691713,
+      "name": "Android UI checks",
+      "head_sha": "fcca5edfa20415d6cc71e603404f0b3a7d2bc3c8",
+      "branch": "main",
+      "created_at": "2026-10-30T20:52:53Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41125243534,
+      "name": "Android UI checks",
+      "head_sha": "760cd18d25cf0cb8b1a7ee379a16ba3160962796",
+      "branch": "main",
+      "created_at": "2026-10-30T20:41:57Z",
+      "conclusion": "failure",
+      "run_attempt": 1
+    },
+    {
+      "id": 41120796047,
+      "name": "Release APK",
+      "head_sha": "61e435c4d7e622b48a4ee09a36bca53c2bb674da",
+      "branch": "v0.4.33",
+      "created_at": "2026-10-30T20:07:38Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    },
+    {
+      "id": 41119141180,
+      "name": "Android UI checks",
+      "head_sha": "b169d12b618d9064291117631f1ec52ec6ea6cc0",
+      "branch": "main",
+      "created_at": "2026-10-30T19:55:13Z",
+      "conclusion": "success",
+      "run_attempt": 1
+    }
+  ],
+  "jobs": [
+    {
+      "run_id": 41152965922,
+      "jobs": [
+        {
+          "id": 124393443068,
+          "name": "trace / layout (36)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run Android UI and virtual camera checks"
+          ]
+        },
+        {
+          "id": 124393443296,
+          "name": "trace / layout (35)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run Android UI and virtual camera checks"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 41151682335,
+      "jobs": [
+        {
+          "id": 124389407517,
+          "name": "trace / layout (36)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run Android UI and virtual camera checks"
+          ]
+        },
+        {
+          "id": 124389407760,
+          "name": "trace / layout (35)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run Android UI and virtual camera checks"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 41150469510,
+      "jobs": [
+        {
+          "id": 124385536785,
+          "name": "trace / layout (35)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run Android UI and virtual camera checks"
+          ]
+        },
+        {
+          "id": 124385537009,
+          "name": "trace / layout (36)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Run Android UI and virtual camera checks"
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 41147755325,
+      "jobs": [
+        {
+          "id": 124376738504,
+          "name": "ui / layout (36)",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 124376738760,
+          "name": "ui / layout (35)",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 124379176250,
+          "name": "apk",
+          "conclusion": "success",
+          "failed_steps": []
+        }
+      ]
+    }
+  ],
+  "latest_release": {
+    "tag": "v0.4.37",
+    "url": "https://github.com/cyanrbt/walkbuddy/releases/tag/v0.4.37",
+    "assets": [
+      {
+        "id": 693836119,
+        "name": "Walk-Buddy-v0.4.37-arm64-debug.apk",
+        "size": 9980497,
+        "digest": "sha256:17dd08931a728de220ce65086ad1591ded3ef7ccc9fdf1602e68fe355e2c7491",
+        "state": "uploaded",
+        "url": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.37/Walk-Buddy-v0.4.37-arm64-debug.apk"
+      }
+    ]
+  },
+  "reviewed_logs": [
+    {
+      "job_id": 124393443068,
+      "build": [
+        "2026-10-31T00:59:07.7822293Z BUILD SUCCESSFUL in 42s"
+      ]
+    },
+    {
+      "job_id": 124393443296,
+      "build": [
+        "2026-10-31T00:59:17.7147031Z BUILD SUCCESSFUL in 47s"
+      ]
+    },
+    {
+      "job_id": 124389407517,
+      "build": [
+        "2026-10-31T00:44:26.9859434Z BUILD SUCCESSFUL in 50s"
+      ]
+    },
+    {
+      "job_id": 124385536785,
+      "build": [
+        "2026-10-31T00:30:59.0702434Z BUILD SUCCESSFUL in 49s"
+      ]
+    }
+  ],
+  "causes": {
+    "41150469510": "Ring buffer overwrote early events; trace integrity check failed",
+    "41151682335": "config_write_into_file_no_flush=1; raw trace evidence in preview-system-trace-stream-2026-10-31.json",
+    "41152965922": "API 35 first stopped trace pull failed; API 36 first trace lost kernel events; exact pull cause unknown"
+  },
+  "fixed_by_run": 41154316569
+}

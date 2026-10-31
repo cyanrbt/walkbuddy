@@ -128,9 +128,9 @@ public final class PreviewActivity extends Activity {
     private RecoveryGuide.Reason recoveryReason=RecoveryGuide.Reason.HIDDEN;
     private boolean previewSeen;
     private Button pipButton, restartButton;
-    private long brightnessAt,sampledAt,analysisEpoch;
+    private long sampledAt,analysisEpoch;
     private long lastReadbackQueueMs=-1,lastSampleCopyMs=-1,lastResultDeliveryMs=-1;
-    private BrightnessSampler brightnessSampler;
+    private BrightnessReadback brightnessReadback;
     private final ReadbackTiming readbackTiming=new ReadbackTiming();
     private Runnable pendingCapture;
     private Runnable pendingReadback;
@@ -282,7 +282,7 @@ public final class PreviewActivity extends Activity {
         scheduleWatchdog();
         lastReadbackQueueMs=lastSampleCopyMs=lastResultDeliveryMs=-1;
         readbackTiming.reset(state.generation);
-        brightnessAt = sampledAt = 0;depthSnapshot=null;
+        sampledAt = 0;depthSnapshot=null;
         // Rebuild only after a stopped/failed session, never on a PiP size change.
         createWindow();
         startPosture();
@@ -525,8 +525,10 @@ public final class PreviewActivity extends Activity {
                 long now=SystemClock.elapsedRealtime();
                 if(!checkHealth(now))return;
                 state.display(now);state.promote(now);syncTicket();render(now);
-                if(state.phase==SessionState.Phase.LIVE && (now-brightnessAt>=1000
-                    || state.recognition && (useDepth || now-sampledAt>=500 && !worker.busy())))queueReadback(now);
+                if(state.phase==SessionState.Phase.LIVE) {
+                    observeBrightness(now);
+                    if(brightnessReadback.ready() || state.recognition && (useDepth || now-sampledAt>=500 && !worker.busy()))queueReadback(now);
+                }
             }
         });
         setContentView(root);
@@ -625,32 +627,43 @@ public final class PreviewActivity extends Activity {
         } catch(CameraAccessException|RuntimeException e) { fail(RecoveryGuide.Reason.CAMERA_BUSY,"摄像头不可用：检查占用、权限、隐私开关"); }
     }
     private void syncTicket(){if(analysisTicket!=null){analysisTicket.captureAt=state.captureAt;analysisTicket.displayAt=state.displayAt;analysisTicket.analysisAt=state.analysisAt;}}
+    private void observeBrightness(long frameAt) {
+        if(brightnessReadback==null) {
+            long generation=state.generation;
+            brightnessReadback=new BrightnessReadback((owner,expired,status,total)->{
+                if(destroyed || owner!=brightnessReadback || generation!=state.generation || state.phase!=SessionState.Phase.LIVE)return;
+                long now=SystemClock.elapsedRealtime();
+                if(!checkHealth(now))return;
+                BrightnessTiming.Sample timing=owner.snapshot(now);
+                if(timing.wallMs>=200)android.util.Log.w("WalkBuddyTiming","Brightness asyncWallMs="+timing.wallMs
+                    +" callerCpuMs="+timing.cpuMs+" queueMs="+timing.queueMs+" deliveryMs="+timing.deliveryMs);
+                if(expired || status!=android.view.PixelCopy.SUCCESS){fail(getString(R.string.preview_readback_failed));return;}
+                if(total<16*12*3*3)fail(RecoveryGuide.Reason.DARK,"画面过暗或隐私占位：不可用（仅白天）");
+            });
+        }
+        brightnessReadback.observe(frameAt);
+    }
     private void queueReadback(long frameAt) {
         if(pendingReadback!=null || texture==null)return;
         TextureView source=texture;long token=state.generation,epoch=analysisEpoch;
         long queuedAt=SystemClock.elapsedRealtime();
-        pendingReadback=()->{
+        pendingReadback=new Runnable(){public void run(){
+            boolean timed=false,reading=false;
             try {
-                if(destroyed || token!=state.generation || texture!=source || state.phase!=SessionState.Phase.LIVE)return;
+                if(pendingReadback!=this || destroyed || token!=state.generation || texture!=source || state.phase!=SessionState.Phase.LIVE)return;
                 long now=SystemClock.elapsedRealtime();
                 lastReadbackQueueMs=now-queuedAt;
                 readbackTiming.begin(token,SystemClock.elapsedRealtimeNanos(),Debug.threadCpuTimeNanos());
+                timed=true;
                 if(!checkHealth(now))return;
                 if(now-frameAt>1000)return; // Keep the original observation time; a delayed task cannot refresh it.
-                // getBitmap can itself call SurfaceTextureUpdated; that is not a displayed frame.
-                readingTexture=true;
-                if(frameAt-brightnessAt>=1000) {
-                    brightnessAt=frameAt;
-                    if(brightnessSampler==null)brightnessSampler=new BrightnessSampler();
-                    long wall=SystemClock.elapsedRealtimeNanos(),cpu=Debug.threadCpuTimeNanos();int light;
-                    try {light=brightnessSampler.read(source);}
-                    finally {readbackTiming.brightness(token,wall,cpu,SystemClock.elapsedRealtimeNanos(),Debug.threadCpuTimeNanos());}
-                    if(light>=0 && light<16*12*3*3){fail(RecoveryGuide.Reason.DARK,"画面过暗或隐私占位：不可用（仅白天）");return;}
-                }
+                if(brightnessReadback!=null && brightnessReadback.ready())brightnessReadback.request(source,frameAt);
                 now=SystemClock.elapsedRealtime();
                 if(!checkHealth(now))return;
                 if(now-frameAt>1000)return;
                 if(state.recognition && epoch==analysisEpoch) {
+                    // The remaining model getBitmap path must not count as a displayed frame.
+                    readingTexture=reading=true;
                     if(useDepth)processDepth(now);
                     if(frameAt-sampledAt>=500 && !worker.busy()) {
                         if(worker.ready(analysisTicket))sample(frameAt);else requestAnalysisPreparation();
@@ -660,15 +673,16 @@ public final class PreviewActivity extends Activity {
                 android.util.Log.w("WalkBuddyTiming","Readback error="+error.getClass().getSimpleName());
                 fail(getString(R.string.preview_readback_failed));
             } finally {
-                readbackTiming.finish(token,SystemClock.elapsedRealtimeNanos(),Debug.threadCpuTimeNanos());
-                if(readbackTiming.completedAtLeast(token,200)) {
+                if(timed)readbackTiming.finish(token,SystemClock.elapsedRealtimeNanos(),Debug.threadCpuTimeNanos());
+                if(timed && readbackTiming.completedAtLeast(token,200)) {
                     ReadbackTiming.Sample timing=readbackTiming.snapshot(token,0,0);
                     android.util.Log.w("WalkBuddyTiming","Readback taskWallMs="+timing.wallMs+" taskCpuMs="+timing.cpuMs
                         +" brightnessWallMs="+timing.brightnessMs+" brightnessCpuMs="+timing.brightnessCpuMs);
                 }
-                readingTexture=false;pendingReadback=null;
+                if(reading)readingTexture=false;
+                if(pendingReadback==this)pendingReadback=null;
             }
-        };
+        }};
         // TextureView invokes its update listener from draw(); readback is forbidden inside drawing.
         main.post(pendingReadback);
     }
@@ -774,6 +788,7 @@ public final class PreviewActivity extends Activity {
     private boolean checkHealth(long now) {
         PreviewHealth.Decision decision=PreviewHealth.check(state,now);
         if(decision==PreviewHealth.Decision.STOP_PREVIEW){fail("画面已过期：不可用，请重新开启");return false;}
+        if(brightnessReadback!=null && brightnessReadback.expired(now)){fail(getString(R.string.preview_readback_failed));return false;}
         if(decision==PreviewHealth.Decision.STOP_DETECTION) {
             pauseDetection(R.string.info_detection_timeout);
             return state.phase==SessionState.Phase.LIVE;
@@ -904,7 +919,8 @@ public final class PreviewActivity extends Activity {
         SessionDiagnostics.Pipeline pipeline=new SessionDiagnostics.Pipeline(active && analysisReady,active && analysisHasResult,
             worker!=null && worker.busy(),active?SessionDiagnostics.age(now,sampledAt):-1,
             active?lastReadbackQueueMs:-1,active?lastSampleCopyMs:-1,active?lastResultDeliveryMs:-1,
-            active?readbackTiming.snapshot(state.generation,SystemClock.elapsedRealtimeNanos(),Debug.threadCpuTimeNanos()):ReadbackTiming.UNKNOWN);
+            active?readbackTiming.snapshot(state.generation,SystemClock.elapsedRealtimeNanos(),Debug.threadCpuTimeNanos()):ReadbackTiming.UNKNOWN,
+            active && brightnessReadback!=null?brightnessReadback.snapshot(now):BrightnessTiming.UNKNOWN);
         return new SessionDiagnostics.Snapshot(category,message,state,now,useDepth || depthCamera!=null,
             isInPictureInPictureMode(),sound!=null && sound.isChecked(),haptics!=null && haptics.enabled(),pipeline);
     }
@@ -1067,7 +1083,7 @@ public final class PreviewActivity extends Activity {
         }
     }
     private void closeCamera() {
-        if(brightnessSampler!=null){brightnessSampler.close();brightnessSampler=null;}
+        if(brightnessReadback!=null){brightnessReadback.close();brightnessReadback=null;}
         stopTrackingPipBounds();
         if(pendingReadback!=null){main.removeCallbacks(pendingReadback);pendingReadback=null;}
         if(pendingCapture!=null){main.removeCallbacks(pendingCapture);pendingCapture=null;}

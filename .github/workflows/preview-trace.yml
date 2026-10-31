@@ -11,6 +11,8 @@ on:
       - scripts/fetch_trace_processor.sh
       - scripts/tests/test_preview_traces.py
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PreviewMainTrace.java
+      - app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java
+      - app/src/main/java/com/cyanrbt/walkbuddy/Brightness*.java
 
 permissions:
   contents: read

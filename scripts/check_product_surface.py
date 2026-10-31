@@ -100,7 +100,10 @@ assert "paintJourney" in activity
 assert "帧龄" not in activity and "毫秒" not in activity and " ms" not in activity
 assert "帧龄" not in service and "毫秒" not in service and " ms" not in service
 assert "lastLatency" not in service
-assert 'publicReport=state.reason+"\\n"+(state.recognition?"识别开着":"识别关着");' in service
+# HomeStateTest checks exact text, retained terminal reports and owner isolation.
+# The Activity publishes and exposes that state rather than formatting each frame.
+assert "homeState.publish(homeOwner,state.phase,state.reason,state.recognition,detectionNotice,homeNotice);" in service
+assert "homeState.report()" in service
 # PiP permission and component contract, mirrored by PipContractTest.
 import xml.etree.ElementTree as ET
 android = "{http://schemas.android.com/apk/res/android}"
