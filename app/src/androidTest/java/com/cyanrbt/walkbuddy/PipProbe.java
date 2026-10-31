@@ -41,7 +41,7 @@ final class PipProbe {
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("PiP recovery probe is restricted to emulators");
-            if(trace)tracing=new PreviewMainTrace(runner);
+            if(trace){tracing=new PreviewMainTrace(runner);runner.runOnMainSync(()->BrightnessReadback.traceRequests(true));}
             if(!PipSupport.available(runner.getTargetContext()))throw new IllegalStateException("System PiP is unavailable");
             try(java.io.InputStream fixture=runner.getContext().getAssets().open("wake-input-inactive.txt")) {
                 report.append("INPUT_WINDOW_RULES_PASS cases=").append(InputWindowState.verifyWakeFixture(
@@ -142,13 +142,13 @@ final class PipProbe {
             result.putString("stream",report+"PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore\n");
             code=Activity.RESULT_OK;
         } catch(Throwable error) {
-            failureEvidence(runner,"pip-recovery-failure");
+            failureEvidence(runner,"pip-recovery-failure",preview);
             result.putString("stream",report+"PIP_RECOVERY_PROBE_FAIL: "+error+"; "+PreviewActivity.report());
         } finally {
             shell(runner,"input keyevent KEYCODE_WAKEUP");
             if(preview!=null){PreviewActivity host=preview;runner.runOnMainSync(host::finish);}
             if(home!=null){Activity host=home;runner.runOnMainSync(host::finish);}
-            if(tracing!=null)tracing.close();
+            if(tracing!=null){runner.runOnMainSync(()->BrightnessReadback.traceRequests(false));tracing.close();}
         }
         runner.finish(code,result);
     }
@@ -220,9 +220,12 @@ final class PipProbe {
 
             // Force expiry from the actual TextureView.draw -> SurfaceTextureUpdated path.
             AtomicBoolean expiredInDraw=new AtomicBoolean();
+            AtomicReference<TextureView.SurfaceTextureListener> retiredListener=new AtomicReference<>();
+            AtomicReference<SurfaceTexture> retiredSource=new AtomicReference<>();
             TextureView retired=read(runner,()->{
                 TextureView view=(TextureView)field(host,"texture");
                 TextureView.SurfaceTextureListener delegate=view.getSurfaceTextureListener();
+                retiredListener.set(delegate);retiredSource.set(view.getSurfaceTexture());
                 view.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
                     public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h){delegate.onSurfaceTextureAvailable(s,w,h);}
                     public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h){delegate.onSurfaceTextureSizeChanged(s,w,h);}
@@ -244,6 +247,19 @@ final class PipProbe {
             });
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
             await(runner,()->live(host),"manual restart after deadline in draw");
+            read(runner,()->{
+                long displayAt=state(host).displayAt;
+                Object camera=field(host,"camera"),brightness=field(host,"brightnessReadback");
+                // Ensure an unguarded old update would visibly change the timestamp.
+                android.os.SystemClock.sleep(2);
+                retiredListener.get().onSurfaceTextureUpdated(retiredSource.get());
+                retiredListener.get().onSurfaceTextureDestroyed(retiredSource.get());
+                if(!live(host) || state(host).displayAt!=displayAt || field(host,"camera")!=camera
+                    || field(host,"brightnessReadback")!=brightness)
+                    throw new AssertionError("Retired TextureView callbacks affected a new observation");
+                return true;
+            });
+            report.append("RETIRED_TEXTURE_CALLBACK_PASS update_ignored=true destroy_ignored=true new_observation_retained=true\n");
             report.append("PASS deadline inside real TextureView.draw covers/stops immediately, defers layer detach, and supports manual restart\n");
             checkpoint(runner,"texture_deadline_recovered");
 
@@ -476,7 +492,7 @@ final class PipProbe {
             report.append("PIP_PROBE_PASS\n");
             result.putString("stream",report.toString());code=Activity.RESULT_OK;
         } catch(Throwable error) {
-            failureEvidence(runner,"pip-failure");
+            failureEvidence(runner,"pip-failure",preview);
             result.putString("stream",report+"PIP_PROBE_FAIL: "+error+"; "+PreviewActivity.report());
         } finally {
             shell(runner,"input keyevent KEYCODE_WAKEUP");
@@ -1016,7 +1032,7 @@ final class PipProbe {
     private static void assertReleased(PreviewActivity host) {
         if(keepsScreenOn(host))throw new AssertionError("Stopped preview retained screen hold");
         if(field(field(host,"haptics"),"requested")!=Detection.Risk.CAPTURED)throw new AssertionError("Stopped preview retained tactile feedback");
-        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback","brightnessSampler"})
+        for(String name:new String[]{"camera","session","surface","depthCamera","analysisTicket","activeTone","pendingCapture","pendingReadback","brightnessReadback"})
             if(field(host,name)!=null)throw new AssertionError("Resource retained: "+name);
         if(state(host).recognition || basicAt(host)!=-1)throw new AssertionError("Stopped camera retained recognition or feedback");
         if((boolean)field(host,"readingTexture"))throw new AssertionError("Stopped camera retained readback state");
@@ -1064,7 +1080,12 @@ final class PipProbe {
         File dir=new File(runner.getTargetContext().getCacheDir(),"ui-probe");if(!dir.isDirectory() && !dir.mkdirs())throw new IllegalStateException("Evidence directory unavailable");
         try(FileOutputStream stream=new FileOutputStream(new File(dir,name))){bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);}finally{bitmap.recycle();}
     }
-    private static void failureEvidence(Instrumentation runner,String prefix) {
+    private static void failureEvidence(Instrumentation runner,String prefix,PreviewActivity preview) {
+        if(preview!=null)try {
+            String incident=read(runner,()->((SessionDiagnostics)field(preview,"diagnostics")).report(
+                BuildConfig.VERSION_NAME,BuildConfig.VERSION_CODE,Build.MANUFACTURER,Build.MODEL,Build.VERSION.RELEASE,Build.VERSION.SDK_INT));
+            SupportProbe.write(runner,prefix+"-problem-info-"+android.os.Process.myPid()+"-"+android.os.SystemClock.elapsedRealtime()+".txt",incident);
+        }catch(Throwable ignored){/* Preserve the original failure if incident capture fails. */}
         // Capture before finish()/instrumentation teardown changes the focused window.
         try{screenshot(runner,prefix+".png");}catch(Exception ignored){/* Keep the original failure. */}
         try{powerEvidence(runner,prefix+"-routing.txt",shellText(runner,

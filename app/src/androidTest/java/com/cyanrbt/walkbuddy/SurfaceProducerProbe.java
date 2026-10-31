@@ -14,7 +14,11 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.widget.FrameLayout;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -28,13 +32,15 @@ import org.json.JSONObject;
 final class SurfaceProducerProbe {
     static JSONObject run(Instrumentation runner,Activity host) throws Exception {
         JSONObject camera,egl;
-        try{camera=camera(runner,host);}catch(Throwable error){camera=new JSONObject().put("accepted",false).put("error",error.toString());}
+        CameraTimeline timeline=new CameraTimeline();
+        try{camera=camera(runner,host,timeline);}catch(Throwable error){camera=new JSONObject().put("accepted",false).put("error",error.toString());}
+        camera.put("stateEvents",timeline.snapshot());
         try{egl=egl(runner,host);}catch(Throwable error){egl=new JSONObject().put("accepted",false).put("error",error.toString());}
         return new JSONObject().put("scope","Frozen virtual Camera2 and synthetic EGL; no product lifecycle, actual AR, or device acceptance")
             .put("camera",camera).put("egl",egl).put("accepted",camera.getBoolean("accepted") && egl.getBoolean("accepted"));
     }
 
-    private static JSONObject camera(Instrumentation runner,Activity host) throws Exception {
+    private static JSONObject camera(Instrumentation runner,Activity host,CameraTimeline timeline) throws Exception {
         CameraManager manager=(CameraManager)host.getSystemService(Context.CAMERA_SERVICE);
         String selected=null;CameraCharacteristics characteristics=null;
         for(String id:manager.getCameraIdList()) {
@@ -52,51 +58,81 @@ final class SurfaceProducerProbe {
             if(modes!=null)for(int mode:modes)if(mode==CaptureRequest.SCALER_ROTATE_AND_CROP_NONE)disableCrop=true;}
         final boolean cropNone=disableCrop;
         AtomicReference<CameraDevice> device=new AtomicReference<>();AtomicReference<CameraCaptureSession> session=new AtomicReference<>();
-        AtomicReference<String> error=new AtomicReference<>();AtomicBoolean closed=new AtomicBoolean(),stopping=new AtomicBoolean();
+        AtomicReference<String> error=new AtomicReference<>();AtomicBoolean closed=new AtomicBoolean(),stopping=new AtomicBoolean(),repeatingStarted=new AtomicBoolean();
         AtomicInteger captures=new AtomicInteger();AtomicLong lastStamp=new AtomicLong();
-        CountDownLatch frames=new CountDownLatch(3),idle=new CountDownLatch(1),sequenceDone=new CountDownLatch(1);
+        CountDownLatch initialReady=new CountDownLatch(1),frames=new CountDownLatch(3),idle=new CountDownLatch(1),sequenceDone=new CountDownLatch(1);
         Fixture fixture=new Fixture(runner,host,640,480,sensor);
         try {
             manager.openCamera(selected,new CameraDevice.StateCallback(){
-                private void failed(String message){if(!closed.get()){error.set(message);while(frames.getCount()>0)frames.countDown();idle.countDown();sequenceDone.countDown();}}
+                private void failed(String message){if(!closed.get()){timeline.event("ERROR "+message,stopping.get());error.set(message);initialReady.countDown();while(frames.getCount()>0)frames.countDown();idle.countDown();sequenceDone.countDown();}}
                 @Override public void onOpened(CameraDevice camera) {
+                    timeline.event("OPENED",stopping.get());
                     if(closed.get()){camera.close();return;}device.set(camera);
                     try{camera.createCaptureSession(Collections.singletonList(fixture.surface),new CameraCaptureSession.StateCallback(){
                         @Override public void onConfigured(CameraCaptureSession ready) {
+                            timeline.event("CONFIGURED",stopping.get());
                             if(closed.get()){ready.close();return;}session.set(ready);
-                            try{CaptureRequest.Builder request=camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);request.addTarget(fixture.surface);
-                                request.set(CaptureRequest.CONTROL_AF_MODE,CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO);
-                                if(Build.VERSION.SDK_INT>=31 && cropNone)request.set(CaptureRequest.SCALER_ROTATE_AND_CROP,CaptureRequest.SCALER_ROTATE_AND_CROP_NONE);
-                                ready.setRepeatingRequest(request.build(),new CameraCaptureSession.CaptureCallback(){
-                                    @Override public void onCaptureCompleted(CameraCaptureSession s,CaptureRequest r,TotalCaptureResult result) {
-                                        if(closed.get())return;Long stamp=result.get(CaptureResult.SENSOR_TIMESTAMP);
-                                        if(stamp!=null){lastStamp.set(stamp);captures.incrementAndGet();frames.countDown();}
-                                    }
-                                    @Override public void onCaptureSequenceCompleted(CameraCaptureSession s,int id,long frame){if(stopping.get())sequenceDone.countDown();}
-                                },new Handler(Looper.getMainLooper()));
-                            }catch(Exception failure){failed(failure.toString());}
                         }
                         @Override public void onConfigureFailed(CameraCaptureSession s){s.close();failed("Camera2 configuration failed");}
-                        @Override public void onReady(CameraCaptureSession s){if(stopping.get())idle.countDown();}
+                        @Override public void onReady(CameraCaptureSession s){timeline.state("READY",true,stopping.get());if(!repeatingStarted.get())initialReady.countDown();if(stopping.get())idle.countDown();}
+                        @Override public void onActive(CameraCaptureSession s){timeline.state("ACTIVE",false,stopping.get());}
+                        @Override public void onClosed(CameraCaptureSession s){timeline.event("SESSION_CLOSED",stopping.get());}
                     },new Handler(Looper.getMainLooper()));}catch(Exception failure){failed(failure.toString());}
                 }
                 @Override public void onDisconnected(CameraDevice camera){camera.close();failed("Camera2 disconnected");}
                 @Override public void onError(CameraDevice camera,int code){camera.close();failed("Camera2 error="+code);}
             },new Handler(Looper.getMainLooper()));
+            require(initialReady,5,"Camera2 initial configured ready");
+            if(error.get()!=null)throw new AssertionError(error.get());
+            SurfaceCopyProbe.onMain(runner,()->{
+                if(device.get()==null || session.get()==null)throw new AssertionError("Initial ready before configured camera");
+                CameraDevice camera=device.get();CameraCaptureSession ready=session.get();
+                repeatingStarted.set(true);timeline.event("START_AFTER_INITIAL_READY",false);
+                CaptureRequest.Builder request=camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);request.addTarget(fixture.surface);
+                request.set(CaptureRequest.CONTROL_AF_MODE,CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO);
+                if(Build.VERSION.SDK_INT>=31 && cropNone)request.set(CaptureRequest.SCALER_ROTATE_AND_CROP,CaptureRequest.SCALER_ROTATE_AND_CROP_NONE);
+                int repeatingId=ready.setRepeatingRequest(request.build(),new CameraCaptureSession.CaptureCallback(){
+                    @Override public void onCaptureCompleted(CameraCaptureSession s,CaptureRequest r,TotalCaptureResult result) {
+                        if(closed.get())return;Long stamp=result.get(CaptureResult.SENSOR_TIMESTAMP);
+                        if(stamp!=null){lastStamp.set(stamp);int count=captures.incrementAndGet();if(count<=4)timeline.event("CAPTURE count="+count+" frame="+result.getFrameNumber(),stopping.get());frames.countDown();}
+                    }
+                    @Override public void onCaptureSequenceCompleted(CameraCaptureSession s,int id,long frame){timeline.event("SEQUENCE_COMPLETED id="+id+" frame="+frame,stopping.get());if(stopping.get())sequenceDone.countDown();}
+                    @Override public void onCaptureSequenceAborted(CameraCaptureSession s,int id){timeline.event("SEQUENCE_ABORTED id="+id,stopping.get());}
+                },new Handler(Looper.getMainLooper()));
+                timeline.event("REPEATING_SUBMITTED id="+repeatingId,stopping.get());
+                return null;
+            });
             require(frames,8,"Camera2 frames");if(error.get()!=null)throw new AssertionError(error.get());
-            SurfaceCopyProbe.onMain(runner,()->{stopping.set(true);session.get().stopRepeating();return null;});
+            SurfaceCopyProbe.onMain(runner,()->{stopping.set(true);timeline.event("STOP_REPEATING",true);session.get().stopRepeating();timeline.event("STOP_RETURNED",true);return null;});
             require(sequenceDone,5,"Camera2 repeating sequence completed");
+            timeline.event("SEQUENCE_WAIT_PASSED",stopping.get());
             require(idle,5,"Camera2 idle after explicit stopRepeating");
+            timeline.event("IDLE_WAIT_PASSED",stopping.get());
             if(error.get()!=null)throw new AssertionError(error.get());
             fixture.settle();
             JSONObject result=fixture.pairs().put("sensor",sensor).put("metadataFrames",captures.get())
                 .put("lastSensorTimestamp",lastStamp.get()).put("rotateAndCropNone",cropNone);
             return result;
         } finally {
+            timeline.event("FINISH captures="+captures.get(),stopping.get());
             closed.set(true);
             try{SurfaceCopyProbe.onMain(runner,()->{if(session.get()!=null)session.get().close();if(device.get()!=null)device.get().close();return null;});}
             finally{fixture.close();}
         }
+    }
+
+    /** Observe the original gate, including failures; this recorder never satisfies a latch. */
+    private static final class CameraTimeline {
+        private final List<Map<String,Object>> events=new ArrayList<>();
+        private Boolean ready;
+        synchronized void state(String name,boolean value,boolean stopping){ready=value;event(name,stopping);}
+        synchronized void event(String name,boolean stopping){
+            Map<String,Object> row=new LinkedHashMap<>();
+            row.put("event",name);row.put("elapsedRealtimeNs",SystemClock.elapsedRealtimeNanos());
+            row.put("onMain",Looper.myLooper()==Looper.getMainLooper());row.put("stopping",stopping);row.put("lastReady",ready);
+            events.add(row);
+        }
+        synchronized JSONArray snapshot(){return new JSONArray(new ArrayList<>(events));}
     }
 
     private static JSONObject egl(Instrumentation runner,Activity host) throws Exception {
@@ -134,9 +170,11 @@ final class SurfaceProducerProbe {
                 SurfaceCopyProbe.onMain(runner,()->{BitmapWarmup.read(view);return null;});
                 long before=SurfaceCopyProbe.onMain(runner,()->view.getSurfaceTexture().getTimestamp());
                 JSONObject result=SurfaceCopyProbe.compare(runner,view,sensor,0,size[0],size[1]);
+                BrightnessReadbackProbe.verifyActualCopy(runner,view);
                 long after=SurfaceCopyProbe.onMain(runner,()->view.getSurfaceTexture().getTimestamp());
                 boolean stable=before>0 && before==after;
-                result.put("sourceTimestampBefore",before).put("sourceTimestampAfter",after).put("sourceTimestampStable",stable);
+                result.put("sourceTimestampBefore",before).put("sourceTimestampAfter",after).put("sourceTimestampStable",stable)
+                    .put("asyncReaderVerified",true);
                 accepted&=result.getBoolean("accepted") && stable;pairs.put(result);
             }
             return new JSONObject().put("accepted",accepted).put("pairs",pairs);

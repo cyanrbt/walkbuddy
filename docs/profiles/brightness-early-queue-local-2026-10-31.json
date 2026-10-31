@@ -1,0 +1,20 @@
+{
+  "baseline_commit": "d52090abb40ec237817e31a7e626a1e06b822bb0",
+  "versionName": "0.4.38",
+  "versionCode": 50,
+  "jvm": {
+    "tests": 256,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 21
+  },
+  "application_and_android_test_apks_compiled": true,
+  "actionlint": true,
+  "deadline_cadence_worker_and_version_unchanged": true,
+  "draw_and_retired_callback_probes_test_apk_only": true,
+  "scope": "Local compile/JVM/lint/DEX only. New real draw and Camera2 checks pending. No performance or physical-device acceptance."
+}

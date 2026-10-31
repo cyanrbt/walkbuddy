@@ -45,6 +45,8 @@ data_sources {
     name: "android.log"
     target_buffer: 1
     android_log_config {
+      # Application android.util.Log tags live in the main/default text buffer.
+      log_ids: LID_DEFAULT
       min_prio: PRIO_INFO
       filter_tags: "WalkBuddyTiming"
       filter_tags: "WalkBuddyPip"

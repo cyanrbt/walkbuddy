@@ -1,0 +1,170 @@
+{
+  "scope": "Original and single retry both failed; no release readiness or proven idle callback cause. ZIPs retained.",
+  "first": {
+    "source_commit": "03c1ec480ff5a331ab41c524cdb435d84d17e857",
+    "run": 41165858560,
+    "attempt": 1,
+    "job": 124433153068,
+    "api": 26,
+    "artifact_id": 13028682612,
+    "artifact_bytes": 128748,
+    "artifact_sha256": "376acc589855798fd1071c170b846fed40fb48565491abca01677bd225e41bed",
+    "summary": {
+      "status": "checks_not_passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "failure",
+      "mode": "surface",
+      "probes": [],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "producers": {
+      "scope": "Frozen virtual Camera2 and synthetic EGL; no product lifecycle, actual AR, or device acceptance",
+      "camera": {
+        "accepted": false,
+        "error": "java.lang.AssertionError: Timed out: Camera2 idle after explicit stopRepeating"
+      },
+      "egl": {
+        "accepted": true,
+        "pairs": [
+          {
+            "sensor": 90,
+            "display": 0,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+            "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+            "referenceRgb": 71946,
+            "surfaceRgb": 71946,
+            "requestCallNs": 882450,
+            "callbackLatencyNs": 1009650,
+            "requestedOffMain": true,
+            "accepted": true,
+            "sourceTimestampBefore": 61497149530,
+            "sourceTimestampAfter": 61497149530,
+            "sourceTimestampStable": true,
+            "asyncReaderVerified": true
+          },
+          {
+            "sensor": 90,
+            "display": 0,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+            "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+            "referenceRgb": 71946,
+            "surfaceRgb": 71946,
+            "requestCallNs": 792970,
+            "callbackLatencyNs": 919210,
+            "requestedOffMain": true,
+            "accepted": true,
+            "sourceTimestampBefore": 61497149530,
+            "sourceTimestampAfter": 61497149530,
+            "sourceTimestampStable": true,
+            "asyncReaderVerified": true
+          }
+        ]
+      },
+      "accepted": false
+    },
+    "new_draw_probe_passed": true,
+    "scope": "Actual first failure retained. Camera2 idle notification timeout; no conclusion of exact cause or release readiness."
+  },
+  "retry": {
+    "source_commit": "03c1ec480ff5a331ab41c524cdb435d84d17e857",
+    "run": 41165858560,
+    "attempt": 2,
+    "job": 124435561386,
+    "api": 26,
+    "artifact_bytes": 129124,
+    "artifact_sha256": "9045539fcc164971eb53ccb87eac8805fd3fff369764e5d89daafba6ea858bfb",
+    "summary": {
+      "status": "checks_not_passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "failure",
+      "mode": "surface",
+      "probes": [],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "producers": {
+      "scope": "Frozen virtual Camera2 and synthetic EGL; no product lifecycle, actual AR, or device acceptance",
+      "camera": {
+        "accepted": false,
+        "error": "java.lang.AssertionError: Timed out: Camera2 idle after explicit stopRepeating"
+      },
+      "egl": {
+        "accepted": true,
+        "pairs": [
+          {
+            "sensor": 90,
+            "display": 0,
+            "viewWidth": 300,
+            "viewHeight": 400,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+            "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+            "referenceRgb": 71946,
+            "surfaceRgb": 71946,
+            "requestCallNs": 1395900,
+            "callbackLatencyNs": 1549280,
+            "requestedOffMain": true,
+            "accepted": true,
+            "sourceTimestampBefore": 71699779380,
+            "sourceTimestampAfter": 71699779380,
+            "sourceTimestampStable": true,
+            "asyncReaderVerified": true
+          },
+          {
+            "sensor": 90,
+            "display": 0,
+            "viewWidth": 280,
+            "viewHeight": 210,
+            "result": 0,
+            "referenceStable": true,
+            "referenceChangedPixels": 0,
+            "differentPixels": 0,
+            "firstDifference": -1,
+            "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+            "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+            "referenceRgb": 71946,
+            "surfaceRgb": 71946,
+            "requestCallNs": 1718780,
+            "callbackLatencyNs": 1801580,
+            "requestedOffMain": true,
+            "accepted": true,
+            "sourceTimestampBefore": 71699779380,
+            "sourceTimestampAfter": 71699779380,
+            "sourceTimestampStable": true,
+            "asyncReaderVerified": true
+          }
+        ]
+      },
+      "accepted": false
+    },
+    "parity_accepted": true,
+    "new_draw_probe_passed": true,
+    "artifact_id": 13029625476,
+    "github_size_digest_matches": true
+  }
+}

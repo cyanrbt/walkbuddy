@@ -1,6 +1,6 @@
 # WalkBuddy
 
-白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前版本 **0.4.37**（versionCode 49），已发布固定签名安装包。
+白天步行时，把后置摄像头留在系统画中画里，切到别的应用后继续看实时画面。这是一个 Android 学习原型，当前源码 **0.4.38**（versionCode 50），本轮安装包需由正式标签流程完成发布。
 
 它多留一个画面，并提供基础物体识别和实验性的空间障碍检测。空间检测按深度占用判断前方是否可能受阻，无需先认识物体名称。路还是要自己看。不要在马路、楼梯或骑行时靠它决定下一步。
 
@@ -54,13 +54,15 @@
 
 ## 安装
 
-当前 [v0.4.37 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.37/Walk-Buddy-v0.4.37-arm64-debug.apk) 已通过[正式发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41147755325)。亮度检查复用 16×12 位图和像素缓冲，复制前清空、停止后释放；问题信息增加读回墙钟/CPU，首个事件和页面重建保留记录。243 项 JVM、Android 15/16 正式十项及实际 APK 0.4.37 / 49 的固定签名、模型和文件摘要均已核验。[验证记录](docs/profiles/brightness-readback-2026-10-31.md)区分原生像素对照、受控位图计时、实际相机故障恢复和设备范围；不宣称历史停顿根因解决、实体帧率或耗电改善。真实设备、TalkBack、AR 与道路仍待验收。
+0.4.38 源码已通过 259 项 JVM、Android 8/15/16 像素专项与 Android 15/16 系统轨迹检查；五份原始附件和六条轨迹已核验并重放。正式 APK 仍须新标签流程通过两套 Android 检查、固定签名构建后发布。上一版 [v0.4.37 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.37/Walk-Buddy-v0.4.37-arm64-debug.apk) 仍可下载，其[发布构建](https://github.com/cyanrbt/walkbuddy/actions/runs/41147755325)、签名和摘要已核验。
+
+本轮在实际画面更新时，将 16×12 亮度复制与求和投递专用线程；默认仅预览不再额外排队主线程模型读回任务。整个进程最多一个未结束复制，旧 View 回调和停止后的结果不能影响新观察，缓冲待实际复制结束再释放。问题信息单独保存亮度等待、复制和交付阶段。超过 1000ms 的旧观测不启动新请求；新的异步等待从最早到期帧起最多 1200ms，采集/显示与模型的原有截止保持，错误或超时仍需主动重新开启。[本轮策略、原始失败与完整验收](docs/profiles/brightness-preview-budget-2026-10-31.md)分别记录，不宣称历史停顿根因解决或实体帧率、耗电改善。真实设备、TalkBack、AR 与道路仍待验收。
 
 Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。最新诊断补充 InputDispatcher 当前焦点、同一停止文件的连接恢复和 INFO 后备记录，[验证与边界](docs/profiles/ci-input-focus-2026-10-31.md)保留首轮失败与复验结果。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
 
 最新系统轨迹红叉发生在编译成功后：托管运行机空间不足，模拟器未启动。新增编译后的限定缓存清理和存储记录，43 项工具测试通过；修订后的[普通检查](https://github.com/cyanrbt/walkbuddy/actions/runs/41167440416)与[系统轨迹](https://github.com/cyanrbt/walkbuddy/actions/runs/41167440427)均首次成功，四份原始附件和六条轨迹已核验重放。实验分支另有 Android 8 Camera2 停止等待失败，尚未发布。[本次核对](docs/profiles/ci-storage-2026-10-31.md)与正式 APK 状态分开记录。
 
-异步亮度读取候选在系统轨迹下出现新的请求截止失败，已撤回主分支产品改动，保留在独立实验分支；未发布 v0.4.38，也未放宽原有保护。[失败证据与当前状态](docs/profiles/brightness-async-2026-10-31.md)保留，当前安装包仍为 v0.4.37。
+早期异步候选曾因请求截止失败撤回，原[失败与撤回记录](docs/profiles/brightness-async-2026-10-31.md)保留。本轮另行修正初始化 ready 顺序，并区分公开版的取样过期跳过与未发布候选新增的请求停机条件；当前源码和验证以[本轮记录](docs/profiles/brightness-preview-budget-2026-10-31.md)为准，正式 APK 发布状态单独核验。
 
 偶发预览停顿增加模拟器专用的 `Preview system trace` 采证流程，分别记录主线程、渲染线程、调度和相机事件，并区分测试主动制造的过期与自然截止观察。31 项工具测试、Android 15/16 各三条完整轨迹及原有十项检查均通过，原始附件已下载核验并以官方引擎重放。[结果、原始失败与边界](docs/profiles/preview-system-trace-2026-10-31.md)保留；本轮未复现历史停顿，根因仍未确定，以上轨迹来源为 v0.4.37。
 
@@ -119,6 +121,8 @@ python3 scripts/check_model.py
 源码：https://github.com/cyanrbt/walkbuddy
 
 ## 版本
+
+- **0.4.38**：亮度复制与求和移到有界单请求 worker，画面更新时尽早提交，默认仅预览不再排模型读回；旧 View 回调拒绝、退休缓冲延后清理，问题信息增加独立亮度阶段。259 项 JVM、三套像素和两套系统轨迹候选检查首次通过，正式安装包等待标签发布，见[本版说明](docs/releases/v0.4.38.md)。
 
 - **0.4.35**：系统小窗直接开关提示音，保留检测/振动，旧按钮拒绝，声音失败更新菜单；大字体横屏侧栏按完整标签所需宽度扩展。237 项 JVM、两套模拟器修订及标签十项检查通过，实际固定签名 APK 已下载核验，见[本版说明](docs/releases/v0.4.35.md)。
 

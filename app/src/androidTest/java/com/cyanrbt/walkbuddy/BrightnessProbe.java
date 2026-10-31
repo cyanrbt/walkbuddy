@@ -82,7 +82,7 @@ final class BrightnessProbe {
                 try(FileOutputStream stream=new FileOutputStream(new File(directory,"brightness-synthetic.json"))) {
                     stream.write(report.toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));
                 }
-                result.set("BRIGHTNESS_SYNTHETIC_PASS cases="+cases.length()+" trials=4 iterations=2000; exact old sums, threshold, alpha, partial/no copy, unavailable, error, close\n");
+                result.set("BRIGHTNESS_SYNTHETIC_PASS cases="+cases.length()+" trials=4 iterations=2000; legacy v0.4.37 sampler reference only: exact old sums, threshold, alpha, partial/no copy, unavailable, error, close\n");
             } finally {sampler.close();}
         });
         return result.get();
