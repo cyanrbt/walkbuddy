@@ -1,0 +1,472 @@
+{
+  "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+  "runs": [
+    {
+      "id": 41180528007,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180528007",
+      "sha": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41180527990,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180527990",
+      "sha": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "status": "completed",
+      "conclusion": "failure",
+      "attempt": 1
+    },
+    {
+      "id": 41180528061,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180528061",
+      "sha": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41180528013,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180528013",
+      "sha": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    }
+  ],
+  "jobs": [
+    {
+      "id": 124476824554,
+      "run": 41180528007,
+      "name": "trace / layout (35)",
+      "workflow": "CPU capacity trace",
+      "status": "completed",
+      "conclusion": "success",
+      "host": {
+        "requested_cores": 4,
+        "allowed_cpu_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cgroup_cpu_max": null,
+        "configured_cores": 4,
+        "scope": "Runner capacity and emulator topology; not device throughput",
+        "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      },
+      "guests": [
+        {
+          "expected_cores": 4,
+          "online": "0-3",
+          "online_cpu_ids": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        },
+        {
+          "expected_cores": 4,
+          "online": "0-3",
+          "online_cpu_ids": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      ],
+      "original_profile_lines": [
+        "2026-10-31T07:26:22.9820464Z {\"requested_cores\": 4, \"allowed_cpu_ids\": [0, 1, 2, 3], \"cgroup_cpu_max\": null, \"configured_cores\": 4, \"scope\": \"Runner capacity and emulator topology; not device throughput\", \"source_commit\": \"3cc077cd4c3933b7574fae2d3b45db0f877d4737\"}",
+        "2026-10-31T07:27:39.8618029Z {\"expected_cores\": 4, \"online\": \"0-3\", \"online_cpu_ids\": [0, 1, 2, 3], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}",
+        "2026-10-31T07:28:58.4732343Z {\"expected_cores\": 4, \"online\": \"0-3\", \"online_cpu_ids\": [0, 1, 2, 3], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}"
+      ],
+      "build_success": true,
+      "failures": []
+    },
+    {
+      "id": 124476824683,
+      "run": 41180528007,
+      "name": "trace / layout (36)",
+      "workflow": "CPU capacity trace",
+      "status": "completed",
+      "conclusion": "success",
+      "host": {
+        "requested_cores": 4,
+        "allowed_cpu_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cgroup_cpu_max": null,
+        "configured_cores": 4,
+        "scope": "Runner capacity and emulator topology; not device throughput",
+        "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      },
+      "guests": [
+        {
+          "expected_cores": 4,
+          "online": "0-3",
+          "online_cpu_ids": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        },
+        {
+          "expected_cores": 4,
+          "online": "0-3",
+          "online_cpu_ids": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      ],
+      "original_profile_lines": [
+        "2026-10-31T07:26:27.9538957Z {\"requested_cores\": 4, \"allowed_cpu_ids\": [0, 1, 2, 3], \"cgroup_cpu_max\": null, \"configured_cores\": 4, \"scope\": \"Runner capacity and emulator topology; not device throughput\", \"source_commit\": \"3cc077cd4c3933b7574fae2d3b45db0f877d4737\"}",
+        "2026-10-31T07:27:59.5851864Z {\"expected_cores\": 4, \"online\": \"0-3\", \"online_cpu_ids\": [0, 1, 2, 3], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}",
+        "2026-10-31T07:29:53.0546889Z {\"expected_cores\": 4, \"online\": \"0-3\", \"online_cpu_ids\": [0, 1, 2, 3], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}"
+      ],
+      "build_success": true,
+      "failures": []
+    },
+    {
+      "id": 124476824611,
+      "run": 41180527990,
+      "name": "layout (36)",
+      "workflow": "Android UI checks",
+      "status": "completed",
+      "conclusion": "success",
+      "host": {
+        "requested_cores": 2,
+        "allowed_cpu_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cgroup_cpu_max": null,
+        "configured_cores": 2,
+        "scope": "Runner capacity and emulator topology; not device throughput",
+        "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      },
+      "guests": [
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      ],
+      "original_profile_lines": [
+        "2026-10-31T07:26:26.0511330Z {\"requested_cores\": 2, \"allowed_cpu_ids\": [0, 1, 2, 3], \"cgroup_cpu_max\": null, \"configured_cores\": 2, \"scope\": \"Runner capacity and emulator topology; not device throughput\", \"source_commit\": \"3cc077cd4c3933b7574fae2d3b45db0f877d4737\"}",
+        "2026-10-31T07:27:59.7227493Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}"
+      ],
+      "build_success": true,
+      "failures": []
+    },
+    {
+      "id": 124476824740,
+      "run": 41180527990,
+      "name": "layout (35)",
+      "workflow": "Android UI checks",
+      "status": "completed",
+      "conclusion": "failure",
+      "host": {
+        "requested_cores": 2,
+        "allowed_cpu_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cgroup_cpu_max": null,
+        "configured_cores": 2,
+        "scope": "Runner capacity and emulator topology; not device throughput",
+        "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      },
+      "guests": [
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      ],
+      "original_profile_lines": [
+        "2026-10-31T07:26:33.1807517Z {\"requested_cores\": 2, \"allowed_cpu_ids\": [0, 1, 2, 3], \"cgroup_cpu_max\": null, \"configured_cores\": 2, \"scope\": \"Runner capacity and emulator topology; not device throughput\", \"source_commit\": \"3cc077cd4c3933b7574fae2d3b45db0f877d4737\"}",
+        "2026-10-31T07:27:50.4275708Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}"
+      ],
+      "build_success": true,
+      "failures": [
+        "2026-10-31T07:28:21.3716355Z PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: recovery manual restart; interactive=true keyguard=false; 画面已过期：不可用，请重新开启；提醒已停止; 画面已过期：不可用，请重新开启；提醒已停止",
+        "2026-10-31T07:31:45.8550905Z ##[error]The process '/usr/bin/sh' failed with exit code 1"
+      ]
+    },
+    {
+      "id": 124476824874,
+      "run": 41180528061,
+      "name": "compare / layout (35)",
+      "workflow": "Surface copy experiment",
+      "status": "completed",
+      "conclusion": "success",
+      "host": {
+        "requested_cores": 2,
+        "allowed_cpu_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cgroup_cpu_max": null,
+        "configured_cores": 2,
+        "scope": "Runner capacity and emulator topology; not device throughput",
+        "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      },
+      "guests": [
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        },
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      ],
+      "original_profile_lines": [
+        "2026-10-31T07:26:12.9079034Z {\"requested_cores\": 2, \"allowed_cpu_ids\": [0, 1, 2, 3], \"cgroup_cpu_max\": null, \"configured_cores\": 2, \"scope\": \"Runner capacity and emulator topology; not device throughput\", \"source_commit\": \"3cc077cd4c3933b7574fae2d3b45db0f877d4737\"}",
+        "2026-10-31T07:27:25.6319654Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}",
+        "2026-10-31T07:27:41.8074479Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}"
+      ],
+      "build_success": true,
+      "failures": []
+    },
+    {
+      "id": 124476825005,
+      "run": 41180528061,
+      "name": "compare / layout (26)",
+      "workflow": "Surface copy experiment",
+      "status": "completed",
+      "conclusion": "success",
+      "host": {
+        "requested_cores": 2,
+        "allowed_cpu_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cgroup_cpu_max": null,
+        "configured_cores": 2,
+        "scope": "Runner capacity and emulator topology; not device throughput",
+        "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      },
+      "guests": [
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      ],
+      "original_profile_lines": [
+        "2026-10-31T07:26:31.9378371Z {\"requested_cores\": 2, \"allowed_cpu_ids\": [0, 1, 2, 3], \"cgroup_cpu_max\": null, \"configured_cores\": 2, \"scope\": \"Runner capacity and emulator topology; not device throughput\", \"source_commit\": \"3cc077cd4c3933b7574fae2d3b45db0f877d4737\"}",
+        "2026-10-31T07:27:53.4290532Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}"
+      ],
+      "build_success": true,
+      "failures": []
+    },
+    {
+      "id": 124476825076,
+      "run": 41180528061,
+      "name": "compare / layout (36)",
+      "workflow": "Surface copy experiment",
+      "status": "completed",
+      "conclusion": "success",
+      "host": {
+        "requested_cores": 2,
+        "allowed_cpu_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cgroup_cpu_max": null,
+        "configured_cores": 2,
+        "scope": "Runner capacity and emulator topology; not device throughput",
+        "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      },
+      "guests": [
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        },
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      ],
+      "original_profile_lines": [
+        "2026-10-31T07:26:25.8756429Z {\"requested_cores\": 2, \"allowed_cpu_ids\": [0, 1, 2, 3], \"cgroup_cpu_max\": null, \"configured_cores\": 2, \"scope\": \"Runner capacity and emulator topology; not device throughput\", \"source_commit\": \"3cc077cd4c3933b7574fae2d3b45db0f877d4737\"}",
+        "2026-10-31T07:28:09.1593966Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}",
+        "2026-10-31T07:28:36.9840040Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}"
+      ],
+      "build_success": true,
+      "failures": []
+    },
+    {
+      "id": 124476824715,
+      "run": 41180528013,
+      "name": "trace / layout (36)",
+      "workflow": "Preview system trace",
+      "status": "completed",
+      "conclusion": "success",
+      "host": {
+        "requested_cores": 2,
+        "allowed_cpu_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cgroup_cpu_max": null,
+        "configured_cores": 2,
+        "scope": "Runner capacity and emulator topology; not device throughput",
+        "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      },
+      "guests": [
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        },
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      ],
+      "original_profile_lines": [
+        "2026-10-31T07:26:14.9071634Z {\"requested_cores\": 2, \"allowed_cpu_ids\": [0, 1, 2, 3], \"cgroup_cpu_max\": null, \"configured_cores\": 2, \"scope\": \"Runner capacity and emulator topology; not device throughput\", \"source_commit\": \"3cc077cd4c3933b7574fae2d3b45db0f877d4737\"}",
+        "2026-10-31T07:27:39.5107217Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}",
+        "2026-10-31T07:29:01.1105757Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}"
+      ],
+      "build_success": true,
+      "failures": []
+    },
+    {
+      "id": 124476824976,
+      "run": 41180528013,
+      "name": "trace / layout (35)",
+      "workflow": "Preview system trace",
+      "status": "completed",
+      "conclusion": "success",
+      "host": {
+        "requested_cores": 2,
+        "allowed_cpu_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cgroup_cpu_max": null,
+        "configured_cores": 2,
+        "scope": "Runner capacity and emulator topology; not device throughput",
+        "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      },
+      "guests": [
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        },
+        {
+          "expected_cores": 2,
+          "online": "0-1",
+          "online_cpu_ids": [
+            0,
+            1
+          ],
+          "valid": true,
+          "scope": "Disposable emulator topology only"
+        }
+      ],
+      "original_profile_lines": [
+        "2026-10-31T07:26:39.6524539Z {\"requested_cores\": 2, \"allowed_cpu_ids\": [0, 1, 2, 3], \"cgroup_cpu_max\": null, \"configured_cores\": 2, \"scope\": \"Runner capacity and emulator topology; not device throughput\", \"source_commit\": \"3cc077cd4c3933b7574fae2d3b45db0f877d4737\"}",
+        "2026-10-31T07:28:03.8472201Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}",
+        "2026-10-31T07:29:54.2014818Z {\"expected_cores\": 2, \"online\": \"0-1\", \"online_cpu_ids\": [0, 1], \"valid\": true, \"scope\": \"Disposable emulator topology only\"}"
+      ],
+      "build_success": true,
+      "failures": []
+    }
+  ],
+  "scope": "First attempt snapshot: eight jobs success, one paused-window input failure. Only CPU-capacity trace ZIPs and the failed ordinary UI ZIP were locally downloaded and replayed; other baseline/Surface jobs checked through terminal status and original job logs."
+}

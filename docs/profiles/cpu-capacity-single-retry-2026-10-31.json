@@ -1,0 +1,183 @@
+{
+  "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+  "reports": [
+    {
+      "api": 35,
+      "workflow_run": 41180527990,
+      "artifact_id": 13035447834,
+      "artifact_bytes": 14034894,
+      "artifact_sha256": "02c1177a820b8a7c1ce74ed90fc2b4a57ea1f71f84b3089f47f35a0f6fcc5489",
+      "ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "original_ui": {
+        "status": "passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "success",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [],
+        "focused_external_anr_dialogs": []
+      },
+      "draw_submission_passed": true,
+      "retired_texture_passed": true,
+      "preview_only_no_model_task_passed": true,
+      "storage": {
+        "scope": "Disposable hosted runner after compilation; APKs, emulator, system images, SDK platform/build tools and keys retained",
+        "free_bytes_before": 90833510400,
+        "removed": [
+          "/usr/local/lib/android/sdk/ndk",
+          "/usr/local/lib/android/sdk/cmake",
+          "/home/runner/.gradle/caches",
+          "/home/runner/.gradle/wrapper/dists"
+        ],
+        "skipped": [],
+        "apk_sha256": {
+          "app/build/outputs/apk/debug/app-debug.apk": "d37f47346523df46d4e43b6fdd34c7ce5276c93f3db1539c32086f082e223db2",
+          "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "6d474e2d03654ff3c1d2bd9f7725b2c7e24b6090278ba2da63154ca5abddbc3e"
+        },
+        "status": "passed",
+        "free_bytes_after": 98532708352,
+        "compiled_apks_unchanged": true
+      }
+    }
+  ],
+  "host_cpu": {
+    "requested_cores": 2,
+    "allowed_cpu_ids": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "cgroup_cpu_max": null,
+    "configured_cores": 2,
+    "scope": "Runner capacity and emulator topology; not device throughput",
+    "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+  },
+  "guest_cpu": {
+    "expected_cores": 2,
+    "online": "0-1",
+    "online_cpu_ids": [
+      0,
+      1
+    ],
+    "valid": true,
+    "scope": "Disposable emulator topology only"
+  },
+  "scope": "Single retry of API 35 job after explicitly rejected DOWN. Same source/two-core configuration and all ten native gates; first attempt input failure retained. No root-cause-fix claim."
+}

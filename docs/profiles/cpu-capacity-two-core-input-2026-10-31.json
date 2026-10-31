@@ -1,0 +1,115 @@
+{
+  "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+  "run": 41180527990,
+  "job": 124476824740,
+  "artifact_id": 13035046140,
+  "bytes": 13975161,
+  "sha256": "e042089f6cc4ad38c8f1b88b0d1a83372defa98fef55e4e29289a9d3fd88fe55",
+  "whole_zip_size_sha256_crc_verified": true,
+  "ui_report_replayed": true,
+  "report": {
+    "status": "checks_not_passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "failure",
+    "mode": "ui",
+    "probes": [
+      {
+        "name": "pip_recovery",
+        "status": "failed",
+        "failures": [
+          "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: recovery manual restart; interactive=true keyguard=false; 画面已过期：不可用，请重新开启；提醒已停止; 画面已过期：不可用，请重新开启；提醒已停止"
+        ]
+      },
+      {
+        "name": "runtime",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "preview",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "overlay",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "layout",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "home",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip-repeat",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "support",
+        "status": "passed",
+        "failures": []
+      }
+    ],
+    "observations": [],
+    "anrs": [],
+    "failure_time_focus": [
+      {
+        "file": "cache/ui-probe/pip-recovery-failure-input.txt",
+        "focused_window": "displayId=0, name='beeffd5 com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity'"
+      }
+    ],
+    "focused_external_anr_dialogs": []
+  },
+  "first_problem_reports": [
+    {
+      "file": "cache/ui-probe/pip-recovery-failure-problem-info-2162-64898.txt",
+      "sha256": "22b3813f06aab10e4df54cbf404fc09f6c24e58377b16a294060a626fc22af47",
+      "text": "WalkBuddy 问题信息\n版本：0.4.38 / 50\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：GENERAL\n提示：画面已过期：不可用，请重新开启\n触发阶段：LIVE / 基础模式\n画中画：是；检测：关；声音：关；振动：开\n采集帧龄(ms)：1201；显示帧龄(ms)：95；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：未取得；墙钟(ms)：未取得；CPU(ms)：未取得\n异步亮度检查：FINISHED；观测帧龄(ms)：524\n亮度排队(ms)：5；请求墙钟(ms)：48；调用与像素处理CPU(ms)：0；交付(ms)：22；结果码：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    }
+  ],
+  "runner_cpu": {
+    "requested_cores": 2,
+    "allowed_cpu_ids": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "cgroup_cpu_max": null,
+    "configured_cores": 2,
+    "scope": "Runner capacity and emulator topology; not device throughput",
+    "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+  },
+  "guest_cpu": {
+    "expected_cores": 2,
+    "online": "0-1",
+    "online_cpu_ids": [
+      0,
+      1
+    ],
+    "valid": true,
+    "scope": "Disposable emulator topology only"
+  },
+  "pipeline_timing": "--------- beginning of main\n10-31 07:28:06.393  2162  2162 W WalkBuddyTiming: Brightness asyncWallMs=679 callerCpuMs=0 queueMs=273 deliveryMs=161\n10-31 07:28:06.975  2162  2162 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=95 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true\n10-31 07:28:51.304  3978  4031 W WalkBuddyTiming: Brightness request error=IllegalStateException\n10-31 07:29:35.397  4560  4560 W WalkBuddyTiming: Brightness asyncWallMs=209 callerCpuMs=0 queueMs=68 deliveryMs=307\n10-31 07:29:59.515  4560  4560 W WalkBuddyTiming: Preview stopped reason=HIDDEN phase=LIVE recognition=false captureGapMs=66 displayGapMs=21 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true\n10-31 07:30:01.823  4560  4560 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=50 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false\n10-31 07:30:03.433  4560  4560 W WalkBuddyTiming: Preview stopped reason=HIDDEN phase=LIVE recognition=false captureGapMs=69 displayGapMs=27 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false\n10-31 07:30:04.924  4560  4614 W WalkBuddyTiming: Brightness request error=IllegalStateException\n10-31 07:30:04.925  4560  4560 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=52 displayGapMs=19 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false\n10-31 07:30:05.862  4560  4560 W WalkBuddyTiming: Brightness asyncWallMs=229 callerCpuMs=0 queueMs=5 deliveryMs=0\n10-31 07:30:26.584  4560  4560 W WalkBuddyTiming: Preview stopped reason=HIDDEN phase=LIVE recognition=true captureGapMs=63 displayGapMs=30 analysisGapMs=310 sampleAgeMs=409 queueMs=2 copyMs=4 deliveryMs=5 workerBusy=false pip=false\n10-31 07:30:28.432  4560  4560 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=17 displayGapMs=28 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true\n10-31 07:30:29.491  4560  4560 W WalkBuddyTiming: Brightness asyncWallMs=429 callerCpuMs=0 queueMs=3 deliveryMs=23\n10-31 07:30:29.653  4560  4560 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=14 displayGapMs=15 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true\n10-31 07:30:33.742  4560  4560 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=3 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true\n10-31 07:30:38.866  5001  5001 W WalkBuddyTiming: Brightness asyncWallMs=543 callerCpuMs=0 queueMs=10 deliveryMs=5\n10-31 07:31:02.550  5001  5001 W WalkBuddyTiming: Preview stopped reason=HIDDEN phase=LIVE recognition=false captureGapMs=90 displayGapMs=41 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true\n10-31 07:31:04.299  5001  5001 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=257 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false\n10-31 07:31:05.835  5001  5001 W WalkBuddyTiming: Preview stopped reason=HIDDEN phase=LIVE recognition=false captureGapMs=78 displayGapMs=25 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false\n10-31 07:31:07.376  5001  5056 W WalkBuddyTiming: Brightness request error=IllegalStateException\n10-31 07:31:07.376  5001  5001 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=64 displayGapMs=20 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false\n10-31 07:31:08.117  5001  5001 W WalkBuddyTiming: Brightness asyncWallMs=219 callerCpuMs=0 queueMs=4 deliveryMs=2\n10-31 07:31:28.510  5001  5001 W WalkBuddyTiming: Preview stopped reason=HIDDEN phase=LIVE recognition=true captureGapMs=82 displayGapMs=16 analysisGapMs=267 sampleAgeMs=351 queueMs=1 copyMs=4 deliveryMs=1 workerBusy=false pip=false\n10-31 07:31:30.396  5001  5001 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=12 displayGapMs=23 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true\n10-31 07:31:31.429  5001  5001 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=12 displayGapMs=8 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true\n10-31 07:31:35.767  5001  5001 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=1201 displayGapMs=11 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=true\n10-31 07:31:41.674  5414  5414 W WalkBuddyTiming: Brightness asyncWallMs=458 callerCpuMs=0 queueMs=113 deliveryMs=24\n10-31 07:31:41.750  5414  5414 W WalkBuddyTiming: Preview stopped reason=GENERAL phase=LIVE recognition=false captureGapMs=76 displayGapMs=673 analysisGapMs=-1 sampleAgeMs=-1 queueMs=-1 copyMs=-1 deliveryMs=-1 workerBusy=false pip=false\n",
+  "scope": "Ordinary emulator input failure; application source unchanged. No matching Perfetto for this untraced run; do not attribute it to brightness or CPU contention.",
+  "input_timing": "10-31 07:28:02.475  2162  2274 I WalkBuddyInput: tap id=start bounds=Rect(20, 550 - 300, 602) focus=true pip=false\n10-31 07:28:02.622  2162  2162 I WalkBuddyInput: after-down id=start bounds=Rect(20, 550 - 300, 602) focus=true pip=false\n10-31 07:28:03.624  2162  2162 I WalkBuddyPip: start-request resumed=true phase=STOPPED pip=false focus=false captureGapMs=-1 displayGapMs=-1\n10-31 07:28:03.790  2162  2162 I WalkBuddyPip: resume resumed=true phase=STARTING pip=false focus=false captureGapMs=-1 displayGapMs=-1\n10-31 07:28:06.502  2162  2274 I WalkBuddyInput: tap id=enter_pip bounds=Rect(16, 552 - 304, 604) focus=true pip=false\n10-31 07:28:06.582  2162  2162 I WalkBuddyInput: after-down id=enter_pip bounds=Rect(16, 552 - 304, 604) focus=true pip=false\n10-31 07:28:06.605  2162  2162 I WalkBuddyPip: request resumed=true phase=LIVE pip=false focus=true captureGapMs=39 displayGapMs=16\n10-31 07:28:06.619  2162  2162 I WalkBuddyPip: accepted=true resumed=true phase=LIVE pip=true focus=true captureGapMs=53 displayGapMs=30\n10-31 07:28:06.763  2162  2162 I WalkBuddyPip: pause resumed=false phase=LIVE pip=true focus=true captureGapMs=16 displayGapMs=52\n10-31 07:28:07.346  2162  2274 I WalkBuddyInput: tap id=start bounds=Rect(20, 62 - 300, 114) focus=true pip=false\n10-31 07:28:07.617  2162  2162 I WalkBuddyPip: mode=true resumed=false phase=UNAVAILABLE pip=true focus=false captureGapMs=-1 displayGapMs=-1\n10-31 07:28:07.901  2162  2162 I WalkBuddyInput: after-down id=start bounds=Rect(20, 62 - 300, 114) focus=true pip=false\n10-31 07:28:08.858  2162  2162 I WalkBuddyPip: mode=false resumed=false phase=UNAVAILABLE pip=false focus=false captureGapMs=-1 displayGapMs=-1\n10-31 07:28:09.273  2162  2162 I WalkBuddyPip: resume resumed=true phase=UNAVAILABLE pip=false focus=true captureGapMs=-1 displayGapMs=-1\n10-31 07:28:09.544  2162  2274 I WalkBuddyInput: system input ready component=com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity display=0 waitedMs=48\n10-31 07:28:09.700  2162  2274 I WalkBuddyInput: PiP expansion-ready after event idle and system input viewport/window; resumed/focus/unlocked/active-package checked\n10-31 07:28:09.706  2162  2274 I WalkBuddyInput: tap id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false\n10-31 07:28:10.112  2162  2162 I WalkBuddyPip: pause resumed=false phase=UNAVAILABLE pip=false focus=true captureGapMs=-1 displayGapMs=-1\n10-31 07:28:10.143  2162  2162 I WalkBuddyPip: resume resumed=true phase=UNAVAILABLE pip=false focus=true captureGapMs=-1 displayGapMs=-1\n10-31 07:28:10.144  2162  2162 I WalkBuddyInput: after-down id=restart_preview bounds=Rect(16, 552 - 304, 604) focus=true pip=false\n10-31 07:28:21.052  2162  2162 I WalkBuddyPip: pause resumed=false phase=UNAVAILABLE pip=false focus=true captureGapMs=-1 displayGapMs=-1",
+  "input_routing": "10-31 07:28:10.028   556  2068 W InputManager-JNI: Input channel object 'a326f79 pip-dismiss-overlay (client)' was disposed without first being removed with the input manager!\n10-31 07:28:10.037   556  1955 W InputManager-JNI: Input channel object '[Gesture Monitor] pip-resize (client)' was disposed without first being removed with the input manager!\n10-31 07:28:10.043   556  2062 W InputManager-JNI: Input channel object 'pip_input_consumer (client)' was disposed without first being removed with the input manager!\n10-31 07:28:10.135   556   669 I InputDispatcher: Not sending touch event to beeffd5 com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity because it is paused\n10-31 07:28:10.135   556   669 W InputDispatcher: Dropping injected event from 5f85d02 Taskbar: Injected event targeted at uid 10209 would be dispatched to window '5f85d02 Taskbar' owned by uid 10179.\n10-31 07:28:10.135   556   669 I InputDispatcher: Dropping event because no targets were found: MotionEvent(deviceId=-1, eventTime=54407000000, source=TOUCHSCREEN, displayId=0, action=DOWN, actionButton=0x00000000, flags=0x00000000, metaState=0x00000000, buttonState=0x00000000, classification=NONE, edgeFlags=0x00000000, xPrecision=1.0, yPrecision=1.0, xCursorPosition=nan, yCursorPosition=nan, pointers=[0: (160.0, 578.0)]), policyFlags=0x6b000000\n10-31 07:28:10.135   556  2062 W InputManager: Input event injection from pid 2162 failed.\n10-31 07:28:10.147   556   811 W InputManager: Input event injection from pid 2162 failed.",
+  "conclusion": "The 1201/95ms frozen snapshot is the probe-controlled first expiry in PiP. No recover-request or subsequent start-request reached the app after the first restart tap. InputDispatcher explicitly rejected DOWN while the app window was paused; this is a restore input failure, not a new natural frame-expiry sample."
+}

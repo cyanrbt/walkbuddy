@@ -1,0 +1,105 @@
+{
+  "source_commit": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+  "local_tests": {
+    "tests": 57,
+    "errors": 0,
+    "failures": 0,
+    "seconds": 8.266
+  },
+  "latest_workflow_statuses": [
+    {
+      "id": 41180528007,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180528007",
+      "sha": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41180527990,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180527990",
+      "sha": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 2
+    },
+    {
+      "id": 41180528061,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180528061",
+      "sha": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 41180528013,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41180528013",
+      "sha": "3cc077cd4c3933b7574fae2d3b45db0f877d4737",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    }
+  ],
+  "first_attempt": {
+    "successful_jobs": 8,
+    "failed_jobs": 1,
+    "source": "cpu-capacity-first-status-2026-10-31.json"
+  },
+  "single_retry": {
+    "requested_original_job": 124476824740,
+    "run": 41180527990,
+    "attempt": 2,
+    "jobs": [
+      {
+        "id": 124481150433,
+        "name": "layout (35)",
+        "status": "completed",
+        "conclusion": "success",
+        "started": "2026-10-31T07:47:54Z",
+        "completed": "2026-10-31T07:54:18Z"
+      },
+      {
+        "id": 124481151105,
+        "name": "layout (36)",
+        "status": "completed",
+        "conclusion": "success",
+        "started": "2026-10-31T07:25:14Z",
+        "completed": "2026-10-31T07:31:38Z"
+      }
+    ],
+    "artifact": {
+      "id": 13035447834,
+      "name": "android-ui-evidence-api-35",
+      "size_in_bytes": 14034894,
+      "url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13035447834",
+      "archive_download_url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13035447834/zip",
+      "expired": false,
+      "created_at": "2026-10-31T07:54:15Z",
+      "expires_at": "2027-01-29T07:47:51Z",
+      "updated_at": "2026-10-31T07:54:15Z",
+      "digest": "sha256:02c1177a820b8a7c1ce74ed90fc2b4a57ea1f71f84b3089f47f35a0f6fcc5489",
+      "workflow_run": {
+        "id": 41180527990,
+        "repository_id": 1412858135,
+        "head_repository_id": 1412858135,
+        "head_branch": "main",
+        "head_sha": "3cc077cd4c3933b7574fae2d3b45db0f877d4737"
+      }
+    },
+    "local_proof": "cpu-capacity-single-retry-2026-10-31.json",
+    "note": "API 36 execution times remain from attempt 1; only API 35 was requested for retry."
+  },
+  "local_original_artifacts": {
+    "four_core_trace_zips": 2,
+    "first_failed_ui_zip": 1,
+    "single_retry_ui_zip": 1,
+    "raw_traces_replayed": 6
+  },
+  "production_app_src_main_and_gradle_identical_to": "v0.4.38",
+  "new_apk_release": false,
+  "not_a_root_cause_fix": "Original 1436/1420ms expiry and the transient paused-input race remain unresolved; no phone, AR, TalkBack, FPS or power acceptance."
+}
