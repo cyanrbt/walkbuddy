@@ -1,0 +1,155 @@
+{
+  "checked_at_utc": "2026-10-31 04:09:58 UTC",
+  "sources": {
+    "runs": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/runs?per_page=12",
+    "release": "https://api.github.com/repos/cyanrbt/walkbuddy/releases/latest",
+    "boot_failure_job": "https://github.com/cyanrbt/walkbuddy/actions/runs/41164516839/job/124429091435"
+  },
+  "release": {
+    "tag": "v0.4.37",
+    "run": 41147755325,
+    "conclusion": "success",
+    "assets": [
+      {
+        "name": "Walk-Buddy-v0.4.37-arm64-debug.apk",
+        "size": 9980497,
+        "digest": "sha256:17dd08931a728de220ce65086ad1591ded3ef7ccc9fdf1602e68fe355e2c7491",
+        "download": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.37/Walk-Buddy-v0.4.37-arm64-debug.apk"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "id": 41165858560,
+      "name": "Surface copy experiment",
+      "sha": "03c1ec480ff5a331ab41c524cdb435d84d17e857",
+      "branch": "perf/brightness-async-a110908",
+      "attempt": 2,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41165858560"
+    },
+    {
+      "id": 41165858460,
+      "name": "Experimental brightness stages",
+      "sha": "03c1ec480ff5a331ab41c524cdb435d84d17e857",
+      "branch": "perf/brightness-async-a110908",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41165858460"
+    },
+    {
+      "id": 41164584945,
+      "name": "Experimental brightness stages",
+      "sha": "d52090abb40ec237817e31a7e626a1e06b822bb0",
+      "branch": "perf/brightness-async-a110908",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41164584945"
+    },
+    {
+      "id": 41164516904,
+      "name": "Android UI checks",
+      "sha": "3184e1028e1a60a5d4dd8dda30fabed923f35ede",
+      "branch": "main",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41164516904"
+    },
+    {
+      "id": 41164516839,
+      "name": "Preview system trace",
+      "sha": "3184e1028e1a60a5d4dd8dda30fabed923f35ede",
+      "branch": "main",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41164516839"
+    },
+    {
+      "id": 41162976895,
+      "name": "Experimental brightness stages",
+      "sha": "5d68ec98840c177e71f74d1e9186d09e7bf77852",
+      "branch": "perf/brightness-async-a110908",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41162976895"
+    },
+    {
+      "id": 41162050269,
+      "name": "Surface copy experiment",
+      "sha": "066e2245529c8a69edbd3045347b0cfb118a3ea0",
+      "branch": "main",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41162050269"
+    },
+    {
+      "id": 41162050199,
+      "name": "Preview system trace",
+      "sha": "066e2245529c8a69edbd3045347b0cfb118a3ea0",
+      "branch": "main",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41162050199"
+    },
+    {
+      "id": 41162050197,
+      "name": "Android UI checks",
+      "sha": "066e2245529c8a69edbd3045347b0cfb118a3ea0",
+      "branch": "main",
+      "attempt": 2,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41162050197"
+    },
+    {
+      "id": 41160797348,
+      "name": "Surface copy experiment",
+      "sha": "a1109083bc8fb4ddfa6f492d4740f8f1cad33f2a",
+      "branch": "main",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41160797348"
+    },
+    {
+      "id": 41160797277,
+      "name": "Android UI checks",
+      "sha": "a1109083bc8fb4ddfa6f492d4740f8f1cad33f2a",
+      "branch": "main",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41160797277"
+    },
+    {
+      "id": 41160797255,
+      "name": "Preview system trace",
+      "sha": "a1109083bc8fb4ddfa6f492d4740f8f1cad33f2a",
+      "branch": "main",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41160797255"
+    }
+  ],
+  "boot_failure_log": [
+    "2026-10-31T03:29:25.6339262Z BUILD SUCCESSFUL in 35s",
+    "2026-10-31T03:30:11.4430365Z FATAL        | Not enough space to create userdata partition. Available: 7169.88 MB at /home/runner/.android/avd/test.avd, need 7372.80 MB."
+  ],
+  "validation": {
+    "python_tests": 43,
+    "failures": 0,
+    "workflow_actionlint": "passed",
+    "hosted_followup": "pending",
+    "product": "unchanged v0.4.37 / 49",
+    "device_results": false
+  }
+}
