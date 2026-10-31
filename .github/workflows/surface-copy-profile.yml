@@ -8,6 +8,7 @@ on:
       - .github/workflows/surface-copy-profile.yml
       - scripts/run_surface_copy_profile.sh
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/SurfaceCopyProbe.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/SurfaceProducerProbe.java
 
 permissions:
   contents: read

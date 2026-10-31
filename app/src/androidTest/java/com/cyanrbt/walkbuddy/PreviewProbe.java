@@ -101,6 +101,10 @@ public class PreviewProbe extends Instrumentation {
     .put("accepted",accepted).put("cases",surfaceCopies).toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));}
    if(!accepted)throw new AssertionError("Experimental Surface copy changed frozen reference pixels; see surface-copy-parity.json");
    report.append("SURFACE_COPY_PARITY_PASS cases=32 pixels=6144; frozen producer, off-main request, exact ARGB and totals\n");
+   org.json.JSONObject producers=SurfaceProducerProbe.run(this,host);
+   try(FileOutputStream stream=new FileOutputStream(new File(evidence,"surface-copy-producers.json"))){stream.write(producers.toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+   if(!producers.getBoolean("accepted"))throw new AssertionError("Frozen Camera2/EGL Surface comparison failed; see surface-copy-producers.json");
+   report.append("SURFACE_PRODUCERS_PARITY_PASS camera_cases=2 egl_cases=2 pixels=768; frozen independent producers, exact ARGB and stable timestamps\n");
   }
   report.append("BRIGHTNESS_TEXTURE_PARITY_PASS cases=32 pixels=6144; exact ARGB and total, one bitmap and array across changes, close recycled; frozen v0.4.36 reference\n");
   report.append("READBACK_OBSERVATION baselineUs=").append(baselineNs/1000).append(" naturalUs=").append(sampledNs/1000).append(" cases=32; alternating order, full baseline includes rotation, natural readback rotates later on worker; not camera end-to-end timing\n");

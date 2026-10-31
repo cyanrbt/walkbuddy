@@ -81,7 +81,7 @@ final class SurfaceCopyProbe {
         for(byte b:MessageDigest.getInstance("SHA-256").digest(buffer.array()))out.append(String.format(java.util.Locale.ROOT,"%02x",b&255));
         return out.toString();
     }
-    private static <T>T onMain(Instrumentation runner,Callable<T> action) {
+    static <T>T onMain(Instrumentation runner,Callable<T> action) {
         AtomicReference<T> value=new AtomicReference<>();AtomicReference<Throwable> failure=new AtomicReference<>();
         runner.runOnMainSync(()->{try{value.set(action.call());}catch(Throwable error){failure.set(error);}});
         if(failure.get()!=null)throw new AssertionError(failure.get());return value.get();
