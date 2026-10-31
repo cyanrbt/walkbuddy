@@ -1,0 +1,8 @@
+10-31 07:28:10.028   556  2068 W InputManager-JNI: Input channel object 'a326f79 pip-dismiss-overlay (client)' was disposed without first being removed with the input manager!
+10-31 07:28:10.037   556  1955 W InputManager-JNI: Input channel object '[Gesture Monitor] pip-resize (client)' was disposed without first being removed with the input manager!
+10-31 07:28:10.043   556  2062 W InputManager-JNI: Input channel object 'pip_input_consumer (client)' was disposed without first being removed with the input manager!
+10-31 07:28:10.135   556   669 I InputDispatcher: Not sending touch event to beeffd5 com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity because it is paused
+10-31 07:28:10.135   556   669 W InputDispatcher: Dropping injected event from 5f85d02 Taskbar: Injected event targeted at uid 10209 would be dispatched to window '5f85d02 Taskbar' owned by uid 10179.
+10-31 07:28:10.135   556   669 I InputDispatcher: Dropping event because no targets were found: MotionEvent(deviceId=-1, eventTime=54407000000, source=TOUCHSCREEN, displayId=0, action=DOWN, actionButton=0x00000000, flags=0x00000000, metaState=0x00000000, buttonState=0x00000000, classification=NONE, edgeFlags=0x00000000, xPrecision=1.0, yPrecision=1.0, xCursorPosition=nan, yCursorPosition=nan, pointers=[0: (160.0, 578.0)]), policyFlags=0x6b000000
+10-31 07:28:10.135   556  2062 W InputManager: Input event injection from pid 2162 failed.
+10-31 07:28:10.147   556   811 W InputManager: Input event injection from pid 2162 failed.

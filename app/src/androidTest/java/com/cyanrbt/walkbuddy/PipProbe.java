@@ -47,6 +47,10 @@ final class PipProbe {
                 report.append("INPUT_WINDOW_RULES_PASS cases=").append(InputWindowState.verifyWakeFixture(
                     new String(fixture.readAllBytes(),java.nio.charset.StandardCharsets.UTF_8))).append('\n');
             }
+            try(java.io.InputStream fixture=runner.getContext().getAssets().open("restore-down-paused.txt")) {
+                report.append("REJECTED_RESTORE_TOUCH_RULES_PASS cases=").append(RejectedTouch.verifyFixture(
+                    new String(fixture.readAllBytes(),java.nio.charset.StandardCharsets.UTF_8))).append('\n');
+            }
             shell(runner,"pm grant "+runner.getTargetContext().getPackageName()+" android.permission.CAMERA");
             home=runner.startActivitySync(new Intent(runner.getTargetContext(),MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             Activity launcher=home;
@@ -583,16 +587,22 @@ final class PipProbe {
         awaitPreviewInputReady(runner,host,"wake");
     }
     static void awaitPreviewInputReady(Instrumentation runner,PreviewActivity host,String reason) throws Exception {
+        awaitPreviewInputReady(runner,host,reason,Long.MAX_VALUE);
+    }
+    private static void awaitPreviewInputReady(Instrumentation runner,PreviewActivity host,String reason,long deadline) throws Exception {
         // Wake/PiP transitions can resume/pause the Activity while input windows are changing.
-        // Wait for observed UI events to settle, then revalidate; do not retry an injected click.
-        runner.getUiAutomation().waitForIdle(500,5000);
-        await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
+        // A delivered or ambiguous gesture is never retried. A proved rejected DOWN
+        // may reobserve readiness within the original tap budget before a second DOWN.
+        long idleBudget=Math.min(5000,remainingMs(deadline));
+        if(idleBudget<500)throw new AssertionError("Input readiness budget exhausted: "+reason);
+        runner.getUiAutomation().waitForIdle(500,idleBudget);
+        awaitUntil(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
             && host.getSystemService(PowerManager.class).isInteractive()
-            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),reason+" input window ready after event idle");
-        awaitSystemInputWindow(runner,host);
-        await(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
+            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),reason+" input window ready after event idle",Math.min(deadline,System.nanoTime()+10_000_000_000L));
+        awaitSystemInputWindow(runner,host,deadline);
+        awaitUntil(runner,()->(boolean)field(host,"resumed") && host.hasWindowFocus()
             && host.getSystemService(PowerManager.class).isInteractive()
-            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),reason+" state after input window readiness");
+            && !host.getSystemService(KeyguardManager.class).isKeyguardLocked(),reason+" state after input window readiness",Math.min(deadline,System.nanoTime()+10_000_000_000L));
         AccessibilityNodeInfo root=runner.getUiAutomation().getRootInActiveWindow();
         try {
             if(root==null || !android.text.TextUtils.equals(host.getPackageName(),root.getPackageName()))
@@ -601,9 +611,14 @@ final class PipProbe {
         android.util.Log.i("WalkBuddyInput",reason+"-ready after event idle and system input viewport/window; resumed/focus/unlocked/active-package checked");
     }
     private static void awaitSystemInputWindow(Instrumentation runner,Activity host) throws Exception {
+        awaitSystemInputWindow(runner,host,Long.MAX_VALUE);
+    }
+    private static void awaitSystemInputWindow(Instrumentation runner,Activity host,long inputDeadline) throws Exception {
         String component=host.getComponentName().flattenToString();
         int displayId=read(runner,()->host.getWindow().getDecorView().getDisplay().getDisplayId());
-        long start=android.os.SystemClock.uptimeMillis(),deadline=start+5000;
+        long budget=Math.min(5000,remainingMs(inputDeadline));
+        if(budget<=0)throw new AssertionError("Input window readiness budget exhausted: "+component);
+        long start=android.os.SystemClock.uptimeMillis(),deadline=start+budget;
         String snapshot="";
         do {
             snapshot=shellText(runner,"dumpsys -t 1 input");
@@ -977,39 +992,95 @@ final class PipProbe {
     }
     static void tap(Instrumentation runner,Activity host,int id) throws Exception {
         // Real input respects focus and enabled state, unlike directly invoking performClick.
-        try {await(runner,()->{
-            View view=host.findViewById(id);android.graphics.Rect bounds=new android.graphics.Rect();
-            if(view==null)return false;
-            for(View node=view;node!=null;) {
-                if(node.isLayoutRequested() || !node.isLaidOut())return false;
-                android.view.ViewParent parent=node.getParent();node=parent instanceof View?(View)parent:null;
-            }
-            return host.hasWindowFocus() && view!=null && view.isShown() && view.isEnabled()
-                && view.isAttachedToWindow() && view.getGlobalVisibleRect(bounds) && !bounds.isEmpty();
-        },"touch target ready id="+id);} catch(AssertionError failure) {
-            throw new AssertionError(failure.getMessage()+"; "+read(runner,()->touchState(host,id)),failure);
-        }
-        android.graphics.Rect bounds=read(runner,()->{
-            android.graphics.Rect rect=new android.graphics.Rect();host.findViewById(id).getGlobalVisibleRect(rect);return rect;
-        });
-        android.util.Log.i("WalkBuddyInput","tap id="+host.getResources().getResourceEntryName(id)+" bounds="+bounds
-            +" focus="+host.hasWindowFocus()+" pip="+host.isInPictureInPictureMode());
-        long at=android.os.SystemClock.uptimeMillis();
-        for(int action:new int[]{android.view.MotionEvent.ACTION_DOWN,android.view.MotionEvent.ACTION_UP}) {
-            android.view.MotionEvent event=android.view.MotionEvent.obtain(at,android.os.SystemClock.uptimeMillis(),action,bounds.exactCenterX(),bounds.exactCenterY(),0);
-            event.setSource(android.view.InputDevice.SOURCE_TOUCHSCREEN);
-            try{
-                try {runner.sendPointerSync(event);} catch(RuntimeException failure) {
-                    throw new AssertionError("Input injection failed action="+action+"; "+failure+"; "+read(runner,()->touchState(host,id)),failure);
+        long deadline=System.nanoTime()+10_000_000_000L;
+        RestoreCheckpoint checkpoint=null;
+        for(int attempt=1;attempt<=2;attempt++) {
+            try {awaitUntil(runner,()->{
+                View view=host.findViewById(id);android.graphics.Rect bounds=new android.graphics.Rect();
+                if(view==null)return false;
+                for(View node=view;node!=null;) {
+                    if(node.isLayoutRequested() || !node.isLaidOut())return false;
+                    android.view.ViewParent parent=node.getParent();node=parent instanceof View?(View)parent:null;
                 }
-                if(action==android.view.MotionEvent.ACTION_DOWN)read(runner,()->{
-                    android.graphics.Rect observed=new android.graphics.Rect();View current=host.findViewById(id);
-                    if(current!=null)current.getGlobalVisibleRect(observed);
-                    android.util.Log.i("WalkBuddyInput","after-down id="+host.getResources().getResourceEntryName(id)+" bounds="+observed
-                        +" focus="+host.hasWindowFocus()+" pip="+host.isInPictureInPictureMode());return true;
-                });
-            }finally{event.recycle();}
+                return host.hasWindowFocus() && view!=null && view.isShown() && view.isEnabled()
+                    && view.isAttachedToWindow() && view.getGlobalVisibleRect(bounds) && !bounds.isEmpty();
+            },"touch target ready id="+id,deadline);} catch(AssertionError failure) {
+                throw new AssertionError(failure.getMessage()+"; "+read(runner,()->touchState(host,id)),failure);
+            }
+            if(attempt==1 && host instanceof PreviewActivity && id==R.id.restart_preview)checkpoint=read(runner,()->{
+                PreviewActivity preview=(PreviewActivity)host;View view=host.findViewById(id);
+                if(!inactive(preview) || view.isLongClickable())return null;
+                return new RestoreCheckpoint(view,state(preview).startedAt,
+                    ((SessionDiagnostics)field(preview,"diagnostics")).preview());
+            });
+            String before=checkpoint!=null?restoreInputRouting(runner):null;
+            if(checkpoint!=null && remainingMs(deadline)<=0)throw new AssertionError("Restore input readiness budget exhausted before DOWN");
+            android.graphics.Rect bounds=read(runner,()->{
+                android.graphics.Rect rect=new android.graphics.Rect();host.findViewById(id).getGlobalVisibleRect(rect);return rect;
+            });
+            android.util.Log.i("WalkBuddyInput","tap id="+host.getResources().getResourceEntryName(id)+" bounds="+bounds
+                +" focus="+host.hasWindowFocus()+" pip="+host.isInPictureInPictureMode()+" attempt="+attempt
+                +" restoreGuard="+(checkpoint!=null));
+            long at=android.os.SystemClock.uptimeMillis();
+            sendTouch(runner,host,id,bounds,at,android.view.MotionEvent.ACTION_DOWN);
+            boolean pressed=read(runner,()->{
+                android.graphics.Rect observed=new android.graphics.Rect();View current=host.findViewById(id);
+                if(current!=null)current.getGlobalVisibleRect(observed);
+                boolean acknowledged=current!=null && current.isPressed();
+                android.util.Log.i("WalkBuddyInput","after-down id="+host.getResources().getResourceEntryName(id)+" bounds="+observed
+                    +" focus="+host.hasWindowFocus()+" pip="+host.isInPictureInPictureMode()+" pressed="+acknowledged);
+                return acknowledged;
+            });
+            if(checkpoint!=null && !pressed) {
+                String after=restoreInputRouting(runner);
+                if(RejectedTouch.pausedDown(before,after,at,android.os.Process.myPid(),host.getComponentName().flattenToString())) {
+                    powerEvidence(runner,"restore-rejected-down-"+android.os.Process.myPid()+"-"+at+".txt",
+                        "BEFORE\n"+before+"\nAFTER\n"+after);
+                    // No window received DOWN. CANCEL ends the rejected sequence without
+                    // producing a click; never reissue a delivered or ambiguous gesture.
+                    sendTouch(runner,host,id,bounds,at,android.view.MotionEvent.ACTION_CANCEL);
+                    RestoreCheckpoint original=checkpoint;
+                    boolean unchanged=read(runner,()->{
+                        PreviewActivity preview=(PreviewActivity)host;
+                        boolean ownerStable=!host.isDestroyed() && !host.isFinishing() && !host.isInPictureInPictureMode()
+                            && host.findViewById(id)==original.view;
+                        if(!RejectedTouch.sameInactiveObservation(inactive(preview),ownerStable,original.startedAt,
+                            state(preview).startedAt,original.incident,
+                            ((SessionDiagnostics)field(preview,"diagnostics")).preview()))return false;
+                        assertReleased(preview);return true;
+                    });
+                    boolean retry=RejectedTouch.mayRetry(attempt,true,unchanged,remainingMs(deadline));
+                    android.util.Log.i("WalkBuddyInput","restore DOWN rejected eventTimeMs="+at+" attempt="+attempt
+                        +" paused_no_targets=true unchanged="+unchanged+" retry="+retry+" remainingMs="+remainingMs(deadline));
+                    if(!retry)throw new AssertionError("Restore DOWN rejected with no input target; attempt="+attempt+" unchanged="+unchanged);
+                    awaitPreviewInputReady(runner,(PreviewActivity)host,"after rejected restore DOWN",deadline);
+                    continue;
+                }
+            }
+            sendTouch(runner,host,id,bounds,at,android.view.MotionEvent.ACTION_UP);
+            return;
         }
+        throw new AssertionError("Restore input attempt bound exceeded");
+    }
+    private static boolean inactive(PreviewActivity host) {
+        return state(host).phase==SessionState.Phase.UNAVAILABLE || state(host).phase==SessionState.Phase.STOPPED;
+    }
+    private static final class RestoreCheckpoint {
+        final View view;final long startedAt;final Object incident;
+        RestoreCheckpoint(View view,long startedAt,Object incident){this.view=view;this.startedAt=startedAt;this.incident=incident;}
+    }
+    private static String restoreInputRouting(Instrumentation runner) {
+        return shellText(runner,"logcat -d -t 1000 -s InputDispatcher:I InputManager:W *:S");
+    }
+    private static void sendTouch(Instrumentation runner,Activity host,int id,android.graphics.Rect bounds,long at,int action) {
+        android.view.MotionEvent event=android.view.MotionEvent.obtain(at,
+            action==android.view.MotionEvent.ACTION_DOWN?at:android.os.SystemClock.uptimeMillis(),
+            action,bounds.exactCenterX(),bounds.exactCenterY(),0);
+        event.setSource(android.view.InputDevice.SOURCE_TOUCHSCREEN);
+        try {runner.sendPointerSync(event);}
+        catch(RuntimeException failure) {
+            throw new AssertionError("Input injection failed action="+action+"; "+failure+"; "+read(runner,()->touchState(host,id)),failure);
+        } finally {event.recycle();}
     }
     private static String touchState(Activity host,int id) {
         View view=host.findViewById(id);android.graphics.Rect bounds=new android.graphics.Rect();
@@ -1061,7 +1132,10 @@ final class PipProbe {
             throw new AssertionError("Active preview lost watchdog protection");
     }
     private static void await(Instrumentation runner,BooleanSupplier condition,String label) throws Exception {
-        long deadline=System.nanoTime()+10_000_000_000L;
+        awaitUntil(runner,condition,label,System.nanoTime()+10_000_000_000L);
+    }
+    private static long remainingMs(long deadline) {return deadline==Long.MAX_VALUE?Long.MAX_VALUE:Math.max(0,(deadline-System.nanoTime())/1_000_000);}
+    private static void awaitUntil(Instrumentation runner,BooleanSupplier condition,String label,long deadline) throws Exception {
         while(System.nanoTime()<deadline){if(read(runner,condition::getAsBoolean))return;Thread.sleep(50);}
         throw new AssertionError("Timed out: "+label+"; interactive="+runner.getTargetContext().getSystemService(PowerManager.class).isInteractive()
             +" keyguard="+runner.getTargetContext().getSystemService(KeyguardManager.class).isKeyguardLocked()+"; "+PreviewActivity.report());

@@ -15,6 +15,9 @@ on:
       - scripts/fetch_trace_processor.sh
       - scripts/tests/test_preview_traces.py
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PreviewMainTrace.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/RejectedTouch.java
+      - app/src/androidTest/assets/restore-down-paused.txt
 
 permissions:
   contents: read

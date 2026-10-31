@@ -9,6 +9,9 @@ on:
       - .github/workflows/ui-check.yml
       - scripts/record_ui_cpu.py
       - scripts/ui_probe_setup.sh
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/RejectedTouch.java
+      - app/src/androidTest/assets/restore-down-paused.txt
       - scripts/run_surface_copy_profile.sh
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/SurfaceCopyProbe.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/SurfaceProducerProbe.java
