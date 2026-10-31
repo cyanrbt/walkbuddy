@@ -1,0 +1,138 @@
+{
+  "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9",
+  "runs": [
+    {
+      "id": 41204399811,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41204399811",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9"
+    },
+    {
+      "id": 41204399812,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41204399812",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9"
+    },
+    {
+      "id": 41204399775,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41204399775",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 2,
+      "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9"
+    },
+    {
+      "id": 41204399703,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41204399703",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 2,
+      "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9"
+    }
+  ],
+  "first_attempt": "observation-copy-first-status-2026-10-31.json",
+  "first_attempt_counts": {
+    "jobs": 9,
+    "first_pass_success": 7,
+    "failed": 2
+  },
+  "original_failure_artifacts": "observation-copy-failures-2026-10-31.json",
+  "full_normal_ui_replay": "observation-copy-native-2026-10-31.json",
+  "single_reruns": [
+    {
+      "run": 41204399703,
+      "original_job": 124546427549,
+      "requested_count": 1,
+      "executed_job": 124551548045,
+      "jobs": [
+        {
+          "id": 124551548045,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-31T13:34:18Z",
+          "completed_at": "2026-10-31T13:40:33Z",
+          "reexecuted": true
+        },
+        {
+          "id": 124551548718,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-31T13:11:00Z",
+          "completed_at": "2026-10-31T13:14:17Z",
+          "reexecuted": false
+        },
+        {
+          "id": 124551548973,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-31T13:11:00Z",
+          "completed_at": "2026-10-31T13:18:38Z",
+          "reexecuted": false
+        }
+      ],
+      "log_evidence": [
+        "2026-10-31T13:35:12.2830089Z BUILD SUCCESSFUL in 38s",
+        "2026-10-31T13:37:29.8853120Z PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore",
+        "2026-10-31T13:38:00.4249782Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:39:12.4441529Z PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "2026-10-31T13:39:12.4465870Z PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "2026-10-31T13:40:19.0464448Z PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "2026-10-31T13:40:19.0486176Z PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "2026-10-31T13:40:25.2208170Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "scope": "Only listed executed_job re-executed; other matrix entries carried original execution timestamps. Terminal status/original retry logs checked; retry ZIPs/traces not locally downloaded or SQL-replayed."
+    },
+    {
+      "run": 41204399775,
+      "original_job": 124546427736,
+      "requested_count": 1,
+      "executed_job": 124552763395,
+      "jobs": [
+        {
+          "id": 124552763395,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-31T13:39:54Z",
+          "completed_at": "2026-10-31T13:48:36Z",
+          "reexecuted": true
+        },
+        {
+          "id": 124552764504,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-31T13:10:59Z",
+          "completed_at": "2026-10-31T13:17:54Z",
+          "reexecuted": false
+        }
+      ],
+      "log_evidence": [
+        "2026-10-31T13:41:12.0909371Z BUILD SUCCESSFUL in 51s",
+        "2026-10-31T13:44:49.0908421Z | 1 | surface_reinstall_recovery | passed | complete | 2780 | 4 | 0 |",
+        "2026-10-31T13:44:49.0909132Z | 2 | recovery | not requested | complete | 2459 | 4 | 0 |",
+        "2026-10-31T13:44:49.0909767Z | 3 | recovery | not requested | complete | 2324 | 4 | 0 |",
+        "2026-10-31T13:45:06.9181565Z PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore",
+        "2026-10-31T13:45:34.7314504Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:46:58.2362179Z PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "2026-10-31T13:46:58.2402611Z PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "2026-10-31T13:48:11.5086495Z PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "2026-10-31T13:48:11.5125839Z PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "2026-10-31T13:48:19.2649425Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true"
+      ],
+      "scope": "Only listed executed_job re-executed; other matrix entries carried original execution timestamps. Terminal status/original retry logs checked; retry ZIPs/traces not locally downloaded or SQL-replayed."
+    }
+  ],
+  "interpretation": "Seven first-pass successes and exactly two same-source failed-job repetitions passed (one per original failure). Original menu nonappearance and 1206ms display-age stop remain preserved. This is no root-cause repair of either failure, older mute-confirmation timeout or natural stale-display events. No health deadline/guard/test relaxed, no physical acceptance."
+}

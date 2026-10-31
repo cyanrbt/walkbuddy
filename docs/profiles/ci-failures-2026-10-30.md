@@ -2,13 +2,15 @@
 
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”“最新”“未发布”等措辞均对应各段记录时的状态；当前结果先看最上方核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
-## v0.4.42 候选两项专项失败核对
+## v0.4.42 两项专项失败核对与正式发布
 
 用户询问后重新读取最近 12 次 Actions 与九份候选原始日志。源码 `8a62a33` 首轮七作业成功、两作业失败，普通 Android 15/16 UI 和四核容量专项首次通过；[首轮快照](observation-copy-first-status-2026-10-31.json)在任何复验前保存。两次失败均先编译成功，不能合称连续 APK 编译失败。查询时最近正式发布仍为成功的 [v0.4.41 41201310263](https://github.com/cyanrbt/walkbuddy/actions/runs/41201310263)，Release 中 10,000,447 字节 APK 已重新确认存在。
 
 [两核系统追踪 41204399775](https://github.com/cyanrbt/walkbuddy/actions/runs/41204399775/attempts/1) Android 15 的第四次系统「关闭提示音」菜单未出现，目标动作触摸尚未执行；应用已提交正确动作并保持 LIVE。清理前只记录三次菜单触摸，窗口位置从下方变为中部，原因未定。[Surface 对照 41204399703](https://github.com/cyanrbt/walkbuddy/actions/runs/41204399703/attempts/1) Android 16 首次相机恢复等待失败：冻结采集/显示龄 8/1206ms，原 1200ms 显示保护触发，亮度读回墙钟 1133ms 的共存记录不足以证明根因。两份完整附件的服务器长度、SHA 与 ZIP CRC 已核对，十报告重放一致，[冻结状态与实际截图](observation-copy-2026-10-31.md#验证阶段)保留；无 ANR 记录，不套用旧 Launcher 解释。
 
-两个失败作业均通过新增复制检查；普通两套完整附件也已重放，不把新功能通过写成旧菜单/时序故障修复。每个失败作业仅申请一次同源码复验，正式发布另由标签工作流检查；终态与实际 APK 待另记，不以重跑删除历史失败。
+两个失败作业均通过新增复制检查；普通两套完整附件也已重放，不把新功能通过写成旧菜单/时序故障修复。每个失败作业仅申请一次同源码复验，均成功，其它矩阵项保留原执行时间；[最终候选记录](observation-copy-final-status-2026-10-31.json)保留首次七成功与两次复验的区别。没有放宽 1200ms 或跳过断言，原始失败不删除。
+
+随后 [v0.4.42 正式发布 41206744467](https://github.com/cyanrbt/walkbuddy/actions/runs/41206744467) attempt 1 的 Android 15、16 与 APK 三作业均首次成功。Release 实际有 [10,002,071 字节 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.42/Walk-Buddy-v0.4.42-arm64-debug.apk)，已完整下载核对 0.4.42 / 54、包名、原固定签名、ARM64、模型和服务器 SHA，[正式日志](observation-copy-release-2026-10-31.json)与[APK 记录](apk-v0.4.42.json)保留。正式和复验 UI ZIP 没有本地重复重放；本地下载超时后的续传不属于构建重跑。实体设备仍未验收，两项首轮故障及旧静音确认根因仍未解决。
 
 ## v0.4.41 正式发布与一次声音开菜单失败
 

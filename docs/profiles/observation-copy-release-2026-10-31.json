@@ -1,0 +1,409 @@
+{
+  "tag": "v0.4.42",
+  "source_commit": "e751dff791417fab0858c4179d04ad576e7ae08b",
+  "validated_candidate_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9",
+  "run": {
+    "id": 41206744467,
+    "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41206744467",
+    "status": "completed",
+    "conclusion": "success",
+    "attempt": 1,
+    "created_at": "2026-10-31T13:42:01Z",
+    "updated_at": "2026-10-31T13:51:06Z"
+  },
+  "jobs": [
+    {
+      "id": 124553253785,
+      "name": "ui / layout (35)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41206744467/job/124553253785",
+      "log_evidence": [
+        "2026-10-31T13:43:04.1355330Z BUILD SUCCESSFUL in 42s",
+        "2026-10-31T13:44:57.6274639Z PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore",
+        "2026-10-31T13:45:13.9252084Z RUNTIME_PROBE_PASS",
+        "2026-10-31T13:45:25.1650930Z PREVIEW_PROBE_PASS cases=32; direction marker + circle in displayed and sampled bitmap",
+        "2026-10-31T13:45:29.5671199Z OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0",
+        "2026-10-31T13:45:44.8840197Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:45:44.8850831Z LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore",
+        "2026-10-31T13:45:51.6210733Z HOME_PROBE_PASS configurations=24 action-states=240 expanded=240; brand reflow, first step, current status, fixed controls, full text, contrast, idle refresh stopped, real Activity recreation",
+        "2026-10-31T13:45:53.7636616Z RECOVERY_PROBE_PASS: denied permission, settings intent, grant and real Activity recreation; no camera auto-start or stopped watchdog polling",
+        "2026-10-31T13:47:01.7776648Z PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "2026-10-31T13:47:01.7808666Z PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "2026-10-31T13:47:01.7809971Z PIP_PROBE_PASS",
+        "2026-10-31T13:48:08.6277264Z PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "2026-10-31T13:48:08.6304384Z PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "2026-10-31T13:48:08.6305802Z PIP_PROBE_PASS",
+        "2026-10-31T13:48:15.1075810Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true",
+        "2026-10-31T13:48:15.1083002Z SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prepare pinned system trace analyzer",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Free hosted runner storage after compilation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Record and bound emulator CPU capacity",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Summarize preview trace evidence",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 124553254063,
+      "name": "ui / layout (36)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41206744467/job/124553254063",
+      "log_evidence": [
+        "2026-10-31T13:43:18.6858540Z BUILD SUCCESSFUL in 51s",
+        "2026-10-31T13:45:39.2467548Z PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore",
+        "2026-10-31T13:46:05.3460114Z RUNTIME_PROBE_PASS",
+        "2026-10-31T13:46:19.9681412Z PREVIEW_PROBE_PASS cases=32; direction marker + circle in displayed and sampled bitmap",
+        "2026-10-31T13:46:26.3078903Z OVERLAY_PROBE_PASS: yellow depth dashes, solid gray/red, cached redraw, resize, clear, narrow label; LABEL_FONT_PASS scale=1.0 pixels=11.0",
+        "2026-10-31T13:46:44.9769236Z OBSERVATION_COPY_LAYOUT_PASS configurations=30 current_and_problem_labels=true reachable=true waiting_hidden=true",
+        "2026-10-31T13:46:44.9779627Z LAYOUT_PROBE_PASS cases=30 states=120; detection-fault-presentations=60; detection-manual-presentations=30; recovery-presentations=660; initial toggles, full text, risk live region, fixed actions, camera space, scroll reach, compact/restore",
+        "2026-10-31T13:46:51.5473029Z HOME_PROBE_PASS configurations=24 action-states=240 expanded=240; brand reflow, first step, current status, fixed controls, full text, contrast, idle refresh stopped, real Activity recreation",
+        "2026-10-31T13:46:53.8304516Z RECOVERY_PROBE_PASS: denied permission, settings intent, grant and real Activity recreation; no camera auto-start or stopped watchdog polling",
+        "2026-10-31T13:48:08.4393163Z PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "2026-10-31T13:48:08.4423632Z PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "2026-10-31T13:48:08.4424986Z PIP_PROBE_PASS",
+        "2026-10-31T13:49:20.7385851Z PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "2026-10-31T13:49:20.7427183Z PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "2026-10-31T13:49:20.7428883Z PIP_PROBE_PASS",
+        "2026-10-31T13:49:28.8158626Z OBSERVATION_COPY_PASS cases=4 native_touch=true plain_text_clipboard=true camera_model_retained=true advancing_frames=true saved_bundle_excludes_current=true first_incident_unchanged=true",
+        "2026-10-31T13:49:28.8169679Z SUPPORT_PROBE_PASS cases=4; first cause, native plain-text clipboard without restart, saved report survives recreation, explicit restart clears; virtual Camera2"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prepare pinned system trace analyzer",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Free hosted runner storage after compilation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Record and bound emulator CPU capacity",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Summarize preview trace evidence",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 124554931423,
+      "name": "apk",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41206744467/job/124554931423",
+      "log_evidence": [
+        "2026-10-31T13:49:45.3793944Z Release metadata: v0.4.42, versionCode 54, notes docs/releases/v0.4.42.md",
+        "2026-10-31T13:50:58.2260301Z BUILD SUCCESSFUL in 1m 1s",
+        "2026-10-31T13:50:59.0405039Z Verified APK signing certificate SHA-256: ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check release tag and notes",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Restore fixed signing key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Android SDK 36",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check model",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test and build arm64 debug APK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify APK signature matches restored key",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Collect APK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Publish GitHub Release",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "release": {
+    "id": 429966366,
+    "url": "https://github.com/cyanrbt/walkbuddy/releases/tag/v0.4.42",
+    "published_at": "2026-10-31T13:51:02Z",
+    "assets": [
+      {
+        "id": 695512842,
+        "name": "Walk-Buddy-v0.4.42-arm64-debug.apk",
+        "state": "uploaded",
+        "bytes": 10002071,
+        "digest": "sha256:86f10b2468fa0c112a7162093790adf14cd5f6915ae07e595a792023bfe6077b",
+        "url": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.42/Walk-Buddy-v0.4.42-arm64-debug.apk"
+      }
+    ]
+  },
+  "formal_ui_artifacts_metadata_only": [
+    {
+      "id": 13044931484,
+      "name": "android-ui-evidence-api-36",
+      "size_in_bytes": 19497864,
+      "url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13044931484",
+      "archive_download_url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13044931484/zip",
+      "expired": false,
+      "created_at": "2026-10-31T13:49:36Z",
+      "expires_at": "2027-01-29T13:42:02Z",
+      "updated_at": "2026-10-31T13:49:36Z",
+      "digest": "sha256:250e762732beb59976cb8ed499a1132bf283bd45e16808393ede3e9d3300e732",
+      "workflow_run": {
+        "id": 41206744467,
+        "repository_id": 1412858135,
+        "head_repository_id": 1412858135,
+        "head_branch": "v0.4.42",
+        "head_sha": "e751dff791417fab0858c4179d04ad576e7ae08b"
+      }
+    },
+    {
+      "id": 13044871440,
+      "name": "android-ui-evidence-api-35",
+      "size_in_bytes": 19518592,
+      "url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13044871440",
+      "archive_download_url": "https://api.github.com/repos/cyanrbt/walkbuddy/actions/artifacts/13044871440/zip",
+      "expired": false,
+      "created_at": "2026-10-31T13:48:20Z",
+      "expires_at": "2027-01-29T13:42:02Z",
+      "updated_at": "2026-10-31T13:48:20Z",
+      "digest": "sha256:db9824f022eb10b0d307a014b9a7b936683992d57c5ebbe18532807a31a1a70b",
+      "workflow_run": {
+        "id": 41206744467,
+        "repository_id": 1412858135,
+        "head_repository_id": 1412858135,
+        "head_branch": "v0.4.42",
+        "head_sha": "e751dff791417fab0858c4179d04ad576e7ae08b"
+      }
+    }
+  ],
+  "independent_apk_record": "apk-v0.4.42.json",
+  "candidate_final_status": "observation-copy-final-status-2026-10-31.json",
+  "scope": "Formal tag attempt1 all three jobs first-pass success; both ten-probe original logs, new copy/layout and previous stop/sound markers checked. Formal UI ZIPs not downloaded or locally replayed. Candidate standard UI ZIPs separately fully verified/replayed; original two failures and each single same-source rerun separately preserved. APK independent structural/signature proof linked separately; no physical-device, AR, TalkBack, audibility or performance acceptance."
+}
