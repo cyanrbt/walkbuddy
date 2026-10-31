@@ -2,6 +2,10 @@
 
 本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
+## v0.4.37 正式发布核对
+
+亮度/读回改进的[基线 41145407736](https://github.com/cyanrbt/walkbuddy/actions/runs/41145407736)、[候选 41146872248](https://github.com/cyanrbt/walkbuddy/actions/runs/41146872248)和[正式发布 41147755325](https://github.com/cyanrbt/walkbuddy/actions/runs/41147755325)均已取得终态成功，原始附件分别核对摘要并重放。正式 APK 已实际下载核验版本、固定签名、摘要、模型和新实现，具体 attempt 与来源见[本轮记录](brightness-readback-2026-10-31.md)。四轮受控位图计时不代表真实 GPU/相机性能，新增墙钟/CPU 记录不证明之前自然停顿根因修复，历史失败继续保留。
+
 ## v0.4.36 正式发布核对
 
 [正式流程 41143546103](https://github.com/cyanrbt/walkbuddy/actions/runs/41143546103) 的两套 Android、固定签名 APK 与整体终态均成功，原始附件和实际 APK 均已下载核对摘要。版本 0.4.36 / 48、固定签名与恢复实现已核验；[完整来源与结果](recovery-presentation-2026-10-31.md#正式发布与实际安装包)保留。新配置将临时模拟器用户分区限定为 2048M；旧报告覆盖问题已复现修正，原始候选失败和自然 1246ms 过期重验不删除，不将成功等同于全部瞬时故障根因已解决。

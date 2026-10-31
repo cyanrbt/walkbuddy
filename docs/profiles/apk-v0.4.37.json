@@ -1,0 +1,472 @@
+{
+  "scope": "Downloaded published ARM64 APK structural/signature checks; no hardware/device acceptance",
+  "tag": "v0.4.37",
+  "source_commit": "afa1e10cf7cd0d3d0345e72015030b779695f888",
+  "workflow_run_id": 41147755325,
+  "workflow_conclusion": "success",
+  "workflow_status": "completed",
+  "release_id": 429606713,
+  "asset_id": 693836119,
+  "asset_name": "Walk-Buddy-v0.4.37-arm64-debug.apk",
+  "download_url": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.37/Walk-Buddy-v0.4.37-arm64-debug.apk",
+  "size_bytes": 9980497,
+  "sha256": "17dd08931a728de220ce65086ad1591ded3ef7ccc9fdf1602e68fe355e2c7491",
+  "github_asset_digest_matches": true,
+  "apksigner_verify": "passed",
+  "apk_signature_v2": true,
+  "signer_count": 1,
+  "certificate_sha256": "ffdf47c306d335d2ee3bc39256d43c470fda5572e80662155ed31dc1c16aae0d",
+  "package": "com.cyanrbt.walkbuddy",
+  "version_name": "0.4.37",
+  "version_code": 49,
+  "min_sdk": 26,
+  "target_sdk": 36,
+  "abis": [
+    "arm64-v8a"
+  ],
+  "permissions": [
+    "android.permission.CAMERA",
+    "android.permission.VIBRATE"
+  ],
+  "model": {
+    "sha256": "2e04c53bfeac0ac2a30c057c7e2a777594ce39baaac35a92f74fb1e8c4fc4e0b",
+    "size_bytes": 4563519,
+    "zip_stored": true
+  },
+  "labels": {
+    "match_tag_source_bytes": true,
+    "sha256": {
+      "labelmap.txt": "f8803ef7900160c629d570848dfda4175e21667bf7b71f73f8ece4938c9f2bf2",
+      "labelmap_zh.tsv": "d1ca7131ef7ae222cd06547f14e02b1a2358b39e987e1cc37d6ffb752f4026b6"
+    },
+    "slots": 90,
+    "unique_chinese_names": 80,
+    "empty_slots": 10
+  },
+  "control_strings_present": [
+    "info_sound_unavailable",
+    "pip_stop_detection",
+    "pip_stop_detection_description",
+    "info_detection_paused",
+    "detection_stopped_compact",
+    "detection_stopped_preview_only",
+    "pip_sound_on",
+    "pip_sound_off",
+    "pip_sound_on_description",
+    "pip_sound_off_description"
+  ],
+  "control_icon_present": true,
+  "label_font_resource": "11sp",
+  "label_fitter_method_present": true,
+  "crowded_label_layout_class_present": true,
+  "crowd_probe_absent": true,
+  "risk_drawing_cache_field_present": true,
+  "risk_probe_absent": true,
+  "label_memory_class_present": true,
+  "label_memory_field_present": true,
+  "motion_probe_absent": true,
+  "stop_detection_action_present": true,
+  "screen_hold_method_present": true,
+  "screen_hold_hint_present": true,
+  "preview_health_class_present": true,
+  "input_readiness_test_class_and_fixture_absent": true,
+  "haptic_api_refs_and_stop_tone_present": true,
+  "risk_haptics_class_present": true,
+  "android_haptics_class_present": true,
+  "responsive_legend_in_layout": true,
+  "cue_strings_present": true,
+  "haptic_probes_absent": true,
+  "independent_vibration_setting_key_and_control_present": true,
+  "muted_legend_text_present": true,
+  "vibration_probes_and_sample_absent": true,
+  "current_camera_pip_bounds_methods_present": true,
+  "pip_matrix_probe_absent": true,
+  "problem_info_class_and_copy_present": true,
+  "problem_info_bundle_state_present": true,
+  "copy_button_and_text_present": true,
+  "support_probe_and_reports_absent": true,
+  "prompt_tone_resource_label": "提示音",
+  "responsive_landscape_label_width_methods_present": true,
+  "pip_sound_menu_and_revision_visit_guards_present": true,
+  "pip_sound_icons_present": true,
+  "pip_sound_probe_and_images_absent": true,
+  "prior_home_event_proof_preserved": true,
+  "prior_string_values_preserved_except_named_sound_label": true,
+  "home_session_event_state_present": true,
+  "home_appops_watcher_present": true,
+  "home_event_probe_absent": true,
+  "preserved_preview_policy_matches_baseline": true,
+  "default_preview_status_class_present": true,
+  "preview_ui_probe_helpers_absent": true,
+  "depth_projection_workspace_present": true,
+  "depth_projection_test_helpers_absent": true,
+  "audio_worker_and_android_output_present": true,
+  "tone_native_probe_and_trace_absent": true,
+  "preview_has_no_direct_tone_generator": true,
+  "feedback_probe_and_trace_absent": true,
+  "feedback_trace_source_matches_tag": true,
+  "test_failure_string_absent": true,
+  "test_portrait_and_candidate_models_absent": true,
+  "opaque_recovery_cover_class_present": true,
+  "recovery_test_code_and_images_absent": true,
+  "historical_source_proof_validation": {
+    "pip_sound_proof_source_matches_tag": true,
+    "home_event_proof_source_matches_tag": true,
+    "preview_status_proof_source_matches_tag": true,
+    "depth_projection_proof_source_matches_tag": true,
+    "recovery_proof_source_matches_tag": true
+  },
+  "brightness_source_matches_current_tag": true,
+  "brightness_current_source_files": 40,
+  "unchanged_v036_source_files": 28,
+  "explicitly_changed_v036_sources": {
+    "app/build.gradle": {
+      "v0.4.36": "6dc8a5fcf9c0501ce764e915358e45c51c7d45b693b7d196df4e55610c136d2c",
+      "current": "ece40e31d09d86c25461fd297ce2d47e59663c4fb16537f189095f089f0c7e7b"
+    },
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java": {
+      "v0.4.36": "68e2268ca66c7d34da37193634f013f036af085fdc0c79c8c51dbcb7e8e86194",
+      "current": "3e9419082be8c7fc3a64a4c766ab65ea4eee90195f82ec421aeea955612b812a"
+    },
+    "app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryProbe.java": {
+      "v0.4.36": "f881792292cc3134a56d452e56d645be78947531ad607eaa43c9853c554c5bee",
+      "current": "18706c808b05cc721a0b4d4098340e8375ed3a3275f4a77e20736567d82ccf5d"
+    },
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java": {
+      "v0.4.36": "fcbf87a70d714a96ea6f26a61caaeddd82698f88511d85c5aa9d18ced398f560",
+      "current": "7383dd4e3a5182542ec299a2fcfae5579892a069900783a36454abcff37de2fb"
+    }
+  },
+  "unchanged_perception_and_lifecycle_files": 17,
+  "all_114_string_values_unchanged": true,
+  "brightness_workspace_and_timing_present": true,
+  "brightness_tests_reports_and_injected_fault_absent": true,
+  "frozen_baseline_rgb_loop_matches": true,
+  "historical_v036_chain": {
+    "recovery_source_file_count": 32,
+    "prior_unchanged_source_count": 16,
+    "explicitly_changed_prior_source_count": 8,
+    "prior_home_event_files_unchanged": 7,
+    "prior_preview_policy_files_unchanged": 3,
+    "prior_strings_unchanged": 111,
+    "added_recovery_strings": [
+      "recovery_compact_description",
+      "recovery_compact_stopped",
+      "recovery_compact_wait"
+    ],
+    "unchanged_camera_and_watchdog_methods": [
+      "private boolean needsWatchdog()",
+      "private void scheduleWatchdog()",
+      "private void startPreview()",
+      "private void fail(RecoveryGuide.Reason reason,String message)"
+    ]
+  },
+  "current_camera_watchdog_policy_validation": "needsWatchdog, scheduleWatchdog and fail bodies unchanged; startPreview matches after removing only readbackTiming.reset diagnostic line",
+  "workflow_attempt": 1,
+  "workflow_updated_at_utc": "2026-10-31T00:10:15Z",
+  "workflow_jobs": [
+    {
+      "id": 124376738504,
+      "name": "ui / layout (36)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41147755325,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ]
+    },
+    {
+      "id": 124376738760,
+      "name": "ui / layout (35)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41147755325,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ]
+    },
+    {
+      "id": 124379176250,
+      "name": "apk",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41147755325,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Check release tag and notes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Restore fixed signing key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Install Android SDK 36",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Check model",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Test and build arm64 debug APK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Verify APK signature matches restored key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Collect APK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Publish GitHub Release",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ]
+    }
+  ],
+  "local_jvm_tests": 243,
+  "local_lint_errors": 0,
+  "local_lint_warnings": 22
+}
