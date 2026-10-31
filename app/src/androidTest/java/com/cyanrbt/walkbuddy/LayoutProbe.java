@@ -76,8 +76,9 @@ final class LayoutProbe {
                 TextView waiting=root.findViewById(R.id.preview_cover);
                 PreviewChrome.title(title,PreviewStatus.Heading.STARTING);
                 for(int prompt:new int[]{R.string.preview_starting,R.string.preview_checking_image}) {
-                    waiting.setVisibility(View.VISIBLE);waiting.setText(prompt);measure(root,size[0],size[1]);textFits(waiting);
+                    waiting.setVisibility(View.VISIBLE);waiting.setText(prompt);measure(root,size[0],size[1]);
                     screenshot(root,new File(output,name+(prompt==R.string.preview_starting?"-starting-camera":"-starting-image")+".png"));
+                    textFits(waiting);
                 }
                 waiting.setVisibility(View.GONE);PreviewChrome.title(title,PreviewStatus.Heading.PREVIEW_ONLY);
                 CheckBox detection=root.findViewById(R.id.preview_recognition),sound=root.findViewById(R.id.preview_sound);

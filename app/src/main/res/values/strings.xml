@@ -42,7 +42,7 @@
     <string name="window_starting">启动中</string>
     <string name="window_idle">已停下</string>
     <string name="preview_starting">正在连接相机\n请稍候</string>
-    <string name="preview_checking_image">正在确认画面\n请对准明亮环境</string>
+    <string name="preview_checking_image">正在确认画面\n请对准亮处</string>
     <string name="preview_info_idle">实时画面还不可用</string>
     <string name="check_recognition">检测</string>
     <string name="check_sound">提示音</string>

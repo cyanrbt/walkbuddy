@@ -1,0 +1,177 @@
+{
+  "source_commit": "48378766fb6a951a57b4c6c9f910c2cdc84a642c",
+  "scope": "First candidate cloud terminal states and decoded job log excerpts. Only standard API35 archive locally downloaded/replayed in the linked proof. Other raw traces/archives not locally replayed.",
+  "reruns_requested": 0,
+  "runs": [
+    {
+      "id": 41188960741,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41188960741",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124501591214,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124501591306,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124501591354,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41188960725,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41188960725",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124501590945,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124501591167,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    {
+      "id": 41188960680,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41188960680",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124501591051,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124501591238,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    {
+      "id": 41188960647,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41188960647",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124501590952,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124501591193,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    }
+  ],
+  "job_log_evidence": [
+    {
+      "job": 124501591214,
+      "lines": [
+        "2026-10-31T09:33:53.1323104Z SURFACE_COPY_PARITY_PASS cases=32 pixels=6144; frozen producer, off-main request, exact ARGB and totals",
+        "2026-10-31T09:33:53.1324858Z SURFACE_PRODUCERS_PARITY_PASS camera_cases=2 egl_cases=2 pixels=768; frozen independent producers, exact ARGB and stable timestamps",
+        "2026-10-31T09:35:05.8304387Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机",
+        "2026-10-31T09:36:24.7732880Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:37:32.6050634Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true"
+      ]
+    },
+    {
+      "job": 124501591306,
+      "lines": [
+        "2026-10-31T09:33:51.4959788Z SURFACE_COPY_PARITY_PASS cases=32 pixels=6144; frozen producer, off-main request, exact ARGB and totals",
+        "2026-10-31T09:33:51.4961785Z SURFACE_PRODUCERS_PARITY_PASS camera_cases=2 egl_cases=2 pixels=768; frozen independent producers, exact ARGB and stable timestamps",
+        "2026-10-31T09:35:05.5120714Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机",
+        "2026-10-31T09:36:20.7454110Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:37:26.2401638Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true"
+      ]
+    },
+    {
+      "job": 124501590945,
+      "lines": [
+        "2026-10-31T09:34:56.3169086Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机",
+        "2026-10-31T09:36:12.8637167Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:37:18.3150546Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true"
+      ]
+    },
+    {
+      "job": 124501591051,
+      "lines": [
+        "2026-10-31T09:35:20.5465274Z | 1 | surface_reinstall_recovery | passed | complete | 2466 | 4 | 0 |",
+        "2026-10-31T09:35:20.5465789Z | 2 | recovery | not requested | complete | 2279 | 4 | 0 |",
+        "2026-10-31T09:35:20.5466403Z | 3 | recovery | not requested | complete | 2052 | 4 | 0 |",
+        "2026-10-31T09:35:58.0179405Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机",
+        "2026-10-31T09:37:12.8035128Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:38:18.9408023Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true"
+      ]
+    },
+    {
+      "job": 124501591238,
+      "lines": [
+        "2026-10-31T09:34:44.2202625Z | 1 | surface_reinstall_recovery | passed | complete | 2301 | 4 | 0 |",
+        "2026-10-31T09:34:44.2203354Z | 2 | recovery | not requested | complete | 2048 | 4 | 0 |",
+        "2026-10-31T09:34:44.2203731Z | 3 | recovery | not requested | complete | 2125 | 4 | 0 |",
+        "2026-10-31T09:35:15.7126739Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机",
+        "2026-10-31T09:36:26.0260817Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:37:29.1458199Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true"
+      ]
+    },
+    {
+      "job": 124501590952,
+      "lines": [
+        "2026-10-31T09:35:11.1718325Z | 1 | surface_reinstall_recovery | passed | complete | 2296 | 4 | 0 |",
+        "2026-10-31T09:35:11.1719213Z | 2 | recovery | not requested | complete | 2563 | 4 | 0 |",
+        "2026-10-31T09:35:11.1720067Z | 3 | recovery | not requested | complete | 2034 | 4 | 0 |",
+        "2026-10-31T09:35:47.8083796Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机",
+        "2026-10-31T09:37:03.2563814Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:38:09.2089702Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true"
+      ]
+    },
+    {
+      "job": 124501591193,
+      "lines": [
+        "2026-10-31T09:35:30.8899100Z | 1 | surface_reinstall_recovery | passed | complete | 2774 | 4 | 0 |",
+        "2026-10-31T09:35:30.8899584Z | 2 | recovery | not requested | complete | 2291 | 4 | 0 |",
+        "2026-10-31T09:35:30.8900003Z | 3 | recovery | not requested | complete | 2313 | 4 | 0 |",
+        "2026-10-31T09:36:07.5573189Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机",
+        "2026-10-31T09:37:20.6026905Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:38:25.1368299Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true"
+      ]
+    },
+    {
+      "job": 124501591167,
+      "lines": [
+        "2026-10-31T09:34:26.8594299Z LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机",
+        "2026-10-31T09:35:43.8756374Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+        "2026-10-31T09:36:48.8107310Z PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true"
+      ]
+    }
+  ],
+  "full_api35_proof": "preview-readiness-first-ui35-2026-10-31.json",
+  "interpretation": "1/9 jobs passed; all eight API35/36 jobs preserve the same actual waiting-text clipping failure. Held real image, controlled dark/error, and manual recovery checks passed in both normal PiP invocations for each API35/36 job. Four traced jobs' cloud summaries each reported three complete trials, four forced stops and zero unforced stops per trial. Fix layout before release; do not rerun unchanged source."
+}

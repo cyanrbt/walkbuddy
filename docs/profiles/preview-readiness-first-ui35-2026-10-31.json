@@ -1,0 +1,81 @@
+{
+  "source_commit": "48378766fb6a951a57b4c6c9f910c2cdc84a642c",
+  "run": 41188960725,
+  "job": 124501591167,
+  "artifact_id": 13038595258,
+  "bytes": 10177397,
+  "sha256": "1c5ece8d6c356a8a4f8c494e1952ab4a96d4f336914b975e76136180bd1f4f0e",
+  "full_zip_crc": "passed",
+  "report_replayed": {
+    "status": "checks_not_passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "failure",
+    "mode": "ui",
+    "probes": [
+      {
+        "name": "pip_recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "runtime",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "preview",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "overlay",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "layout",
+        "status": "failed",
+        "failures": [
+          "LAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机"
+        ]
+      },
+      {
+        "name": "home",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip-repeat",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "support",
+        "status": "passed",
+        "failures": []
+      }
+    ],
+    "observations": [],
+    "anrs": [],
+    "failure_time_focus": [],
+    "focused_external_anr_dialogs": []
+  },
+  "native_readiness_lines": [
+    "PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true",
+    "PREVIEW_READINESS_PASS cases=4 held_real_image=true covered_until_checked=true progress_after_check=true dark_and_error_stop_startup=true manual_recovery=true"
+  ],
+  "held_actual_image_evidence": "phase=STARTING captureAt=229274 displayAt=229276 cover=正在确认画面\n请对准明亮环境\nreleased_real_image=true live=true progress=true\n",
+  "layout_failure": "HAPTIC_EFFECT_PASS presets=2 fallback_patterns=2 parcel_roundtrips=4; no physical motor\nPASS 320x480-font100-day camera=320x173\nPASS 320x480-font100-night camera=320x173\nPASS 320x480-font150-day camera=320x164\nPASS 320x480-font150-night camera=320x164\nPASS 320x480-font200-day camera=320x151\nPASS 320x480-font200-night camera=320x151\nPASS 360x640-font100-day camera=360x269\nPASS 360x640-font100-night camera=360x269\nPASS 360x640-font150-day camera=360x260\nPASS 360x640-font150-night camera=360x260\nPASS 360x640-font200-day camera=360x247\nPASS 360x640-font200-night camera=360x247\nPASS 600x360-font100-day camera=360x169\nPASS 600x360-font100-night camera=360x169\nPASS 600x360-font150-day camera=352x153\nPASS 600x360-font150-night camera=352x153\nLAYOUT_PROBE_FAIL: java.lang.AssertionError: java.lang.AssertionError: Text vertically clipped: 正在连接相机\n请稍候\n",
+  "interpretation": "Only layout failed in this archive. Both real Camera2 held-image/dark/error/manual-recovery probes passed. Last completed layout was 600x360-font150-night; next 600x360-font200-day failed text-height assertion. No screenshot for the failed prompt was exported before the original assertion. Preserve this actual first failure; no rerun requested."
+}

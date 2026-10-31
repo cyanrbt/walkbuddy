@@ -1,0 +1,38 @@
+{
+  "version": "0.4.39",
+  "versionCode": 51,
+  "local_build": "BUILD SUCCESSFUL in 45s",
+  "tasks": "lintDebug assembleDebug assembleDebugAndroidTest -PuniversalApk --offline",
+  "unchanged_jvm_sources_match_previous_270_pass_record": true,
+  "source": [
+    {
+      "path": "app/src/main/res/layout/activity_preview.xml",
+      "bytes": 18153,
+      "sha256": "5db58c1f43d1a9209a64af0b0807978a1dcc1b753ad1032cb9a781e5fa6a5d61"
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "bytes": 10103,
+      "sha256": "e6b5c966fbe87bebafc954045a84c251791c00acd4e9cbd4afec9d05d258fa5c"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java",
+      "bytes": 38400,
+      "sha256": "2f2b2b75db401824b93bf68dbd0f4ca8c8c880fbe545a1b073dbba0b68d63e2a"
+    }
+  ],
+  "local_universal_debug_apks": [
+    {
+      "path": "app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 26263786,
+      "sha256": "f1d326e6eef296e0ed1925c03ba1b3bbbf23c257f06f35a7c555c013bd1838cf"
+    },
+    {
+      "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "bytes": 393229,
+      "sha256": "4a8b5e04805fd972188bc8e75937d90fc9a9d3029d9f5f2af69aaa87d8fbeb49"
+    }
+  ],
+  "workflow_actionlint": "passed",
+  "native_validation": "Pending new source push. Earlier clipping failure preserved."
+}
