@@ -1,0 +1,856 @@
+{
+  "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9",
+  "reports": [
+    {
+      "case": "surface36",
+      "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9",
+      "run": 41204399703,
+      "job": 124546427549,
+      "attempt": 1,
+      "artifact_id": 13043497472,
+      "artifact_bytes": 19424420,
+      "artifact_sha256": "fa00e00828dceab97b803120b2be479d943332c979708325831642b823866c57",
+      "all_zip_crc_checked": true,
+      "ui_replay": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "failed",
+            "failures": [
+              "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: recovery Camera2 LIVE; interactive=true keyguard=false; 画面已过期：不可用，请重新开启；提醒已停止; 画面已过期：不可用，请重新开启；提醒已停止"
+            ]
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [
+          {
+            "file": "cache/ui-probe/pip-recovery-failure-input.txt",
+            "focused_window": "displayId=0, name='5977b2f com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity'"
+          }
+        ],
+        "focused_external_anr_dialogs": []
+      },
+      "trace_members_streamed_sha256_only_no_local_sql": [],
+      "frozen_incident": {
+        "path": "cache/ui-probe/pip-recovery-failure-problem-info-3434-97901.txt",
+        "text": "WalkBuddy 问题信息\n版本：0.4.42 / 54\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：GENERAL\n提示：画面已过期：不可用，请重新开启\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：8；显示帧龄(ms)：1206；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：未取得；墙钟(ms)：未取得；CPU(ms)：未取得\n异步亮度检查：FINISHED；观测帧龄(ms)：1206\n亮度排队(ms)：32；请求墙钟(ms)：1133；调用与像素处理CPU(ms)：0；交付(ms)：16；结果码：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+      },
+      "interpretation": "Failure at initial Camera2 LIVE before PiP cycles/current-copy tests. Frozen capture age 8ms, display age 1206ms; brightness request wall 1133ms, queue 32ms, delivery 16ms. Existing 1200ms display freshness guard stopped preview. Association is not proof of brightness/scheduler root cause. No ANR recorded; failure focus is PreviewActivity. No guard relaxed.",
+      "inspected_failure_image": {
+        "path": "cache/ui-probe/pip-recovery-failure.png",
+        "bytes": 29356,
+        "sha256": "557962fe3a667054c53d6eda2c0a15e87bcd68ac56111bc845168dab3e1e983d"
+      },
+      "failure_image_visually_inspected": true
+    },
+    {
+      "case": "trace35",
+      "source_commit": "8a62a33de86fe239f014097b3deac8d5b4ad74f9",
+      "run": 41204399775,
+      "job": 124546427736,
+      "attempt": 1,
+      "artifact_id": 13043803266,
+      "artifact_bytes": 78806043,
+      "artifact_sha256": "71490caa678dd201c692a36817be0e26eedd38c702985a33a8c14f8ac11b5044",
+      "all_zip_crc_checked": true,
+      "ui_replay": {
+        "status": "checks_not_passed",
+        "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+        "build_result": "success",
+        "emulator_result": "failure",
+        "mode": "ui",
+        "probes": [
+          {
+            "name": "pip_recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "runtime",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "preview",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "overlay",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "layout",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "home",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "recovery",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "pip-repeat",
+            "status": "failed",
+            "failures": [
+              "PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: visible SystemUI 关闭提示音 last=null; 实时画面"
+            ]
+          },
+          {
+            "name": "support",
+            "status": "passed",
+            "failures": []
+          }
+        ],
+        "observations": [],
+        "anrs": [],
+        "failure_time_focus": [
+          {
+            "file": "cache/ui-probe/pip-failure-input.txt",
+            "focused_window": "displayId=0, name='d5b800 com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.MainActivity'"
+          }
+        ],
+        "focused_external_anr_dialogs": []
+      },
+      "trace_members_streamed_sha256_only_no_local_sql": [
+        {
+          "path": "preview-trace/trial-1/trace.pftrace",
+          "bytes": 84428559,
+          "sha256": "28b48627d3f5a61acd7540b6be1f0edd78acbd12a9eb9eb8ce524a96fd5b9933"
+        },
+        {
+          "path": "preview-trace/trial-2/trace.pftrace",
+          "bytes": 45837638,
+          "sha256": "ffb1bf268f86a1080c3f8fc1268a86aee01f686f140b9df3e9c666b43a9a3fc5"
+        },
+        {
+          "path": "preview-trace/trial-3/trace.pftrace",
+          "bytes": 40685533,
+          "sha256": "372a345ecf5b2427a11ad5e456aa1dc1140390f313016b67154ed0a676773253"
+        }
+      ],
+      "failed_sound_file": "cache/ui-probe/pip-sound-6153-315791-before-cleanup.json",
+      "before_cleanup_evidence": {
+        "outcome": "failed",
+        "pid": 6153,
+        "started_ms": 315791,
+        "failure": "java.lang.AssertionError: Timed out: visible SystemUI 关闭提示音 last=null",
+        "before_cleanup": {
+          "stage": "before_cleanup",
+          "elapsed_ms": 331135,
+          "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+          "generation": 21,
+          "revision": 13,
+          "visit": 9,
+          "submitted_revision": 13,
+          "submitted_visit": 9,
+          "phase": "LIVE",
+          "pip": true,
+          "recognition": true,
+          "enabled": true,
+          "checked": true,
+          "capture_age_ms": 38,
+          "display_age_ms": 6,
+          "analysis_age_ms": 262,
+          "active_tone": false,
+          "submitted_actions": [
+            {
+              "title": "停止",
+              "description": "停止",
+              "enabled": true
+            },
+            {
+              "title": "关闭检测",
+              "description": "关闭检测、声音和振动，保留实时画面",
+              "enabled": true
+            },
+            {
+              "title": "关闭提示音",
+              "description": "关闭提示音，检测继续；振动和系统朗读各自控制",
+              "enabled": true
+            }
+          ]
+        },
+        "states": [
+          {
+            "stage": "initial",
+            "elapsed_ms": 315793,
+            "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+            "generation": 21,
+            "revision": 10,
+            "visit": 9,
+            "submitted_revision": 10,
+            "submitted_visit": 9,
+            "phase": "LIVE",
+            "pip": true,
+            "recognition": true,
+            "enabled": true,
+            "checked": false,
+            "capture_age_ms": 46,
+            "display_age_ms": 14,
+            "analysis_age_ms": 177,
+            "active_tone": false,
+            "submitted_actions": [
+              {
+                "title": "停止",
+                "description": "停止",
+                "enabled": true
+              },
+              {
+                "title": "关闭检测",
+                "description": "关闭检测、声音和振动，保留实时画面",
+                "enabled": true
+              },
+              {
+                "title": "打开提示音",
+                "description": "打开提示音，检测继续；振动和系统朗读各自控制",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "stage": "invalid_commands_sent",
+            "elapsed_ms": 315794,
+            "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+            "generation": 21,
+            "revision": 10,
+            "visit": 9,
+            "submitted_revision": 10,
+            "submitted_visit": 9,
+            "phase": "LIVE",
+            "pip": true,
+            "recognition": true,
+            "enabled": true,
+            "checked": false,
+            "capture_age_ms": 47,
+            "display_age_ms": 15,
+            "analysis_age_ms": 178,
+            "active_tone": false,
+            "submitted_actions": [
+              {
+                "title": "停止",
+                "description": "停止",
+                "enabled": true
+              },
+              {
+                "title": "关闭检测",
+                "description": "关闭检测、声音和振动，保留实时画面",
+                "enabled": true
+              },
+              {
+                "title": "打开提示音",
+                "description": "打开提示音，检测继续；振动和系统朗读各自控制",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "stage": "before_touch_false",
+            "elapsed_ms": 316698,
+            "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+            "generation": 21,
+            "revision": 10,
+            "visit": 9,
+            "submitted_revision": 10,
+            "submitted_visit": 9,
+            "phase": "LIVE",
+            "pip": true,
+            "recognition": true,
+            "enabled": true,
+            "checked": false,
+            "capture_age_ms": 30,
+            "display_age_ms": 14,
+            "analysis_age_ms": 258,
+            "active_tone": false,
+            "submitted_actions": [
+              {
+                "title": "停止",
+                "description": "停止",
+                "enabled": true
+              },
+              {
+                "title": "关闭检测",
+                "description": "关闭检测、声音和振动，保留实时画面",
+                "enabled": true
+              },
+              {
+                "title": "打开提示音",
+                "description": "打开提示音，检测继续；振动和系统朗读各自控制",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "stage": "first_enable_observed",
+            "elapsed_ms": 316839,
+            "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+            "generation": 21,
+            "revision": 11,
+            "visit": 9,
+            "submitted_revision": 11,
+            "submitted_visit": 9,
+            "phase": "LIVE",
+            "pip": true,
+            "recognition": true,
+            "enabled": true,
+            "checked": true,
+            "capture_age_ms": 39,
+            "display_age_ms": 9,
+            "analysis_age_ms": 399,
+            "active_tone": true,
+            "submitted_actions": [
+              {
+                "title": "停止",
+                "description": "停止",
+                "enabled": true
+              },
+              {
+                "title": "关闭检测",
+                "description": "关闭检测、声音和振动，保留实时画面",
+                "enabled": true
+              },
+              {
+                "title": "关闭提示音",
+                "description": "关闭提示音，检测继续；振动和系统朗读各自控制",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "stage": "before_touch_true",
+            "elapsed_ms": 319714,
+            "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+            "generation": 21,
+            "revision": 11,
+            "visit": 9,
+            "submitted_revision": 11,
+            "submitted_visit": 9,
+            "phase": "LIVE",
+            "pip": true,
+            "recognition": true,
+            "enabled": true,
+            "checked": true,
+            "capture_age_ms": 33,
+            "display_age_ms": 1,
+            "analysis_age_ms": 122,
+            "active_tone": false,
+            "submitted_actions": [
+              {
+                "title": "停止",
+                "description": "停止",
+                "enabled": true
+              },
+              {
+                "title": "关闭检测",
+                "description": "关闭检测、声音和振动，保留实时画面",
+                "enabled": true
+              },
+              {
+                "title": "关闭提示音",
+                "description": "关闭提示音，检测继续；振动和系统朗读各自控制",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "stage": "first_mute_observed",
+            "elapsed_ms": 319816,
+            "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+            "generation": 21,
+            "revision": 12,
+            "visit": 9,
+            "submitted_revision": 12,
+            "submitted_visit": 9,
+            "phase": "LIVE",
+            "pip": true,
+            "recognition": true,
+            "enabled": true,
+            "checked": false,
+            "capture_age_ms": 32,
+            "display_age_ms": 1,
+            "analysis_age_ms": 224,
+            "active_tone": false,
+            "submitted_actions": [
+              {
+                "title": "停止",
+                "description": "停止",
+                "enabled": true
+              },
+              {
+                "title": "关闭检测",
+                "description": "关闭检测、声音和振动，保留实时画面",
+                "enabled": true
+              },
+              {
+                "title": "打开提示音",
+                "description": "打开提示音，检测继续；振动和系统朗读各自控制",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "stage": "before_touch_false",
+            "elapsed_ms": 322659,
+            "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+            "generation": 21,
+            "revision": 12,
+            "visit": 9,
+            "submitted_revision": 12,
+            "submitted_visit": 9,
+            "phase": "LIVE",
+            "pip": true,
+            "recognition": true,
+            "enabled": true,
+            "checked": false,
+            "capture_age_ms": 44,
+            "display_age_ms": 9,
+            "analysis_age_ms": 162,
+            "active_tone": false,
+            "submitted_actions": [
+              {
+                "title": "停止",
+                "description": "停止",
+                "enabled": true
+              },
+              {
+                "title": "关闭检测",
+                "description": "关闭检测、声音和振动，保留实时画面",
+                "enabled": true
+              },
+              {
+                "title": "打开提示音",
+                "description": "打开提示音，检测继续；振动和系统朗读各自控制",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "stage": "second_enable_observed",
+            "elapsed_ms": 322767,
+            "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+            "generation": 21,
+            "revision": 13,
+            "visit": 9,
+            "submitted_revision": 13,
+            "submitted_visit": 9,
+            "phase": "LIVE",
+            "pip": true,
+            "recognition": true,
+            "enabled": true,
+            "checked": true,
+            "capture_age_ms": 53,
+            "display_age_ms": 1,
+            "analysis_age_ms": 270,
+            "active_tone": true,
+            "submitted_actions": [
+              {
+                "title": "停止",
+                "description": "停止",
+                "enabled": true
+              },
+              {
+                "title": "关闭检测",
+                "description": "关闭检测、声音和振动，保留实时画面",
+                "enabled": true
+              },
+              {
+                "title": "关闭提示音",
+                "description": "关闭提示音，检测继续；振动和系统朗读各自控制",
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "stage": "before_cleanup",
+            "elapsed_ms": 331135,
+            "owner": "0c9f7f50-9445-4e9b-ac33-4789a71c28a2",
+            "generation": 21,
+            "revision": 13,
+            "visit": 9,
+            "submitted_revision": 13,
+            "submitted_visit": 9,
+            "phase": "LIVE",
+            "pip": true,
+            "recognition": true,
+            "enabled": true,
+            "checked": true,
+            "capture_age_ms": 38,
+            "display_age_ms": 6,
+            "analysis_age_ms": 262,
+            "active_tone": false,
+            "submitted_actions": [
+              {
+                "title": "停止",
+                "description": "停止",
+                "enabled": true
+              },
+              {
+                "title": "关闭检测",
+                "description": "关闭检测、声音和振动，保留实时画面",
+                "enabled": true
+              },
+              {
+                "title": "关闭提示音",
+                "description": "关闭提示音，检测继续；振动和系统朗读各自控制",
+                "enabled": true
+              }
+            ]
+          }
+        ],
+        "touches": [
+          {
+            "title": "打开提示音",
+            "requested": true,
+            "target": "[255,576][303,624]",
+            "windows": [
+              {
+                "id": 152,
+                "type": 3,
+                "active": false,
+                "focused": false,
+                "pip": false,
+                "bounds": "[0,0][320,24]",
+                "package": "com.android.systemui",
+                "targets": []
+              },
+              {
+                "id": 168,
+                "type": 3,
+                "active": false,
+                "focused": false,
+                "pip": true,
+                "bounds": "[160,432][304,624]",
+                "package": "com.android.systemui",
+                "targets": [
+                  {
+                    "title": "打开提示音",
+                    "bounds": "[255,576][303,624]"
+                  }
+                ]
+              },
+              {
+                "id": 157,
+                "type": 1,
+                "active": false,
+                "focused": false,
+                "pip": true,
+                "bounds": "[160,432][304,624]",
+                "package": "com.cyanrbt.walkbuddy",
+                "targets": []
+              },
+              {
+                "id": 156,
+                "type": 1,
+                "active": true,
+                "focused": true,
+                "pip": false,
+                "bounds": "[0,0][320,640]",
+                "package": "com.cyanrbt.walkbuddy",
+                "targets": []
+              }
+            ],
+            "down_injected": true,
+            "down_uptime_ms": 316773,
+            "up_injected": true,
+            "up_uptime_ms": 316826
+          },
+          {
+            "title": "关闭提示音",
+            "requested": false,
+            "target": "[255,576][303,624]",
+            "windows": [
+              {
+                "id": 152,
+                "type": 3,
+                "active": false,
+                "focused": false,
+                "pip": false,
+                "bounds": "[0,0][320,24]",
+                "package": "com.android.systemui",
+                "targets": []
+              },
+              {
+                "id": 168,
+                "type": 3,
+                "active": false,
+                "focused": false,
+                "pip": true,
+                "bounds": "[160,432][304,624]",
+                "package": "com.android.systemui",
+                "targets": [
+                  {
+                    "title": "关闭提示音",
+                    "bounds": "[255,576][303,624]"
+                  }
+                ]
+              },
+              {
+                "id": 157,
+                "type": 1,
+                "active": false,
+                "focused": false,
+                "pip": true,
+                "bounds": "[160,432][304,624]",
+                "package": "com.cyanrbt.walkbuddy",
+                "targets": []
+              },
+              {
+                "id": 156,
+                "type": 1,
+                "active": true,
+                "focused": true,
+                "pip": false,
+                "bounds": "[0,0][320,640]",
+                "package": "com.cyanrbt.walkbuddy",
+                "targets": []
+              }
+            ],
+            "down_injected": true,
+            "down_uptime_ms": 319725,
+            "up_injected": true,
+            "up_uptime_ms": 319775
+          },
+          {
+            "title": "打开提示音",
+            "requested": true,
+            "target": "[255,576][303,624]",
+            "windows": [
+              {
+                "id": 152,
+                "type": 3,
+                "active": false,
+                "focused": false,
+                "pip": false,
+                "bounds": "[0,0][320,24]",
+                "package": "com.android.systemui",
+                "targets": []
+              },
+              {
+                "id": 168,
+                "type": 3,
+                "active": false,
+                "focused": false,
+                "pip": true,
+                "bounds": "[160,432][304,624]",
+                "package": "com.android.systemui",
+                "targets": [
+                  {
+                    "title": "打开提示音",
+                    "bounds": "[255,576][303,624]"
+                  }
+                ]
+              },
+              {
+                "id": 157,
+                "type": 1,
+                "active": false,
+                "focused": false,
+                "pip": true,
+                "bounds": "[160,432][304,624]",
+                "package": "com.cyanrbt.walkbuddy",
+                "targets": []
+              },
+              {
+                "id": 156,
+                "type": 1,
+                "active": true,
+                "focused": true,
+                "pip": false,
+                "bounds": "[0,0][320,640]",
+                "package": "com.cyanrbt.walkbuddy",
+                "targets": []
+              }
+            ],
+            "down_injected": true,
+            "down_uptime_ms": 322672,
+            "up_injected": true,
+            "up_uptime_ms": 322724
+          }
+        ],
+        "scope": "Emulator snapshot before audio cleanup. Input injection acceptance alone does not prove command receipt. No physical audibility claim.",
+        "commands": [
+          {
+            "elapsed_ms": 315793,
+            "result": "rejected_owner",
+            "raw": "command elapsedMs=315793 owner=retired-owner generation=21 revision=10 visit=9 requested=true before=false result=rejected_owner current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=10 visit=9 pip=true phase=LIVE detection=true enabled=true checked=false}"
+          },
+          {
+            "elapsed_ms": 315793,
+            "result": "rejected_generation",
+            "raw": "command elapsedMs=315793 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=20 revision=10 visit=9 requested=true before=false result=rejected_generation current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=10 visit=9 pip=true phase=LIVE detection=true enabled=true checked=false}"
+          },
+          {
+            "elapsed_ms": 315793,
+            "result": "rejected_revision",
+            "raw": "command elapsedMs=315793 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=9 visit=9 requested=true before=false result=rejected_revision current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=10 visit=9 pip=true phase=LIVE detection=true enabled=true checked=false}"
+          },
+          {
+            "elapsed_ms": 315794,
+            "result": "rejected_visit",
+            "raw": "command elapsedMs=315794 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=10 visit=8 requested=true before=false result=rejected_visit current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=10 visit=9 pip=true phase=LIVE detection=true enabled=true checked=false}"
+          },
+          {
+            "elapsed_ms": 315794,
+            "result": "rejected_missing_enabled",
+            "raw": "command elapsedMs=315794 result=rejected_missing_enabled"
+          },
+          {
+            "elapsed_ms": 315794,
+            "result": "rejected_revision",
+            "raw": "command elapsedMs=315794 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=-1 visit=9 requested=true before=false result=rejected_revision current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=10 visit=9 pip=true phase=LIVE detection=true enabled=true checked=false}"
+          },
+          {
+            "elapsed_ms": 316839,
+            "result": "applied",
+            "raw": "command elapsedMs=316839 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=10 visit=9 requested=true before=false result=applied current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=11 visit=9 pip=true phase=LIVE detection=true enabled=true checked=true}"
+          },
+          {
+            "elapsed_ms": 319789,
+            "result": "applied",
+            "raw": "command elapsedMs=319789 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=11 visit=9 requested=false before=true result=applied current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=12 visit=9 pip=true phase=LIVE detection=true enabled=true checked=false}"
+          },
+          {
+            "elapsed_ms": 319817,
+            "result": "rejected_revision",
+            "raw": "command elapsedMs=319817 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=10 visit=9 requested=true before=false result=rejected_revision current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=12 visit=9 pip=true phase=LIVE detection=true enabled=true checked=false}"
+          },
+          {
+            "elapsed_ms": 319819,
+            "result": "rejected_revision",
+            "raw": "command elapsedMs=319819 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=11 visit=9 requested=false before=false result=rejected_revision current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=12 visit=9 pip=true phase=LIVE detection=true enabled=true checked=false}"
+          },
+          {
+            "elapsed_ms": 322741,
+            "result": "applied",
+            "raw": "command elapsedMs=322741 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=12 visit=9 requested=true before=false result=applied current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=13 visit=9 pip=true phase=LIVE detection=true enabled=true checked=true}"
+          },
+          {
+            "elapsed_ms": 322768,
+            "result": "rejected_revision",
+            "raw": "command elapsedMs=322768 owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=11 visit=9 requested=false before=true result=rejected_revision current={owner=0c9f7f50-9445-4e9b-ac33-4789a71c28a2 generation=21 revision=13 visit=9 pip=true phase=LIVE detection=true enabled=true checked=true}"
+          }
+        ],
+        "windows": [
+          {
+            "id": 152,
+            "type": 3,
+            "active": false,
+            "focused": false,
+            "pip": false,
+            "bounds": "[0,0][320,24]",
+            "package": "com.android.systemui",
+            "targets": []
+          },
+          {
+            "id": 157,
+            "type": 1,
+            "active": false,
+            "focused": false,
+            "pip": true,
+            "bounds": "[188,295][304,449]",
+            "package": "com.cyanrbt.walkbuddy",
+            "targets": []
+          },
+          {
+            "id": 156,
+            "type": 1,
+            "active": true,
+            "focused": true,
+            "pip": false,
+            "bounds": "[0,0][320,640]",
+            "package": "com.cyanrbt.walkbuddy",
+            "targets": []
+          }
+        ]
+      },
+      "interpretation": "Fourth SystemUI menu-open lookup timed out before the fourth target touch: only three native action touches and 12 sound-command records. App still LIVE/PiP, detection enabled, sound checked, revision13/visit9 submitted, capture38/display6/analysis262ms; close-tone action submitted. Four OPEN records use [188,470–304,624], final PiP window [188,295–304,449], no SystemUI PiP menu window. Movement/menu absence cause unknown. Similar stage to v0.4.41 does not prove identical root cause or explain older mute-confirmation timeout.",
+      "inspected_failure_image": {
+        "path": "cache/ui-probe/pip-sound-6153-315791-before-cleanup.png",
+        "bytes": 39725,
+        "sha256": "8127f105dd9fb41043884057258b2cb3b252e43e739bc4515c69fc0e94c02aad"
+      },
+      "menu_open_records": [
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)"
+      ],
+      "failure_image_visually_inspected": true
+    }
+  ],
+  "scope": "Original failed artifacts fully downloaded and server size/SHA/ZIP CRC checked; ten report replay matches each. Trace members streamed/hashed, not new local Perfetto SQL replay. Original attempt failures remain failures; later reruns cannot establish fixes. Emulator evidence only, no physical acceptance.",
+  "reruns_requested": [
+    {
+      "original_job": 124546427549,
+      "run": 41204399703,
+      "count": 1
+    },
+    {
+      "original_job": 124546427736,
+      "run": 41204399775,
+      "count": 1
+    }
+  ]
+}
