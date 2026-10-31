@@ -1,0 +1,412 @@
+{
+  "tag": "v0.4.41",
+  "source_commit": "9f6fef0a94a93d3345a72464be7adc349c46e9a0",
+  "validated_candidate_commit": "c55eccda2b87152debebd91c68e14507b9d52a49",
+  "run": {
+    "id": 41201310263,
+    "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41201310263",
+    "status": "completed",
+    "conclusion": "success",
+    "attempt": 1,
+    "created_at": "2026-10-31T12:29:09Z",
+    "updated_at": "2026-10-31T12:38:08Z"
+  },
+  "jobs": [
+    {
+      "id": 124537507917,
+      "name": "ui / layout (35)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41201310263/job/124537507917",
+      "stop_ownership_pass_count": 2,
+      "sound_diagnostic_pass_count": 2,
+      "log_evidence": [
+        "BUILD SUCCESSFUL in 54s",
+        "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Prepare pinned system trace analyzer",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 9
+        },
+        {
+          "name": "Free hosted runner storage after compilation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Record and bound emulator CPU capacity",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Summarize preview trace evidence",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 14
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ]
+    },
+    {
+      "id": 124537508822,
+      "name": "ui / layout (36)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41201310263/job/124537508822",
+      "stop_ownership_pass_count": 2,
+      "sound_diagnostic_pass_count": 2,
+      "log_evidence": [
+        "BUILD SUCCESSFUL in 35s",
+        "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+        "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Test CI report interpretation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install build SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Create disposable test signing key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Build emulator test APKs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Prepare pinned system trace analyzer",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 9
+        },
+        {
+          "name": "Free hosted runner storage after compilation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Enable KVM",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Record and bound emulator CPU capacity",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run Android UI and virtual camera checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Summarize preview trace evidence",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 14
+        },
+        {
+          "name": "Summarize build, probes and system evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Upload layout evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        }
+      ]
+    },
+    {
+      "id": 124539073050,
+      "name": "apk",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41201310263/job/124539073050",
+      "stop_ownership_pass_count": 0,
+      "sound_diagnostic_pass_count": 0,
+      "log_evidence": [
+        "BUILD SUCCESSFUL in 1m 9s"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Check release tag and notes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Restore fixed signing key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run android-actions/setup-android@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Install Android SDK 36",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Check model",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Test and build arm64 debug APK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Verify APK signature matches restored key",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Collect APK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Publish GitHub Release",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ]
+    }
+  ],
+  "release": {
+    "id": 429928780,
+    "url": "https://github.com/cyanrbt/walkbuddy/releases/tag/v0.4.41",
+    "tag_name": "v0.4.41",
+    "draft": false,
+    "published_at": "2026-10-31T12:38:04Z",
+    "assets": [
+      {
+        "id": 695352537,
+        "name": "Walk-Buddy-v0.4.41-arm64-debug.apk",
+        "size": 10000447,
+        "digest": "sha256:ea3ee5703ff20854fd5961df96584ca7d3c334079cdaa3f72c1396b4473e2153",
+        "browser_download_url": "https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.41/Walk-Buddy-v0.4.41-arm64-debug.apk",
+        "state": "uploaded"
+      }
+    ]
+  },
+  "local_jvm_tests": 273,
+  "apk_validation": "apk-v0.4.41.json",
+  "candidate_full_ui_replay": "pip-stop-owner-native-2026-10-31.json",
+  "candidate_final_status": "pip-stop-owner-final-status-2026-10-31.json",
+  "original_failure": "pip-stop-owner-menu-failure-2026-10-31.json",
+  "scope": "All three first-attempt formal terminal results and original job logs checked. Each API35/36 log contains two eight-case stop ownership passes and two sound diagnostic/control passes. Candidate UI ZIPs fully verified/replayed with 32 stop cases and selected controlled-failure image inspected. Formal UI ZIPs not downloaded/replayed. Published ARM64 APK independently downloaded and checked for version/package/fixed certificate/model/source invariants and absence of test probes.",
+  "unresolved": "Candidate first run had eight successes and one sound menu-opening failure; exactly one same-source failed-job rerun passed. Frozen original failure and movement/menu cause remain preserved and unresolved. No root-cause fix claim for it, earlier second-mute timeout or frame expiration; no physical install, audibility, real AR, TalkBack, FPS/power acceptance."
+}

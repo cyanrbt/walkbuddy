@@ -1,0 +1,78 @@
+{
+  "source_commit": "c55eccda2b87152debebd91c68e14507b9d52a49",
+  "runs": [
+    {
+      "id": 41199483406,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41199483406",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source_commit": "c55eccda2b87152debebd91c68e14507b9d52a49"
+    },
+    {
+      "id": 41199483116,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41199483116",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source_commit": "c55eccda2b87152debebd91c68e14507b9d52a49"
+    },
+    {
+      "id": 41199483112,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41199483112",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "source_commit": "c55eccda2b87152debebd91c68e14507b9d52a49"
+    },
+    {
+      "id": 41199483102,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41199483102",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 2,
+      "source_commit": "c55eccda2b87152debebd91c68e14507b9d52a49"
+    }
+  ],
+  "first_attempt": "pip-stop-owner-first-status-2026-10-31.json",
+  "first_failure": "pip-stop-owner-menu-failure-2026-10-31.json",
+  "full_normal_ui_replay": "pip-stop-owner-native-2026-10-31.json",
+  "single_rerun": {
+    "original_job": 124532261583,
+    "requested_count": 1,
+    "executed_job": 124537487574,
+    "jobs": [
+      {
+        "id": 124537487574,
+        "name": "trace / layout (35)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T12:29:12Z",
+        "completed_at": "2026-10-31T12:36:33Z"
+      },
+      {
+        "id": 124537490177,
+        "name": "trace / layout (36)",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T12:04:31Z",
+        "completed_at": "2026-10-31T12:11:57Z"
+      }
+    ],
+    "log_evidence": [
+      "| 1 | surface_reinstall_recovery | passed | complete | 2255 | 4 | 0 |",
+      "| 2 | recovery | not requested | complete | 2157 | 4 | 0 |",
+      "| 3 | recovery | not requested | complete | 2210 | 4 | 0 |",
+      "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+      "PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true",
+      "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+      "PIP_STOP_OWNERSHIP_PASS cases=8 fullscreen_ignored=true old_visit_ignored=true old_observation_ignored=true old_activity_ignored=true legacy_ignored=true owner_only_distinct=true failed_pip_stoppable=true advancing_frames=true"
+    ],
+    "scope": "Only API35 re-executed, 12:29:12–12:36:33 UTC; API36 retains original 12:04:31–12:11:57 execution. Terminal results and original retry log checked; retry archive/raw trace not downloaded or locally SQL-replayed."
+  },
+  "interpretation": "Eight original first-pass jobs and exactly one same-source failed-job rerun success. Original fourth menu-opening failure and frozen state remain preserved; successful repetition does not establish cause or repair of PiP movement/menu nonappearance or older second-mute confirmation timeout. No physical-device acceptance."
+}
