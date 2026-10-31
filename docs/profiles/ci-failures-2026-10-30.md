@@ -1,5 +1,13 @@
 # 2026-10-30 Actions 失败原因核对
 
+本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”“最新”“未发布”等措辞均对应各段记录时的状态；当前结果先看最上方核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
+
+## Surface 前序采证修订（应用仍为已发布 v0.4.38）
+
+源码 `1b52177` 的[普通 UI 41178081273](https://github.com/cyanrbt/walkbuddy/actions/runs/41178081273)和[系统轨迹 41178081292](https://github.com/cyanrbt/walkbuddy/actions/runs/41178081292)均首次终态成功，四个 Android 作业成功。51 项工具检查通过，四份完整附件与六条原始轨迹实际核验重放；系统轨迹第一轮现包含相机/像素专项及原有两次 APK 安装，再执行恢复。原采证首轮 `346e13e` 漏相机授权而失败，已补齐并保留两套原生权限错误。应用源码与发布版本不变，[完整本轮验收](surface-startup-trace-2026-10-31.md)保留全部来源。
+
+此前 `2b71a39` 的首页失焦已核对原图、当前输入焦点与同设备事件顺序：Launcher 无响应弹窗覆盖首页，其 ANR 早于应用测试进程启动；不能归因于之后的相机专项，也不解释另一次 1436/1420ms 画面过期。新完整场景有一个 1134ms 首请求，仍需检查其中的原生/回调等待，不称历史停顿根因解决。
+
 ## v0.4.38 正式发布与独立失败
 
 [正式标签 41172338591](https://github.com/cyanrbt/walkbuddy/actions/runs/41172338591) attempt 1 的 Android 15、16 与 APK 三作业均成功，实际 [v0.4.38 APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.38/Walk-Buddy-v0.4.38-arm64-debug.apk) 已完整下载核对版本 0.4.38 / 50、原固定签名、模型与摘要；两份正式 UI 附件核验重放通过。[正式证据](brightness-preview-budget-2026-10-31.md#正式标签与开发复验分别核对)保留。
@@ -34,7 +42,6 @@ main `3184e10` 的普通 UI 首次成功，系统轨迹 API 36 则在编译成�
 修订后 [41154316569](https://github.com/cyanrbt/walkbuddy/actions/runs/41154316569) 已首次成功，旧红叉保留。最新 [v0.4.37 发布 41147755325](https://github.com/cyanrbt/walkbuddy/actions/runs/41147755325) 的 Android 15、16 与 APK 三个作业均成功，Release 再次确认存在 9,980,497 字节的 [APK](https://github.com/cyanrbt/walkbuddy/releases/download/v0.4.37/Walk-Buddy-v0.4.37-arm64-debug.apk)，摘要与此前实际下载核验相同。未因此另发重复版本或覆盖历史标签；原来偶发 1246ms 停顿根因仍未确定，后续优化需独立验收。
 
 
-本文件按历次核对保留 Actions 失败证据，下面的历史版本和“本次”均对应各段记录时的状态；当前结果先看最新核对。编译、模拟器检查、APK 发布与实体设备验收分别记录。
 
 ## 预览系统诊断工具核对（应用仍为 v0.4.37）
 

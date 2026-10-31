@@ -1,0 +1,58 @@
+{
+  "source_commit": "1b5217706b5a0fd0d7ee755ed7cb6d0cd7eaeff3",
+  "local_tool_tests": {
+    "tests": 51,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 8.701
+  },
+  "runs": [
+    {
+      "id": 41178081292,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41178081292",
+      "sha": "1b5217706b5a0fd0d7ee755ed7cb6d0cd7eaeff3",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124469681499,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124469681763,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41178081273,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41178081273",
+      "sha": "1b5217706b5a0fd0d7ee755ed7cb6d0cd7eaeff3",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124469681563,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124469681634,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "production_unchanged_from": "v0.4.38",
+  "new_apk_release": false,
+  "unresolved": "Original 1436/1420ms frame expiry; new first request 1134ms includes 1015.005ms return-to-callback wait; not a root-cause or device-performance claim"
+}

@@ -58,15 +58,13 @@
 
 本轮在实际画面更新时，将 16×12 亮度复制与求和投递专用线程；默认仅预览不再额外排队主线程模型读回任务。整个进程最多一个未结束复制，旧 View 回调和停止后的结果不能影响新观察，缓冲待实际复制结束再释放。问题信息单独保存亮度等待、复制和交付阶段。超过 1000ms 的旧观测不启动新请求；新的异步等待从最早到期帧起最多 1200ms，采集/显示与模型的原有截止保持，错误或超时仍需主动重新开启。[本轮策略、原始失败与完整验收](docs/profiles/brightness-preview-budget-2026-10-31.md)分别记录，不宣称历史停顿根因解决或实体帧率、耗电改善。真实设备、TalkBack、AR 与道路仍待验收。
 
-Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。最新诊断补充 InputDispatcher 当前焦点、同一停止文件的连接恢复和 INFO 后备记录，[验证与边界](docs/profiles/ci-input-focus-2026-10-31.md)保留首轮失败与复验结果。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
+Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示普通模拟器检查，`Surface copy experiment` 和 `Preview system trace` 为开发专项。正式标签仍须通过两套 Android 检查后才能生成 APK；专项的红叉不等同于 APK 编译失败，正式发布成功也不等同于全部专项故障已解决。
 
-为定位专项后的画面停顿，第一轮系统轨迹增加原有 Surface 专项及随后两次 APK 重新安装，再执行恢复；后两轮保留原恢复场景。首轮发现采证遗漏相机授权准备，现已补齐，51 项工具测试通过，修订后的云端结果待取得；这次只完善采证，不改变应用时效或已发布版本。[场景、失败保留和验证范围](docs/profiles/surface-startup-trace-2026-10-31.md)。
+目前仍保留一次采集/显示龄 1436/1420ms 的画面过期，根因待定位。另一次首页失焦已用原图、当前输入焦点与同设备时间线确认：Pixel Launcher 的无响应弹窗覆盖首页，且其 ANR 早于应用测试进程启动；这不解释前一次画面停顿或后续关屏。[本轮原始证据与范围](docs/profiles/surface-startup-trace-2026-10-31.md)。
 
-最新系统轨迹红叉发生在编译成功后：托管运行机空间不足，模拟器未启动。新增编译后的限定缓存清理和存储记录，43 项工具测试通过；修订后的[普通检查](https://github.com/cyanrbt/walkbuddy/actions/runs/41167440416)与[系统轨迹](https://github.com/cyanrbt/walkbuddy/actions/runs/41167440427)均首次成功，四份原始附件和六条轨迹已核验重放。实验分支另有 Android 8 Camera2 停止等待失败，尚未发布。[本次核对](docs/profiles/ci-storage-2026-10-31.md)与正式 APK 状态分开记录。
+为定位专项后的画面停顿，第一轮系统轨迹增加原有 Surface 专项及随后两次 APK 重新安装，再执行恢复；后两轮保留原恢复场景。首轮采证遗漏的相机授权准备已补齐，51 项工具测试通过；修订后的普通 UI 与系统轨迹均首次成功，四份附件和六条原始轨迹已实际核验重放。仍有一次首请求耗时 1134ms 的近截止样本，不能据成功称旧停顿已修复。这次只完善采证，不改变应用时效或已发布版本。[场景、失败保留和完整验证](docs/profiles/surface-startup-trace-2026-10-31.md)。
 
-早期异步候选曾因请求截止失败撤回，原[失败与撤回记录](docs/profiles/brightness-async-2026-10-31.md)保留。本轮区分公开版的取样过期跳过与未发布候选新增的请求停机条件；独立冻结相机夹具进一步使用[显式排空](docs/profiles/camera-explicit-drain-2026-10-31.md)，其修订不改变已发布的应用源码。当前源码和验证以[本轮记录](docs/profiles/brightness-preview-budget-2026-10-31.md)为准。
-
-偶发预览停顿增加模拟器专用的 `Preview system trace` 采证流程，分别记录主线程、渲染线程、调度和相机事件，并区分测试主动制造的过期与自然截止观察。31 项工具测试、Android 15/16 各三条完整轨迹及原有十项检查均通过，原始附件已下载核验并以官方引擎重放。[结果、原始失败与边界](docs/profiles/preview-system-trace-2026-10-31.md)保留；本轮未复现历史停顿，根因仍未确定，以上轨迹来源为 v0.4.37。
+此前的[输入焦点采证](docs/profiles/ci-input-focus-2026-10-31.md)、[运行机存储清理](docs/profiles/ci-storage-2026-10-31.md)、[相机夹具显式排空](docs/profiles/camera-explicit-drain-2026-10-31.md)及 [v0.4.37 系统轨迹](docs/profiles/preview-system-trace-2026-10-31.md)按各自来源保留。旧异步候选的[失败与撤回](docs/profiles/brightness-async-2026-10-31.md)属于发布前历史；当前应用以 v0.4.38 的安装包和[版本验证](docs/profiles/brightness-preview-budget-2026-10-31.md)为准。完整失败记录见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。
 
 推送 `v` 开头的标签后，GitHub Actions 会构建 **arm64** 调试包，并挂到 [Releases](https://github.com/cyanrbt/walkbuddy/releases)。文件名是 `Walk-Buddy-<标签>-arm64-debug.apk`，只含 arm64-v8a，最低 Android 8。同一页上的 Source code 压缩包是源码，不是可安装的应用。
 
