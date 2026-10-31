@@ -1,0 +1,19 @@
+{
+  "branch": "perf/brightness-async-a110908",
+  "baseline_source_commit": "a1109083bc8fb4ddfa6f492d4740f8f1cad33f2a",
+  "jvm": {
+    "tests": 256,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 21
+  },
+  "tools_tests": 31,
+  "application_and_test_apk_built": true,
+  "actionlint_passed": true,
+  "unchanged_deadline_activity_version_sources": true,
+  "scope": "Local experimental branch only; actual new stage trace pending; no release/device/performance claim"
+}

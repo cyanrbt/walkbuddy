@@ -41,7 +41,7 @@ final class PipProbe {
         try {
             if(!(Build.FINGERPRINT.contains("generic") || Build.MODEL.contains("sdk") || Build.MODEL.contains("Emulator")))
                 throw new IllegalStateException("PiP recovery probe is restricted to emulators");
-            if(trace)tracing=new PreviewMainTrace(runner);
+            if(trace){tracing=new PreviewMainTrace(runner);runner.runOnMainSync(()->BrightnessReadback.traceRequests(true));}
             if(!PipSupport.available(runner.getTargetContext()))throw new IllegalStateException("System PiP is unavailable");
             try(java.io.InputStream fixture=runner.getContext().getAssets().open("wake-input-inactive.txt")) {
                 report.append("INPUT_WINDOW_RULES_PASS cases=").append(InputWindowState.verifyWakeFixture(
@@ -148,7 +148,7 @@ final class PipProbe {
             shell(runner,"input keyevent KEYCODE_WAKEUP");
             if(preview!=null){PreviewActivity host=preview;runner.runOnMainSync(host::finish);}
             if(home!=null){Activity host=home;runner.runOnMainSync(host::finish);}
-            if(tracing!=null)tracing.close();
+            if(tracing!=null){runner.runOnMainSync(()->BrightnessReadback.traceRequests(false));tracing.close();}
         }
         runner.finish(code,result);
     }

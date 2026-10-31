@@ -23,6 +23,8 @@ final class BrightnessReadback implements AutoCloseable {
         static {THREAD.start();WORK=new Handler(THREAD.getLooper());}
     }
     private static Job active;
+    private static volatile boolean traceEnabled;
+    private static long nextTraceId;
     private final BrightnessFlight flight=new BrightnessFlight();
     private final LongSupplier clock;
     private final Copier copier;
@@ -39,9 +41,15 @@ final class BrightnessReadback implements AutoCloseable {
     BrightnessReadback(Listener listener,LongSupplier clock,Copier copier){
         this.listener=listener;this.clock=clock;this.copier=copier;
     }
-    void observe(long frameAt){mainOnly();flight.observe(frameAt);}
+    static void traceRequests(boolean enabled){mainOnly();traceEnabled=enabled;}
+    void observe(long frameAt){mainOnly();boolean due=flight.due();flight.observe(frameAt);
+        if(traceEnabled && !due && flight.due())traceOwner("DUE",frameAt,flight.dueAt(),"");}
     boolean ready(){mainOnly();return flight.due() && active==null;}
-    boolean expired(long now){mainOnly();return flight.expired(now);}
+    boolean expired(long now){mainOnly();boolean expired=flight.expired(now);
+        if(expired && traceEnabled){Job job=pending;
+            if(job==null)traceOwner("EXPIRED",-1,flight.dueAt()," stage=WAITING");
+            else job.trace("EXPIRED"," checkedMs="+now+" stage="+snapshot(now).stage+" status="+(job.result==null?-1:job.result.status));}
+        return expired;}
 
     boolean request(TextureView source,long frameAt) {
         mainOnly();long now=clock.getAsLong();
@@ -55,6 +63,7 @@ final class BrightnessReadback implements AutoCloseable {
             surface=new Surface(source.getSurfaceTexture());
             Job job=new Job(this,ticket,surface,bitmap,pixels,SystemClock.elapsedRealtimeNanos(),now-ticket.dueAt);
             pending=active=job;last=null;lastDeliveryMs=-1;
+            if(job.traced)job.trace("QUEUED"," waitingMs="+job.waitingMs+" queuedNs="+job.queuedNs);
             if(!Threads.WORK.post(job::submit))throw new IllegalStateException("Brightness worker unavailable");
             return true;
         } catch(RuntimeException|Error error) {
@@ -77,15 +86,24 @@ final class BrightnessReadback implements AutoCloseable {
         return last==null?BrightnessTiming.UNKNOWN:last.sample(BrightnessTiming.Stage.FINISHED,now,lastDeliveryMs);
     }
     private void delivered(Job job,Result result) {
-        mainOnly();if(active!=job || pending!=job)return;
+        mainOnly();if(active!=job || pending!=job){job.trace("IGNORED_DELIVERY","");return;}
         long now=clock.getAsLong();BrightnessFlight.Outcome outcome=flight.complete(job.ticket,now);
         active=pending=null;last=result;lastDeliveryMs=millis(result.finishedNs,SystemClock.elapsedRealtimeNanos());
+        if(job.traced)job.trace("DELIVER"," outcome="+outcome+" status="+result.status+" deliveryMs="+lastDeliveryMs+" closed="+closed);
         if(closed){releaseBitmap();return;}
         Listener receiver=listener;
         if(receiver!=null && outcome!=BrightnessFlight.Outcome.UNRELATED && outcome!=BrightnessFlight.Outcome.RETIRED)
             receiver.completed(this,outcome==BrightnessFlight.Outcome.EXPIRED,result.status,result.total);
     }
-    @Override public void close(){mainOnly();if(closed)return;closed=true;listener=null;flight.close();if(pending==null)releaseBitmap();}
+    @Override public void close(){mainOnly();if(closed)return;
+        if(pending!=null)pending.trace("CLOSE"," pending=true");
+        else if(traceEnabled)traceOwner("CLOSE",-1,flight.dueAt()," pending=false");
+        closed=true;listener=null;flight.close();if(pending==null)releaseBitmap();}
+    private void traceOwner(String event,long frameAt,long dueAt,String detail){
+        android.util.Log.i("WalkBuddyTiming","BrightnessStage event="+event+" id=0 pid="+android.os.Process.myPid()+" owner="+System.identityHashCode(this)
+            +" frameAt="+frameAt+" dueAt="+dueAt+" nowMs="+SystemClock.elapsedRealtime()
+            +" nowNs="+SystemClock.elapsedRealtimeNanos()+" activeId="+(active==null?0:active.traceId)+detail);
+    }
     private void releaseBitmap(){if(bitmap!=null){bitmap.recycle();bitmap=null;}pixels=null;}
     private static void mainOnly(){if(Looper.myLooper()!=Looper.getMainLooper())throw new IllegalStateException("Brightness owner requires main thread");}
     private static long millis(long from,long to){return from>=0 && to>=from?(to-from)/1_000_000:-1;}
@@ -104,25 +122,34 @@ final class BrightnessReadback implements AutoCloseable {
     }
     private static final class Job {
         final BrightnessReadback owner;final BrightnessFlight.Ticket ticket;final Surface surface;final Bitmap bitmap;final int[] pixels;final long queuedNs,waitingMs;
+        final boolean traced;final long traceId;
         volatile long startedNs=-1;volatile Result result;
         private long callCpuNs;private boolean finished;
         Job(BrightnessReadback owner,BrightnessFlight.Ticket ticket,Surface surface,Bitmap bitmap,int[] pixels,long queuedNs,long waitingMs){
             this.owner=owner;this.ticket=ticket;this.surface=surface;this.bitmap=bitmap;this.pixels=pixels;this.queuedNs=queuedNs;this.waitingMs=waitingMs;
+            traced=traceEnabled;traceId=traced?++nextTraceId:0;
         }
         void submit(){startedNs=SystemClock.elapsedRealtimeNanos();long cpu=Debug.threadCpuTimeNanos();
-            try{owner.copier.request(surface,bitmap,status->Threads.WORK.post(()->finish(status)),Threads.WORK);}
+            if(traced)trace("SUBMIT"," startedNs="+startedNs);
+            try{owner.copier.request(surface,bitmap,status->{if(traced)trace("CALLBACK"," status="+status);Threads.WORK.post(()->finish(status));},Threads.WORK);}
             catch(RuntimeException error){android.util.Log.w("WalkBuddyTiming","Brightness request error="+error.getClass().getSimpleName());
                 Threads.WORK.post(()->finish(PixelCopy.ERROR_UNKNOWN));}
-            finally{callCpuNs=Math.max(0,Debug.threadCpuTimeNanos()-cpu);}
+            finally{callCpuNs=Math.max(0,Debug.threadCpuTimeNanos()-cpu);
+                if(traced)trace("RETURN"," callCpuNs="+callCpuNs);}
         }
         void finish(int status){
-            if(finished)return;finished=true;long cpu=Debug.threadCpuTimeNanos();int total=-1;
+            if(finished){if(traced)trace("IGNORED_CALLBACK"," status="+status);return;}finished=true;long cpu=Debug.threadCpuTimeNanos();int total=-1;
             try{if(status==PixelCopy.SUCCESS){bitmap.getPixels(pixels,0,16,0,0,16,12);total=0;
                 for(int pixel:pixels)total+=((pixel>>16)&255)+((pixel>>8)&255)+(pixel&255);}}
             catch(RuntimeException error){status=PixelCopy.ERROR_UNKNOWN;total=-1;}
             finally{surface.release();}
             Result completed=new Result(this,status,total,SystemClock.elapsedRealtimeNanos(),callCpuNs+Math.max(0,Debug.threadCpuTimeNanos()-cpu));
-            result=completed;Threads.MAIN.post(()->owner.delivered(this,completed));
+            result=completed;if(traced)trace("FINISHED"," status="+status+" finishedNs="+completed.finishedNs+" queueMs="+completed.queueMs+" wallMs="+completed.wallMs+" cpuMs="+completed.cpuMs);
+            Threads.MAIN.post(()->owner.delivered(this,completed));
+        }
+        void trace(String event,String detail){if(traced)android.util.Log.i("WalkBuddyTiming","BrightnessStage event="+event
+            +" id="+traceId+" pid="+android.os.Process.myPid()+" owner="+System.identityHashCode(owner)+" frameAt="+ticket.frameAt+" dueAt="+ticket.dueAt
+            +" nowMs="+SystemClock.elapsedRealtime()+" nowNs="+SystemClock.elapsedRealtimeNanos()+detail);
         }
     }
 }

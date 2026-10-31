@@ -1,0 +1,20 @@
+name: Experimental brightness stages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [perf/brightness-async-a110908]
+    paths:
+      - .github/workflows/brightness-stages.yml
+      - scripts/preview_trace.sql
+      - app/src/main/java/com/cyanrbt/walkbuddy/BrightnessReadback.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java
+
+permissions:
+  contents: read
+
+jobs:
+  stages:
+    uses: ./.github/workflows/ui-check.yml
+    with:
+      preview_trace: true

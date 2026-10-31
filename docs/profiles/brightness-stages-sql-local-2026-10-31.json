@@ -1,0 +1,13 @@
+{
+  "trace_sha256": "91c65d08e5547c79a829568c648c7509d7f08d6cd8c93af534f55413784a4eed",
+  "source_run": 41160797255,
+  "api": 35,
+  "trial": 2,
+  "worker_rows": {
+    "cpu": 6,
+    "state": 16,
+    "slice": 0
+  },
+  "previous_summary_byte_equivalent_except_parser_own_runtime_stats": true,
+  "scope": "Retrospective query of original failed recording; newly added application stage logs did not exist in that recording"
+}
