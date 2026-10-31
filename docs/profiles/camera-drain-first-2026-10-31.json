@@ -1,0 +1,202 @@
+{
+  "source_commit": "a4bbb537e6053674fd565c13fff992e959b936e7",
+  "run": 41172338642,
+  "attempt": 1,
+  "job": 124452763149,
+  "artifact_id": 13031446586,
+  "artifact_bytes": 129922,
+  "artifact_sha256": "32b279d330346454531f02188d74c18e0c3393e0137bb637d2ae7aebad9c5946",
+  "summary": {
+    "status": "checks_not_passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "failure",
+    "mode": "surface",
+    "probes": [],
+    "observations": [],
+    "anrs": [],
+    "failure_time_focus": [],
+    "focused_external_anr_dialogs": []
+  },
+  "producers": {
+    "scope": "Frozen virtual Camera2 and synthetic EGL; no product lifecycle, actual AR, or device acceptance",
+    "camera": {
+      "accepted": false,
+      "error": "java.lang.AssertionError: Timed out: Camera2 idle after explicit stopRepeating",
+      "stateEvents": [
+        {
+          "event": "OPENED",
+          "elapsedRealtimeNs": 102802322630,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": null
+        },
+        {
+          "event": "CONFIGURED",
+          "elapsedRealtimeNs": 102891927410,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": null
+        },
+        {
+          "event": "READY",
+          "elapsedRealtimeNs": 102891996880,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "START_AFTER_INITIAL_READY",
+          "elapsedRealtimeNs": 102892292490,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "REPEATING_SUBMITTED id=0",
+          "elapsedRealtimeNs": 102899727560,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "ACTIVE",
+          "elapsedRealtimeNs": 102918603900,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "READY",
+          "elapsedRealtimeNs": 102922798300,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "CAPTURE count=1 frame=0",
+          "elapsedRealtimeNs": 103772136570,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "CAPTURE count=2 frame=1",
+          "elapsedRealtimeNs": 103813311260,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "CAPTURE count=3 frame=2",
+          "elapsedRealtimeNs": 103844425900,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "STOP_REPEATING",
+          "elapsedRealtimeNs": 103844867120,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "STOP_RETURNED",
+          "elapsedRealtimeNs": 103845071300,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "CAPTURE count=4 frame=3",
+          "elapsedRealtimeNs": 103893526290,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "SEQUENCE_COMPLETED id=0 frame=3",
+          "elapsedRealtimeNs": 103893608640,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "SEQUENCE_WAIT_PASSED",
+          "elapsedRealtimeNs": 103893706350,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "FINISH captures=4",
+          "elapsedRealtimeNs": 108894625430,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "SESSION_CLOSED",
+          "elapsedRealtimeNs": 109274309550,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        }
+      ]
+    },
+    "egl": {
+      "accepted": true,
+      "pairs": [
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 300,
+          "viewHeight": 400,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "referenceRgb": 71946,
+          "surfaceRgb": 71946,
+          "requestCallNs": 3587460,
+          "callbackLatencyNs": 10876180,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 109455224030,
+          "sourceTimestampAfter": 109455224030,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        },
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 280,
+          "viewHeight": 210,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "referenceRgb": 71946,
+          "surfaceRgb": 71946,
+          "requestCallNs": 1791710,
+          "callbackLatencyNs": 6105020,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 109455224030,
+          "sourceTimestampAfter": 109455224030,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        }
+      ]
+    },
+    "accepted": false
+  },
+  "scope": "Initial-ready wait did not exclude a later ready during active capture; original five-second post-stop gate failed. Product APK is unaffected by the independent fixture change."
+}

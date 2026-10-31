@@ -58,7 +58,7 @@ final class SurfaceProducerProbe {
             if(modes!=null)for(int mode:modes)if(mode==CaptureRequest.SCALER_ROTATE_AND_CROP_NONE)disableCrop=true;}
         final boolean cropNone=disableCrop;
         AtomicReference<CameraDevice> device=new AtomicReference<>();AtomicReference<CameraCaptureSession> session=new AtomicReference<>();
-        AtomicReference<String> error=new AtomicReference<>();AtomicBoolean closed=new AtomicBoolean(),stopping=new AtomicBoolean(),repeatingStarted=new AtomicBoolean();
+        AtomicReference<String> error=new AtomicReference<>();AtomicBoolean closed=new AtomicBoolean(),stopping=new AtomicBoolean(),repeatingStarted=new AtomicBoolean(),draining=new AtomicBoolean();
         AtomicInteger captures=new AtomicInteger();AtomicLong lastStamp=new AtomicLong();
         CountDownLatch initialReady=new CountDownLatch(1),frames=new CountDownLatch(3),idle=new CountDownLatch(1),sequenceDone=new CountDownLatch(1);
         Fixture fixture=new Fixture(runner,host,640,480,sensor);
@@ -74,7 +74,7 @@ final class SurfaceProducerProbe {
                             if(closed.get()){ready.close();return;}session.set(ready);
                         }
                         @Override public void onConfigureFailed(CameraCaptureSession s){s.close();failed("Camera2 configuration failed");}
-                        @Override public void onReady(CameraCaptureSession s){timeline.state("READY",true,stopping.get());if(!repeatingStarted.get())initialReady.countDown();if(stopping.get())idle.countDown();}
+                        @Override public void onReady(CameraCaptureSession s){timeline.state("READY",true,stopping.get());if(!repeatingStarted.get())initialReady.countDown();if(stopping.get() && draining.get())idle.countDown();}
                         @Override public void onActive(CameraCaptureSession s){timeline.state("ACTIVE",false,stopping.get());}
                         @Override public void onClosed(CameraCaptureSession s){timeline.event("SESSION_CLOSED",stopping.get());}
                     },new Handler(Looper.getMainLooper()));}catch(Exception failure){failed(failure.toString());}
@@ -106,7 +106,14 @@ final class SurfaceProducerProbe {
             SurfaceCopyProbe.onMain(runner,()->{stopping.set(true);timeline.event("STOP_REPEATING",true);session.get().stopRepeating();timeline.event("STOP_RETURNED",true);return null;});
             require(sequenceDone,5,"Camera2 repeating sequence completed");
             timeline.event("SEQUENCE_WAIT_PASSED",stopping.get());
-            require(idle,5,"Camera2 idle after explicit stopRepeating");
+            if(error.get()!=null)throw new AssertionError(error.get());
+            // Consume a fresh quiescence notification after the completed repeating sequence.
+            // Waiting for the initial ready alone cannot exclude a late configure-idle event.
+            SurfaceCopyProbe.onMain(runner,()->{
+                draining.set(true);timeline.event("ABORT_DRAIN",true);session.get().abortCaptures();
+                timeline.event("ABORT_DRAIN_RETURNED",true);return null;
+            });
+            require(idle,5,"Camera2 ready after explicit stop and drain");
             timeline.event("IDLE_WAIT_PASSED",stopping.get());
             if(error.get()!=null)throw new AssertionError(error.get());
             fixture.settle();
