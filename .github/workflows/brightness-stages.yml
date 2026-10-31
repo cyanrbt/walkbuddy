@@ -6,6 +6,8 @@ on:
     branches: [perf/brightness-async-a110908]
     paths:
       - .github/workflows/brightness-stages.yml
+      - .github/workflows/ui-check.yml
+      - scripts/prepare_ui_storage.py
       - scripts/preview_trace.sql
       - scripts/record_preview_trace.py
       - app/src/main/java/com/cyanrbt/walkbuddy/BrightnessReadback.java

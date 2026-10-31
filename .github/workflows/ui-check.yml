@@ -63,6 +63,13 @@ jobs:
         run: |
           bash scripts/fetch_trace_processor.sh "${RUNNER_TEMP}/walkbuddy-perfetto"
           echo "WALKBUDDY_TRACE_PROCESSOR=${RUNNER_TEMP}/walkbuddy-perfetto/trace_processor_shell" >> "$GITHUB_ENV"
+      - name: Free hosted runner storage after compilation
+        run: |
+          mkdir -p ui-evidence
+          sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ENVIRONMENT python3 scripts/prepare_ui_storage.py \
+            --workspace "$GITHUB_WORKSPACE" --sdk "$ANDROID_HOME" \
+            --gradle-home "${GRADLE_USER_HOME:-$HOME/.gradle}" --avd-home "$HOME" \
+            --report ui-evidence/runner-storage.json
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
