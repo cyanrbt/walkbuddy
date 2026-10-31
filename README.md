@@ -60,7 +60,7 @@
 
 Actions 中 `Release APK` 表示标签发布，`Android UI checks` 表示模拟器检查；检查红叉的具体原因、输入窗口就绪修正和历史问题的因果边界见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。最新诊断补充 InputDispatcher 当前焦点、同一停止文件的连接恢复和 INFO 后备记录，[验证与边界](docs/profiles/ci-input-focus-2026-10-31.md)保留首轮失败与复验结果。纯文档或模型研究改动仅运行相关检查，标签发布仍须通过两套 Android 检查后才能生成安装包。
 
-为定位专项后的画面停顿，第一轮系统轨迹增加原有 Surface 专项及随后两次 APK 重新安装，再执行恢复；后两轮保留原恢复场景。50 项工具测试通过，云端结果待取得；这次只完善采证，不改变应用时效或已发布版本。[场景、失败保留和验证范围](docs/profiles/surface-startup-trace-2026-10-31.md)。
+为定位专项后的画面停顿，第一轮系统轨迹增加原有 Surface 专项及随后两次 APK 重新安装，再执行恢复；后两轮保留原恢复场景。首轮发现采证遗漏相机授权准备，现已补齐，51 项工具测试通过，修订后的云端结果待取得；这次只完善采证，不改变应用时效或已发布版本。[场景、失败保留和验证范围](docs/profiles/surface-startup-trace-2026-10-31.md)。
 
 最新系统轨迹红叉发生在编译成功后：托管运行机空间不足，模拟器未启动。新增编译后的限定缓存清理和存储记录，43 项工具测试通过；修订后的[普通检查](https://github.com/cyanrbt/walkbuddy/actions/runs/41167440416)与[系统轨迹](https://github.com/cyanrbt/walkbuddy/actions/runs/41167440427)均首次成功，四份原始附件和六条轨迹已核验重放。实验分支另有 Android 8 Camera2 停止等待失败，尚未发布。[本次核对](docs/profiles/ci-storage-2026-10-31.md)与正式 APK 状态分开记录。
 

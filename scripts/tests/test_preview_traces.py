@@ -219,17 +219,37 @@ class TraceRecorderTest(unittest.TestCase):
             calls = adb.calls
             start = next(i for i, c in enumerate(calls) if '--background-wait' in c)
             prefix = next(i for i, c in enumerate(calls) if 'surface_copy' in c)
+            grant = next(i for i, c in enumerate(calls) if c[:3] == ('shell', 'pm', 'grant'))
             installs = [i for i, c in enumerate(calls) if c[0] == 'install']
             recovery = next(i for i, c in enumerate(calls) if 'pip_recovery' in c)
             stop = next(i for i, c in enumerate(calls) if 'kill' in c)
-            self.assertEqual(sorted([start, prefix, *installs, recovery, stop]),
-                             [start, prefix, *installs, recovery, stop])
+            self.assertEqual(sorted([start, grant, prefix, *installs, recovery, stop]),
+                             [start, grant, prefix, *installs, recovery, stop])
+            self.assertEqual(('com.cyanrbt.walkbuddy', 'android.permission.CAMERA'), calls[grant][-2:])
+            self.assertEqual(0, result['camera_permission_exit'])
             self.assertEqual(2, len(installs))
             self.assertNotEqual(calls[installs[0]][-1], calls[installs[1]][-1])
             self.assertTrue(all(i['passed'] for i in result['reinstall']))
             self.assertEqual(config, (directory/'config.pbtxt').read_text())
             self.assertEqual(hashlib.sha256(config.encode()).hexdigest(), result['config_sha256'])
             self.assertEqual(adb.output, (directory/'surface-prefix.txt').read_text())
+
+    def test_failed_camera_permission_preparation_never_starts_either_probe(self):
+        class PermissionDeniedAdb(SurfacePrefixAdb):
+            def run(self, *args, **kwargs):
+                if args[:3] == ('shell', 'pm', 'grant'):
+                    self.calls.append(args)
+                    return SimpleNamespace(returncode=1, stdout='', stderr='Unknown package')
+                return super().run(*args, **kwargs)
+        with tempfile.TemporaryDirectory() as temp:
+            adb = PermissionDeniedAdb()
+            result = recorder.capture(adb, Path(temp), '', 1, surface_prefix=True)
+            self.assertEqual(1, result['camera_permission_exit'])
+            self.assertFalse(result['probe_pass'])
+            self.assertTrue(result['errors'])
+            self.assertTrue(result['flushed'])
+            self.assertFalse(any('instrument' in c or c[0] == 'install' for c in adb.calls))
+            self.assertEqual('Unknown package', (Path(temp)/'camera-permission.txt').read_text())
 
     def test_surface_prefix_requires_all_markers_no_failure_and_successful_exit(self):
         for output, exit_code in ((SurfacePrefixAdb.output, 1), ('PREVIEW_PROBE_PASS cases=32', 0),

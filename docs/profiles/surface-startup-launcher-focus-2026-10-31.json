@@ -1,0 +1,71 @@
+{
+  "source_commit": "2b71a395b54a72deeda17449bb532789c7979fa5",
+  "run": 41173728712,
+  "job": 124456860547,
+  "attempt": 1,
+  "artifact": {
+    "id": 13031493292,
+    "bytes": 13476314,
+    "sha256": "0f59623ef50453a426900882f4dc351031e90c92a5f62bf2db3a0676a60db008",
+    "whole_zip_sha256_crc_verified": true
+  },
+  "checked_files": {
+    "cache/ui-probe/pip-recovery-failure-input.txt": {
+      "bytes": 76857,
+      "sha256": "3c41f1782965074b96c580840f1171094c12c8690d1580a595cad86005877d5c"
+    },
+    "cache/ui-probe/pip-recovery-failure-window.txt": {
+      "bytes": 41238,
+      "sha256": "5c9a03e1f42c3e01f45022a2eba119c3848d02986fe141de6d0117cf144c2ab6"
+    },
+    "cache/ui-probe/pip-recovery-failure-activity.txt": {
+      "bytes": 30225,
+      "sha256": "405e741c1fa0b3a105a4d8f4403622c1b67cf5ad69c795791759180c6bdcd44b"
+    },
+    "cache/ui-probe/pip-recovery-failure.png": {
+      "bytes": 36048,
+      "sha256": "8b28e50e7ff6ebf6104779818e352f7af218cf23c2b6e09b64e89c03651bcbcd"
+    },
+    "check-summary.json": {
+      "bytes": 4162,
+      "sha256": "eca1cb88dc3513194b7c5545aeb965ace56e87a9259483209e872f6ea84f3883"
+    },
+    "lifecycle.txt": {
+      "bytes": 84711,
+      "sha256": "a77e4e2a06603efe629dfb64470fea9281181e201fa0859773722bbfa55ea87d"
+    },
+    "input-routing.txt": {
+      "bytes": 36164,
+      "sha256": "d418ddb7a017296ea6a267b9be1ca42267b9a76b2b855a3aaa5d9a9a2f2b6314"
+    }
+  },
+  "observed": {
+    "screenshot": "Pixel Launcher is not responding dialog visibly covers and dims the MainActivity start button",
+    "current_input_dispatcher_focused_window": "displayId=0, name='3f4e74b Application Not Responding: com.google.android.apps.nexuslauncher'",
+    "window_manager_current_focus": "Window{3f4e74b u0 Application Not Responding: com.google.android.apps.nexuslauncher}",
+    "top_resumed_activity": "com.cyanrbt.walkbuddy/.MainActivity",
+    "anrs": [
+      {
+        "package": "com.google.android.apps.nexuslauncher",
+        "event": "10-31 05:46:06.637   556  2253 E ActivityManager: ANR in com.google.android.apps.nexuslauncher (com.google.android.apps.nexuslauncher/.NexusLauncherActivity)",
+        "reason": "Input dispatching timed out (Application does not have a focused window)."
+      }
+    ],
+    "job_log_first_streamed_install_utc": "2026-10-31T05:46:09.9625372Z",
+    "job_log_surface_success_utc": "2026-10-31T05:46:24.2847132Z",
+    "same_device_lifecycle_sequence": [
+      "10-31 05:46:06.637 ActivityManager: ANR in com.google.android.apps.nexuslauncher",
+      "10-31 05:46:13.159 ActivityManager: Force stopping com.cyanrbt.walkbuddy: start instr",
+      "10-31 05:46:13.282 ActivityManager: Start proc 2704:com.cyanrbt.walkbuddy",
+      "10-31 05:46:14.191 ActivityTaskManager: START com.cyanrbt.walkbuddy/.MainActivity"
+    ]
+  },
+  "conclusion": "Focused Launcher ANR dialog directly explains the first start-button focus precondition failure. The same device lifecycle log places Launcher ANR before the first application instrumentation/process start, so the later Surface producer work cannot be its initiating cause.",
+  "limits": [
+    "Does not establish the cause of Launcher ANR",
+    "Does not establish the cause of later interactive=false observations",
+    "Does not explain the separate a4bbb53 1436/1420ms frame expiry",
+    "No rerun, dialog dismissal, application change, or device acceptance",
+    "Host job output and device log timestamps are different clocks; same-device lifecycle ordering supports the conclusion independently of clock alignment"
+  ]
+}

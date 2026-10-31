@@ -6,6 +6,8 @@
 
 下一次 [41173728712](https://github.com/cyanrbt/walkbuddy/actions/runs/41173728712) 的 API 35 冻结像素子检查通过，但随后首页 `focus=false`、再后屏幕 `interactive=false`，整轮失败；不把它归为同一次亮度停顿。独立 [Android 15/16 普通检查](https://github.com/cyanrbt/walkbuddy/actions/runs/41173728725)和 [v0.4.38 正式发布](https://github.com/cyanrbt/walkbuddy/actions/runs/41172338591)成功，不能覆盖这两个失败。
 
+本轮实际下载该次失败的完整附件 `13031493292`，核对 13,476,314 字节、GitHub SHA-256 与全部 ZIP CRC，再查看原图、当前 InputDispatcher `FocusedWindows` 和 WindowManager 当前焦点：三者一致指向覆盖首页的 **Pixel Launcher 无响应弹窗**，而顶部 resumed Activity 仍是应用首页。同一设备生命周期日志记录 Launcher ANR 为 05:46:06.637，首次应用 instrumentation 启动为 05:46:13.159、进程启动为 05:46:13.282，明确早于 Surface 专项；不依赖宿主作业时间与设备时钟精确对齐。这直接解释首次点击的焦点前提失败，不能据此称专项造成该 ANR、后续关屏由它导致，或另一轮画面过期已解决。[逐文件摘要与原始来源](surface-startup-launcher-focus-2026-10-31.json)保留；没有关闭弹窗或重跑该失败作业。
+
 原系统轨迹只覆盖四轮 PiP 恢复，没有包含失败之前的 Surface 专项。查看实际脚本还发现：专项后进入普通 UI 检查时，会重新安装应用 APK 和测试 APK。这两次安装可能影响进程和窗口状态，采证不能省略。
 
 ## 本轮改动
@@ -20,4 +22,12 @@
 
 本地 `python3 -m unittest discover -s scripts/tests -v`：50 项通过，9.302 秒；包括前序操作确实处于同一条轨迹中、零退出码缺少标记仍失败、安装失败不得进入恢复、专项超时保留部分输出并清理自有进程、恢复失败不重跑，以及仅第一轮增加前序操作。合成测试不代表模拟器运行成功。
 
-本轮仅改采证工具、配置、测试与文档，`app/src/main` 和 `app/build.gradle` 相对正式 `v0.4.38` 无差异，包名、签名和已发布 APK 不变；不生成重复版本。云端 Android 15/16 采证及普通检查结果待推送后取得，不提前称为通过或根因修复。没有新增实体设备、AR、TalkBack、帧率或功耗验收。
+本轮仅改采证工具、配置、测试与文档，`app/src/main` 和 `app/build.gradle` 相对正式 `v0.4.38` 无差异，包名、签名和已发布 APK 不变；不生成重复版本。没有新增实体设备、AR、TalkBack、帧率或功耗验收。
+
+## 首轮云端结果与授权准备补齐
+
+源码 `346e13e` 的 [普通 UI 41176914889](https://github.com/cyanrbt/walkbuddy/actions/runs/41176914889) 首轮 Android 15/16 均成功；[系统轨迹 41176914849](https://github.com/cyanrbt/walkbuddy/actions/runs/41176914849) 两套均失败，不能称整体通过。两套首轮 Surface 的合成 32 组与 EGL 比较通过，虚拟 Camera2 均报 `SecurityException: cannot open camera without camera permission`，没有采集帧。前序失败后未开始恢复；后两条原恢复及随后的全部普通 UI 检查均通过。四份原始附件已完整核对服务端长度、SHA-256 与全部 ZIP CRC；六条原始轨迹重放另行记录。
+
+这是新增采证脚本遗漏了原 Surface 脚本 `pm grant ... CAMERA` 的准备操作，不是应用权限流程回归，也不能据此分析原 1.4 秒停顿。现补齐同一个授权步骤，并保存其原始输出和退出码；失败时不启动任一探针，仍保存停止后的同一条轨迹。回归检查明确验证授权先于相机专项，以及授权失败不得进入专项或恢复。修订后本地 51 项工具测试通过，8.701 秒。采证 240 秒上限也覆盖新增授权命令 10 秒；应用时效保持。
+
+修订后的云端结果待取得，保留首轮失败及两套原生权限错误；不重跑旧作业消除失败。

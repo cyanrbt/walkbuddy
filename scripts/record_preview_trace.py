@@ -107,6 +107,16 @@ def capture(adb, directory, config, index, surface_prefix=False):
         if start.returncode or pid is None:
             raise RuntimeError(f'Perfetto did not confirm a PID: {start.returncode}: {start.stdout.strip()}; {start.stderr.strip()}')
         if surface_prefix:
+            # The original Surface script grants CAMERA before its independent
+            # producer probe; unlike PipProbe, PreviewProbe does not grant it.
+            stage = 'camera-permission'
+            permission = adb.run('shell', 'pm', 'grant', 'com.cyanrbt.walkbuddy',
+                                 'android.permission.CAMERA', timeout=10, check=False)
+            (directory/'camera-permission.txt').write_text(permission.stdout + permission.stderr)
+            record['camera_permission_exit'] = permission.returncode
+            if permission.returncode:
+                raise RuntimeError('Camera permission setup failed; Surface prefix was not started')
+            stage = 'surface-prefix'
             # Match the failed Surface workflow's order, including a separate
             # instrumentation invocation. Start tracing before its producer work.
             prefix = adb.run('shell', 'am', 'instrument', '-w', '-e', 'preview', 'true',
@@ -118,7 +128,9 @@ def capture(adb, directory, config, index, surface_prefix=False):
                 'SURFACE_PRODUCERS_PARITY_PASS camera_cases=2 egl_cases=2 pixels=768',
                 'PREVIEW_PROBE_PASS cases=32')) and 'PREVIEW_PROBE_FAIL' not in prefix.stdout
             if not record['surface_prefix_pass']:
-                raise RuntimeError('Surface prefix instrumentation did not pass; recovery was not started')
+                failure = next((line for line in reversed(prefix.stdout.splitlines()) if 'PREVIEW_PROBE_FAIL:' in line), '')
+                raise RuntimeError('Surface prefix instrumentation did not pass; recovery was not started'
+                                   + (f': {failure}' if failure else ''))
             # run_surface_copy_profile.sh next sources run_ui_probes.sh, whose
             # setup reinstalls both APKs. Retain that intervening process/window
             # transition, rather than substituting a simpler warm-start scenario.
