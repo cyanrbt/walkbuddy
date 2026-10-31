@@ -1,0 +1,189 @@
+{
+  "source_commit": "e7ef51c93230dd2e2a09fabe0f6c61108871dcb5",
+  "run": 41168543511,
+  "attempt": 1,
+  "job": 124441279730,
+  "artifact_id": 13029913197,
+  "artifact_bytes": 130004,
+  "artifact_sha256": "c2e8917b471c1de46532e92bace0fe83b9bc7e1d48fa096b98b8a0ced7148d45",
+  "scope": "Actual failing callback order; not proof of CameraDevice internal state or product root cause.",
+  "summary": {
+    "status": "checks_not_passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "failure",
+    "mode": "surface",
+    "probes": [],
+    "observations": [],
+    "anrs": [],
+    "failure_time_focus": [],
+    "focused_external_anr_dialogs": []
+  },
+  "producers": {
+    "scope": "Frozen virtual Camera2 and synthetic EGL; no product lifecycle, actual AR, or device acceptance",
+    "camera": {
+      "accepted": false,
+      "error": "java.lang.AssertionError: Timed out: Camera2 idle after explicit stopRepeating",
+      "stateEvents": [
+        {
+          "event": "OPENED",
+          "elapsedRealtimeNs": 62862538910,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": null
+        },
+        {
+          "event": "CONFIGURED",
+          "elapsedRealtimeNs": 62905366190,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": null
+        },
+        {
+          "event": "REPEATING_SUBMITTED id=0",
+          "elapsedRealtimeNs": 62907463150,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": null
+        },
+        {
+          "event": "READY",
+          "elapsedRealtimeNs": 62907550450,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "ACTIVE",
+          "elapsedRealtimeNs": 62907679220,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "READY",
+          "elapsedRealtimeNs": 62909280870,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "CAPTURE count=1 frame=0",
+          "elapsedRealtimeNs": 63132614150,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "CAPTURE count=2 frame=1",
+          "elapsedRealtimeNs": 63195143090,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "CAPTURE count=3 frame=2",
+          "elapsedRealtimeNs": 63338039440,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "STOP_REPEATING",
+          "elapsedRealtimeNs": 63338488910,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "STOP_RETURNED",
+          "elapsedRealtimeNs": 63338790070,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "SEQUENCE_COMPLETED id=0 frame=2",
+          "elapsedRealtimeNs": 63339011080,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "SEQUENCE_WAIT_PASSED",
+          "elapsedRealtimeNs": 63339166470,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "FINISH captures=3",
+          "elapsedRealtimeNs": 68339534380,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "SESSION_CLOSED",
+          "elapsedRealtimeNs": 68346866760,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        }
+      ]
+    },
+    "egl": {
+      "accepted": true,
+      "pairs": [
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 300,
+          "viewHeight": 400,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "referenceRgb": 71946,
+          "surfaceRgb": 71946,
+          "requestCallNs": 2216740,
+          "callbackLatencyNs": 2356450,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 68453099020,
+          "sourceTimestampAfter": 68453099020,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        },
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 280,
+          "viewHeight": 210,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "referenceRgb": 71946,
+          "surfaceRgb": 71946,
+          "requestCallNs": 948360,
+          "callbackLatencyNs": 1101340,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 68453099020,
+          "sourceTimestampAfter": 68453099020,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        }
+      ]
+    },
+    "accepted": false
+  },
+  "observed_ready_before_all_three_capture_callbacks": true
+}

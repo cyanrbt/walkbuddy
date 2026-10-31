@@ -58,13 +58,13 @@ final class SurfaceProducerProbe {
             if(modes!=null)for(int mode:modes)if(mode==CaptureRequest.SCALER_ROTATE_AND_CROP_NONE)disableCrop=true;}
         final boolean cropNone=disableCrop;
         AtomicReference<CameraDevice> device=new AtomicReference<>();AtomicReference<CameraCaptureSession> session=new AtomicReference<>();
-        AtomicReference<String> error=new AtomicReference<>();AtomicBoolean closed=new AtomicBoolean(),stopping=new AtomicBoolean();
+        AtomicReference<String> error=new AtomicReference<>();AtomicBoolean closed=new AtomicBoolean(),stopping=new AtomicBoolean(),repeatingStarted=new AtomicBoolean();
         AtomicInteger captures=new AtomicInteger();AtomicLong lastStamp=new AtomicLong();
-        CountDownLatch frames=new CountDownLatch(3),idle=new CountDownLatch(1),sequenceDone=new CountDownLatch(1);
+        CountDownLatch initialReady=new CountDownLatch(1),frames=new CountDownLatch(3),idle=new CountDownLatch(1),sequenceDone=new CountDownLatch(1);
         Fixture fixture=new Fixture(runner,host,640,480,sensor);
         try {
             manager.openCamera(selected,new CameraDevice.StateCallback(){
-                private void failed(String message){if(!closed.get()){timeline.event("ERROR "+message,stopping.get());error.set(message);while(frames.getCount()>0)frames.countDown();idle.countDown();sequenceDone.countDown();}}
+                private void failed(String message){if(!closed.get()){timeline.event("ERROR "+message,stopping.get());error.set(message);initialReady.countDown();while(frames.getCount()>0)frames.countDown();idle.countDown();sequenceDone.countDown();}}
                 @Override public void onOpened(CameraDevice camera) {
                     timeline.event("OPENED",stopping.get());
                     if(closed.get()){camera.close();return;}device.set(camera);
@@ -72,22 +72,9 @@ final class SurfaceProducerProbe {
                         @Override public void onConfigured(CameraCaptureSession ready) {
                             timeline.event("CONFIGURED",stopping.get());
                             if(closed.get()){ready.close();return;}session.set(ready);
-                            try{CaptureRequest.Builder request=camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);request.addTarget(fixture.surface);
-                                request.set(CaptureRequest.CONTROL_AF_MODE,CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO);
-                                if(Build.VERSION.SDK_INT>=31 && cropNone)request.set(CaptureRequest.SCALER_ROTATE_AND_CROP,CaptureRequest.SCALER_ROTATE_AND_CROP_NONE);
-                                int repeatingId=ready.setRepeatingRequest(request.build(),new CameraCaptureSession.CaptureCallback(){
-                                    @Override public void onCaptureCompleted(CameraCaptureSession s,CaptureRequest r,TotalCaptureResult result) {
-                                        if(closed.get())return;Long stamp=result.get(CaptureResult.SENSOR_TIMESTAMP);
-                                        if(stamp!=null){lastStamp.set(stamp);int count=captures.incrementAndGet();if(count<=4)timeline.event("CAPTURE count="+count+" frame="+result.getFrameNumber(),stopping.get());frames.countDown();}
-                                    }
-                                    @Override public void onCaptureSequenceCompleted(CameraCaptureSession s,int id,long frame){timeline.event("SEQUENCE_COMPLETED id="+id+" frame="+frame,stopping.get());if(stopping.get())sequenceDone.countDown();}
-                                    @Override public void onCaptureSequenceAborted(CameraCaptureSession s,int id){timeline.event("SEQUENCE_ABORTED id="+id,stopping.get());}
-                                },new Handler(Looper.getMainLooper()));
-                                timeline.event("REPEATING_SUBMITTED id="+repeatingId,stopping.get());
-                            }catch(Exception failure){failed(failure.toString());}
                         }
                         @Override public void onConfigureFailed(CameraCaptureSession s){s.close();failed("Camera2 configuration failed");}
-                        @Override public void onReady(CameraCaptureSession s){timeline.state("READY",true,stopping.get());if(stopping.get())idle.countDown();}
+                        @Override public void onReady(CameraCaptureSession s){timeline.state("READY",true,stopping.get());if(!repeatingStarted.get())initialReady.countDown();if(stopping.get())idle.countDown();}
                         @Override public void onActive(CameraCaptureSession s){timeline.state("ACTIVE",false,stopping.get());}
                         @Override public void onClosed(CameraCaptureSession s){timeline.event("SESSION_CLOSED",stopping.get());}
                     },new Handler(Looper.getMainLooper()));}catch(Exception failure){failed(failure.toString());}
@@ -95,6 +82,26 @@ final class SurfaceProducerProbe {
                 @Override public void onDisconnected(CameraDevice camera){camera.close();failed("Camera2 disconnected");}
                 @Override public void onError(CameraDevice camera,int code){camera.close();failed("Camera2 error="+code);}
             },new Handler(Looper.getMainLooper()));
+            require(initialReady,5,"Camera2 initial configured ready");
+            if(error.get()!=null)throw new AssertionError(error.get());
+            SurfaceCopyProbe.onMain(runner,()->{
+                if(device.get()==null || session.get()==null)throw new AssertionError("Initial ready before configured camera");
+                CameraDevice camera=device.get();CameraCaptureSession ready=session.get();
+                repeatingStarted.set(true);timeline.event("START_AFTER_INITIAL_READY",false);
+                CaptureRequest.Builder request=camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);request.addTarget(fixture.surface);
+                request.set(CaptureRequest.CONTROL_AF_MODE,CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO);
+                if(Build.VERSION.SDK_INT>=31 && cropNone)request.set(CaptureRequest.SCALER_ROTATE_AND_CROP,CaptureRequest.SCALER_ROTATE_AND_CROP_NONE);
+                int repeatingId=ready.setRepeatingRequest(request.build(),new CameraCaptureSession.CaptureCallback(){
+                    @Override public void onCaptureCompleted(CameraCaptureSession s,CaptureRequest r,TotalCaptureResult result) {
+                        if(closed.get())return;Long stamp=result.get(CaptureResult.SENSOR_TIMESTAMP);
+                        if(stamp!=null){lastStamp.set(stamp);int count=captures.incrementAndGet();if(count<=4)timeline.event("CAPTURE count="+count+" frame="+result.getFrameNumber(),stopping.get());frames.countDown();}
+                    }
+                    @Override public void onCaptureSequenceCompleted(CameraCaptureSession s,int id,long frame){timeline.event("SEQUENCE_COMPLETED id="+id+" frame="+frame,stopping.get());if(stopping.get())sequenceDone.countDown();}
+                    @Override public void onCaptureSequenceAborted(CameraCaptureSession s,int id){timeline.event("SEQUENCE_ABORTED id="+id,stopping.get());}
+                },new Handler(Looper.getMainLooper()));
+                timeline.event("REPEATING_SUBMITTED id="+repeatingId,stopping.get());
+                return null;
+            });
             require(frames,8,"Camera2 frames");if(error.get()!=null)throw new AssertionError(error.get());
             SurfaceCopyProbe.onMain(runner,()->{stopping.set(true);timeline.event("STOP_REPEATING",true);session.get().stopRepeating();timeline.event("STOP_RETURNED",true);return null;});
             require(sequenceDone,5,"Camera2 repeating sequence completed");
