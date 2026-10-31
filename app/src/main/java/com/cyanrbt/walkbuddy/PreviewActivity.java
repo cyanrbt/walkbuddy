@@ -526,7 +526,7 @@ public final class PreviewActivity extends Activity {
                 long now=SystemClock.elapsedRealtime();
                 if(!checkHealth(now))return;
                 state.display(now);state.promote(now);syncTicket();
-                if(state.phase==SessionState.Phase.LIVE && !submitBrightness(now))return;
+                if(state.fresh(now) && !submitBrightness(now))return;
                 long checkedAt=SystemClock.elapsedRealtime();
                 if(!checkHealth(checkedAt))return;
                 render(checkedAt);
@@ -633,15 +633,19 @@ public final class PreviewActivity extends Activity {
     private void observeBrightness(long frameAt) {
         if(brightnessReadback==null) {
             long generation=state.generation;
-            brightnessReadback=new BrightnessReadback((owner,expired,status,total)->{
-                if(destroyed || owner!=brightnessReadback || generation!=state.generation || state.phase!=SessionState.Phase.LIVE)return;
+            brightnessReadback=new BrightnessReadback((owner,expired,status,total,checkedFrameAt)->{
+                if(destroyed || owner!=brightnessReadback || generation!=state.generation
+                    || state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE)return;
                 long now=SystemClock.elapsedRealtime();
                 if(!checkHealth(now))return;
                 BrightnessTiming.Sample timing=owner.snapshot(now);
                 if(timing.wallMs>=200)android.util.Log.w("WalkBuddyTiming","Brightness asyncWallMs="+timing.wallMs
                     +" callerCpuMs="+timing.cpuMs+" queueMs="+timing.queueMs+" deliveryMs="+timing.deliveryMs);
                 if(expired || status!=android.view.PixelCopy.SUCCESS){fail(getString(R.string.preview_readback_failed));return;}
-                if(total<16*12*3*3)fail(RecoveryGuide.Reason.DARK,"画面过暗或隐私占位：不可用（仅白天）");
+                if(total<16*12*3*3){fail(RecoveryGuide.Reason.DARK,"画面过暗或隐私占位：不可用（仅白天）");return;}
+                if(state.phase==SessionState.Phase.STARTING) {
+                    state.imageChecked(generation,checkedFrameAt,now);state.promote(now);syncTicket();render(now);
+                }
             });
         }
         brightnessReadback.observe(frameAt);
@@ -856,7 +860,8 @@ public final class PreviewActivity extends Activity {
             homeState.historyChanged(homeOwner);
         }
         cover.setVisibility(live?View.GONE:View.VISIBLE);
-        if(!live && state.phase==SessionState.Phase.STARTING) setTextIfChanged(cover,state.reason);
+        if(!live && state.phase==SessionState.Phase.STARTING) setTextIfChanged(cover,
+            getText(state.fresh(now)?R.string.preview_checking_image:R.string.preview_starting));
         recognition.setEnabled(live && LocalDetector.AVAILABLE);
         sound.setEnabled(live && state.recognition);
         vibration.setEnabled(live);

@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class CameraFramesTest {
     private SessionState live() {
-        SessionState s=new SessionState();s.start(1000);s.capture(1_000_000_000L,1000);s.display(1000);s.promote(1000);return s;
+        SessionState s=new SessionState();s.start(1000);s.capture(1_000_000_000L,1000);s.display(1000);s.imageChecked(s.generation,1000,1000);s.promote(1000);return s;
     }
     @Test public void earlyMetadataDoesNotRefreshUntilItsTimeActuallyArrives() {
         SessionState s=live();long token=s.generation,stamp=1_117_000_000L;
@@ -46,7 +46,7 @@ public class CameraFramesTest {
         assertEquals(SessionState.Phase.UNAVAILABLE,s.phase);
     }
     @Test public void theExistingTwelveHundredLimitStillHasANanosecondBoundary() {
-        SessionState allowed=new SessionState();allowed.start(1000);allowed.capture(1,1000);allowed.display(1000);allowed.promote(1000);
+        SessionState allowed=new SessionState();allowed.start(1000);allowed.capture(1,1000);allowed.display(1000);allowed.imageChecked(allowed.generation,1000,1000);allowed.promote(1000);
         assertEquals(ACCEPTED,CameraFrames.accept(allowed,allowed.generation,1_000_000_000L,2200,2200,2_200_000_000L,true));
         SessionState late=live();
         assertEquals(STALE,CameraFrames.accept(late,late.generation,1_000_000_000L,2200,2200,2_200_000_001L,true));
@@ -66,7 +66,7 @@ public class CameraFramesTest {
         assertEquals(1110,s.captureAt);
     }
     @Test public void unknownTimestampSourceUsesProgressNotAnAssumedClockOrigin() {
-        SessionState s=new SessionState();s.start(1000);s.capture(100,1000);s.display(1000);s.promote(1000);
+        SessionState s=new SessionState();s.start(1000);s.capture(100,1000);s.display(1000);s.imageChecked(s.generation,1000,1000);s.promote(1000);
         assertEquals(ACCEPTED,CameraFrames.accept(s,s.generation,101,1100,1100,1_100_000_000L,false));
         assertEquals(1100,s.captureAt);
         assertEquals(ACCEPTED,CameraFrames.accept(s,s.generation,101,1200,1200,1_200_000_000L,false));
@@ -89,7 +89,7 @@ public class CameraFramesTest {
         assertEquals(2,CameraFrames.waitMillis(1_101_000_001L,1_100_000_000L));
     }
     @Test public void oldStartupMetadataCannotCompletePreviewButAFreshCaptureCan() {
-        SessionState s=new SessionState();s.start(1000);s.display(2500);long token=s.generation;
+        SessionState s=new SessionState();s.start(1000);s.display(2500);s.imageChecked(s.generation,2500,2500);long token=s.generation;
         assertEquals(STARTUP_STALE,CameraFrames.accept(s,token,1_000_000_000L,2500,2500,2_500_000_000L,true));
         assertEquals(0,s.captureAt);assertEquals(SessionState.Phase.STARTING,s.phase);assertEquals(1000,s.startedAt);
         assertEquals(ACCEPTED,CameraFrames.accept(s,token,2_501_000_000L,2501,2501,2_501_000_000L,true));

@@ -1,0 +1,107 @@
+{
+  "version": "0.4.39",
+  "versionCode": 51,
+  "jvm": {
+    "tests": 270,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_readiness_tests": 11,
+  "lint": "passed",
+  "final_apk_build": "BUILD SUCCESSFUL in 33s",
+  "full_versioned_build": "BUILD SUCCESSFUL in 40s",
+  "release_metadata_check": "v0.4.39, versionCode 51, notes docs/releases/v0.4.39.md",
+  "workflow_actionlint": "passed",
+  "diff_check": "passed",
+  "source_files": [
+    {
+      "path": "app/build.gradle",
+      "bytes": 1457,
+      "sha256": "aa341cab5f44bc9f7915ebfa41993d85f1c0b8537b7d20ba487c064b180d0c8d"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/BrightnessReadbackProbe.java",
+      "bytes": 11916,
+      "sha256": "72a978b39d70a72a95e1577cb25dab3c000f50aa6cbcc9886fe501987a88983e"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/DrawBrightnessProbe.java",
+      "bytes": 6272,
+      "sha256": "53c905800c26b0d25f7e6f6ec0ab618071ad5f9496c26e0fab9a920fb1e3d60e"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java",
+      "bytes": 38379,
+      "sha256": "5ce37ccc6d099e7fe39f5993b888c26f1675aeb1bdb067a3a176fc1d330bf7c2"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java",
+      "bytes": 95643,
+      "sha256": "12a5def0d5fc0d559970777f878494ac966b689d277f8ed23031605dbdbbc347"
+    },
+    {
+      "path": "app/src/main/java/com/cyanrbt/walkbuddy/BrightnessReadback.java",
+      "bytes": 10430,
+      "sha256": "85a4e2ab6a3f07afd80722c562dea7fe28be8cfd8290f8b3fb8faa7f7caca3ae"
+    },
+    {
+      "path": "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java",
+      "bytes": 68179,
+      "sha256": "17711f65a9a1ed246d043e825e7091ab12681f6a4614992221f926f857eac4f3"
+    },
+    {
+      "path": "app/src/main/java/com/cyanrbt/walkbuddy/SessionState.java",
+      "bytes": 3195,
+      "sha256": "db1f5b0347ac7cd2f80d52d65d8f174bb7e5f6f08ca29a6be2b1b76e7a148caa"
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "bytes": 10109,
+      "sha256": "252ae08b7f36637b6e696488366b76134a928599a9bbc1faf387cdcf472e2280"
+    },
+    {
+      "path": "app/src/test/java/com/cyanrbt/walkbuddy/BrightnessFlightTest.java",
+      "bytes": 6098,
+      "sha256": "3f916674c9c2a1c7fbdd0b9270a0856afe01b474105eb84356ec63b71cb8d9a7"
+    },
+    {
+      "path": "app/src/test/java/com/cyanrbt/walkbuddy/CameraFramesTest.java",
+      "bytes": 7407,
+      "sha256": "c27c9bdd7c0cefde590468048fe554c1bf9957acce66a0265364569efdd4b68a"
+    },
+    {
+      "path": "app/src/test/java/com/cyanrbt/walkbuddy/SessionDiagnosticsTest.java",
+      "bytes": 10610,
+      "sha256": "8850a4080e9275ac394709df32c6833c2c0caab3fb4ce3434ecb5cd80748bc0c"
+    },
+    {
+      "path": "app/src/test/java/com/cyanrbt/walkbuddy/SessionStateTest.java",
+      "bytes": 3485,
+      "sha256": "c38413d72a15d0fa9cfb640735f23bebf673c6ece3ff09f97141fdd70078ff91"
+    },
+    {
+      "path": "app/src/test/java/com/cyanrbt/walkbuddy/PreviewReadinessTest.java",
+      "bytes": 3903,
+      "sha256": "fbf8eddfa3727e273395ce0bdc6985c093fb4eb28a464faa8857727942447ab4"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/PreviewReadinessProbe.java",
+      "bytes": 9339,
+      "sha256": "a81462c45be0471835bf40cd596492630b1f25dc9e17da1771e5c2c540bf4961"
+    }
+  ],
+  "local_universal_debug_apks": [
+    {
+      "path": "app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 26263794,
+      "sha256": "84080e77825100c101660c3515f83c4a34c51316015e15a5366933d397081785"
+    },
+    {
+      "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "bytes": 601455,
+      "sha256": "b5ceeb6520317d61e13d86b5c8c2a5f8d68879e54d6d073dacc23140cf380f6d"
+    }
+  ],
+  "scope": "Local JVM/Lint/compilation only. Native startup/controlled-copy/60-presentation probes not yet executed. Local debug signing is not a verification of the fixed release signature."
+}

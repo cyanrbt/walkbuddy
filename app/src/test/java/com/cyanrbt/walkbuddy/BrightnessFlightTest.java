@@ -85,6 +85,6 @@ public class BrightnessFlightTest {
     }
     private static SessionState livePreview(){
         SessionState preview=new SessionState();preview.start(1000);preview.capture(1,1000);preview.display(1000);
-        assertTrue(preview.promote(1000));return preview;
+        preview.imageChecked(preview.generation,1000,1000);assertTrue(preview.promote(1000));return preview;
     }
 }

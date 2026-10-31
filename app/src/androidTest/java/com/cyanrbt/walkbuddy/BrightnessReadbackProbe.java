@@ -19,9 +19,9 @@ final class BrightnessReadbackProbe {
     static String run(Instrumentation runner,TextureView view) throws Exception {
         AtomicLong clock=new AtomicLong(1000);AtomicInteger callbacks=new AtomicInteger();AtomicReference<Delivery> delivered=new AtomicReference<>();
         FakeCopy fake=new FakeCopy();
-        BrightnessReadback reader=SurfaceCopyProbe.onMain(runner,()->new BrightnessReadback((owner,expired,status,total)->{
+        BrightnessReadback reader=SurfaceCopyProbe.onMain(runner,()->new BrightnessReadback((owner,expired,status,total,frameAt)->{
             if(Looper.myLooper()!=Looper.getMainLooper())throw new AssertionError("Brightness result was not delivered on main");
-            delivered.set(new Delivery(expired,status,total));callbacks.incrementAndGet();
+            delivered.set(new Delivery(expired,status,total,frameAt));callbacks.incrementAndGet();
         },clock::get,fake));
         Bitmap storage=null;Object pixels=null;int cases=0;
         try {
@@ -57,7 +57,7 @@ final class BrightnessReadbackProbe {
     }
     private static int check(Instrumentation runner,TextureView view,BrightnessReadback reader,FakeCopy fake,AtomicLong clock,
             AtomicInteger callbacks,AtomicReference<Delivery> delivered,int expectedStatus) throws Exception {
-        int before=callbacks.get();clock.addAndGet(1000);fake.clock=clock;
+        int before=callbacks.get();long requestedAt=clock.addAndGet(1000);fake.clock=clock;
         Bitmap reference=Bitmap.createBitmap(16,12,Bitmap.Config.ARGB_8888);
         int expected;
         try{if(fake.write)reference.setPixels(fake.content,0,16,0,0,16,fake.rows);expected=BrightnessProbe.legacyTotal(reference);}
@@ -65,6 +65,7 @@ final class BrightnessReadbackProbe {
         SurfaceCopyProbe.onMain(runner,()->{reader.observe(clock.get());if(!reader.ready() || !reader.request(view,clock.get()))throw new AssertionError("Brightness request rejected");return null;});
         await(()->callbacks.get()>before,"controlled brightness completion");
         Delivery result=delivered.get();
+        if(result.frameAt!=requestedAt)throw new AssertionError("Delivery replaced the original brightness frame time");
         if(result.status!=expectedStatus || !fake.offMain.get())throw new AssertionError("Brightness status/thread changed");
         if(expectedStatus==0 && result.total!=expected || expectedStatus!=0 && result.total!=-1)throw new AssertionError("Brightness copied RGB sum changed");
         return result.total;
@@ -72,9 +73,9 @@ final class BrightnessReadbackProbe {
     private static void verifyRetirement(Instrumentation runner,TextureView view) throws Exception {
         AtomicLong clock=new AtomicLong(50000);AtomicReference<IntConsumer> held=new AtomicReference<>();
         AtomicInteger oldCalls=new AtomicInteger(),newCalls=new AtomicInteger();AtomicBoolean heartbeat=new AtomicBoolean();
-        BrightnessReadback old=SurfaceCopyProbe.onMain(runner,()->new BrightnessReadback((owner,expired,status,total)->oldCalls.incrementAndGet(),clock::get,
+        BrightnessReadback old=SurfaceCopyProbe.onMain(runner,()->new BrightnessReadback((owner,expired,status,total,frameAt)->oldCalls.incrementAndGet(),clock::get,
             (surface,target,done,handler)->held.set(done)));
-        BrightnessReadback next=SurfaceCopyProbe.onMain(runner,()->new BrightnessReadback((owner,expired,status,total)->newCalls.incrementAndGet(),clock::get,
+        BrightnessReadback next=SurfaceCopyProbe.onMain(runner,()->new BrightnessReadback((owner,expired,status,total,frameAt)->newCalls.incrementAndGet(),clock::get,
             (surface,target,done,handler)->{target.eraseColor(Color.WHITE);done.accept(0);}));
         Bitmap retired=null;
         try {
@@ -98,7 +99,7 @@ final class BrightnessReadbackProbe {
     static void verifyActualCopy(Instrumentation runner,TextureView view) throws Exception {
         int[] reference=SurfaceCopyProbe.onMain(runner,()->SurfaceCopyProbe.reference(view));AtomicReference<int[]> copied=new AtomicReference<>();
         AtomicReference<Throwable> failure=new AtomicReference<>();CountDownLatch completed=new CountDownLatch(1);AtomicBoolean offMain=new AtomicBoolean();
-        BrightnessReadback reader=SurfaceCopyProbe.onMain(runner,()->new BrightnessReadback((owner,expired,status,total)->{
+        BrightnessReadback reader=SurfaceCopyProbe.onMain(runner,()->new BrightnessReadback((owner,expired,status,total,frameAt)->{
             try{if(expired || status!=0)throw new AssertionError("Actual brightness copy failed or expired");
                 Bitmap bitmap=(Bitmap)field(owner,"bitmap");int[] pixels=new int[192];bitmap.getPixels(pixels,0,16,0,0,16,12);copied.set(pixels);
                 if(total!=SurfaceCopyProbe.total(pixels))throw new AssertionError("Actual copied brightness sum changed");
@@ -114,7 +115,8 @@ final class BrightnessReadbackProbe {
             if(!offMain.get() || !Arrays.equals(reference,after) || !Arrays.equals(reference,copied.get()))throw new AssertionError("Actual reader changed frozen Surface pixels");
         }finally{SurfaceCopyProbe.onMain(runner,()->{reader.close();return null;});}
     }
-    private static final class Delivery {final boolean expired;final int status,total;Delivery(boolean expired,int status,int total){this.expired=expired;this.status=status;this.total=total;}}
+    private static final class Delivery {final boolean expired;final int status,total;final long frameAt;
+        Delivery(boolean expired,int status,int total,long frameAt){this.expired=expired;this.status=status;this.total=total;this.frameAt=frameAt;}}
     private static final class FakeCopy implements BrightnessReadback.Copier {
         final int[] content=new int[192];final AtomicBoolean offMain=new AtomicBoolean();AtomicLong clock;long delayMs;
         int rows=12,status;boolean write=true,throwCopy,expire;

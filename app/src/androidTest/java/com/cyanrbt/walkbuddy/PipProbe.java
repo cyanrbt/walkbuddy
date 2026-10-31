@@ -281,7 +281,10 @@ final class PipProbe {
             read(runner,()->{assertWatching(host);return true;});
             report.append("PASS Home releases camera; returned stopped preview does not poll; returning requires manual restart\n");
             checkpoint(runner,"home_restart_live");
-            if(profilePriority==null && profileThreads==null)BrightnessActivityProbe.run(runner,host,report);
+            if(profilePriority==null && profileThreads==null) {
+                PreviewReadinessProbe.run(runner,host,report);
+                BrightnessActivityProbe.run(runner,host,report);
+            }
 
             read(runner,()->{
                 host.findViewById(R.id.preview_recognition).performClick();

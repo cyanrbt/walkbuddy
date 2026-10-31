@@ -73,6 +73,13 @@ final class LayoutProbe {
                 checkFeedback(root);
                 ((TextView)root.findViewById(R.id.preview_title)).setText(R.string.window_live);
                 String name=size[0]+"x"+size[1]+"-font"+Math.round(font*100)+(night?"-night":"-day");
+                TextView waiting=root.findViewById(R.id.preview_cover);
+                PreviewChrome.title(title,PreviewStatus.Heading.STARTING);
+                for(int prompt:new int[]{R.string.preview_starting,R.string.preview_checking_image}) {
+                    waiting.setVisibility(View.VISIBLE);waiting.setText(prompt);measure(root,size[0],size[1]);textFits(waiting);
+                    screenshot(root,new File(output,name+(prompt==R.string.preview_starting?"-starting-camera":"-starting-image")+".png"));
+                }
+                waiting.setVisibility(View.GONE);PreviewChrome.title(title,PreviewStatus.Heading.PREVIEW_ONLY);
                 CheckBox detection=root.findViewById(R.id.preview_recognition),sound=root.findViewById(R.id.preview_sound);
                 TextView info=root.findViewById(R.id.preview_info);
                 String basic=confirmedMessage(Detection.fromModel("人",.8f,new float[]{.1f,.3f,.9f,.7f},320,320,0,0));

@@ -18,6 +18,7 @@ on:
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/BrightnessReadbackProbe.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/DrawBrightnessProbe.java
       - app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java
+      - app/src/main/java/com/cyanrbt/walkbuddy/SessionState.java
       - app/src/main/java/com/cyanrbt/walkbuddy/Brightness*.java
 
 permissions:

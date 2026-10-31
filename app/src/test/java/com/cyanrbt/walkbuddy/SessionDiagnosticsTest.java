@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 public class SessionDiagnosticsTest {
     private SessionState live() {
-        SessionState state=new SessionState();state.start(100);state.capture(1,200);state.display(220);state.promote(220);
+        SessionState state=new SessionState();state.start(100);state.capture(1,200);state.display(220);state.imageChecked(state.generation,220,220);state.promote(220);
         state.recognition=true;state.analysisAt=240;return state;
     }
     private SessionDiagnostics.Snapshot snapshot(String category,SessionState state) {

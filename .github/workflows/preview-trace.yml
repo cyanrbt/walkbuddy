@@ -16,6 +16,10 @@ on:
       - scripts/tests/test_preview_traces.py
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PreviewMainTrace.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/PreviewReadinessProbe.java
+      - app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java
+      - app/src/main/java/com/cyanrbt/walkbuddy/SessionState.java
+      - app/src/main/java/com/cyanrbt/walkbuddy/BrightnessReadback.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/RejectedTouch.java
       - app/src/androidTest/assets/restore-down-paused.txt
 

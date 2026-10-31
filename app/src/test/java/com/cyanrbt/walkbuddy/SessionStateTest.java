@@ -2,7 +2,7 @@ package com.cyanrbt.walkbuddy;
 import org.junit.Test;
 import static org.junit.Assert.*;
 public class SessionStateTest {
-    private SessionState live() {SessionState s=new SessionState();s.start(100);s.capture(10,150);s.display(150);assertTrue(s.promote(150));return s;}
+    private SessionState live() {SessionState s=new SessionState();s.start(100);s.capture(10,150);s.display(150);s.imageChecked(s.generation,150,150);assertTrue(s.promote(150));return s;}
     @Test public void recognitionIsOffOnEveryStart() {SessionState s=live();assertFalse(s.recognition);s.recognition=true;s.stop();s.start(200);assertFalse(s.recognition);}
     @Test public void analysisDeadlineCannotBeRenewedBeforeWatchdog() {SessionState s=live();s.recognition=true;s.analysisAt=150;s.capture(20,900);s.display(900);s.capture(30,1600);s.display(1600);assertTrue(s.acceptResult(s.generation,1600,1650));assertFalse(s.acceptResult(s.generation,1600,1651));assertEquals(SessionState.Phase.UNAVAILABLE,s.phase);}
     @Test public void captureCannotRenewAfterDisplayDeadlineBeforeWatchdog() {SessionState s=live();long g=s.generation;s.capture(20,1351);assertEquals(SessionState.Phase.UNAVAILABLE,s.phase);assertTrue(s.generation>g);assertEquals(0,s.captureAt);}

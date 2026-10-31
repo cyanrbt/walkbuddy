@@ -38,7 +38,7 @@ final class DrawBrightnessProbe {
                     updates.incrementAndGet();warm.countDown();
                     if(!armed.get() || !requested.compareAndSet(false,true))return;
                     try {
-                        BrightnessReadback copy=new BrightnessReadback((owner,expired,status,total)->{
+                        BrightnessReadback copy=new BrightnessReadback((owner,expired,status,total,frameAt)->{
                             try {
                                 if(Looper.myLooper()!=Looper.getMainLooper() || expired || status!=PixelCopy.SUCCESS)
                                     throw new AssertionError("Draw-submitted copy failed: expired="+expired+" status="+status);

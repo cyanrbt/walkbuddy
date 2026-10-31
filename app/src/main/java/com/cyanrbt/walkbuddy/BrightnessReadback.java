@@ -14,7 +14,7 @@ import java.util.function.LongSupplier;
 
 /** One process-wide in-flight copy. Only the serial worker reads copied pixels. */
 final class BrightnessReadback implements AutoCloseable {
-    interface Listener {void completed(BrightnessReadback owner,boolean expired,int status,int total);}
+    interface Listener {void completed(BrightnessReadback owner,boolean expired,int status,int total,long frameAt);}
     interface Copier {void request(Surface source,Bitmap target,IntConsumer finished,Handler callbackHandler);}
     private static final class Threads {
         static final Handler MAIN=new Handler(Looper.getMainLooper());
@@ -93,7 +93,7 @@ final class BrightnessReadback implements AutoCloseable {
         if(closed){releaseBitmap();return;}
         Listener receiver=listener;
         if(receiver!=null && outcome!=BrightnessFlight.Outcome.UNRELATED && outcome!=BrightnessFlight.Outcome.RETIRED)
-            receiver.completed(this,outcome==BrightnessFlight.Outcome.EXPIRED,result.status,result.total);
+            receiver.completed(this,outcome==BrightnessFlight.Outcome.EXPIRED,result.status,result.total,result.ticket.frameAt);
     }
     @Override public void close(){mainOnly();if(closed)return;
         if(pending!=null)pending.trace("CLOSE"," pending=true");
