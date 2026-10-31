@@ -65,7 +65,7 @@
 
 Actions 中 `Release APK` 是标签发布，`Android UI checks` 是普通模拟器检查，`Surface copy experiment`、`Preview system trace` 和 `CPU capacity trace` 是开发专项。正式标签须通过两套 Android 检查后才能生成 APK；专项的红叉不等同于 APK 编译失败，正式发布成功也不代表所有历史专项故障已解决。更多原始记录见 [CI 失败核对](docs/profiles/ci-failures-2026-10-30.md)。
 
-开发源码为后续小窗声音问题补充命令处理结果、触摸记录与清理前状态采证，含受控异常夹具，见[诊断验证记录](docs/profiles/pip-sound-diagnostics-2026-10-31.md)。该诊断补强没有覆盖已发布 v0.4.40 的标签或附件，不等同静音超时根因已修复。
+开发源码为后续小窗声音问题补充命令处理结果、触摸记录与清理前状态采证，含受控异常夹具。273 项 JVM、四流程九作业均首次通过，两套完整普通 UI 附件已重放，见[诊断验证记录](docs/profiles/pip-sound-diagnostics-2026-10-31.md)。该诊断补强没有覆盖已发布 v0.4.40 的标签或附件，不等同静音超时根因已修复。
 
 推送 `v` 开头的标签后，GitHub Actions 会构建 **arm64** 调试包，并挂到 [Releases](https://github.com/cyanrbt/walkbuddy/releases)。文件名是 `Walk-Buddy-<标签>-arm64-debug.apk`，只含 arm64-v8a，最低 Android 8。同一页上的 Source code 压缩包是源码，不是可安装的应用。
 

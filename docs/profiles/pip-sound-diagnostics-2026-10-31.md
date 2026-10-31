@@ -19,3 +19,13 @@ v0.4.40 开发专项的四核 Android 15 作业 `124518183842` 在后续小窗�
 本地 273 项 JVM、Lint、双 APK 构建通过（43 秒）；受控异常夹具新增后 Android 测试 APK 再编译通过（18 秒），最终 Lint 通过（24 秒）。57 项 CI 工具检查、shell 语法与四个相关工作流 actionlint 通过。[本地结果与源码摘要](pip-sound-diagnostics-local-2026-10-31.json)保留。本轮未新增 JVM 策略，命令与采证路径待 Android 15/16 原生运行验证；取得结果后追加原始来源与附件检查。
 
 本轮为诊断与回归检查补强，已发布版本仍为 v0.4.40 / 52，不覆盖该标签或附件，不因日志改动生成重复安装包。新增诊断属于开发源码；正式 v0.4.40 的原始 APK 验证仍见[原发布记录](enlarged-viewfinder-release-2026-10-31.json)。没有实体设备、真实声音、AR、TalkBack、帧率或功耗验收，旧自然画面过期仍待后续定位。
+
+## 云端终态与实际附件
+
+源码 `6e1b598e0f901cef8456c62e4991dfc512be325e` 的四个流程九个作业均首次成功，没有重跑：[普通 UI](https://github.com/cyanrbt/walkbuddy/actions/runs/41197919454)、[两核系统轨迹](https://github.com/cyanrbt/walkbuddy/actions/runs/41197919641)、[四核专项](https://github.com/cyanrbt/walkbuddy/actions/runs/41197919617)、[三套像素专项](https://github.com/cyanrbt/walkbuddy/actions/runs/41197919627)。九份原始作业日志均已读取；八套 Android 15/16 各有两次新诊断与声音交互通过标记，Android 8 仅运行原像素范围，不把它算作声音验证。四个轨迹作业各三条云端报告 complete、各四次强制停止、零非强制超时；本轮未下载这些专项 ZIP 或本地 SQL 重放。[终态、原日志摘录与范围](pip-sound-diagnostics-status-2026-10-31.json)保留。
+
+普通 Android 15/16 两份完整附件为 17,774,258 / 17,760,589 字节，已核对服务端 SHA256、全部 ZIP CRC，并分别重放十项报告，均通过。八份独立 JSON 逐份核对：四份正常交互记录共 68 条命令、16 次原生菜单按钮触摸，目标窗口、DOWN/UP 返回值、传入与当前令牌、选择变更和具体拒绝原因可对应。每次运行中的六条无效调用属于直接接收器调用，另十一条属于 PendingIntent，不能把所有命令都称为原生触摸。
+
+另外四份记录明确标为 `injected_failure_fixture`：冻结时声音和音频会话开启，原生断言在 finally 关闭后重新读文件，证明原选择未被覆盖。这是采证路径的受控异常验证，不是旧静音超时复现。四张夹具截图也已核对 PNG 头和摘要，实际查看其中一张 Android 15 图，显示首页上的实时模拟器 Camera2 小窗。[完整附件重放、状态与触摸摘要](pip-sound-diagnostics-native-2026-10-31.json)保留。
+
+另将源码中声音命令的十四个原判断表达式与 v0.4.40 逐项对照，表达式和顺序保持；这是源码核对，不冒充十四种分支均有新增实体测试。当前成功运行未重现旧超时，仍不宣称根因已修复。新增诊断验证已提交推送，正式下载继续使用原 v0.4.40。

@@ -1,0 +1,203 @@
+{
+  "source_commit": "6e1b598e0f901cef8456c62e4991dfc512be325e",
+  "reruns_requested": 0,
+  "runs": [
+    {
+      "id": 41197919641,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41197919641",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "created_at": "2026-10-31T11:41:49Z",
+      "updated_at": "2026-10-31T11:49:37Z",
+      "jobs": [
+        {
+          "id": 124527741569,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostics_pass_count": 2,
+          "sound_controls_pass_count": 2,
+          "log_evidence": [
+            "| 1 | surface_reinstall_recovery | passed | complete | 2405 | 4 | 0 |",
+            "| 2 | recovery | not requested | complete | 2204 | 4 | 0 |",
+            "| 3 | recovery | not requested | complete | 2177 | 4 | 0 |",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+          ]
+        },
+        {
+          "id": 124527741739,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostics_pass_count": 2,
+          "sound_controls_pass_count": 2,
+          "log_evidence": [
+            "| 1 | surface_reinstall_recovery | passed | complete | 2454 | 4 | 0 |",
+            "| 2 | recovery | not requested | complete | 2207 | 4 | 0 |",
+            "| 3 | recovery | not requested | complete | 2238 | 4 | 0 |",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41197919627,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41197919627",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "created_at": "2026-10-31T11:41:49Z",
+      "updated_at": "2026-10-31T11:49:26Z",
+      "jobs": [
+        {
+          "id": 124527741637,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostics_pass_count": 2,
+          "sound_controls_pass_count": 2,
+          "log_evidence": [
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+          ]
+        },
+        {
+          "id": 124527741750,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostics_pass_count": 2,
+          "sound_controls_pass_count": 2,
+          "log_evidence": [
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+          ]
+        },
+        {
+          "id": 124527741805,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostics_pass_count": 0,
+          "sound_controls_pass_count": 0,
+          "log_evidence": []
+        }
+      ]
+    },
+    {
+      "id": 41197919617,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41197919617",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "created_at": "2026-10-31T11:41:49Z",
+      "updated_at": "2026-10-31T11:50:15Z",
+      "jobs": [
+        {
+          "id": 124527741474,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostics_pass_count": 2,
+          "sound_controls_pass_count": 2,
+          "log_evidence": [
+            "| 1 | surface_reinstall_recovery | passed | complete | 2346 | 4 | 0 |",
+            "| 2 | recovery | not requested | complete | 2229 | 4 | 0 |",
+            "| 3 | recovery | not requested | complete | 2096 | 4 | 0 |",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+          ]
+        },
+        {
+          "id": 124527741605,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostics_pass_count": 2,
+          "sound_controls_pass_count": 2,
+          "log_evidence": [
+            "| 1 | surface_reinstall_recovery | passed | complete | 2408 | 4 | 0 |",
+            "| 2 | recovery | not requested | complete | 2159 | 4 | 0 |",
+            "| 3 | recovery | not requested | complete | 2100 | 4 | 0 |",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41197919454,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41197919454",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "created_at": "2026-10-31T11:41:49Z",
+      "updated_at": "2026-10-31T11:49:30Z",
+      "jobs": [
+        {
+          "id": 124527741145,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostics_pass_count": 2,
+          "sound_controls_pass_count": 2,
+          "log_evidence": [
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+          ]
+        },
+        {
+          "id": 124527741328,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostics_pass_count": 2,
+          "sound_controls_pass_count": 2,
+          "log_evidence": [
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+            "PIP_SOUND_DIAGNOSTICS_PASS received_commands=17 invalid_guard_reasons=6 frozen_choice_retained=true native_ui_toggles=4 injected_failure_before_cleanup=true",
+            "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true"
+          ]
+        }
+      ]
+    }
+  ],
+  "local_validation": "pip-sound-diagnostics-local-2026-10-31.json",
+  "full_normal_ui_native_replay": "pip-sound-diagnostics-native-2026-10-31.json",
+  "source_guard_audit": {
+    "baseline": "v0.4.40",
+    "retained_conditions_in_original_order": 14,
+    "scope": "One-off source-expression/order audit and manual guard refactor review; actual native invalid command and stale replay checks remain."
+  },
+  "scope": "All nine first-attempt terminal states and original job logs checked. Two standard UI ZIPs verified in full, ten UI reports each replayed, eight per-process JSONs checked: four successful interaction runs (17 commands and four native action touches each), four explicitly injected failure fixtures. Trace/surface ZIPs and raw traces not locally downloaded/replayed this round.",
+  "selected_image_inspected": {
+    "api": 35,
+    "file": "cache/ui-probe/pip-sound-4624-215304-before-cleanup.png",
+    "scope": "Real emulator screenshot during explicitly injected capture fixture, not original/natural failure; live virtual Camera2 PiP over home visible."
+  },
+  "published_release": "v0.4.40",
+  "new_release_tag_created": false,
+  "unresolved": "Earlier natural second-SystemUI-mute timeout still unexplained. Successful runs and injected diagnostics are not root-cause repair or natural failure reproduction. No physical installation/audibility, TalkBack, actual AR, FPS/power acceptance."
+}
