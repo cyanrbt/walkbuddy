@@ -1,0 +1,321 @@
+{
+  "source_commit": "a4bbb537e6053674fd565c13fff992e959b936e7",
+  "run": 41172338642,
+  "job": 124452763132,
+  "artifact_id": 13032335446,
+  "artifact_bytes": 13972636,
+  "artifact_sha256": "fa0c0dfc9c963fd1e711c5185d538ea2098df4157b6af08ebe5f8dd36ebb0e5e",
+  "whole_zip_size_sha256_crc_verified": true,
+  "summary": {
+    "status": "checks_not_passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "failure",
+    "mode": "ui",
+    "probes": [
+      {
+        "name": "pip_recovery",
+        "status": "failed",
+        "failures": [
+          "PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: touch target ready id=2130968590; interactive=true keyguard=false; 画面已过期：不可用，请重新开启；提醒已停止; target=enter_pip activity=PreviewActivity focus=true pip=false finishing=false destroyed=false attached=true shown=false enabled=false windowVisibility=0 visibleRect=true bounds=Rect(16, 552 - 304, 604) ancestor[0]=Button laidOut=true layoutRequested=true ancestor[1]=LinearLayout laidOut=true layoutRequested=false ancestor[2]=LinearLayout laidOut=true layoutRequested=false ancestor[3]=FrameLayout laidOut=true layoutRequested=false ancestor[4]=LinearLayout laidOut=true layoutRequested=false ancestor[5]=DecorView laidOut=true layoutRequested=false; 画面已过期：不可用，请重新开启；提醒已停止"
+        ]
+      },
+      {
+        "name": "runtime",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "preview",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "overlay",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "layout",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "home",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "recovery",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "pip-repeat",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "support",
+        "status": "passed",
+        "failures": []
+      }
+    ],
+    "observations": [],
+    "anrs": [],
+    "failure_time_focus": [
+      {
+        "file": "cache/ui-probe/pip-recovery-failure-input.txt",
+        "focused_window": "displayId=0, name='537bee9 com.cyanrbt.walkbuddy/com.cyanrbt.walkbuddy.PreviewActivity'"
+      }
+    ],
+    "focused_external_anr_dialogs": []
+  },
+  "frozen_producers": {
+    "scope": "Frozen virtual Camera2 and synthetic EGL; no product lifecycle, actual AR, or device acceptance",
+    "camera": {
+      "accepted": true,
+      "pairs": [
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 300,
+          "viewHeight": 400,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "9a5368a321885cec51b7aac931900e1d83004c8615975554ccc43468ac44b14b",
+          "surfaceArgbSha256": "9a5368a321885cec51b7aac931900e1d83004c8615975554ccc43468ac44b14b",
+          "referenceRgb": 117286,
+          "surfaceRgb": 117286,
+          "requestCallNs": 34905,
+          "callbackLatencyNs": 920396,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 57323878700,
+          "sourceTimestampAfter": 57323878700,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        },
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 280,
+          "viewHeight": 210,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "9a5368a321885cec51b7aac931900e1d83004c8615975554ccc43468ac44b14b",
+          "surfaceArgbSha256": "9a5368a321885cec51b7aac931900e1d83004c8615975554ccc43468ac44b14b",
+          "referenceRgb": 117286,
+          "surfaceRgb": 117286,
+          "requestCallNs": 26430,
+          "callbackLatencyNs": 2181529,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 57323878700,
+          "sourceTimestampAfter": 57323878700,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        }
+      ],
+      "sensor": 90,
+      "metadataFrames": 11,
+      "lastSensorTimestamp": 57323878700,
+      "rotateAndCropNone": true,
+      "stateEvents": [
+        {
+          "event": "OPENED",
+          "elapsedRealtimeNs": 56239117341,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": null
+        },
+        {
+          "event": "CONFIGURED",
+          "elapsedRealtimeNs": 56254405582,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": null
+        },
+        {
+          "event": "READY",
+          "elapsedRealtimeNs": 56254432151,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "START_AFTER_INITIAL_READY",
+          "elapsedRealtimeNs": 56254895385,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "REPEATING_SUBMITTED id=0",
+          "elapsedRealtimeNs": 56261461120,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "ACTIVE",
+          "elapsedRealtimeNs": 56261499741,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "CAPTURE count=1 frame=0",
+          "elapsedRealtimeNs": 56498300942,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "CAPTURE count=2 frame=1",
+          "elapsedRealtimeNs": 56686516432,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "CAPTURE count=3 frame=2",
+          "elapsedRealtimeNs": 56789768506,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "CAPTURE count=4 frame=3",
+          "elapsedRealtimeNs": 56791467795,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "STOP_REPEATING",
+          "elapsedRealtimeNs": 56791487021,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": false
+        },
+        {
+          "event": "STOP_RETURNED",
+          "elapsedRealtimeNs": 56791860157,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": false
+        },
+        {
+          "event": "SEQUENCE_COMPLETED id=0 frame=10",
+          "elapsedRealtimeNs": 57302999222,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": false
+        },
+        {
+          "event": "SEQUENCE_WAIT_PASSED",
+          "elapsedRealtimeNs": 57303232888,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": false
+        },
+        {
+          "event": "READY",
+          "elapsedRealtimeNs": 57305774378,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "IDLE_WAIT_PASSED",
+          "elapsedRealtimeNs": 57305836523,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "FINISH captures=11",
+          "elapsedRealtimeNs": 57538385804,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "SESSION_CLOSED",
+          "elapsedRealtimeNs": 57733301753,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        }
+      ]
+    },
+    "egl": {
+      "accepted": true,
+      "pairs": [
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 300,
+          "viewHeight": 400,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "referenceRgb": 71946,
+          "surfaceRgb": 71946,
+          "requestCallNs": 2121086,
+          "callbackLatencyNs": 2174095,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 57896599722,
+          "sourceTimestampAfter": 57896599722,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        },
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 280,
+          "viewHeight": 210,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "referenceRgb": 71946,
+          "surfaceRgb": 71946,
+          "requestCallNs": 22772,
+          "callbackLatencyNs": 1614451,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 57896599722,
+          "sourceTimestampAfter": 57896599722,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        }
+      ]
+    },
+    "accepted": true
+  },
+  "first_problem_reports": {
+    "cache/ui-probe/pip-recovery-failure-problem-info-3458-83267.txt": "WalkBuddy 问题信息\n版本：0.4.38 / 50\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：GENERAL\n提示：画面已过期：不可用，请重新开启\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：1436；显示帧龄(ms)：1420；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：未取得；墙钟(ms)：未取得；CPU(ms)：未取得\n异步亮度检查：DELIVERING；观测帧龄(ms)：1420\n亮度排队(ms)：9；请求墙钟(ms)：1383；调用与像素处理CPU(ms)：0；交付(ms)：11；结果码：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+  },
+  "scope": "Actual frame expiry retained independently; not an initial-ready fixture failure, not proof of exact GPU/RenderThread root cause."
+}

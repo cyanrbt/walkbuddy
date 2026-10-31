@@ -1,0 +1,112 @@
+{
+  "formal": {
+    "id": 41172338591,
+    "sha": "a4bbb537e6053674fd565c13fff992e959b936e7",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41172338591",
+    "jobs": [
+      {
+        "id": 124452762916,
+        "name": "ui / layout (35)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124452763041,
+        "name": "ui / layout (36)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124454080891,
+        "name": "apk",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "main_rechecks": [
+    {
+      "id": 41172338632,
+      "name": "Preview system trace",
+      "sha": "a4bbb537e6053674fd565c13fff992e959b936e7",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41172338632"
+    },
+    {
+      "id": 41172338638,
+      "name": "Android UI checks",
+      "sha": "a4bbb537e6053674fd565c13fff992e959b936e7",
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41172338638"
+    },
+    {
+      "id": 41172338642,
+      "name": "Surface copy experiment",
+      "sha": "a4bbb537e6053674fd565c13fff992e959b936e7",
+      "status": "completed",
+      "conclusion": "failure",
+      "attempt": 1,
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41172338642"
+    }
+  ],
+  "drain_jobs": {
+    "surface": [
+      {
+        "id": 124456860547,
+        "name": "compare / layout (35)",
+        "status": "completed",
+        "conclusion": "failure"
+      },
+      {
+        "id": 124456860667,
+        "name": "compare / layout (26)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124456860689,
+        "name": "compare / layout (36)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "ui": [
+      {
+        "id": 124456860543,
+        "name": "layout (36)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124456860673,
+        "name": "layout (35)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "drain35_log_excerpt": [
+    "2026-10-31T05:46:24.2848433Z SURFACE_PRODUCERS_PARITY_PASS camera_cases=2 egl_cases=2 pixels=768; frozen independent producers, exact ARGB and stable timestamps",
+    "2026-10-31T05:46:39.7825516Z PIP_RECOVERY_PROBE_FAIL: java.lang.AssertionError: Timed out: touch target ready id=2130968655; interactive=true keyguard=false; 已停止；请主动开启; target=start activity=MainActivity focus=false pip=false finishing=false destroyed=false attached=true shown=true enabled=true windowVisibility=0 visibleRect=true bounds=Rect(20, 550 - 300, 602) ancestor[0]=Button laidOut=true layoutRequested=false ancestor[1]=LinearLayout laidOut=true layoutRequested=false ancestor[2]=LinearLayout laidOut=true layoutRequested=false ancestor[3]=LinearLayout laidOut=true layoutRequested=false ancestor[4]=FrameLayout laidOut=true layoutRequested=false ancestor[5]=LinearLayout laidOut=true layoutRequested=false ancestor[6]=DecorView laidOut=true layoutRequested=false; 已停止；请主动开启",
+    "2026-10-31T05:47:12.9534676Z HOME_PROBE_FAIL: java.lang.AssertionError: Timed out: focused home with AppOps observer and drained refresh",
+    "2026-10-31T05:47:29.6757525Z PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: full preview owns screen hold; interactive=false keyguard=false; 锁屏：摄像头已停止，请主动重新开启；提醒已停止; 锁屏：摄像头已停止，请主动重新开启；提醒已停止",
+    "2026-10-31T05:47:43.8100573Z PIP_PROBE_FAIL: java.lang.AssertionError: Timed out: full preview owns screen hold; interactive=false keyguard=false; 锁屏：摄像头已停止，请主动重新开启；提醒已停止; 锁屏：摄像头已停止，请主动重新开启；提醒已停止",
+    "2026-10-31T05:47:55.3442845Z SUPPORT_PROBE_FAIL: java.lang.AssertionError: Timed out: problem info copy input window ready after event idle; interactive=true keyguard=false; 测试后续离屏；提醒已停止"
+  ],
+  "artifact_transfer": {
+    "initial_full_downloads": "Local curl timeout followed by expired signed-URL 403; not a workflow rerun",
+    "final": "HTTP206 ranges checked, assembled original full length/SHA-256 verified before ZIP and UI replay",
+    "artifacts": [
+      13032300483,
+      13031269775,
+      13032335446
+    ]
+  }
+}

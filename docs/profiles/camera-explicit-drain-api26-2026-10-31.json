@@ -1,0 +1,281 @@
+{
+  "source_commit": "2b71a395b54a72deeda17449bb532789c7979fa5",
+  "run": 41173728712,
+  "job": 124456860667,
+  "artifact_id": 13032202750,
+  "artifact_bytes": 130380,
+  "artifact_sha256": "732107166e116d0197d1b3dd6b231ce072d6eb3f9f7adb8a7331518f64e99aed",
+  "whole_zip_size_sha256_crc_verified": true,
+  "fresh_ready_after_abort_drain_verified": true,
+  "summary": {
+    "status": "passed",
+    "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+    "build_result": "success",
+    "emulator_result": "success",
+    "mode": "surface",
+    "probes": [],
+    "observations": [],
+    "anrs": [],
+    "failure_time_focus": [],
+    "focused_external_anr_dialogs": []
+  },
+  "producers": {
+    "scope": "Frozen virtual Camera2 and synthetic EGL; no product lifecycle, actual AR, or device acceptance",
+    "camera": {
+      "accepted": true,
+      "pairs": [
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 300,
+          "viewHeight": 400,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "0135a763be07a72f63127d9d966879f467ae0246fb0dca7fa5075792696fb83c",
+          "surfaceArgbSha256": "0135a763be07a72f63127d9d966879f467ae0246fb0dca7fa5075792696fb83c",
+          "referenceRgb": 33977,
+          "surfaceRgb": 33977,
+          "requestCallNs": 1028620,
+          "callbackLatencyNs": 1171870,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 64923827480,
+          "sourceTimestampAfter": 64923827480,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        },
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 280,
+          "viewHeight": 210,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "0135a763be07a72f63127d9d966879f467ae0246fb0dca7fa5075792696fb83c",
+          "surfaceArgbSha256": "0135a763be07a72f63127d9d966879f467ae0246fb0dca7fa5075792696fb83c",
+          "referenceRgb": 33977,
+          "surfaceRgb": 33977,
+          "requestCallNs": 7457820,
+          "callbackLatencyNs": 7608110,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 64923827480,
+          "sourceTimestampAfter": 64923827480,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        }
+      ],
+      "sensor": 90,
+      "metadataFrames": 4,
+      "lastSensorTimestamp": 64923827480,
+      "rotateAndCropNone": false,
+      "stateEvents": [
+        {
+          "event": "OPENED",
+          "elapsedRealtimeNs": 63922254410,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": null
+        },
+        {
+          "event": "CONFIGURED",
+          "elapsedRealtimeNs": 64065429290,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": null
+        },
+        {
+          "event": "READY",
+          "elapsedRealtimeNs": 64065486950,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "START_AFTER_INITIAL_READY",
+          "elapsedRealtimeNs": 64072185550,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "REPEATING_SUBMITTED id=0",
+          "elapsedRealtimeNs": 64074052140,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": true
+        },
+        {
+          "event": "ACTIVE",
+          "elapsedRealtimeNs": 64074310500,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "CAPTURE count=1 frame=0",
+          "elapsedRealtimeNs": 64479317270,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "CAPTURE count=2 frame=1",
+          "elapsedRealtimeNs": 64591435730,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "CAPTURE count=3 frame=2",
+          "elapsedRealtimeNs": 64958650320,
+          "onMain": true,
+          "stopping": false,
+          "lastReady": false
+        },
+        {
+          "event": "STOP_REPEATING",
+          "elapsedRealtimeNs": 64959189660,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": false
+        },
+        {
+          "event": "STOP_RETURNED",
+          "elapsedRealtimeNs": 64959410460,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": false
+        },
+        {
+          "event": "CAPTURE count=4 frame=3",
+          "elapsedRealtimeNs": 65092097280,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": false
+        },
+        {
+          "event": "SEQUENCE_COMPLETED id=0 frame=3",
+          "elapsedRealtimeNs": 65092163330,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": false
+        },
+        {
+          "event": "READY",
+          "elapsedRealtimeNs": 65092226860,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "SEQUENCE_WAIT_PASSED",
+          "elapsedRealtimeNs": 65092332160,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "ABORT_DRAIN",
+          "elapsedRealtimeNs": 65095966620,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "ABORT_DRAIN_RETURNED",
+          "elapsedRealtimeNs": 65096088860,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "READY",
+          "elapsedRealtimeNs": 65096394700,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "IDLE_WAIT_PASSED",
+          "elapsedRealtimeNs": 65098916080,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "FINISH captures=4",
+          "elapsedRealtimeNs": 65241743280,
+          "onMain": false,
+          "stopping": true,
+          "lastReady": true
+        },
+        {
+          "event": "SESSION_CLOSED",
+          "elapsedRealtimeNs": 65325313450,
+          "onMain": true,
+          "stopping": true,
+          "lastReady": true
+        }
+      ]
+    },
+    "egl": {
+      "accepted": true,
+      "pairs": [
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 300,
+          "viewHeight": 400,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "referenceRgb": 71946,
+          "surfaceRgb": 71946,
+          "requestCallNs": 3015030,
+          "callbackLatencyNs": 3078190,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 65487295630,
+          "sourceTimestampAfter": 65487295630,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        },
+        {
+          "sensor": 90,
+          "display": 0,
+          "viewWidth": 280,
+          "viewHeight": 210,
+          "result": 0,
+          "referenceStable": true,
+          "referenceChangedPixels": 0,
+          "differentPixels": 0,
+          "firstDifference": -1,
+          "referenceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "surfaceArgbSha256": "10e90fa70ab8a8715411687ab0f728ab1d09c8dd9d270e817e007576e9f1df01",
+          "referenceRgb": 71946,
+          "surfaceRgb": 71946,
+          "requestCallNs": 1696750,
+          "callbackLatencyNs": 1758410,
+          "requestedOffMain": true,
+          "accepted": true,
+          "sourceTimestampBefore": 65487295630,
+          "sourceTimestampAfter": 65487295630,
+          "sourceTimestampStable": true,
+          "asyncReaderVerified": true
+        }
+      ]
+    },
+    "accepted": true
+  }
+}
