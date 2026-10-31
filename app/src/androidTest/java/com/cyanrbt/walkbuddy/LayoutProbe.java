@@ -175,7 +175,7 @@ final class LayoutProbe {
         report.append("RECOVERY_PRESENTATION_LAYOUT_PASS configurations=30 full=660 compact=1320 restored=660; native full text, opaque cover, hidden settings, accessible reason, fixed actions, scroll and original preview style\n");
         report.append("VIBRATION_SETTING_LAYOUT_PASS configurations=30; enabled/muted legend, native checkbox, full text and scroll reach\n");
         report.append("PREVIEW_ONLY_LAYOUT_PASS configurations=30 compact=96x128; default full heading, persistent compact notice, no clipping, unchanged repeated text, detection-on and expansion clear notice\n");
-        report.append("VIEWFINDER_LAYOUT_PASS configurations=30 larger_viewport=true essential_actions=true detection_and_depth_cues=true choices_retained=true recovery_visible=true restored=true\n");
+        report.append("VIEWFINDER_LAYOUT_PASS configurations=30 larger_viewport=true larger_camera_pixels=true essential_actions=true detection_and_depth_cues=true choices_retained=true recovery_visible=true restored=true\n");
     }
 
     private static void checkHapticLegend(View root,int width,int height,File output) throws Exception {

@@ -1,0 +1,94 @@
+{
+  "source_commit": "fbf73d374ce4d0be0b20845414139c7ee9c0df1b",
+  "runs": [
+    {
+      "id": 41193356040,
+      "name": "Surface copy experiment",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41193356040",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124514467412,
+          "name": "compare / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124514467527,
+          "name": "compare / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124514467534,
+          "name": "compare / layout (26)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41193355992,
+      "name": "CPU capacity trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41193355992",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124514467366,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124514467502,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41193355973,
+      "name": "Preview system trace",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41193355973",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124514467488,
+          "name": "trace / layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124514467626,
+          "name": "trace / layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 41193355965,
+      "name": "Android UI checks",
+      "url": "https://github.com/cyanrbt/walkbuddy/actions/runs/41193355965",
+      "attempt": 1,
+      "jobs": [
+        {
+          "id": 124514467280,
+          "name": "layout (36)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124514467422,
+          "name": "layout (35)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "reruns_requested": 0,
+  "scope": "All nine jobs succeeded at first attempt. Normal API35/36 full archives were locally verified/replayed. Other workflows inspected for terminal result only; raw system traces not locally replayed.",
+  "refinement": "Initial area assertions compared the preview container. Landscape fit-center images can remain height-limited when only the sidebar is hidden. A subsequent source revision reduces enlarged header space and checks the actual fit-center image area in all 30 layouts, with per-case numeric records. These first successes do not prove that later stronger condition."
+}

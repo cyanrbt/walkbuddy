@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BooleanSupplier;
+import org.json.JSONObject;
 
 /** Actual Camera2 and real touch toggles; a deliberate failure exercises recovery expansion. */
 final class ViewfinderProbe {
@@ -19,12 +20,17 @@ final class ViewfinderProbe {
         await(runner,()->live(host) && host.hasWindowFocus(),"viewfinder initial live");
         Snapshot before=read(runner,()->new Snapshot(host));
         long area=read(runner,()->area(host.findViewById(R.id.preview_frame)));
+        double image=read(runner,()->imageArea(host));
+        JSONObject normal=read(runner,()->geometry(host));
         PipProbe.tap(runner,host,R.id.viewfinder_toggle);
-        await(runner,()->enlarged(host) && area(host.findViewById(R.id.preview_frame))>area,"larger actual viewport");
+        await(runner,()->enlarged(host) && area(host.findViewById(R.id.preview_frame))>area && imageArea(host)>image,"larger actual camera pixels");
         read(runner,()->{before.unchanged(host);assertEnlarged(host);return true;});
         long at=SystemClock.elapsedRealtime();
         await(runner,()->live(host) && state(host).captureAt>at+250 && state(host).displayAt>at+250,"frames after enlargement");
         PipProbe.screenshot(runner,"viewfinder-actual-enlarged.png");
+        JSONObject large=read(runner,()->geometry(host));
+        SupportProbe.write(runner,"viewfinder-actual-geometry.json",new JSONObject().put("normal",normal).put("enlarged",large)
+            .put("scope","Actual emulated Camera2 window and production display geometry; no device FPS/power claim").toString(2));
         PipProbe.tap(runner,host,R.id.enter_pip);
         await(runner,host::isInPictureInPictureMode,"enlarged explicit PiP");
         read(runner,()->{
@@ -37,7 +43,7 @@ final class ViewfinderProbe {
         read(runner,()->{before.unchanged(host);assertEnlarged(host);return true;});
         PipProbe.tap(runner,host,R.id.viewfinder_toggle);
         await(runner,()->live(host) && host.findViewById(R.id.preview_controls).isShown()
-            && area(host.findViewById(R.id.preview_frame))==area,"settings and viewport restored");
+            && area(host.findViewById(R.id.preview_frame))==area && imageArea(host)==image,"settings and viewport restored");
         read(runner,()->{before.unchanged(host);return true;});
         PipProbe.screenshot(runner,"viewfinder-actual-controls.png");
         PipProbe.tap(runner,host,R.id.viewfinder_toggle);
@@ -107,6 +113,16 @@ final class ViewfinderProbe {
         }
     }
     private static long area(View view){return (long)view.getWidth()*view.getHeight();}
+    private static double imageArea(PreviewActivity host) {
+        PreviewGeometry geometry=(PreviewGeometry)field(host,"previewGeometry");
+        return geometry==null?0:(double)geometry.width*geometry.height;
+    }
+    private static JSONObject geometry(PreviewActivity host) throws Exception {
+        PreviewGeometry geometry=(PreviewGeometry)field(host,"previewGeometry");
+        View frame=host.findViewById(R.id.preview_frame);
+        return new JSONObject().put("frameWidth",frame.getWidth()).put("frameHeight",frame.getHeight())
+            .put("imageWidth",geometry.width).put("imageHeight",geometry.height).put("imageArea",imageArea(host));
+    }
     private static boolean enlarged(PreviewActivity host){return live(host) && !host.isInPictureInPictureMode() && host.findViewById(R.id.preview_controls).getVisibility()==View.GONE;}
     private static boolean live(PreviewActivity host){return state(host).phase==SessionState.Phase.LIVE && state(host).fresh(SystemClock.elapsedRealtime());}
     private static SessionState state(PreviewActivity host){return (SessionState)field(host,"state");}

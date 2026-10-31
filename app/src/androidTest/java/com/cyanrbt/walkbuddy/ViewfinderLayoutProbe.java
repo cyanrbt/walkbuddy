@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
+import org.json.JSONObject;
 
 /** Constructed native layouts for large fonts, viewport space and essential status/actions. */
 final class ViewfinderLayoutProbe {
@@ -16,12 +19,25 @@ final class ViewfinderLayoutProbe {
         TextView depthCue=root.findViewById(R.id.pip_depth_status);CharSequence oldDepth=depthCue.getText();
         PreviewChrome.compact(root,false,false);PreviewChrome.viewfinder(root,false,true,false);measure(root,width,height);
         View camera=root.findViewById(R.id.preview_frame);long originalArea=area(camera);
+        double originalImage=imageArea(camera,width>height?90:0);
+        int originalWidth=camera.getWidth(),originalHeight=camera.getHeight();
         try {
             detection.setChecked(false);sound.setChecked(false);
+            PreviewChrome.title(root.findViewById(R.id.preview_title),PreviewStatus.heading(SessionState.Phase.LIVE,true,false));
             PreviewChrome.viewfinder(root,false,true,true);PreviewChrome.detectionStatus(root,true,false,false,false,true);
             measure(root,width,height);
             if(area(camera)<=originalArea || root.findViewById(R.id.preview_controls).getVisibility()!=View.GONE)
                 throw new AssertionError("Enlargement did not give space back to the camera: "+name);
+            if(imageArea(camera,width>height?90:0)<=originalImage)
+                throw new AssertionError("Enlargement added letterboxing without enlarging camera pixels: "+name);
+            JSONObject geometry=new JSONObject().put("configuration",name).put("displayDegrees",width>height?90:0)
+                .put("normalFrameWidth",originalWidth).put("normalFrameHeight",originalHeight)
+                .put("enlargedFrameWidth",camera.getWidth()).put("enlargedFrameHeight",camera.getHeight())
+                .put("normalImageArea",originalImage).put("enlargedImageArea",imageArea(camera,width>height?90:0))
+                .put("scope","Native constructed layout with the production 640x480 fit-center geometry; not a camera throughput measurement");
+            try(FileOutputStream stream=new FileOutputStream(new File(output,name+"-viewfinder-geometry.json"))) {
+                stream.write(geometry.toString(2).getBytes(StandardCharsets.UTF_8));
+            }
             for(int id:new int[]{R.id.viewfinder_toggle,R.id.preview_stop,R.id.enter_pip})visible(root,root.findViewById(id));
             View toggle=root.findViewById(R.id.viewfinder_toggle);
             if(!toggle.isSelected() || !toggle.isEnabled() || !root.getContext().getText(R.string.viewfinder_controls).equals(toggle.getContentDescription()))
@@ -33,6 +49,7 @@ final class ViewfinderLayoutProbe {
 
             // Choices remain checked even while their controls are hidden.
             detection.setChecked(true);sound.setChecked(true);vibration.setChecked(false);
+            PreviewChrome.title(root.findViewById(R.id.preview_title),PreviewStatus.heading(SessionState.Phase.LIVE,true,true));
             PreviewChrome.depth(root,true);depthCue.setText("地面已确认 · 等待深度");
             PreviewChrome.viewfinder(root,false,true,true);PreviewChrome.detectionStatus(root,true,true,false,false,true);measure(root,width,height);
             if(!detection.isChecked() || !sound.isChecked() || vibration.isChecked() || warning.getVisibility()!=View.GONE
@@ -57,9 +74,15 @@ final class ViewfinderLayoutProbe {
             detection.setChecked(rec);sound.setChecked(audio);vibration.setChecked(haptics);
             detection.setEnabled(true);sound.setEnabled(rec);vibration.setEnabled(true);root.findViewById(R.id.enable_depth).setEnabled(true);
             PreviewChrome.viewfinder(root,false,true,false);PreviewChrome.detectionStatus(root,true,rec,false,false);depthCue.setText(oldDepth);
+            PreviewChrome.title(root.findViewById(R.id.preview_title),PreviewStatus.heading(SessionState.Phase.LIVE,true,rec));
             measure(root,width,height);
         }
-        if(area(camera)!=originalArea)throw new AssertionError("Restored viewport differs from original: "+name);
+        if(area(camera)!=originalArea || imageArea(camera,width>height?90:0)!=originalImage)
+            throw new AssertionError("Restored viewport differs from original: "+name);
+    }
+    private static double imageArea(View view,int display) {
+        PreviewGeometry geometry=new PreviewGeometry(640,480,90,display,view.getWidth(),view.getHeight());
+        return (double)geometry.width*geometry.height;
     }
     private static long area(View view){return (long)view.getWidth()*view.getHeight();}
     private static void visible(View root,View view) {

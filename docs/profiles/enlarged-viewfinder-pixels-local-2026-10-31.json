@@ -1,0 +1,54 @@
+{
+  "version": "0.4.40",
+  "versionCode": 52,
+  "jvm": {
+    "tests": 273,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "production_and_full_jvm_build": "BUILD SUCCESSFUL in 44s",
+  "geometry_metadata_build": "BUILD SUCCESSFUL in 29s",
+  "final_layout_fixture_build": "BUILD SUCCESSFUL in 25s",
+  "latest_checks": "Lint and final test APK compilation; production main source unchanged since the 44s full build",
+  "source": [
+    {
+      "path": "app/src/main/java/com/cyanrbt/walkbuddy/PreviewChrome.java",
+      "bytes": 4802,
+      "sha256": "fb837f78e879dc376b56c72d38610c2b859088172fcec219602260136f25306c"
+    },
+    {
+      "path": "app/src/main/res/layout/activity_preview.xml",
+      "bytes": 18329,
+      "sha256": "9f3bf765f9b47a205610433f6417446dbbbe2dc62b33bca4b65d707a59a9a49f"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/ViewfinderProbe.java",
+      "bytes": 10859,
+      "sha256": "755bd1532eda697034264662fb7a785e557cd742088655d9b4eee43f087fba91"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/ViewfinderLayoutProbe.java",
+      "bytes": 8410,
+      "sha256": "1499d35b796dce5c550ff8044d231a5ed863e917ef876cb5825267608d96f175"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java",
+      "bytes": 38706,
+      "sha256": "d7f2a1fe472472a797ea916767a74864ba47e1367a5c05627ac0d6e12235735c"
+    }
+  ],
+  "local_universal_debug_apks": [
+    {
+      "path": "app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 26266808,
+      "sha256": "d3426c160c3355b3c29317ea589fecc56b7940c1b23d8ce3929d7ba00c60edbb"
+    },
+    {
+      "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "bytes": 619579,
+      "sha256": "fb38740658a1607732912219478b55553eecbeba52ce9cd1fcbaaa721f44a598"
+    }
+  ],
+  "scope": "Local JVM/Lint/compilation; 30-layout and real Camera2 image-area records pending cloud execution."
+}

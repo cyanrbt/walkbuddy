@@ -36,6 +36,11 @@ final class PreviewChrome {
     }
     static void viewfinder(View root,boolean compact,boolean live,boolean requested) {
         boolean enlarged=live && requested && !compact;
+        root.findViewById(R.id.preview_name).setVisibility(enlarged?View.GONE:View.VISIBLE);
+        View header=root.findViewById(R.id.preview_header);
+        int inset=Math.round((enlarged?4:8)*root.getResources().getDisplayMetrics().density);
+        if(header.getPaddingTop()!=inset || header.getPaddingBottom()!=inset)
+            header.setPadding(header.getPaddingLeft(),inset,header.getPaddingRight(),inset);
         root.findViewById(R.id.preview_controls).setVisibility(compact || enlarged?View.GONE:View.VISIBLE);
         android.widget.ImageButton toggle=root.findViewById(R.id.viewfinder_toggle);
         toggle.setEnabled(live && !compact);toggle.setAlpha(live && !compact?1f:.45f);
