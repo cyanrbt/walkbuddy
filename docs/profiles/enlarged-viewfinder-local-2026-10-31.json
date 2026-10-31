@@ -1,0 +1,111 @@
+{
+  "versionName": "0.4.40",
+  "versionCode": 52,
+  "jvm": {
+    "tests": 273,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_status_cases": 3,
+  "final_build": "BUILD SUCCESSFUL in 38s",
+  "tasks": "testDebugUnitTest lintDebug assembleDebug assembleDebugAndroidTest -PuniversalApk --offline",
+  "actionlint": "passed",
+  "release_metadata": "passed",
+  "diff_check": "passed",
+  "source": [
+    {
+      "path": "app/build.gradle",
+      "bytes": 1457,
+      "sha256": "0579896a5ca3bde3de20d67241e19f3a01c04e32f8b056cf7ed3616f451dc5ee"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/LayoutProbe.java",
+      "bytes": 38680,
+      "sha256": "c29501cd62e6b27e7f18cf1f242aa3c6f2330c050978e3a7b7fd64339f6e1fd8"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java",
+      "bytes": 95817,
+      "sha256": "6aa65c1b9a09e47351e6f5af68e2ca82abf8a731add042329ab43d717790cf98"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/PreviewReadinessProbe.java",
+      "bytes": 9408,
+      "sha256": "353c280a06841e6f147799823d7c7769f67b830c5df33c04eea9c1bfa7a4e51b"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/RecoveryPresentationProbe.java",
+      "bytes": 9211,
+      "sha256": "71c367b38e32e518d6a6a9059f1003502087c94b223a76324bc417b208401a65"
+    },
+    {
+      "path": "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java",
+      "bytes": 68736,
+      "sha256": "9cff1a498e3e65b7bedec7e23858e68a9cf5b285f5a047cf4271d473bcbcb15d"
+    },
+    {
+      "path": "app/src/main/java/com/cyanrbt/walkbuddy/PreviewChrome.java",
+      "bytes": 4384,
+      "sha256": "d7ebafabdc035b93d953798874b0f5e652bf8047f38a0135d5b12a8f2c442e3c"
+    },
+    {
+      "path": "app/src/main/java/com/cyanrbt/walkbuddy/PreviewRecovery.java",
+      "bytes": 3150,
+      "sha256": "90f5b438493c1f247e7f8b68fa6745554e210fa7de9f75c6e6a734f12dbfc196"
+    },
+    {
+      "path": "app/src/main/java/com/cyanrbt/walkbuddy/PreviewStatus.java",
+      "bytes": 892,
+      "sha256": "191b6e942e15aa3c2daa7528bc8c91e2b1b6cad1b70ea565f650c06e4a92cc3e"
+    },
+    {
+      "path": "app/src/main/res/layout/activity_preview.xml",
+      "bytes": 18298,
+      "sha256": "34fdb5eb5cb7899a426ed0c5d5155a2b60c38a5529875adbf02c09f14a778a0f"
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "bytes": 10321,
+      "sha256": "8139da9fd446879d3dd4a29eef3e0b5cc22df7b81bbcb04749e159c0eaef2a6c"
+    },
+    {
+      "path": "app/src/test/java/com/cyanrbt/walkbuddy/PreviewStatusTest.java",
+      "bytes": 3152,
+      "sha256": "25305b8f49567e13620f8883bc96c6750319174f861a81a0a372d13a19e42d99"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_expand_preview.xml",
+      "bytes": 417,
+      "sha256": "bfb89518cf9701692969e49ed3a7c10c3ea44efdc96e0fd29511cedc0b1957b7"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_restore_controls.xml",
+      "bytes": 417,
+      "sha256": "974bce6e1cc584715f4cd7b367d46d9ff2f3db9bdbf6ad0624de859ad065811e"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/ViewfinderProbe.java",
+      "bytes": 9680,
+      "sha256": "4503bdfb3800e7e9b919c4112afd0d4032802620f890c7d3c5725b838c2d99fa"
+    },
+    {
+      "path": "app/src/androidTest/java/com/cyanrbt/walkbuddy/ViewfinderLayoutProbe.java",
+      "bytes": 6507,
+      "sha256": "f96e49c617a7f4a1d79f348826733b71582094e485e746445de41775d1a13d46"
+    }
+  ],
+  "local_universal_debug_apks": [
+    {
+      "path": "app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 26266764,
+      "sha256": "14404571a1d1806ceb5a2c52f5cacf0c8b63c2b378425f8ed0ca8d71eb1447c7"
+    },
+    {
+      "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "bytes": 616370,
+      "sha256": "3c40dfc7099f14f01931487bdae63b4ff59eec40565892267dc41fc64e0495b3"
+    }
+  ],
+  "scope": "Local JVM/Lint and compilation only. New real-touch/Camera2/model/PiP/30-layout probes not yet executed. Local universal debug APK signing does not verify the fixed formal ARM64 release."
+}

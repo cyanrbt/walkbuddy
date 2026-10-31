@@ -166,6 +166,7 @@ final class LayoutProbe {
                 ((TextView)root.findViewById(R.id.depth_guide_hint)).setText(R.string.guide_hint_default);
                 measure(root,size[0],size[1]);
                 checkHapticLegend(root,size[0],size[1],new File(output,"haptics-"+name+".png"));
+                ViewfinderLayoutProbe.check(root,size[0],size[1],output,name);
                 report.append("PASS ").append(name).append(" camera=").append(camera.getWidth()).append('x').append(camera.getHeight()).append('\n');
             }
         report.append("FEEDBACK_COOLDOWN_PASS configurations=30 scenarios=3 near_at=1600 caution_at=3400; current results only, disappearance requires new confirmation\n");
@@ -174,6 +175,7 @@ final class LayoutProbe {
         report.append("RECOVERY_PRESENTATION_LAYOUT_PASS configurations=30 full=660 compact=1320 restored=660; native full text, opaque cover, hidden settings, accessible reason, fixed actions, scroll and original preview style\n");
         report.append("VIBRATION_SETTING_LAYOUT_PASS configurations=30; enabled/muted legend, native checkbox, full text and scroll reach\n");
         report.append("PREVIEW_ONLY_LAYOUT_PASS configurations=30 compact=96x128; default full heading, persistent compact notice, no clipping, unchanged repeated text, detection-on and expansion clear notice\n");
+        report.append("VIEWFINDER_LAYOUT_PASS configurations=30 larger_viewport=true essential_actions=true detection_and_depth_cues=true choices_retained=true recovery_visible=true restored=true\n");
     }
 
     private static void checkHapticLegend(View root,int width,int height,File output) throws Exception {

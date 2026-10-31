@@ -15,17 +15,37 @@ final class PreviewChrome {
         if(!android.text.TextUtils.equals(title.getText(),label))title.setText(label);
     }
     static void detectionStatus(View root,boolean live,boolean recognition,boolean stoppedNotice,boolean compact) {
-        detectionStopped(root,PreviewStatus.showNotice(live,recognition,stoppedNotice,compact),compact);
+        detectionStatus(root,live,recognition,stoppedNotice,compact,false);
+    }
+    static void detectionStatus(View root,boolean live,boolean recognition,boolean stoppedNotice,boolean compact,boolean enlarged) {
+        detectionStopped(root,PreviewStatus.showNotice(live,recognition,stoppedNotice,compact,enlarged),compact,enlarged,
+            enlarged && !stoppedNotice?R.string.detection_off_enlarged:R.string.detection_stopped_preview_only);
     }
     static void detectionStopped(View root,boolean stopped,boolean compact) {
+        detectionStopped(root,stopped,compact,false,R.string.detection_stopped_preview_only);
+    }
+    private static void detectionStopped(View root,boolean stopped,boolean compact,boolean enlarged,int fullText) {
         android.widget.TextView warning=root.findViewById(R.id.detection_status);
         warning.setVisibility(stopped?View.VISIBLE:View.GONE);
-        int text=compact?R.string.detection_stopped_compact:R.string.detection_stopped_preview_only;
+        int text=compact?R.string.detection_stopped_compact:fullText;
         CharSequence label=root.getResources().getText(text);
         if(!android.text.TextUtils.equals(warning.getText(),label))warning.setText(label);
         boolean depth=root.findViewById(R.id.depth_steps).getVisibility()==View.VISIBLE;
-        root.findViewById(R.id.pip_depth_status).setVisibility(compact && depth && !stopped?View.VISIBLE:View.GONE);
+        root.findViewById(R.id.pip_depth_status).setVisibility((compact || enlarged) && depth && !stopped?View.VISIBLE:View.GONE);
         if(compact && stopped)root.findViewById(R.id.posture_hint).setVisibility(View.GONE);
+    }
+    static void viewfinder(View root,boolean compact,boolean live,boolean requested) {
+        boolean enlarged=live && requested && !compact;
+        root.findViewById(R.id.preview_controls).setVisibility(compact || enlarged?View.GONE:View.VISIBLE);
+        android.widget.ImageButton toggle=root.findViewById(R.id.viewfinder_toggle);
+        toggle.setEnabled(live && !compact);toggle.setAlpha(live && !compact?1f:.45f);
+        if(toggle.isSelected()!=enlarged) {
+            toggle.setSelected(enlarged);
+            toggle.setImageResource(enlarged?R.drawable.ic_restore_controls:R.drawable.ic_expand_preview);
+        }
+        CharSequence description=root.getResources().getText(enlarged?R.string.viewfinder_controls:R.string.viewfinder_expand);
+        if(!android.text.TextUtils.equals(toggle.getContentDescription(),description))toggle.setContentDescription(description);
+        if(!android.text.TextUtils.equals(toggle.getTooltipText(),description))toggle.setTooltipText(description);
     }
     static void compact(View root,boolean compact,boolean depth) {
         depth(root,depth);

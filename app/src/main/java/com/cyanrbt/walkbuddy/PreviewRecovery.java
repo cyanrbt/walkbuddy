@@ -21,6 +21,7 @@ final class PreviewRecovery {
         show(root,prompt,false);
     }
     static void show(View root,RecoveryGuide.Prompt prompt,boolean compact) {
+        PreviewChrome.viewfinder(root,compact,false,false);
         PreviewCover cover=root.findViewById(R.id.preview_cover);cover.recovery(compact);
         TextView hint=root.findViewById(R.id.recovery_hint);
         TextView action=root.findViewById(R.id.restart_preview);

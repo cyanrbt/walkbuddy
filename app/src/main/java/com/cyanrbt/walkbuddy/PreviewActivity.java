@@ -445,8 +445,7 @@ public final class PreviewActivity extends Activity {
         syncKeepScreenOn();
         if (root == null) return;
         PreviewChrome.compact(root,compact,useDepth);
-        PreviewChrome.detectionStatus(root,state.phase==SessionState.Phase.LIVE && state.fresh(SystemClock.elapsedRealtime()),
-            state.recognition,detectionNotice!=0,compact);
+        renderViewfinderChrome(state.phase==SessionState.Phase.LIVE && state.fresh(SystemClock.elapsedRealtime()));
         root.requestApplyInsets();
         if (compact) getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         else getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
@@ -479,6 +478,12 @@ public final class PreviewActivity extends Activity {
         depthButton=root.findViewById(R.id.enable_depth);
         depthButton.setOnClickListener(v->chooseDepth());
         root.findViewById(R.id.copy_problem_info).setOnClickListener(v->copyProblemInfo());
+        root.findViewById(R.id.viewfinder_toggle).setOnClickListener(v->{
+            long now=SystemClock.elapsedRealtime();
+            if(!compactUi && !destroyed && checkHealth(now) && state.phase==SessionState.Phase.LIVE && state.fresh(now)) {
+                enlargedPreview=!enlargedPreview;render(now);
+            }
+        });
         refreshDepthAvailability();
         renderDepthGuide();
         recognition=root.findViewById(R.id.preview_recognition);
@@ -872,12 +877,18 @@ public final class PreviewActivity extends Activity {
         PreviewRecovery.problemInfo(root,diagnostics.available());
         depthButton.setEnabled(live);
         homeState.publish(homeOwner,state.phase,state.reason,state.recognition,detectionNotice,homeNotice);
-        PreviewChrome.detectionStatus(root,live,state.recognition,detectionNotice!=0,compactUi);
+        renderViewfinderChrome(live);
         if(live){setTextIfChanged(cover,"");if(!state.recognition)setTextIfChanged(info,getText(detectionNotice!=0?detectionNotice:R.string.info_recognition_off));}
         if(titleView!=null)PreviewChrome.title(titleView,PreviewStatus.heading(state.phase,live,state.recognition));
         renderDepthGuide();
         renderRecovery();
         syncPipActions();
+    }
+    private boolean enlargedPreview;
+    private void renderViewfinderChrome(boolean live) {
+        PreviewChrome.viewfinder(root,compactUi,live,enlargedPreview);
+        PreviewChrome.detectionStatus(root,live,state.recognition,detectionNotice!=0,compactUi,
+            live && enlargedPreview && !compactUi);
     }
     private void renderRecovery() {
         if(root==null)return;
@@ -891,6 +902,7 @@ public final class PreviewActivity extends Activity {
     }
     private void fail(RecoveryGuide.Reason reason,String message) {
         if(destroyed)return;
+        enlargedPreview=false;
         boolean observing=state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE;
         if(reason!=RecoveryGuide.Reason.INSTALLING && reason!=RecoveryGuide.Reason.SWITCHING
             && (observing || reason!=RecoveryGuide.Reason.HIDDEN && reason!=RecoveryGuide.Reason.LOCKED))

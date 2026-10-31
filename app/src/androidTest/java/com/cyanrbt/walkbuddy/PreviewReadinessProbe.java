@@ -98,7 +98,8 @@ final class PreviewReadinessProbe {
     private static void assertWaiting(PreviewActivity host,SharedPreferences history) {
         if(state(host).phase!=SessionState.Phase.STARTING || host.findViewById(R.id.preview_cover).getVisibility()!=View.VISIBLE
             || host.findViewById(R.id.enter_pip).isEnabled() || host.findViewById(R.id.preview_recognition).isEnabled()
-            || host.findViewById(R.id.enable_depth).isEnabled() || history.getBoolean(HomeJourney.PREVIEW_SEEN,false)
+            || host.findViewById(R.id.enable_depth).isEnabled() || host.findViewById(R.id.viewfinder_toggle).isEnabled()
+            || history.getBoolean(HomeJourney.PREVIEW_SEEN,false)
             || (boolean)field(host,"previewSeen"))throw new AssertionError("Unchecked startup exposed preview or completed progress");
     }
     private static boolean live(PreviewActivity host) {

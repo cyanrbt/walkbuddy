@@ -9,6 +9,9 @@ final class PreviewStatus {
         return recognition?Heading.LIVE:Heading.PREVIEW_ONLY;
     }
     static boolean showNotice(boolean live,boolean recognition,boolean stoppedNotice,boolean compact) {
-        return live && !recognition && (stoppedNotice || compact);
+        return showNotice(live,recognition,stoppedNotice,compact,false);
+    }
+    static boolean showNotice(boolean live,boolean recognition,boolean stoppedNotice,boolean compact,boolean enlarged) {
+        return live && !recognition && (stoppedNotice || compact || enlarged);
     }
 }

@@ -100,7 +100,7 @@ final class RecoveryPresentationProbe {
             throw new AssertionError("Stopped camera lacks a full opaque cover");
         for(int id:new int[]{R.id.preview_live_settings,R.id.preview_optional_settings,R.id.recent_alert,R.id.posture_hint,R.id.pip_depth_status})
             if(root.findViewById(id).getVisibility()!=View.GONE)throw new AssertionError("Stopped recovery exposed obsolete controls/overlays: "+id);
-        for(int id:new int[]{R.id.preview_recognition,R.id.preview_sound,R.id.preview_vibration,R.id.enable_depth})
+        for(int id:new int[]{R.id.preview_recognition,R.id.preview_sound,R.id.preview_vibration,R.id.enable_depth,R.id.viewfinder_toggle})
             if(root.findViewById(id).isEnabled())throw new AssertionError("Stopped recovery enabled a camera setting");
     }
     private static void textFits(TextView text) {

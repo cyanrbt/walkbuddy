@@ -284,6 +284,7 @@ final class PipProbe {
             if(profilePriority==null && profileThreads==null) {
                 PreviewReadinessProbe.run(runner,host,report);
                 BrightnessActivityProbe.run(runner,host,report);
+                ViewfinderProbe.run(runner,launcher,host,report);
             }
 
             read(runner,()->{
@@ -324,6 +325,7 @@ final class PipProbe {
             checkpoint(runner,"recognition_reenabled");
             report.append("PASS actual bundled-model results advance; off cancels Ticket/feedback; re-enable produces new results\n");
             InferenceWorker.Ticket geometryTicket=read(runner,()->(InferenceWorker.Ticket)field(host,"analysisTicket"));
+            if(profilePriority==null && profileThreads==null)ViewfinderProbe.detection(runner,host,report);
             Object geometryModel=read(runner,()->field(field(host,"worker"),"detector"));
             if(geometryModel==null)throw new AssertionError("Actual model was not retained after a valid result");
 

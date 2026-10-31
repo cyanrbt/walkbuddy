@@ -56,11 +56,14 @@
     <string name="problem_info_copied">问题信息已复制，可粘贴反馈</string>
     <string name="problem_info_copy_failed">暂时无法复制，请稍后重试</string>
     <string name="preview_stop">停止</string>
+    <string name="viewfinder_expand">收起设置，放大取景</string>
+    <string name="viewfinder_controls">显示设置</string>
     <string name="info_recognition_off">检测已关闭</string>
     <string name="info_recognition_on">正在分析画面</string>
     <string name="info_recognition_preparing">准备识别器…</string>
     <string name="window_preview_only">仅预览</string>
     <string name="detection_stopped_preview_only">检测已停止 · 仅看画面</string>
+    <string name="detection_off_enlarged">检测已关闭 · 仅看画面</string>
     <string name="detection_stopped_compact">未检测\n仅预览</string>
     <string name="info_detection_timeout">检测超时，提醒已停止；可重新勾选检测。</string>
     <string name="info_detection_failed">检测失败，提醒已停止；可重新勾选检测。</string>
