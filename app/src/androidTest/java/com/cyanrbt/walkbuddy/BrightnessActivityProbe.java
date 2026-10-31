@@ -30,7 +30,8 @@ final class BrightnessActivityProbe {
             ReadbackTiming.Sample timing=((ReadbackTiming)field(host,"readbackTiming")).snapshot(state(host).generation,
                 SystemClock.elapsedRealtimeNanos(),android.os.Debug.threadCpuTimeNanos());
             BrightnessTiming.Sample async=first.snapshot(SystemClock.elapsedRealtime());
-            if(timing.wallMs<0 || timing.cpuMs<0 || async.wallMs<0 || async.cpuMs<0 || async.queueMs<0 || async.deliveryMs<0)
+            if(timing.wallMs!=-1 || timing.cpuMs!=-1 || timing.running || field(host,"pendingReadback")!=null
+                || async.wallMs<0 || async.cpuMs<0 || async.queueMs<0 || async.deliveryMs<0)
                 throw new AssertionError("Actual brightness readback timing missing");
             SupportProbe.write(runner,"brightness-live-timing.txt","taskWallMs="+timing.wallMs+" taskCpuMs="+timing.cpuMs
                 +" asyncWallMs="+async.wallMs+" callerCpuMs="+async.cpuMs+" queueMs="+async.queueMs+" deliveryMs="+async.deliveryMs+"\n");
@@ -42,7 +43,7 @@ final class BrightnessActivityProbe {
             do{SystemClock.sleep(1);}while(SystemClock.elapsedRealtimeNanos()<until);
             throw new IllegalStateException("Injected asynchronous brightness copy failure");
         });
-        read(runner,()->{first.close();set(host,"brightnessReadback",broken);broken.observe(SystemClock.elapsedRealtime());queue(host);return true;});
+        read(runner,()->{first.close();set(host,"brightnessReadback",broken);submit(host);return true;});
         await(runner,()->state(host).phase==SessionState.Phase.UNAVAILABLE && (boolean)field(broken,"closed"),"readback error releases camera");
         String evidence=read(runner,()->{
             if(!storage.isRecycled())throw new AssertionError("Retired brightness bitmap retained");
@@ -78,7 +79,7 @@ final class BrightnessActivityProbe {
                 throw new AssertionError("Restart reused retired workspace or changed default/remembered choices");
             return true;
         });
-        report.append("BRIGHTNESS_ACTIVITY_PASS cases=3 reused=true close_on_error=true frozen_async_timing=true restart_new_workspace=true no_auto_camera=true\n");
+        report.append("BRIGHTNESS_ACTIVITY_PASS cases=3 reused=true close_on_error=true frozen_async_timing=true restart_new_workspace=true no_auto_camera=true no_preview_only_model_readback=true\n");
     }
     private static boolean finished(PreviewActivity host) {
         BrightnessReadback reader=(BrightnessReadback)field(host,"brightnessReadback");
@@ -91,8 +92,8 @@ final class BrightnessActivityProbe {
         return state(host).phase==SessionState.Phase.LIVE && state(host).fresh(SystemClock.elapsedRealtime())
             && host.findViewById(R.id.preview_cover).getVisibility()==View.GONE;
     }
-    private static void queue(PreviewActivity host) {
-        try{Method method=PreviewActivity.class.getDeclaredMethod("queueReadback",long.class);method.setAccessible(true);method.invoke(host,SystemClock.elapsedRealtime());}
+    private static void submit(PreviewActivity host) {
+        try{Method method=PreviewActivity.class.getDeclaredMethod("submitBrightness",long.class);method.setAccessible(true);method.invoke(host,SystemClock.elapsedRealtime());}
         catch(ReflectiveOperationException error){throw new AssertionError(error);}
     }
     private static SessionState state(PreviewActivity host){return (SessionState)field(host,"state");}

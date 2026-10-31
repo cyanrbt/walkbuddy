@@ -9,6 +9,8 @@ on:
       - scripts/preview_trace.sql
       - scripts/record_preview_trace.py
       - app/src/main/java/com/cyanrbt/walkbuddy/BrightnessReadback.java
+      - app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java
+      - app/src/androidTest/java/com/cyanrbt/walkbuddy/DrawBrightnessProbe.java
       - app/src/androidTest/java/com/cyanrbt/walkbuddy/PipProbe.java
 
 permissions:

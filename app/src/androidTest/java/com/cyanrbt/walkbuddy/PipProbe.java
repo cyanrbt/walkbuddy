@@ -220,9 +220,12 @@ final class PipProbe {
 
             // Force expiry from the actual TextureView.draw -> SurfaceTextureUpdated path.
             AtomicBoolean expiredInDraw=new AtomicBoolean();
+            AtomicReference<TextureView.SurfaceTextureListener> retiredListener=new AtomicReference<>();
+            AtomicReference<SurfaceTexture> retiredSource=new AtomicReference<>();
             TextureView retired=read(runner,()->{
                 TextureView view=(TextureView)field(host,"texture");
                 TextureView.SurfaceTextureListener delegate=view.getSurfaceTextureListener();
+                retiredListener.set(delegate);retiredSource.set(view.getSurfaceTexture());
                 view.setSurfaceTextureListener(new TextureView.SurfaceTextureListener(){
                     public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h){delegate.onSurfaceTextureAvailable(s,w,h);}
                     public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h){delegate.onSurfaceTextureSizeChanged(s,w,h);}
@@ -244,6 +247,19 @@ final class PipProbe {
             });
             read(runner,()->host.findViewById(R.id.restart_preview).performClick());
             await(runner,()->live(host),"manual restart after deadline in draw");
+            read(runner,()->{
+                long displayAt=state(host).displayAt;
+                Object camera=field(host,"camera"),brightness=field(host,"brightnessReadback");
+                // Ensure an unguarded old update would visibly change the timestamp.
+                android.os.SystemClock.sleep(2);
+                retiredListener.get().onSurfaceTextureUpdated(retiredSource.get());
+                retiredListener.get().onSurfaceTextureDestroyed(retiredSource.get());
+                if(!live(host) || state(host).displayAt!=displayAt || field(host,"camera")!=camera
+                    || field(host,"brightnessReadback")!=brightness)
+                    throw new AssertionError("Retired TextureView callbacks affected a new observation");
+                return true;
+            });
+            report.append("RETIRED_TEXTURE_CALLBACK_PASS update_ignored=true destroy_ignored=true new_observation_retained=true\n");
             report.append("PASS deadline inside real TextureView.draw covers/stops immediately, defers layer detach, and supports manual restart\n");
             checkpoint(runner,"texture_deadline_recovered");
 

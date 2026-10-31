@@ -516,19 +516,22 @@ public final class PreviewActivity extends Activity {
             if(checked)ensureToneSession();else stopTone();
             syncPipActions();
         });
-        texture.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
-            public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h) { openCamera(s); }
-            public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h) { transform(); }
-            public boolean onSurfaceTextureDestroyed(SurfaceTexture s) { if(!destroyed && (state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE)) fail("显示 Surface 已销毁：不可用");return true; }
+        TextureView observedTexture=texture;
+        observedTexture.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
+            public void onSurfaceTextureAvailable(SurfaceTexture s,int w,int h) { if(texture==observedTexture)openCamera(s); }
+            public void onSurfaceTextureSizeChanged(SurfaceTexture s,int w,int h) { if(texture==observedTexture)transform(); }
+            public boolean onSurfaceTextureDestroyed(SurfaceTexture s) { if(texture==observedTexture && !destroyed && (state.phase==SessionState.Phase.STARTING || state.phase==SessionState.Phase.LIVE)) fail("显示 Surface 已销毁：不可用");return true; }
             public void onSurfaceTextureUpdated(SurfaceTexture s) {
-                if(readingTexture || texture==null || destroyed || (state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE))return;
+                if(texture!=observedTexture || readingTexture || destroyed || (state.phase!=SessionState.Phase.STARTING && state.phase!=SessionState.Phase.LIVE))return;
                 long now=SystemClock.elapsedRealtime();
                 if(!checkHealth(now))return;
-                state.display(now);state.promote(now);syncTicket();render(now);
-                if(state.phase==SessionState.Phase.LIVE) {
-                    observeBrightness(now);
-                    if(brightnessReadback.ready() || state.recognition && (useDepth || now-sampledAt>=500 && !worker.busy()))queueReadback(now);
-                }
+                state.display(now);state.promote(now);syncTicket();
+                if(state.phase==SessionState.Phase.LIVE && !submitBrightness(now))return;
+                long checkedAt=SystemClock.elapsedRealtime();
+                if(!checkHealth(checkedAt))return;
+                render(checkedAt);
+                if(state.phase==SessionState.Phase.LIVE && state.recognition
+                    && (useDepth || now-sampledAt>=500 && !worker.busy()))queueReadback(now);
             }
         });
         setContentView(root);
@@ -643,6 +646,17 @@ public final class PreviewActivity extends Activity {
         }
         brightnessReadback.observe(frameAt);
     }
+    private boolean submitBrightness(long frameAt) {
+        try {
+            observeBrightness(frameAt);
+            // Wrap and enqueue only. PixelCopy and getPixels execute on the worker.
+            if(brightnessReadback.ready())brightnessReadback.request(texture,frameAt);
+            return true;
+        } catch(RuntimeException error) {
+            android.util.Log.w("WalkBuddyTiming","Brightness submission error="+error.getClass().getSimpleName());
+            fail(getString(R.string.preview_readback_failed));return false;
+        }
+    }
     private void queueReadback(long frameAt) {
         if(pendingReadback!=null || texture==null)return;
         TextureView source=texture;long token=state.generation,epoch=analysisEpoch;
@@ -657,10 +671,6 @@ public final class PreviewActivity extends Activity {
                 timed=true;
                 if(!checkHealth(now))return;
                 if(now-frameAt>1000)return; // Keep the original observation time; a delayed task cannot refresh it.
-                if(brightnessReadback!=null && brightnessReadback.ready())brightnessReadback.request(source,frameAt);
-                now=SystemClock.elapsedRealtime();
-                if(!checkHealth(now))return;
-                if(now-frameAt>1000)return;
                 if(state.recognition && epoch==analysisEpoch) {
                     // The remaining model getBitmap path must not count as a displayed frame.
                     readingTexture=reading=true;
@@ -683,7 +693,7 @@ public final class PreviewActivity extends Activity {
                 if(pendingReadback==this)pendingReadback=null;
             }
         }};
-        // TextureView invokes its update listener from draw(); readback is forbidden inside drawing.
+        // Model getBitmap must run after drawing. Brightness only queues its worker there.
         main.post(pendingReadback);
     }
     private void captureFrame(long token,long stamp,long receivedAt) {

@@ -95,6 +95,7 @@ public class PreviewProbe extends Instrumentation {
   BrightnessProbe.finish(brightness);
   try(FileOutputStream stream=new FileOutputStream(new File(evidence,"brightness-parity.json"))){stream.write(brightnessSamples.toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));}
   report.append(BrightnessProbe.synthetic(this,evidence));
+  report.append(DrawBrightnessProbe.run(this,host));
   if(surfaceCopy){
    boolean accepted=true;for(int i=0;i<surfaceCopies.length();i++)accepted&=surfaceCopies.getJSONObject(i).getBoolean("accepted");
    try(FileOutputStream stream=new FileOutputStream(new File(evidence,"surface-copy-parity.json"))){stream.write(new org.json.JSONObject()
