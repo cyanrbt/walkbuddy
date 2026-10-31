@@ -1,0 +1,2074 @@
+[
+  {
+    "brightness_texture_samples": [
+      {
+        "sensor": 0,
+        "display": 0,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 767548,
+        "sumCpuNs": 109653,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 538760,
+        "bulkReadCpuNs": 113329,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 0,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 628262,
+        "sumCpuNs": 108161,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 444359,
+        "bulkReadCpuNs": 70714,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 90,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 627160,
+        "sumCpuNs": 107940,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 392011,
+        "bulkReadCpuNs": 70173,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 90,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 651346,
+        "sumCpuNs": 133608,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 451169,
+        "bulkReadCpuNs": 63213,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 180,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 622573,
+        "sumCpuNs": 109753,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 412071,
+        "bulkReadCpuNs": 81101,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 180,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 633769,
+        "sumCpuNs": 108441,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 387495,
+        "bulkReadCpuNs": 71116,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 270,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 620270,
+        "sumCpuNs": 109322,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 471660,
+        "bulkReadCpuNs": 112167,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 270,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 651667,
+        "sumCpuNs": 136482,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 444840,
+        "bulkReadCpuNs": 80018,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 0,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 607101,
+        "sumCpuNs": 107970,
+        "argbSha256": "b26edb7175a5265932f562f32bc4f4ef55a35fba097f87826582d2f9f00419cf",
+        "bulkReadWallNs": 511800,
+        "bulkReadCpuNs": 112046,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 0,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 629644,
+        "sumCpuNs": 136994,
+        "argbSha256": "b26edb7175a5265932f562f32bc4f4ef55a35fba097f87826582d2f9f00419cf",
+        "bulkReadWallNs": 456848,
+        "bulkReadCpuNs": 65467,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 90,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140592,
+        "bitmapBytes": 768,
+        "copyWallNs": 931922,
+        "sumCpuNs": 184384,
+        "argbSha256": "416d56c8b7ca7c3cce5b7ab6704b3a2d1a658947b103db59d9ddf096c760ef92",
+        "bulkReadWallNs": 456757,
+        "bulkReadCpuNs": 83944,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 90,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140592,
+        "bitmapBytes": 768,
+        "copyWallNs": 642332,
+        "sumCpuNs": 107509,
+        "argbSha256": "416d56c8b7ca7c3cce5b7ab6704b3a2d1a658947b103db59d9ddf096c760ef92",
+        "bulkReadWallNs": 518289,
+        "bulkReadCpuNs": 99477,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 180,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140622,
+        "bitmapBytes": 768,
+        "copyWallNs": 662843,
+        "sumCpuNs": 109583,
+        "argbSha256": "7dae426953c11d85a0f0eb725d014ce96a89751edcd89242281a3b6a86e64867",
+        "bulkReadWallNs": 381606,
+        "bulkReadCpuNs": 77455,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 180,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140622,
+        "bitmapBytes": 768,
+        "copyWallNs": 692618,
+        "sumCpuNs": 106348,
+        "argbSha256": "7dae426953c11d85a0f0eb725d014ce96a89751edcd89242281a3b6a86e64867",
+        "bulkReadWallNs": 416117,
+        "bulkReadCpuNs": 62083,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 270,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140223,
+        "bitmapBytes": 768,
+        "copyWallNs": 600400,
+        "sumCpuNs": 108371,
+        "argbSha256": "59d0aa8d401ce21c2a0f7711cce695c95c1e093c53bff7c38e04f76bae93482c",
+        "bulkReadWallNs": 370900,
+        "bulkReadCpuNs": 66368,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 270,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140223,
+        "bitmapBytes": 768,
+        "copyWallNs": 604847,
+        "sumCpuNs": 114249,
+        "argbSha256": "59d0aa8d401ce21c2a0f7711cce695c95c1e093c53bff7c38e04f76bae93482c",
+        "bulkReadWallNs": 434104,
+        "bulkReadCpuNs": 81481,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 0,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 660820,
+        "sumCpuNs": 123613,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 470818,
+        "bulkReadCpuNs": 83374,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 0,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 585298,
+        "sumCpuNs": 135821,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 470859,
+        "bulkReadCpuNs": 71547,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 90,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 617606,
+        "sumCpuNs": 111445,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 460113,
+        "bulkReadCpuNs": 70805,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 90,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 721850,
+        "sumCpuNs": 110944,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 546771,
+        "bulkReadCpuNs": 94181,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 180,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144030,
+        "bitmapBytes": 768,
+        "copyWallNs": 701720,
+        "sumCpuNs": 126328,
+        "argbSha256": "513b8c782c27bcdc9791c681077776b91272c6ae4520883408e1cd024b4cf858",
+        "bulkReadWallNs": 4030207,
+        "bulkReadCpuNs": 98686,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 180,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144030,
+        "bitmapBytes": 768,
+        "copyWallNs": 1131548,
+        "sumCpuNs": 116864,
+        "argbSha256": "513b8c782c27bcdc9791c681077776b91272c6ae4520883408e1cd024b4cf858",
+        "bulkReadWallNs": 570336,
+        "bulkReadCpuNs": 69973,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 270,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 645187,
+        "sumCpuNs": 141771,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 383839,
+        "bulkReadCpuNs": 57335,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 270,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 571047,
+        "sumCpuNs": 111365,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 377700,
+        "bulkReadCpuNs": 66299,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 0,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 1639982,
+        "sumCpuNs": 112226,
+        "argbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+        "bulkReadWallNs": 566170,
+        "bulkReadCpuNs": 110489,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 0,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 845124,
+        "sumCpuNs": 112307,
+        "argbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+        "bulkReadWallNs": 3385601,
+        "bulkReadCpuNs": 242384,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 90,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140622,
+        "bitmapBytes": 768,
+        "copyWallNs": 587101,
+        "sumCpuNs": 109372,
+        "argbSha256": "7ef766e00488776617c33c89542bebc35f834362ba5c9a7202a4df5f2e35d3f9",
+        "bulkReadWallNs": 421235,
+        "bulkReadCpuNs": 64725,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 90,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140622,
+        "bitmapBytes": 768,
+        "copyWallNs": 2501540,
+        "sumCpuNs": 154590,
+        "argbSha256": "7ef766e00488776617c33c89542bebc35f834362ba5c9a7202a4df5f2e35d3f9",
+        "bulkReadWallNs": 3302698,
+        "bulkReadCpuNs": 85608,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 180,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140634,
+        "bitmapBytes": 768,
+        "copyWallNs": 587401,
+        "sumCpuNs": 112417,
+        "argbSha256": "87c2886a53390300c9479781c1d1f1f7613b865cbb0c422f6c5f5850de41c023",
+        "bulkReadWallNs": 405691,
+        "bulkReadCpuNs": 71886,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 180,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140634,
+        "bitmapBytes": 768,
+        "copyWallNs": 582189,
+        "sumCpuNs": 133488,
+        "argbSha256": "87c2886a53390300c9479781c1d1f1f7613b865cbb0c422f6c5f5850de41c023",
+        "bulkReadWallNs": 447614,
+        "bulkReadCpuNs": 70926,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 270,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 610015,
+        "sumCpuNs": 109492,
+        "argbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+        "bulkReadWallNs": 541363,
+        "bulkReadCpuNs": 78045,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 270,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 873335,
+        "sumCpuNs": 112587,
+        "argbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+        "bulkReadWallNs": 509626,
+        "bulkReadCpuNs": 100990,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      }
+    ],
+    "brightness_controlled_workload": {
+      "scope": "Controlled native bitmap-copy workload; not camera/GPU or device performance",
+      "cases": [
+        {
+          "name": "solid-ff000000",
+          "totalRgb": 0,
+          "dark": true
+        },
+        {
+          "name": "solid-ffffffff",
+          "totalRgb": 146880,
+          "dark": false
+        },
+        {
+          "name": "solid-ff010101",
+          "totalRgb": 576,
+          "dark": true
+        },
+        {
+          "name": "solid-ff020202",
+          "totalRgb": 1152,
+          "dark": true
+        },
+        {
+          "name": "solid-ff030303",
+          "totalRgb": 1728,
+          "dark": false
+        },
+        {
+          "name": "solid-ff040404",
+          "totalRgb": 2304,
+          "dark": false
+        },
+        {
+          "name": "solid-ffff0000",
+          "totalRgb": 48960,
+          "dark": false
+        },
+        {
+          "name": "solid-ff00ff00",
+          "totalRgb": 48960,
+          "dark": false
+        },
+        {
+          "name": "solid-ff0000ff",
+          "totalRgb": 48960,
+          "dark": false
+        },
+        {
+          "name": "solid-0",
+          "totalRgb": 0,
+          "dark": true
+        },
+        {
+          "name": "solid-7f2f8e61",
+          "totalRgb": 54720,
+          "dark": false
+        },
+        {
+          "name": "below-threshold",
+          "totalRgb": 1727,
+          "dark": true
+        },
+        {
+          "name": "above-threshold",
+          "totalRgb": 1729,
+          "dark": false
+        },
+        {
+          "name": "varying-alpha-rgb",
+          "totalRgb": 3315,
+          "dark": false
+        },
+        {
+          "name": "partial-copy-empty-remainder",
+          "totalRgb": 0,
+          "dark": true
+        },
+        {
+          "name": "no-copy-clears-old-brightness",
+          "totalRgb": 0,
+          "dark": true
+        },
+        {
+          "name": "unavailable-surface",
+          "totalRgb": -1,
+          "dark": false
+        },
+        {
+          "name": "copy-after-error",
+          "totalRgb": 146880,
+          "dark": false
+        }
+      ],
+      "trials": [
+        {
+          "path": "legacy",
+          "iterations": 2000,
+          "wallNs": 121073231,
+          "cpuNs": 119432625,
+          "checksum": 293760000
+        },
+        {
+          "path": "reused",
+          "iterations": 2000,
+          "wallNs": 7101041,
+          "cpuNs": 7086009,
+          "checksum": 293760000
+        },
+        {
+          "path": "reused",
+          "iterations": 2000,
+          "wallNs": 7213488,
+          "cpuNs": 7136634,
+          "checksum": 293760000
+        },
+        {
+          "path": "legacy",
+          "iterations": 2000,
+          "wallNs": 149412891,
+          "cpuNs": 124795772,
+          "checksum": 293760000
+        }
+      ],
+      "closedBitmapRecycled": true,
+      "closedReadRejected": true
+    },
+    "brightness_controlled_failure_report": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：GENERAL\n提示：读取画面失败，请主动重新开启\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：13；显示帧龄(ms)：78；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：0；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：执行中；墙钟(ms)：13；CPU(ms)：0\n任务内亮度读回墙钟(ms)：12；CPU(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "brightness_actual_camera_timing": "taskWallMs=137 taskCpuMs=0 brightnessWallMs=137 brightnessCpuMs=0\n",
+    "brightness_scope": "Exact displayed TextureView parity and bounded workspace; controlled bitmap ABBA excludes GPU/camera and is not device/FPS/energy evidence; controlled failure does not prove historical stall cause",
+    "support_vibration_render_readiness": "before phase=LIVE fresh=true cover=0 shown=true enabled=false checked=true preference=true\nafter phase=LIVE fresh=true cover=8 shown=true enabled=true checked=true preference=true waitMs=347\n",
+    "recovery_compact_samples": [
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 1,
+        "text": "已停止\n请展开",
+        "textSizePx": 12,
+        "lineCount": 2,
+        "textHeight": 35,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font100-day.png",
+        "png_sha256": "ab5d8a3c5adbffb1c79711c7e975b910afeefcb2356773f76f83605b09f7ccd4"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 1,
+        "text": "已停止\n请展开",
+        "textSizePx": 12,
+        "lineCount": 2,
+        "textHeight": 35,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font100-night.png",
+        "png_sha256": "ab5d8a3c5adbffb1c79711c7e975b910afeefcb2356773f76f83605b09f7ccd4"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 1.5,
+        "text": "已停止\n请展开",
+        "textSizePx": 18,
+        "lineCount": 2,
+        "textHeight": 52,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font150-day.png",
+        "png_sha256": "5bdeb728075ff933b6b83b094a117bbed192e196930fe6dc8c799ad3e44c9b9a"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 1.5,
+        "text": "已停止\n请展开",
+        "textSizePx": 18,
+        "lineCount": 2,
+        "textHeight": 52,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font150-night.png",
+        "png_sha256": "5bdeb728075ff933b6b83b094a117bbed192e196930fe6dc8c799ad3e44c9b9a"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 2,
+        "text": "已停止\n请展开",
+        "textSizePx": 24,
+        "lineCount": 2,
+        "textHeight": 70,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font200-day.png",
+        "png_sha256": "761c596249acb214e1750ef668cac37b863420272a3eb8a2830615dcf5de6743"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 2,
+        "text": "已停止\n请展开",
+        "textSizePx": 24,
+        "lineCount": 2,
+        "textHeight": 70,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font200-night.png",
+        "png_sha256": "761c596249acb214e1750ef668cac37b863420272a3eb8a2830615dcf5de6743"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 1,
+        "text": "已停止\n请展开",
+        "textSizePx": 12,
+        "lineCount": 2,
+        "textHeight": 35,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font100-day.png",
+        "png_sha256": "322325f2a207b84f094540bab91d44ee8821af2ae249c90359efc85efd7716d9"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 1,
+        "text": "已停止\n请展开",
+        "textSizePx": 12,
+        "lineCount": 2,
+        "textHeight": 35,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font100-night.png",
+        "png_sha256": "322325f2a207b84f094540bab91d44ee8821af2ae249c90359efc85efd7716d9"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 1.5,
+        "text": "已停止\n请展开",
+        "textSizePx": 18,
+        "lineCount": 2,
+        "textHeight": 52,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font150-day.png",
+        "png_sha256": "152013ab92dbf30292240f631e51ab1c77699e9469e9487554b4361200796200"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 1.5,
+        "text": "已停止\n请展开",
+        "textSizePx": 18,
+        "lineCount": 2,
+        "textHeight": 52,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font150-night.png",
+        "png_sha256": "152013ab92dbf30292240f631e51ab1c77699e9469e9487554b4361200796200"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 2,
+        "text": "已停止\n请展开",
+        "textSizePx": 24,
+        "lineCount": 2,
+        "textHeight": 70,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font200-day.png",
+        "png_sha256": "4c6743b1d1e07b15022b5e3037ad566052b9c2770f1730ceffb784550eb99637"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 2,
+        "text": "已停止\n请展开",
+        "textSizePx": 24,
+        "lineCount": 2,
+        "textHeight": 70,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font200-night.png",
+        "png_sha256": "4c6743b1d1e07b15022b5e3037ad566052b9c2770f1730ceffb784550eb99637"
+      }
+    ],
+    "recovery_layout_configurations": 30,
+    "recovery_full_presentations": 660,
+    "recovery_compact_presentations_including_duplicates": 1320,
+    "recovery_restore_presentations": 660,
+    "recovery_activity_markers": {
+      "pip": [
+        "RECOVERY_PRESENTATION_ACTIVITY_PASS compact=2_lines full=reason_and_instructions settings=hidden manual_restart=restored no_auto_camera=true stopped_polling=false home_report_preserved=true"
+      ],
+      "pip-repeat": [
+        "RECOVERY_PRESENTATION_ACTIVITY_PASS compact=2_lines full=reason_and_instructions settings=hidden manual_restart=restored no_auto_camera=true stopped_polling=false home_report_preserved=true"
+      ]
+    },
+    "api": 35,
+    "source_commit": "2261f42d93e91d67e8ba179ae733317061f86213",
+    "run_id": 41146872248,
+    "attempt": 1,
+    "artifact_id": 13021523078,
+    "archive_size_bytes": 14007211,
+    "archive_sha256": "5656d76f03f988eb422d56f450d944cbf9641704803cc695dde37d166557ac18",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：56；显示帧龄(ms)：32；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：137；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：已结束；墙钟(ms)：83；CPU(ms)：0\n任务内亮度读回墙钟(ms)：83；CPU(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "default_preview_geometry_sample": "PREVIEW_ONLY_GEOMETRY_PASS full=320x640 compact=116x155 frames_advance=true default_detection=false sound=false\n",
+    "default_preview_layout_configurations": 30,
+    "default_preview_activity_cases_per_pip_run": 3,
+    "default_preview_recovery_cycles": 4,
+    "depth_report_markers": [
+      "DEPTH_PROJECTION_PARITY_PASS cases=96 grid_points=589824; raw float bits, obstacle/drop outputs, moving pose/intrinsics, sparse updates; constructed observations, not AR camera accuracy",
+      "DEPTH_PROJECTION_STATE_PASS cases=5; sample centers, incomplete transform reset, independent workspaces/grids, nonfinite boundary math, near obstacle/drop"
+    ],
+    "depth_projection_cases": 96,
+    "depth_grid_positions": 589824,
+    "depth_state_cases": 5,
+    "depth_scope": "Actual bundled ARCore Pose on ART with constructed points; no AR Session or device depth",
+    "tone_thread_samples": "BLOCKED\ncreate_blocked thread=WalkBuddy sound at_ms=191989\nclose thread=WalkBuddy sound at_ms=192357\nNATIVE\ncreate_begin thread=WalkBuddy sound at_ms=192459\ncreate_end thread=WalkBuddy sound at_ms=192463\nplay_begin thread=WalkBuddy sound at_ms=192472\nplay_end accepted=true thread=WalkBuddy sound at_ms=192477\nplay_begin thread=WalkBuddy sound at_ms=192677\nplay_end accepted=true thread=WalkBuddy sound at_ms=192677\nclose_begin thread=WalkBuddy sound at_ms=192678\nclose_end thread=WalkBuddy sound at_ms=192688\n",
+    "tone_activity_checks_per_pip_run": 3,
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：未取得；墙钟(ms)：未取得；CPU(ms)：未取得\n任务内亮度读回墙钟(ms)：未取得；CPU(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：49；显示帧龄(ms)：19；分析龄(ms)：15\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：4；复制(ms)：7；结果交付(ms)：6\n读回任务：已结束；墙钟(ms)：7；CPU(ms)：0\n任务内亮度读回墙钟(ms)：未取得；CPU(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：15 / API 35\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：49；显示帧龄(ms)：19；分析龄(ms)：1501\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：19；读回排队(ms)：3；复制(ms)：4；结果交付(ms)：6\n读回任务：已结束；墙钟(ms)：4；CPU(ms)：0\n任务内亮度读回墙钟(ms)：未取得；CPU(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "recovery_geometry": [
+      [
+        "0",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "1",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "2",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "3",
+        "320",
+        "640",
+        "116",
+        "154"
+      ]
+    ],
+    "recovery_transition_samples": [
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=0 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=1 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=2 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=3 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false"
+    ],
+    "sound_ui_steps_by_pip_run": {
+      "pip": [
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 打开提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 打开提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)",
+        "audio_creates=2 audio_closes=2"
+      ],
+      "pip-repeat": [
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 打开提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 打开提示音 target=Rect(255, 576 - 303, 624)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)",
+        "TOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)",
+        "audio_creates=2 audio_closes=2"
+      ]
+    },
+    "sound_controls_trace": "Actual SystemUI touch targets; controlled output, no physical audibility claim\nOPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)\nTOUCH 打开提示音 target=Rect(255, 576 - 303, 624)\nOPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)\nTOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)\nOPEN 打开提示音 pip_screen=Rect(188, 470 - 304, 624)\nTOUCH 打开提示音 target=Rect(255, 576 - 303, 624)\nOPEN 关闭提示音 pip_screen=Rect(188, 470 - 304, 624)\nTOUCH 关闭提示音 target=Rect(255, 576 - 303, 624)\nguarded_invalid_commands=6 real_ui_toggles=4 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true\naudio_creates=2 audio_closes=2\n",
+    "sound_native_markers": {
+      "pip": [
+        "PIP_SOUND_FAILURE_MENU_PASS sound_off=true next_action=enable stale_retry_ignored=true detection_camera_vibration_retained=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_SOUND_TRACE_BEGIN",
+        "PIP_SOUND_TRACE_END"
+      ],
+      "pip-repeat": [
+        "PIP_SOUND_FAILURE_MENU_PASS sound_off=true next_action=enable stale_retry_ignored=true detection_camera_vibration_retained=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_SOUND_TRACE_BEGIN",
+        "PIP_SOUND_TRACE_END"
+      ]
+    },
+    "home_idle_and_lifecycle_markers": [
+      "HOME_EVENTS_INITIAL_STATE focus=false visible=true queued=false",
+      "HOME_EVENTS_IDLE_PASS quietMs=1100 refreshes=0; actual AppOps deny/allow rendered without resume; original raw mode restored",
+      "HOME_EVENTS_LIFECYCLE_PASS retired subscriptions removed; stale off-main AppOps callback ignored; recreated home subscribed"
+    ],
+    "home_live_markers": {
+      "pip": [
+        "HOME_EVENTS_LIVE_PASS quietMs=1100 refreshes=0 advancingCapture=true advancingDisplay=true reportReused=true batch=20 accessSamples=1; watcher-unavailable polling fallback and reattachment pass"
+      ],
+      "pip-repeat": [
+        "HOME_EVENTS_LIVE_PASS quietMs=1100 refreshes=0 advancingCapture=true advancingDisplay=true reportReused=true batch=20 accessSamples=1; watcher-unavailable polling fallback and reattachment pass"
+      ]
+    },
+    "scope": "Android emulator real SystemUI touch prompt-tone toggles, stale choice/visit/fullscreen command rejection and controlled audio-failure menu; actual Camera2/model/vibration retained; old home/UI/depth/native-audio gates retained; no physical audibility, device or power acceptance"
+  },
+  {
+    "brightness_texture_samples": [
+      {
+        "sensor": 0,
+        "display": 0,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 2514073,
+        "sumCpuNs": 340817,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 639383,
+        "bulkReadCpuNs": 131446,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 0,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 673667,
+        "sumCpuNs": 346296,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 1153313,
+        "bulkReadCpuNs": 70722,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 90,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 634775,
+        "sumCpuNs": 142956,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 528877,
+        "bulkReadCpuNs": 61696,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 90,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 607975,
+        "sumCpuNs": 186578,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 2993318,
+        "bulkReadCpuNs": 65690,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 180,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 1043368,
+        "sumCpuNs": 147556,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 895671,
+        "bulkReadCpuNs": 97235,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 180,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 715956,
+        "sumCpuNs": 142987,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 808750,
+        "bulkReadCpuNs": 91303,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 270,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 764087,
+        "sumCpuNs": 189965,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 593137,
+        "bulkReadCpuNs": 55595,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 0,
+        "display": 270,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144063,
+        "bitmapBytes": 768,
+        "copyWallNs": 657827,
+        "sumCpuNs": 165328,
+        "argbSha256": "269b4b74a8f171dbfc4c6a93048d1bade8eee17336c43292fe00e47f06de8f8b",
+        "bulkReadWallNs": 446774,
+        "bulkReadCpuNs": 53620,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 0,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 696680,
+        "sumCpuNs": 169476,
+        "argbSha256": "b26edb7175a5265932f562f32bc4f4ef55a35fba097f87826582d2f9f00419cf",
+        "bulkReadWallNs": 439780,
+        "bulkReadCpuNs": 56725,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 0,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 742736,
+        "sumCpuNs": 140001,
+        "argbSha256": "b26edb7175a5265932f562f32bc4f4ef55a35fba097f87826582d2f9f00419cf",
+        "bulkReadWallNs": 648861,
+        "bulkReadCpuNs": 58798,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 90,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140592,
+        "bitmapBytes": 768,
+        "copyWallNs": 610620,
+        "sumCpuNs": 143889,
+        "argbSha256": "416d56c8b7ca7c3cce5b7ab6704b3a2d1a658947b103db59d9ddf096c760ef92",
+        "bulkReadWallNs": 440932,
+        "bulkReadCpuNs": 61716,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 90,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140592,
+        "bitmapBytes": 768,
+        "copyWallNs": 712339,
+        "sumCpuNs": 141925,
+        "argbSha256": "416d56c8b7ca7c3cce5b7ab6704b3a2d1a658947b103db59d9ddf096c760ef92",
+        "bulkReadWallNs": 470147,
+        "bulkReadCpuNs": 60272,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 180,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140622,
+        "bitmapBytes": 768,
+        "copyWallNs": 3975310,
+        "sumCpuNs": 141874,
+        "argbSha256": "7dae426953c11d85a0f0eb725d014ce96a89751edcd89242281a3b6a86e64867",
+        "bulkReadWallNs": 467192,
+        "bulkReadCpuNs": 66323,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 180,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140622,
+        "bitmapBytes": 768,
+        "copyWallNs": 629555,
+        "sumCpuNs": 140862,
+        "argbSha256": "7dae426953c11d85a0f0eb725d014ce96a89751edcd89242281a3b6a86e64867",
+        "bulkReadWallNs": 473625,
+        "bulkReadCpuNs": 66024,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 270,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140223,
+        "bitmapBytes": 768,
+        "copyWallNs": 820582,
+        "sumCpuNs": 187220,
+        "argbSha256": "59d0aa8d401ce21c2a0f7711cce695c95c1e093c53bff7c38e04f76bae93482c",
+        "bulkReadWallNs": 514700,
+        "bulkReadCpuNs": 64330,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 90,
+        "display": 270,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140223,
+        "bitmapBytes": 768,
+        "copyWallNs": 1034360,
+        "sumCpuNs": 143325,
+        "argbSha256": "59d0aa8d401ce21c2a0f7711cce695c95c1e093c53bff7c38e04f76bae93482c",
+        "bulkReadWallNs": 1651242,
+        "bulkReadCpuNs": 57174,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 0,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 680350,
+        "sumCpuNs": 141504,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 1192837,
+        "bulkReadCpuNs": 74619,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 0,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 1590589,
+        "sumCpuNs": 308696,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 1685094,
+        "bulkReadCpuNs": 81523,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 90,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 1541828,
+        "sumCpuNs": 147645,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 1390506,
+        "bulkReadCpuNs": 58329,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 90,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 2292830,
+        "sumCpuNs": 146062,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 924174,
+        "bulkReadCpuNs": 68547,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 180,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144030,
+        "bitmapBytes": 768,
+        "copyWallNs": 1810590,
+        "sumCpuNs": 179385,
+        "argbSha256": "513b8c782c27bcdc9791c681077776b91272c6ae4520883408e1cd024b4cf858",
+        "bulkReadWallNs": 903546,
+        "bulkReadCpuNs": 67295,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 180,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144030,
+        "bitmapBytes": 768,
+        "copyWallNs": 662116,
+        "sumCpuNs": 190836,
+        "argbSha256": "513b8c782c27bcdc9791c681077776b91272c6ae4520883408e1cd024b4cf858",
+        "bulkReadWallNs": 1852228,
+        "bulkReadCpuNs": 60232,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 270,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 1074165,
+        "sumCpuNs": 141594,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 443768,
+        "bulkReadCpuNs": 58930,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 180,
+        "display": 270,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 144609,
+        "bitmapBytes": 768,
+        "copyWallNs": 1488678,
+        "sumCpuNs": 181157,
+        "argbSha256": "b83537c78af3e89259d42b3f1755d756080f7020aa74b54c7c3102ef342ee3f2",
+        "bulkReadWallNs": 1806482,
+        "bulkReadCpuNs": 81644,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 0,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 20696066,
+        "sumCpuNs": 267988,
+        "argbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+        "bulkReadWallNs": 49883750,
+        "bulkReadCpuNs": 134119,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 0,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 633422,
+        "sumCpuNs": 143338,
+        "argbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+        "bulkReadWallNs": 4733476,
+        "bulkReadCpuNs": 66253,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 90,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140622,
+        "bitmapBytes": 768,
+        "copyWallNs": 5053693,
+        "sumCpuNs": 146012,
+        "argbSha256": "7ef766e00488776617c33c89542bebc35f834362ba5c9a7202a4df5f2e35d3f9",
+        "bulkReadWallNs": 1227962,
+        "bulkReadCpuNs": 104014,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 90,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140622,
+        "bitmapBytes": 768,
+        "copyWallNs": 1149305,
+        "sumCpuNs": 452854,
+        "argbSha256": "7ef766e00488776617c33c89542bebc35f834362ba5c9a7202a4df5f2e35d3f9",
+        "bulkReadWallNs": 9302543,
+        "bulkReadCpuNs": 96289,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 180,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140634,
+        "bitmapBytes": 768,
+        "copyWallNs": 1811021,
+        "sumCpuNs": 307303,
+        "argbSha256": "87c2886a53390300c9479781c1d1f1f7613b865cbb0c422f6c5f5850de41c023",
+        "bulkReadWallNs": 2072799,
+        "bulkReadCpuNs": 202403,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 180,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140634,
+        "bitmapBytes": 768,
+        "copyWallNs": 852912,
+        "sumCpuNs": 380681,
+        "argbSha256": "87c2886a53390300c9479781c1d1f1f7613b865cbb0c422f6c5f5850de41c023",
+        "bulkReadWallNs": 6993022,
+        "bulkReadCpuNs": 106016,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 270,
+        "width": 300,
+        "height": 400,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 2146216,
+        "sumCpuNs": 146974,
+        "argbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+        "bulkReadWallNs": 611281,
+        "bulkReadCpuNs": 78137,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      },
+      {
+        "sensor": 270,
+        "display": 270,
+        "width": 280,
+        "height": 210,
+        "totalRgb": 140664,
+        "bitmapBytes": 768,
+        "copyWallNs": 1624722,
+        "sumCpuNs": 199663,
+        "argbSha256": "65b0f7133570cd5ab8f17d2963b22b90891088d9ba3f724ad60430d81d05cdc3",
+        "bulkReadWallNs": 1322479,
+        "bulkReadCpuNs": 71414,
+        "argbIdentical": true,
+        "totalIdentical": true,
+        "bitmapReused": true,
+        "pixelsReused": true
+      }
+    ],
+    "brightness_controlled_workload": {
+      "scope": "Controlled native bitmap-copy workload; not camera/GPU or device performance",
+      "cases": [
+        {
+          "name": "solid-ff000000",
+          "totalRgb": 0,
+          "dark": true
+        },
+        {
+          "name": "solid-ffffffff",
+          "totalRgb": 146880,
+          "dark": false
+        },
+        {
+          "name": "solid-ff010101",
+          "totalRgb": 576,
+          "dark": true
+        },
+        {
+          "name": "solid-ff020202",
+          "totalRgb": 1152,
+          "dark": true
+        },
+        {
+          "name": "solid-ff030303",
+          "totalRgb": 1728,
+          "dark": false
+        },
+        {
+          "name": "solid-ff040404",
+          "totalRgb": 2304,
+          "dark": false
+        },
+        {
+          "name": "solid-ffff0000",
+          "totalRgb": 48960,
+          "dark": false
+        },
+        {
+          "name": "solid-ff00ff00",
+          "totalRgb": 48960,
+          "dark": false
+        },
+        {
+          "name": "solid-ff0000ff",
+          "totalRgb": 48960,
+          "dark": false
+        },
+        {
+          "name": "solid-0",
+          "totalRgb": 0,
+          "dark": true
+        },
+        {
+          "name": "solid-7f2f8e61",
+          "totalRgb": 54720,
+          "dark": false
+        },
+        {
+          "name": "below-threshold",
+          "totalRgb": 1727,
+          "dark": true
+        },
+        {
+          "name": "above-threshold",
+          "totalRgb": 1729,
+          "dark": false
+        },
+        {
+          "name": "varying-alpha-rgb",
+          "totalRgb": 3315,
+          "dark": false
+        },
+        {
+          "name": "partial-copy-empty-remainder",
+          "totalRgb": 0,
+          "dark": true
+        },
+        {
+          "name": "no-copy-clears-old-brightness",
+          "totalRgb": 0,
+          "dark": true
+        },
+        {
+          "name": "unavailable-surface",
+          "totalRgb": -1,
+          "dark": false
+        },
+        {
+          "name": "copy-after-error",
+          "totalRgb": 146880,
+          "dark": false
+        }
+      ],
+      "trials": [
+        {
+          "path": "legacy",
+          "iterations": 2000,
+          "wallNs": 456251608,
+          "cpuNs": 204348277,
+          "checksum": 293760000
+        },
+        {
+          "path": "reused",
+          "iterations": 2000,
+          "wallNs": 123972749,
+          "cpuNs": 57339794,
+          "checksum": 293760000
+        },
+        {
+          "path": "reused",
+          "iterations": 2000,
+          "wallNs": 56386575,
+          "cpuNs": 23702589,
+          "checksum": 293760000
+        },
+        {
+          "path": "legacy",
+          "iterations": 2000,
+          "wallNs": 722108653,
+          "cpuNs": 283652988,
+          "checksum": 293760000
+        }
+      ],
+      "closedBitmapRecycled": true,
+      "closedReadRejected": true
+    },
+    "brightness_controlled_failure_report": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：GENERAL\n提示：读取画面失败，请主动重新开启\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：35；显示帧龄(ms)：20；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：0；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：执行中；墙钟(ms)：12；CPU(ms)：0\n任务内亮度读回墙钟(ms)：12；CPU(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "brightness_actual_camera_timing": "taskWallMs=2 taskCpuMs=0 brightnessWallMs=2 brightnessCpuMs=0\n",
+    "brightness_scope": "Exact displayed TextureView parity and bounded workspace; controlled bitmap ABBA excludes GPU/camera and is not device/FPS/energy evidence; controlled failure does not prove historical stall cause",
+    "support_vibration_render_readiness": "before phase=LIVE fresh=true cover=8 shown=true enabled=true checked=true preference=true\nafter phase=LIVE fresh=true cover=8 shown=true enabled=true checked=true preference=true waitMs=18\n",
+    "recovery_compact_samples": [
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 1,
+        "text": "已停止\n请展开",
+        "textSizePx": 12,
+        "lineCount": 2,
+        "textHeight": 35,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font100-day.png",
+        "png_sha256": "ab5d8a3c5adbffb1c79711c7e975b910afeefcb2356773f76f83605b09f7ccd4"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 1,
+        "text": "已停止\n请展开",
+        "textSizePx": 12,
+        "lineCount": 2,
+        "textHeight": 35,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font100-night.png",
+        "png_sha256": "ab5d8a3c5adbffb1c79711c7e975b910afeefcb2356773f76f83605b09f7ccd4"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 1.5,
+        "text": "已停止\n请展开",
+        "textSizePx": 18,
+        "lineCount": 2,
+        "textHeight": 52,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font150-day.png",
+        "png_sha256": "5bdeb728075ff933b6b83b094a117bbed192e196930fe6dc8c799ad3e44c9b9a"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 1.5,
+        "text": "已停止\n请展开",
+        "textSizePx": 18,
+        "lineCount": 2,
+        "textHeight": 52,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font150-night.png",
+        "png_sha256": "5bdeb728075ff933b6b83b094a117bbed192e196930fe6dc8c799ad3e44c9b9a"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 2,
+        "text": "已停止\n请展开",
+        "textSizePx": 24,
+        "lineCount": 2,
+        "textHeight": 70,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font200-day.png",
+        "png_sha256": "761c596249acb214e1750ef668cac37b863420272a3eb8a2830615dcf5de6743"
+      },
+      {
+        "width": 116,
+        "height": 154,
+        "fontScale": 2,
+        "text": "已停止\n请展开",
+        "textSizePx": 24,
+        "lineCount": 2,
+        "textHeight": 70,
+        "availableTextHeight": 138,
+        "fits": true,
+        "image": "recovery-compact-116x154-font200-night.png",
+        "png_sha256": "761c596249acb214e1750ef668cac37b863420272a3eb8a2830615dcf5de6743"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 1,
+        "text": "已停止\n请展开",
+        "textSizePx": 12,
+        "lineCount": 2,
+        "textHeight": 35,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font100-day.png",
+        "png_sha256": "322325f2a207b84f094540bab91d44ee8821af2ae249c90359efc85efd7716d9"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 1,
+        "text": "已停止\n请展开",
+        "textSizePx": 12,
+        "lineCount": 2,
+        "textHeight": 35,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font100-night.png",
+        "png_sha256": "322325f2a207b84f094540bab91d44ee8821af2ae249c90359efc85efd7716d9"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 1.5,
+        "text": "已停止\n请展开",
+        "textSizePx": 18,
+        "lineCount": 2,
+        "textHeight": 52,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font150-day.png",
+        "png_sha256": "152013ab92dbf30292240f631e51ab1c77699e9469e9487554b4361200796200"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 1.5,
+        "text": "已停止\n请展开",
+        "textSizePx": 18,
+        "lineCount": 2,
+        "textHeight": 52,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font150-night.png",
+        "png_sha256": "152013ab92dbf30292240f631e51ab1c77699e9469e9487554b4361200796200"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 2,
+        "text": "已停止\n请展开",
+        "textSizePx": 24,
+        "lineCount": 2,
+        "textHeight": 70,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font200-day.png",
+        "png_sha256": "4c6743b1d1e07b15022b5e3037ad566052b9c2770f1730ceffb784550eb99637"
+      },
+      {
+        "width": 96,
+        "height": 128,
+        "fontScale": 2,
+        "text": "已停止\n请展开",
+        "textSizePx": 24,
+        "lineCount": 2,
+        "textHeight": 70,
+        "availableTextHeight": 112,
+        "fits": true,
+        "image": "recovery-compact-96x128-font200-night.png",
+        "png_sha256": "4c6743b1d1e07b15022b5e3037ad566052b9c2770f1730ceffb784550eb99637"
+      }
+    ],
+    "recovery_layout_configurations": 30,
+    "recovery_full_presentations": 660,
+    "recovery_compact_presentations_including_duplicates": 1320,
+    "recovery_restore_presentations": 660,
+    "recovery_activity_markers": {
+      "pip": [
+        "RECOVERY_PRESENTATION_ACTIVITY_PASS compact=2_lines full=reason_and_instructions settings=hidden manual_restart=restored no_auto_camera=true stopped_polling=false home_report_preserved=true"
+      ],
+      "pip-repeat": [
+        "RECOVERY_PRESENTATION_ACTIVITY_PASS compact=2_lines full=reason_and_instructions settings=hidden manual_restart=restored no_auto_camera=true stopped_polling=false home_report_preserved=true"
+      ]
+    },
+    "api": 36,
+    "source_commit": "2261f42d93e91d67e8ba179ae733317061f86213",
+    "run_id": 41146872248,
+    "attempt": 1,
+    "artifact_id": 13020874376,
+    "archive_size_bytes": 14008698,
+    "archive_sha256": "53cb197d6c335104df18b87c1ec0f92785a527c046e93f2949d2a492a5dd057b",
+    "summary": {
+      "status": "passed",
+      "scope": "Emulator diagnostics; no device acceptance or root-cause claim from ANR coexistence",
+      "build_result": "success",
+      "emulator_result": "success",
+      "mode": "ui",
+      "probes": [
+        {
+          "name": "pip_recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "runtime",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "preview",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "overlay",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "layout",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "home",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "recovery",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "pip-repeat",
+          "status": "passed",
+          "failures": []
+        },
+        {
+          "name": "support",
+          "status": "passed",
+          "failures": []
+        }
+      ],
+      "observations": [],
+      "anrs": [],
+      "failure_time_focus": [],
+      "focused_external_anr_dialogs": []
+    },
+    "source_bounds_cases_per_pip_run": 3,
+    "system_pip_transition_cases_per_run": 2,
+    "source_bounds_samples": "SOURCE_BOUNDS step=0 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\nSOURCE_BOUNDS step=1 landscape=true legacy=Rect(0, 95 - 384, 224) matrix=Rect(106, 95 - 278, 224) submitted=Rect(106, 95 - 278, 224) retained_camera=true\nSOURCE_BOUNDS step=2 landscape=false legacy=Rect(0, 95 - 320, 364) matrix=Rect(59, 95 - 261, 364) submitted=Rect(59, 95 - 261, 364) retained_camera=true\n",
+    "vibration_settings_activity_cases_per_pip_run": 3,
+    "vibration_layout_configurations": 30,
+    "vibration_persistence_cases": 3,
+    "controlled_vibration_report": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：GENERAL\n提示：构造关闭振动的问题信息\n触发阶段：LIVE / 基础模式\n画中画：否；检测：关；声音：关；振动：关\n采集帧龄(ms)：23；显示帧龄(ms)：11；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：322；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：已结束；墙钟(ms)：260；CPU(ms)：0\n任务内亮度读回墙钟(ms)：260；CPU(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+    "default_preview_geometry_sample": "PREVIEW_ONLY_GEOMETRY_PASS full=320x640 compact=116x154 frames_advance=true default_detection=false sound=false\n",
+    "default_preview_layout_configurations": 30,
+    "default_preview_activity_cases_per_pip_run": 3,
+    "default_preview_recovery_cycles": 4,
+    "depth_report_markers": [
+      "DEPTH_PROJECTION_PARITY_PASS cases=96 grid_points=589824; raw float bits, obstacle/drop outputs, moving pose/intrinsics, sparse updates; constructed observations, not AR camera accuracy",
+      "DEPTH_PROJECTION_STATE_PASS cases=5; sample centers, incomplete transform reset, independent workspaces/grids, nonfinite boundary math, near obstacle/drop"
+    ],
+    "depth_projection_cases": 96,
+    "depth_grid_positions": 589824,
+    "depth_state_cases": 5,
+    "depth_scope": "Actual bundled ARCore Pose on ART with constructed points; no AR Session or device depth",
+    "tone_thread_samples": "BLOCKED\ncreate_blocked thread=WalkBuddy sound at_ms=247154\nclose thread=WalkBuddy sound at_ms=247709\nNATIVE\ncreate_begin thread=WalkBuddy sound at_ms=247860\ncreate_end thread=WalkBuddy sound at_ms=247862\nplay_begin thread=WalkBuddy sound at_ms=247868\nplay_end accepted=true thread=WalkBuddy sound at_ms=247876\nplay_begin thread=WalkBuddy sound at_ms=248076\nplay_end accepted=true thread=WalkBuddy sound at_ms=248077\nclose_begin thread=WalkBuddy sound at_ms=248082\nclose_end thread=WalkBuddy sound at_ms=248087\n",
+    "tone_activity_checks_per_pip_run": 3,
+    "support_cases": 4,
+    "diagnostic_layout_configurations": 30,
+    "controlled_report_samples": {
+      "PERMISSION": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次预览首次停止\n分类：PERMISSION\n提示：摄像头未获允许，预览已停止\n触发阶段：STOPPED / 基础模式\n画中画：否；检测：关；声音：关；振动：开\n采集帧龄(ms)：未取得；显示帧龄(ms)：未取得；分析龄(ms)：未取得\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：未取得；复制(ms)：未取得；结果交付(ms)：未取得\n读回任务：未取得；墙钟(ms)：未取得；CPU(ms)：未取得\n任务内亮度读回墙钟(ms)：未取得；CPU(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_ERROR": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_ERROR\n提示：检测失败，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：51；显示帧龄(ms)：17；分析龄(ms)：16\n模型就绪：否；已有结果：否；工作线程忙：否\n取样龄(ms)：未取得；读回排队(ms)：4；复制(ms)：4；结果交付(ms)：18\n读回任务：已结束；墙钟(ms)：16；CPU(ms)：0\n任务内亮度读回墙钟(ms)：16；CPU(ms)：0\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n",
+      "DETECTION_TIMEOUT": "WalkBuddy 问题信息\n版本：0.4.37 / 49\n设备：Google / sdk_gphone64_x86_64\nAndroid：16 / API 36\n\n本次检测首次暂停\n分类：DETECTION_TIMEOUT\n提示：检测超时，提醒已停止；可重新勾选检测。\n触发阶段：LIVE / 基础模式\n画中画：否；检测：开；声音：关；振动：开\n采集帧龄(ms)：50；显示帧龄(ms)：18；分析龄(ms)：1501\n模型就绪：是；已有结果：否；工作线程忙：是\n取样龄(ms)：18；读回排队(ms)：4；复制(ms)：3；结果交付(ms)：18\n读回任务：已结束；墙钟(ms)：2；CPU(ms)：0\n任务内亮度读回墙钟(ms)：未取得；CPU(ms)：未取得\n\n时序为事件发生时的回调与模型记录，非相机端到端延迟。\n"
+    },
+    "recovery_geometry": [
+      [
+        "0",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "1",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "2",
+        "320",
+        "640",
+        "116",
+        "154"
+      ],
+      [
+        "3",
+        "320",
+        "640",
+        "116",
+        "154"
+      ]
+    ],
+    "recovery_transition_samples": [
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=0 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=1 root=320x640 layoutRequested=false warning=320x51 visible=true rect=Rect(0, 589 - 320, 640) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=2 root=116x154 layoutRequested=false warning=116x51 visible=true rect=Rect(0, 103 - 116, 154) warningLayoutRequested=false",
+      "PREVIEW_ONLY_RECOVERY_TRANSITION cycle=3 root=116x154 layoutRequested=false warning=116x51 visible=true rect=Rect(0, 103 - 116, 154) warningLayoutRequested=false"
+    ],
+    "sound_ui_steps_by_pip_run": {
+      "pip": [
+        "OPEN 打开提示音 pip_screen=Rect(188, 292 - 304, 446)",
+        "TOUCH 打开提示音 target=Rect(255, 413 - 303, 461)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 291 - 304, 445)",
+        "TOUCH 关闭提示音 target=Rect(255, 412 - 303, 460)",
+        "OPEN 打开提示音 pip_screen=Rect(188, 291 - 304, 445)",
+        "TOUCH 打开提示音 target=Rect(255, 412 - 303, 460)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 291 - 304, 445)",
+        "TOUCH 关闭提示音 target=Rect(255, 412 - 303, 460)",
+        "audio_creates=2 audio_closes=2"
+      ],
+      "pip-repeat": [
+        "OPEN 打开提示音 pip_screen=Rect(188, 276 - 304, 430)",
+        "TOUCH 打开提示音 target=Rect(255, 399 - 303, 447)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 275 - 304, 429)",
+        "TOUCH 关闭提示音 target=Rect(255, 398 - 303, 446)",
+        "OPEN 打开提示音 pip_screen=Rect(188, 275 - 304, 429)",
+        "TOUCH 打开提示音 target=Rect(255, 398 - 303, 446)",
+        "OPEN 关闭提示音 pip_screen=Rect(188, 275 - 304, 429)",
+        "TOUCH 关闭提示音 target=Rect(255, 398 - 303, 446)",
+        "audio_creates=2 audio_closes=2"
+      ]
+    },
+    "sound_controls_trace": "Actual SystemUI touch targets; controlled output, no physical audibility claim\nOPEN 打开提示音 pip_screen=Rect(188, 276 - 304, 430)\nTOUCH 打开提示音 target=Rect(255, 399 - 303, 447)\nOPEN 关闭提示音 pip_screen=Rect(188, 275 - 304, 429)\nTOUCH 关闭提示音 target=Rect(255, 398 - 303, 446)\nOPEN 打开提示音 pip_screen=Rect(188, 275 - 304, 429)\nTOUCH 打开提示音 target=Rect(255, 398 - 303, 446)\nOPEN 关闭提示音 pip_screen=Rect(188, 275 - 304, 429)\nTOUCH 关闭提示音 target=Rect(255, 398 - 303, 446)\nguarded_invalid_commands=6 real_ui_toggles=4 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true\naudio_creates=2 audio_closes=2\n",
+    "sound_native_markers": {
+      "pip": [
+        "PIP_SOUND_FAILURE_MENU_PASS sound_off=true next_action=enable stale_retry_ignored=true detection_camera_vibration_retained=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_SOUND_TRACE_BEGIN",
+        "PIP_SOUND_TRACE_END"
+      ],
+      "pip-repeat": [
+        "PIP_SOUND_FAILURE_MENU_PASS sound_off=true next_action=enable stale_retry_ignored=true detection_camera_vibration_retained=true",
+        "PIP_SOUND_CONTROLS_PASS ui_toggles=4 invalid_commands=6 stale_choice_fullscreen_visit=true muted_late_plays=0 camera_model_vibration_retained=true",
+        "PIP_SOUND_TRACE_BEGIN",
+        "PIP_SOUND_TRACE_END"
+      ]
+    },
+    "home_idle_and_lifecycle_markers": [
+      "HOME_EVENTS_INITIAL_STATE focus=false visible=true queued=false",
+      "HOME_EVENTS_IDLE_PASS quietMs=1100 refreshes=0; actual AppOps deny/allow rendered without resume; original raw mode restored",
+      "HOME_EVENTS_LIFECYCLE_PASS retired subscriptions removed; stale off-main AppOps callback ignored; recreated home subscribed"
+    ],
+    "home_live_markers": {
+      "pip": [
+        "HOME_EVENTS_LIVE_PASS quietMs=1100 refreshes=0 advancingCapture=true advancingDisplay=true reportReused=true batch=20 accessSamples=1; watcher-unavailable polling fallback and reattachment pass"
+      ],
+      "pip-repeat": [
+        "HOME_EVENTS_LIVE_PASS quietMs=1100 refreshes=0 advancingCapture=true advancingDisplay=true reportReused=true batch=20 accessSamples=1; watcher-unavailable polling fallback and reattachment pass"
+      ]
+    },
+    "scope": "Android emulator real SystemUI touch prompt-tone toggles, stale choice/visit/fullscreen command rejection and controlled audio-failure menu; actual Camera2/model/vibration retained; old home/UI/depth/native-audio gates retained; no physical audibility, device or power acceptance"
+  }
+]

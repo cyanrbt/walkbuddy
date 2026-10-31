@@ -137,5 +137,20 @@
   },
   "lint_errors": 0,
   "lint_warnings": 22,
-  "local_app_and_native_test_build": "success"
+  "local_app_and_native_test_build": "success",
+  "candidate_run_id": 41146872248,
+  "candidate_source_commit": "2261f42d93e91d67e8ba179ae733317061f86213",
+  "candidate_attempt": 1,
+  "candidate_native_artifacts_verified": true,
+  "controlled_bitmap_cpu_us_per_read": {
+    "35": {
+      "legacy": 61.05709925,
+      "reused": 3.55566075
+    },
+    "36": {
+      "legacy": 122.00031625,
+      "reused": 20.26059575
+    }
+  },
+  "controlled_benchmark_scope": "Native Android fixed-bitmap producer, ABBA 4 rounds x 2000 reads, no camera/GPU; no device, FPS, energy or end-to-end inference"
 }
