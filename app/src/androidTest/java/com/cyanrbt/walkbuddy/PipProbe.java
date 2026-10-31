@@ -142,7 +142,7 @@ final class PipProbe {
             result.putString("stream",report+"PIP_RECOVERY_PROBE_PASS cycles=4; native touch return/restart/re-entry before and after lock; native home stop, controls restore\n");
             code=Activity.RESULT_OK;
         } catch(Throwable error) {
-            failureEvidence(runner,"pip-recovery-failure");
+            failureEvidence(runner,"pip-recovery-failure",preview);
             result.putString("stream",report+"PIP_RECOVERY_PROBE_FAIL: "+error+"; "+PreviewActivity.report());
         } finally {
             shell(runner,"input keyevent KEYCODE_WAKEUP");
@@ -492,7 +492,7 @@ final class PipProbe {
             report.append("PIP_PROBE_PASS\n");
             result.putString("stream",report.toString());code=Activity.RESULT_OK;
         } catch(Throwable error) {
-            failureEvidence(runner,"pip-failure");
+            failureEvidence(runner,"pip-failure",preview);
             result.putString("stream",report+"PIP_PROBE_FAIL: "+error+"; "+PreviewActivity.report());
         } finally {
             shell(runner,"input keyevent KEYCODE_WAKEUP");
@@ -1080,7 +1080,12 @@ final class PipProbe {
         File dir=new File(runner.getTargetContext().getCacheDir(),"ui-probe");if(!dir.isDirectory() && !dir.mkdirs())throw new IllegalStateException("Evidence directory unavailable");
         try(FileOutputStream stream=new FileOutputStream(new File(dir,name))){bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);}finally{bitmap.recycle();}
     }
-    private static void failureEvidence(Instrumentation runner,String prefix) {
+    private static void failureEvidence(Instrumentation runner,String prefix,PreviewActivity preview) {
+        if(preview!=null)try {
+            String incident=read(runner,()->((SessionDiagnostics)field(preview,"diagnostics")).report(
+                BuildConfig.VERSION_NAME,BuildConfig.VERSION_CODE,Build.MANUFACTURER,Build.MODEL,Build.VERSION.RELEASE,Build.VERSION.SDK_INT));
+            SupportProbe.write(runner,prefix+"-problem-info-"+android.os.Process.myPid()+"-"+android.os.SystemClock.elapsedRealtime()+".txt",incident);
+        }catch(Throwable ignored){/* Preserve the original failure if incident capture fails. */}
         // Capture before finish()/instrumentation teardown changes the focused window.
         try{screenshot(runner,prefix+".png");}catch(Exception ignored){/* Keep the original failure. */}
         try{powerEvidence(runner,prefix+"-routing.txt",shellText(runner,

@@ -2,7 +2,8 @@ package com.cyanrbt.walkbuddy;
 
 /** Main-thread brightness cadence and ownership, independent of Android and pixel storage. */
 final class BrightnessFlight {
-    static final long PERIOD_MS=1000,TIMEOUT_MS=1000;
+    // Sampling age and preview failure are different policies in the published implementation.
+    static final long PERIOD_MS=1000,MAX_START_AGE_MS=1000,TIMEOUT_MS=1200;
     enum Outcome { ACCEPTED, EXPIRED, RETIRED, UNRELATED }
     static final class Ticket {
         final long frameAt,dueAt;
@@ -22,15 +23,15 @@ final class BrightnessFlight {
     boolean expired(long now) {
         if(closed)return false;
         long at=pending!=null?pending.dueAt:dueAt;
-        return at>=0 && (pending!=null && now<pending.frameAt || now<at || now-at>=TIMEOUT_MS);
+        return at>=0 && (pending!=null && now<pending.frameAt || now<at || now-at>TIMEOUT_MS);
     }
     Ticket begin(long frameAt,long now) {
-        if(!due() || frameAt<dueAt || frameAt>now || now-frameAt>=TIMEOUT_MS || expired(now))return null;
+        if(!due() || frameAt<dueAt || frameAt>now || now-frameAt>MAX_START_AGE_MS || expired(now))return null;
         pending=new Ticket(frameAt,dueAt);submittedAt=frameAt;dueAt=-1;return pending;
     }
     Outcome complete(Ticket ticket,long now) {
         if(ticket==null || ticket!=pending)return Outcome.UNRELATED;
-        boolean stale=now<ticket.frameAt || now-ticket.dueAt>=TIMEOUT_MS;
+        boolean stale=now<ticket.frameAt || now-ticket.dueAt>TIMEOUT_MS;
         pending=null;
         return closed?Outcome.RETIRED:stale?Outcome.EXPIRED:Outcome.ACCEPTED;
     }

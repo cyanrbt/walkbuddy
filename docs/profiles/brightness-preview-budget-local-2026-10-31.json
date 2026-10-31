@@ -1,0 +1,51 @@
+{
+  "scope": "Local JVM, Lint and actual APK compilation only; new native gates and physical acceptance pending.",
+  "base_commit": "424f8eb",
+  "version_name": "0.4.38",
+  "version_code": 50,
+  "jvm": {
+    "tests": 259,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 21
+  },
+  "build": {
+    "result": "success",
+    "seconds": 46,
+    "tasks": [
+      "testDebugUnitTest",
+      "lintDebug",
+      "assembleDebug",
+      "assembleDebugAndroidTest"
+    ],
+    "universal_apk": true
+  },
+  "tool_tests": {
+    "tests": 43,
+    "failures": 0
+  },
+  "actionlint": "passed",
+  "product_surface": "passed",
+  "release_metadata": "passed",
+  "source_sha256": {
+    "app/build.gradle": "263a8c194a86adc0593d1af132b9c0a50d661f5c0b3d88ed8460aeeb52c68403",
+    "app/src/main/java/com/cyanrbt/walkbuddy/BrightnessFlight.java": "87485a635400c4b866c15ce8f2c6c8b375460b5be77b2edfc3e4e7d77b63f4a5",
+    "app/src/main/java/com/cyanrbt/walkbuddy/BrightnessReadback.java": "1284df9c99d7073070a8dd1327f0296236fc622e47efc87eec9cb0abbb1090fc",
+    "app/src/main/java/com/cyanrbt/walkbuddy/BrightnessTiming.java": "29fd2bab473283cd9483adba6d84acc0adaf976340355519ef90d39c9565d798",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java": "fea8b643b79a7419450b97e8597cfbe33a31263b459d690a7d3c5eb47a8ae93d",
+    "app/src/main/java/com/cyanrbt/walkbuddy/SessionDiagnostics.java": "03a1f9275813e61afdf43aed578a41c8b291e1e0c8abd92f134870c7309dc7c9"
+  },
+  "public_policy_sources_unchanged": [
+    "app/src/main/java/com/cyanrbt/walkbuddy/SessionState.java",
+    "app/src/main/java/com/cyanrbt/walkbuddy/PreviewHealth.java",
+    "app/src/main/java/com/cyanrbt/walkbuddy/CameraFrames.java",
+    "app/src/main/java/com/cyanrbt/walkbuddy/LocalDetector.java",
+    "app/src/main/java/com/cyanrbt/walkbuddy/InferenceWorker.java"
+  ],
+  "native_component_cases": 20,
+  "new_native_result": "pending"
+}

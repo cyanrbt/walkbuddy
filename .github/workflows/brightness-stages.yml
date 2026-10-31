@@ -9,6 +9,7 @@ on:
       - .github/workflows/ui-check.yml
       - scripts/prepare_ui_storage.py
       - scripts/preview_trace.sql
+      - scripts/preview_trace.pbtxt
       - scripts/record_preview_trace.py
       - app/src/main/java/com/cyanrbt/walkbuddy/BrightnessReadback.java
       - app/src/main/java/com/cyanrbt/walkbuddy/PreviewActivity.java

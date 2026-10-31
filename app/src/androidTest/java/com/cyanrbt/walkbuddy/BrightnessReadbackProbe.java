@@ -43,6 +43,10 @@ final class BrightnessReadbackProbe {
             fake.status=PixelCopy.ERROR_SOURCE_NO_DATA;check(runner,view,reader,fake,clock,callbacks,delivered,fake.status);fake.status=0;cases++;
             fake.throwCopy=true;check(runner,view,reader,fake,clock,callbacks,delivered,PixelCopy.ERROR_UNKNOWN);fake.throwCopy=false;cases++;
             Arrays.fill(fake.content,Color.WHITE);check(runner,view,reader,fake,clock,callbacks,delivered,0);cases++;
+            Arrays.fill(fake.content,Color.BLACK);fake.delayMs=1004;
+            if(check(runner,view,reader,fake,clock,callbacks,delivered,0)!=0 || delivered.get().expired)
+                throw new AssertionError("A current dark brightness result was discarded at the model sampling age");
+            fake.delayMs=0;cases++;
             fake.expire=true;check(runner,view,reader,fake,clock,callbacks,delivered,0);fake.expire=false;
             if(!delivered.get().expired)throw new AssertionError("Late copy was accepted as current");
         } finally {SurfaceCopyProbe.onMain(runner,()->{reader.close();return null;});}
@@ -112,11 +116,11 @@ final class BrightnessReadbackProbe {
     }
     private static final class Delivery {final boolean expired;final int status,total;Delivery(boolean expired,int status,int total){this.expired=expired;this.status=status;this.total=total;}}
     private static final class FakeCopy implements BrightnessReadback.Copier {
-        final int[] content=new int[192];final AtomicBoolean offMain=new AtomicBoolean();AtomicLong clock;
+        final int[] content=new int[192];final AtomicBoolean offMain=new AtomicBoolean();AtomicLong clock;long delayMs;
         int rows=12,status;boolean write=true,throwCopy,expire;
         @Override public void request(android.view.Surface source,Bitmap target,IntConsumer done,android.os.Handler handler){
             offMain.set(Looper.myLooper()!=Looper.getMainLooper());if(throwCopy)throw new IllegalStateException("Injected async copy failure");
-            if(write)target.setPixels(content,0,16,0,0,16,rows);if(expire)clock.addAndGet(1000);done.accept(status);
+            if(write)target.setPixels(content,0,16,0,0,16,rows);clock.addAndGet(expire?1201:delayMs);done.accept(status);
         }
     }
     private static Object field(Object source,String name){try{Field f=source.getClass().getDeclaredField(name);f.setAccessible(true);return f.get(source);}catch(ReflectiveOperationException e){throw new AssertionError(e);}}
